@@ -3,195 +3,504 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Introduction
+Flashlingo is a versatile desktop application centered around learning words through flash cards. It is optimized for use via a **Command Line Interface** (CLI),
+while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on **beginner language
+learners** with beginner level of proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
 
-1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+By incorporating [**Leitner system**](https://en.wikipedia.org/wiki/Leitner_system#), Flashlingo schedules review sessions, ensuring words are revisited at
+optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Application Features
+Flashlingo predominantly consists of two main features: **Managing flash cards** and **Reviewing flash cards**
+- **Managing flash cards**
+  - Users are given the ability to add, delete and edit flash cards. And each flash card is assigned with a `level`, which
+  indicates the proficiency of the user with the word. The level of the flash card will be updated after each review session.
+* **Reviewing flash cards**
+   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether they have
+     - memorized the word
+     <br>
+     This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
+     - forgotten the word
+     <br>
+      This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the level:**<br>
+
+* The higher the `Level` is, the higher the proficiency of the user with the word is. The maximum level is 5, and it will be displayed as `word mastered`.
+
+* Words which are indicated as `word mastered` will not appear in review session.
+
+</div>
+
+With each review frequency scientifically determined by **Flashlingo**, it will make your vocabulary learning an absolute breeze,
+meaning you can **spend less time and memorize things more enduringly.**
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start
+
+1. Ensure you have Java `11` installed in your computer.
+
+2. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
+   Below shows the steps to perform such a task
+    1. Open up the terminal.
+    * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
+      ![img.png](images/Terminal.png)
+    * For windows users, press `Windows + R`, type `cmd` and press `Enter`.
+    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder. So the command is:
+        ```
+        cd Downloads
+        ```
+       >Click [here](https://en.wikipedia.org/wiki/Cd_(command)) for more information on how to navigate to a folder in the terminal.
+    3. Simply type in `java -jar flashlingo.jar` to get started!
+
+       A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+       ![Ui](images/MainUi.png)
+
+### Using the application
+
+1. Type the command in the command box and press Enter to execute it.
+   <img width="728" alt="Screenshot 2023-10-27 at 3 14 07 PM 1" src="https://github.com/itsNatTan/tp/assets/64185574/a4a8dbd2-94ff-417d-84a4-175bf85ff100">
+
+2. The image below shows the result of typing in a command. A log message will be displayed below the command box to give information about the outcome of the command.
+   <img width="729" alt="Screenshot 2023-10-27 at 3 11 50 PM" src="https://github.com/itsNatTan/tp/assets/64185574/48b74efc-2a39-48d5-b0aa-70f165484c5e">
+
+3. Refer to the [Commands](#commands) below for details of each command.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Commands
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+| Notation         | Description                                                   | Example Command                                                         | Example Usage                   |
+|------------------|---------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------|
+| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                        | `delete 1`                      |
+| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANG>] [tl/<TRANSLATION_LANG>]` | `add w/Hello t/你好`              |
+ | `<PARAMETER...>` | Commands that can take in multiple comma separated parameters | `find <KEYWORD...>`                                                     | `find hello, bye`                |
+| `...`            | Parameter that will not be used                               | `help ...`                                                              | `help 123` is the same as `help` |
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+**:information_source: Notes about the command output:**<br>
+`...` in the command output shown below depends on user input and details of the existing flash cards.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
+| :warning: Commands Supported Only Outside Review Session                                                                             | :warning: Commands Supported Only Inside Review Session |
+|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| `add` <br> `delete` <br> `edit` <br> `find` <br> `start` <br> `list` <br> `load` <br> `language` <br> `review` <br> `stats`          | `yes` <br> `no` <br> `end`                              |
+| *Error Message:* `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` | *Error Message:* `You are not in a review session.`     |
 
 
-### Adding a person: `add`
+### Adding a flash card: `add`
 
-Adds a person to the address book.
+<div markdown="block" class="alert alert-info">
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**:information_source: Notes about adding words:**
+* In order to give users full customizability, there's no any restriction on input, as long as it is not empty.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+Adds a word to the flash card with its translation.
+* Creates a wild flash card.
+* Works to add a word with its translation in their respective languages.
+* The already saved translation can be overridden with a new translation in a different language.
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+[Command Format](#commands): `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
+> The default language for both word and translation is blank (`""`)
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add w/雪 t/snow` saves the translation of **雪** as **snow**
+* `add w/雪 wl/Chinese t/snow tl/English` saves the translation of the **Chinese** word **雪** as an **English** word **snow**
 
-### Locating persons by name: `find`
+Output:
 
-Finds persons whose names contain any of the given keywords.
+![img.png](images/AddCommand.png)
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Note**
+* Flash cards are case-insensitive. The following commands are the same:
+  * `add w/CIAO t/hello/bye`
+  * `add w/ciao t/HELLO/BYE`
+* Users can add two flash cards with the **same word and translation BUT in different language**<br>
+  The following three commands will not cause duplicate error:
+    * `add w/雪 t/snow`
+    * `add w/雪 t/snow wl/Chinese tl/English`
+    * `add w/雪 t/snow wl/Japanese tl/English`
+* Users are **not allowed** to add a flash card with the **same word and translation**<br>
+  The following command will cause duplicate error:
+    * `add w/sorry t/sorry`
+    * `add w/sorry t/SORRY`
+* Users are **not allowed** to add a flash card with the **empty word or translation**<br>
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+### Deleting a flash card: `delete`
+
+Deletes a flash card and its related information
+* Deletes a flash card.
+
+[Command Format](#commands): `delete <INDEX>`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `delete 2` deletes the word and its translation at index 2
 
-### Deleting a person : `delete`
+Output:
 
-Deletes the specified person from the address book.
+|  Before delete   | ![img.png](images/BeforeDelete.png) |
+|:----------------:|:-----------------------------------:|
+| **After delete** | ![img.png](images/AfterDelete.png)  |
 
-Format: `delete INDEX`
+### Editing a flash card: `edit`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Edits the specified flash card at the given index.
+
+[Command Format](#commands): `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `edit 1 w/こんにちわ t/Hello` edits the translation at index 1
 
-### Clearing all entries : `clear`
+Output:
 
-Clears all entries from the address book.
+|  Before edit   |![img.png](images/BeforeEdit.png)  |
+|:--------------:|:---------------------------------:|
+| **After edit** | ![img.png](images/AfterEdit.png)  |
 
-Format: `clear`
+**Note**
+* `<INDEX>` is the index of each flash card in the `list`
+* Users must change at **LEAST** one certain parameter by using certain prefix
+    * Word: `w/WORD`
+    * Word Language: `wl/WORD_LANGUAGE`
+    * Translation: `t/TRANSLATION`
+    * Translation Language: `tl/TRANSLATION_LANGUAGE`
+* Users are not allowed to edit a flash card to an existing flash card
+> The error message: <br>
+> `This flash card already exists in Flashlingo!`
 
-### Exiting the program : `exit`
+### Listing all flash cards : `list`
 
-Exits the program.
+Shows the list of flash cards with both the original word and the corresponding translation.
+* Lists all the flash cards saved
 
-Format: `exit`
+[Command Format](#commands): `list ...`
+> All the saved flash cards, regardless of the review date, are listed.
+
+Output:
+
+![img.png](images/ListCommand.png)
+
+
+**Note**
+* `list` command cannot be used during a review session
+   * To facilitate learning, only the flash cards - that are to be reviewed - can be seen during the review session.
+   * As soon as the review session ends, all the flash cards can be listed once again.
+
+### Finding a flash card: `find`
+
+Filters the flash card list by the given keywords. All the flash cards whose word or translation contains at least one of the keywords will be displayed.
+* The search is case-insensitive. e.g `food` will match `Food`
+
+[Command Format](#commands): `find <KEYWORDS...>`
+
+Examples:
+* `find food` returns the flash card list and its translation that contains the keyword `food`
+* `find oo` returns the flash card list and its translation that contains the substring `oo`
+* `find food, bye` returns the flash card list and its translation that contains the keyword `food` or `bye`
+
+Output:
+
+| **Before find** | ![img.png](images/BeforeFind.png) |
+|:---------------:|:---------------------------------:|
+| **After find**  | ![img.png](images/AfterFind.png)  |
+
+### Filtering list with specified language: `language`
+
+Filters the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
+* The search is case-insensitive. e.g `french` will match `French`
+
+[Command Format](#commands): `language [<SPECIFIED_LANGUAGE>]`
+
+Examples:
+* `language French` displays a list where each word or translation is from French language.
+
+**Note**
+* Unlike the `find` command, the `language` command uses **exact search**. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
+    * e.g. `language Chinese` will not display following flash cards:
+        * `w/读书 t/read book wl/简体中文 tl/English`
+        * `w/讀書 t/read book wl/Traditional Chinese tl/English`
+* `language` without any parameter will display all the flash cards with default language `""`.
+
+### Getting list for revision: `review`
+
+Displays the flash cards of all the words to be reviewed that day
+* The review command will present flash cards selected by Flashlingo based on your level, as well as the interval between the last review, utilizing the Leitner system.
+* If you wish to view all your saved flash cards without the [Leitner system's](https://en.wikipedia.org/wiki/Leitner_system#) selection criteria, please use the `list` command.
+
+[Command Format](#commands): `review ...`
+
+Output:
+
+![img.png](images/ReviewSuccess.png)
+
+**Note**
+* The message `0 flashcards listed!` occurs when:
+    * There are no flash cards scheduled for review at the time when the command is executed.
+
+###  Starting a new review session : `start`
+
+Starts a new review session.
+
+[Command Format](#commands): `start ...`
+
+Output: `Review Session has been started.`
+
+**Note**
+* If there are no words to review, users will not be able to start review session. <br> `You have no more words to review!`
+  will be displayed.
+
+
+### Ending the current review session: `end`
+
+Ends the current review session and returns to the main menu.
+
+[Command Format](#commands): `end ...`
+
+Output: `Review Session has ended.`
+
+### Revealing the other side of the flash card: `reveal`
+
+Shows the translation of the flash card given by index if it is hidden. Otherwise, hides the translation of the flash card.
+
+[Command Format](#commands): `reveal [<INDEX>]`
+
+Output :
+
+|  **If translation is hidden**  | ![img.png](images/BeforeReveal.png) |
+|:------------------------------:|:-----------------------------------:|
+| **If translation is revealed** | ![img.png](images/AfterReveal.png)  |
+
+
+<div markdown="block" class="alert alert-info">
+:information_source: Notes:
+
+* When `<INDEX>` is omitted, the default value is 1.
+* Pressing `reveal` or `hide` button will have the same effect.
+* In future enhancement, this command will be renamed to `flip` to better reflect its function.
+
+</div>
+
+### Indicating user has memorized the word: `yes`
+
+Marks the word as memorized and advances the word into the next `level`. If there are still remaining words to review,
+they will be automatically shown in the section below. Otherwise, review session will be closed by default.
+
+[Command Format](#commands): `yes ...`
+
+Output:
+
+![img.png](images/Yes.png)
+
+**Note**
+* Pressing `yes` button will have the same effect.
+* In the case where there are no more words to review, `The next word is:` will be replaced by  
+`You have no more words to review!`.
+
+###  Indicating user has forgotten the word: `no`
+
+Marks the word as not grasped and decreases its `level` by 1. If there are still remaining words to review,
+they will be automatically shown in the section below. Otherwise, review session will be closed by default.
+
+[Command Format](#commands): `no ...`
+
+Output:
+
+![img.png](images/No.png)
+
+**Note**
+* Pressing `no` button will have the same effect.
+* In the case where there are no more words to review, `The next word is:` will be replaced by  
+`You have no more words to review!`.
+
+### Show learning statistics: `stats`
+
+To help track user progress and inspire continued learning, this command offers detailed statistics:
+* Total Flash Cards: Displays the total count of flash cards you have saved.
+* Remembered Words: Shows the number of terms you have successfully retained in this session.
+* Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
+
+[Command Format](#commands): `stats ...`
+
+Output:
+
+![img.png](images/Stats.png)
+
+**Note**
+* The success rate is calculated solely on the basis of the current session.
+
+
+### Loading list of words: `load`
+Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
+review session automatically.
+
+[Command Format](#commands): `load <FILE_NAME>`
+<div id="load">
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the file input:**<br>
+* **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
+* **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
+* **File name:** The file names, with and without the `.xlsx` extension depend on different systems, should not contain leading or trailing spaces.
+* **File content:** The app only reads the **first two columns** of the **first sheet** of the file.
+  * The sheet must contain only the following two columns (cannot have blank columns on the left):
+    1. Column A - The original words
+    2. Column B - The translation of the words
+  * The sheet cannot contain empty rows in between all rows with words.
+* **Resources:** A sample file can be found [here](SampleData.xlsx).
+</div>
+</div>
+
+Output:
+* `You have successfully loaded file: ...`: Successful loading.
+* `File not found or accessible`:<br>
+⚠️ Make sure the file is in the correct directory with read permission.
+* `File cannot be read due to invalid content or format`:<br>
+⚠️ Make sure the file contains only two columns with the valid words/translations.
+* `... flash card already exists!`:<br>
+⚠️ Modify the duplicated word/translation in the file to avoid duplication with the flash cards in the app.
+* `Word/translation cannot be empty!`:<br>
+⚠️ Ensure all words and translations are not empty spaces.
+
+### Switching color theme: `switch`
+Switches between light and dark appearance of Flashlingo.
+* The theme will be saved and loaded when Flashlingo is restarted.
+* Default color theme is the **light theme**.
+
+[Command Format](#commands): `switch ...`
+
+Output:
+
+|  Light theme   | ![img.png](images/LightTheme.png) |
+|:--------------:|:---------------------------------:|
+| **Dark theme** | ![img.png](images/DarkTheme.png)  |
+
+### Viewing help: `help`
+
+Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
+
+[Command Format](#commands): `help ...`
+
+### Exiting the program: `exit`
+
+Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
+
+[Command Format](#commands): `exit ...`
+
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Flashlingo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Flashlingo data are saved automatically as a JSON file `[JAR file location]/data/flashlingo.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, Flashlingo will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q: How can I check if I have installed and am using the Java `11` version?**<br>
+* Open up the terminal. **Run the `java -version` command.** The output should contain similar information to:
+`version "11.0.X"`.
+* If Java `11` is not installed, you may download it again.
+* If you are using lower or higher versions of Java, you may find switch version on [Mac](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-macos), [Windows](https://stackoverflow.com/questions/26993101/switching-between-different-jdk-versions-in-windows) or [Linux](https://askubuntu.com/questions/740757/switch-between-multiple-java-versions) useful.
 
---------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+**Q: How do I transfer my data to another computer?**<br>
+<br>
+Install the app on the other computer and **overwrite the empty data file** it creates with the **file that contains the data of your previous Flashlingo** home folder.
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+**Q: How can I import my data to the app?**<br>
+<br>
+Save your words and translations in the specified format in an Excel file. Move the file to the same folder with `flashlingo.jar`.
+Then, **use the `load` command to import the data.**
+
+**Q: What may be the reasons why my data cannot be loaded into the app?**<br>
+
+* First, **check your file name** by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
+* If Flashlingo still cannot read the file, try inputting the file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
+* Secondly, ensure the **content in your file is correctly formatted and valid**. All rules can be found [here](#load).
+* There may be issues with loading Excel if you have tried to delete data without using the _delete whole row/column_ function. Copy the entire data (only valid rows and columns) to a new Excel file and try again.
+
+**Q: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I be able to see these changes immediately reflected in the review session?**<br>
+
+* Unfortunately, **no**. The card is updated synchronously in the card list and the review session of Flashlingo. However, since you have already reviewed the same card on the day, the card will not be included in the review session again.
+* To check the card after editing, you can **use the `list` or `find` command** to locate the specific card. The changes will also be reflected in the next review session for that card.
+
+**Q: If the displayed level of a flash card is `Word Mastered`, what can I do if I want to review the card again?**<br>
+
+* Currently, there's no way for you to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
+* However, if you must review the card again, you can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added to the review session.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+Refer to [Commands](#commands) if unsure of how to interpret the format.
+
+| Action                  | Format, Examples                                                                                                           | Supported Period       |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------|------------------------|
+| **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         | Outside review session |
+| **Delete**              | `delete <INDEX>`<br> e.g., `delete 1`                                                                                      | Outside review session |
+| **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` | Outside review session |
+| **Find**                | `find <KEYWORD...>`<br> e.g., `find bye`                                                                                   | Outside review session |
+| **List**                | `list ...`                                                                                                                 | Outside review session |
+| **Review**              | `review ...`                                                                                                               | Outside review session |
+| **Start**               | `start ...`                                                                                                                | Outside review session |
+| **End**                 | `end ...`                                                                                                                  | Inside review session  |
+| **Reveal**              | `reveal [<INDEX>]`                                                                                                         | Both                   |
+| **Yes**                 | `yes ...`                                                                                                                  | Inside review session  |
+| **No**                  | `no ...`                                                                                                                   | Inside review session  |
+| **Learning Statistics** | `stats ...`                                                                                                                | Outside review session |
+| **Language**            | `language [<SPECIFIED_LANGUAGE>]`<br> e.g., `language French`                                                              | Outside review session |
+| **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        | Outside review session |
+| **Switch**              | `switch ...`                                                                                                               | Both                   |
+| **Help**                | `help ...`                                                                                                                 | Outside review session |
+| **Exit**                | `exit ...`                                                                                                                 | Both                   |
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+| Term               | Definition                                                                                                                                                                                                                                                                      |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**            | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html).                            |
+| **GUI**            | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                  |
+| **JSON**           | JSON (JavaScript Object Notation) is a lightweight data format commonly used for representing structured data.                                                                                                                                                                  |
+| **Leitner System** | The Leitner system is a widely used method of efficiently using flashcards that was proposed by the German science journalist Sebastian Leitner in 1972. It is a simple implementation of the principle of spaced repetition, where cards are reviewed at increasing intervals. |
+| **Level**          | The level represents the proficiency with a specific flash card. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                            |
+| **Review Session** | A review session is a designated phase within the system where words requiring review are presented individually, based on Leitner System. Users can confirm their understanding or signal a need for further review.                                                           |
+

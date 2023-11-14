@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes YesCommand;
+:Call execute(Model);
+:Call nextReviewWord();
+:Call updateLevel(true);
+:Call recallFlashCard();
+if () then ([hasNextRound()])
+  :Call nextReviewWord();
+else ([else])
+  :Set Session to false;
+  :Update Filtered FlashCard List;
+  :Generate CommandResult;
+endif
+stop
+@enduml
