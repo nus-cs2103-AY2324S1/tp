@@ -576,7 +576,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Medication**: A drug identified by a name.
-* **Prescription**: Uniquely identified by a medication, other fields are optional.
+* **Prescription**: Uniquely identified by a medication and a start date.
 * **Conflicting drugs**: Drugs that should not be taken together.
 
 --------------------------------------------------------------------------------------------------------------------
