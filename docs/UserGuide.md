@@ -95,7 +95,7 @@ Some fields are **single-valued fields**, meaning that each contact has **only 1
 
 | Single-valued fields | Prefix    | Format                                                                              | Remarks                                                  |
 | -------------------- | --------- |-------------------------------------------------------------------------------------| -------------------------------------------------------- |
-| name                 | /name     | Any non-empty value comprising alphanumeric characters (and spaces, if any)         | Is case-sensitive. Moreover, if a contact's name contains non-alphanumeric characters (e.g. `/`), you may omit these characters in the stored name. |
+| name                 | /name     | Any non-empty value comprising alphanumeric characters (and spaces, if any)         | If a contact's name contains non-alphanumeric characters (e.g. `/`), you may omit these characters in the name that you store. |
 | priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet                           | Not case-sensitive                                       |
 | graduation semester  | /grad     | `AYxxxx-Sy`<br/><br/>e.g., `AY2223-S1` for Academic Year 20`22`/20`23` Semester `1` | `xxxx` is the 4-digit representation of 2 **consecutive** calendar years.<br/>Academic year must be between AY1970/1971 to AY2069/2070 (inclusive). <br/>`y` is either `1` for Semester 1, or `2` for Semester 2. |
 
@@ -626,11 +626,6 @@ You can use the `help` command to open a help window containing a link to this u
 Format: `help`
 
 Parameters: N/A
-
-<div markdown="span" class="alert alert-secondary">
-:information_source: **Note:**
-If the help window is open and minimised, executing the `help` command again may not make the window pop up again.
-</div>
 
 Example usage:
 
