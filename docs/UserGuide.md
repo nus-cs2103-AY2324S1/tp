@@ -62,7 +62,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 --------------------------------------------------------------------------------------------------------------------
 ## Parameters
 
-The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands.
+The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands. Users should follow these constraints for all commands, unless otherwise stated.
 
 **Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so do please follow them when necessary!
 
@@ -99,10 +99,11 @@ The list below contains the parameters that are used in various commands as well
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-  * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`,
-  `clear`, `undo` and `redo`) will be
-    ignored.<br>
-    e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `undo` and `redo`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extraneous parameters behind any valid parameters will be deemed as the input for that parameter. <br>
+  e.g. if the command specifies `add-doctor a/ADRESS c/some condition ....`, `c/some condition` will be interpreted as part of the address.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -121,7 +122,7 @@ Format: `help`
 
 Adds a Doctor to MediLink Contacts.
 
-Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add-doctor n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb:
 **Tip:**
@@ -159,16 +160,16 @@ behaviour of MediLink Contacts. The exceptions to this section, as well as addit
 
 Adds a Patient to MediLink Contacts.
 
-Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
+Format: `add-patient n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Take Note:**<br>
 
 - A patient cannot have the same NRIC as another person.
-- A person can either be a doctor or a patient, but not both. Hence, if the patient's IC is already in the app
+- A person can either be a doctor or a patient, but not both. Hence, if the patient's NRIC is already in the app
     as a doctor, it may result in an error.
-- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
+- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same as the person's contact number.
 - A patient can only have up to one tag at any time.
 
 </div>
@@ -182,14 +183,14 @@ Examples:
 
 Creates a new appointment for patients.
 
-Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
+Format: `new-appt pic/NRIC dic/NRIC time/yyyy-MM-dd HH:mm`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- PATIENT must contain the valid IC of a Patient in MediLink Contacts.
-- DOCTOR must contain the valid IC of a Doctor in MediLink Contacts.
+- NRIC for pic/ must contain the valid NRIC of a Patient in MediLink Contacts.
+- NRIC for dic/ must contain the valid NRIC of a Doctor in MediLink Contacts.
 - There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
@@ -251,7 +252,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
-* Edits the person with the specified `NRIC`. The NRIC provided **must be a valid IC number** and is not case-sensitive.
+* Edits the person with the specified `NRIC`. The NRIC provided **must be a valid NRIC number** and is not case-sensitive.
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
 * You cannot change a person's IC number. If the provided ic number is the same as the original it will work.
@@ -348,7 +349,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from MediLink Contacts.
+Deletes the specified person from MediLink Contacts. Note that appointments related to the person to be deleted will still remain in MediLink Contacts even after the person is deleted.
 
 Format: `delete NRIC`
 
@@ -460,6 +461,9 @@ that specifies the format to be used for that field. Common cases of Invalid Fie
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous MediLink Contacts home folder.
 
+**Q**: How do I if I have the correct java version?<br>
+**A**: Open a Command Prompt, type java -version and press enter. It will then show the java version installed on your machine. If you see `Java not recognised as an internal or external command`, it means you likely do not have java installed. In this case you may download java11 [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+
 --------------------------------------------------------------------------------------------------------------------
 ## Known issues
 
@@ -471,20 +475,20 @@ the data of your previous MediLink Contacts home folder.
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                                                                                                   |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **New Doctor**         | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                                   |
-| **New Patient**        | `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High` |
-| **New Appointment**    | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                             |
-| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                      |
-| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                                    |
-| **Clear**              | `clear`                                                                                                                                                                                                                                                                            |
-| **Undo**               | `undo`                                                                                                                                                                                                                                                                             |
-| **Redo**               | `redo`                                                                                                                                                                                                                                                                             |
-| **Delete**             | `delete NRIC`<br> e.g., `delete T0666485G`                                                                                                                                                                                                                                         |
-| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                 |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                         |
-| **List**               | `list`                                                                                                                                                                                                                                                                             |
-| **Help**               | `help`                                                                                                                                                                                                                                                                             |
-| **Exit**               | `exit`                                                                                                                                                                                                                                                                             |
+| Action                 | Format, Examples                                                                                                                                                                                                                                                                                 |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **New Doctor**         | `add-doctor n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                                               |
+| **New Patient**        | `add-patient n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/12345678 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High` |
+| **New Appointment**    | `new-appt pic/NRIC dic/NRIC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                                       |
+| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                                    |
+| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                                                  |
+| **Clear**              | `clear`                                                                                                                                                                                                                                                                                          |
+| **Undo**               | `undo`                                                                                                                                                                                                                                                                                           |
+| **Redo**               | `redo`                                                                                                                                                                                                                                                                                           |
+| **Delete**             | `delete NRIC`<br> e.g., `delete T0666485G`                                                                                                                                                                                                                                                       |
+| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                               |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                       |
+| **List**               | `list`                                                                                                                                                                                                                                                                                           |
+| **Help**               | `help`                                                                                                                                                                                                                                                                                           |
+| **Exit**               | `exit`                                                                                                                                                                                                                                                                                           |
 
