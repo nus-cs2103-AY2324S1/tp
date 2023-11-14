@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 12
+skinparam ArrowFontSize 12
+
+start
+:User wants to mark her employees' attendances;
+:User physically checks who is absent;
+
+:User requests to mark an employee as absent;
+:ManaGease reads and parses command;
+if () then ([employee is on leave])
+    :ManaGease displays an error message;
+else ([employee is not on leave])
+    :Updated attendance is saved
+    and stored in ManaGease;
+endif
+stop
+
+
+@enduml

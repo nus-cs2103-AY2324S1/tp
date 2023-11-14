@@ -693,51 +693,66 @@ These two features are dependent on the following classes:
 Below are the relationships between these classes:
 
 ![Attendance package classes](images/AttendanceStorageClassDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The <code>markXYZ()</code> method above is a placeholder for the different methods: <code>markPresent()</code>, <code>markAbsent()</code>, and <code>markLate()</code>.
+</div>
+
+Each `Person` class references a single `AttendanceStorage` object, which contains the `storage` -- an `ArrayList<>` of `Attendance` objects associated with the given employee.
+
+The AttendanceType is an enumeration with the values `PRESENT`, `ABSENT`, `LATE`, `ON_LEAVE`. Each `Attendance` object references an `AttendanceType` and a date, such that an `Attendance` object consists of the day the attendance was recorded as well as the type of attendance that was recorded.
+
+The `AttendanceStorage` only stores `Attendances` that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given employee.
+
 
 #### 1. Mark attendance feature
 
-The mark mechanism is dependent on the Attendance class. The Attendance class contains information on the date and AttendanceType of a Person.  It implements the following operations:
+The `mark` mechanism is dependent on the `Attendance` class. The Attendance class contains information on the date and `AttendanceType` of a `Person`.  It implements the following operations:
 * `Attendance#markAbsent(LocalDate date)` -- marks the attendance of the employee on the provided date as absent.
 * `Attendance#markLate(LocalDate date)` -- marks the attendance of the employee on the provided date as late.
-  
-The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-Step 1. The user executes `mark 1 /at LATE` command to mark the 1st Person in the list as late.
+Step 1. The user executes `mark 1 /at LATE` command to mark the 1st employee in the list as late.
 
-Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given Person.
+Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given `Person` class associated with that employee.
 
 This working status is then updated in the GUI as shown below:
 
 ![GUI before mark command](images/GUIBeforeMarkCommand.png) ![GUI after mark command](images/GUIAfterMarkCommand.png)
 
-Sequence diagram is as shown below:
+The sequence diagram for the example above is as shown below:
 
 ![Mark Sequence Diagram](images/MarkSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>MarkCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+The following class diagram shows how the different classes interact with one another in the `mark` feature:
+![Mark Command Class Diagram](images/MarkCommandClassDiagram.png)
+
 #### 2. Attendance Report feature
 
-The attendance reporting mechanism is dependent on the AttendanceStorage class. The AttendanceStorage is a collection of the Attendances of a Person. It implements the following operations:
-* `AttendanceStorage#getCount` -- counts the number of days the attendance of type `attendanceType` appears in the AttendanceStorage
+The attendance reporting mechanism is dependent on the `AttendanceStorage` class. The `AttendanceStorage` is a collection of the `Attendance` objects associated with an employee. It implements the following operations:
+* `AttendanceStorage#getCount` -- counts the number of days the attendance of type `attendanceType` appears in the `AttendanceStorage`
 * `AttendanceStorage#getAttendanceReport` -- provides an `int[]` of the number of days of each attendance type in the following order: [leave, absent, late]
-
-The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-Step 1. The user executes `attendance 1` command to retrieve the attendance of the first Person.
+Step 1. The user executes `attendance 1` command to retrieve the attendance of the first employee.
 
-Step 2. The `attendance` command calls `AttendanceCommand#reportByIndex()` of the given employee, which calls the `AttendanceStorage#getAttendanceReport()` of the given Person.
+Step 2. The `attendance` command calls `AttendanceCommand#reportByIndex()` of the given employee, which calls the `AttendanceStorage#getAttendanceReport()` of the given `Person` class associated with that employee.
 
 Sequence diagram is as shown below:
 ![Mark Sequence Diagram](images/AttendanceSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AttendanceCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+
+The following class diagram shows how the different classes interact with one another in the `attendance` feature:
+![Attendance Command Class Diagram](images/AttendanceCommandClassDiagram.png)
+
+Finally, the following activity diagram shows how a user would use both the `mark` command and `attendance` command to take the attendance of her employees:
+![Attendance Activity Diagram](images/AttendanceActivityDiagram.png)
 
 
 #### Design considerations:
@@ -750,6 +765,7 @@ Sequence diagram is as shown below:
 * **Alternative 2:** As a UniqueAttendanceList.
   * Pros: No copies of Attendance objects having the same attribute values
   * Cons: Difficult to reference a Person to each Attendance.
+
 
     
 --------------------------------------------------------------------------------------------------------------------
