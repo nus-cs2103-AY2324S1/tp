@@ -29,7 +29,8 @@ retailers looking for a cheap and efficient way to record daily transactions.
 
 ### **Developer Guide**
 
-- Updated text and UML diagrams in architecture, logic component and model component sections (PR [#91](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/91))
+- Updated text and UML diagrams in architecture, logic component and model component sections (PR [#91](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/91), [#204](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/204), [#205](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/205))
+- Added planned enhancements (PR [#225](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/225))
 
 ### **Review Contributions**
 
