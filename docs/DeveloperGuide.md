@@ -888,14 +888,6 @@ Guarantees: The list of Orders that fulfills the status or medicine or both will
 1. Application should be smaller than 100mb so that application can be run on space constrained systems.
 1. Generated storage file shouldn't take up more than 100mb of storage so that the application can be run on space constrained systems.
 
-#### General
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **CLI**: Command Line Interface
-* **GUI**: Graphical User Interface
-* **API**: Application Programming Interface
-* **MSS**: Main Success Scenario (or, Happy Path)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
