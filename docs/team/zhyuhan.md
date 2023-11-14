@@ -20,10 +20,11 @@ These are my contributions:
   - Credits: @kamiliarsyad for the implementation of the dashboard data model.
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=zhyuhan&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=false)
 - **Project management**:
-  - Managed releases `v1.2.1` - `v1.3` (2 releases) on GitHub
+  - Managed releases `v1.2.1` - `v1.4` (3 releases) on GitHub
 - **Documentation**:
   - User Guide:
     - Catalogued known issues.
+    - Updated app screenshots.
   - Developer Guide:
     - Added implementation details of the dashboard view and `view` command.
 - **Community**:
