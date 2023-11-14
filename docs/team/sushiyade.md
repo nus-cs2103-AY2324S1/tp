@@ -41,7 +41,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=sushiyade&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
-  * To be added
+  * Created demo video for Freelance Buddy
 
 * **Enhancements to existing features**:
 * **Updated**: Add Contact Parser
