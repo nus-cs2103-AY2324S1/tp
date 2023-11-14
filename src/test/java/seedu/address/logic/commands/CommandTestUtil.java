@@ -85,8 +85,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_DEREK = " " + PREFIX_NAME + VALID_NAME_DEREK;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String PHONE_DESC_CHERYL = " " + PREFIX_NAME + VALID_PHONE_CHERYL;
-    public static final String PHONE_DESC_DEREK = " " + PREFIX_NAME + VALID_PHONE_DEREK;
+    public static final String PHONE_DESC_CHERYL = " " + PREFIX_PHONE + VALID_PHONE_CHERYL;
+    public static final String PHONE_DESC_DEREK = " " + PREFIX_PHONE + VALID_PHONE_DEREK;
     public static final String EMERGENCY_CONTACT_DESC_AMY =
             " " + PREFIX_EMERGENCY_CONTACT + VALID_EMERGENCY_CONTACT_AMY;
     public static final String EMERGENCY_CONTACT_DESC_BOB =
