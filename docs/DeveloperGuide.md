@@ -102,7 +102,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `ManageHrParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete an employee).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -112,7 +112,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `ManageHrParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ManageHrParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -128,7 +128,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Department` list in the `AddressBook`, which `Employee` references. This allows `AddressBook` to only require one `Department` object per unique tag, instead of each `Employee` needing their own `Department` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Department` list in the `ManageHr`, which `Employee` references. This allows `ManageHr` to only require one `Department` object per unique tag, instead of each `Employee` needing their own `Department` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -143,12 +143,12 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ManageHrStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,30 +161,34 @@ This section describes some noteworthy details on how certain features are imple
 
 #### The employee class
 
+![Employee Class Diagram](images/ManageHR/EmployeeClassDiagram.png)
+
 ManageHR keeps track of employees within the company with the use of `Employee` and `UniqueEmployeeList`. The `UniqueEmployeeList` serves as a container for the `Employee` objects
 within the company, while enforcing the constraints that no 2 employees can have the same name.
 
 The `Employee` class contains the following attributes.
 
-1. `Name`: The name of the employee.
+1. `EmployeeName`: The name of the employee.
 2. `Email`: The email of the employee.
 3. `Address`: The home address of the employee.
 4. `Leave`: The amount of leave remaining for the employee.
 5. `Salary`: The monthly salary accorded to the employee.
 6. `Phone`: The phone number of the employee.
-7. `Departments`: A set of departments in which the employee can belong to.
+7. `Role`: The role of the employee.
+8. `Superiors`: The employee name of the superior in charge of them.
+9. `Departments`: A set of departments in which the employee can belong.
 
-All the attributes except Departments are compulsory fields.
+All the attributes except Departments and Superiors are compulsory fields.
 
 ### List command
 
 #### Overview
 
-The `ListCommand` displays the `Employee` objects currently stored in `UniqueEmployeeList` object.
+The `ListCommand` displays all the `Employee` objects currently stored in `UniqueEmployeeList` object.
 
 The following sequence diagram shows how the different components of ManageHR interact with each other.
 
-<img src="images/ManageHR/ListCommandSequenceDiagram.png" width="700" />
+<img src="images/ManageHR/ListSequenceDiagram.png" width="700" />
 
 The above sequence diagram omits details on the internal implementations within each directory in order to improve
 overall readability of the diagram.
