@@ -36,9 +36,8 @@ Given below are my contributions to the project.
   * **Credit**: Slightly referenced AB3's `find` and `edit` feature's design as well as to Kenvyn Kwek's prior implementation of feature.
 * **Refactor**: Refactored all instances of `AddressBook3` to `manageHr`
   * **What it does**: No changes to features.
-  * **Justification**: tP instructions to treat each version as the final product. Not changing `AddressBook3` instances
-    would mean having non-descriptive package/class/method/variable names.
-  * **Highlights**: Refactor implementation was hard due to the many dependencies between each class.
+  * **Justification**: It is pivotal to do so as failing so could make future implementations more difficult to understand. 
+  * **Highlights**: Refactor implementation was hard due to the many dependencies that exists between each class.
   * **Credit**: nil
 
 
