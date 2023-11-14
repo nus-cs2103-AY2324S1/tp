@@ -6,9 +6,9 @@
     "studentNumber" : "A0245234A",
     "classDetails" : {
       "classNumber" : "T11",
-      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
-      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
-      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
+      "attendanceTracker" : [ false, false, true, false ],
+      "assignmentTracker" : [ 100, 55, 0, 30, 0, 90 ],
+      "classParticipationTracker" : [ false, true, false, false ]
     },
     "tags" : [ "owesMoney", "friends" ],
     "comment" : ""

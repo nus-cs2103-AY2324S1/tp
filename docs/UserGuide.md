@@ -211,9 +211,9 @@ Data visualisation of student's Class Information is automatically generated in 
 
 **Class Manager 2023's** data is saved as a [JSON](#glossary) file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br>
+<img alt="sample_contents" src="images/sample-contents.png" width="700"> <br>
 
-Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command to ensure your data file matches the configuration of **Class Manager 2023**. The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. In the image above, the data file can only be loaded if **Class Manager 2023** has been configured to have 10 tutorials and 4 assignments, as deduced from the size of the relevant arrays. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. 
+Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command to ensure your data file matches the configuration of **Class Manager 2023**. The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. In the image above, the data file can only be loaded if **Class Manager 2023** has been configured to have 4 tutorials and 4 assignments, as deduced from the size of the relevant arrays. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. 
 
 
 <box type="warning" seamless>
@@ -258,18 +258,20 @@ After `config #t/6 #a/5` is executed successfully and `view s/A0247243A` is exec
 
 <img alt="config success" src="images/config-success.png" width="700"> <br>
 
+The number of tutorials and assignments of all students is updated to 6 and 5 respectively, while their Class Information is reset.
+
 Possible errors and their corresponding error messages:
-* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing
+* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing:
     * Error message: `Invalid command format! 
         config: Configures Class Manager with the module information.
         WARNING: Configuring Class Manager resets the grades, attendance and class participation details of all students. This cannot be undone.
         The default Class Manager is configured with 13 tutorials and 6 assignments.
         Parameters: #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT
-        Example: config #t/10 #a/4`
-* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is less than 1 
-    * Error message: `Invalid count values! The count value of tutorials/assignments cannot be less than 1.`
-* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is more than 40
-    * Error message: `Invalid count values! The count value of tutorials/assignments cannot be more than 40.`
+        Example: config #t/10 #a/4`<br>
+* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is less than 1:
+    * Error message: `Invalid count values! The count value of tutorials/assignments cannot be less than 1.`<br>
+* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is more than 40:
+    * Error message: `Invalid count values! The count value of tutorials/assignments cannot be more than 40.`<br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -340,9 +342,9 @@ After `load f/sample` is executed successfully:
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
 Possible errors and their corresponding error messages:
-* If `sample.json` does not exist in the `/data` folder
-  * Error message: `The file sample.json cannot be found. Please make sure the file is in the /data folder.`
-* The file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**
+* If `sample.json` does not exist in the `/data` folder.
+  * Error message: `The file sample.json cannot be found. Please make sure the file is in the /data folder.`<br>
+* If the file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**.
   * Error message: `The file sample.json cannot be loaded. Please make sure the file is formatted correctly.`
 
 [Back to Table of Contents](#table-of-contents)
@@ -455,7 +457,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]â€¦â€
 
 * **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
-* `PHONE` must be a 3 to 20 digit positive integer.
+* `PHONE` must be a positive integer that contains 3 or more digits.
 * [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
@@ -466,7 +468,7 @@ The following image shows a successful execution of the `add` command.
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags (including 0)
+**Tip:** A student can have zero or more of tags.
 
 </box>
 
@@ -484,7 +486,7 @@ Adds or replaces a comment of an existing student in **Class Manager 2023**. The
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
     * Note that the `COMMENT` string must not include any prefix.
@@ -503,7 +505,7 @@ Displayed result if `comment` is successful: `Comment added successfully.`
 
 Possible errors and their corresponding error messages:
 * If [`STUDENT_NUMBER`](#student-number) input is invalid.
-    * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`
+    * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`<br>
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
     * Error message: `There is no student with the given Student Number.`
 
@@ -562,7 +564,7 @@ The Student Number entered __without__ the `s/` prefix refers to the **existing*
 * `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in **Class Manager 2023**).
+* The `NEW_STUDENT_NUMBER` must be valid and does not belong to any existing student in **Class Manager 2023**.
 
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and [email address](#glossary) of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
@@ -668,9 +670,9 @@ Other success messages of the `tag` command:
 
 Possible errors and their corresponding error messages:
 * If [`STUDENT_NUMBER`](#student-number) input is invalid.
-  * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`
+  * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`<br>
 * If `Tag` input is invalid.
-  * Error message: `Tag names should be alphanumeric`
+  * Error message: `Tag names should be alphanumeric`<br>
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
   * Error message: `There is no student with the given Student Number.`
 
@@ -764,7 +766,7 @@ Record the class participation for an existing student in **Class Manager 2023**
 
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
-* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 * `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 * `PARTICIPATION` must be either `true` or `false`.
     * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
@@ -787,7 +789,7 @@ Setting an assignment grade for an existing student in **Class Manager 2023**.
 
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 * The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**`config`**](#configure-class-manager-2023--config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
