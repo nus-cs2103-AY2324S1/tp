@@ -40,7 +40,7 @@ public class RemoveMusicianFromBandCommand extends Command {
     private final Index musicianTargetIndex;
 
     /**
-     * Creates a RemoveMusicianFromBandCommand to remove the specified {@code Musician} from the {@code Band}.
+     * Creates a {@code RemoveMusicianFromBandCommand} to remove the specified {@code Musician} from the {@code Band}.
      */
     public RemoveMusicianFromBandCommand(Index bandTargetIndex, Index musicianTargetIndex) {
         requireNonNull(bandTargetIndex);

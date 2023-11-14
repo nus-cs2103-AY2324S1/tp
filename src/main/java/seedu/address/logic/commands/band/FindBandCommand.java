@@ -28,6 +28,9 @@ public class FindBandCommand extends Command {
     public static final String MESSAGE_NO_BAND_IN_LIST = "No bands yet." + "\n" + "Please create a band first!";
     private final Predicate<Band> predicate;
 
+    /**
+     * Creates a {@code FindBandCommand} to find all {@code Musicians} belonging to the specified {@code Band}.
+     */
     public FindBandCommand(Predicate<Band> predicate) {
         this.predicate = predicate;
     }

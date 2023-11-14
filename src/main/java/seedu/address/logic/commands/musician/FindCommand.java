@@ -42,7 +42,7 @@ public class FindCommand extends Command {
     private final HashSet<Predicate<Musician>> predicates;
 
     /**
-     * Creates a FindCommand to find the specified {@code Musician}.
+     * Creates a {@code FindCommand} to find the specified {@code Musician}.
      *
      * @param predicates the list of predicates to filter the list of musicians.
      */

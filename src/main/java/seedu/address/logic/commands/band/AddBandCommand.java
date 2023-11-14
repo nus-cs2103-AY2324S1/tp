@@ -31,7 +31,7 @@ public class AddBandCommand extends Command {
     private final Band toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an {@code AddBandCommand} to add the specified {@code Band}.
      */
     public AddBandCommand(Band band) {
         requireNonNull(band);
