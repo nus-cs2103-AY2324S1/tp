@@ -176,9 +176,9 @@ Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection o
 
 Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
 
-Step 5. `TagCommand` creates a new `Student` object with the new `Tag` and copy all other details.
+Step 5. `TagCommand` updates the `Student` with the new `Tag`.
 
-Step 6. `TagCommand` updates the `Model` with the new Student by calling `Model#setStudent()`.
+Step 6. `TagCommand` updates the `Model` with the updated Student by calling `Model#setStudent()`.
 
 Step 7. Finally, the `TagCommand` creates a CommandResult with a success message and returns it to the LogicManager to complete the command execution. The GUI would also be updated with the change of status.
 
