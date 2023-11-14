@@ -18,7 +18,7 @@ Given below are my contributions to the project.
     * Highlights: Implementing this feature requires in-depth understanding of how the `Student` model functions and interacts with the other component of the application. It also requires more modification to the existing model.
       <br><br>
   * **New feature:** `view` command (PR: [#99](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/99))
-    * What it does: Users can view the class information of a specific student in the Class Manager.
+    * What it does: Users can view the Class Information of a specific student in the Class Manager.
     * Justification: Initially, there was no way to view the class details of a `Student` despite being able to store them. This feature will allow users to view the specifics of a students' performance and edit them accordingly.
     * Highlight: Implementing this feature requires in-depth understanding of how components are rendered on the `GUI` and how it is being updated on the `GUI`. It requires more modifications to the existing model and GUI.
       <br><br>
@@ -28,7 +28,7 @@ Given below are my contributions to the project.
     * Highlight: `Tag` was previously edited using the `edit` command. However, it was inefficient as each time the user wants to edit the `Tag` of `Student` users have to replace all existing tags. Thus, extracting it from the `edit` command and enhancing the feature to support addition and deletion of `Tag` from `Student` requires deep understanding of how `Tag` is stored under `Student`. It requires modification to the existing model.
       <br><br>
   * **Enhancement to existing commands:** `GUI` (PR: [#96](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/96))
-    * Changes: Added a side panel that will display the class informations of a student.
+    * Changes: Added a side panel that will display the Class Information of a student.
     * Highlights: Modifying the UI requires in-depth understanding of how the UI classes observe and update when the target component is changed. It also requires understanding of JavaFX, FXML and CSS.
       <br><br>
 * **Documentation**:
