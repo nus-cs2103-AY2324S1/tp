@@ -12,14 +12,14 @@ public class InterviewType {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Type is not case sensitive and should only be in the form: \n"
-                    + "BEHAVIOURAL, TECHNICAL, CASE, GROUP, PHONE, VIDEO, ONLINE, ONSITE, OTHER";
+                    + "BEHAVIOURAL, TECHNICAL, CASE, GROUP, VIDEO, ONLINE, ONSITE, OTHER";
 
     public final String interviewType;
     /**
      * Enum for interview types
      */
     public enum InterviewTypes {
-        BEHAVIOURAL, TECHNICAL, CASE, GROUP, PHONE, VIDEO, ONLINE, ONSITE, OTHER
+        BEHAVIOURAL, TECHNICAL, CASE, GROUP, VIDEO, ONLINE, ONSITE, OTHER
     }
 
     /**
