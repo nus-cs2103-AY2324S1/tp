@@ -17,6 +17,12 @@ import seedu.address.model.band.BandNameContainsKeywordsPredicate;
  */
 public class FindBandCommandParser implements Parser<FindBandCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the FindBandCommand
+     * and returns a FindBandCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public FindBandCommand parse(String args) throws ParseException {
         try {

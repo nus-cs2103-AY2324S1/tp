@@ -9,6 +9,9 @@ BandConnect++ is a desktop application that helps music producers seeking talent
 
 Given below are my contributions to the project.
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=tanyyyming&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=tanyyyming&tabRepo=AY2324S1-CS2103T-W11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false&since=2023-09-22)
+
+
 * **New Feature 1: Tagging the musicians with their instruments and genres [\#73](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/73), [\#83](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/83)**
   * **What it does:** it allows the user to tag the musicians with their instruments and genres while checking the input against a list of valid instruments and genres
   * **Justification:** they are more specialised and less error-prone than AB3's general tags, catering to the needs of the target users (music producers)
@@ -23,9 +26,6 @@ Given below are my contributions to the project.
   * **Credits:** My teammate did the initial implementation of this feature which supports adding one musician at a time. I extended it to support adding multiple musicians at once. I also refactored the code and enhanced its error handling.
 
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=tanyyyming&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=tanyyyming&tabRepo=AY2324S1-CS2103T-W11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false&since=2023-09-22)
-
-
 * **Enhancements to existing features**:
   * Enhanced the `find` feature to allow the user to find musicians by their tags, instruments, and genres on top of their names [\#94](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/94), [\#148](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/148)
 
@@ -33,23 +33,38 @@ Given below are my contributions to the project.
 * **Team tasks contributions**:
   * Set up the product website and did site-wide settings [\#51](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/51)
   * Reviewed PRs of team members and gave constructive feedback
-  * Structured the UG and DG to ensure consistency across the team members [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#219](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/219), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222)
-  * Fixed bugs of other features [\#144](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/144), [\#194](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/194)
+  * Structured and formatted the UG and DG to ensure consistency across the team members [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222), [\#224](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/224)
+  * Fixed bugs for other features [\#144](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/144), [\#194](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/194)
   * Product-wide modifications, like GUI [\#140](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/140)
   * Conducted post-PE-D bugs triage, classify bugs and close duplicate and irrelevant issues
   * Managed the aggregation and distribution of tasks among team members
 
 
 * **Documentation**:
-  * User Guide [\#154](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/154), [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200):
+  * User Guide [\#154](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/154), [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#219](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/219), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222)
     * Product introduction and overview
     * How to use the guide
     * Features: `edit`, `tags`, `find`, `addm` 
     * Command Summary
     * Glossary
-    * Overall structure and formatting
-  * Developer Guide [\#203](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/203), [\#208](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/208):
+  * Developer Guide [\#203](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/203), [\#208](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/208), [\#224](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/224), [\#227](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/227), :
     * Features: `tags`, `find`, `addm`
     * Added two activity diagrams (`find` and `addm`), one sequence diagram (`find`), and one class diagram (`tags`)
     * Use cases
     * User stories
+    * Planned enhancements
+
+<div style="page-break-after: always;"></div>
+
+* **Contributions to the User Guide (Extracts):**
+
+![UG3.png](tanyyyming-contributions%2FUG3.png)
+
+<div style="page-break-after: always;"></div>
+
+* **Contributions to the Developer Guide (Extracts):**
+
+<img src="tanyyyming-contributions%2FDG1.png" alt="DG1.png" width="700">
+
+![FindMusicianActivityDiagram.png](..%2Fimages%2FFindMusicianActivityDiagram.png)
+![FindMusicianSequenceDiagram.png](..%2Fimages%2FFindMusicianSequenceDiagram.png)

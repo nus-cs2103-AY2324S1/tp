@@ -19,14 +19,17 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddMusiciantoBandCommand object
+ * Parses input arguments and creates a new AddMusicianToBandCommand object
  */
 public class AddMusicianToBandCommandParser implements Parser<AddMusicianToBandCommand> {
+
     /**
-     * Parses the given {@code String} of arguments in the context of the AddMusiciantoBandCommand
-     * and returns an AddMusiciantoBandCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddMusicianToBandCommand
+     * and returns an AddMusicianToBandCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public AddMusicianToBandCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_BINDEX, PREFIX_MINDEX);

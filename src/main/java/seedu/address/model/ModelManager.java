@@ -148,16 +148,12 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
-        requireNonNull(bandIndex);
-        requireNonNull(musicianIndex);
         return addressBook.hasMusicianInBand(filteredBands.get(bandIndex), filteredMusicians.get(musicianIndex));
     }
 
     @Override
     public void addMusicianToBand(int bandIndex, int musicianIndex) {
-        requireNonNull(bandIndex);
-        requireNonNull(musicianIndex);
-        addressBook.addMusicianToBand(bandIndex, filteredMusicians.get(musicianIndex));
+        addressBook.addMusicianToBand(filteredBands.get(bandIndex), filteredMusicians.get(musicianIndex));
     }
 
     @Override
@@ -226,7 +222,7 @@ public class ModelManager implements Model {
     public void updateFilteredBandMusicianList(Predicate<Band> bandPredicate) {
         filteredBands.setPredicate(bandPredicate);
 
-        if (filteredBands.size() == 0) {
+        if (filteredBands.isEmpty()) {
             updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
             updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
             return;

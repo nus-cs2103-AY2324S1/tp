@@ -28,9 +28,8 @@ Given below are my contributions to the project.
 
 
 * **Documentation**:
-  * User Guide: [\#13](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/13) [\#43](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/43) [\#134](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/134) [\#146](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/146)
-    * Introduction
-    * About
+  * User Guide: [\#13](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/13) [\#43](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/43) [\#134](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/134) [\#146](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/146) [\#217](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/217) [\#226](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/226) [\#232](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/232) [\#235](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/235)
+    * Using the Guide
     * Quick Start
     * Table of Contents
     * Features:
@@ -42,13 +41,15 @@ Given below are my contributions to the project.
       * Clear
       * Exit
       * Save
-  * Developer Guide: [\#44](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/44) [\#112](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/112)
+    * Command Summary
+  * Developer Guide: [\#44](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/44) [\#112](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/112) [\#235](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/235)
     * Updated existing UML diagrams to conform to current project [\#204](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/204) 
     * Created 1 new activity diagram for edit musician feature [\#205](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/205)
     * Features:
       * List Band Members
       * Add Musician
       * Edit Musician
+    * Appendix 3: Effort
 
 
 * **Team-based tasks**:

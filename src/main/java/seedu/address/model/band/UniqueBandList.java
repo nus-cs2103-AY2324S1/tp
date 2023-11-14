@@ -154,13 +154,13 @@ public class UniqueBandList implements Iterable<Band> {
     /**
      * Adds a musician to a band.
      */
-    public void addMusician(int bandIndex, Musician musician) {
-        requireNonNull(bandIndex);
+    public void addMusician(Band band, Musician musician) {
+        requireNonNull(band);
         requireNonNull(musician);
-        if (internalList.get(bandIndex).getModifiableMusicianList().contains((musician))) {
+        if (band.getModifiableMusicianList().contains((musician))) {
             throw new DuplicateMusicianException();
         }
-        internalList.get(bandIndex).getModifiableMusicianList().add(musician);
+        band.getModifiableMusicianList().add(musician);
     }
 
     /**

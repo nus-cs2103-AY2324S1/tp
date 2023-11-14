@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes `Main` and `MainApp`) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,24 +68,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/uml/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MusicianListPanel`, `BandListPanel`,  `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Musician` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,19 +114,19 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/uml/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Musician` objects (which are contained in a `UniqueMusicianList` object).
+* stores the currently 'selected' `Musician` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Musician>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Musician` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Musician` needing their own `Tag` objects.<br>
 
 <img src="images/uml/BetterModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/uml/StorageClassDiagram.png" width="550" />
 
@@ -155,7 +155,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Musician Feature
-The user can add a new musician to the storage through the `add` Command.
+The user can add a new musician to the storage through the `add` command.
 
 Command: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​`
 
@@ -164,9 +164,12 @@ Command: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​ 
     1. A success message is returned.
     2. The musician panel immediately reflects the updated musician list with the new musician just added. The band panel shows all bands.
 
-* **Failed Scenario (when musician already exists in storage):**
+* **Failed Scenario:**
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+* **Possible Failing Condition:**
+  1. When the musician already exists in storage (same name), or has duplicate information (phone or email) with another musician who already exists in storage.
 
 #### Implementation
 Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any musician with the same name, phone, or email. This is achieved through the use of `Model::hasMusician` and `Model::hasDuplicateInfo` method.
@@ -185,7 +188,7 @@ Command: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTR
 * **Failed Scenario:**
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-* **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
+* **Possible failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
 
 #### Implementation
 ![EditMusicianActivityDiagram.png](images/uml/EditMusicianActivityDiagram.png)
@@ -289,7 +292,7 @@ Command: `addb n/BANDNAME`
 
 #### Implementation
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
-to be added. This is achieved through the use of `Model#hasBand(Band)` method.
+to be added. This is achieved through the use of `Model::hasBand` method.
 
 
 ### Add Musician To Band Feature
@@ -318,6 +321,8 @@ Command: `deleteb [INDEX]`
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
 
+* **Possible failing condition:**
+  1. Band index is invalid
 #### Implementation
 ![DeleteBandActivityDiagram.png](images/uml/DeleteBandActivityDiagram.png)
 Within the execute method of the command, a check is done to ensure that the index specified is not equal to or greater 
@@ -325,7 +330,7 @@ than the size of the list containing all Bands.
 
 
 ### Find Band Members Feature
-**Command**:`findb [BANDNAME]`
+**Command**:`findb BANDNAME`
 
 This feature lists all the musicians in band with name of `BANDNAME`. 
 
@@ -337,6 +342,8 @@ This feature lists all the musicians in band with name of `BANDNAME`.
 * **Failed Scenario (when band name is invalid):** 
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+
 #### Implementation
 The following activity diagram shows the logic flow of this feature.
 ![FindBandActivityDiagram.png](images/uml/FindBandActivityDiagram.png)
@@ -393,7 +400,9 @@ Command: `editb INDEX [n/NAME] [g/GENRE]…​`
 * **Failed Scenario:**
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-* **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
+  
+* **Possible failing condition:** 
+  1. When there is another band with the same edited band name.
 
 #### Implementation
 ![EditBandActivityDiagram.png](images/uml/EditBandActivityDiagram.png)
@@ -414,6 +423,7 @@ It is important to maintain the unique constraint of name of bands at all times.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Appendix 1: Requirements**
 
@@ -437,25 +447,26 @@ about musicians to potentially work with
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                          | I want to …​                                    | So that I can…​                                                          |
-|--------|--------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *` | producer                                         | see usage instructions                          | refer to instructions when I forget how to use the App                   |
-| `* * *` | producer                                         | add a new musician                              | contact them to form a band                                              |
-| `* * *` | producer                                         | delete a record for one musician                | remove entries that I no longer need                                     |
-| `* * *` | producer                                         | tag a musician with the instrument they play    | understand their potential role in a band                                |
+| Priority | As a …​                                          | I want to …​                                     | So that I can…​                                                          |
+|--------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *` | producer                                         | see usage instructions                           | refer to instructions when I forget how to use the App                   |
+| `* * *` | producer                                         | add a new musician                               | contact them to form a band                                              |
+| `* * *` | producer                                         | delete a record for one musician                 | remove entries that I no longer need                                     |
+| `* * *` | producer                                         | tag a musician with the instrument they play     | understand their potential role in a band                                |
 | `* * *` | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                              |
-| `* * *` | producer                                         | find a musician by name, instrument, and genre  | locate details of musicians without having to go through the entire list |
-| `* * *` | producer                                         | create a band                                   | form hypothetical bands that could potentially perform my music          |
-| `* * *` | producer                                         | add musicians to a band                         | experiment with different makeups of the band                            |
-| `* * *` | producer                                         | view the members of a specific band             | keep track of the band members in each band                              |
-| `* *`  | producer                                         | delete a band                                   |                                                                          |
-| `* *`  | producer                                         | edit a record for a musician                    | modify or update the information for a musician                          |
-| `* *`  | producer                                         | view all records of musicians I have stored     | easily see all the information I have                                    |
-| `*`    | producer                                         | hide private contact details                    | minimize chance of someone else seeing them by accident                  |
-| `*`    | producer                                         | tag a band with the genre it specialises in     | find the band suited to performing the song I wish                       |
-| `*`    | producer who has worked with a musician before   | give a musician a rating                        | keep track of my past experience with them                               |
-| `*`    | producer with many musicians in the address book | sort musicians by rating                        | find the musicians I enjoy working with easily                           |
-| `*`    | producer who is actively producing music         | check the availability of a musician            | avoid musicians with clashing schedules                                  |
+| `* * *` | producer                                         | find a musician by name, instrument, and genre   | locate details of musicians without having to go through the entire list |
+| `* * *` | producer                                         | create a band                                    | form hypothetical bands that could potentially perform my music          |
+| `* * *` | producer                                         | add musicians to a band                          | experiment with different makeups of the band                            |
+| `* * *` | producer                                         | view the members of a specific band              | keep track of the band members in each band                              |
+| `* *`  | producer                                         | delete a band                                    |                                                                          |
+| `* *`  | producer                                         | edit a record for a musician                     | modify or update the information for a musician                          |
+| `* *`  | producer                                         | edit a record for a band                         | modify or update the information for a band                              |
+| `* *`  | producer                                         | view all records of musicians I have stored      | easily see all the information I have                                    |
+| `*`    | producer                                         | hide private contact details                     | minimize chance of someone else seeing them by accident                  |
+| `*`    | producer                                         | tag a band with the genre it specialises in      | find the band suited to performing the song I wish                       |
+| `*`    | producer who has worked with a musician before   | give a musician a rating                         | keep track of my past experience with them                               |
+| `*`    | producer with many musicians in the address book | sort musicians by rating                         | find the musicians I enjoy working with easily                           |
+| `*`    | producer who is actively producing music         | check the availability of a musician             | avoid musicians with clashing schedules                                  |
 
 ### Use cases
 
@@ -557,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC07 - Create a band**
+**Use case: UC05 - Create a band**
 
 **MSS**
 
@@ -582,7 +593,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
   
 
-**Use case: UC08 - Add musicians to a band**
+**Use case: UC06 - Add musicians to a band**
 
 **MSS**
 
@@ -607,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC09 - Delete band**
+**Use case: UC07 - Delete band**
 
 **MSS**
 
@@ -626,7 +637,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC10 - View all musicians inside a band**
+**Use case: UC08 - View all musicians inside a band**
 
 **MSS**
 
@@ -645,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC11 - Remove a musician from a band**
+**Use case: UC09 - Remove a musician from a band**
 
 **MSS**
 
@@ -704,6 +715,7 @@ testers are expected to do more *exploratory* testing.
 ### Add a musician
 
 1. Adding a musician with only compulsory fields
+
    1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`  
         **Expected:** New Musician is added to the Musician List with the details
 
@@ -861,5 +873,34 @@ Given below is the evidence for challenges faced and efforts required for our pr
    * We need to create relevant classes of the new entity `Band` in all components (`UI`, `Logic`, `Model`, `Storage`) 
    * We need to establish a composition relationship between  `Band` and `Musician`. 
 
-2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and be intuitive to the users.
+2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and do not cause confusion to the users.
 3. Due to the addition in complexity of commands and the addition of two entities in our project, there are much more error-handling to do. We need to customize error messages as well as write many tests.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix 4: Planned Enhancements**
+
+Given below are the planned enhancements for our project.
+
+1. The current sample data upon initial launch of the app is not representative of the use cases of our app as no band data exists, and musicians do not have any instruments nor genres. We plan to change the sample data to be more representative, similar to the image shown in the Quick Start section of the User Guide. 
+
+2. The current `removem` command only allows the user to remove one musician from a band at a time. We plan to enhance this command to allow the user to remove multiple musicians at once just like the `addm` command.
+
+3. The current `find` command only allows the user to find musicians by their name, tag, instrument, and genre. We plan to enhance this command to allow the user to find musicians by their email and phone number as well.
+
+4. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showm` to make it more intuitive to the user.
+
+5. When adding multiple musicians to a band using the `addm` command, the currently displayed message does not let users know which musician(s) already exist in the band. We plan to edit this message to indicate the name(s) of the musician(s) that are already inside the band.
+
+6. The current `help` command only includes a link to the User Guide. However, a possible use case is that a user has forgotten a command name and/or parameters. We plan to include a hyperlink to the Command Summary so that users can quickly refer to a specific command.
+
+7. The current list of valid instruments and genres are not editable by the user. We plan to allow the user to add and remove valid instruments and genres from the list to give the user more freedom.
+
+8. The application currently allows unlimited input length for the name and tag of musicians and bands, e.g. name, email. As a result, the GUI truncates the unusually long input. We plan to limit the length of fields to 100 characters to prevent the UI from breaking.
+
+9. The current allowable musician name and band name are restrictive. Special characters is not allowed but we understand that both musician name and band name may contain special characters, like "/". We plan to support this in the future.
+
+10. The current design of UI is not intuitive enough for the user. There are times when the two panels are not synced. For example, when the user is filtering musician panel, the band panel remains idle. We propose to improve the UI design by having a home page, a musician page and a band page. By switching between pages, redundant information will be hidden and the user will be able to view only the information of interest.
+
+

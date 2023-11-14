@@ -46,7 +46,7 @@ public class AddCommand extends Command {
     private final Musician toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Musician}
+     * Creates an {@code AddCommand} to add the specified {@code Musician}.
      */
     public AddCommand(Musician musician) {
         requireNonNull(musician);

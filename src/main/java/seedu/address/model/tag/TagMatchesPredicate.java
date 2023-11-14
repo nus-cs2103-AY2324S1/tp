@@ -25,10 +25,6 @@ public class TagMatchesPredicate implements Predicate<Musician> {
                 ));
     }
 
-    protected List<String> getTagNames() {
-        return tagNames;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

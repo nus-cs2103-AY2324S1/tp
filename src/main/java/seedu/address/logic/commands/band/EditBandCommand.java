@@ -46,6 +46,8 @@ public class EditBandCommand extends Command {
     private final EditBandCommand.EditBandDescriptor editBandDescriptor;
 
     /**
+     * Creates a {@code EditBandCommand} to edit one or more fields of the specified {@code Band}.
+     *
      * @param index of the band in the filtered band list to edit
      * @param editBandDescriptor details to edit the band with
      */
