@@ -27,7 +27,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Updated and refined the User Guide to include the new "Welcome", "Find", and "FindTeam" features.
     * Transformed the form of our previous User Guide draft and uploaded it to GitHub.
-  
+
   * Developer Guide:
     * Added a new section detailing the storage architecture and its components.
     * Included diagrams and instructions to aid in understanding the storage system.

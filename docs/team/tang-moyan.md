@@ -42,7 +42,7 @@ suggestions.
     * Developer Guide:
         * Updated the UMl diagrams for our modifications in the Logic component.
           ([\#117](https://github.com/AY2324S1-CS2103T-W11-4/tp/pull/117))
-    
+
     * Demo Video:
         * Fully responsible for the production of the demo video and update it if there are
 some changes to our application.
@@ -58,5 +58,5 @@ an Identity code as an alternative. (examples [1](https://github.com/AY2324S1-CS
 
 * **Tools**:
   * Used PlantUML tool to design our diagrams in the developer guide.
-  * Used SceneBuilder to edit fxml files and make changes to our GUI. 
+  * Used SceneBuilder to edit fxml files and make changes to our GUI.
 

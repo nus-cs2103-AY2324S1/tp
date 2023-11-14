@@ -365,23 +365,23 @@ The list developers feature is facilitated by the ListCommand. It extends `Comma
 #### Usage
 Given below is an example usage scenario and how the function behaves at each step.
 
-Case 1. The Ui is not displaying only the developer list, and uses the `list` command. In this case a list containing 
+Case 1. The Ui is not displaying only the developer list, and uses the `list` command. In this case a list containing
 only all existing developers but no teams will be displayed.
 
-Case 2. The user has just used the `list` command, where the Ui is displaying the developer list already, and the user 
+Case 2. The user has just used the `list` command, where the Ui is displaying the developer list already, and the user
 uses `list` command again. The app will go back to displaying both lists of developers and teams.
 
 <box type="info" seamless>
 
-**Note:** As long as the app is not displaying only the list of developers, the `list` command will toggle it to do so, 
+**Note:** As long as the app is not displaying only the list of developers, the `list` command will toggle it to do so,
 otherwise, the `list` command will toggle the app to display both lists of developers and teams.
 
 </box>
 
 #### Function Implementation
 - ListCommand is executed.
-- if the Ui is listing only developers already: MainWindow toggles the HBox containing both lists of developers and teams to 
-be visible; MainWindow toggles the HBox containing the list of teams to be invisible; Display both lists of developers 
+- if the Ui is listing only developers already: MainWindow toggles the HBox containing both lists of developers and teams to
+be visible; MainWindow toggles the HBox containing the list of teams to be invisible; Display both lists of developers
 and teams;
 - else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible; 
 MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
@@ -714,7 +714,7 @@ Case 2. The Ui is displaying the tree. Used `tree` command again to hide the tre
 
 <box type="info" seamless>
 
-**Note:**  
+**Note:**
 * Any additional words provided after the command will be ignored.
 (e.g. entering `tree list delete 1 HAHAHA-1234` is equivalent to entering `tree`)
 * The project name **cannot be edited** because our application is designed to hold
@@ -992,18 +992,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tag-Based System**: A system in LinkTree that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
 * **Public Profile**: A profile in the Team Directory visible to all users, containing non-sensitive information about a team or individual.
 * **Addressbook**: A file that stores the list of developers in the application.
-* **TeamBook**: A file that stores the list of teams in the application. 
+* **TeamBook**: A file that stores the list of teams in the application.
 * **Prefix**: A keyword used before certain elements in a command to specify its type or category.
 * **Tag**: A label or keyword assigned to developers for categorization and easy identification.
 * **Tree**: A visual representation of the top-down project's structure, displaying teams and developers.
-* **Index**: A numerical identifier assigned to developers or teams for reference.      
+* **Index**: A numerical identifier assigned to developers or teams for reference.
 * **FAQ**: Frequently Asked Questions which users can check out if needed.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix B: Instructions for manual testing**
 
-This appendix provides guidance for testers to explore the 
+This appendix provides guidance for testers to explore the
 features of LinkTree efficiently. It highlights key test
 inputs and outlines the process for testing various
 functionalities. This information is supplementary to the
@@ -1051,7 +1051,7 @@ testers are expected to do more *exploratory* testing.
 
 <box type="info" seamless>
 
-**Note:** 
+**Note:**
 * Phone numbers should only contain numbers, and it should
 be at least 3 digits long
 * Emails should be of the format local-part@domain and
@@ -1194,7 +1194,7 @@ be at least 3 digits long
     * Teams matching at least one keyword will be returned (i.e.
       OR search). e.g. ‘Alpha Beta’ will return ‘Team Alpha’,
       ‘Team Beta’
-  
+
 - **Testing**: Use the command to search for teams by name.
 
 <box type="info" seamless>
@@ -1256,7 +1256,7 @@ be at least 3 digits long
 <box type="info" seamless>
 
 **Note:**
-* The command summary shown in the app will not display all commands, but only those that are more commonly used. 
+* The command summary shown in the app will not display all commands, but only those that are more commonly used.
 Please refer to our User Guide for a complete summary of commands.
 
 </box>
