@@ -264,6 +264,11 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("lead", lead)
+                .add("telegram", telegram)
+                .add("profession", profession)
+                .add("income", income)
+                .add("details", details)
                 .toString();
     }
 

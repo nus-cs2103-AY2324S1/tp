@@ -18,6 +18,7 @@ Listed below are my contributions to the project:
   * Updated the `Person` object to use the Builder Design Pattern to accomodate for optional fields in a robust way ([#71](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/71)).
   * Added the ability to store additional fields in JSON storage ([#109](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/109)).
   * Wrote comprehensive tests for `Lead` and `Income` ([#178](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/178), [#180](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/180)).
+  * Added logging for various parts ([#198](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/198)).
 
 
 * **Documentation**
@@ -27,14 +28,18 @@ Listed below are my contributions to the project:
     * Updated the introduction and quick start sections to better suit our target audience.
     * Added examples for each command, along with screenshots of the before and after to illustrate its effects.
     * Updated the command summary table to reflect all commands that Connectify offers.
+    * Added Graphical User Interface section to explain GUI components.
   * Developer Guide
     * Updated user stories section ([#181](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/181)).
+    * Updated class diagrams on model and storage ([#203](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/203)).
   
 
 * **Team-based tasks**
   * Renamed our product to Connectify in various parts of the documentation ([#21](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/21), [#24](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/24)).
   * Migrated draft user guide to the product website ([#18](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/18))
   * Fixed various bugs found ([#180](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/180), [#182](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/182), [#184](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/184)).
+  * Maintained issue tracker on GitHub
+    * Consistently created outstanding issues in GitHub's issue tracker, assigned to users, and closed them when the corresponding pull request is made.
     
 
 * **Reviewing pull requests**
@@ -42,5 +47,4 @@ Listed below are my contributions to the project:
 
 
 * **Community**
-  * Reported bugs and gave suggestions to other team listed [here](https://github.com/dickongwd/ped/issues).
-
+  * Reported bugs and gave suggestions to another other team listed [here](https://github.com/dickongwd/ped/issues).

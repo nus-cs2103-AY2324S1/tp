@@ -16,8 +16,8 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 [[github](https://github.com/KamiliArsyad)]
 [[portfolio](team/kamiliarsyad.md)]
 
-* Role: Developer
-* Responsibilities: _to be updated_
+* Role: Team Lead
+* Responsibilities: Reviewer and Repo maintainer
 
 ### Dick Ong
 
@@ -26,8 +26,8 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 [[github](http://github.com/dickongwd)]
 [[portfolio](team/dickongwd.md)]
 
-* Role: Developer
-* Responsibilities: _to be updated_
+* Role: Code Quality and Documentation Reviewer
+* Responsibilities: UserGuide and DeveloperGuide
 
 ### Jair Goh
 
@@ -36,8 +36,8 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 [[github](http://github.com/lilozz2)]
 [[portfolio](team/lilozz2.md)]
 
-* Role: Developer
-* Responsibilities: _to be updated_
+* Role: Developer & Integration Reviewer
+* Responsibilities: Component Design & Testing
 
 ### Sean Wang
 
@@ -46,8 +46,8 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 [[github](http://github.com/magnificentcreature)]
 [[portfolio](team/magnificentcreature.md)]
 
-* Role: Developer
-* Responsibilities: _to be updated_
+* Role: Testing Reviewer
+* Responsibilities: DevOps + Testing + Threading
 
 ### Zhang Yu Han
 
@@ -56,5 +56,5 @@ You can reach us at the email `connectify[at]comp.nus.edu.sg`
 [[github](http://github.com/zhyuhan)]
 [[portfolio](team/zhyuhan.md)]
 
-* Role: Developer
-* Responsibilities: _to be updated_
+* Role: Frontend Developer
+* Responsibilities: Dashboard, UI
