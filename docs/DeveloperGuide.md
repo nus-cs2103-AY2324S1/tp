@@ -599,3 +599,17 @@ testers are expected to do more *exploratory* testing.
    1. Modify `ManageHr.json` illegally. This is by adding illegal json tags, or destruction of the json structure.
    2. ManageHR will sense an issue, and replace the working file with the sample dataset.
 
+### Planned Enhancements
+
+1. Functional Updates
+
+    1. Able to display the list of departments
+    2. Each department may have additional constraints eg. having supervisors and subordinate roles tied to a particular department
+    3. Able to display the manager-subordinate relationship in the profile details of each employee
+
+2. UI improvements/
+
+    1. Addition of a tab of buttons to toggle between viewing employees & departments. This is necessary as the small window of our current UI may not be able to contain all useful information without being too cluttered
+    2. Display managers of each employee as a list of names under the profile of each employee. This is desirable as users would be able to more easily pinpoint the relationship between the employees in the list.
+    3. Display the role (manager/subordinate) of each employee as a separate tag for each employee in the list.
+    4. Color scheme changes. Cosmetic update in sync of the UI mock-up.
