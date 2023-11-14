@@ -40,8 +40,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "Present All - present-all tut/TUTORIAL_INDEX\n"
             + "Absent All - absent-all tut/TUTORIAL_INDEX\n"
             + "Random - random NUMBER_OF_STUDENTS\n"
-            + "Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION\n"
-            + "Set Grade - grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE\n"
+            + "Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION\n"
+            + "Set Grade - grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE\n"
             + "Tag - tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…\n"
             + "View - view s/STUDENT_NUMBER\n";
 

@@ -51,7 +51,7 @@ First time using **Class Manager 2023**? Fear not! This tutorial will guide you 
 
 * For any terms that you are unsure of, the [Glossary](#glossary) might have an explanation for it.
 
-* If you have any burning questions, the answers may lie in the [FAQ](#faq). If not, find us at our [website](https://ay2324s1-cs2103t-t11-1.github.io/tp/index.html).
+* If you have any burning questions, the answers may lie in the [FAQ](#faq). If not, find us at our [website](https://github.com/AY2324S1-CS2103T-T11-1/tp).
 
 Before reading our User Guide, here are some quick tips:
 
@@ -89,7 +89,7 @@ Before reading our User Guide, here are some quick tips:
 
   </box>
 
-3. Refer to [Feature](#features) for a detailed explanation of each command and its format.
+3. Refer to [Features](#features) for a detailed explanation of each command and its format.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -215,7 +215,7 @@ Data visualisation of student's Class Information is automatically generated in 
 
 **Class Manager 2023's** data is saved as a [JSON](#glossary) file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
 
-<img alt="sample_contents" src="images/sample-contents.png" width="700"> <br>
+<img alt="sample_contents" src="images/sample-contents.png" width="650"> <br>
 
 Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command to ensure your data file matches the configuration of **Class Manager 2023**. The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. In the image above, the data file can only be loaded if **Class Manager 2023** has been configured to have 4 tutorials and 4 assignments, as deduced from the size of the relevant arrays. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. 
 
@@ -466,10 +466,6 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]â€¦â€
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
 
-The following image shows a successful execution of the `add` command.
-
-<img alt="add-student-success" src="images/add-student-success.png" width="700" > <br>
-
 <box type="tip" seamless>
 
 **Tip:** A student can have zero or more of tags.
@@ -479,6 +475,10 @@ The following image shows a successful execution of the `add` command.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11 t/friends t/owesMoney`
 * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11`
+
+The following image shows a successful execution of the `add` command.
+
+<img alt="add-student-success" src="images/add-student-success.png" width="700" > <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -513,7 +513,6 @@ Possible errors and their corresponding error messages:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
     * Error message: `There is no student with the given Student Number.`
 
-
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -539,12 +538,11 @@ The following image shows a successful execution of the `delete s/A0245234A` com
 
 ### Delete all students : `clear`
 
-Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
+Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this change.
 
 Format: `clear`
 
 Displayed result if `clear` is successful: `Class Manager has been cleared!`
-
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -606,7 +604,7 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 
 **Note:**
 - _At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
-- This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
+- The command does not perform field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
 
 </box>
 
@@ -791,10 +789,10 @@ Examples:
 
 Setting an assignment grade for an existing student in **Class Manager 2023**.
 
-Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
+Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE`
 
 * The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
-* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**`config`**](#configure-class-manager-2023--config) command.
+* The `ASSIGNMENT_NUMBER` must be a valid positive integer, within the configured assignment count given in the [**`config`**](#configure-class-manager-2023--config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
@@ -887,10 +885,10 @@ Possible error and their corresponding message:
 ## Class Information commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
-| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
+| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `present s/A0245234A tut/1`                                      |
+| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `absent s/A0245234A tut/1`                                      |
+| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_INDEX` <br> e.g. `present-all tut/1`                                                         |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_INDEX` <br> e.g. `absent-all tut/1`                                                           |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
 | [**View a student's Class Information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
