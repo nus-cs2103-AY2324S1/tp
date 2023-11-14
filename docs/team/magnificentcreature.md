@@ -52,6 +52,7 @@ Given below are my contributions to the project.
     * Added user stories [\#16](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/16)
     * Added simple uses cases for adding `interaction` and marking `lead` [\#22](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/22)  
     * Added implementation details of the `interaction` feature (Pull request [\#78](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/78))
+    * Tweaked Model diagram to be less complex and more comprehensible (Pull request [\#221](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/221))
 
 * **Community**:
   * Some PRs reviewed (with review comments): [\#29](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/29), [\#85](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/85), [\#178](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/178), but most reviews were done in telegram chat or zoom with my teammates, especailly if I found bugs after merging code
