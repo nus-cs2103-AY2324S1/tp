@@ -57,4 +57,4 @@ We currently do not offer any means to contacting us, thank you for your underst
 [[portfolio](team/chen1x.md)]
 
 * Role: Developer
-* Responsibilities: Job role object
+* Responsibilities: User Interface
