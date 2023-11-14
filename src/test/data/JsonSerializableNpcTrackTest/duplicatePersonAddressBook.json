@@ -1,0 +1,22 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "telegram": "aliceTelegram",
+    "attendance": "0,0,0,0,0,0,0,0,0,0,0,0",
+    "attendanceStatus" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags": [ "friends" ],
+    "group": "friends"
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "telegram": "aliceTelegram",
+    "attendance": "0,0,0,0,0,0,0,0,0,0,0,0",
+    "attendanceStatus" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "group": "friends"
+  } ]
+}

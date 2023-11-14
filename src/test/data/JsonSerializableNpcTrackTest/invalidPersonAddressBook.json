@@ -1,0 +1,10 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "telegram": "hansTelegram",
+    "attendance": "0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0"
+  } ]
+}

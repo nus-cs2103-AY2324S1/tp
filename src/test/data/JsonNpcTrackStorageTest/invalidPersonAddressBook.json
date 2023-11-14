@@ -1,0 +1,9 @@
+{
+  "persons": [ {
+    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "telegram": "thstreet",
+    "attendance": "U,U,U,U,U,U,U,U,U,U,U,U"
+  } ]
+}

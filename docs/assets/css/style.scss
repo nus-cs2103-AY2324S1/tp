@@ -10,3 +10,42 @@
     height: 21px;
     width: 21px
 }
+
+
+/* Apply styles to the container */
+.container {
+  display: flex;
+  flex-direction: row;
+  background-color: #f0f0f0;
+}
+
+/* Style the sidebar */
+.sidebar {
+  padding: 20px;
+  background-color: #28282B;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Adjust the height as needed */
+  flex: 1;
+}
+
+
+.sidebar a {
+  color: #fff;
+}
+
+.wrapper-side {
+  max-width: fit-content;
+}
+
+/* Style the main content */
+.main-content {
+  flex: 4;
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+}
+
+
+

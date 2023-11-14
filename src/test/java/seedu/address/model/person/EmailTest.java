@@ -15,7 +15,7 @@ public class EmailTest {
 
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
+        String invalidEmail = "da8(AS(@dsiad";
         assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
     }
 
@@ -84,5 +84,11 @@ public class EmailTest {
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Email email = new Email("valid@email");
+        assertTrue(email.hashCode() == email.hashCode());
     }
 }

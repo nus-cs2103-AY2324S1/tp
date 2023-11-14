@@ -15,7 +15,7 @@ public class PhoneTest {
 
     @Test
     public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
+        String invalidPhone = "abcdef";
         assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
     }
 
@@ -56,5 +56,17 @@ public class PhoneTest {
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Phone phone = new Phone("999");
+        assertTrue(phone.hashCode() == phone.hashCode());
+    }
+
+    @Test
+    public void toStringTest() {
+        Phone phone = new Phone("999");
+        assertTrue(phone.toString().equals("999"));
     }
 }

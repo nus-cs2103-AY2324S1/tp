@@ -48,6 +48,9 @@ public class NameTest {
         // same object -> returns true
         assertTrue(name.equals(name));
 
+        // different case -> returns false
+        assertFalse(name.equals(new Name("valid name")));
+
         // null -> returns false
         assertFalse(name.equals(null));
 
@@ -56,5 +59,34 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void equalsIgnoreCase() {
+        Name name = new Name("Valid Name");
+
+        // same values -> returns true
+        assertTrue(name.equalsIgnoreCase(new Name("Valid Name")));
+
+        // same object -> returns true
+        assertTrue(name.equalsIgnoreCase(name));
+
+        // different case -> returns true
+        assertTrue(name.equalsIgnoreCase(new Name("valid name")));
+
+        // null -> returns false
+        assertFalse(name.equalsIgnoreCase(null));
+
+        // different types -> returns false
+        assertFalse(name.equalsIgnoreCase(5.0f));
+
+        // different values -> returns false
+        assertFalse(name.equalsIgnoreCase(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Name name = new Name("Valid Name");
+        assertTrue(name.hashCode() == name.hashCode());
     }
 }

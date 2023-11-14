@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkAttendanceParser" as MarkAttendanceParser LOGIC_COLOR
+participant "d:MarkAttendanceCommand" as MarkAttendanceCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("markAtd 1 t/1 s/P")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("markAtd 1 t/1 s/P")
+activate AddressBookParser
+
+create MarkAttendanceParser
+AddressBookParser -> MarkAttendanceParser
+activate MarkAttendanceParser
+
+MarkAttendanceParser --> AddressBookParser
+deactivate MarkAttendanceParser
+
+AddressBookParser -> MarkAttendanceParser : parse("1 t/1 s/P")
+activate MarkAttendanceParser
+
+create MarkAttendanceCommand
+MarkAttendanceParser -> MarkAttendanceCommand
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceParser : d
+deactivate MarkAttendanceCommand
+
+MarkAttendanceParser --> AddressBookParser : d
+deactivate MarkAttendanceParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkAttendanceParser -[hidden]-> AddressBookParser
+destroy MarkAttendanceParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> MarkAttendanceCommand : execute()
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand -> Model : updatePerson(studentToEdit)
+activate Model
+
+Model --> MarkAttendanceCommand
+deactivate Model
+
+create CommandResult
+MarkAttendanceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkAttendanceCommand
+deactivate CommandResult
+
+MarkAttendanceCommand --> LogicManager : result
+deactivate MarkAttendanceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

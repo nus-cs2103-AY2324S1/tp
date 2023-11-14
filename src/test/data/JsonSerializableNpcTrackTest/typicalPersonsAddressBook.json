@@ -1,0 +1,67 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "telegram" : "aliceTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ "friends" ],
+    "group" : "tut33"
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "benson@example.com",
+    "telegram" : "bensonTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ "owesMoney", "friends" ],
+    "group" : "tut33"
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "carl@example.com",
+    "telegram" : "carlTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ ],
+    "group" : "tut33"
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "daniel@example.com",
+    "telegram" : "danielTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ "friends" ],
+    "group" : "tut33"
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "94822242",
+    "email" : "elle@example.com",
+    "telegram" : "elleTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ ],
+    "group" : "tut33"
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "94824271",
+    "email" : "fiona@example.com",
+    "telegram" : "fionaTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ ],
+    "group" : "tut33"
+  }, {
+    "name" : "George Best",
+    "phone" : "94824424",
+    "email" : "george@example.com",
+    "telegram" : "georgeTelegram",
+    "attendance" : "U,U,U,U,U,U,U,U,U,U,U,U",
+    "participation" : "0,0,0,0,0,0,0,0,0,0,0,0",
+    "tags" : [ ],
+    "group" : "tut33"
+  } ]
+}

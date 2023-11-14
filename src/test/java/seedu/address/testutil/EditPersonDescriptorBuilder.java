@@ -5,12 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.person.Assignment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,8 +37,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setTelegramHandle(person.getTelegramHandle());
         descriptor.setTags(person.getTags());
+        descriptor.setComments(person.getComments());
+        descriptor.setAssignments(person.getAssignments());
+        descriptor.setAttendance(person.getAttendance());
+        descriptor.setGroup(person.getGroup());
     }
 
     /**
@@ -66,8 +72,18 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withTelegram(String telegram) {
+        descriptor.setTelegramHandle(new TelegramHandle(telegram));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAssignments(String... assignmentNames) {
+        Set<Assignment> newAssignments =
+                Stream.of(assignmentNames).map(Name::new).map(Assignment::new).collect(Collectors.toSet());
+        descriptor.setAssignments(newAssignments);
         return this;
     }
 
@@ -81,7 +97,19 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code comments} into a {@code Set<Comment>} and set it to the {@code EditPersonDescriptor}
+     * @return the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptor build() {
         return descriptor;
+    }
+
+    /**
+     * Sets the {@code comments} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGroup(String g01) {
+        descriptor.setGroup(new Group(g01));
+        return this;
     }
 }

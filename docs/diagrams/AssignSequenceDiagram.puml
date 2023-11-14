@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AssignCommandParser" as AssignCommandParser LOGIC_COLOR
+participant "g:AssignCommand" as AssignCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Assignment" as Assignment MODEL_COLOR
+participant "editedStudent:Person" as EditedPerson MODEL_COLOR
+end box
+[-> LogicManager : execute("assign n/Tutorial1 m/100")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("assign n/Tutorial1 m/100")
+activate AddressBookParser
+
+create AssignCommandParser
+AddressBookParser -> AssignCommandParser
+activate AssignCommandParser
+
+AssignCommandParser --> AddressBookParser
+deactivate AssignCommandParser
+
+AddressBookParser -> AssignCommandParser : parse("n/Tutorial1 m/100")
+activate AssignCommandParser
+
+create AssignCommand
+AssignCommandParser -> AssignCommand
+activate AssignCommand
+
+
+AssignCommand --> AssignCommandParser
+deactivate AssignCommand
+
+AssignCommandParser --> AddressBookParser
+deactivate AssignCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> AssignCommand : execute()
+activate AssignCommand
+
+AssignCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AssignCommand : lastShownList
+deactivate Model
+
+group loop [for studentToEdit in lastShownList]
+    create Assignment
+    AssignCommand -> Assignment
+    activate Assignment
+    Assignment --> AssignCommand
+    deactivate Assignment
+
+    create EditedPerson
+    AssignCommand -> EditedPerson
+    activate EditedPerson
+    EditedPerson --> AssignCommand
+    deactivate EditedPerson
+
+    AssignCommand -> Model : setPerson(studentToEdit, editedStudent)
+    activate Model
+
+    Model --> AssignCommand
+    deactivate Model
+end
+
+AssignCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> AssignCommand
+deactivate Model
+
+create CommandResult
+AssignCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AssignCommand
+deactivate CommandResult
+
+AssignCommand --> LogicManager : result
+deactivate AssignCommand
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

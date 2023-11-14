@@ -9,7 +9,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AddressBook Level-3](https://se-education.org/addressbook-level3/)
+* [Past Year Teams' Reference](https://github.com/AY2223S1-CS2103T-W17-2/tp/blob/master/docs/DeveloperGuide.md)
+* [Past Year Teams' Reference](https://ay2223s1-cs2103t-t12-1.github.io/tp/DeveloperGuide.html)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Demo video**
+
+Watch the demo [here](https://www.youtube.com/watch?v=EblMcXC3lXk).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +44,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and
+shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +77,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -121,12 +130,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the student's data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) 
+model is given below. It has a `Tag` list in the `NpcTrack`, which `Person` references. This allows `NpcTrack` to 
+only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -154,90 +165,216 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Assignment Distribution Feature
 
-#### Proposed Implementation
+#### Implementation
+An instance of an `Assignment` is handled by `Assignment.java`. It holds a `name`, `score` and `maxScore`.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Each `Person` will contain `assignments` in the form of a `Set<Assignment>`. We can modify the `Person`'s `Assignment`s by using the following implemented operations by `Assignment`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `Assignment#setScore()` - sets the `score` of the assignment, which should be less than `maxScore`.
+* `Assignment#setMaxScore()` - sets the `maxScore` of the assignment, which should be more than `0`.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+We can give an `Assignment` to everybody in the address book, through the `AssignmentCommand`.
+The `AssignmentCommand` looks through all the `Person`s, and attempts to add the `Assignment` to each `Person`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Below is the activity diagram for parsing an assignment command.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+<img src="images/AssignParserActivityDiagram.png" width="100%"/>
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Below is the sequence diagram for an assignment command.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/AssignSequenceDiagram.png" width="100%"/>
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Who to give assignment to by default**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Give it to everybody in the address book.
   * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Cons: If a new person is added, they will not have an assignment.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2:** Give it to one person, specified by an index.
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Pros: More control and more tailorable to each person.
+  * Cons: Troublesome and infeasible at worst for a large address book.
 
-_{more aspects and alternatives to be added}_
+**Aspect: What grade to store in the assignment**
 
-### \[Proposed\] Data archiving
+* **Alternative 1 (current choice):** A score, out of a maximum score.
+  * Pros: Easy to implement and universally understood.
+  * Cons: Grades, or work without scores are unsupported.
 
-_{Explain here how the data archiving feature will be implemented}_
+* **Alternative 2:** A complete or incomplete basis.
+  * Pros: Easy to implement.
+  * Cons: Inflexible, and may not apply to assignments which require scores.
 
+* **Alternative 3:** A grade to represent the performance.
+  * Pros: Easy to implement.
+  * Cons: Not universally understood, certain letters may mean different things to people.
+  For example, S in Japan could be amazing, but not as ideal in Singapore.
+
+### Assignment Group Distribution Feature
+
+#### Implementation
+The implementation is an extension of Assignment Distribution Feature in recognition of the
+possible limitation of giving assignment to everyone. 
+
+Instead, we can give an `Assignment` to a group of people, through the `AssignmentGroupCommand`.
+The `AssignmentGroupCommand` looks through all the `Person`s in the same group, and attempts to add the `Assignment` to each `Person` 
+in the group.
+
+#### Design considerations:
+
+**Aspect: Which group to give assignment to by default**
+
+* **Alternative 1 (current choice):** Give it to a group of people, specified by the exact full group name.
+  * Pros: Reduced Chance of Error: Gives users the exact group they want to assign and reduces chances of error since it needs
+    to be exact match.
+  * Cons: Troublesome for the user to type the full group name.
+
+* **Alternative 2:** Give it to a group of people, specified by its prefix.
+    * Pros: Reduced Chance of Error: Easier to be used by users as they can just input a partial part of their group name to be able to assign
+      to list of students in the same group.
+    * Cons: Higher Chance of Error: Since it is more complex and multiple group name may contain the same prefix, it has higher chance of error.
+
+The activity diagram of the parser shows the flow of the final implementation of assigning to a group of students.
+
+<img src="images/AssignGroupParserActivityDiagram.png" width="100%"/>
+
+### Mark Attendance
+
+#### Implementation
+
+Mark attendance command is handled by MarkAttendanceCommand, MarkAttendanceParser, and Model.
+* `MarkAttendanceParser`: Parse user inputs.
+* `MarkAttendanceCommand`: Given the parsed user input, execute the command.
+* `Model`: Updates the student list accordingly.
+
+Below is the sequence diagram for marking of a students tutorial attendance.
+
+<img src="images/MarkAttendanceSequenceDiagram.png" width="100%"/>
+
+#### Design considerations
+
+**Aspect: How should we mark the attendance?**
+* **Alternative 1 (Chosen): 4 Status (Present, Valid Reasons, Absent, and Unmarked)**
+  * Pros: Provides more detailed and granular information about the students' attendance status.
+  * Pros: Allows for the recognition of valid reasons for missing a class.
+  * Cons: The system with four status options may be more complex to implement and manage.
+* **Alternative 2: Only 2 status (Present, Absent)**
+  * Pros: It simplifies the attendance tracking system, making it easier to implement and use.
+  * Cons:  It lacks the ability to differentiate between different reasons for absences.
+
+The activity diagram shows the flow of how the final implementation of marking attendance has been implemented:
+
+<img src="images/MarkAttendanceActivityDiagram.png" width="100%"/>
+
+For reference, the activity diagram shows the flow of the final implementation of unmark attendance.
+
+<img src="images/UnmarkAttendanceActivityDiagram.png" width="100%"/>
+
+### Input Participation Points
+
+#### Implementation
+
+Input participation command is handled by `InputParticipationCommand`, `InputParticipationParser`, and `Model`.
+* `InputParticipationParser`: Parse user inputs.
+* `InputParticipationCommand`: Given the parsed user input, execute the command.
+* `Model`: Updates the student list accordingly.
+
+Below is the sequence diagram for inputting participation points of a student.
+
+<img src="images/InputParticipationSequenceDiagram.png" width="100%"/>
+
+#### Design considerations
+
+**Aspect: How to handle cases where TA attempts to add participation points for unmarked tutorial**
+* **Alternative 1 (Chosen):** `npc_track` will output message telling user to mark attendance first.
+  * Pros: Prevents Errors: It reduces the chances of errors and inconsistencies in the data,
+  as participation points should only be added after attendance is marked.
+  * Cons: Potential Delay: If marking attendance and adding participation points are time-sensitive actions,
+  requiring the user to mark attendance first may cause a slight delay in the participation point entry process.
+
+* **Alternative 2:** `npc_track` allows participation points to be input regardless of the attendance for that tutorial.
+  * Pros: Reduced User Friction: By avoiding strict dependencies, users may experience less friction when interacting
+  with the system, potentially leading to a smoother user experience.
+  * Cons: Data Inconsistencies: Allowing participation points without ensuring attendance may lead to
+  data inconsistencies. For example, TAs might accidentally skip marking attendance and input participation points,
+  causing inaccuracies in student records.
+
+The activity diagram shows the flow of how the final implementation of inputting participation has been implemented:
+
+<img src="images/InputParticipationActivityDiagram.png" width="100%"/>
+
+### Find Students
+
+#### Implementation
+
+Find Student command is handled by `FindCommand`, `FindCommandParser`, and `Model`.
+* `FindCommandParser`: Parse user inputs.
+* `FindCommand`: Given the parsed user input, execute the command.
+* `Model`: Updates the student list according to the keyword that the user keys in.
+
+Below is the sequence diagram for finding students.
+
+<img src="images/FindSequenceDiagram.png" width="100%"/>
+
+#### Design considerations
+
+**Aspect: Allowing teaching assistants to find using what keyword**
+* **Alternative 1 (Chosen):** `npc_track` will output students based on what TA exactly input.
+    * Pros: Reduced Chance of Error: Gives users the exact student they want and reduces chances of error since it needs 
+      to be exact match.
+    * Cons: Increased Complexity: Users need to know the exact name of their student, or else they will not be able 
+      to find the student.
+
+* **Alternative 2:** `npc_track` allows users to find just a part of the student's name.
+    * Pros: Better User Experience: Users can just input a partial part of their name to be able to find and get a 
+      list of students that contain a part of the keyword
+    * Cons: Increased Chance of Error: Since it is more complex, there is higher chance of error.
+
+### Find Group of Students
+
+#### Implementation
+Find Group of Students command is handled by `FindGroupCommand`, `FindGroupCommandParser`, and `Model`.
+* `FindGroupCommandParser`: Parse user inputs.
+* `FindGroupCommand`: Given the parsed user input, execute the command.
+* `Model`: Updates the student list according to the keyword that the user keys in.
+
+Below is the sequence diagram for finding a group of students.
+
+<img src="images/FindGroupSequenceDiagram.png" width="100%"/>
+
+#### Design considerations
+
+**Aspect: Allowing teaching assistants to find group using what keyword**
+
+* **Alternative 1 (Chosen):** `npc_track` will output the group of students based on what TA exactly input for the particular group.
+    * Pros: Reduced Chance of Error: Gives users the exact group of students they want and reduces chances of error since it needs 
+      to be exact match to the group name.
+    * Cons: Increased Complexity: Users need to know the exact name of the group, or else they will not be able 
+      to find the group of students.
+
+* **Alternative 2:** `npc_track` allows users to find the group of students using just a part of the group's name.
+    * Pros: Better User Experience: Users can just input a partial part of their group name to be able to find and get a 
+       list of students in the same group that contain a part of the keyword
+    * Cons: Increased Chance of Error: Since it is more complex, there is higher chance of error.
+
+### Grade Students
+
+#### Implementation
+
+Grade Student command is handled by `GradeCommand`, `GradeCommandParser`, `Assignment`, `Person` and `Model`.
+* `GradeCommandParser`: Parse user inputs.
+* `GradeCommand`: Given the parsed user input, execute the command.
+* `Model`: Updates the student list according to the keyword that the user keys in.
+* `Person`: Updates the particular Person model to change the grade to.
+* `Assignment`: Updates the student's assignment grade.
+
+Below is the sequence diagram for grading students.
+
+<img src="images/GradeSequenceDiagram.png" width="100%"/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,42 +394,168 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* teaching assistant at NUS
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: our app offers teaching assistants an efficient solution to student management. It provides quick
+access to student details, course organisation, and secure data handling. Communication logs, customization, and
+integration with university systems enhance personalized support. Cross-platform access ensures flexibility, supporting
+various teaching activities seamlessly.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​  | I want to …​                        | So that I can…​                                         |
+|----------|----------|-------------------------------------|---------------------------------------------------------|
+| `* * *`  | new user | see usage instructions              | refer to instructions when I forget how to use the App  |
+| `* * *`  | TA       | add students to a class             |                                                         |
+| `* * *`  | TA       | delete students from a class        | remove students who are not part of the class anymore   |
+| `* * *`  | TA       | find students by keyword            | reduce time taken to locate student details             |
+| `* *`    | TA       | hide private contact details        | minimize chance of someone else seeing them by accident |
+| `* *`    | TA       | mark and unmark students attendance | track the class participation records                   |
+| `* *`    | TA       | input participation points          | track how much each student participates in lessons      |
+| `* *`    | TA       | list all students in a class        | have an overview of all the students in a class         |
+| `*`      | TA       | exit the app                        | close the program                                       |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `npc_track` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a student**
+
+**MSS**
+
+1.  User requests to add a student.
+2.  User provides the name and optional details.
+3.  `npc_track` creates a new person entry with the provided optional details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User does not provide the name.
+
+    * 2a1. `npc_track` displays an error message and prompts the user to provide missing details.
+
+      Use case resumes at step 2.
+
+**Use case: Mark a student's attendance**
+
+**MSS**
+
+1. User requests to mark the attendance of a specified tutorial for a specified student with a given status.
+2. `npc_track` updates the current tutorial attendance of that student as marked with the status.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User does not provide the correct index/tutorial/status.
+  * 1a1. `npc_track` displays an error message and prompts the user to provide the correct details.
+
+    Use case ends.
+
+* 1b. Student's attendance in question is not marked to begin with.
+
+    Use case ends.
+
+* 1b. User attempts to mark a tutorial that has already been marked.
+  * 1b1. `npc_track` displays an error message and informs the user that the tutorial in question has already been marked.
+
+    Use case ends.
+
+*1c. User attempts to update using the unknown status.
+  * 1c1. `npc_track` displays an error message and prompts the user to provide a valid status.
+
+    Use case ends.
+
+**Use case: Unmark a student's attendance**
+
+**MSS**
+
+1. User requests to unmark the attendance of a particular tutorial for a particular student.
+2. `npc_track` updates the current tutorial attendance of that student as unmarked.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User does not provide the correct index/tutorial.
+    * 1a1. `npc_track` displays an error message and prompts the user to provide the correct details.
+
+    Use case ends.
+
+**Use case: Input participation points to a students tutorial participation**
+
+**MSS**
+
+1. User requests to input participation points to a students tutorial participation.
+2. `npc_track` updates the current tutorials participation point for the student.
+
+**Extensions**
+
+* 1a. User does not provide the correct index/tutorial.
+    * 1a1. `npc_track` displays an error message and prompts the user to provide the correct details.
+
+    Use case ends.
+* 1b. User was absent for the tutorial.
+    * 1b1. `npc_track` displays an error message and tells the user that the student is absent.
+	
+    Use case ends.
+
+**Use case: List a students participation record**
+
+**MSS**
+
+1. User requests to list the participation record of a specified student.
+2. `npc_track` returns a message containing the participation record of the student.
+
+**Extensions**
+
+* 1a. User does not provide the correct index.
+    * 1a1. `npc_track` displays an error message and prompts the user to provide the missing details.
+
+    Use case ends.
+
+**Use case: Grade a student's assignment**
+
+**MSS**
+
+1.  User requests to grade the assignment of a particular student.
+2.  User provides the student index, assignment name and score.
+3.  `npc_track` updates the current assignment of that student according to the mark given.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User does not provide the correct index / assignment name / score.
+
+    * 2a1. `npc_track` displays an error message and prompts the user to provide missing details.
+
+* 2b. User provides a score that is outside the valid boundary.
+    * 2b1. `npc_track` displays an error message and prompts the user to provide the correct score.
+* 2c. User provides an assignment that has not been created.
+
+    * 2c1. `npc_track` displays an error message and prompts the user to provide a valid assignment.
+
+      Use case resumes at step 2.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  `npc_track` shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  `npc_track` deletes the person
 
     Use case ends.
 
@@ -304,24 +567,103 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. `npc_track` shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case : Edit a person**
+
+**MSS**
+
+1. User requests to Edit persons
+2. `npc_track` shows the edited person
+
+    Use case ends.
+
+**Use case: Find a person**
+
+**MSS**
+
+1.  User requests to find a person.
+2.  User provides the full or partial search keyword.
+3.  `npc_track` searches for persons matching the keyword.
+4.  `npc_track` displays a list of matching persons.
+
+    Use case ends.
+
+**Extensions**
+
+* 5a. No persons match the search keyword.
+
+    * 5a1. `npc_track` displays a message indicating no matching persons were found.
+
+      Use case ends.
+
+**Use case: Find a group of persons**
+
+**MSS**
+1. User requests to find a group of persons.
+2. User provides the full or partial search keyword.
+3. `npc_track` searches for persons matching the keyword.
+4. `npc_track` displays a list of matching persons.
+
+   Use case ends.
+
+**Extensions**
+
+* 5a. No persons match the search keyword.
+
+    * 5a1. `npc_track` displays a message indicating no matching persons were found.
+
+      Use case ends.
+
+**Use case: List all persons**
+
+**MSS**
+
+1.  User requests to list all persons.
+2.  `npc_track` retrieves the list of all persons.
+3.  `npc_track` displays a list of all persons.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no persons in the address book.
+
+    * 2a1. `npc_track` displays a message indicating that the `npc_track` book is empty.
+
+      Use case ends.
+
+**Use case: Change the current groupings**
+
+**MSS**
+
+1. User requests to change the current groupings.
+2. User provides the new groupings.
+3. `npc_track` changes the current groupings.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Any teaching assistant from any faculty should know how to use it.
+5.  Data of the students should not be easily accessible.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface
+* **GUI**: Graphical User Interface
+* **UI**: User Interface
+* **TA**: Teaching Assistant
+* **MSS**: Main Success Scenario
+* **Attendance status**: The attendance status of a student, which can be either present, absent, valid reason (VR) or unknown.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -349,8 +691,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -366,12 +706,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

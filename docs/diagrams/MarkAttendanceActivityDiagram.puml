@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User marks attendance for specific student;
+if () then ([Argument prefixes appear more than once])
+    #FF6666:Error for duplicate prefixes is shown to user;
+    stop;
+else ([Else])
+    if () then ([Student index is invalid])
+        #FF6666:Error for invalid index input is shown;
+        stop;
+    else ([Else])
+        if () then ([Tutorial field is invalid])
+            #FF6666:Error for invalid tutorial is thrown;
+            stop;
+        else ([Else])
+            if () then ([Tutorial has been marked for the week])
+                #FF6666:Error indicating attendance for the week has been marked;
+                stop;
+            else ([Tutorial is valid])
+                if () then ([Attendance status is invalid])
+                    #FF6666:Error for invalid attendance status is shown;
+                    stop;
+                else ([Else])
+                    #66FF66:Student's attendance for the week is marked with the status;
+                    #66FF66:Message is returned indicating that the student's attendance has been marked successfully;
+stop
+
+@enduml

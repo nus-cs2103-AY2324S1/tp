@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,12 +23,16 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.fields.Comment;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.person.Assignment;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -42,15 +48,17 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_COMMENT + "COMMENT]... "
+            + "[" + PREFIX_GROUP + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person's name already exists.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -98,10 +106,20 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
+        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Comment> updatedComments = editPersonDescriptor.getComments().orElse(personToEdit.getComments());
+        Set<Assignment> updatedAssignments =
+            editPersonDescriptor.getAssignments().orElse(personToEdit.getAssignments());
+        Group updatedGroup = editPersonDescriptor.getGroup().orElse(personToEdit.getGroup());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
+                Optional.ofNullable(updatedTelegramHandle), Optional.ofNullable(updatedAttendance),
+                updatedTags, updatedComments, updatedAssignments, Optional.ofNullable(updatedGroup));
+
     }
 
     @Override
@@ -136,8 +154,13 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private TelegramHandle telegramHandle;
+        private Attendance attendance;
         private Set<Tag> tags;
+        private Set<Comment> comments;
+        private Set<Assignment> assignments;
+        private Group group;
+
 
         public EditPersonDescriptor() {}
 
@@ -149,15 +172,19 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setTelegramHandle(toCopy.telegramHandle);
+            setAttendance(toCopy.attendance);
             setTags(toCopy.tags);
+            setComments(toCopy.comments);
+            setAssignments(toCopy.assignments);
+            setGroup(toCopy.group);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegramHandle, tags, comments, group);
         }
 
         public void setName(Name name) {
@@ -184,12 +211,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
+        }
+
+        public void setAttendance(Attendance attendance) {
+            this.attendance = attendance;
+        }
+
+        public Optional<Attendance> getAttendance() {
+            return Optional.ofNullable(attendance);
         }
 
         /**
@@ -206,7 +241,60 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.ofNullable(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code comments} to this object's {@code comments}.
+         * A defensive copy of {@code comments} is used internally.
+         */
+        public void setComments(Set<Comment> comments) {
+            this.comments = (comments != null) ? new HashSet<>(comments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable comment set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code comments} is null.
+         */
+        public Optional<Set<Assignment>> getAssignments() {
+            return (assignments != null)
+                ? Optional.ofNullable(Collections.unmodifiableSet(assignments))
+                : Optional.empty();
+        }
+
+        /**
+         * Sets {@code assignments} to this object's {@code assignments}.
+         * A defensive copy of {@code assignments} is used internally.
+         */
+        public void setAssignments(Set<Assignment> assignments) {
+            this.assignments = (assignments != null) ? new HashSet<>(assignments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable comment set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code comments} is null.
+         */
+        public Optional<Set<Comment>> getComments() {
+            return (comments != null) ? Optional.ofNullable(Collections.unmodifiableSet(comments)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code group} to this object's {@code group}.
+         * A defensive copy of {@code group} is used internally.
+         */
+        public void setGroup(Group group) {
+            this.group = group;
+        }
+
+        /**
+         * Returns an unmodifiable group, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code group} is null.
+         */
+        public Optional<Group> getGroup() {
+            return Optional.ofNullable(group);
         }
 
         @Override
@@ -224,8 +312,12 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
+                    && Objects.equals(attendance, otherEditPersonDescriptor.attendance)
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(comments, otherEditPersonDescriptor.comments)
+                    && Objects.equals(assignments, otherEditPersonDescriptor.assignments)
+                    && Objects.equals(group, otherEditPersonDescriptor.group);
         }
 
         @Override
@@ -234,8 +326,12 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
+                    .add("telegram", telegramHandle)
+                    .add("attendance", attendance)
                     .add("tags", tags)
+                    .add("comments", comments)
+                    .add("assignments", assignments)
+                    .add("group", group)
                     .toString();
         }
     }

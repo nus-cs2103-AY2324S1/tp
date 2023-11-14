@@ -8,8 +8,9 @@ import seedu.address.model.Model;
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
-
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting npc_track as requested ...";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program. "
+            + "Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute(Model model) {

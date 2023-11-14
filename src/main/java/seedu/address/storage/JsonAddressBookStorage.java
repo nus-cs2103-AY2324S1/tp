@@ -15,7 +15,7 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access NpcTrack data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
@@ -43,8 +43,9 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @throws DataLoadingException if loading the data from storage failed.
      */
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+        logger.info("Attempting to read data from file: " + filePath);
         requireNonNull(filePath);
-
+        logger.info("success");
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
