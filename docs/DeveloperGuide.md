@@ -987,8 +987,6 @@ testers are expected to do more *exploratory* testing.
        Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
     1. Test case: `findp n/Alex John`
        Expected: All person(s) with name containing "Alex" or "John" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-    1. Test case: `findp t/senior diabetic`
-       Expected: All person(s) with tag containing "senior" or "diabetic" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
     1. Test case: `findp no/Aspirin Paracetamol`
        Expected: All person(s) with allergy containing "Aspirin" or "Paracetamol" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
     1. Test case: `findp p/123456`
@@ -1001,8 +999,6 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message is displayed due to the absence of any field. No person is shown.
     1. Test case: `findp n/`
        Expected: An error message is displayed due to the absence of the name. No person is shown.
-    1. Test case: `findp t/`
-       Expected: An error message is displayed due to the absence of the tag. No person is shown.
 2. _{ more test cases …​ }_
 
 ### Listing all medicines

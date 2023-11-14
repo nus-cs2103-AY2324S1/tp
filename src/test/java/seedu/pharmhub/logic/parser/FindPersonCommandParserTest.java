@@ -5,7 +5,6 @@ import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.pharmhub.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.pharmhub.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -21,7 +20,6 @@ import seedu.pharmhub.model.allergy.Allergy;
 import seedu.pharmhub.model.medicine.Medicine;
 import seedu.pharmhub.model.person.Email;
 import seedu.pharmhub.model.person.Phone;
-import seedu.pharmhub.model.tag.Tag;
 
 public class FindPersonCommandParserTest {
 
@@ -32,6 +30,7 @@ public class FindPersonCommandParserTest {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
     }
+
     @Test
     public void parse_validArgsForName_returnsFindCommand() {
         List<String> nameKeywords = List.of("Alice", "Bob");
@@ -54,11 +53,6 @@ public class FindPersonCommandParserTest {
         List<String> nameKeywords = List.of("Alice", "Bob");
         Phone phoneToFind = new Phone("123456");
         Email emailToFind = new Email("rachel@example.com");
-        Set<Tag> tagsToFind = new HashSet<>(
-                Arrays.asList(
-                        new Tag("friends"),
-                        new Tag("owesMoney")));
-
         Set<Allergy> allergiesToFind = new HashSet<>(
                 Arrays.asList(
                         new Allergy(new Medicine("Aspirin")),
@@ -69,13 +63,11 @@ public class FindPersonCommandParserTest {
                 new FindPersonCommand(nameKeywords,
                         phoneToFind,
                         emailToFind,
-                        tagsToFind,
                         allergiesToFind);
 
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice Bob"
                         + " " + PREFIX_PHONE + "123456"
                         + " " + PREFIX_EMAIL + "rachel@example.com"
-                        + " " + PREFIX_TAG + "friends owesMoney"
                         + " " + PREFIX_ALLERGY + "Aspirin Penicillin",
                 expectedFindCommand);
     }
@@ -85,11 +77,6 @@ public class FindPersonCommandParserTest {
         List<String> nameKeywords = null;
         Phone phoneToFind = new Phone("123456");
         Email emailToFind = new Email("rachel@example.com");
-        Set<Tag> tagsToFind = new HashSet<>(
-                Arrays.asList(
-                        new Tag("friends"),
-                        new Tag("owesMoney")));
-
         Set<Allergy> allergiesToFind = new HashSet<>(
                 Arrays.asList(
                         new Allergy(new Medicine("Aspirin")),
@@ -99,12 +86,10 @@ public class FindPersonCommandParserTest {
                 new FindPersonCommand(nameKeywords,
                         phoneToFind,
                         emailToFind,
-                        tagsToFind,
                         allergiesToFind);
 
         assertParseSuccess(parser, " " + PREFIX_PHONE + "123456"
                         + " " + PREFIX_EMAIL + "rachel@example.com"
-                        + " " + PREFIX_TAG + "friends owesMoney"
                         + " " + PREFIX_ALLERGY + "Aspirin Penicillin",
                 expectedFindCommand);
     }
