@@ -30,7 +30,7 @@ organization**,
         * [Clearing all dates: `clear`](#clearing-all-dates-clear)
         * [Starring a date: `star`](#starring-a-date-star)
         * [Unstarring a date: `unstar`](#unstarring-a-date-unstar)
-    * [Sorting, Searching for dates](#sorting-searching-for-dates)
+    * [Sorting, Finding dates](#sorting-finding-dates)
         * [Finding a date: `find`](#finding-a-date-find)
         * [Filtering dates by a certain metric: `filter`](#filtering-dates-by-a-certain-metric-filter)
         * [Sorting dates by a certain metric: `sort`](#sorting-dates-by-a-certain-metric-sort)
@@ -104,15 +104,9 @@ Here's a quick guide to help you understand what they mean.
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
-3. Double-click the file to start the app. The window that appears will be similar to the one below.<br>
-   ![emptyLoveBook](images/emptyLoveBook.png)
-4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
-   open the help window.<br>
-   Some commands you can try:
-
-    * `list` : Lists all dates and their associated details
-    * `exit` : Exits the app
-5. Refer to the features below for details of each command.
+3. Double-click the file to start the app. The window that appears will be similar to the one below. <br>
+    ![startScreen](images/emptyLoveBook.png) <br>
+4. Follow the tutorial below to get started.
 
 ### **Navigating the GUI**
 
@@ -147,11 +141,11 @@ Here you can add John to LoveBook using the add command:
 
 In the command box, enter `add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra` and press
 the `enter` key.
-This will add John to LoveBook. <br> <br>
+This will add John to LoveBook. <br>
 
 ![addCommandExample](images/user-commands/addCommandExample.png) <br>
 
-Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now: <br> <br>
+Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now: <br>
 
 ![addCommandExample2](images/user-commands/addCommandExample2.png) <br>
 
@@ -161,7 +155,7 @@ With so many dates you might want to start keeping tabs on dates that are perhap
 as you go along
 in your journey. Here you can star John for instance, using the star command:
 Enter `star 2`.
-This will star John. <br> <br>
+This will star John. <br>
 
 ![starCommandExample](images/user-commands/starCommandExample.png) <br>
 
@@ -171,7 +165,7 @@ With so many dates, you might want to start filtering down to the metrics that m
 simply filter for
 a specific age. Here you can filter for an age of 21 for instance, using the filter command:
 Enter `filter age/21`.
-This will filter for John. <br> <br>
+This will filter for John. <br>
 
 ![filterCommandExample](images/user-commands/filterCommandExample.png) <br>
 
@@ -181,18 +175,18 @@ Well, maybe you are indecisive as a serial dater, and you want a third party opi
 in your preferences using the
 setPreferences command:
 Enter `setP age/22 height/130 income/3200 horoscope/Libra`
-This will set your preferences like so: <br> <br>
+This will set your preferences like so: <br>
 
 ![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png) <br>
 
 #### 5. Best Match
 
 And here it is, to get the match of your dreams, simply use the bestMatch command:
-Enter `bestMatch` <br> <br>
+Enter `bestMatch` <br>
 
 ![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png) <br>
 
-### Congrats! You have completed the tutorial! <br>
+### Congrats! You have completed the tutorial!
 
 The tutorial shows you what a typical workflow might look like on LoveBook. Do continue to peruse the commands section
 which contains
@@ -241,7 +235,6 @@ The following table shows the list of metrics and their respective constraints.
 
 </box>
 
-
 ---
 
 ### **Managing Dates**
@@ -282,10 +275,9 @@ Format: `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [incom
 <box type="tip">
 
 * Metric is limited to `gender, age, horoscope, name, height, income` only.
-* New argument replaces the existing argument for that metric.
+* New value replaces the existing value.
 * User can edit up to n number of metrics in one command line, where n refers to the number of metrics available.
-* The index must be a positive integer, and be within the range of the recorded dates.
-* For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+* The index must be a positive integer, and be within the range of the recorded dates. For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 
 </box>
 
@@ -295,7 +287,7 @@ Examples:
 - `edit 1 name/John horoscope/Cancer` (editing 2 metrics)
 - `edit 1 horoscope/Cancer name/John` (sequence doesn't matter) 
 
-<br> <br>
+<br>
 
 ![editCommandExample](images/user-commands/editCommandExample.png) <br>
 
@@ -312,12 +304,11 @@ Format: `delete INDEX`
 
 <box type="tip">
 
-* The index must be a positive integer, and be within the range of the recorded dates.
-* For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+The index must be a positive integer, and be within the range of the recorded dates. For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 
 </box>
 
-Example: `delete 1` <br> <br>
+Example: `delete 1` <br> 
 
 ![deleteCommandExample](images/user-commands/deleteCommandExample.png) <br>
 
@@ -331,7 +322,7 @@ Expected output: `Deleted Date: Ben Brown; Age: 21; Gender: F; Height: 194; Inco
 
 Shows a list of all dates in the LoveBook.
 
-Format: `list` <br> <br>
+Format: `list` <br>
 
 ![listCommandExample](images/user-commands/listCommandExample.png) <br>
 
@@ -393,12 +384,11 @@ Format: `unstar INDEX`
 
 <box type="tip">
 
-* The index must be a positive integer, and be within the range of the recorded dates.
-* For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+The index must be a positive integer, and be within the range of the recorded dates. For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 
 </box>
 
-Example: `unstar 1` <br> <br>
+Example: `unstar 1` <br>
 
 ![unstarCommandExample](images/user-commands/unstarCommandExample.png) <br>
 
@@ -417,8 +407,7 @@ Format: `find NAME [MORE_NAMES]`
 
 <box type="tip">
 
-* Name should be a non-empty and should contain only letters/numbers/spaces.
-* More names can be added to the command line, and the search will be conducted for all names provided.
+More names can be added to the command line, and the search will be conducted for all names provided.
 
 </box>
 
@@ -436,15 +425,15 @@ Expected Output: `Lists the dates with the name(s) specified`
 
 Filters the dates in the LoveBook by a specific metric.
 
-Format: `filter xx METRIC/ARG`
+Format: `filter METRIC/ARG`
 
 <box type="tip">
 
 * Metric is limited to `gender, age, name, height` only
 * Arguments should be non-empty and adhere to the constraints of the metric
 * Multiple valid METRIC/ARG pairs can be added to the command line, and the search will be conducted for all pairs
-  provided.
-* Filter format is valid as long as there is one valid METRIC/ARG pair.
+  provided. e.g. `filter gender/M age/21`
+* Filter format is valid as long as there is one valid METRIC/ARG pair. e.g. `filter xx gender/M` works as well, where xx is not a metric
 
 </box>
 
@@ -460,7 +449,7 @@ Example:
 - `filter name/Cleon`
 - `filter gender/M`
 - `filter gender/M name/Cleon`
-- `filter hi gender/M`
+- `filter hi gender/M` (provides flexibility to the user in the case they mistype a metric)
 - `filter income/20 name/Cleon` (this only returns dates with name Cleon since income is an invalid metric)
 
 Expected Output: `Lists the dates with the valid metric values specified`
@@ -495,7 +484,7 @@ Example:
 
 - `sort name/increasing`
 - `sort horoscope/decreasing`
-- `sort xx income/decreasing`, where xx is not a metric
+- `sort xx income/decreasing`, where xx is not a metric (provides flexibility to the user in the case they mistype a metric)
 
 Expected Output: `Lists the dates in the order specified`
 
@@ -548,7 +537,7 @@ Sets the user's preferences for the matching algorithm.
 
 Format: `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`
 
-Example: `setP age/22 height/180 income/2000 horoscope/TAURUS` <br> <br>
+Example: `setP age/22 height/180 income/2000 horoscope/TAURUS` <br>
 
 ![setPCommandExample](images/user-commands/setPCommandExample.png) <br>
 
@@ -563,7 +552,7 @@ Expected output: `Updated Preferences: Age: 22; Height: 180; Income: 2000; Horos
 
 Filters out the most compatible date based on the set preferences.
 
-Format: `bestMatch` <br> <br>
+Format: `bestMatch` <br>
 
 ![bestMatchCommandExample-1](images/user-commands/bestMatchCommandExample1.png) <br>
 
@@ -578,7 +567,7 @@ Expected Output: `Here's your best match!`
 
 Outputs a random date from the LoveBook.
 
-Format: `blindDate` <br> <br>
+Format: `blindDate` <br>
 
 ![blindDateCommandExample-1](images/user-commands/blindDateCommandExample1.png) <br>
 
@@ -608,7 +597,7 @@ Expected output: `Exiting LoveBook...`
 
 Shows a window to bring user to the LoveBook User Guide.
 
-Format: `help` <br> <br>
+Format: `help` <br>
 
 ![helpCommandExample](images/user-commands/helpCommandExample.png) <br>
 
@@ -630,7 +619,7 @@ contains the data of your previous LoveBook home folder.
 **A**: No, all your data is stored locally, no need to fear a potential data hack.
 
 **Q**: Do I have to save before exiting the application for my data to safely backed up on my computer? <br>
-**A**: All your data is saved on your computer as soon as you enter in the command. There is no need to manually save
+**A**: All your data is saved on your computer as soon as you enter the command in. There is no need to manually save
 your data. In the event of a power outage, all your data will be safe.
 
 **Q**: Where do I go if I have issues with LoveBook? <br>
