@@ -589,5 +589,22 @@ We went through many iterations of the UG and DG based on our own testing and
 feedback from others. We wanted to make sure that the information they contained 
 are accurate and consistent with our product. Though it was not difficult, 
 it was a time-consuming process.
+
+## **Appendix: Planned Enhancements**
+
+### 1. Add Course Command
+
+- **Enhancement:** Add a new command to allow users to add courses instead of directly modifying the `courses.json` file.
+- **Reason:** This is to avoid direct manipulation of data, and actions on data by users should be handled by TAManager software.
+- **Examples:** `addCourse CS2109S` will add `CS2109S` as a course.
+
+
+### 2. Limit character length for TA fields
+
+- **Enhancement:** Limit the character length for various fields for TAs to ensure data and UI consistency.
+- **Reason:** To uphold an organized format for inputting data and avoid excessively lengthy entries that might impact the system's presentation and user-friendliness.
+- **Examples:**
+    1. **Name**: Limit to 1 - 50 characters to ensure the name has appropriate length.
+    2. **Tags**: Limit to 1 - 50 characters to ensure the tag meanings are valid but not too long to impact UI presentations. 
     
     
