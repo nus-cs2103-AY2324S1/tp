@@ -824,7 +824,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. MedBook shows an error message.
     - 2a2. User enters new PINNEDID.
     - Steps 2a1-2a2 are repeated until the PINNEDID entered is correct.
-    - Use Case resumes from step 3.
+    - Use case resumes from step 3.
 
 ---
 
@@ -940,7 +940,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. MedBook shows an error message.
     - 2a2. User enters new appointment details.
     - Steps 2a1-2a2 are repeated until the appointment details entered is correct.
-    - Use Case resumes from step 3.
+    - Use case resumes from step 3.
 
 ---
 
@@ -971,7 +971,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. MedBook shows an error message.
     - 3a2. User enters new appointment ID.
     - Steps 3a1-3a2 are repeated until the appointment ID entered is correct.
-    - Use Case resumes from step 4.
+    - Use case resumes from step 4.
 
 ---
 
@@ -989,9 +989,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 - **Extension**:
-- 3a. User does not choose a file.
-  - 3a1. MedBook displays an error message.
-  - Use case ends.
+  - 3a. User does not choose a file.
+    - 3a1. MedBook displays an error message.
+    - Use case ends.
 
 ---
 
@@ -1002,14 +1002,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Preconditions**: There is at least one record entry with a file attached in the patient
 - **Main Success Scenario (MSS)**:
 
-1.  User requests to view a file attached to a record.
-2.  MedBook opens the file on the user’s default launcher.<br>
-    Use case ends.
+  1.  User requests to view a file attached to a record.
+  2.  MedBook opens the file on the user’s default launcher.<br>
+      Use case ends.
 
 - **Extension**:
-- 1a. File does not exist in user’s local storage.
-  - 1a1. MedBook displays an error message.
-  - Use case ends.
+  - 1a. File does not exist in user’s local storage.
+    - 1a1. MedBook displays an error message.
+    - Use case ends.
 
 ---
 
