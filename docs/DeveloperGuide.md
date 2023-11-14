@@ -690,6 +690,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Appendix 2: Instructions for manual testing**
 
@@ -863,6 +864,7 @@ testers are expected to do more *exploratory* testing.
        **Expected:** Application is closed.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Appendix 3: Effort**
 
@@ -876,8 +878,8 @@ Given below is the evidence for challenges faced and efforts required for our pr
 2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and do not cause confusion to the users.
 3. Due to the addition in complexity of commands and the addition of two entities in our project, there are much more error-handling to do. We need to customize error messages as well as write many tests.
 
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Appendix 4: Planned Enhancements**
 
