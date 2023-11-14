@@ -93,10 +93,10 @@ In NetworkBook, details of a contact are categorised into different **fields**. 
 
 Some fields are **single-valued fields**, meaning that each contact has **only 1 value** for each of these fields.
 
-| Single-valued fields | Prefix    | Format                                                       | Remarks                                                      |
-| -------------------- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| name                 | /name     | Any non-empty value                                          | -                                                            |
-| priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet    | Not case-sensitive                                           |
+| Single-valued fields | Prefix    | Format                                                                              | Remarks                                                  |
+| -------------------- | --------- |-------------------------------------------------------------------------------------| -------------------------------------------------------- |
+| name                 | /name     | Any non-empty value comprising alphanumeric characters (and spaces, if any)         | Is case-sensitive                                       |
+| priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet                           | Not case-sensitive                                       |
 | graduation semester  | /grad     | `AYxxxx-Sy`<br/><br/>e.g., `AY2223-S1` for Academic Year 20`22`/20`23` Semester `1` | `xxxx` is the 4-digit representation of 2 **consecutive** calendar years.<br/>Academic year must be between AY1970/1971 to AY2069/2070 (inclusive). <br/>`y` is either `1` for Semester 1, or `2` for Semester 2. |
 
 Other fields are **multi-valued fields**. Each contact has a **list** of different values for each of these fields.
@@ -582,10 +582,16 @@ Note that this only works when the command box is not active. If you are typing 
 
 [Table of Contents](#table-of-contents)
 
-#### Other useful shortcuts: `ctrl-S/W`
+#### Other useful shortcuts: `ctrl-S/W`, `F1`
 
 * `ctrl-S`: manually save to data file (equivalent to [`save` command](#manually-save-to-data-file-save))
 * `ctrl-W`: exit NetworkBook (equivalent to [`exit` command](#exit-networkbook-exit))
+* `F1`: view help window (equivalent to [`help` command](#view-help-window-help))
+
+<div markdown="span" class="alert alert-secondary">
+:information_source: **Note:**
+If the `F1` key is bound to a different function in your computer settings, the keyboard shortcut to view help window may not work as expected.
+</div>
 
 [Table of Contents](#table-of-contents)
 
@@ -620,6 +626,11 @@ You can use the `help` command to open a help window containing a link to this u
 Format: `help`
 
 Parameters: N/A
+
+<div markdown="span" class="alert alert-secondary">
+:information_source: **Note:**
+If the help window is open and minimised, executing the `help` command again may not make the window pop up again.
+</div>
 
 Example usage:
 
