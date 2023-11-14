@@ -759,7 +759,7 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CampusConnect home folder.
 
-**Q**: Why can't I type in characters that aren't printable ASCII characters?
+**Q**: Why can't I type in characters that aren't printable ASCII characters?<br>
 **A**: Currently, we only support printable ASCII characters. We plan to support Unicode characters in the future for greater internationalization support.
 
 --------------------------------------------------------------------------------------------------------------------
