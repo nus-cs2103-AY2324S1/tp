@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "PersonCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,7 +40,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane groups;
+    @FXML
+    private FlowPane freeTime;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,10 +53,12 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getGroups()
+                .toStream()
+                .sorted(Comparator.comparing(Group::getGroupName))
+                .forEach(group -> groups.getChildren().add(new Label(group.getGroupName())));
+        person.getTime().iterator().forEachRemaining(interval ->
+            freeTime.getChildren().add(new Label(interval.toString())));
     }
 }

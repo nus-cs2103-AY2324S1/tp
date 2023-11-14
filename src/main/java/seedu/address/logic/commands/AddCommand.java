@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,23 +19,24 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
+        + "Parameters: "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_PHONE + "PHONE "
+        + PREFIX_EMAIL + "EMAIL "
+        + PREFIX_GROUPTAG + "GROUPNAME \n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "John Doe "
+        + PREFIX_PHONE + "98765432 "
+        + PREFIX_EMAIL + "johnd@example.com "
+        + PREFIX_GROUPTAG + "CS2103T";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "%1$s is already in the contact list";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email: %1$s already belongs to some "
+        + "one in the contact list";
+    public static final String MESSAGE_DUPLICATE_PHONE = "This phone number: %1$s belongs to some one "
+        + "in the contact list";
 
     private final Person toAdd;
 
@@ -53,10 +53,28 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON, toAdd.getName().toString()));
+        }
+
+        if (model.hasEmail(toAdd)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, toAdd.getEmail().toString()));
+        }
+
+        if (model.hasPhone(toAdd)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE, toAdd.getPhone().toString()));
         }
 
         model.addPerson(toAdd);
+        toAdd.getGroups().toStream().findFirst().ifPresent(group -> {
+            if (!model.hasGroup(group)) {
+                model.addGroup(group);
+            }
+            try {
+                model.findGroup(group.getGroupName()).addPerson(toAdd);
+            } catch (CommandException e) {
+                throw new RuntimeException(e);
+            }
+        });
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -78,7 +96,7 @@ public class AddCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

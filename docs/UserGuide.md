@@ -1,197 +1,1001 @@
 ---
-layout: page
-title: User Guide
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+# Welcome to ProjectPRO's User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+## Introduction
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+Achieve simplicity while optimizing efficiency.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+ProjectPRO is a desktop application designed to help university students organize their projects. Here is how ProjectPRO can streamline your project management process.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
 
-   * `list` : Lists all contacts.
+- Categorize your contacts into various project groups.
+- Track key information from your projects.
+- Find free time for your group meetings.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserving the advantages of maintaining an attractive user interface. ProjectPRO utilizes simple and easy-to-remember commands to execute different tasks, enhancing our user's experience. For instance, adding a contact is executed with a simple `add` command, as listed in our Features Section. Unlock more time in your day, store your information the smart way.
 
 --------------------------------------------------------------------------------------------------------------------
+
+
+**New here?** View our instructions for first-time users [here](#first-time-user).
+
+
+**Used ProjectPRO before?** Click [here](#experienced-user) to recall what features we have!
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
+- [1. Introduction](#introduction)
+- [2. Table of Contents](#table-of-contents)
+- [3. Using Our Guide](#using-our-guide)
+- [4. Quick Start](#quick-start)
+- [5. Glossary](#glossary)
+- [6. Features](#features)
+- [7. Commands to Manage Contacts](#commands-to-manage-contacts)
+  - [7.1 Adding a Contact `add`](#adding-a-contact-add)
+  - [7.2 Deleting a Contact `delete`](#deleting-a-contact-delete)
+  - [7.3 Finding a Contact `find`](#finding-a-contact-find)
+  - [7.4 Listing all Contacts `list`](#listing-contacts-list)
+- [8. Commands to Manage Groups](#commands-to-manage-groups)
+  - [8.1 Adding a Group `new`](#adding-a-group-new)
+  - [8.2 Deleting a Group `delete`](#deleting-a-group-delete)
+  - [8.3 Adding remarks to a Group `remark`](#adding-remarks-to-a-group-remark)
+  - [8.4 Finding a Group `find`](#finding-a-group-find)
+  - [8.5 Listing a Group `list`](#listing-a-group-listgroup)
+  - [8.6 Grouping a Contact `group`](#grouping-a-contact-group)
+  - [8.7 Ungrouping a Contact `ungroup`](#ungrouping-a-contact-ungroup)
+- [9. Commands to Manage Time](#commands-to-manage-time)
+  - [9.1 Adding Time to a Contact `addtime`](#adding-time-to-a-contact-addtime)
+  - [9.2 Removing Time from a Contact `deletetime`](#removing-time-from-a-contact-deletetime)
+  - [9.3 Listing Time from a Contact `listtime`](#listing-time-from-a-contact-listtime)
+  - [9.4 Add Meeting to Group `addmeeting`](#add-meeting-to-a-group-addmeeting)
+  - [9.5 Remove Meeting Time from a Group `deletetime`](#remove-meeting-time-from-a-group-deletetime)
+  - [9.6 Listing Meeting Time from a Group `listtime`](#listing-meeting-time-from-a-group-listtime)
+  - [9.7 Finding Free Time of a Group `findfreetime`](#finding-free-time-of-a-group-findfreetime)
+- [10. General Commands](#general-commands)
+  - [10.1 Viewing Help `help`](#viewing-help-help)
+  - [10.2 Clearing All Data `clear`](#clearing-all-data-clear)
+  - [10.3 Exit ProjectPRO `exit`](#exit-projectpro-exit)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Using Our Guide
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+This guide explains how you can use ProjectPRO to add contacts and manage your groups of contacts effectively by using our commands.
+
+Here are some annotations used in this guide:
+
+
+
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: px 0;"  ><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">USER_INPUT</code>
+    Description of what you are allowed to type.</p>
+</div>
+<p></p>
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">INLINE_CODE</code>
+    Pay attention to these points as they could lead to unexpected issues.</p>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### First Time User
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](#quick-start) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to the image below to get acquainted with our user interface.
+
+![Image 1: ProjectPRO's user interface](images/UG/Overview_of_GUI.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">ProjectPRO user interface</p>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+#### Experienced User
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](#table-of-contents) for our table of contents.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick Start
+
+--------------------------------------------------------------------------------------------------------------------
+
+1. Ensure you have Java 11 or above installed on your computer.
+   - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
+
+2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
+   - ![here](images/UG/QUICKSTART_2.1.png)
+
+3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
+   - For Mac Users:
+     - ![MACGUIDE](images/UG/QUICKSTART3.png)
+   - For Windows Users:
+     - ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
+4. Launch ProjectPRO.
+   1. Open a command terminal.
+   2. Type `cd Desktop` , followed by `cd ProjectPro`.
+   3. Type `java -jar ProjectPRO.jar` to run the application.
+<p></p>
+5. Start using ProjectPRO!
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Glossary
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+**Definitions**
+
+
+Written below are the definitions of the terminology used throughout the User Guide:
+
+
+| Term      | Definition                                                                                |
+|-----------|-------------------------------------------------------------------------------------------|
+| Parameter | Parameter indicates the type of information required for a particular command.            |
+| Command   | A special word used together with parameters to execute a particular action. E.g. `find`. |
+| GUI       | Graphical User Interface, the visual display of ProjectPRO.                               |
+
+
+**Parameter Information**
+
+
+Written below are some commonly used parameters, what they represent, and examples:
+
+
+| Parameter | Description                      | Constraints                                                                                                                                             | Valid Examples                           | Invalid Examples                                |
+|-----------|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|-------------------------------------------------|
+| `n/`      | Contact name of the student      | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                        | John Doe, David Li 2                     | Kishen s/o Kasinathan, ナルト, அசிங்கமான           |
+| `p/`      | Phone number of the student      | Positive integer with 3 or more digits                                                                                                                  | 999, 98765432, 18003569377               | 1-800-356-9377, 0, -1, 98431234.5               |
+| `e/`      | Email of the student             | Email prefix: Alphanumeric characters (a to z, A to Z, 0 to 9), @, Email Domain                                                                         | example@gmail.com, example@moe.edu.sg    | example@!.com, example@moed.edu.s               |
+| `g/`      | Name of the group                | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                        | CS2103T, Group 3                         | Group 3!, 1                                     |
+| `r/`      | Group remark                     | N/A                                                                                                                                                     | Zoom link: CS2101.zoom, 123!@#$#@        | N/A                                             |
+| `t/`      | Time interval of student / group | timings are written with the first 3 letters of the day and time in 24 hour format, with a `-` between the timings. Start time cannot be after end time | mon 1300 - mon 1400, sat 1000 - sun 1300 | monday 1300 - tuesday 1200, wed 1300 - wed 1000 |
+
+**Command format**
+
+Written below are some extra information regarding our command formats:
+
+| Format                      | Explanation                                      | Examples                                                                                                                                              |
+|-----------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Words in `UPPER_CASE`       | These are values written by you                  | `new g/GROUP_NAME` can be written as new `g/CS2103T`                                                                                                  |
+| Items in `SQUARE_BRACKETS`  | These are optional values that can be left empty | `add n/NAME p/PHONE e/EMAIL [g/GROUP_NAME]` can be used as `add n/John p/999 e/example@gmail.com` and `add n/John p/999 e/example@gmail.com g/CS2103` |
+| Items with `...` after them | These are values that can be used multiple times | `addtime n/NAME t/time...` can be used as `addtime n/John t/mon 1200 - mon 1300 t/tue 1400 - tue 1500`                                                |
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+ <div style="display: flex; align-items: center;">
+    <img src="icons/writing.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Notes</h5>
+  </div>
+  <li> All user inputs are <strong>case-sensitive</strong>, unless stated otherwise.</li>
+  <li> Command prefixes can be in any order.</li>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+--------------------------------------------------------------------------------------------------------------------
 
-**:information_source: Notes about the command format:**<br>
+## Commands to Manage Contacts
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+--------------------------------------------------------------------------------------------------------------------
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+### Adding a contact: `add`
+You can create a contact in your contact list.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+**Format:** `add n/NAME p/PHONE e/EMAIL [g/GROUP_NAME]`
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric, cannot be blank and must not be an existing contact in the contact list.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">PHONE</code>
+    must be a positive integer with at least 3 digits and must not exist in the contact list.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">EMAIL</code>
+    must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric. This is an <strong>optional</strong> parameter.</p>
 </div>
 
-### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+**Example(s):**
+- `add n/John Doe p/98765432 e/johnd@example.com g/CS2103T`  
+  This creates a contact in the contact list, named John Doe, who is in group CS2103T.
+- `add n/John Doe p/98765432 e/johnd@example.com`  
+  This creates a contact in the contact list, named John Doe, who is not in any group.
 
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+![Manage Contacts: Add](images/features/Managecontacts_add.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have added John Doe to your contacts, at contact number 7.</p>
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+**Potential error(s):**
+- Incorrect format (e.g., no prefix, duplicate prefixes).
+- The contact you are trying to add already exists in your contact list: `This person already exists in your contact list`.
 
-### Listing all persons : `list`
+--------------------------------------------------------------------------------------------------------------------
 
-Shows a list of all persons in the address book.
+### Deleting a contact: `delete`
+You can delete a contact from your contact list.
 
-Format: `list`
 
-### Editing a person : `edit`
+**Format:** `delete n/NAME`
 
-Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric, cannot be blank, and must be an existing contact in the contact list.</p>
+</div>
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Example(s):**
+- `delete n/John Doe`  
+  This deletes John Doe from the contact list.
 
-### Locating persons by name: `find`
+![Manage Contacts: Delete](images/features/Managecontacts_delete.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have deleted John Doe, previously contact number 7, from your contacts.</p>
+</div>
 
-Finds persons whose names contain any of the given keywords.
+**Potential error(s):**
+- Invalid format (e.g., no prefix, duplicate prefixes).
+- The contact you are trying to delete does not exist in your contact list: `No person with such name found. Please provide the person's full name as in the existing contact list`.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+--------------------------------------------------------------------------------------------------------------------
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+### Finding a contact: `find`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+You can find all the contacts from your contact list with the matching keywords.
 
-### Deleting a person : `delete`
+**Format:** `find n/KEYWORDS_IN_NAME`
 
-Deletes the specified person from the address book.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">KEYWORDS_IN_NAME</code>
+    must be alphanumeric and cannot be blank. It is <strong>not case-sensitive</strong>.</p>
+</div>
 
-Format: `delete INDEX`
+**Example(s):**
+- `find n/alex bernice`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+  This displays all the contacts with names containing Alex or Bernice.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+![Manage Contacts: Find](images/features/Managecontacts_find.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have found all your contacts with the name Alex or Bernice.</p>
+</div>
 
-### Clearing all entries : `clear`
+**Potential error(s):**
+- Invalid format (e.g., no prefix, duplicate prefixes).
 
-Clears all entries from the address book.
+--------------------------------------------------------------------------------------------------------------------
 
-Format: `clear`
+### Listing contacts: `list`
+You can list all the contacts in your contact list.
 
-### Exiting the program : `exit`
+**Format:** `list`
 
-Exits the program.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;">
+    No additional input required.</p>
+</div>
 
-Format: `exit`
+**Example(s):**
+- `list`  
+  This displays all the contacts in the contact list.
+
+![Manage Contacts: List](images/features/Managecontacts_list.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have listed all the contacts in your contact list.</p>
+</div>
+
+**Potential error(s):**
+- Extra inputs detected.
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Commands to Manage Groups
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Adding a group: `new`
+
+You can create a new group in your contact list.
+
+**Format:** `new g/GROUP_NAME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank, and must not be an existing group in your contact list.</p>
+</div>
+
+**Example(s):**
+- `new g/CS2103T tp`  
+  This creates a new group named "CS2103T tp".
+
+![Manage Groups: New](images/features/Managegroup_new.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have created a new group called CS2103T tp.</p>
+</div>
+
+**Potential error(s):**
+- Invalid command format (e.g., no prefix, duplicate prefixes).
+- The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Deleting a group: `delete`
+You can delete a group in your contact list.
+
+**Format:** `delete g/GROUP_NAME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+</div>
+
+
+**Example(s):**
+- `delete g/CS2103T tp`  
+  This deletes the group "CS2103T tp" from your contact list, given "CS2103T tp" is an existing group in your contact list.
+
+![Manage Group: Delete](images/features/Managegroup_delete.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have deleted the group "CS2103T tp" from your contact list.</p>
+</div>
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix, duplicate prefixes).
+- The group you are trying to delete does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Adding remarks to a group: `remark`
+
+You can add remarks to a group in your contact list.
+
+**Format:** `remark g/GROUP_NAME r/REMARK`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">REMARK</code>
+    can take on any value.</p>
+</div>
+
+
+**Example(s):**
+- `remark g/CS2103T r/quiz tomorrow`  
+  This adds the remark "quiz tomorrow" to the existing "CS2103T" group in your contact list.
+
+![Manage Group: Remark](images/features/Managegroup_remark.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have added the group remark "quiz tomorrow" to the group "CS2103T" in your contact list.</p>
+</div>
+
+**Potential errors(s):**
+- Incorrect format (e.g. no prefix, duplicate prefixes).
+- The group you entered does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list.`
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Finding a group: `find`
+You can find a group in your contact list. This allows you to view the group's members and remarks.
+
+
+**Format:** `find g/GROUP_NAME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+</div>
+
+**Example(s):**
+- `find g/CS2103T`  
+  This returns the members and remarks of the existing "CS2103T" group in your contact list.
+
+![Manage Group: Find](images/features/Managegroup_find.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You are now able to view all details regarding the group "CS2103T" in your contact list.</p>
+</div>
+
+
+**Potential error(s):**
+- Incorrect format (e.g. no prefix, duplicate prefixes).
+- The group you are trying to find does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
+
+
+### Listing a group: `listgroup`
+You can list all the groups in your contact list.
+
+**Format:** `listgroup`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div><p style="font-size:13px; color: #000; margin: 8px 0;">
+   No additional parameters.
+</div>
+
+
+**Example(s):**
+- `listgroup`  
+  This lists all the groups in your contact list.
+
+![Manage Group: List Group](images/features/Managegroup_listgroup.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have listed all the groups in your contact list.</p>
+</div>
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Grouping a Contact: `group`
+
+You can add an existing contact to an existing group.
+
+**Format:** `group n/NAME g/GROUP_NAME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric, cannot be blank, must be an existing contact in your contact list, and must not be a member of <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank, and must be an existing group in your contact list.</p>
+</div>
+
+
+**Example(s):**
+- `group n/Bernice Yu g/CS2103T`  
+  This adds your contact "Bernice Yu" into the group "CS2103T".
+
+![Manage Group: Group](images/features/Managegroup_group.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have added "Bernice Yu" to the group "CS2103T" in your contact list.</p>
+</div>
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix, duplicate prefixes).
+- The contact you are trying to add is already a member of the group: `Bernice Yu is already in this group: CS2103T`.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Ungrouping a Contact: `ungroup`
+
+You can remove a contact from a group.
+
+**Format:** `ungroup n/NAME g/GROUP_NAME`
+
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric, cannot be blank, must be an existing contact in your contact list, and must be a member of <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank, and must be an existing group in your contact list.</p>
+</div>
+
+
+**Example(s):**
+- `ungroup n/Alex Yeoh g/CS2103T`  
+  This removes your contact "Alex Yeoh" from the group "CS2103T".
+
+![Manage Group: Ungroup](images/features/Managegroup_ungroup.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have removed "Alex Yeoh" from the group "CS2103T".</p>
+</div>
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix, duplicate prefixes).
+- The contact you are trying to remove is not a member of the group: `Alex Yeoh is not in this group: CS2103T`.
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Commands to Manage Time
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Adding Time to a Contact: `addtime`
+You can add time slots when your contacts are available.
+
+**Format:** `addtime n/NAME t/FREE_TIME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
+     must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
+  </p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must be a time slot within the current weekly schedule. E.g. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must be a time slot with some duration. E.g. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1200</code> is not valid as there is no duration.<code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1300- Mon 1400</code> is valid.
+It is <strong>not case-sensitive</strong>.</p>
+</div>
+
+<p></p>
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;">
+<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
+</div>
+
+**Example(s):**
+- `addtime n/Alex Yeoh  t/mon 1400 - mon 1600`  
+This adds a time slot when Alex Yeoh is available in your contact list.
+
+![](images/features/Managetime_addtime.png)
+
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have added the Monday 2 pm - 4 pm timeslot to Alex Yeoh to indicate that he is free during that time.</p>
+</div>
+
+**Potential error(s):**
+- Contact does not exist in the contact list.
+- The time slot you are trying to add is not valid.
+
+
+### Removing Time from a Contact: `deletetime`
+You can remove available time slots of your contacts.
+
+
+**Format:** `deletetime n/NAME t/FREE_TIME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+    <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
+     must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
+  </p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must match the contact's existing time. It is <strong>not case-sensitive</strong>.</p>
+</div>
+
+<p></p>
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
+ <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must not clash with other inputted time slots.</p>
+</div>
+
+**Example(s):**
+- `deletetime n/Alex Yeoh  t/mon 1400 - mon 1600`  
+  This removes a time slot when Alex Yeoh is available from your contact list.
+
+![](images/features/Managetime_deletetimecontact.png)
+
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have deleted the Monday 2 pm - 4 pm time slot from Alex Yeoh to indicate that he is not free during that time anymore.</p>
+</div>
+
+**Potential error(s):**
+- Contact does not exist in the contact list.
+- Time slot does not exist for the contact.
+- Invalid time slot format.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Listing Time from a Contact: `listtime`
+You list all available time slots of your contacts.
+
+**Format:** `listtime n/NAME`
+- Provide the full name of the contact using the `n/` prefix.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+    must be alphanumeric, cannot be blank and must be an existing contact in your contact list.</p>
+</div>
+
+<p></p>
+
+
+**Example(s):**
+- `listtime n/Alex Yeoh`  
+  This lists all time slots when Alex Yeoh is available from your contact list.
+
+![](images/features/Managetime_listtimecontact.png)
+
+<div align="center">
+  <p style="font-size: 13px; font-style: italic;">You have listed Alex Yeoh's free times.</p>
+</div>
+
+**Potential error(s):**
+- Contact does not exist in the contact list.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Add Meeting to a Group: `addmeeting`
+You can add a meeting time slot for your group.
+
+
+**Format:** `addmeeting g/GROUP_NAME t/MEETING_TIME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+<p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+    must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.  It is <strong>not case-sensitive</strong>.</p>
+</div>
+<p></p>
+
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+    can be added even if some members are not available for the time slot. Do coordinate with your group members on the most suitable time slots.</p>
+</div>
+
+**Example(s):**
+- `addmeeting g/CS2103T  t/mon 1400 - mon 1600`  
+  This adds a meeting for the group "CS2103T".
+
+![](images/features/Managetime_addmeeting.png)
+
+<div align="center">
+  <p style="font-size: 13px; font-style: italic;">You have added a Monday 2 pm - 4 pm meeting for the group "CS2103T".</p>
+</div>
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Invalid time slot format.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Remove Meeting Time from a Group: `deletetime`
+You can remove meeting times from your groups.
+
+**Format:** `deletetime g/GROUP_NAME t/MEETING_TIME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+    must be a time slot within a weekly schedule and must be an existing meeting slot of the group. It is <strong>not case-sensitive</strong>.</p>
+</div>
+<p></p>
+
+**Example(s):**
+- `deletetime g/CS2103T t/mon 1400 - mon 1600`  
+  This removes a meeting time slot from the group "CS2103T".
+
+![](images/features/Managetime_deletetimegroup.png)
+
+<div align="center">
+  <p style="font-size: 13px; font-style: italic;">You have deleted the Monday 2 pm - 4 pm meeting for the group "CS2103T".</p>
+</div>
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Group does not contain meeting time.
+- Invalid time slot format.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Listing Meeting Time from a Group: `listtime`
+You list meeting time for your groups.
+
+**Format:** `listtime g/GROUP_NAME`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+</div>
+<p></p>
+
+
+**Example(s):**
+- `listtime g/CS2103T`  
+  This lists all meeting times of the CS2100 group.
+
+![](images/features/Managetime_listtimegroup.png)
+
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You can see all the meetings you have for CS2103T/p>
+</div>
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Finding Free Time of a Group: `findfreetime`
+You can find a meeting time slot for your group where everyone is available.
+
+
+**Format:** `findfreetime g/GROUP_NAME d/DURATION`
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
+    must be a whole number representing the meeting duration in minutes.</p>
+</div>
+<p></p>
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must contain contacts with their free time slots. </p>
+</div>
+
+**Example(s):**
+- `findfreetime g/CS2103T d/60`  
+  This shows you all possible 60-minute meeting slots for your CS2103T group.
+
+![](images/features/Managetime_findfreetime.png)
+
+<div align="center">
+  <p style="font-size: 13px; font-style: italic;">You are now able to view all possible meeting times of at least 60 minutes for the group "CS2103T".</p>
+</div>
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Contacts in the group did not add their available time slots.
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## General Commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Viewing Help: `help`
+You can view the link to our User Guide.
+
+
+**Format:** `help`
+
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;">
+    No additional input required.</p>
+</div>
+<p></p>
+
+**Example(s):**
+- `help`
+
+  This displays the link to the User Guide.
+
+![](images/features/Generalcommand_help.png)
+
+<div align="center">
+  <p style="font-size: 13px; font-style: italic;">You are now able to copy the URL of the User Guide.</p>
+</div>
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Clearing All Data: `clear`
+Clears all entries from the contact list.
+
+
+**Format:** `clear`
+
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;">
+    No additional input required.</p>
+</div>
+<p></p>
+
+
+**Example(s):**
+- `clear`
+
+  This clears all the data in your contact list.
+
+![](images/features/Generalcommand_clear.png)
+
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have cleared all the data in your contact list.</p>
+</div>
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+### Exit ProjectPRO: `exit`
+You can exit ProjectPRO.
+
+**Format:** `exit`
+
+
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable values</h5>
+  </div>
+  <p style="font-size:13px; color: #000; margin: 8px 0;">
+    No additional input required.</p>
+</div>
+<p></p>
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
+ProjectPRO saves automatically after any command changes the data. There is no need to save manually.
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+ProjectPRO's data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
+<p style="font-size:13px; color: #000; margin: 8px 0;">
+    If your changes to the data file makes its format invalid, ProjectPRO will discard all data and start with a sample data file. Hence, it is recommended to take a backup of the file before editing it.
+</p>
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+[Back to Table of Contents](#table-of-contents)
