@@ -40,7 +40,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
     * Refactored code, added `Day` parameter (Pull requests [\#70](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/70))
     * Updated GUI by modifying UI of list tiles (Pull requests [\#117](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/117))
-    * Refactored `Person#isSamePerson` such that a person is considered a duplicate if they have the `Name` and `Phone` [\#126](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/126))
+    * Refactored `Person#isSamePerson` such that a person is considered a duplicate if they have the `Name` and `Phone` (Pull requests [\#126](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/126))
 
 * **Documentation**:
   * User Guide:
