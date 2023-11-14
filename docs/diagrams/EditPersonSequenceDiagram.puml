@@ -11,6 +11,7 @@ participant ":PersonDescriptor" as PersonDescriptor LOGIC_COLOR
 participant "ep:EditPersonCommand" as EditPersonCommand LOGIC_COLOR
 participant ":Person" as Person LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "<<class>>\nEditPersonCommand" as EditPersonCommandClass LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -73,18 +74,18 @@ activate Model
 Model --> EditPersonCommand
 deactivate Model
 
-EditPersonCommand -> EditPersonCommand : createEditedPerson(personToEdit, personDescriptor)
-activate EditPersonCommand
+EditPersonCommand -> EditPersonCommandClass : createEditedPerson(personToEdit, personDescriptor)
+activate EditPersonCommandClass
 
 create Person
-EditPersonCommand -> Person
+EditPersonCommandClass -> Person
 activate Person
 
-Person --> EditPersonCommand
+Person --> EditPersonCommandClass
 deactivate Person
 
-EditPersonCommand --> EditPersonCommand
-deactivate EditPersonCommand
+EditPersonCommandClass --> EditPersonCommand
+deactivate EditPersonCommandClass
 
 EditPersonCommand -> Model : setPerson(personToEdit, editedPerson)
 activate Model

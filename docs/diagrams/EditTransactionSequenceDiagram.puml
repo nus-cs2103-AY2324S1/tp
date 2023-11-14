@@ -9,6 +9,7 @@ participant ":EditTransactionCommandParser" as EditTransactionCommandParser LOGI
 participant ":TransactionDescriptor" as TransactionDescriptor LOGIC_COLOR
 participant "et:EditTransactionCommand" as EditTransactionCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "<<class>>\nEditTransactionCommand" as EditTransactionCommandClass LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -65,11 +66,11 @@ activate Model
 Model --> EditTransactionCommand
 deactivate Model
 
-EditTransactionCommand -> EditTransactionCommand : createEditedTransaction(originalTransaction, transactionDescriptor)
-activate EditTransactionCommand
+EditTransactionCommand -> EditTransactionCommandClass : createEditedTransaction(originalTransaction, transactionDescriptor)
+activate EditTransactionCommandClass
 
-EditTransactionCommand --> EditTransactionCommand : editedTransaction
-deactivate EditTransactionCommand
+EditTransactionCommandClass --> EditTransactionCommand : editedTransaction
+deactivate EditTransactionCommandClass
 
 EditTransactionCommand -> Model : setTransaction(originalTransaction, editedTransaction)
 activate Model
