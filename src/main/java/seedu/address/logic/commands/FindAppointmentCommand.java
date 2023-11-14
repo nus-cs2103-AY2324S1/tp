@@ -22,7 +22,7 @@ public class FindAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments that involve the "
             + "the specified case-sensitive NRIC and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: INDEX ...\n"
             + "Example: " + COMMAND_WORD + " T1234567Z";
 
     private final Predicate<Appointment> predicate;
