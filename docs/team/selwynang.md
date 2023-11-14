@@ -13,18 +13,14 @@ My team and I adapted the product from an existing Java application called [Addr
 Given below is a summary of my contributions to the project. All of my code contributions can be found in this [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=selwynang&breakdown=true#/).
 
 ### Features Implemented
-* **Delete Member Feature** [#104](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/104)
-  * **Feature details:** Allows the user of CCACommander to delete a member from CCACommander's database.
-  * **Justifications:** Gives the user the power to delete any irrelevant members from the database once they are not needed anymore.
-* **Delete Event Feature** [#104](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/104)
-  * **Feature details:** Allows the user of CCACommander to delete an event from CCACommander's database.
-  * **Justifications:** Gives the user the power to delete any irrelevant events from the database once they are not needed anymore.
-* **Find Member Feature** [#146](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/146)
-  * **Feature details:** Allows the user of CCACommander to find a member from CCACommander's database by using the member's name.
-  * **Justifications:** Speeds up the process where the user can determine if a particular member is in the database, especially if the member list has many members.
-* **Find Event Feature** [#146](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/146)
-  * **Feature details:** Allows the user of CCACommander to find an event from CCACommander's database by using the event's name.
-  * **Justifications:** Speeds up the process where the user can determine if a particular event is in the database, especially if the event list has many events.
+I implemented the `deleteMember` [#104](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/104),
+`deleteEvent` [#104](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/104), 
+`findMember` [#146](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/146), 
+`findEvent` [#146](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/146), 
+`unenrol` [#179](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/179),
+`undo` [#154](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/154) and
+`redo` [#154](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/154) commands.
+Details of some non-trivial commands are stated below.
 * **Unenrol Feature** [#179](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/179)
     * **Feature details:** Allows the user of CCACommander to unenrol a member from an event which the member was enrolled to.
     * **Justifications:** Provides the user with the flexibility to remove the association between a member and event if they are no longer related to one another, which parallels what happens
