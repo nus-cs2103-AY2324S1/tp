@@ -420,12 +420,12 @@ matching the one input by user, **and is regardless of the currently displayed c
 - After performing the complete, the contact list displayed will be reset to display all contacts in the contact book.
 
 <div markdown="span" class="alert alert-primary">:information_source:
-Note that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the **year, month and day are the same**. Time of the appointment does not matter in this command.
+**Note that** an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the **year, month and day are the same**. Time of the appointment does not matter in this command.
 </div>
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
-<div markdown="span" class="alert alert-primary">:information_source:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip**
 To save time, you may find it useful to `complete` by `APPOINTMENT_DATE` once at the end of the day. This will clear all your completed appointments for the entire day.
 </div>
 
