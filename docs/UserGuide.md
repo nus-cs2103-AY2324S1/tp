@@ -112,7 +112,7 @@ Before reading our User Guide, here are some quick tips:
 
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to **Class Manager 2023**.
 
-   * `delete s/A0245234A` : Deletes the student with Student number A0245234A from **Class Manager 2023**, who was added in the previous step.
+   * `delete s/A0245234A` : Deletes the student with Student Number A0245234A from **Class Manager 2023**, who was added in the previous step.
 
    * `exit` : Exits **Class Manager 2023** by closing the application window.
 
@@ -189,7 +189,7 @@ Student Number refers to the unique matriculation number of a NUS student. **Cla
 * Student Number must not be blank.
 * The last alphabetical character of Student Number is automatically converted to uppercase when stored in **Class Manager 2023**.
 * Student Number is not case-sensitive, e.g. Student Number `A123V` and `A123v` refer to the same student.
-* Here are some valid examples of Class Numbers:
+* Here are some valid examples of Student Numbers:
     - `A0123456X`
     - `A32g (Stored as A32G)`
 
