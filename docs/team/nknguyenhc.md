@@ -41,15 +41,6 @@ Pull request: [#77](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/77)
 * **Bug fix**: Ensured that any kind of malformed JSON and lack of write permission in the data file, preference file, config file and log file do not cause the application to crash upon launch.
 Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#237](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/237)
 
-* **Other small enhancements, bug fixes and code quality improvements on other features**:
-  * Updated phone validation to accommodate phone numbers with country code. Pull request: [#163](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/163)
-  * Changed `requireNonNull` to use assertions. Pull request: [#140](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/140)
-  * Fixed bug on `add` and `edit` command not checking for duplicate fields. Pull request: [#147](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/147)
-  * Relax tag validation. Pull request: [#164](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/164)
-  * Refactor `add` command into its own package. Pull request: [#221](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/221)
-  * Fix bug on lack of validation for emails without a period `.` in domain. Pull request: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235)
-  * Ensure that name checking in case-insensitive. Pull request: [#290](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/290)
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=nknguyenhc&tabRepo=AY2324S1-CS2103T-T08-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
@@ -58,20 +49,13 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the following features (pull request: [#57](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/57)):
-      * Add an email to a person
-      * Add a link to a person
-      * Edit details of a person
-    * Ensured consistency in the feature section. Pull request: [#182](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/182)
+    * Added documentation for the following features (pull request: [#57](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/57)): add email, add link, edit email
     * Updated table for common fields used. Pull request: [#284](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/284)
   * Developer Guide:
     * Added user stories, use cases and non-functional requirements
     for features related to accessibility. Pull request: [#24](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/24)
     * Added a glossary to define relevant terms used in the Developer Guide.
-    * Added documentation on the implementation the edit feature.
-    This includes the sequence diagrams on the edit command and explanation on the implementation of the edit command.
-    This also includes the use cases related to edit command.
-    Pull request: [#138](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/138) and the one below
+    * Added documentation on the implementation the edit feature. Pull request: [#138](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/138) and the one below
     * Refined documentation on the model package. Pull request: [#238](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/238)
     * Added documentation on the implementation of filter feature. Pull request: [#297](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/297)
     * Updated planned enhancements. Pull requests: [#248](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/248), [#289](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/289)
@@ -80,12 +64,10 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
 
 * **Community**:
   * Conducted team weekly meetings.
-  * Did task division to ensure equal share of workload and team's progress.
   * Ensured that team members follow the internal deadlines.
     * Conducted thorough review of team's dynamics in `v1.2` postmortem meeting to ensure everyone is on track, upon late work submissions in `v1.2`.
   * Reviews on major PRs (with changes in functional code): [#82](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/82), [#85](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/85), [#87](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/87), [#94](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/94), [#97](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/97), [#141](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/141), [#167](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/167), [#142](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/142), [#166](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/166), [#145](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/145), [#178](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/178), [#146](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/146), [#160](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/160), [#165](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/165), [#269](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/269)
-  * Completed teammate's task when he could not finish in time.
-    * Add functionalities related to specialisation and course attributes of a contact: [#95](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/95)
+  * Completed teammate's task when he could not finish in time: [#95](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/95)
   * Produce bug reports for PE-D: [#256](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/256) [#258](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/258) [#272](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/272) [#276](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/276) [#282](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/282)
   * Produce bug reports for team T08-1: [repo link](https://github.com/nknguyenhc/Medi-Contrived/issues)
 
