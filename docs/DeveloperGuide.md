@@ -137,6 +137,8 @@ The sections below give more details of each component.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified
@@ -163,6 +165,8 @@ The `UI` component,
 - depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -209,6 +213,8 @@ How the parsing works:
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API
@@ -231,6 +237,8 @@ The `Model` component,
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API
@@ -249,9 +257,13 @@ The `Storage` component,
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.LoveBook.commons` package.
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -272,6 +284,8 @@ The following class diagram shows the new `Date` class after the changes mention
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Add Dates
 
@@ -345,6 +359,8 @@ The activity diagram notation of the above steps is shown below. <br>
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### List Dates
 
 1. The list dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
@@ -377,6 +393,8 @@ The sequence diagram notation of the above steps is shown below. <br>
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Filter dates
 
 1. The filter dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
@@ -398,6 +416,8 @@ the command `filter name/John`. <br>
 <puml src="diagrams/FilterSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Sort dates
 
@@ -423,6 +443,8 @@ the command `sort name/increasing`. <br>
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Get Blind Date
 
 1. The blind date feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
@@ -443,6 +465,8 @@ the command `blindDate`. <br>
 <puml src="diagrams/BlindDateSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Get best match
 
@@ -478,6 +502,8 @@ the command `bestMatch`
 <puml src="diagrams/BestMatchSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Set preferences
 
@@ -522,6 +548,8 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Show preferences
 
 #### Implementation
@@ -538,6 +566,8 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 <puml src="diagrams/ShowPrefSequenceDiagram.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Star dates
 
@@ -575,6 +605,8 @@ the command `star 1`
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Unstar dates
 
 #### Implementation
@@ -602,6 +634,8 @@ the command `unstar 1`
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -613,6 +647,8 @@ the command `unstar 1`
 - [DevOps guide](DevOps.md)
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -633,6 +669,8 @@ dates by taking into account the user’s preferences, thereby enhancing the eff
 perfect match.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -662,6 +700,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       |
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -912,6 +952,8 @@ Use case ends. <br>
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1. Usability and Accessibility: The application should provide clear and user-friendly CLI prompts and menus.
@@ -926,6 +968,8 @@ Use case ends. <br>
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 | Term          | Definition                                                                                                        |
@@ -939,6 +983,8 @@ Use case ends. <br>
 | Mainstream OS | Windows, Linux, Unix, OS-X                                                                                        |
 
 [Scroll back to _Table of Contents_](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -1069,6 +1115,8 @@ _Prerequisites:_ Have at least 1 date in the LoveBook. Best to have more than 5 
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 ## **Appendix: Effort**
@@ -1101,7 +1149,7 @@ effort to produce an eventual satisfactory and working UI that we were proud to 
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
-[Scroll back to _Table of Contents_](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
