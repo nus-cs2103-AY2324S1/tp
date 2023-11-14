@@ -15,7 +15,6 @@
 
 This is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -304,7 +303,7 @@ This is done by setting the `isView` property to true in the `CommandResult` obj
 
 ### Create feature
 
-### Implementation
+#### Implementation
 
 The `create` feature is implemented using the `CreateTagCommand` class. It extends `Command` and overrides the `execute()` method
 to create tags of specific categories.
@@ -346,7 +345,7 @@ The following sequence diagram shows how the search operation works:
 
 **Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<puml src="diagrams/SearchSequenceDiagram.puml" width="550" />
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram"/>
 
 Step 3. The user should see the UI below upon entering `search t/intern`.
 
@@ -354,7 +353,7 @@ Step 3. The user should see the UI below upon entering `search t/intern`.
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `search` command.
 
-<puml src="diagrams/SearchActivityDiagram.puml" width="550" />
+<puml src="diagrams/SearchActivityDiagram.puml" />
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
@@ -405,7 +404,7 @@ Step 3. Assuming Bernice is the applicant matching the requirements, the user sh
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `delete` command.
 
-<puml src="diagrams/DeleteActivityDiagram.puml" width="550" />
+<puml src="diagrams/DeleteActivityDiagram.puml" />
 
 **Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
@@ -923,7 +922,14 @@ Currently, the UI does not update and will remain unchanged from the previous co
 
 ### Improve on `remark` feature
 **Improve the remark feature**
-Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus, we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+
+### Improve on `edit` feature
+**Improve on the edit feature**
+Currently, for tagging, once you add a tag to a person, it does not update when you add the tag categories to the same tag name using `create`.   
+This is a feature flaw since a user would expect the tag to be updated and would not need to be re-tag again. We would like to improve on this by updating the tag when the tag category is updated.    
+That is if you add an extra category to the tag name, the tag will be updated to include the tag category. Thus, a user would not need to re-tag the person again to update the tag category.
+
 
 ## **Appendix: Effort**
 
