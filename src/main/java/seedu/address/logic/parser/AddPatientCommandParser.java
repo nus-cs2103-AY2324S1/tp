@@ -39,6 +39,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddPatientCommandParser implements Parser<AddPatientCommand> {
     private static final Logger logger = LogsCenter.getLogger(AddPatientCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddPatientCommand
      * and returns an AddPatientCommand object for execution.
@@ -49,19 +50,8 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
      */
     public AddPatientCommand parse(String args) throws ParseException {
         logger.fine("Attempting to parse AddPatientCommand from arguments: " + args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_REMARK, PREFIX_GENDER, PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE,
-                        PREFIX_EMERGENCY_CONTACT);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
-                PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT)
-                || !argMultimap.getPreamble().isEmpty()) {
-            logger.warning("Invalid command format for AddPatientCommand: " + args);
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
-        }
+        ArgumentMultimap argMultimap = checkPrefixes(args);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                PREFIX_GENDER, PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Phone emergencyContact =
@@ -89,11 +79,25 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
      * {@code ArgumentMultimap}.
      *
      * @param argumentMultimap The parsed argument multimap.
-     * @param prefixes The prefixes to check.
+     * @param prefixes         The prefixes to check.
      * @return True if all prefixes are present and have non-empty values, false otherwise.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    private ArgumentMultimap checkPrefixes(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_REMARK, PREFIX_GENDER, PREFIX_NRIC, PREFIX_CONDITION,
+                PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
+                PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT)
+                || !argMultimap.getPreamble().isEmpty()) {
+            logger.warning("Invalid command format for AddPatientCommand: " + args);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                PREFIX_GENDER, PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT);
+        return argMultimap;
+    }
 }

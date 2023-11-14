@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-## Table Of Contents
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -14,7 +14,7 @@ title: Developer Guide
 
 MediLink Contacts is a brownfield software project based
 off [AddressBook Level-3](https://se-education.org/addressbook-level3/), created under the module CS2103 for the School
-of Computing in the National University of Singapore
+of Computing at the National University of Singapore
 
 Java dependencies:
 
@@ -57,10 +57,10 @@ Given below is a quick overview of main components and how they interact with ea
 **`Main`** (consisting of
 classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
 and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
-in charge of the app launch and shut down.
+in charge of the app launch and shutdown.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+* At shutdown, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
@@ -105,7 +105,7 @@ e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -188,7 +188,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Patient/Doctor Feature
 
-This feature allows users to add patients or doctors to the address book. No duplicated person should be added. There are many fields for each patient/doctor which can be found in the user guide. The implementation for adding patient and doctors are similar, we just need to change the relevant command name from patient to doctor. For the below details, we will just patient when mentioning the commands.
+This feature allows users to add patients or doctors to the address book. No duplicate person should be added. There are many fields for each patient/doctor which can be found in the user guide. The implementation for adding patient and doctors are similar, we just need to change the relevant command name from patient to doctor. For the below details, we will just use patient when mentioning the commands.
 
 #### Implementation
 
@@ -786,7 +786,7 @@ There are 4 main areas where we adapted substantially from the original AB3.
 ### UI changes
 Compared to the original UI, our app now shows three columns, Patient, Doctor, Appointment. We had to figure out how to fit 3 different columns in JavaFX which we were not familiar with. Additionally, linking the changes in model with the the actual UI component was also difficult since there many different files involved. We had to really trace through the code to understand how the different components work together to show the required UI that we wanted.
 
-### Person to Patients and Doctors
+### Person to Patient and Doctor
 MediLink Contacts adapted from the AB3 to use the Patient and Doctor classes to represent the information that our target users will need. The original code base was deeply linked to the Person class and there was a significant amount of changes that had to be made to refactor the code to accommodate the two classes.  The biggest challenge was that we had to understand the entire code base well at the beginning to be able to make these refactorings.
 
 Some changes were also made to such that the two classes have their own attributes on top of the original Person attributes and inherit from the common class Person. There are now 2 instead of just 1 entity that has to be handled. This translates to more Parsers, attribute classes and input validations to support these two classes.
