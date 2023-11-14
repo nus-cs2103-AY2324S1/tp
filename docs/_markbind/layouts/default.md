@@ -30,14 +30,16 @@
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
-  * [Introduction]({{ baseUrl }}/DeveloperGuide.html#1-introduction)
+  * [Introduction]({{ baseUrl }}/DeveloperGuide.html#1.-introduction)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#2-design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#3-implementation)
-  * [Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#5-documentation-logging-testing-configuration-dev-ops)
+  * [Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#4-planned-enhancements)
+  * [Documentation and Testing]({{ baseUrl }}/DeveloperGuide.html#5-documentation-logging-testing-configuration-dev-ops)
   * [Requirements]({{ baseUrl }}/DeveloperGuide.html#6-appendix-requirements)
   * [Manual Testing]({{ baseUrl }}/DeveloperGuide.html#7-appendix-instructions-for-manual-testing)
   * [Effort]({{ baseUrl }}/DeveloperGuide.html#8-appendix-effort)
-* [About us] ({{ baseUrl }}/AboutUs.html)
+* [About us] ({{ baseUrl }}/AboutUs.html) :expanded
+  * [Introduction]({{ baseUrl }}/AboutUs.html#about-us)
       </site-nav>
     </div>
   </nav>

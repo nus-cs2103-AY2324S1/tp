@@ -1451,7 +1451,7 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 8 Appendix Effort
+## 8 Appendix Effort 
 
 ProjectPRO is a project built upon AB3, which was built out of the SE-EDU initiative. Our group has been actively working on ProjectPRO this semester, meeting regularly to discuss about our application to meet deadlines punctually.
 
