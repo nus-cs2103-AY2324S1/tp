@@ -22,7 +22,6 @@ Given below are my contributions to the project.
   * Upgraded Json files to accomodate for `Module` objects 
   * Created tests and `TypicalModules` and `ModuleBuilder` as backbone for testing commands.
 
-
 * **Documentation**:
   * User Guide:
     * Features Section: Added details to `Modules` section.
