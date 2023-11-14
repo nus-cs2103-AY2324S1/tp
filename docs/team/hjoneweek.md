@@ -20,21 +20,21 @@ title: "Hanjoo's Project Portfolio Page"
   - Created the `AddRecordCommandParser` class and the `AddRecordCommand` class to execute the `addrecord` command.
 
 - **New Feature 2**: Search Record Feature [#86](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/86)
-  - Another essential feature that allows doctors to search for the past records of the patient that they are currently viewing using keywords.
+  - Another essential feature that allows doctors to use keywords to search for the past records of the patient that they are currently viewing.
   - Created the `RecordContainsKeywordPredicate` class, `FindRecordCommandParser` class, and the `FindRecordCommand` class to execute the `searchrecord` command.
 
 - **New Feature 3** Delete Record Feature [#88](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/88)
-  - Allows doctors to delete records of patients if necessary
+  - Allows doctors to delete records of patients if necessary.
   - Created the `DeleteRecordCommandParser` class and the `DeleteRecordCommand` class to execute the `deleterecord` command.
 
 - **Documentation**
   - User Guide
     - Added new sections explaining how to use the newly implemented features and commands, which are `addrecord`, `searchrecord`, and `deleterecord` command.
-    - Modified `addpatient` command (originally `addperson` command) section according to the updated attributes of the patient.
+    - Modified `addpatient` command (which was originally `add` command) section according to the updated attributes of the patient.
     - Reviewed the User Guide altogether as a team.
     
   - Developer Guide
-    - Added the **Record Feature** section (except for the implementation details of `editrecord` command).
+    - Added the **Record Feature** section (except for the implementation details of the `editrecord` command).
     - Created the sequence diagrams of the executions of the `addrecord`, `searchrecord`, `deleterecord`, and `addpatient` commands.
     - Created the class diagrams of the `Record`, and `Person` classes.
     - Updated the class diagrams for `UI`, `Storage`, and `Model` components of MedBook.

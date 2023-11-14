@@ -1,7 +1,7 @@
 ---
 layout: default.md
 title: "User Guide"
-pageNav: 3
+pageNav: 4
 ---
 
 # User Guide
@@ -42,26 +42,30 @@ With MedBook, experience a new level of convenience and control:
 - [MedBook Tutorial](#medbook-tutorial)
 - [Features](#features)
   - [Parameters](#parameters)
-  - [Viewing help](#viewing-help--help)
-  - [Adding a patient](#adding-a-patient-addpatient)
-  - [Adding a medical record](#adding-a-medical-record-addrecord)
-  - [Adding an appointment](#adding-an-appointment-addappointment)
-  - [Listing all patients](#listing-all-patients-list)
-  - [Viewing patient medical records](#viewing-patient-medical-records-view)
-  - [Viewing appointments](#viewing-appointments-viewappointment)
-  - [Editing a patient](#editing-a-patient-editpatient)
-  - [Editing a medical record](#editing-a-medical-record-editrecord)
-  - [Locating patients by keywords](#locating-patients-by-keywords-search)
-  - [Locating medical records by keywords](#locating-medical-records-by-keywords-searchrecord)
-  - [Deleting a patient](#deleting-a-patient-delete)
-  - [Deleting a medical record](#deleting-a-medical-record-deleterecord)
-  - [Deleting an appointment](#deleting-an-appointment-deleteappointment)
-  - [Pinning a patient](#pinning-a-patient-pin)
-  - [Unpinning a patient](#unpinning-a-patient-unpin)
-  - [Attaching files to a patient's medical record](#attaching-files-to-a-patients-medical-record)
-  - [Exiting the program](#exiting-the-program-exit)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
+  - [Patient Features](#patient-features)
+    - [Adding a patient](#adding-a-patient-addpatient)
+    - [Editing a patient](#editing-a-patient-editpatient)
+    - [Deleting a patient](#deleting-a-patient-delete)
+    - [Locating patients by keywords](#locating-patients-by-keywords-search)
+    - [Listing all patients](#listing-all-patients-list)
+    - [Pinning a patient](#pinning-a-patient-pin)
+    - [Unpinning a patient](#unpinning-a-patient-unpin)
+  - [Medical Record Features](#medical-record-features)
+    - [Adding a medical record](#adding-a-medical-record-addrecord)
+    - [Viewing patient medical records](#viewing-patient-medical-records-view)
+    - [Editing a medical record](#editing-a-medical-record-editrecord)
+    - [Deleting a medical record](#deleting-a-medical-record-deleterecord)
+    - [Locating medical records by keywords](#locating-medical-records-by-keywords-searchrecord)
+    - [Attaching files to a patient's medical record](#attaching-files-to-a-patient-s-medical-record)
+  - [Appointment Features](#appointment-features)
+    - [Adding an appointment](#adding-an-appointment-addappointment)
+    - [Deleting an appointment](#deleting-an-appointment-deleteappointment)
+    - [Viewing appointments](#viewing-appointments-viewappointment)
+  - [General Features](#general-features)
+    - [Viewing help](#viewing-help-help)
+    - [Exiting the program](#exiting-the-program-exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -336,7 +340,7 @@ The **domain** name must: <br>
 
 ---
 
-### Patient features
+### Patient Features
 
 #### Adding a patient: `addpatient`
 
@@ -376,7 +380,8 @@ Format: `editpatient PATIENTID PREFIX/NEWVALUE...`
 - Edits the details of the patient with the corresponding `PATIENTID`. <br>
 
 - Acceptable fields: `NAME`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`. <br>
-  <box type="info">
+  
+<box type="info">
 
 **Note**: `NRIC` cannot be edited.
 
@@ -534,7 +539,7 @@ Examples:
 
 ---
 
-### Medical Record features
+### Medical Record Features
 
 #### Adding a medical record: `addrecord`
 
@@ -704,7 +709,7 @@ Screenshots:
 
 ---
 
-### Appointment features
+### Appointment Features
 
 #### Adding an appointment: `addappointment`
 
@@ -765,7 +770,7 @@ Format: `viewappointment`
 
 ---
 
-### General features
+### General Features
 
 #### Viewing help : `help`
 
