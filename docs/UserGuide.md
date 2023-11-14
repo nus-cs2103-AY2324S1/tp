@@ -15,12 +15,14 @@ This is why we are excited to introduce **Class Manager 2023**, an all-in-one ap
 
 This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. It aims to provide a head start to new users, while serving as a point of reference for the advanced users. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
 # Table of Contents
 
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Overview
@@ -35,6 +37,7 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 **Class Manager 2023** is optimized for use via a Command Line Interface ([CLI](#glossary)) while still having the benefits of a Graphical User Interface ([GUI](#glossary)). Since CS2103/T TAs have an adequate understanding of CLI, **Class Manager 2023** will allow class management tasks to be completed faster than traditional GUI apps.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # How to use our User Guide
@@ -91,6 +94,7 @@ Before reading our User Guide, here are some quick tips:
 
 3. Refer to [Features](#features) for a detailed explanation of each command and its format.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Quick start
@@ -121,6 +125,7 @@ Before reading our User Guide, here are some quick tips:
 
 7. That's it! You can now explore **Class Manager 2023**! Refer to [Commands](#commands) for details of each command or the [Command Summary](#command-summary) for an overview of Class Manager's commands.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # GUI Overview
@@ -138,6 +143,7 @@ The **GUI** has 6 notable sections:
 5. **Student List** - This is where the current list of students will be displayed in card form.
 6. **Status Bar** - This is where the current file path of the loaded data file will be displayed.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -227,6 +233,7 @@ If your changes to the data file make its format invalid (missing value pairs or
 
 </box>
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Commands
@@ -827,6 +834,7 @@ Possible error and their corresponding message:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
@@ -854,6 +862,7 @@ Possible error and their corresponding message:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Command summary
@@ -900,6 +909,7 @@ Possible error and their corresponding message:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Glossary
