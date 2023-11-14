@@ -128,8 +128,6 @@ Here are some descriptions of the words we use throughout the User Guide:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Understanding the Graphical User Interface (GUI)
 
 ### Quick Orientation
