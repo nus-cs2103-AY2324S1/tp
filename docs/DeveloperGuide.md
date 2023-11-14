@@ -452,3 +452,15 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+Connectify was our take on a customer relations manager (CRM) software built on the existing AB3 system. Due to the added context, changes were made regarding the management and storage of information within and across components to ensure we follow of Object-Oriented Programming (OOP) and Design Patterns. Furthermore, due to the added coupling of the systems such as the `Reminders` and `Dashboard`, we had major changes that we had to make to `Model` and `Logic` while seeking out best design practices. The `Dashboard` was also a entirely new window on its own, with its own classes for handling the Logic as well as the UI. Additionally, we were committed to building the app using a minimalistic approach, only adding classes that were required and writing clean and effective code.
+
+Here are some other features that we implemented that were challenging:
+* `create`, `edit`:  These commands required additional fields which we handle through the use of `PersonBuilder` that allowed for optional fields to be added more easily. 
+* `dashboard`: There is a dashboard class which handles the logic of our UI output including key statistics as well as reminders. Due to dependence on the interactions as well as the persons, there was a need for updating the dashboard.
+* `interaction`: `Interactions` was a whole different class on its own which handled outcomes, notes and dates. This was a new class that also had to be created with Reminders as well as dashboards in mind. 
+* `reminders`: Reminders was something that was hard to implement because of the dependence on `Person` and `Lead`. While we refer to past year's teams implementation as a reference for the design, the logic behind the list and the scheduler was something that we had to figure out on our own. We also had to deal with how and when to update the reminderList, which proved tedious because of the singleton pattern. Furthermore, with our added dashboard and a class to handle the logic on its own, we had to integrate the whole system together to ensure that the reminders were updated whenever the dashboard was being called.
+
+We estimate a 30% increase in base features from the base AB3 system. This is due to the added features such as `reminders` and `dashboard` as well as `interactions` which increased the complexity of the relationship with the other components.
