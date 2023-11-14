@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.employee.exceptions.ModelException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +32,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private EmployeeListPanel employeeListPanel;
+    private ProfileDetails profileDetails;
+    private Sidebar sidebar;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +45,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane profileDetailsPlaceholder;
+
+    @FXML
+    private StackPane sidebarPlaceholder;
+
+    @FXML
+    private StackPane employeeListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,13 +119,19 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        sidebar = new Sidebar();
+        sidebarPlaceholder.getChildren().add(sidebar.getRoot());
+
+        profileDetails = new ProfileDetails();
+        profileDetailsPlaceholder.getChildren().add(profileDetails.getRoot());
+
+        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList(), profileDetails);
+        employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getManageHrFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -140,13 +155,36 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        helpWindow.resetHelpText();
+        helpWindow.resetHelpCopy();
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
-            helpWindow.focus();
+            helpWindow.hide();
+            helpWindow.show();
         }
     }
 
+    /**
+     * Opens the help window with specific help for command.
+     *
+     * @params cmd Command to display help for
+     */
+    @FXML
+    public void handleHelp(String cmdUsage, String cmdExample) {
+        helpWindow.setHelpText(cmdUsage); // Set the text to the command help
+        helpWindow.setHelpCopy(cmdExample); // Set URL to command example.
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.hide();
+            helpWindow.show();
+        }
+    }
+
+    /**
+     * Displays the JavaFX primary stage.
+     */
     void show() {
         primaryStage.show();
     }
@@ -163,10 +201,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -179,7 +213,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                // Handle help, pass command over to handler to create special page
+                String cmdUsage = commandResult.getCmdUsage();
+                String cmdExample = commandResult.getCmdExample();
+                // If empty string, it's to display all help.
+                if (cmdUsage.isEmpty()) {
+                    handleHelp();
+                } else {
+                    handleHelp(cmdUsage, cmdExample);
+                }
             }
 
             if (commandResult.isExit()) {
@@ -187,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ModelException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +38,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103-T16-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103-T16-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,24 +70,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103-T16-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EmployeeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103-T16-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103-T16-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Employee` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103-T16-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -100,9 +102,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `ManageHrParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete an employee).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,23 +112,23 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `ManageHrParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ManageHrParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103-T16-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Employee` objects (which are contained in a `UniqueEmployeeList` object).
+* stores the currently 'selected' `Employee` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Employee>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Department` list in the `ManageHr`, which `Employee` references. This allows `ManageHr` to only require one `Department` object per unique tag, instead of each `Employee` needing their own `Department` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -135,18 +137,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103-T16-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ManageHrStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,70 +156,168 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+### Employee management
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### The employee class
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![Employee Class Diagram](images/ManageHR/EmployeeClassDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+ManageHR keeps track of employees within the company with the use of `Employee` and `UniqueEmployeeList`. The `UniqueEmployeeList` serves as a container for the `Employee` objects
+within the company, while enforcing the constraints that no 2 employees can have the same name.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The `Employee` class contains the following attributes.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+1. `EmployeeName`: The name of the employee.
+2. `Email`: The email of the employee.
+3. `Address`: The home address of the employee.
+4. `Leave`: The amount of leave remaining for the employee.
+5. `Salary`: The monthly salary accorded to the employee.
+6. `Phone`: The phone number of the employee.
+7. `Role`: The role of the employee.
+8. `Superiors`: The employee name of the superior in charge of them.
+9. `Departments`: A set of departments in which the employee can belong.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+All the attributes except Departments and Superiors are compulsory fields.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+### List command
 
-![UndoRedoState1](images/UndoRedoState1.png)
+#### Overview
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The `ListCommand` displays all the `Employee` objects currently stored in `UniqueEmployeeList` object.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+The following sequence diagram shows how the different components of ManageHR interact with each other.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<img src="images/ManageHR/ListSequenceDiagram.png" width="700" />
 
-</div>
+The above sequence diagram omits details on the internal implementations within each directory in order to improve
+overall readability of the diagram.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+### Help command
 
-![UndoRedoState3](images/UndoRedoState3.png)
+#### Overview
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+The `HelpCommand` displays help for the current command.
+- `help <Command>`
+  - example: `help add`
+  - expected: Shows functionality for `add` in the help window.
+  - Shows the same content as the user guide.
+- `help`
+  - example: `help'
+  - expected: Displays a link to the user guide.
+  - Shows the same content as the user guide.
 
-</div>
+The following sequence diagram summarizes the possible outputs of the help command.
+![](images/helpSequenceDiagram.png)
 
-The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+**Design considerations:**
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+Basic functionality of referring to the online user guide should always be retained.
+However, due to a host of reasons, the online guide may not be available to our target user.
+As such, offline help is required, by the means of a quick reference with the `help <command>` function.
 
-</div>
+This help function is intended as a quick reference guide to the user, rather than a comprehensive reference document.
+It is intended to simulate `man` pages in linux, with very simple guides as to how command syntax should be applied.
+Examples are also provided for the quick reference of the user, and are intended to work on the default ManageHR sample.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+When presenting users with help, syntax and examples need to be provided to the user.
+The Copy URL button used for the general help can be repurposed to support the quick copying of an example command.
+The example command is now separated from the usage in each command, to allow for quick delivery of the example.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Adding additional Command:**
 
-</div>
+Upon the addition of a new Command, registration has to occur in ManageHRParser.
+This involves adding a new case to both the parser, and the command use checker.
+By default, this should return the `MESSAGE_USAGE` and `MESSAGE_EXAMPLE`.
+`MESSAGE_EXAMPLE` should be something that can be copy-pasted into the command line.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Mechanism of Action:**
 
-![UndoRedoState4](images/UndoRedoState4.png)
+In order for the help window to be called, the mechanism of the window had to be modified.
+Previously the window just defocused itself upon the user clicking away from it.
+This method results in the window being static, and built upon the launch of ManageHR, with
+limited abilities to re-designate text within the window.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+This was solved by closing the window, before re-building and re-focusing the window at every stage.
+Upon typing the help command with no arguments, the default text would change to a link to the User Guide,
+as well as a quick link to copy said user guide.
+After typing a help command together with a Command to discover help for, the help window is closed,
+before text is regenerated, and the button's label is modified to copy examples. The text is then changed to the
+`MESSAGE_USAGE` of the Command, and the text is modified to "Copy Example".
+The button is now configured to copy `MESSAGE_EXAMPLE`, for the quick reference of the user.
 
-![UndoRedoState5](images/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+### Delete feature
+The delete feature allows employees to be deleted with just a simple index.
+-   `delete <index>`
+    - example: `delete 4`
+    - expected: Deletes employee with the current index of 4.
+    - Shows successful deletion of employee.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+A sequence diagram of this deletion is shown below.
+![](images/DeleteEmployeeSequenceDiagram.png)
+
+**Design Considerations:**
+
+The delete command is an essential part of the CRUD process. As such, this is the first few items to implement in ManageHR.
+Initially with barebones functions, each employee effectively had an ID assigned on when they joined ManageHR.
+However, this design has changed, due to the implementation of the filter function, where IDs are no longer unique.
+ManageHR now has to be aware of the state of the program, if there are any filters active, and the IDs and people being shown to the user.
+
+The deletion of an employee is relatively easy compared to the deletion of a department. The removal of an employee does not do any updates
+to the department, as there is only unidirectional dependencies of an employee to a department. No update is required to any departments upon the departure of the last employee.
+
+
+**Mechanism of Action:**
+
+This feature is implemented by first modifying the ID state to use ParserUtil to host the current state, and get the current index's validity at the given state.
+Following that, the parser is able to extract out the appropriate employee to refer to. A DeleteCommand is then created, ready to execute.
+Upon calling execute, the Model returns a filtered employee list, and the deletion is done by the model.
+On completion, a command result is thrown back with the appropriate success/failure values.
+
+
+### Filter command
+
+The filter command filters employees by prefixes/parameters.
+
+Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME] [d/DEPARTMENT]`
+
+* The filter is case-sensitive. e.g. `R&D` will not match `r&d`
+* At least one of the optional fields must be provided.
+* Able to filter by multiple prefixes
+
+Examples:
+* `filter d/investment` returns employees with the `investment` department
+* `filter s/4000` returns employees with salary equal to or less than 4000
+* `filter l/14 r/manager` returns employees with 14 days of leave and the manager role
+
+
+The following activity diagram summarizes what happens when a user executes the filter command, the Activity Diagrams
+are split into two part to ensure clarity/visibility of the diagrams, however the activities occur simultaneously:
+
+![FilterActivityDiagramPart1](images/FilterActivityDiagramPart1.png)
+
+![FilterActivityDiagramPart2](images/FilterActivityDiagramPart2.png)
+
+The following is the filter feature's class diagram, illustrating the interaction between the FilterCommand,
+FilterCommandParser and the ContainsAllPredicate classes.
+
+![FilterCommandClassDiagram](images/FilterCommandClassDiagram.png)
+
+### Department feature
+
+The department feature allows users to manage department using a single command
+- `department t/TYPE n/NAME`
+    - TYPE corresponds to the type of action to be taken
+    - example 1: `department t/add n/R&D`
+    - expected 1: add a department with the name R&D
+    - example 2: `department t/delete n/R&D`
+    - expected 2: delete the department with the name R&D
+
+The following activity diagram summarizes what happens when a user executes the filter command:
+
+![DepartmentActivityDiagram](images/DepartmentActivityDiagram.png)
 
 #### Design considerations:
 
@@ -229,15 +329,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
+Copy the current ManageHR json file into a backup, with the appropriate name.
+Load a new sample copy of ManageHR's data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,66 +355,199 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of people' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage people' information faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a…             | I want to …                                          | So that I can …                                                |
+|----------|-------------------|------------------------------------------------------|----------------------------------------------------------------|
+| `***`    | Beginner user     | Add an employee entry with details                   | Keep track of people                                           |
+| `***`    | Beginner user     | Delete employee entries                              | Maintain employee list so that it doesn’t get too long         |
+| `***`    | Beginner user     | Edit employee entries                                | Update employee details                                        |
+| `***`    | User              | Retrieve information of past records                 | Find details of applicants that have been keyed in previously. |
+| `***`    | Beginner user     | There is a ‘help’ command to list functions/features | Know how to use the app                                        |
+| `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
+| `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
+| `***`    | Intermediate user | Handle departments                                   | Easily keep track of organizational structure                  |
+| `**`     | Intermediate user | Handle additional benefits like leave and salary     | Easily keep track of organizational incentive programs.        |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ManageHR` and the **Actor** is the `HR manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: UC01 - List all people
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. HR manager requests to list people
+2. ManageHR shows a list of people
+
+    Use case ends.
+
+
+#### Use case: UC02 - Delete an employee
+
+**MSS**
+
+1. HR manager [lists all people (UC01)](#use-case-uc01---list-all-people).
+2. HR manager requests to delete a specific employee in the list
+3. ManageHR deletes the employee
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2a1. ManageHR shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-*{More to be added}*
+#### Use case: UC03 - Add an employee
+
+**MSS**
+
+1. HR manager enters the employee details
+2. A confirmation message is displayed to the HR manager, indicating that the employee has been successfully added.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ManageHR detects an error with the entered employee's details.
+  * 1a1. ManageHR shows an error message.
+
+    Use case ends.
+
+#### Use case: UC04 - Edit an employee details
+
+**MSS**
+
+1. HR manager [lists all people (UC01)](#use-case-uc01---list-all-people).
+2. HR manager edits a specific employee's details in the list.
+3. ManageHR modifies the employee's details.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. ManageHR shows an error message.
+
+        Use case ends. 
+
+* 2b. ManageHR detects an error with the entered employee's details.
+
+    * 2b1. ManageHR shows an error message.
+
+        Use case ends. 
+
+#### Use case: UC05 - Get help with ManageHR's features
+
+**MSS**
+
+1. HR manager is using the ManageHR and has forgotten some of the features in the app.
+2. HR manager requests help.
+3. ManageHR displays a link to access the user guide.
+4. HR manager access the user guide and obtains information on the different features.
+
+   Use case ends.
+
+**Extensions**
+
+* 4a. HR manager does not find the required information in the user guide.
+
+    * 4a1. ManageHR provides options for contacting customer support or accessing additional help resources.
+
+        Use case ends.
+
+#### Use case: UC06 - Close ManageHR
+
+**MSS**
+
+1. HR manager requests to close ManageHR.
+2. ManageHR closes.
+
+   Use case ends.
+
+#### Use case: UC07 - Filtering employees by department
+
+**MSS**
+
+1. HR Manager filters employees by department tag.
+2. ManageHR displays employees with filtered department tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid department entered.
+
+  * 2a1. ManageHR shows an error message.
+
+    Use case ends.
+
+#### Use case: UC08 - Adding a department
+
+**MSS**
+
+1. HR Manager adds a department.
+2. ManageHR adds a department, displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Duplicate name/Name already exists for departments.
+
+    * 2a1. ManageHR shows an error message.
+
+      Use case ends.
+
+#### Use case: UC09 - Deleting a department
+
+**MSS**
+
+1. HR Manager deletes a department.
+2. ManageHR deletes the department with the exact name that exists, displays success message
+3. ManageHR removes all department names from employees who belonged in the deleted department
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Department name could not be found/Name does not exist in department list
+
+    * 2a1. ManageHR shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 people without a noticeable sluggishness in performance for typical usage.
+3. A HR manager with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The user interface should be intuitive and user-friendly for HR managers to easily understand.
+5. ManageHR's code should be well-documented and adhere to coding standards to allow for efficient updates to it.
 
 ### Glossary
 
@@ -340,7 +571,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample employees. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -349,29 +580,71 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Help function
+1. Calling help
+   1. With ManageHR open, type `help` into the command line.
+        Expected: A help window containing a link to the user guide, and a copy button shows.
 
-### Deleting a person
+2. Calling help with a custom command.
+   1. With ManageHR open, type `help add` into the command line.
+        Expected: A help window containing syntax, as well as an example should be visible to the user. The UI should be scaled such that everything can be seen. The copy button now takes on the command example.
 
-1. Deleting a person while all persons are being shown
+### Deleting an employee
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Deleting an employee while all people are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First employee is deleted from the list. Details of the deleted employee shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Filtering
+
+1. Filter by `department`
+
+   1. Prerequisites: Employees need to have department tags
+
+   1. Test case: `filter d/R&D`<br>
+      Expected: Only employees with `R&D` department tag are shown.
+
+   1. Test case: `filter d/aaosijflk`<br>
+      Expected: No such department tag found. No employee is shown. Error details shown in the status message.
+
+2. Filter by `salary`
+
+   1. Prerequisites: Employees need to have salary assigned
+
+   1. Test case: `filter s/4000`<br>
+      Expected: Employees with salary less than or equal to 4000 are shown.
+
+   2. Test case: `filter s/alsjl`<br>
+      Expected: Incorrect parameter. Not an integer. No employee is shown. Error details shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Modify `ManageHr.json` illegally. This is by adding illegal json tags, or destruction of the json structure.
+   2. ManageHR will sense an issue, and replace the working file with the sample dataset.
 
-1. _{ more test cases …​ }_
+### Planned Enhancements
+
+1. Functional Updates
+
+    1. Able to display the list of departments
+    2. Each department may have additional constraints eg. having supervisors and subordinate roles tied to a particular department
+    3. Able to display the manager-subordinate relationship in the profile details of each employee
+
+2. UI improvements/
+
+    1. Addition of a tab of buttons to toggle between viewing employees & departments. This is necessary as the small window of our current UI may not be able to contain all useful information without being too cluttered
+    2. Display managers of each employee as a list of names under the profile of each employee. This is desirable as users would be able to more easily pinpoint the relationship between the employees in the list.
+    3. Display the role (manager/subordinate) of each employee as a separate tag for each employee in the list.
+    4. Color scheme changes. Cosmetic update in sync of the UI mock-up.

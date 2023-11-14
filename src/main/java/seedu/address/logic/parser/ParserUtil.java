@@ -4,16 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.DepartmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Leave;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
+import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,7 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_UNDEFINED_ACTION_TYPE = "Only add/delete actions are allowed in this context";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -41,13 +46,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static EmployeeName parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!EmployeeName.isValidName(trimmedName)) {
+            throw new ParseException(EmployeeName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new EmployeeName(trimmedName);
     }
 
     /**
@@ -96,29 +101,116 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String salary} into a {@code Salary}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code salary} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Salary(trimmedSalary);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String leave} into a {@code Leave}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code leave} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Leave parseLeave(String leave) throws ParseException {
+        requireNonNull(leave);
+        String trimmedLeave = leave.trim();
+        if (!Leave.isValidLeave(trimmedLeave)) {
+            throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new Leave(trimmedLeave);
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim().toLowerCase(Locale.ROOT);
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code String supervisor} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code supervisor} is invalid.
+     */
+    public static EmployeeName parseSupervisor(String supervisor) throws ParseException {
+        requireNonNull(supervisor);
+        String trimmedSupervisorName = supervisor.trim();
+        if (!EmployeeName.isValidName(trimmedSupervisorName)) {
+            throw new ParseException(EmployeeName.MESSAGE_CONSTRAINTS);
+        }
+        return new EmployeeName(trimmedSupervisorName);
+    }
+
+    /**
+     * Parses {@code Collection<String> supervisors} into a {@code Set<Name>}.
+     */
+    public static Set<EmployeeName> parseSupervisors(Collection<String> supervisors) throws ParseException {
+        requireNonNull(supervisors);
+        final Set<EmployeeName> supervisorNameSet = new HashSet<>();
+        for (String supervisor : supervisors) {
+            supervisorNameSet.add(parseSupervisor(supervisor));
+        }
+        return supervisorNameSet;
+    }
+
+    /**
+     * Parses a {@code String department} into a {@code Department}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code department} is invalid.
+     */
+    public static DepartmentName parseDepartment(String department) throws ParseException {
+        requireNonNull(department);
+        String trimmedDepartment = department.trim();
+        if (!DepartmentName.isValidName(trimmedDepartment)) {
+            throw new ParseException(DepartmentName.MESSAGE_CONSTRAINTS);
+        }
+        return new DepartmentName(trimmedDepartment);
+    }
+
+    /**
+     * Parses {@code Collection<String> departments} into a {@code Set<Department>}.
+     */
+    public static Set<DepartmentName> parseDepartments(Collection<String> departments) throws ParseException {
+        requireNonNull(departments);
+        final Set<DepartmentName> departmentSet = new HashSet<>();
+        for (String departmentName : departments) {
+            departmentSet.add(parseDepartment(departmentName));
+        }
+        return departmentSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> departments} into a {@code Set<Department>}.
+     */
+    public static DepartmentCommand.Type parseAction(String action) throws ParseException {
+        requireNonNull(action);
+        switch (action) {
+        case "add":
+            return DepartmentCommand.Type.ADD;
+        case "delete":
+            return DepartmentCommand.Type.DELETE;
+        default:
+            throw new ParseException(MESSAGE_UNDEFINED_ACTION_TYPE);
+        }
     }
 }

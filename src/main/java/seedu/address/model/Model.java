@@ -5,14 +5,18 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.department.Department;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +39,80 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' ManageHR file path.
      */
-    Path getAddressBookFilePath();
+    Path getManageHrFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' ManageHR file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setManageHrFilePath(Path manageHrFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces ManageHr data with the data in {@code manageHR}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setManageHr(ReadOnlyManageHr manageHr);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns ManageHR */
+    ReadOnlyManageHr getManageHr();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an employee with the same identity as {@code employee} exists in ManageHR.
      */
-    boolean hasPerson(Person person);
+    boolean hasEmployee(Employee employee);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if an employee with the identity as {@code name} exists in ManageHR.
      */
-    void deletePerson(Person target);
+    boolean hasEmployeeWithName(EmployeeName name);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Deletes the given employee.
+     * The employee must exist in ManageHR.
      */
-    void addPerson(Person person);
+    void deleteEmployee(Employee target);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Adds the given employee.
+     * {@code employee} must not already exist in ManageHR.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void addEmployee(Employee employee);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Replaces the given employee {@code target} with {@code editedEmployee}.
+     * {@code target} must exist in ManageHR.
+     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     */
+    void setEmployee(Employee target, Employee editedEmployee) throws CommandException;
+
+    /** Returns an unmodifiable view of the filtered employee list */
+    ObservableList<Employee> getFilteredEmployeeList();
+
+    /**
+     * Updates the filter of the filtered employee list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredEmployeeList(Predicate<Employee> predicate);
+
+    /**
+     * Returns true if an department with the same identity as {@code department} exists in ManageHR.
+     */
+    boolean hasDepartment(Department department);
+
+    /**
+     * Returns true if a department with the identity as {@code name} exists in ManageHR.
+     */
+    boolean hasDepartmentWithName(DepartmentName name);
+
+    /**
+     * Adds a department to ManageHR.
+     * The department must not already exist in ManageHR.
+     */
+    void addDepartment(Department department);
+
+    /**
+     * Removes {@code key} from this {@code ManageHr}.
+     * {@code key} must exist in the ManageHr's department list.
+     */
+    void deleteDepartment(Department target);
 }

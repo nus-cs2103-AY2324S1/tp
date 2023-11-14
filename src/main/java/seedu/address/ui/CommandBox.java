@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.employee.exceptions.ModelException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -44,7 +45,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ModelException e) {
             setStyleToIndicateCommandFailure();
         }
     }

@@ -5,55 +5,47 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `ManageHR@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kenvyn Kwek
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kenvynkwek.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kenvynkwek)]
+[[portfolio](team/kenvynkwek.md)]
 
-* Role: Project Advisor
+* Role: Team Lead + Developer
+* Responsibilities: Deliverables and deadlines + Integration
 
-### Jane Doe
+### Matthew Sung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sungmatt.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[homepage](http://sungmatt.com)]
+[[github](https://github.com/sungmatt)]
+[[portfolio](team/sungmatt.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Dev Ops, Administrative
 
-### Jean Doe
+### Lee Bing Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/starrylight99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/starrylight99)]
+[[portfolio](team/starrylight99.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI + Testing
+
+### Zhu XiHua
+
+<img src="images/xihuaz.png" width="200px">
+
+[[github](https://github.com/XihuaZ)]
+[[portfolio](team/xihuaz.md)]
+
+* Role: Developer
+* Responsibilities: UX + Code Quality

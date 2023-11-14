@@ -11,33 +11,36 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.department.Department;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the ManageHR data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    private final AddressBook addressBook;
+    private final ManageHr manageHr;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Employee> filteredPeople;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given manageHR and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyManageHr manageHr, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(manageHr, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with ManageHR: " + manageHr + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.manageHr = new ManageHr(manageHr);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPeople = new FilteredList<>(this.manageHr.getEmployeeList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ManageHr(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,67 +68,95 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getManageHrFilePath() {
+        return userPrefs.getManageHrFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setManageHrFilePath(Path manageHrFilePath) {
+        requireNonNull(manageHrFilePath);
+        userPrefs.setManageHrFilePath(manageHrFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ManageHR ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setManageHr(ReadOnlyManageHr manageHr) {
+        this.manageHr.resetData(manageHr);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyManageHr getManageHr() {
+        return manageHr;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasEmployee(Employee employee) {
+        requireNonNull(employee);
+        return manageHr.hasEmployee(employee);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public boolean hasEmployeeWithName(EmployeeName name) {
+        requireNonNull(name);
+        return manageHr.hasEmployeeWithName(name);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void deleteEmployee(Employee target) {
+        manageHr.removeEmployee(target);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void addEmployee(Employee employee) {
+        manageHr.addEmployee(employee);
+        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+    }
+
+    @Override
+    public void setEmployee(Employee target, Employee editedEmployee) throws CommandException {
+        requireAllNonNull(target, editedEmployee);
+
+        manageHr.setEmployee(target, editedEmployee);
+    }
+
+    @Override
+    public boolean hasDepartment(Department department) {
+        requireNonNull(department);
+        return manageHr.hasDepartment(department);
+    }
+
+    @Override
+    public boolean hasDepartmentWithName(DepartmentName name) {
+        requireNonNull(name);
+        return manageHr.hasDepartmentWithName(name);
+    }
+
+    @Override
+    public void deleteDepartment(Department target) {
+        manageHr.removeDepartment(target);
+    }
+
+    @Override
+    public void addDepartment(Department department) {
+        manageHr.addDepartment(department);
+    }
+
+    //=========== Filtered Employee List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
+     * {@code versionedManageHr}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Employee> getFilteredEmployeeList() {
+        return filteredPeople;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPeople.setPredicate(predicate);
     }
 
     @Override
@@ -140,9 +171,9 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return manageHr.equals(otherModelManager.manageHr)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPeople.equals(otherModelManager.filteredPeople);
     }
 
 }

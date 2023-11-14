@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User uses filter command;
+fork
+    if () then ([n/NAME present])
+        :Filter with given name;
+    else ([n/NAME absent])
+    endif
+fork again
+    if () then ([p/PHONE_NUMBER present])
+        :Filter with given phone number;
+    else ([p/PHONE_NUMBER absent])
+    endif
+fork again
+    if () then ([e/EMAIL present])
+        :Filter with given email;
+    else ([e/EMAIL absent])
+    endif
+fork again
+    if () then ([a/ADDRESS present])
+        :Filter with given address;
+    else ([a/ADDRESS absent])
+    endif
+fork again
+    if () then ([s/SALARY present])
+        :Filter with given salary;
+    else ([s/SALARY absent])
+    endif
+end fork
+
+:ManageHR UI shows filtered employees;
+stop
+
+@enduml

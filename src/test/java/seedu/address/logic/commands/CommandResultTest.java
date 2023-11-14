@@ -33,6 +33,17 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+
+
+        // Complicated help CommandResult
+        CommandResult commandResult2 = new CommandResult("feedback", true, false,
+                "Usage", "Example");
+
+        // different text, but same value -> returns true
+        assertTrue(commandResult2.equals(new CommandResult("feedback", true, false)));
+
+        // different other values -> returns false
+        assertFalse(commandResult2.equals(new CommandResult("feedback", false, false)));
     }
 
     @Test
@@ -50,6 +61,15 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+
+        // Complicated help CommandResult
+        CommandResult commandResult2 = new CommandResult("feedback", true, false, "Usage", "Example");
+
+        // same values -> returns same hashcode
+        assertEquals(commandResult2.hashCode(), new CommandResult("feedback", true, false).hashCode());
+
+        // different showHelp value -> returns different hashcode
+        assertNotEquals(commandResult2.hashCode(), new CommandResult("feedback", false, false).hashCode());
     }
 
     @Test
@@ -59,5 +79,43 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void cmdUsage() {
+        CommandResult commandResult = new CommandResult("feedback", true, false, "Usage 1", "Command 1");
+
+        // Same Usage -> return true
+        assertEquals(commandResult.getCmdUsage(), "Usage 1");
+
+        // Same object -> return true
+        assertEquals(commandResult.getCmdUsage(), commandResult.getCmdUsage());
+
+        CommandResult commandResult2 = new CommandResult("feedback", true, false, "Usage 2", "Command 2");
+
+        // Same Usage -> return true
+        assertEquals(commandResult2.getCmdUsage(), "Usage 2");
+
+        // Different command, different usage -> return false
+        assertNotEquals(commandResult.getCmdUsage(), commandResult2.getCmdUsage());
+    }
+
+    @Test
+    public void cmdExample() {
+        CommandResult commandResult = new CommandResult("feedback", true, false, "Usage 1", "Command 1");
+
+        // Same Usage -> return true
+        assertEquals(commandResult.getCmdExample(), "Command 1");
+
+        // Same object -> return true
+        assertEquals(commandResult.getCmdExample(), commandResult.getCmdExample());
+
+        CommandResult commandResult2 = new CommandResult("feedback", true, false, "Usage 2", "Command 2");
+
+        // Same Usage -> return true
+        assertEquals(commandResult2.getCmdExample(), "Command 2");
+
+        // Different command, different usage -> return false
+        assertNotEquals(commandResult.getCmdExample(), commandResult2.getCmdExample());
     }
 }
