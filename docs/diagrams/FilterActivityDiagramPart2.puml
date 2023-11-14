@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User uses filter command;
+fork
+    if () then ([l/LEAVE present])
+        :Filter with given leave;
+    else ([l/LEAVE absent])
+    endif
+fork again
+    if () then ([r/ROLE present])
+        :Filter with given role;
+    else ([r/ROLE absent])
+    endif
+fork again
+    if () then ([m/MANAGER_NAME present])
+        :Filter with given manager name;
+    else ([m/MANAGER_NAME absent])
+    endif
+fork again
+    if () then ([d/DEPARTMENT present])
+        :Filter with given department;
+    else ([d/DEPARTMENT absent])
+    endif
+end fork
+
+:ManageHR UI shows filtered employees;
+stop
+
+@enduml
