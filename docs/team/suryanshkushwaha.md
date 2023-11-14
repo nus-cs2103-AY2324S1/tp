@@ -20,6 +20,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Responsible for the qualify of code and ensuring that the code is up to the standards, in the created PRs.
+  * Releasing of the final Jar file (v1.4) for the project.
 
 
 * **Enhancements to existing features**:
@@ -38,5 +39,5 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-  * PRs reviewed (with non-trivial comments): [#93](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/93), [#99](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/99) 
+  * PRs reviewed (with non-trivial comments): [#93](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/93), [#99](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/99)
   * Had the role of a "Code Quality" in the team, and guided the team on how to write good code and how to maintain the code quality.
