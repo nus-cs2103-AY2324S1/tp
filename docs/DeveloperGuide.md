@@ -731,15 +731,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2a1. System informs user that there is no available timeslots.
     <br>
     <br>
-  
-**Use case: UC12 - Calculating monthly revenue**
-=======
-    - 2a1. System informs user that there is no available timeslots.
-      <br>
-      <br>
 
 **Use case: UC12 - Get monthly revenue**
->>>>>>> 5394edbcdb82587074178c06fd0066449503c778
 
 **MSS**
 
