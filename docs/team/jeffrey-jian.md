@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 
 ### Code Contribution
 
-* RepoSense link: [jeffrey-jian](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jeffrey-jian&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
+* RepoSense link: [jeffrey-jian](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jeffrey-jian)
 
 ### New Features
 
