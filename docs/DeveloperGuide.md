@@ -326,13 +326,6 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -373,8 +366,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `***`    | Beginner user     | There is a ‘help’ command to list functions/features | Know how to use the app                                        |
 | `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
 | `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -540,8 +531,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting an employee
 
 1. Deleting an employee while all people are being shown
@@ -556,8 +545,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Filtering
 
@@ -580,11 +567,3 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `filter s/alsjl`<br>
       Expected: Incorrect parameter. Not an integer. No employee is shown. Error details shown in the status message.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
