@@ -5,8 +5,7 @@ title: Ng Yin Joe's Project Portfolio Page
 
 ### Project: Pharmhub
 
-PharmHub - PharmHub is an order and patient tracking application for small remote pharmacist to implement an all-in-one application to improve precision and efficiency.
-The user interacts with it gusing a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+PharmHub is an order and patient tracking application for small remote pharmacist to implement an all-in-one application to improve precision and efficiency. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
@@ -16,7 +15,7 @@ Given below are my contributions to the project.
 
 * Justification: Allergies are critical health information that can significantly impact patient safety. By incorporating this attribute, pharmacists can proactively avoid prescribing medications that may cause adverse reactions.
 
-* Highlights: This enhancement affects existing commands and commands to be added in the future.
+* Highlights: None
 
 * Credits: None
 
@@ -27,25 +26,24 @@ Given below are my contributions to the project.
 
 * Justification: Patient safety is paramount in healthcare systems. By incorporating this allergy alert, we proactively prevent adverse reactions due to medication allergies. It ensures that healthcare providers make informed decisions while prescribing treatments.
 
-* Highlights: This enhancement affects existing commands and commands to be added in the future.
+* Highlights: None
 
 * Credits: None
 
 
-**New Feature**: Added the ability to find a person based on their name, phone number, email, tags, and allergies.
+**New Feature**: Added the ability to find a person based on their name, phone number, email, and allergies.
 
-* What it does: The enhanced person search allows users to find individuals based on various criteria, including their name, phone number, email address, associated tags, and allergies. Name search supports multiple keyword matches, tags and allergies support multiple exact matches, while email and phone require a single exact match. Users can quickly locate relevant patient records or personnel within the system. 
+* What it does: The enhanced person search allows users to find individuals based on various criteria, including their name, phone number, email address, and allergies. Name search supports multiple keyword matches, allergies support multiple exact(case-insensitive) matches, while email and phone require a single exact(case-sensitive) match. Users can quickly locate relevant patient records or personnel within the system. 
 
 * Justification: Efficient person search is essential for streamlined workflows in healthcare, administrative tasks, and other contexts. By expanding the search capabilities, we empower users to retrieve accurate information promptly.
 
-* Highlights: This enhancement affects existing commands and commands to be added in the future.
+* Highlights: None
 
 * Credits: None
 
-
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=joeng03&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
-**Testing**:
+**Testing for non-Assigned features**:
 
 * [Add tests for findo command](https://github.com/AY2324S1-CS2103T-W08-4/tp/pull/171)
 
@@ -65,15 +63,15 @@ User Guide:
 
 Developer Guide:
 
-* MSS (Main Success Scenario) for Adding Medication Order for a Patient.
+* Add MSS (Main Success Scenario) for Adding Medication Order for a Patient.
 
-* Design of Logic Component 
+* Add Design of Logic Component 
 
-* Implementation of Edit Person feature
+* Add Implementation of Edit Person feature
 
-* Manual Testing Guide for Person
+* Add Manual Testing Guide for Person
 
-* Glossary
+* Add Glossary
 
 **Community**:
 
