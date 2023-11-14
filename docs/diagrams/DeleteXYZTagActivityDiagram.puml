@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters DeleteXYZCommand with a specified index and \ntag to be added;
+floating note right
+    XYZ = Specialisation, MedicalCondition or Prescription
+end note
+:MediConnectParser parses the command;
+:DeleteXYZCommandParser parses the index specified and tag provided;
+if () then ([command is valid])
+  :New DeleteXYZCommand instance is created;
+  if () then ([XYZ object already exists])
+    :Parser throws exception;
+  else ([XYZ object does not exist])
+  :FilteredXYZList is updated with the new XYZ item;
+  endif
+else ([command is invalid])
+  :Parser throws exception;
+endif
+if () then ([no error thrown])
+  :Display updated FilteredXYZList;
+else ([error thrown])
+  :Display error message;
+endif
+stop
+
+@enduml

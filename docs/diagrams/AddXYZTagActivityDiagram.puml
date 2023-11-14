@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters AddXYZCommand with a specified index and \ntag to be added;
+floating note right
+    XYZ = MedicalCondition, Specialisation or Prescription
+    ABC = Appointment, Doctor or Patient
+end note
+:MediConnectParser parses the command;
+:AddXYZCommandParser parses the index specified and tag provided;
+if () then ([command is valid])
+  :XYZ item is added to ABC with the specified index;
+  :The existing ABC in database is replaced with edited ABC \nand FilteredABCList is updated;
+else ([command is invalid])
+  :Parser throws error message;
+endif
+if () then ([no error thrown])
+  :Display updated FilteredABCList;
+else ([error thrown])
+  :Display error message;
+endif
+stop
+
+@enduml

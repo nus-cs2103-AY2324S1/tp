@@ -1,0 +1,30 @@
+{
+  "patients": [{
+    "name": "Benson",
+    "phone": "94351253",
+    "nric": "S9348573F",
+    "remark": "",
+    "tags": []
+  }],
+  "doctors": [{
+    "name": "Alice Pauline",
+    "nric": "T0123456J",
+    "remark": "",
+    "tags": []
+  }],
+  "appointments": [ {
+    "doctorNric" : "T0123456J",
+    "patientNric" : "S9348573F",
+    "startTime" : "2023-12-01 07:30",
+    "endTime" : "2023-12-01 08:30",
+    "remark": "",
+    "tags": []
+  }, {
+    "doctorNric" : "T0123456J",
+    "patientNric" : "S9348573F",
+    "startTime" : "2023-12-01 07:30",
+    "endTime" : "2023-12-01 08:30",
+    "remark": "",
+    "tags": []
+  } ]
+}
