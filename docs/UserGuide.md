@@ -694,7 +694,7 @@ You may want to view all valid instrument and genre tags for musicians and bands
 
 The instrument and genre tags can be added/edited for a musician using the [add](#add-musician-add) and [edit](#edit-musician-edit) command with prefix `i/` and `g/` respectively.
 
-The genre tags can also be added/edited for a band using the [addb](#create-band-addb) and [editb](#edit-band-editb) command with prefix `g/`. Currently, band does not support instrument tags.
+The genre tags can also be added/edited for a band using the [addb](#create-band-addb) and [editb](#edit-a-band-editb) command with prefix `g/`. Currently, band does not support instrument tags.
 
 </div>
 
@@ -724,7 +724,7 @@ This command is irreversible, and all your data will be lost. Please use this co
 
 [Back To ToC](#table-of-contents)
 
-#### Exit app : `exit`
+#### Exit app: `exit`
 
 Exits the application.
 
@@ -761,12 +761,12 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 
 ### Musician Command summary
 
-| Action                                        | Format                                                                                   | Examples                                                                                                        |
-|-----------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **[Add Musician](#add-musician-add)**         | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
-| **[Delete Musician](delete-musician-delete)** | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
-| **[Edit Musician](#edit-musician-edit)**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
-| **[Find Musicians](#find-musicians-find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
+| Action                                         | Format                                                                                   | Examples                                                                                                        |
+|------------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **[Add Musician](#add-musician-add)**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
+| **[Delete Musician](#delete-musician-delete)** | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
+| **[Edit Musician](#edit-musician-edit)**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
+| **[Find Musicians](#find-musicians-find)**     | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
 
 [Back To ToC](#table-of-contents)
 
@@ -835,8 +835,6 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Troubleshooting
 
