@@ -6,9 +6,11 @@
 
 # Class Manager 2023 Developer Guide
 
-<!-- * Table of Contents -->
+<!-- * Table of Contents Remove after PDF conversion-->
+# Table of Contents
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -341,7 +343,7 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 
 #### Valid JSON format
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+<img alt="sample_contents" src="images/sample-contents.png" width="650"> <br><br>
 
 #### Parsing user input
 
