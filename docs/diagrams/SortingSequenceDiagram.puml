@@ -24,7 +24,7 @@ activate MainWindow
 MainWindow -> Logic : execute(commandText)
 activate Logic
 
-ref over Logic : Parse sort Command
+ref over Logic, Command : Parse sort command
 
 Logic -> Command : execute(model)
 activate Command
