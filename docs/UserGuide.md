@@ -146,24 +146,24 @@ The **GUI** has 6 notable sections:
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are parameters that follow a prefix.<br>
+  e.g. in `add n/NAME`, `n/` is the name prefix while `NAME` is a parameter. You need to provide the name parameter and the command can become `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times, including zero times.<br>
+* Items with `…`​ after them can be used zero or more times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME c/CLASS_NUMBER`, `c/CLASS_NUMBER n/NAME` is also acceptable.
+* Parameters can be written in any order.<br>
+  e.g. if the command you execute has parameters `n/NAME c/CLASS_NUMBER`, `c/CLASS_NUMBER n/NAME` is also treated as the same parameters.
 
 * Extraneous parameters for commands that **do not** take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command you execute is `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for **commands that take in parameters** will invalidate the command. <br>
-  e.g. if the input command is `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, the command will be invalid. <br>
-  Please **refrain** from using prefixes as input for another prefix.
+* Extraneous parameters for commands that **do** take in parameters will invalidate the command.<br>
+  e.g. if the input command is `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, the command will be invalid.<br>
+  Please **refrain** from using prefixes as parameters for another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line breaks may be omitted when copied over to the application.
 
@@ -171,8 +171,11 @@ The **GUI** has 6 notable sections:
 
 ## Class Number
 
-* Class Number is case-sensitive and must begin with a capital "T", followed by any number of characters. Class Numbers must not be blank.
-* Class Number is stored verbatim based on your input, with the case being preserved. 
+Class Number refers to the unique alphanumeric string used to identify tutorial sessions in NUS. In **Class Manager 2023**:
+
+* Class Number is case-sensitive and must begin with the capital letter "T", followed by any number of characters. 
+* Class Numbers must not be blank.
+* Class Number is stored verbatim based on your input, with the case being preserved.
 * Here are some valid examples of Class Numbers:
     - `T11`
     - `TG11`
@@ -180,14 +183,20 @@ The **GUI** has 6 notable sections:
 
 ## Student Number
 
-Student Number refers to the unique matriculation number of a NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Numbers must not be blank.
+Student Number refers to the unique matriculation number of a NUS student. **Class Manager 2023** uniquely identifies each student in most commands using the Student Number. In **Class Manager 2023**:
 
-**Class Manager 2023** uniquely identifies each student in most commands using the Student Number. Student Number is not case-sensitive, e.g. Student Number `A123V` and `A123v` refer to the same student.
+* Student Number must begin with the capital letter "A", followed by 1 or more consecutive digits, and end with a single alphabetical character. 
+* Student Number must not be blank.
+* The last alphabetical character of Student Number is automatically converted to uppercase when stored in **Class Manager 2023**.
+* Student Number is not case-sensitive, e.g. Student Number `A123V` and `A123v` refer to the same student.
+* Here are some valid examples of Class Numbers:
+    - `A0123456X`
+    - `A32g (Stored as A32G)`
 
 ## Data visualisation
 
 Data visualisation of student's Class Information is automatically generated in the Data Visualisation section of the GUI (within the card of a student in the Student List section).
-* There will be 3 bar graphs, each representing the student's average grades, attendance and class participation percentages.
+* There will be 3 bar graphs, each representing the student's average grades, attendance and class participation percentages respectively.
 * This provides a quick overview of the student's performance in the module and allows for easy comparison between students.
 
 ## Command navigation
@@ -196,7 +205,7 @@ Data visualisation of student's Class Information is automatically generated in 
 
 ## Saving your data
 
-**Class Manager 2023** data is automatically saved on your computer after any command changes the data. There is no need to save manually.
+**Class Manager 2023** data is automatically saved on your computer after any command modifies the data. There is no need to save manually.
 
 ## Editing the data file
 
@@ -204,7 +213,8 @@ Data visualisation of student's Class Information is automatically generated in 
 
 <img alt="sample_contents" src="images/sample-contents.png" width="750"> <br>
 
-The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command.
+Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command to ensure your data file matches the configuration of **Class Manager 2023**. The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. In the image above, the data file can only be loaded if **Class Manager 2023** has been configured to have 10 tutorials and 4 assignments, as deduced from the size of the relevant arrays. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. 
+
 
 <box type="warning" seamless>
 
