@@ -1101,7 +1101,7 @@ Testers are expected to do more *exploratory* testing.
 
 ### Delete a student
 
-1. Delete a student from Class Manager.
+1. Delete an existing student from Class Manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student are shown in the Result Display Box.
@@ -1114,7 +1114,7 @@ Testers are expected to do more *exploratory* testing.
    
 ### Edit a student
 
-1. Edit a student's details in Class Manager.
+1. Edit an existing student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
@@ -1208,7 +1208,7 @@ Testers are expected to do more *exploratory* testing.
 
 </box>
 
-1. Mark a student as present in Class Manager.
+1. Mark an existing student as present in Class Manager.
 
    1. Test case: `present s/STUDENT_NUMBER tut/1`<br>
       Expected: The student with STUDENT_NUMBER is marked as present for the first tutorial.
