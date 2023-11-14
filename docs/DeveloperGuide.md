@@ -710,6 +710,7 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 2. CoordiMate shows a list of persons.
 3. User requests to add tag(s) to a specific person in the list by index.
 4. CoordiMate edits the person to include the specified tag(s).
+5. CoordiMate informs the user of the added tag(s).
 
    Use case ends.
 
@@ -729,7 +730,14 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
   * 3b1. CoordiMate shows an error message and prompts the user to enter valid tag(s).
 
-    Use case resumes from step 3.
+      Use case resumes from step 3.
+
+* 3c. Some given tag(s) already exist in the person.
+
+  * 3c1. CoordiMate only adds the tag(s) that do not exist.
+  * 3c2. CoordiMate informs the user of the addedtag(s), as well as the tag(s) that already exist.
+
+      Use case resumes from step 3.
 
 ---
 
@@ -956,6 +964,7 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 2. CoordiMate shows a list of tasks.
 3. User requests to add tag(s) to a specific task in the list by index.
 4. CoordiMate edits the task to include the specified tag(s).
+5. CoordiMate informs the user of the added tag(s).
 
    Use case ends.
 
@@ -974,6 +983,13 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 * 3b. The given tag(s) are invalid.
 
   * 3b1. CoordiMate shows an error message and prompts the user to enter valid tag(s).
+
+      Use case resumes from step 3.
+
+* 3c. Some given tag(s) already exist in the person.
+
+  * 3c1. CoordiMate only adds the tag(s) that do not exist.
+  * 3c2. CoordiMate informs the user of the addedtag(s), as well as the tag(s) that already exist.
 
       Use case resumes from step 3.
 
@@ -1066,6 +1082,10 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **Extensions**
 
+* 2a. The task list is empty.
+
+      Use case ends.
+
 * 3a. Some given tag(s) do not exist in the person.
 
    * 3a1. CoordiMate only deletes the tag(s) that exist.
@@ -1094,6 +1114,10 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
    Use case ends.
 
 **Extensions**
+
+* 2a. The task list is empty.
+
+      Use case ends.
 
 * 3a. Some given tag(s) do not exist in the task.
 
