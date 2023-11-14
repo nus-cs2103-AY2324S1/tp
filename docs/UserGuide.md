@@ -17,6 +17,8 @@ encounter in your university life.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 * Table of Contents
@@ -73,6 +75,8 @@ If you want a detailed look into each of the features that CampusCompanion has, 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Getting Started
 
 1. Ensure you have Java `11` or above installed in your Computer. [Click here](#checking-java-version) to learn how to check your java version 
@@ -123,15 +127,14 @@ Here are some descriptions of the words we use throughout the User Guide:
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Understanding the Graphical User Interface (GUI)
 
 ### Quick Orientation
 
-<div markdown="block" class="alert alert-info">
-
 CampusCompanion's GUI has 2 main views, `Assignments` and `Internships`.
-
-</div>
 
 #### Assignments View
 
@@ -152,6 +155,9 @@ Here is a quick summary of each GUI component within CampusCompanion's assignmen
 | Calendar Navigation Buttons | Used to change the month being shown on the calendar.                                                                                                                                                                                                                                    |
 | Footer                      | Shows the location of the saved data. This file can be used to move data to another computer.                                                                                                                                                                                            |
 
+
+<div style="page-break-after: always;"></div>
+
 #### Internships View
 
 ![img.png](images/LabelledInternshipGUI.png)
@@ -164,6 +170,8 @@ Here is a quick summary of the different GUI components within CampusCompanion's
 | Internship Task List | Shows the information of individual ``internship task`` for an ``internship role`` that you're applying for. For example: `live interview for Google Backend engineer` can be an internship task |
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Notes about the GUI
 
@@ -181,6 +189,9 @@ For example, clicking:
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Command format
 
 | Format                                                                             | Explanation                                                                  | Examples                                                                                            |
@@ -195,80 +206,92 @@ For example, clicking:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## CampusCompanion Tutorial (for new users)
 
 This is a tutorial for new CampusCompanion users. This tutorial will provide you step-by-step instructions for how to use each
 command for both assignments and internships. 
 
-1. Launch CampusCompanion. You may refer to the instructions [here](#getting-started).
 
-2. Let's change the view to see assignments first. Enter the command `list-a`
-![NewUserTutListA.png](images%2FNewUserTutListA.png)
+**Step 1:** Launch CampusCompanion. You may refer to the instructions [here](#getting-started). <br>
 
-3. Let's try **adding an assignment** to CampusCompanion. Enter the command
-`add-a n/CC tutorial 1 e/2023-11-29`
-![NewUserTutAdd1.png](images%2FNewUserTutAdd1.png)
+**Step 2:** Let's change the view to see assignments first. Enter the command `list-a` <br> 
+<img src="images/NewUserTutListA.png" width="500" /> <br>
+<div style="page-break-after: always;"></div>
 
-4. Add a few more assignments. Try out filling optional parameters as well, eg:
- - `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
- - `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional`
-   - Note: On adding assignments, they will automatically be sorted by their deadlines.
-   The assignment due earliest will be first in the assignments list, which can be viewed using `list-a`
+**Step 3:** Let's try **adding an assignment** to CampusCompanion. Enter the command
+`add-a n/CC tutorial 1 e/2023-11-29` <br> 
+<img src="images/NewUserTutAdd1.png" width="500" /> <br>
 
-   ![NewUserTutAddMoreAssgn.png](images%2FNewUserTutAddMoreAssgn.png)
+**Step 4:** Add a few more assignments. Try out filling optional parameters as well, eg:
+- `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
+- `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional`
+- Note: On adding assignments, they will automatically be sorted by their deadlines. <br> 
+<img src="images/NewUserTutAddMoreAssgn.png" width="470" /> <br> 
+<div style="page-break-after: always;"></div>
 
-5. Let us try editing the description of `CC tutorial 1` to say `nice descriptive description!`.
-In the example above, `CC tutorial 1` is in index 2, so we do `edit-a i/2 d/nice descriptive description!`
-![NewUserTutEdit.png](images%2FNewUserTutEdit.png)
+**Step 5:** Let us try editing the description of `CC tutorial 1` to say `nice descriptive description!`.
+In the example above, `CC tutorial 1` is in index 2, so we do `edit-a i/2 d/nice descriptive description!` <br> 
+<img src="images/NewUserTutEdit.png" width="500" /> <br>
 
-6. We are done with `CC tutorial 1`! Let's now mark it as complete. First, let's try using `find-a` to filter and narrow
+**Step 6:** We are done with `CC tutorial 1`! Let's now mark it as complete. First, let's try using `find-a` to filter and narrow
 down the list. We can do `find-a tutorial` to filter the assignments list to show only assignments that
-contain `tutorial`
-![NewUserTutFind.png](images%2FNewUserTutFind.png)
+contain `tutorial` <br> 
+<img src="images/NewUserTutFind.png" width="500" /> <br> 
+<div style="page-break-after: always;"></div>
 
-7. Then, we use the index shown in the list (in this case, `CC tutorial 1` is at index 1) and do `mark-a 1` to mark the assignment as completed
-![NewUserTutMark.png](images%2FNewUserTutMark.png)
+**Step 7:** Then, we use the index shown in the list (in this case, `CC tutorial 1` is at index 1) and do `mark-a 1` to mark the assignment as completed <br> 
+<img src="images/NewUserTutMark.png" width="500" /> <br>
 
-8. To see all our assignments again, let's do `list-a`
-![NewUserTutList.png](images%2FNewUserTutList.png)
+**Step 8:** To see all our assignments again, let's do `list-a` <br> 
+<img src="images/NewUserTutList.png" width="500" /> <br> 
+<div style="page-break-after: always;"></div>
 
-9. Lastly for our assignments, let's delete our `CC tutorial 1` as we no longer want to track it.
-With reference the picture above, we will do `delete-a 2`
-![NewUserTutDelete.png](images%2FNewUserTutDelete.png)
+**Step 9:** Lastly for our assignments, let's delete our `CC tutorial 1` as we no longer want to track it.
+With reference the picture above, we will do `delete-a 2` <br> 
+<img src="images/NewUserTutDelete.png" width="500" /> <br>
 
-10. Now, let's change the view to see internships. Enter the command `list-i`
-![NewUserTutListI.png](images%2FNewUserTutListI.png)
+**Step 10:**  Now, let's change the view to see internships. Enter the command `list-i` <br> 
+<img src="images/NewUserTutListI.png" width="500" /> <br> 
+<div style="page-break-after: always;"></div>
 
-11. Similar to assignments, we can add internship roles (under applications) and tasks! Let's add a few roles now using the command `add-i-role`
- - `add-i-role n/Google r/SWE c/Summer 2024`
- - `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida`
-![NewUserTutAddIRoles.png](images%2FNewUserTutAddIRoles.png)
+**Step 11:** Similar to assignments, we can add internship roles (under applications) and tasks! Let's add a few roles now using the command `add-i-role`
+- `add-i-role n/Google r/SWE c/Summer 2024`
+- `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida` <br> 
+<img src="images/NewUserTutAddIRoles.png" width="500" /> <br>
+<div style="page-break-after: always;"></div>
 
-12. Now, let's add in some tasks relating to our roles, with `add-i-task`
- - `add-i-task n/OA i/1  e/2023-11-30 11:30` 
- - `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
- - `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up`
-![NewUserTutAddITasks.png](images%2FNewUserTutAddITasks.png)
+**Step 12:** Now, let's add in some tasks relating to our roles, with `add-i-task`
+    
+- `add-i-task n/OA i/1  e/2023-11-30 11:30`
+- `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
+- `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up` <br> 
+<img src="images/NewUserTutAddITasks.png" width="500" /> <br> 
+<div style="page-break-after: always;"></div>
 
-13. We can also mark tasks as complete with `mark-i` and edit tasks and roles using `edit-i-task` and `edit-i-role` respectively. Let's try!
- - `mark-i 2`
- - `edit-i-task i/1 o/awaiting`
- - `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park`
-![NewUserTutMarkEditI.png](images%2FNewUserTutMarkEditI.png)
+**Step 13:** We can also mark tasks as complete with `mark-i` and edit tasks and roles using `edit-i-task` and `edit-i-role` respectively. Let's try!
+- `mark-i 2`
+- `edit-i-task i/1 o/awaiting`
+- `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park` <br> 
+<img src="images/NewUserTutMarkEditI.png" width="500" /> <br>
 
-14. Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1`
-![NewUserTutFindDeleteI.png](images%2FNewUserTutFindDeleteI.png)
+**Step 14:** Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1` <br> 
+<img src="images/NewUserTutFindDeleteI.png" width="500" /> <br>
 
-15. We can view our internships list again with `list-i`
-![NewUserTutLastListI.png](images%2FNewUserTutLastListI.png)
+**Step 15:** We can view our internships list again with `list-i` <br> 
+<img src="images/NewUserTutLastListI.png" width="500" />
 
-16. Congratulations! You are now ready to use CampusCompanion.
+**Step 16:** Congratulations! You are now ready to use CampusCompanion.
 
 To view all our features, you may visit out [features section](#features).
 
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 ## Assignment Features
@@ -288,6 +311,7 @@ This command also changes the view to assignments tab (if the view is not curren
 - **In order to use any of the assignment related commands below, you must be in the assignment view**. In particular, you must use
   list-a to switch to assignment view. This is to prevent you from performing commands while you are not looking at the correct list.
 - The start time and end timing is optional. If not provided, start time will default to 00:00 and end time will default to 23:59.
+
 </div>
 
 **Examples:**
@@ -306,6 +330,9 @@ This command also changes the view to assignments tab (if the view is not curren
 - If you want to filter your current assignments by date, and view the assignments only within a specified time frame.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an assignment
 
@@ -348,6 +375,8 @@ If not provided, timing will default to 23:59.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an assignment
 
 ```edit-a i/INDEX d/DESCRIPTION```
@@ -374,6 +403,8 @@ is at **index** 1, use `edit-a i/1 d/Create test cases` to edit its description 
 - If the requirements of the assignment has changed since you last added it.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an assignment
 
@@ -414,6 +445,8 @@ For information on which details can be edited, [refer here](#editing-an-assignm
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Marking an assignment as complete
 
 ```mark-a INDEX```
@@ -439,6 +472,8 @@ Assuming the assignment to mark is at index 1, you can use `mark-a 1` to mark it
 **When you might use it:**
 - When you complete an assignment, and you want to mark it.
 - When you wrongly unmark a completed assignment, and want to mark it again.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an assignment as incomplete
 
@@ -471,6 +506,9 @@ regarding the assignment and want to continue working on it.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+
+<div style="page-break-after: always;"></div>
+
 ### Finding an assignment by keywords
 
 ```find-a KEYWORD```
@@ -500,6 +538,8 @@ are all equivalent and will match with this assignment
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Internship Features
 
 ### Common internship features
@@ -526,6 +566,8 @@ This command also changes the view to internships tab (if the view is not curren
 - If you want to switch from assignment view to internship view. 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Internship Role 
 
@@ -564,6 +606,8 @@ To add an internship role into CampusCompanion.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Editing an internship role
 
 ```edit-i-role i/INDEX [c/CYCLE] [d/DESCRIPTION] [p/PAY] [o/OUTCOME] [l/LOCATION]```
@@ -594,6 +638,8 @@ is at **index** 1, use `edit-i-role i/1 o/rejected p/1000` to edit its outcome t
 - If you imported old internship application information, and want to update the current outcome of that application.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting an internship role 
 
@@ -634,6 +680,8 @@ all its associated tasks using ``add-i-task``.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Finding an internship role by keywords
 
 ```find-i-role KEYWORD```
@@ -662,6 +710,8 @@ for example, if you had an internship role with the name "TikTok", using the com
 - If you want to find information about specific internship role, but you don't remember the company's exact name.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Internship Task
 
@@ -696,6 +746,8 @@ To add an internship task, associated to an internship role into CampusCompanion
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Editing an internship task
 
 ```edit-i-task i/INDEX o/OUTCOME```
@@ -715,6 +767,8 @@ is at **index** 1, use `edit-i-task i/1 o/rejected` to edit its outcome to rejec
 - If you imported old internship application information, and want to update the current outcome of that application.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting an internship task
 
@@ -751,6 +805,8 @@ To view internship task parameter information, click [here](#internship-task-par
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Marking an internship task as complete
 
 ```mark-i INDEX```
@@ -775,6 +831,10 @@ To mark a specific internship task in CampusCompanion as complete.
 **When you might use it:**
 - When you complete an internship task, and you want to mark it.
 - When you wrongly unmark a completed internship task, and want to mark it again.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Marking an internship task as incomplete
 
@@ -801,6 +861,8 @@ To mark a specific internship task in CampusCompanion as incomplete.
 - When you wrongly add an internship task with the status as complete.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Finding an internship task by keywords
 
@@ -829,6 +891,8 @@ will match with this internship task.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## General Commands
 
 ### Exiting the program
@@ -851,6 +915,8 @@ will match with this internship task.
 - If you are unsure of what are the commands that are available to you in CampusCompanion. 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Data Related Features
 
@@ -879,6 +945,9 @@ application, and certain information within the application may not be able to l
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 This section provides a summary of the **commands**. 
@@ -908,6 +977,8 @@ or [feature](#features) section, for detailed information about each feature.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Internship Commands
 
 #### Common Internship Commands
@@ -929,6 +1000,8 @@ or [feature](#features) section, for detailed information about each feature.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Internship Task Commands
 
 | Command       | What it does                                                                            |
@@ -943,6 +1016,9 @@ or [feature](#features) section, for detailed information about each feature.
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Parameter Summary
 
 [Scroll back to Table of Contents](#table-of-contents)
@@ -1011,6 +1087,8 @@ The information below specifies parameter description, constraints and usage thr
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 ### Launching CampusCompanion
@@ -1026,18 +1104,17 @@ Method 1: For users familiar with the command prompt
 
 Method 2: For users that wish to create a script to launch CampusCompanion 
 1. Create a new text file
-2. Copy and paste the following into the text file:
-```
-java -jar [JAR file location]/CampusCompanion.jar
-```
-3. Save the text file as `CampusCompanion.bat` (Windows) or `CampusCompanion.sh` (MacOS/Linux)
+2. Copy and paste the following into the text file: <br> ``` java -jar [JAR file location]/campusCompanion.jar``` <br>
+3. Save the text file as `campusCompanion.bat` (Windows) or `campusCompanion.sh` (MacOS/Linux)
 4. Change the admin settings of the script to allow it to run as a program:
-  1. Windows: Right-click on the script and select `Properties`. Under `General`, check the box that says `Allow this file to run as a program`.
-  2. MacOS/Linux: Open the terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press enter. (`chmod +x` changes permissions of the script to allow it to be executed.)
+   1. Windows: Right-click on the script and select `Properties`. Under `General`, check the box that says `Allow this file to run as a program`.
+   2. MacOS/Linux: Open the terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press enter. (`chmod +x` changes permissions of the script to allow it to be executed.)
 5. Double-click on the script to launch CampusCompanion
 6. CampusCompanion should launch
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Checking Java version
 **Q**: How can I check my Java version?<br>
