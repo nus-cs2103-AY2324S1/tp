@@ -104,7 +104,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`UI.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/UI.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <p style="text-align: center;">
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
@@ -913,7 +913,7 @@ testers are expected to do more *exploratory* testing.
     * The response box is to display responses for command execution, to indicate success or errors.
     * The left side has the list panel, which shows different list types (student, schedule, tasks).
     * The right side has the details panel, which shows details of any specific item in the list.
-      ![UI](images/UI.png)
+      ![Ui](images/Ui.png)
 
 ### Viewing ___STUDENTS list___, ___SCHEDULE list___ and  ___TASKS list___
 
