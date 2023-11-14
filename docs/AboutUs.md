@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page 
 title: About Us
 ---
 
@@ -25,7 +25,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jonyeokj.png" width="200px">
 
-[[homepage](https://github.com/jonyeokj)]
 [[github](https://github.com/jonyeokj)]
 [[portfolio](team/jonyeokj.md)]
 
