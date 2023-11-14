@@ -16,22 +16,19 @@ I implemented the UI [#114](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/11
 `list` [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181),
 `viewMember` [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181),
 `viewEvent` [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181).
-
-Details of some non-trivial commands are stated below.
+Relevant tests were added for the commands. Details of some non-trivial commands are stated below.
 * **Designed a new UI for CCACommander** [#114](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/114)
   * **Feature details:** Changing the UI layout and color theme of application.
   * **Justifications:** The change in design is needed because CCACommander's core is in tracking both members and events,
     hence the two respective columns must be presented. With the new design, users are able to see both members and events simultaneously.
 
 * **View Members of Event Feature** [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181)
-  * **Feature details:** Allows the user of CCACommander to view all the members attending an event.
+  * **Feature details:** Allows users to view all the members attending an event.
   * **Justifications:** Gives the user the ability to quickly see the members participation of an event and the contribution of each member (hours and remark).
 
 * **View Events of Member Feature** [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181)
-  * **Feature details:** Allows the user of CCACommander to view all the events a member is involved in.
+  * **Feature details:** Allows users to view all the events a member is involved in.
   * **Justifications:** Gives the user the ability to quickly see the list of events of a member and their contribution in each event (hours and remark).
-
-Relevant tests were added for these commands.
 
 ### Enhancements to existing features:
 * **Fix `editMember` and `editEvent` commands logic to also update enrolment:** [#182](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/182) [#192](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/192)
@@ -45,12 +42,12 @@ Relevant tests were added for these commands.
 
 * **Fix `editEnrolment` command** [#265](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/265)
   * **Enhancement details:** Previously, the edited enrolment details (hours, remarks) are correctly stored but not updated to UI automatically,
-    this causes confusion to users. Hence, enhancement were made so that the hours and remarks fields is reflected in UI when edited via `editEnrolment` command.
+    this causes confusion to users. Hence, enhancement were made so that the changes is reflected in UI.
 
 ### Documentation:
 * **User Guide**
-  * Updated the following sections: Introduction, About, Quick Start, Navigate UI, Command History, Notes for command format.
-  * Added command details and summaries for the following commands: `enrol`, `unenrol` for draft UG.
+  * Updated the sections: Introduction, About, Quick Start, Navigate UI, Command History, Notes for command format.
+  * Added command details and summaries for `enrol`, `unenrol` commands for draft UG.
 * **Developer Guide**
   * Added diagram for updated UI, Member and Event class, updated general model class diagram.
   * Added alternative design consideration for Member and Event sections.
