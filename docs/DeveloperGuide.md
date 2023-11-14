@@ -235,8 +235,6 @@ The `Storage` component,
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
