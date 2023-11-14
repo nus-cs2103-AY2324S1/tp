@@ -5,14 +5,19 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.event.Event;
+import seedu.address.model.volunteer.Volunteer;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Volunteer> PREDICATE_SHOW_ALL_VOLUNTEERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -34,54 +39,151 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    //=========== Event Storage ================================================================================
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' event storage file path.
      */
-    Path getAddressBookFilePath();
+    Path getEventStorageFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' event storage file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setEventStorageFilePath(Path eventStorageFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces event storage data with the data in {@code eventStorage}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setEventStorage(ReadOnlyEventStorage eventStorage);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the EventStorage */
+    ReadOnlyEventStorage getEventStorage();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an event with the same identity as {@code event} exists in the event storage.
      */
-    boolean hasPerson(Person person);
+    boolean hasEvent(Event event);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given event.
+     * The event must exist in the event storage.
      */
-    void deletePerson(Person target);
+    void deleteEvent(Event target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given event, and rearranges the event list in ascending order, based on their date and time
+     * {@code event} must not already exist in the event storage.
      */
-    void addPerson(Person person);
+    void addEvent(Event event);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in the event storage.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the event storage.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setEvent(Event target, Event editedEvent);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredEventList(Predicate<Event> predicate);
+
+    /** Returns an unmodifiable view of the event to display in the event window */
+    ObservableList<Event> getEventToShowList();
+
+    /**
+     * Updates the filter of the eventToShow list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateEventToShowList(Predicate<Event> eventPredicate);
+
+    //=========== Volunteer Storage ================================================================================
+    /**
+     * Returns the user prefs' volunteer storage file path.
+     */
+    Path getVolunteerStorageFilePath();
+
+    /**
+     * Sets the user prefs' volunteer storage file path.
+     */
+    void setVolunteerStorageFilePath(Path volunteerStorageFilePath);
+
+    /**
+     * Replaces volunteer storage data with the data in {@code volunteerStorage}.
+     */
+    void setVolunteerStorage(ReadOnlyVolunteerStorage volunteerStorage);
+
+    /** Returns the VolunteerStorage */
+    ReadOnlyVolunteerStorage getVolunteerStorage();
+
+    /**
+     * Returns true if a volunteer with the same identity as {@code volunteer} exists in the volunteer storage.
+     */
+    boolean hasVolunteer(Volunteer volunteer);
+
+    /**
+     * Deletes the given volunteer.
+     * The volunteer must exist in the volunteer storage.
+     */
+    void deleteVolunteer(Volunteer target);
+
+    /**
+     * Adds the given volunteer.
+     * {@code volunteer} must not already exist in the volunteer storage.
+     */
+    void addVolunteer(Volunteer volunteer);
+
+    /**
+     * Replaces the given volunteer {@code target} with {@code editedVolunteer}.
+     * {@code target} must exist in the volunteer storage.
+     * The volunteer identity of {@code editedVolunteer} must not be the same as another existing volunteer
+     * in the volunteer storage.
+     */
+    void setVolunteer(Volunteer target, Volunteer editedVolunteer);
+
+    /** Returns an unmodifiable view of the filtered volunteer list */
+    ObservableList<Volunteer> getFilteredVolunteerList();
+
+    /**
+     * Updates the filter of the filtered volunteer list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredVolunteerList(Predicate<Volunteer> predicate);
+    /**
+     * Points the Event and Volunteer state to the previous state.
+     */
+    void undoBothStorages() throws CommandException;
+    void redoBothStorages() throws CommandException;
+
+    /**
+     * If there is a change to the Event and Volunteer state, then save this state and point to it.
+     * @param readOnlyEventStorage The new state of Events.
+     * @param readOnlyVolunteerStorage The new state of Volunteers.
+     */
+    void commitToBothVersionedStorages(ReadOnlyEventStorage readOnlyEventStorage,
+                                       ReadOnlyVolunteerStorage readOnlyVolunteerStorage);
+
+    /** Returns an unmodifiable view of the versionedVolunteerStorage */
+    VersionedVolunteerStorage getVersionedVolunteerStorage();
+    /** Returns an unmodifiable view of the versionedEventStorage */
+    VersionedEventStorage getVersionedEventStorage();
+
+    // Functionality to change Role quantities after an edit is done to Volunteer or Event
+
+    /**
+     * Updates all Role quantities for every Event within the model using updateEventRoleQuantities.
+     */
+    void updateAllEventRoleQuantities();
+
+    /**
+     * Updates the event's role quantities based on the volunteers currently in the model's volunteer list, returning
+     * it as a new Event object.
+     * @param event The event to get the set of roles from.
+     * @return The event with current role quantities updated.
+     */
+    Event updateEventRoleQuantities(Event event);
+
 }

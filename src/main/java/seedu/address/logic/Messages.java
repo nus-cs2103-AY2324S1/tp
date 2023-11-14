@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
+import seedu.address.model.volunteer.Volunteer;
 
 /**
  * Container for user visible messages.
@@ -14,8 +15,12 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_DATE_PARAMS =
+            "Invalid date/time parameters: start date/time should be before/same as end date/time!";
+    public static final String MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX = "The volunteer index provided is invalid";
+    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
+    public static final String MESSAGE_VOLUNTEERS_LISTED_OVERVIEW = "%1$d volunteers listed!";
+    public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -32,20 +37,49 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code event} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Event event) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        builder.append(event.getEventName())
+                .append("; Roles: ");
+
+        event.getRoles().forEach(builder::append);
+
+        builder.append("; From ")
+                .append(event.getStartDate())
+                .append(" to ")
+                .append(event.getEndDate())
+                .append("; Location: ")
+                .append(event.getLocation())
+                .append("; Description: ")
+                .append(event.getDescription())
+                .append("; Materials and Logistics needed: ");
+
+        event.getMaterials().forEach(builder::append);
+
+        builder.append("; Budget: ")
+                .append(event.getBudget());
+        builder.append("; Assigned Volunteers: ");
+        event.getAssignedVolunteers().forEach(builder::append);
+
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code volunteer} for display to the user.
+     */
+    public static String format(Volunteer volunteer) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(volunteer.getName())
+                .append("\nPhone: ")
+                .append(volunteer.getPhone())
+                .append("\nEmail: ")
+                .append(volunteer.getEmail())
+                .append("\nSkills: ");
+        volunteer.getSkills().forEach(builder::append);
+        builder.append("\nAssigned Events: ");
+        volunteer.getAssignedEvents().forEach(builder::append);
+        return builder.toString();
+    }
 }

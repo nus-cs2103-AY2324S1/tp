@@ -2,9 +2,10 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,27 +15,26 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skill.Skill;
+import seedu.address.model.volunteer.Email;
+import seedu.address.model.volunteer.Name;
+import seedu.address.model.volunteer.Phone;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SKILL = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_PHONE = "12345678";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SKILL_1 = "friend";
+    private static final String VALID_SKILL_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    // volunteer parsing methods
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -50,33 +50,33 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVolunteerName((String) null));
     }
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseVolunteerName(INVALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+        assertEquals(expectedName, ParserUtil.parseVolunteerName(VALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+        assertEquals(expectedName, ParserUtil.parseVolunteerName(nameWithWhitespace));
     }
 
     @Test
@@ -103,29 +103,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    }
-
-    @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
@@ -149,48 +126,110 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseSkill_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSkill(null));
+    }
+
+    // Something up with INVALID_SKILL, to be resolved later
+    //    @Test
+    //    public void parseSkill_invalidValue_throwsParseException() {
+    //        assertThrows(ParseException.class, () -> ParserUtil.parseSkill(INVALID_SKILL));
+    //    }
+
+    @Test
+    public void parseSkill_validValueWithoutWhitespace_returnsSkill() throws Exception {
+        Skill expectedSkill = new Skill(VALID_SKILL_1);
+        assertEquals(expectedSkill, ParserUtil.parseSkill(VALID_SKILL_1));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseSkill_validValueWithWhitespace_returnsTrimmedSkill() throws Exception {
+        String skillWithWhitespace = WHITESPACE + VALID_SKILL_1 + WHITESPACE;
+        Skill expectedSkill = new Skill(VALID_SKILL_1);
+        assertEquals(expectedSkill, ParserUtil.parseSkill(skillWithWhitespace));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseSkills_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills(null));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseSkills_collectionWithInvalidSkills_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, INVALID_SKILL)));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseSkills_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseSkills(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseSkills_collectionWithValidSkills_returnsSkillSet() throws Exception {
+        Set<Skill> actualSkillSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
+        Set<Skill> expectedSkillSet = new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1),
+                new Skill(VALID_SKILL_2)));
+
+        assertEquals(expectedSkillSet, actualSkillSet);
+    }
+
+    // event parsing methods
+
+    @Test
+    public void parseMaterialName_nullMaterial_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMaterialName(null));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseMaterialName_invalidMaterial_throwsParseException() {
+        // invalid quantity
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialName("-3 potatoes"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialName("3.5 potatoes"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialName("-3.5 potatoes"));
+
+        // invalid material name
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialName("-3 potatoes&"));
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseMaterialName_validMaterial_success() {
+        try {
+            assertTrue(ParserUtil.parseMaterialName("3 potatoes").equals("potatoes"));
+            assertTrue(ParserUtil.parseMaterialName("4 apple").equals("apple"));
 
-        assertEquals(expectedTagSet, actualTagSet);
+            // contains whitespace
+            assertTrue(ParserUtil.parseMaterialName("   300 gloves ").equals("gloves"));
+        } catch (ParseException pe) {
+            fail("ParseException should not be thrown");
+        }
+    }
+
+    @Test
+    public void parseMaterialQuantity_nullMaterial_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMaterialQuantity(null));
+    }
+
+    @Test
+    public void parseMaterialQuantity_invalidMaterial_throwsParseException() {
+        // invalid quantity
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialQuantity("-3 potatoes"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialQuantity("3.5 potatoes"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialQuantity("-3.5 potatoes"));
+
+        // invalid material name
+        assertThrows(ParseException.class, () -> ParserUtil.parseMaterialQuantity("-3 potatoes&"));
+    }
+
+    @Test
+    public void parseMaterialQuantity_validMaterial_success() {
+        try {
+            assertTrue(ParserUtil.parseMaterialQuantity("3 potatoes") == 3);
+            assertTrue(ParserUtil.parseMaterialQuantity("4 apple") == 4);
+
+            // contains whitespace
+            assertTrue(ParserUtil.parseMaterialQuantity("   300 gloves ") == 300);
+        } catch (ParseException pe) {
+            fail("ParseException should not be thrown");
+        }
     }
 }

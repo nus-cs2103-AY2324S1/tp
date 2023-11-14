@@ -3,20 +3,30 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.VolunteerFindCommandTest.preparePredicate;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VOLUNTEERS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEvents.FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalVolunteers.ALICE;
+import static seedu.address.testutil.TypicalVolunteers.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
+import seedu.address.model.volunteer.SkillNameContainsKeywordsPredicate;
+import seedu.address.testutil.TypicalEvents;
+import seedu.address.testutil.VolunteerStorageBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +36,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new VolunteerStorage(), new VolunteerStorage(modelManager.getVolunteerStorage()));
     }
 
     @Test
@@ -37,14 +47,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setVolunteerStorageFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setVolunteerStorageFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,47 +71,125 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setVolunteerStorageFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setVolunteerStorageFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setVolunteerStorageFilePath_validPath_setsVolunteerStorageFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setVolunteerStorageFilePath(path);
+        assertEquals(path, modelManager.getVolunteerStorageFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void undoBothStorages_nil_success() {
+        modelManager.commitToBothVersionedStorages(modelManager.getEventStorage(), modelManager.getVolunteerStorage());
+        try {
+            modelManager.undoBothStorages();
+        } catch (CommandException e) {
+            fail();
+        }
+        VersionedEventStorage versionedEventStorage = modelManager.getVersionedEventStorage();
+        VersionedVolunteerStorage versionedVolunteerStorage = modelManager.getVersionedVolunteerStorage();
+
+        assertEquals(versionedEventStorage.getCurrentStatePointer(), 0);
+        assertEquals(versionedEventStorage.getVersionedEventsSize(), 2);
+        assertEquals(versionedVolunteerStorage.getCurrentStatePointer(), 0);
+        assertEquals(versionedVolunteerStorage.getVersionedVolunteersSize(), 2);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void undoBothStorages_invalid_throwsCommandExceptionError() {
+        assertThrows(CommandException.class, () -> modelManager.undoBothStorages());
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void redoBothStorages_nil_success() {
+        modelManager.commitToBothVersionedStorages(modelManager.getEventStorage(), modelManager.getVolunteerStorage());
+        try {
+            modelManager.undoBothStorages();
+            modelManager.redoBothStorages();
+        } catch (CommandException e) {
+            fail();
+        }
+        VersionedEventStorage versionedEventStorage = modelManager.getVersionedEventStorage();
+        VersionedVolunteerStorage versionedVolunteerStorage = modelManager.getVersionedVolunteerStorage();
+
+        assertEquals(versionedEventStorage.getCurrentStatePointer(), 1);
+        assertEquals(versionedEventStorage.getVersionedEventsSize(), 2);
+        assertEquals(versionedVolunteerStorage.getCurrentStatePointer(), 1);
+        assertEquals(versionedVolunteerStorage.getVersionedVolunteersSize(), 2);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void redoBothStorages_invalid_throwsCommandExceptionError() {
+        assertThrows(CommandException.class, () -> modelManager.redoBothStorages());
     }
 
     @Test
-    public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+    public void commitToBothVersionedStorages_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager
+                .commitToBothVersionedStorages(null, null));
+    }
+
+    @Test
+    public void commitToBothVersionedStorages_validParameters_success() {
+        modelManager.commitToBothVersionedStorages(modelManager.getEventStorage(), modelManager.getVolunteerStorage());
+        VersionedEventStorage versionedEventStorage = modelManager.getVersionedEventStorage();
+        VersionedVolunteerStorage versionedVolunteerStorage = modelManager.getVersionedVolunteerStorage();
+
+        assertEquals(versionedEventStorage.getCurrentStatePointer(), 1);
+        assertEquals(versionedEventStorage.getVersionedEventsSize(), 2);
+        assertEquals(versionedVolunteerStorage.getCurrentStatePointer(), 1);
+        assertEquals(versionedVolunteerStorage.getVersionedVolunteersSize(), 2);
+    }
+
+    @Test
+    public void hasVolunteer_nullVolunteer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasVolunteer(null));
+    }
+
+    @Test
+    public void hasVolunteer_volunteerNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasVolunteer(ALICE));
+    }
+
+    @Test
+    public void hasVolunteer_volunteerInAddressBook_returnsTrue() {
+        modelManager.addVolunteer(ALICE);
+        assertTrue(modelManager.hasVolunteer(ALICE));
+    }
+
+    @Test
+    public void getFilteredVolunteerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredVolunteerList().remove(0));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
+    public void getEventToShowList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getEventToShowList().remove(0));
+    }
+
+    @Test
+    public void equals() throws ParseException {
+        // Need to change
+        EventStorage eventStorage = TypicalEvents.getTypicalEventStorage();
+        EventStorage differentEventStorage = new EventStorage();
+
+        VolunteerStorage volunteerStorage = new VolunteerStorageBuilder().withVolunteer(ALICE).withVolunteer(BENSON)
+                .build();
+        VolunteerStorage differentVolunteerStorage = new VolunteerStorage();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(eventStorage, volunteerStorage, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(eventStorage, volunteerStorage, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,19 +202,35 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentEventStorage, differentVolunteerStorage, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        String name = ALICE.getName().fullName.split("\\s+")[0];
+        SkillNameContainsKeywordsPredicate predicate = preparePredicate(" n/" + name);
+        modelManager.updateFilteredVolunteerList(predicate);
+        assertFalse(modelManager.equals(new ModelManager(eventStorage, volunteerStorage, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setVolunteerStorageFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(eventStorage, volunteerStorage, differentUserPrefs)));
+
+        // different filteredEventList -> returns false
+        CommandTestUtil.showEventAtIndex(modelManager, INDEX_FIRST);
+        assertFalse(modelManager.equals(new ModelManager(eventStorage, volunteerStorage, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+
+        // different eventToShowList -> returns false
+        Predicate<Event> predicateShowEvent = e -> e.equals(FIRST);
+        modelManager.updateEventToShowList(predicateShowEvent);
+        assertFalse(modelManager.equals(new ModelManager(eventStorage, volunteerStorage, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateEventToShowList(PREDICATE_SHOW_ALL_EVENTS);
     }
 }

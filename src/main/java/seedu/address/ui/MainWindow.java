@@ -31,9 +31,11 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private VolunteerListPanel volunteerListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private EventShowWindow eventShowWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +44,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane volunteerListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +71,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        logger.info("eventToShow list: " + logic.getEventToShowList().toString());
+        eventShowWindow = new EventShowWindow(logic.getEventToShowList());
     }
 
     public Stage getPrimaryStage() {
@@ -100,6 +107,8 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+                logger.info(keyCombination.getDisplayText()
+                        + " key pressed triggers " + menuItem.getId());
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
@@ -110,13 +119,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        volunteerListPanel = new VolunteerListPanel(logic.getFilteredVolunteerList());
+        volunteerListPanelPlaceholder.getChildren().add(volunteerListPanel.getRoot());
+
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
+        resultDisplay.setFeedbackToUser("Waiting for your inputs! :)");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getVolunteerStorageFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -141,9 +154,27 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
+            logger.fine("Showing help window");
             helpWindow.show();
         } else {
+            logger.fine("Help window is already opened, focusing on help window");
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the EventShowWindow or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleShowEvent() {
+        if (!eventShowWindow.isShowing()) {
+            logger.fine("Showing event show window");
+            eventShowWindow.loadContents();
+            eventShowWindow.show();
+        } else {
+            logger.fine("Event show window is already opened, focusing on event show window");
+            eventShowWindow.loadContents();
+            eventShowWindow.focus();
         }
     }
 
@@ -160,11 +191,8 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        eventShowWindow.hide();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**
@@ -184,6 +212,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowEvent()) {
+                handleShowEvent();
             }
 
             return commandResult;

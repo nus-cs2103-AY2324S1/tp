@@ -11,11 +11,13 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.IVolunteerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyEventStorage;
+import seedu.address.model.ReadOnlyVolunteerStorage;
+import seedu.address.model.event.Event;
+import seedu.address.model.volunteer.Volunteer;
 import seedu.address.storage.Storage;
 
 /**
@@ -31,7 +33,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final IVolunteerParser iVolunteerParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +41,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        iVolunteerParser = new IVolunteerParser();
     }
 
     @Override
@@ -47,11 +49,12 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = iVolunteerParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveVolunteerStorage(model.getVolunteerStorage());
+            storage.saveEventStorage(model.getEventStorage());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,18 +65,38 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyEventStorage getEventStorage() {
+        return model.getEventStorage();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Event> getFilteredEventList() {
+        return model.getFilteredEventList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObservableList<Event> getEventToShowList() {
+        return model.getEventToShowList();
+    }
+
+    @Override
+    public Path getEventStorageFilePath() {
+        return model.getEventStorageFilePath();
+    }
+
+    @Override
+    public ReadOnlyVolunteerStorage getVolunteerStorage() {
+        return model.getVolunteerStorage();
+    }
+
+    @Override
+    public ObservableList<Volunteer> getFilteredVolunteerList() {
+        return model.getFilteredVolunteerList();
+    }
+
+    @Override
+    public Path getVolunteerStorageFilePath() {
+        return model.getVolunteerStorageFilePath();
     }
 
     @Override
