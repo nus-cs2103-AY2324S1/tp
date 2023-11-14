@@ -1372,4 +1372,4 @@ Testers are expected to do more *exploratory* testing.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
 7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
 8. The name field does not accept special characters such as `\` or `/`. We plan to allow users to add special characters to the name field in the future, so that names such as "Ravi s/o Veegan" will be allowed.
-9. The phone field only accepts number. We plan to allow users to add other characters to the phone field in the future.
+9. The phone field only accepts numbers and should be at least three digits long. We plan to allow users to have more flexibility to the phone field in the future, such as allowing special characters.
