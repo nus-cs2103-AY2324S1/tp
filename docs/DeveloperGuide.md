@@ -80,7 +80,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280 />
+<puml src="diagrams/ArchitectureDiagram.puml" />
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 
@@ -118,7 +118,7 @@ For example, new features can be added to the `Storage` component without affect
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"/>
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -171,7 +171,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" />
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
 call as an example.
@@ -196,7 +196,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" />
 
 How the parsing works:
 
@@ -214,7 +214,7 @@ How the parsing works:
 **API
 ** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 The `Model` component,
 
@@ -236,7 +236,7 @@ The `Model` component,
 **API
 ** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550"/>
+<puml src="diagrams/StorageClassDiagram.puml" />
 
 The `Storage` component,
 
