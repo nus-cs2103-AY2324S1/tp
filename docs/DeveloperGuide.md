@@ -693,6 +693,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC9 - Find Appointment**
+
+**MSS**
+
+1. User inputs a query of the Ic of the Patient/Doctor whose appointment is required.
+2. Medilink Contacts lists all appointments with the involved Patient/Doctor.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Appointment does not involve query Patient.
+
+    * 2a1. Medilink Contacts shows error message.
+
+      Use case ends.
+
+* 2b. Appointment does not involve query Doctor.
+
+    * 2b1. Medilink Contacts shows error message.
+
+      Use case ends.
+
+**Use case: UC9 - Find Appointment**
+
+**MSS**
+
+1. User inputs the index of appointment to be deleted.
+2. Medilink Contacts located the appointment by index.
+3. Medilink Contacts deletes the appointment.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Appointment index does not exist.
+
+    * 2a1. Medilink Contacts shows error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -754,6 +795,9 @@ Additionally, we moved away from using Index for most of our operations. Instead
 This is a newly created class that represents a relationship between the Doctor and Patient class. Am AppointmentTime class was also created to represent the time used in the Appointment class. One challenge that we faced was to come up with the required checks for adding new appointment. We decided to go with whether the inputted IC exist in MediLink Contacts and whether the new appointment causes a clash with the doctor and patient. However, actually implementing these checks were difficult as we had to find a way to get the same Patient and Doctor stored in the model. 
 
 Storing the appointment was a challenge too. We store each appointment in the involved doctor and patient such that we can search for their appointments more easily as well as a separate list in the model, that has all the appointments. We had to create new JsonAdaptedAppointment class for this purpose.
+
+### UniqueObjectList class
+To further enhance our application, we created an abstract UniqueObjectList class that can store any object in the required format for use in the addressbook. Using this class, we instantiated UniquePatientList, UniqueObjectList and UniqueAppointmentList. This also allows for future improvements as any new object list to be store can be simply instantiated as a child of UniqueObjectList.
 
 ### Undo and Redo
 As we wanted to allow our users to revert back some mistakes, we implemented the undo and redo functions, which are fairly new compared to the existing functions that are mainly CRUD related. These changes had to be tied to each individual commands as we had to store the different states of the system before and after each operation is performed. Hence, the code changes were across many files and had to be linked well for it to work.
