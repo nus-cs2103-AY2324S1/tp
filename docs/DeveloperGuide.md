@@ -559,7 +559,7 @@ Step 3. The `filter` command is executed. The predicate generated based on user 
   </a>
 </div>
 
-The following sequence diagram shows how the sort operation works:
+The following sequence diagram shows how the filter operation works:
 
 <puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram" />
 

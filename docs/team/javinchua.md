@@ -5,7 +5,7 @@ title: "Javin's Project Portfolio Page"
 
 ## Project: Flagship
 
-Flagship is a desktop application used to help aspiring students track internship applications. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about () kLoC.
+Flagship is a desktop application used to help aspiring students track internship applications. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 ## Summary of contributions
 
