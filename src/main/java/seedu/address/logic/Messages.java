@@ -76,7 +76,6 @@ public class Messages {
             builder.append("; Note: ")
                 .append(prescription.getNote().get());
         }
-        // person.getTags().forEach(builder::append);
         return builder.toString();
     }
 

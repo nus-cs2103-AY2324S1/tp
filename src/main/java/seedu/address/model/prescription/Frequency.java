@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's frequency in the address book.
+ * Represents a Prescription's frequency in the prescription list.
  * Guarantees: immutable; is valid as declared in {@link #isValidFrequency(String)}
  */
 public class Frequency {

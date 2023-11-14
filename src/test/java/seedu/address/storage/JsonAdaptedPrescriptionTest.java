@@ -23,7 +23,6 @@ public class JsonAdaptedPrescriptionTest {
     private static final String INVALID_END_DATE = "01/2/2024";
     private static final String INVALID_EXPIRY_DATE = "2024/01/23";
     private static final String INVALID_STOCK = "EFGH";
-    // private static final String INVALID_CONSUMPTION = "IJKL";
     private static final String INVALID_NOTE = " ";
 
     private static final String VALID_NAME = ASPIRIN.getName().toString();
@@ -35,10 +34,6 @@ public class JsonAdaptedPrescriptionTest {
     private static final String VALID_STOCK = ASPIRIN.getTotalStock().get().toString();
     private static final String VALID_CONSUMPTION = ASPIRIN.getConsumptionCount().toString();
     private static final String VALID_NOTE = ASPIRIN.getNote().get().toString();
-
-    // private static final List<JsonAdaptedTag> VALID_TAGS = ASPIRIN.getTags().stream()
-    //     .map(JsonAdaptedTag::new)
-    //     .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPrescriptionDetails_returnsPrescription() throws Exception {
@@ -100,24 +95,6 @@ public class JsonAdaptedPrescriptionTest {
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
 
-    // @Test
-    // public void toModelType_nullDosage_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         null,
-    //         VALID_FREQUENCY,
-    //         VALID_START_DATE,
-    //         VALID_END_DATE,
-    //         VALID_EXPIRY_DATE,
-    //         VALID_STOCK,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         VALID_NOTE
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Dosage.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
-
     @Test
     public void toModelType_invalidFrequency_throwsIllegalValueException() {
         JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
@@ -135,24 +112,6 @@ public class JsonAdaptedPrescriptionTest {
         String expectedMessage = Frequency.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
-
-    // @Test
-    // public void toModelType_nullFrequency_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         VALID_DOSAGE,
-    //         null,
-    //         VALID_START_DATE,
-    //         VALID_END_DATE,
-    //         VALID_EXPIRY_DATE,
-    //         VALID_STOCK,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         VALID_NOTE
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Frequency.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
 
     @Test
     public void toModelType_invalidStartDate_throwsIllegalValueException() {
@@ -172,24 +131,6 @@ public class JsonAdaptedPrescriptionTest {
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
 
-    // @Test
-    // public void toModelType_nullStartDate_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         VALID_DOSAGE,
-    //         VALID_FREQUENCY,
-    //         null,
-    //         VALID_END_DATE,
-    //         VALID_EXPIRY_DATE,
-    //         VALID_STOCK,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         VALID_NOTE
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
-
     @Test
     public void toModelType_invalidEndDate_throwsIllegalValueException() {
         JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
@@ -207,24 +148,6 @@ public class JsonAdaptedPrescriptionTest {
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
-
-    // @Test
-    // public void toModelType_nullEndDate_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         VALID_DOSAGE,
-    //         VALID_FREQUENCY,
-    //         VALID_START_DATE,
-    //         null,
-    //         VALID_EXPIRY_DATE,
-    //         VALID_STOCK,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         VALID_NOTE
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
 
     @Test
     public void toModelType_invalidExpiryDate_throwsIllegalValueException() {
@@ -244,24 +167,6 @@ public class JsonAdaptedPrescriptionTest {
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
 
-    // @Test
-    // public void toModelType_nullExpiryDate_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         VALID_DOSAGE,
-    //         VALID_FREQUENCY,
-    //         VALID_START_DATE,
-    //         VALID_END_DATE,
-    //         null,
-    //         VALID_STOCK,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         VALID_NOTE
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
-
     @Test
     public void toModelType_invalidStock_throwsIllegalValueException() {
         JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
@@ -280,24 +185,6 @@ public class JsonAdaptedPrescriptionTest {
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
 
-    // @Test
-    // public void toModelType_nullStock_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         VALID_DOSAGE,
-    //         VALID_FREQUENCY,
-    //         VALID_START_DATE,
-    //         VALID_END_DATE,
-    //         VALID_EXPIRY_DATE,
-    //         null,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         VALID_NOTE
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Stock.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
-
     @Test
     public void toModelType_invalidNote_throwsIllegalValueException() {
         JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
@@ -315,32 +202,4 @@ public class JsonAdaptedPrescriptionTest {
         String expectedMessage = Note.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
     }
-
-    // @Test
-    // public void toModelType_nullNote_throwsIllegalValueException() {
-    //     JsonAdaptedPrescription prescription = new JsonAdaptedPrescription(
-    //         VALID_NAME,
-    //         VALID_DOSAGE,
-    //         VALID_FREQUENCY,
-    //         VALID_START_DATE,
-    //         VALID_END_DATE,
-    //         VALID_EXPIRY_DATE,
-    //         VALID_STOCK,
-    //         VALID_CONSUMPTION,
-    //         false,
-    //         null
-    //     );
-    //     String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
-    //     assertThrows(IllegalValueException.class, expectedMessage, prescription::toModelType);
-    // }
-
-    // @Test
-    // public void toModelType_invalidTags_throwsIllegalValueException() {
-    //     List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-    //     invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-    //     JsonAdaptedPrescription prescription =
-    //         new JsonAdaptedPrescription(VALID_NAME, VALID_DOSAGE, VALID_FREQUENCY, VALID_ADDRESS, invalidTags);
-    //     assertThrows(IllegalValueException.class, prescription::toModelType);
-    // }
-
 }

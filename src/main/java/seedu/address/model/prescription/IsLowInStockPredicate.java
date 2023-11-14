@@ -14,8 +14,12 @@ public class IsLowInStockPredicate implements Predicate<Prescription> {
         int prescriptionTotalStock = Integer.parseInt(prescription.getTotalStock().get().toString());
         int prescriptionDosages = Integer.parseInt(prescription.getDosage().get().toString());
 
-        return prescriptionDosages > 0
-                && prescriptionTotalStock <= 10
-                || prescriptionTotalStock / prescriptionDosages <= 7;
+        int minimumStock = 10;
+        int minimumDosages = 0;
+        int minimumDaysOfStock = 7;
+
+        return prescriptionDosages > minimumDosages
+                && prescriptionTotalStock <= minimumStock
+                || prescriptionTotalStock / prescriptionDosages <= minimumDaysOfStock;
     }
 }

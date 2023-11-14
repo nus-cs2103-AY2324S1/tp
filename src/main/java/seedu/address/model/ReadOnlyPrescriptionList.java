@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.prescription.Prescription;
 
 /**
- * Unmodifiable view of an prescription list.
+ * Unmodifiable view of a prescription list.
  */
 public interface ReadOnlyPrescriptionList {
 

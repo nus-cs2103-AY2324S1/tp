@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's stock in the prescription list.
+ * Represents a Prescription's stock in the prescription list.
  * Guarantees: immutable; is valid as declared in {@link #isValidStockFormat(String)}
  */
 public class Stock {
@@ -45,7 +45,7 @@ public class Stock {
      */
     public static boolean isValidStock(String test) {
         try {
-            int stockValue = Integer.parseInt(test);
+            Integer.parseInt(test);
         } catch (NumberFormatException e) {
             return false;
         }

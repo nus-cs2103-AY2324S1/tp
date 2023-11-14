@@ -103,10 +103,17 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PRESCRIPTION_SUCCESS, Messages.format(editedPrescription)));
     }
 
+    /**
+     * Creates and returns a {@code Prescription} with the details of {@code prescriptionToEdit}
+     * edited with {@code editPrescriptionDescriptor}.
+     *
+     * @param prescriptionToEdit The original {@code Prescription} to be edited.
+     * @param editPrescriptionDescriptor The descriptor containing the edited details.
+     * @return A new {@code Prescription} object with the edited details.
+     */
     private static Prescription createEditedPrescription(Prescription prescriptionToEdit,
-        EditPrescriptionDescriptor editPrescriptionDescriptor) throws CommandException {
+        EditPrescriptionDescriptor editPrescriptionDescriptor) {
         assert prescriptionToEdit != null;
-
         Name updatedName = editPrescriptionDescriptor.getName().orElse(
                 prescriptionToEdit.getName());
         Dosage updatedDosage = editPrescriptionDescriptor.getDosage().orElse(
@@ -131,8 +138,6 @@ public class EditCommand extends Command {
         if (conflictingDrugs.isEmpty()) {
             conflictingDrugs = prescriptionToEdit.getConflictingDrugs();
         }
-
-
         return new Prescription(updatedName, updatedDosage, updatedFrequency, updatedStartDate, updatedEndDate,
                 updatedExpiryDate, updatedTotalStock, updatedConsumptionCount, updatedIsCompleted, updatedNote,
                 conflictingDrugs);

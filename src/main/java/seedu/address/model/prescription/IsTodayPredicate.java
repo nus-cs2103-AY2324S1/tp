@@ -25,13 +25,16 @@ public class IsTodayPredicate implements Predicate<Prescription> {
             return true;
         }
 
+        int daysInWeek = 7;
+        int daysInMonth = 30;
+
         switch (frequency.get().toString()) {
         case "Daily":
             return true;
         case "Weekly":
-            return daysBetween % 7 == 0;
+            return daysBetween % daysInWeek == 0;
         case "Monthly":
-            return daysBetween % 30 == 0;
+            return daysBetween % daysInMonth == 0;
         default:
             return false;
         }

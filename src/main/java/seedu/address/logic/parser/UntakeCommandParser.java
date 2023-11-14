@@ -10,15 +10,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.prescription.Dosage;
 
 /**
- * Parses input arguments and creates a new UntakePrescriptionCommand object
+ * Parses input arguments and creates a new UntakeCommand object
  */
 public class UntakeCommandParser implements Parser<UntakeCommand> {
 
     /**
-     * Parses the given arguments to create an UntakePrescriptionCommand.
+     * Parses the given arguments to create an UntakeCommand.
      *
      * @param args User input representing the command.
-     * @return An UntakePrescriptionCommand for untaking a specified number of doses from a prescription.
+     * @return An UntakeCommand for untaking a specified number of doses from a prescription.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     @Override

@@ -36,7 +36,6 @@ public class AddCommand extends Command {
             + PREFIX_TOTAL_STOCK + "total_stock "
             + PREFIX_CONFLICTING_DRUGS + "conflicting_drugs "
             + PREFIX_NOTE + "note \n"
-            // + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aspirin "
             + PREFIX_DOSAGE + "1 "

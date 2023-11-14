@@ -22,14 +22,6 @@ import seedu.address.testutil.PrescriptionBuilder;
 
 public class PrescriptionTest {
 
-    /*
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Prescription prescription = new PrescriptionBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> prescription.getTags().remove(0));
-    }
-     */
-
     @Test
     public void isEnded() {
         // completed prescription
@@ -140,9 +132,6 @@ public class PrescriptionTest {
         editedAspirin = new PrescriptionBuilder(ASPIRIN).withStartDate(VALID_START_DATE_PROPRANOLOL).build();
         assertFalse(ASPIRIN.equals(editedAspirin));
 
-        // different tags -> returns false
-        // editedAspirin = new PrescriptionBuilder(ASPIRIN).withTags(VALID_TAG_HUSBAND).build();
-        // assertFalse(ASPIRIN.equals(editedAspirin));
     }
 
     @Test

@@ -13,7 +13,7 @@ import seedu.address.model.prescription.Name;
 import seedu.address.model.prescription.Prescription;
 
 /**
- * Deletes a prescription from prescription list.
+ * Lists conflicting drugs for a specific prescription.
  */
 public class ListConflictsCommand extends Command {
 

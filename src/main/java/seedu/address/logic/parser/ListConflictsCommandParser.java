@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new DeletePrescriptionCommand object
+ * Parses input arguments and creates a new ListConflictsCommand object
  */
 public class ListConflictsCommandParser implements Parser<ListConflictsCommand> {
     /**

@@ -108,9 +108,6 @@ public class PrescriptionCard extends UiPart<Region> {
         }
 
         setCompletionStatus(prescription);
-        // prescription.getTags().stream()
-        //         .sorted(Comparator.comparing(tag -> tag.tagName))
-        //         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     private void setExpiryDateHeaderStyle(Prescription prescription) {

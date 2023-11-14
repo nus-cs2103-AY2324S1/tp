@@ -42,9 +42,6 @@ public class PrescriptionUtil {
         sb.append(PREFIX_EXPIRY_DATE + prescription.getExpiryDate().get().toString() + " ");
         sb.append(PREFIX_TOTAL_STOCK + prescription.getTotalStock().get().toString() + " ");
         sb.append(PREFIX_NOTE + prescription.getNote().get().toString() + " ");
-        // person.getTags().stream().forEach(
-        //     s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        // );
         return sb.toString();
     }
 

@@ -10,15 +10,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.prescription.Dosage;
 
 /**
- * Parses input arguments and creates a new TakePrescriptionCommand object
+ * Parses input arguments and creates a new TakeCommand object
  */
 public class TakeCommandParser implements Parser<TakeCommand> {
 
     /**
-     * Parses the given arguments to create a TakePrescriptionCommand.
+     * Parses the given arguments to create a TakeCommand.
      *
      * @param args User input representing the command.
-     * @return A TakePrescriptionCommand for taking a specified number of doses from a prescription.
+     * @return A TakeCommand for taking a specified number of doses from a prescription.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     @Override

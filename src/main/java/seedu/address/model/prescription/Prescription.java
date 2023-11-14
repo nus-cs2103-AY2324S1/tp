@@ -22,6 +22,8 @@ public class Prescription {
     public static final IsValidDatesPredicate DATES_PREDICATE = new IsValidDatesPredicate();
     public static final IsLowInStockPredicate STOCK_PREDICATE = new IsLowInStockPredicate();
     public static final IsAboutToExpirePredicate EXPIRE_PREDICATE = new IsAboutToExpirePredicate();
+    private static final String DEFAULT_CONSUMPTION_COUNT = "0";
+
 
     // Data fields
     private final Name name;
@@ -42,11 +44,11 @@ public class Prescription {
     public Prescription(Name name, Dosage dosage, Frequency frequency, Date startDate,
                         Date endDate, Date expiryDate, Stock totalStock, Note note, Set<Name> conflictingDrugs) {
         this(name, dosage, frequency, startDate, endDate, expiryDate,
-            totalStock, new ConsumptionCount("0"), false, note, conflictingDrugs);
+            totalStock, new ConsumptionCount(DEFAULT_CONSUMPTION_COUNT), false, note, conflictingDrugs);
     }
 
     /**
-     * Every field must be present and not null.
+     * Constructor for prescription.
      */
     public Prescription(Name name, Dosage dosage, Frequency frequency, Date startDate,
                         Date endDate, Date expiryDate, Stock totalStock, ConsumptionCount consumptionCount,
