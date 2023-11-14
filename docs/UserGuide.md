@@ -356,7 +356,7 @@ ap
 `Phone numbers should only contain numbers, and it should be at least 3 digits long` | Ensure that the phone number specified is not blank, contain only numbers and at least 3 digits long.
 `Addresses can take any values, and it should not be blank` | Ensure that the address specified is not blank.
 `Emails should be of the format local-part@domain and adhere to the following constraints: …` | Ensure that the email specified is not blank and adheres to the constraints specified.
-`Tags names should be alphanumeric` | Ensure that the tag used is alphanumeric.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 `This person already exists in the address book` | Ensure that the new name specified does not match an existing person.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for name, email, address and phone number.
 
@@ -446,7 +446,7 @@ ep
 `Phone numbers should only contain numbers, and it should be at least 3 digits long` | Ensure that the phone number specified is not blank, contain only numbers and at least 3 digits long.
 `Addresses can take any values, and it should not be blank` | Ensure that the address specified is not blank.
 `Emails should be of the format local-part@domain and adhere to the following constraints: …` | Ensure that the email specified is not blank and adheres to the constraints specified.
-`Tags names should be alphanumeric` | Ensure that the tag used is alphanumeric.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 `This person already exists in the address book.` | Ensure that the new name specified does not match an existing person.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for name, email, address and phone number.
 
@@ -634,7 +634,7 @@ at
 ---------------|---------------
 `Invalid command format! …` | Ensure that the title and note are specified.
 `Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and note specified are not blank.
-`Tags names should be alphanumeric` | Ensure that the tag used is alphanumeric.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 `This task already exists in the address book` | Ensure that the new title and note specified do not match an existing task.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for title and note.
 
@@ -718,7 +718,7 @@ et
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `At least one field to edit must be provided.` | Ensure that at least one of title, note, or tag is specified.
 `Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and/or note specified are not blank.
-`Tags names should be alphanumeric` | Ensure that the tag used is alphanumeric.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 `This task already exists in the address book.` | Ensure that the new title and note specified do not match an existing task.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for title and note.
 
@@ -1101,8 +1101,8 @@ atagp
  Error message | How to resolve
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index and tag are both specified. The index should be correctly specified as an integer.
-`Tags names should be alphanumeric` | Ensure that the tag is specified and is alphanumeric.
 `The person index provided is invalid` | Ensure that the index provided is within the valid range.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 
 <div style="page-break-after: always;"></div>
 
@@ -1148,8 +1148,8 @@ atagt
  Error message | How to resolve
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index and tag are both specified. The index should be correctly specified as an integer.
-`Tags names should be alphanumeric` | Ensure that the tag is specified and is alphanumeric.
 `The task index provided is invalid` | Ensure that the index provided is within the valid range.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 
 <div style="page-break-after: always;"></div>
 
