@@ -600,7 +600,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | forgetful tutor | see all the planned lessons with a student                                    | plan for additional lessons with the student                                                  |
 | `* *`    | tutor           | update my students' details as they progress through learning in remarks      | keep track of their information like test scores and learning styles                          |
 | `*`      | forgetful tutor | include certain tasks to do for each lesson                                   | remember to do them in preparation for each lesson                                            |
-| `*`      | busy user       | see all the tasks for all my tuition sessions at a glance                     | I know how many tasks I have yet to complete in preparation for all my tuition sessions       |
+| `*`      | busy user       | see all the tasks for all my tuition sessions at a glance                     | know how many tasks I have yet to complete in preparation for all my tuition sessions         |
 
 
 
