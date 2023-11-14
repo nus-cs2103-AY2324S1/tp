@@ -1,14 +1,19 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+# NoteNote
+[![CI Status](https://github.com/AY2324S1-CS2103-W14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103-W14-2/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+* This is a desktop meeting note-taking application that allows users to efficiently record notes for their contact.
+* NoteNote provide tools for organizing and categorizing contacts in a systematic and easy-to-navigate structure.
+* Users interact with the application through a CLI, and it has a GUI created with JavaFX.
+* The application is written in Java.
+
+# Sitemap
+* [User guide](docs/UserGuide.md)
+* [Developer guide](docs/DeveloperGuide.md)
+* [About us](docs/AboutUs.md)
+
+# Acknowledgements
+* Some parts of this sample application were inspired by the excellent [JavaFX tutorial](http://code.makery.ch/library/javafx-8-tutorial/[Java) by
+  _Marco Jakob_.
+* Libraries used: [JavaFX](https://openjfx.io/JavaFX), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

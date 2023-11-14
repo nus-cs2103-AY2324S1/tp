@@ -1,0 +1,74 @@
+{
+  "_comment": "AddressBook save file which contains the same Contact values as in TypicalContacts#getTypicalAddressBook()",
+  "contacts" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "tags" : [ "friends" ],
+    "notes" : [ ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "tags" : [ "owesMoney", "friends" ],
+    "notes" : [ "Likes chicken", "Hates tiramisu" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "tags" : [ ],
+    "notes" : [ "Enjoys rom-coms" ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "tags" : [ ],
+    "notes" : [ "Hates football" ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "tags" : [ ],
+    "notes" : [ "Keyboard geek" ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "tags" : [ ],
+    "notes" : [ "Gym rat" ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "tags" : [ ],
+    "notes" : [ "Likes bread" ]
+  } ],
+  "meetings" : [ {
+    "title" : "CS2103 Meeting",
+    "time" : "01/01/2023 00:00",
+    "place" : "Zoom",
+    "description" : "",
+    "notes" : [ ]
+  },
+  {
+    "title" : "GES2001 Meeting",
+    "time" : "01/01/2023 20:30",
+    "place" : "Discord",
+    "description" : "Project details",
+    "notes" : [ "Skeletal PPP" ]
+  },
+  {
+    "title" : "LAJ2101 Meeting",
+    "time" : "01/01/2023 16:00",
+    "place" : "Classroom A",
+    "description" : "",
+    "notes" : [ "Skeletal PPP" ]
+  },
+  {
+    "title" : "Date with Girlfriend",
+    "time" : "01/05/2023 18:00",
+    "place" : "Sentosa",
+    "description" : "Picnic with Sandwiches!",
+    "notes" : [ ]
+  } ]
+}

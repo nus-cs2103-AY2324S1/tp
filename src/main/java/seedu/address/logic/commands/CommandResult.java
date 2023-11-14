@@ -20,7 +20,11 @@ public class CommandResult {
     private final boolean exit;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with all specified fields.
+     *
+     * @param feedbackToUser The feedback message to be shown to the user.
+     * @param showHelp Boolean indicating if help information should be shown.
+     * @param exit Boolean indicating if the application should exit.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -29,8 +33,10 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * Constructs a {@code CommandResult} with the given feedback message,
+     * and sets other fields to their default values.
+     *
+     * @param feedbackToUser The feedback message to be shown to the user.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
@@ -60,9 +66,10 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+        boolean eq = feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                    && showHelp == otherCommandResult.showHelp
+                    && exit == otherCommandResult.exit;
+        return eq;
     }
 
     @Override
