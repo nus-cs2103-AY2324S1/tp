@@ -418,6 +418,7 @@ edit
   [ed/<end_date>]
   [exd/<expiry_date>]
   [ts/<total_stock>]
+  [cfdg/<conflicting_drugs>]
   [n/<note>]
 ```
 
@@ -461,6 +462,8 @@ edit 2 mn/Creatine n/Red Pill
 ```
 
 By typing this, you will edit the name and note of the second prescription on the list to be `Creatine` and `Red Pill` respectively.
+
+![result for 'Example output of edit command'](images/ui/Ui-edit-2.png)
 
 </box>
 <br></br>
