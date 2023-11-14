@@ -291,9 +291,12 @@ Examples:
 * `filter l/14 r/manager` returns employees with 14 days of leave and the manager role
 
 
-The following activity diagram summarizes what happens when a user executes the filter command:
+The following activity diagram summarizes what happens when a user executes the filter command, the Activity Diagrams
+are split into two part to ensure clarity/visibility of the diagrams, however the activities occur simultaneously:
 
-![FilterActivityDiagram](images/FilterActivityDiagram.png)
+![FilterActivityDiagramPart1](images/FilterActivityDiagramPart1.png)
+
+![FilterActivityDiagramPart2](images/FilterActivityDiagramPart2.png)
 
 The following is the filter feature's class diagram, illustrating the interaction between the FilterCommand,
 FilterCommandParser and the ContainsAllPredicate classes.
@@ -326,13 +329,6 @@ The following activity diagram summarizes what happens when a user executes the 
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -539,8 +535,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting an employee
 
 1. Deleting an employee while all people are being shown
@@ -555,8 +549,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Filtering
 
@@ -579,11 +571,3 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `filter s/alsjl`<br>
       Expected: Incorrect parameter. Not an integer. No employee is shown. Error details shown in the status message.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
