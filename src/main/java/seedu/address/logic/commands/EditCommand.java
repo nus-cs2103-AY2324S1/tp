@@ -1,90 +1,111 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_MEDIA_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Year;
+import seedu.address.model.socialmedialink.SocialMediaLink;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing student in StudentConnect.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
+            + "by the email used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: EMAIL (must end with u.nus.edu) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_YEAR + "YEAR] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_TUTORIAL + "TUTORIAL]... "
+            + "[" + PREFIX_SOCIAL_MEDIA_LINK + "SOCIAL_MEDIA_LINK]... "
+            + "[" + PREFIX_NATIONALITY + "NATIONALITY] "
+            + "[" + PREFIX_GENDER + "GENDER] \n"
+            + "Example: " + COMMAND_WORD + " johnd@u.nus.edu "
+            + PREFIX_YEAR + "3 "
+            + PREFIX_EMAIL + "johndoe@u.nus.edu";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Details edited successfully! Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student is already on StudentConnect as this "
+            + "email has already been used.";
+    public static final String MESSAGE_EMAIL_NOT_FOUND = "Student with the provided email not found.";
 
-    private final Index index;
+    private final Email email;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param email of the person in the filtered student list to edit
+     * @param editPersonDescriptor details to edit the student with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(Email email, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(email);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.email = email;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // Find the person with the provided email
+        Optional<Person> personToEdit = model.getPersonWithEmail(email);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (personToEdit.isEmpty()) {
+            throw new CommandException(MESSAGE_EMAIL_NOT_FOUND);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit.get(), editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToEdit.get().isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToEdit.get(), editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (model.personIsInAGroup(editedPerson)) {
+            Group targetGroup = model.getGroupThatPersonIsIn(personToEdit.get());
+            targetGroup.removeMember(personToEdit.get());
+            targetGroup.addMember(editedPerson);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -96,12 +117,19 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
+        Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
+        Set<Tutorial> updatedTutorials = editPersonDescriptor.getTutorials()
+            .orElse(personToEdit.getTutorials());
+        Set<SocialMediaLink> updatedSocialMediaLinks = editPersonDescriptor.getSocialMediaLinks()
+            .orElse(personToEdit.getSocialMediaLinks());
+        Nationality updatedNationality = editPersonDescriptor.getNationality().orElse(personToEdit.getNationality());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedMajor, updatedYear, updatedEmail, updatedDescription,
+                updatedTutorials, updatedSocialMediaLinks, updatedNationality, updatedGender);
     }
 
     @Override
@@ -116,48 +144,57 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return email.equals(otherEditCommand.email)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("email", email)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the student with. Each non-empty field value will replace the
+     * corresponding field value of the student.
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
+        private Major major;
+        private Year year;
         private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private Description description;
+        private Set<Tutorial> tutorials;
+        private Set<SocialMediaLink> socialMediaLinks;
+        private Nationality nationality;
+        private Gender gender;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code socialMediaLinks} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setMajor(toCopy.major);
+            setYear(toCopy.year);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setDescription(toCopy.description);
+            setTutorials(toCopy.tutorials);
+            setSocialMediaLinks(toCopy.socialMediaLinks);
+            setNationality(toCopy.nationality);
+            setGender(toCopy.gender);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, major, year, email, description,
+                    tutorials, socialMediaLinks, nationality, gender);
         }
 
         public void setName(Name name) {
@@ -168,12 +205,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setMajor(Major major) {
+            this.major = major;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Major> getMajor() {
+            return Optional.ofNullable(major);
+        }
+
+        public void setYear(Year year) {
+            this.year = year;
+        }
+
+        public Optional<Year> getYear() {
+            return Optional.ofNullable(year);
         }
 
         public void setEmail(Email email) {
@@ -184,29 +229,62 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setDescription(Description description) {
+            this.description = description;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tutorials} to this object's {@code tutorials}.
+         * A defensive copy of {@code tutorials} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTutorials(Set<Tutorial> tutorials) {
+            this.tutorials = (tutorials != null) ? new HashSet<>(tutorials) : null;
         }
 
+        public Optional<Nationality> getNationality() {
+            return Optional.ofNullable(nationality);
+        }
+
+        public void setNationality(Nationality nationality) {
+            this.nationality = nationality;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable tutorial set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code tutorials} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Tutorial>> getTutorials() {
+            return (tutorials != null) ? Optional.of(Collections.unmodifiableSet(tutorials)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code socialMediaLinks} to this object's {@code socialMediaLinks}.
+         * A defensive copy of {@code socialMediaLinks} is used internally.
+         */
+        public void setSocialMediaLinks(Set<SocialMediaLink> socialMediaLinks) {
+            this.socialMediaLinks = (socialMediaLinks != null) ? new HashSet<>(socialMediaLinks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable social media link set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code socialMediaLinks} is null.
+         */
+        public Optional<Set<SocialMediaLink>> getSocialMediaLinks() {
+            return (socialMediaLinks != null) ? Optional.of(Collections.unmodifiableSet(socialMediaLinks))
+                    : Optional.empty();
         }
 
         @Override
@@ -222,20 +300,28 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(major, otherEditPersonDescriptor.major)
+                    && Objects.equals(year, otherEditPersonDescriptor.year)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(description, otherEditPersonDescriptor.description)
+                    && Objects.equals(tutorials, otherEditPersonDescriptor.tutorials)
+                    && Objects.equals(socialMediaLinks, otherEditPersonDescriptor.socialMediaLinks)
+                    && Objects.equals(nationality, otherEditPersonDescriptor.nationality)
+                    && Objects.equals(gender, otherEditPersonDescriptor.gender);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phone", phone)
+                    .add("major", major)
+                    .add("year", year)
                     .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("description", description)
+                    .add("tutorials", tutorials)
+                    .add("social media links", socialMediaLinks)
+                    .add("nationality", nationality)
+                    .add("gender", gender)
                     .toString();
         }
     }

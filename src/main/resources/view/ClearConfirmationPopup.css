@@ -1,0 +1,18 @@
+#yesButton, #cancelButton, #confirmationMessage {
+    -fx-text-fill: white;
+}
+
+#yesButton, #cancelButton {
+    -fx-background-color: dimgray;
+}
+
+#yesButton:hover, #cancelButton:hover {
+    -fx-background-color: gray;
+}
+
+#MessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+.message-label {
+    -fx-font-size: 15px; /* Adjust the font size as needed */
+}

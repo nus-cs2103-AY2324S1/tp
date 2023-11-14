@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueGroupList groups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,12 +29,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        groups = new UniqueGroupList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons and Groups in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -49,12 +53,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
@@ -94,6 +107,37 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    /**
+     * Adds a group to the address book.
+     *
+     * @param group
+     */
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        groups.add(group);
+    }
+
+    /**
+     * Adds the given {@code Person} to the give {@code Group}.
+     *
+     * @param person The person to be added.
+     * @param group The group that the person will be added to.
+     */
+    public void addPersonToGroup(Person person, Group group) {
+        requireNonNull(person);
+        requireNonNull(group);
+
+        group.addMember(person);
+    }
+
     //// util methods
 
     @Override
@@ -106,6 +150,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public void sortGroups() {
+        List<Group> sortedGroups = groups.getSortedList();
+        this.setGroups(sortedGroups);
     }
 
     @Override
@@ -127,4 +182,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+
+
+    /**
+     * Removes the given person from the specified group.
+     * @param person The person to be removed from the group.
+     */
+    public void removePersonFromGroup(Person person) {
+        groups.remove(person);
+    }
+
+    /**
+     * Removes the given group from the address book.
+     *
+     * @param group The group to be removed.
+     */
+    public void removeGroup(Group group) {
+        requireNonNull(group);
+        groups.remove(group);
+    }
+
 }

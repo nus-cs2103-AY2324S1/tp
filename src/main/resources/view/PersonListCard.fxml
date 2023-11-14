@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -25,12 +24,46 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" id="name-label" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <HBox fx:id="nationalityBox" style="-fx-background-color: #E7BE34; -fx-background-radius: 15;">
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="5" />
+          </padding>
+          <Label fx:id="nationality" styleClass="cell_nationality_label" text="\$nationality" />
+        </HBox>
+        <HBox fx:id="genderBox" style="-fx-background-color: #E7BE34; -fx-background-radius: 15;">
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="5" />
+          </padding>
+          <Label fx:id="gender" styleClass="cell_gender_label" text="\$gender" />
+        </HBox>
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label styleClass="label-bold">Major:</Label>
+        <Label fx:id="major" styleClass="cell_small_label" text="\$major" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label styleClass="label-bold">Year:</Label>
+        <Label fx:id="year" styleClass="cell_small_label" text="\$year" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label styleClass="label-bold">Email:</Label>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label styleClass="label-bold">Description:</Label>
+        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label styleClass="label-bold">Tutorials:</Label>
+        <Label fx:id="tutorials" styleClass="cell_small_label" text="\$tutorials" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label styleClass="label-bold">Social Media:</Label>
+        <FlowPane fx:id="socialMediaLinks" style="-fx-font-size: 10px; -fx-text-fill: #FFDB58;" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>

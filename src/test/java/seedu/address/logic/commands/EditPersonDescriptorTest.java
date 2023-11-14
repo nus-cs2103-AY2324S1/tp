@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SM_LINKEDIN_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUT_FIRST_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,20 +42,28 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        // different major -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withMajor(VALID_MAJOR_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different year -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withYear(VALID_YEAR_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        // different description -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_DESCRIPTION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different tutorial -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTutorials(VALID_TUT_FIRST_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different social media links -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSocialMediaLinks(VALID_SM_LINKEDIN_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -61,11 +71,16 @@ public class EditPersonDescriptorTest {
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getName().orElse(null) + ", major="
+                + editPersonDescriptor.getMajor().orElse(null) + ", year="
+                + editPersonDescriptor.getYear().orElse(null) + ", email="
+                + editPersonDescriptor.getEmail().orElse(null) + ", description="
+                + editPersonDescriptor.getTutorials().orElse(null) + ", tutorials="
+                + editPersonDescriptor.getDescription().orElse(null) + ", social media links="
+                + editPersonDescriptor.getSocialMediaLinks().orElse(null) + ", nationality="
+                + editPersonDescriptor.getNationality().orElse(null) + ", gender="
+                + editPersonDescriptor.getGender().orElse(null) + "}";
+
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

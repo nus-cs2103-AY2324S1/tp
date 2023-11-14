@@ -2,12 +2,22 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_MEDIA_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +27,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.group.tasks.Task;
+import seedu.address.model.group.tasks.TaskModule;
+import seedu.address.model.group.tasks.TaskStatus;
+import seedu.address.model.group.tasks.Todo;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -28,31 +44,80 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
-
+    public static final String VALID_MAJOR_AMY = "Computer Science";
+    public static final String VALID_MAJOR_BOB = "Information Systems";
+    public static final String VALID_YEAR_AMY = "2";
+    public static final String VALID_YEAR_BOB = "3";
+    public static final String VALID_EMAIL_AMY = "amy@u.nus.edu";
+    public static final String VALID_EMAIL_BOB = "bob@u.nus.edu";
+    public static final String VALID_DESCRIPTION_AMY = "Frontend Developer";
+    public static final String VALID_DESCRIPTION_BOB = "Backend Developer";
+    public static final String VALID_TUT_FIRST_AMY = "01";
+    public static final String VALID_TUT_SECOND_AMY = "02";
+    public static final String VALID_TUT_FIRST_BOB = "03";
+    public static final String VALID_TUT_SECOND_BOB = "04";
+    public static final String VALID_SM_LINKEDIN_AMY = "https://www.linkedin.com/in/amy";
+    public static final String VALID_SM_GITHUB_AMY = "https://github.com/amy";
+    public static final String VALID_SM_LINKEDIN_BOB = "https://www.linkedin.com/in/bob";
+    public static final String VALID_SM_GITHUB_BOB = "https://github.com/bob";
+    public static final String VALID_NATIONALITY_AMY = "local";
+    public static final String VALID_NATIONALITY_BOB = "foreigner";
+    public static final String VALID_GENDER_AMY = "F";
+    public static final String VALID_GENDER_BOB = "M";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String MAJOR_DESC_AMY = " " + PREFIX_MAJOR + VALID_MAJOR_AMY;
+    public static final String MAJOR_DESC_BOB = " " + PREFIX_MAJOR + VALID_MAJOR_BOB;
+    public static final String YEAR_DESC_AMY = " " + PREFIX_YEAR + VALID_YEAR_AMY;
+    public static final String YEAR_DESC_BOB = " " + PREFIX_YEAR + VALID_YEAR_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
+    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
+    public static final String TUTORIAL_DESC_AMY = " " + PREFIX_TUTORIAL + VALID_TUT_FIRST_AMY + " "
+            + PREFIX_TUTORIAL + VALID_TUT_SECOND_AMY;
+    public static final String TUTORIAL_DESC_BOB = " " + PREFIX_TUTORIAL + VALID_TUT_FIRST_BOB + " "
+            + PREFIX_TUTORIAL + VALID_TUT_SECOND_BOB;
+    public static final String SM_DESC_AMY = " " + PREFIX_SOCIAL_MEDIA_LINK + VALID_SM_LINKEDIN_AMY + " "
+            + PREFIX_SOCIAL_MEDIA_LINK + VALID_SM_GITHUB_AMY;
+    public static final String SM_DESC_BOB = " " + PREFIX_SOCIAL_MEDIA_LINK + VALID_SM_LINKEDIN_BOB + " "
+            + PREFIX_SOCIAL_MEDIA_LINK + VALID_SM_GITHUB_BOB;
+    public static final String NATIONALITY_DESC_AMY = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_AMY;
+    public static final String NATIONALITY_DESC_BOB = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_BOB;
+    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
+    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "Computer Games"; // not in list of majors
+    public static final String INVALID_YEAR_DESC = " " + PREFIX_YEAR + "-1"; // negative integer not allowed for year
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESCRIPTION_DESC = " "
+            + PREFIX_DESCRIPTION; // empty string not allowed for description
+    public static final String INVALID_TUTORIAL_DESC = " " + PREFIX_TUTORIAL + "1"; // not a 2 digit number
+    public static final String INVALID_SM_DESC = " " + PREFIX_SOCIAL_MEDIA_LINK
+            + "example.com"; // does not start with https://
+    public static final String INVALID_NATIONALITY_DESC = " " + PREFIX_NATIONALITY + "Singaporean";
+    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "MALE";
+
+
+    public static final String VALID_NUMBER_GROUP1 = "1";
+    public static final String VALID_NUMBER_GROUP2 = "2";
+    public static final String VALID_TUTORIAL_GROUP1 = "01";
+    public static final String VALID_TUTORIAL_GROUP2 = "02";
+    public static final Person VALID_MEMBER1_GROUP1 = ALICE;
+    public static final Person VALID_MEMBER2_GROUP1 = BENSON;
+    public static final Person VALID_MEMBER3_GROUP1 = CARL;
+    public static final Person VALID_MEMBER1_GROUP2 = DANIEL;
+    public static final Person VALID_MEMBER2_GROUP2 = ELLE;
+    public static final Person VALID_MEMBER3_GROUP2 = FIONA;
+
+    public static final Task VALID_TASK1 = new Todo("Upload video of OP1.",
+            TaskStatus.NOT_DONE, TaskModule.CS2101);
+    public static final Task VALID_TASK2 = new Todo("Complete mid semester review form.",
+            TaskStatus.NOT_DONE, TaskModule.CS2103T);
+    public static final Task VALID_TASK3 = new Todo("Attend tutorials",
+            TaskStatus.NOT_DONE, TaskModule.CS2103T);
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -61,12 +126,16 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withMajor(VALID_MAJOR_AMY)
+                .withYear(VALID_YEAR_AMY).withEmail(VALID_EMAIL_AMY).withDescription(VALID_DESCRIPTION_AMY)
+                .withTutorials(VALID_TUT_FIRST_AMY, VALID_TUT_SECOND_AMY)
+                .withSocialMediaLinks(VALID_SM_LINKEDIN_AMY, VALID_SM_GITHUB_AMY)
+                .withNationality(VALID_NATIONALITY_BOB).withGender(VALID_GENDER_BOB).build();
+        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withMajor(VALID_MAJOR_BOB)
+                .withYear(VALID_YEAR_BOB).withEmail(VALID_EMAIL_BOB).withDescription(VALID_DESCRIPTION_BOB)
+                .withTutorials(VALID_TUT_FIRST_BOB, VALID_TUT_SECOND_BOB)
+                .withSocialMediaLinks(VALID_SM_LINKEDIN_BOB, VALID_SM_GITHUB_BOB)
+                .withNationality(VALID_NATIONALITY_BOB).withGender(VALID_GENDER_BOB).build();
     }
 
     /**
@@ -90,8 +159,13 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            Model expectedModel, boolean groupCommand) {
+        CommandResult expectedCommandResult;
+        if (groupCommand) {
+            expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false);
+        } else {
+            expectedCommandResult = new CommandResult(expectedMessage);
+        }
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -111,6 +185,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -123,6 +198,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the group at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showGroupAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
+
+        Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
+        int groupNumber = group.getNumber();
+        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(String.valueOf(groupNumber))));
+
+        assertEquals(1, model.getFilteredGroupList().size());
     }
 
 }

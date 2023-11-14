@@ -1,0 +1,27 @@
+@startuml
+
+class Person {
+    +Person(Name, Major, Year, Email, Description, Set<Tutorial>, Set<SocialMediaLink>, Nationality, Gender)
+}
+
+class Name
+class Email
+class Major
+class Year
+class Description
+class Tutorial
+class SocialMediaLink
+class Nationality
+class Gender
+
+Person --|> Name
+Person --|> Email
+Person --|> Major
+Person --|> Year
+Person --|> Description
+Person --|> Tutorial
+Person --|> SocialMediaLink
+Person --|> Nationality
+Person --|> Gender
+
+@enduml

@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -10,9 +11,11 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,9 +35,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private ConfirmationPopup confirmationPopup;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -42,7 +47,12 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem clearMenuItem;
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane groupListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        confirmationPopup = new ConfirmationPopup();
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(clearMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -113,6 +125,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -147,6 +161,22 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the confirmation popup for clearing data.
+     */
+    @FXML
+    public void handleClear() {
+        // You can directly execute the ClearCommand logic here
+        try {
+            CommandResult result = logic.execute(ClearCommand.COMMAND_WORD);
+            // Check the result if needed
+        } catch (CommandException | ParseException e) {
+            // Handle exceptions if any
+            e.printStackTrace(); // You might want to log or display an error message
+        }
+    }
+
+
     void show() {
         primaryStage.show();
     }
@@ -156,15 +186,45 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
-        logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
-        primaryStage.hide();
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.6));
+        pause.setOnFinished(event -> {
+            GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                    (int) primaryStage.getX(), (int) primaryStage.getY());
+            logic.setGuiSettings(guiSettings);
+            helpWindow.hide();
+            primaryStage.hide();
+        });
+        pause.play();
+    }
+
+    /**
+     * Displays the group UI.
+     */
+    @FXML
+    public void handleGroupCommand() {
+        personListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        if (!groupListPanelPlaceholder.getChildren().contains(groupListPanel.getRoot())) {
+            groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Displays the normal UI.
+     */
+    @FXML
+    public void handlePersonCommand() {
+        groupListPanelPlaceholder.getChildren().remove(groupListPanel.getRoot());
+        if (!personListPanelPlaceholder.getChildren().contains(personListPanel.getRoot())) {
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public GroupListPanel getGroupListPanel() {
+        return groupListPanel;
     }
 
     /**
@@ -176,7 +236,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -184,6 +243,19 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isGroupCommand()) {
+                handleGroupCommand();
+            } else {
+                handlePersonCommand();
+            }
+
+            if (commandResult.isClear()) {
+                handleClear();
+            } else {
+                // If it's not a clear command, set the feedback message in ResultDisplay
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             }
 
             return commandResult;

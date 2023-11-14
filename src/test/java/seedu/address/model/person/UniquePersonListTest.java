@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -40,11 +40,10 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_personWithSameIdentityFieldsInList_returnsFalse() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(uniquePersonList.contains(editedAlice));
     }
 
     @Test
@@ -85,8 +84,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedAlice);
@@ -171,5 +169,37 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void equals_sameList_returnsTrue() {
+        UniquePersonList firstList = new UniquePersonList();
+        UniquePersonList secondList = new UniquePersonList();
+        assertTrue(firstList.equals(secondList));
+    }
+
+    @Test
+    public void equals_differentLists_returnsFalse() {
+        UniquePersonList firstList = new UniquePersonList();
+        UniquePersonList secondList = new UniquePersonList();
+        firstList.add(ALICE);
+        secondList.add(BOB);
+        assertFalse(firstList.equals(secondList));
+    }
+
+    @Test
+    public void hashCode_sameList_returnsSameHashCode() {
+        UniquePersonList firstList = new UniquePersonList();
+        UniquePersonList secondList = new UniquePersonList();
+        assertEquals(firstList.hashCode(), secondList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentLists_returnsDifferentHashCode() {
+        UniquePersonList firstList = new UniquePersonList();
+        UniquePersonList secondList = new UniquePersonList();
+        firstList.add(ALICE);
+        secondList.add(BOB);
+        assertNotEquals(firstList.hashCode(), secondList.hashCode());
     }
 }
