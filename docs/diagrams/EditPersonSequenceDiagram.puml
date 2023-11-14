@@ -9,7 +9,6 @@ participant ":SpendNSplitParser" as SpendNSplitParser LOGIC_COLOR
 participant ":EditPersonCommandParser" as EditPersonCommandParser LOGIC_COLOR
 participant ":PersonDescriptor" as PersonDescriptor LOGIC_COLOR
 participant "ep:EditPersonCommand" as EditPersonCommand LOGIC_COLOR
-participant ":Person" as Person LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant "<<class>>\nEditPersonCommand" as EditPersonCommandClass LOGIC_COLOR
 end box
@@ -77,14 +76,7 @@ deactivate Model
 EditPersonCommand -> EditPersonCommandClass : createEditedPerson(personToEdit, personDescriptor)
 activate EditPersonCommandClass
 
-create Person
-EditPersonCommandClass -> Person
-activate Person
-
-Person --> EditPersonCommandClass
-deactivate Person
-
-EditPersonCommandClass --> EditPersonCommand
+EditPersonCommandClass --> EditPersonCommand : editedPerson
 deactivate EditPersonCommandClass
 
 EditPersonCommand -> Model : setPerson(personToEdit, editedPerson)
