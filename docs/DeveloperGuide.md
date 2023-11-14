@@ -128,7 +128,7 @@ The `Model` component,
 <div markdown="span" class="alert alert-info">:information_source: **Note:** A simpler model of the Person class is given below. 
 Firstly the Addressbook a list of all the `Person` objects in the `AddressBook`. It also has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="700" />
 
 </div>
 
@@ -257,6 +257,26 @@ Step 4. `UniqueReminderList` should also be updated daily with `ReminderSchedule
     * Pros: Reminders will always be up to date
     * Cons: Will require more processing power and might slow down the application
 
+
+### Edit Single field Macro feature
+
+Keying in the ***edit*** command can be a little tedious to use especially if the user only want to edit a single field of a client profile. The edit single field is a macro to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
+
+#### Current Implementation
+
+The proposed Edit Single field Macro mechanism is facilitated by `AddressBookParser` and `EditCommandMacroParser`
+
+`AddressBookParser` contains an enum with the different person fields to expect as command words.
+
+Then in its parseCommand method, if it is not another valid command word, it will check in the default if it is a valid person field by iterating through the enum. If it is, it will create a `EditCommandMacroParser` and pass the command to it through its constructor.
+
+`EditCommandMacroParser` will then take in the input, and parse the `index` and the argument to the command without any prefix similar to the `FindCommand`. It will then create a `EditCommand` with only the `commandWord` changed to its single argument input and pass said `EditCommand` to the `LogicManager` to execute.
+
+`EditCommandMacroParser` does the argument checking using `ParseUtil` commands to check if they are valid arguments. However other checks like whether it is a valid index or duplicated person is done by the `EditCommand` itself.
+
+#### Design considerations:
+This is a huge step up in terms of code efficiency as compared to creating a new command for each field.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -306,14 +326,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a client**
+For each use case, "User is in client view" means an expectation that user has already executed the `list` command and is viewing the list of clients. However the user could be in the dashboard view, in this case the command will still work, but as an additional step, the user will be redirected to the client view after the command finishes executing. 
+
+To enter the client view see Use case UC01:
+
+**Use case: UC01 - Enter client view**
 
 **MSS**
 
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  Connectify deletes the client
+1.  User opens the app and is in dashboard view
+2.  User requests to enter client view
+3.  Connectify shows the client view
+
+    Use case ends.
+
+**Use case: UC02 - Delete a client**
+
+**MSS**
+
+1.  User is in client view
+2.  User requests to delete a specific client in the list
+3.  Connectify deletes the client
 
     Use case ends.
 
@@ -323,65 +356,130 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
-**Use case: Add a client interaction**
+**Use case: UC02 - Add a client interaction**
 
 **MSS**
 
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests create a client interaction
-4.  Connectify adds the interaction to the client profile
+1. User is in client view
+2.  User requests create a client interaction
+3.  Connectify adds the interaction to the client profile
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The user does not exist.
+* 2a. The user does not exist.
 
-    * 3a1. Connectify shows an error message.
+    * 2a1. Connectify shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The client interaction is empty
+* 2b. The entered client interaction is invalid
    
-    * 3b1. Connectify shows an error message.
+    * 2b1. Connectify shows an error message.
    
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
-**Use case: Mark a client as “Cold”, “Warm” or “Hot” Leads**
+**Use case: UC03 - Edit a client’s profile**
+
+**Guarantees:**
+
+* The client’s profile will be updated only if the command is executed successfully.
 
 **MSS**
 
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests to mark a client as “Cold”, “Warm” or “Hot” Lead
-4.  Connectify displays the updated client profile
+1. User is in client view
+2. User requests to edit a client’s profile
+3. Connectify shows the updated client’s profile
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The user does not exist.
+* 2a. The user does not exist.
 
-    * 3a1. Connectify shows an error message.
+    * 2a1. Connectify shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The lead category is key'ed in wrong or empty
-   
-    * 3b1. Connectify shows an error message.
-   
-      Use case resumes at step 2.
+* 2b. The edited fields are invalid
 
-*{More to be added}*
+    * 2b1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC04 - View a client’s full profile**
+
+**MSS**
+
+1. User is in client view
+2. User requests to view a client’s full profile
+3. Connectify shows the client’s full profile
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not exist.
+
+    * 2a1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: UC05 - Mark a client as “Cold”, “Warm” or “Hot” Leads**
+
+**Guarantees:**
+
+* The client’s profile will be updated only if the command is executed successfully.
+
+**MSS**
+
+Very similar to UC03, the difference being that only the `lead` field is updated only if the entered field is a valid lead.
+
+**Use case: UC06 - View dashboard analytics**
+
+**MSS**
+1. User is in client view
+2. User requests to view dashboard analytics
+3. Connectify shows the dashboard analytics
+
+    Use case ends.
+
+**Use case: UC07 - View Help**
+
+**MSS**
+1. User requests to view help
+2. The help window is shown
+
+    Use case ends.
+
+**Use case: UC08 - Find a client**
+
+**MSS**
+1. User is in client view
+2. User requests to find a client
+3. Connectify filters the address book list to show only clients that match the search query
+
+    Use case ends.
+
+**Use case: UC09 - Clear the address book**
+
+**MSS**
+1. User is in client view
+2. User requests to clear the address book
+3. Connectify clears the address book
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
