@@ -169,8 +169,6 @@ Here are some definitions of the terms used throughout this user guide.
 **Main Window**:
 ![Ui Component](images/UiComponent.png)
 
-Here is a brief summary of the GUI components in MedBook.
-
 | **Name of Component** | **Description**                                                                                          |
 | --------------------- | -------------------------------------------------------------------------------------------------------- |
 | Menu Bar              | Displays the drop down menus for MedBook, such as **File** and **Help**                                  |
