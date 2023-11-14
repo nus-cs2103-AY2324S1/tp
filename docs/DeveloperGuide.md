@@ -167,7 +167,7 @@ The Interaction feature is implemented using the `Interaction` class. A `Person`
 ![InteractionClassDiagram](images/InteractionClassDiagram.png)
 
 `InteractionNote` will store the details of the interaction.
-`InteractionOutcome` is an Enumeration used to store the outcome of the interaction.
+`Outcome` is an Enumeration used to store the outcome of the interaction.
 There is also a `date` field to store the date of the interaction. This is set to the current date when the interaction is created.
 
 When the user executes the `interaction` command, an `Interaction` is created and added to the `Person`'s list of interactions. The new `Interaction` is then displayed in the `PersonCard` automatically.
@@ -244,10 +244,6 @@ Step 4. `UniqueReminderList` should also be updated daily with `ReminderSchedule
 * **Alternative 2:** Updates Reminders when commands are executed
     * Pros: Reminders will always be up to date
     * Cons: Will require more processing power and might slow down the application
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
