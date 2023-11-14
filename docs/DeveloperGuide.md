@@ -246,6 +246,8 @@ Step 3. When displaying the `Reminder`'s, the `UniqueReminderList` will then be 
 
 Step 4. `UniqueReminderList` should also be updated daily with `ReminderScheduler` class. This will ensure that if the user leaves the dashboard open for prolonged periods, the reminders will be able to sync up to account for the time passed
 
+![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
+
 #### Design considerations:
 
 **Aspect: How Reminders executes:**
