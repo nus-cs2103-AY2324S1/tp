@@ -69,7 +69,6 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
-[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -738,6 +737,7 @@ Name clash detected.
 Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -821,6 +821,7 @@ Unknown command
 <br>
 <div style="page-break-after: always;"></div>
 
+
 ### Filter Feature
 
 #### For Student:
@@ -861,6 +862,7 @@ Usage: filter (any number of unique -[name|subject|tag|remark] [value]).
 For example, filter -name John -subject physics,english
 ```
 <div style="page-break-after: always;"></div>
+
 #### For Schedule:
 <box type="info" seamless>
 
@@ -1074,6 +1076,7 @@ Note: This command is only available when a lesson is shown
 ```
 No such student with name Bernice Yong found
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 This feature is not used for tasks!
@@ -1235,9 +1238,7 @@ Format: `help`
 ### Saving Data
 
 TutorMate data is saved in the _hard disk_<sup>[9](#glossary)</sup> automatically after any command that changes the data. There is no need to save manually.
-
 <br>
-
 ### Editing Data File
 
 TutorMate data is saved automatically as _JSON_<sup>[10](#glossary)</sup> files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. It is possible to update data directly by editing that data file, but we do not recommend doing so.
@@ -1282,24 +1283,25 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 ## Command Summary
 
-| Action       | List                                    | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
-|--------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| **List**     | Any                                     | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the 📅 ___SCHEDULE list___     |
-| **Show**     | Any                                     | `show INDEX`                                                                                                                              | `show 1`, `show 3`                                                                                             | `show` will show the specified item at the given index of the current list |
-| **Add**      | Students(`add`), Any(`addPerson`)       | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                         |
-| **Add**      | Schedule(`add`), Any(`addLesson`)       | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                         |
-| **Add**      | Schedule                                | `addTask [INDEX] DESCRIPTION`                                                                                                             | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                         |
-| **Delete**   | Students(`delete`), Any(`deletePerson`) | `deletePerson INDEX`                                                                                                                      | `deletePerson 1`                                                                                               | NA                                                                         |
-| **Delete**   | Schedule(`delete`), Any(`deleteLesson`) | `deleteLesson INDEX`                                                                                                                      | `deleteLesson 1`                                                                                               | NA                                                                         |
-| **Delete**   | Schedule                                | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`       |
-| **Edit**     | Students(`edit`), Any(`editPerson`)     | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | `INDEX` can be  omitted when editing the currently shown person            |
-| **Edit**     | Schedule(`edit`), Any(`editLesson`)     | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | `INDEX` can be  omitted when editing the currently shown lesson            |
-| **Find**     | Students, Schedule                      | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in 💼 ___TASKS list___                                            |
-| **Filter**   | Students                                | `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`                                                                     | `filter -name Alex -tag primary -subject Mathematics`                                                          | NA                                                                         |
-| **Filter**   | Schedule                                | `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`                                        | `filter -before 2023/12/20 -subject Mathematics`                                                               | NA                                                                         |
-| **Link**     | Students                                | `linkTo LESSON_NAME`                                                                                                                      | `linkTo CS2103T Lab`                                                                                           | There is no way to unlink lesson to student                                |
-| **Link**     | Schedule                                | `linkTo STUDENT_NAME`                                                                                                                     | `linkTo Bernice Yu`                                                                                            | There is no way to unlink student to lesson                                |
-| **Navigate** | Students, Schedule                      | `nav`                                                                                                                                     | `nav`                                                                                                          | Student/Lesson should have at least one linked lesson/student              |
+| Action       | List                                      | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
+|--------------|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **List**     | Any                                       | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the 📅 ___SCHEDULE list___     |
+| **Show**     | Any                                       | `show INDEX`                                                                                                                              | `show 1`, `show 3`                                                                                             | `show` will show the specified item at the given index of the current list |
+| **Add**      | Students(`add`), Any(`addPerson`)         | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                         |
+| **Add**      | Schedule(`add`), Any(`addLesson`)         | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                         |
+| **Add**      | Schedule                                  | `addTask [INDEX] DESCRIPTION`                                                                                                             | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                         |
+| **Delete**   | Students(`delete`), Any(`deletePerson`)   | `deletePerson INDEX`                                                                                                                      | `deletePerson 1`                                                                                               | NA                                                                         |
+| **Delete**   | Schedule(`delete`), Any(`deleteLesson`)   | `deleteLesson INDEX`                                                                                                                      | `deleteLesson 1`                                                                                               | NA                                                                         |
+| **Delete**   | Schedule                                  | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`       |
+| **Edit**     | Students(`edit`), Any(`editPerson`)       | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | `INDEX` can be  omitted when editing the currently shown person            |
+| **Edit**     | Schedule(`edit`), Any(`editLesson`)       | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | `INDEX` can be  omitted when editing the currently shown lesson            |
+| **Find**     | Students, Schedule                        | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in 💼 ___TASKS list___                                            |
+| **Filter**   | Students                                  | `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`                                                                     | `filter -name Alex -tag primary -subject Mathematics`                                                          | NA                                                                         |
+| **Filter**   | Schedule                                  | `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`                                        | `filter -before 2023/12/20 -subject Mathematics`                                                               | NA                                                                         |
+| **Link**     | Students, Schedule                        | `link -student STUDENT_NAME -lesson LESSON_NAME`                                                                                          | `link -student Alex Yeoh -lesson CS2103T Lab`                                                                  | There is no way to unlink lesson to student                                |
+| **Link**     | Students                                  | `linkTo LESSON_NAME`                                                                                                                      | `linkTo CS2103T Lab`                                                                                           | There is no way to unlink lesson to student                                |
+| **Link**     | Schedule                                  | `linkTo STUDENT_NAME`                                                                                                                     | `linkTo Bernice Yu`                                                                                            | There is no way to unlink student to lesson                                |
+| **Navigate** | Students, Schedule                        | `nav`                                                                                                                                     | `nav`                                                                                                          | Student/Lesson should have at least one linked lesson/student              |
 
 [Back to Table of Contents](#table-of-contents)
 
