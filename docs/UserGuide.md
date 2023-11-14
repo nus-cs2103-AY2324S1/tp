@@ -1227,7 +1227,7 @@ To reset the persons and tasks view, simply run the <a href='#42-listing-all-per
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that a keyword is provided.
+`Invalid command format! …` | Ensure that a keyword is provided.
 
 <div style="page-break-after: always;"></div>
 
@@ -1279,7 +1279,7 @@ To reset the persons and tasks view, simply run the <a href='#42-listing-all-per
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that a keyword is provided.
+`Invalid command format! …` | Ensure that a keyword is provided.
 
 <div style="page-break-after: always;"></div>
 
