@@ -467,9 +467,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Product scope
 
-**Target user profile**: Clinic staff who
+**Target user profile**: Clinic staff who:
 
-* has a need to manage a significant number of contacts
+* have a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -483,20 +483,21 @@ tasks.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                           | I want to …​                        | So that I can…​                                                        |
-|----------|-----------------------------------|-------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                          | see usage instructions              | refer to instructions when I forget how to use the App                 |
-| `* * *`  | Hospital Staff                    | add a new patient                   | access patient details quickly next time                               |
-| `* * *`  | Hospital Staff                    | add a new doctor                    | include doctors assigned to the patients                               |
-| `* * *`  | Hospital Staff                    | delete a patient/doctor             | remove entries that I no longer need                                   |
-| `* * *`  | Hospital Staff                    | add an appointment                  | tell which patient/doctor is coming at what time                       |
-| `* * *`  | Hospital Staff                    | update patient's details            | information remains accurate                                           |
-| `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |
-| `* * *`  | Hospital Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
-| `* *`    | Hospital Staff                    | hide private contact details        | minimize chance of someone else seeing them by accident                |
-| `*`      | Hospital Staff with many contacts | sort persons by name                | locate a person easily                                                 |
-| `*`      | Hospital Staff                    | undo previous command               | prevent mistakes                                                       |
-| `*`      | Hospital staff                    | redo previously undid command       | prevent mistakes                                                       |
+| Priority | As a …​                         | I want to …​                        | So that I can…​                                                        |
+|----------|---------------------------------|-------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                        | see usage instructions              | refer to instructions when I forget how to use the App                 |
+| `* * *`  | Clinic Staff                    | add a new patient                   | access patient details quickly next time                               |
+| `* * *`  | Clinic Staff                    | add a new doctor                    | include doctors assigned to the patients                               |
+| `* * *`  | Clinic Staff                    | delete a patient/doctor             | remove entries that I no longer need                                   |
+| `* * *`  | Clinic Staff                    | add an appointment                  | tell which patient/doctor is coming at what time                       |
+| `* * *`  | Clinic Staff                    | update patient's details            | information remains accurate                                           |
+| `* * *`  | Clinic Staff                    | update doctor's details             | information remains accurate                                           |
+| `* * *`  | Clinic Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
+| `* * *`  | Clinic Staff                    | reassign patients to doctors/nurses | account for changes in the people treating the patients                |
+| `* *`    | Clinic Staff                    | hide private contact details        | minimize chance of someone else seeing them by accident                |
+| `*`      | Clinic Staff with many contacts | sort persons by name                | locate a person easily                                                 |
+| `*`      | Clinic Staff                    | undo previous command               | prevent mistakes                                                       |
+| `*`      | Clinic staff                    | redo previously undid command       | prevent mistakes                                                       |
 
 
 ### Use cases
@@ -782,30 +783,254 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a patient
+
+1. Adding a patient without using a tag
+
+    1. Prerequisites: There is no patient or doctor with NRIC S9851386G added yet.
+   
+    2. Test case: `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com 
+      a/John street, block 123, #01-01 c/pneumothorax b/O+`<br>
+      Expected: Patient with above details added to Patient list. Details of the added patient shown in the status
+      message. 
+
+    3. Test case: `add-patient n/John Doe ic/S985138G g/M p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/O+`<br>
+       Expected: No patient is added. Error details shown in the status message.
+
+    4. Other incorrect add-patient commands to try: `add-patient n/John Doe ic/S9851386G g/K p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/O+`, `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/C+`<br>
+       Expected: Similar to previous.
+
+2. Adding a patient using a tag
+
+    1. Prerequisites: There is no patient or doctor with NRIC S9851386G added yet.
+
+    2. Test case: `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/O+ t/high`<br>
+       Expected: Patient with above details added to Patient list. Details of the added patient shown in the status
+       message.
+
+    3. Test case: `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/O+ t/extreme`<br>
+       Expected: No patient is added. Error details shown in the status message.
+
+    4. Other incorrect add-patient commands to try: `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/O+ t/`, `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com
+       a/John street, block 123, #01-01 c/pneumothorax b/O+ t/high t/low`<br>
+       Expected: Similar to previous.
+
+### Adding a doctor
+
+1. Adding a doctor without using tags
+
+    1. Prerequisites: There is no patient or doctor with NRIC S9851386G added yet.
+
+    2. Test case: `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+       Expected: Doctor with above details added to Doctor list. Details of the added doctor shown in the status
+       message.
+
+    3. Test case: `add-doctor n/John Doe ic/S985138G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+       Expected: No doctor is added. Error details shown in the status message.
+
+    4. Other incorrect add-doctor commands to try: `add-doctor n/John Doe ic/S9851386G g/K p/98765432 e/johnd@example.com a/John street, block 123, #01-01`,
+       `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/j@k a/John street, block 123, #01-01`<br>
+       Expected: Similar to previous.
+
+2. Adding a doctor using tags
+
+    1. Prerequisites: There is no patient or doctor with NRIC S9851386G added yet.
+
+    2. Test case: `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/surgeon t/general_practitioner`<br>
+       Expected: Doctor with above details added to Doctor list. Details of the added doctor shown in the status
+       message.
+
+    3. Test case: `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/high`<br>
+       Expected: No doctor is added. Error details shown in the status message.
+
+    4. Other incorrect add-doctor commands to try: `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/special`,
+       `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/high t/surgeon`<br>
+       Expected: Similar to previous.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Patient/Doctor with NRIC S1111111Z already added.
 
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+    2. Test case: `delete S1111111Z`<br>
+       Expected: Person with NRIC S1111111Z is deleted from the list. Details of the deleted contact shown in the status message.
 
-    3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete S1111Z`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete Y1234567H`<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+### Finding a person
+
+1. Finding a person by name
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list with different names. At least one Patient/Doctor with name Jonathan already added. No persons with Jon in their name should be added.
+
+    2. Test case: `find Jonathan`<br>
+       Expected: Patient and Doctor list only shows all persons containing Jonathan in their name. Number of persons found shown in the status message.
+   
+    3. Test case: `find Jon`<br>
+       Expected: Patient and Doctor list should be empty. 0 persons found should be shown in the status message.
+
+    4. Other test cases under find by name: `find s1111111z` (as NRIC is not capitalised), `find f` (as Gender is not capitalised).
+       Expected: Similar to previous (unless persons with the names s1111111z, f etc. exist).
+
+2. Finding a person by gender
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list with different genders, at least one of each gender.
+
+    2. Test case: `find M`<br>
+       Expected: Patient and Doctor list only shows all persons of the Male gender. Number of persons found shown in the status message.
+
+    3. Test case: `find F`<br>
+       Expected: Patient and Doctor list only shows all persons of the Female gender. Number of persons found shown in the status message.
+
+3. Finding a person by NRIC
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Patient/Doctor with NRIC S1111111Z already added.
+   
+    2. Test case: `find S1111111Z`<br>
+       Expected: Patient and Doctor list only shows the person with the NRIC S1111111Z. 1 person found shown in the status message.
+
+    3. Test case: `find T1111111Z`<br>
+       Expected: Patient and Doctor list should be empty. 0 persons found should be shown in the status message.
+
+### Editing a person
+
+1. Editing a patient
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Patient with NRIC S1111111Z already added.
+
+    2. Test case: `edit S1111111Z n/Thomas`<br>
+       Expected: Patient with NRIC S1111111Z is edited. Details of the edited patient, including the name Thomas, is shown in status message.
+
+    3. Test case: `edit S1111111Z n/Thomas b/K+`<br>
+       Expected: No patient is edited. Error details shown in the status message.
+
+    4. Other incorrect edit commands to try: `edit S1111111Z n/Thomas p/3`, `edit S1111111Z n/Thomas ec/0`<br>
+       Expected: Similar to previous.
+
+2. Editing a doctor
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Doctor with NRIC S1111111Z already added.
+
+    2. Test case: `edit S1111111Z n/Thomas`<br>
+       Expected: Doctor with NRIC S1111111Z is edited. Details of the edited doctor, including the name Thomas, is shown in status message.
+
+    3. Test case: `edit S1111111Z n/Thomas b/O+`<br>
+       Expected: No doctor is edited. Error details shown in the status message.
+
+    4. Other incorrect edit commands to try: `edit S1111111Z n/Thomas ec/91467892`, `edit S1111111Z n/Thomas c/Injured`<br>
+       Expected: Similar to previous.
+
+### Creating new appointment
+
+1. Creating a new appointment with no existing appointments
+
+    1. Prerequisites: Patient with NRIC T0123456H as well as Doctor with NRIC S9851586G already added. No existing appointments created.
+
+    2. Test case: `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`<br>
+       Expected: Appointment with the above details is added to the Appointment list. Details of the added appointment shown in the status
+       message.
+
+    3. Test case: `new-appt pic/T0123456H dic/S9851586G time/2023-10-35 13:00`<br>
+       Expected: No appointment is created. Error details shown in the status message.
+
+    4. Other incorrect new-appt commands to try: `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 33:00`,
+       `new-appt pic/T012345H dic/S9851586G time/2023-10-30 13:00`<br>
+       Expected: Similar to previous
+
+2. Creating a new appointment with appointments already added
+
+    1. Prerequisites: Patient with NRIC T0123456H as well as Doctor with NRIC S9851586G already added. Appointment created using `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`.
+
+    2. Test case: `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:30`<br>
+       Expected: Appointment with the above details is added to the Appointment list. Details of the added appointment shown in the status
+       message.
+
+    3. Test case: `new-appt pic/T0123456H dic/S9851586G time/2023-10-35 13:00`<br>
+       Expected: No appointment is created. Error details shown in the status message.
+
+### Deleting an appointment
+
+1. Deleting an appointment while all appointments are being shown
+
+    1. Prerequisites: List all appointments using the `list` command. Exactly 3 appointments in the list.
+
+    2. Test case: `delete-appt 2`<br>
+       Expected: Second appointment in the Appointment list is deleted. Details of the deleted appointment shown in the status message.
+
+    3. Test case: `delete-appt 0`<br>
+       Expected: No appointment is deleted. Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `delete-appt 4` (or any other index greater than 3), `delete-appt`<br>
+       Expected: Similar to previous.
+
+### Finding an appointment
+
+1. Finding an appointment while all appointments are being shown
+
+    1. Prerequisites: List all appointments using the `list` command. Multiple appointments in the list. 
+       Patient with NRIC T0123456H as well as Doctor with NRIC S9851586G already added. Appointment created using `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`.
+
+    2. Test case: `find-appt T0123456H`<br>
+       Expected: All appointments, including the one added in the prerequisites section, involving a Patient or Doctor with the above NRIC 
+       are shown in the Appointment list. Number of appointments found shown in the status message.
+
+    3. Test case: `find-appt S9851586G`<br>
+       Expected: All appointments, including the one added in the prerequisites section, involving a Patient or Doctor with the above NRIC
+       are shown in the Appointment list. Number of appointments found shown in the status message.
+
+    4. Test case: `find-appt T012345H`<br>
+       Expected: Error details shown in error message.
+
+    5. Other incorrect find-appt commands to try: `find-appt`, `find-appt T01234567H`
+       Expected: Similar to previous.
+
+### Undoing previous command
+
+1. Undo a delete command
+
+    1. Prerequisites: Deleted a person using the `delete` command. No other command performed since opening the app.
+
+    2. Test case: `undo`<br>
+       Expected: Deleted person can be seen in the address book. Successful undo shown in the status message.
+
+    3. Test case: `undo` 2 times<br>
+       Expected: Second undo unsuccessful. Error details shown in error message.
+
+2. Undo over 5 consecutive times
+
+    1. Prerequisites: Performed at least 5 commands since opening the app.
+
+    2. Test case: `undo` 6 times<br>
+       Expected: Sixth undo unsuccessful. Error details shown in error message.
+
+### Redoing an undone command
+
+1. Redo a delete command reversed by undo
+
+    1. Prerequisites: Deleted a person using the `delete` command, then used `undo` right after. No other command performed since opening the app.
+
+    2. Test case: `redo`<br>
+       Expected: Person is deleted from the list. Successful redo shown in the status message.
+
+    3. Test case: `redo` 2 times<br>
+       Expected: Second redo unsuccessful. Error details shown in error message.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Enter the data file and edit one of the Patient/Doctor fields to become an invalid field. For example,
+       changing a Patient's tag from `priority: LOW` to `priority: EXTREME`
 
-2. _{ more test cases …​ }_
+    2. Exit and re-enter the app. All data from the address book should be cleared, and all lists should be empty.
