@@ -1,8 +1,12 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.CreateTagCommand.MESSAGE_FAILURE;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,6 +102,10 @@ public class UniqueTagList {
                     return tag;
                 }
             }
+            if (!containsTagCategory(tagCategory)
+                    && countDistinctCategories(internalList) > 5) {
+                throw new ParseException(MESSAGE_FAILURE);
+            }
             Tag tag = new Tag(tagName, tagCategory);
             add(tag);
             return tag;
@@ -119,6 +127,20 @@ public class UniqueTagList {
         Tag uncategorisedTag = new Tag(tagName, "uncategorised");
         this.add(uncategorisedTag); // add uncategorised tag to unique tag list
         return uncategorisedTag;
+    }
+
+    private int countDistinctCategories(List<Tag> tags) {
+        requireNonNull(tags);
+        Set<String> distinctCategories = new HashSet<>();
+
+        for (Tag tag : tags) {
+            String tagCategory = tag.getTagCategory();
+            if (!tagCategory.equals("uncategorised")) {
+                distinctCategories.add(tagCategory);
+            }
+        }
+
+        return distinctCategories.size();
     }
 
     /**
