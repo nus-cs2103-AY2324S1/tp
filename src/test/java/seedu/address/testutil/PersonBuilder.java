@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.event.Event;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +30,8 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private List<Note> notes;
+    private List<Event> events;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +42,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        notes = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
     /**
@@ -47,6 +55,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        notes = new ArrayList<>(personToCopy.getNotes());
+        events = new ArrayList<>(personToCopy.getEvents());
     }
 
     /**
@@ -90,7 +100,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, notes, events);
     }
 
 }

@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,10 +12,12 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -91,6 +94,24 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
+    public void getSortedFilteredEventList_throwsNullPointerExceptionWhenListNotGenerated() {
+        assertThrows(NullPointerException.class, () -> modelManager.getSortedFilteredEventList());
+    }
+
+    @Test
+    public void getSortedFilteredEventList_generateList_success() {
+        Comparator<Event> comparatorStub = (e1, e2) -> e1.hashCode() - e2.hashCode();
+        assertDoesNotThrow(() -> modelManager
+                .generateSortedFilteredEventList(comparatorStub));
+        assertTrue(modelManager.getSortedFilteredEventList().isEmpty());
     }
 
     @Test

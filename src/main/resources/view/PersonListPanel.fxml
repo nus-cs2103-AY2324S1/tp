@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableColumn?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+  <TableView fx:id="table" VBox.vgrow="ALWAYS">
+    <columns>
+      <TableColumn fx:id="indexCol" text="ID"/>
+      <TableColumn fx:id="contactCol" text="Contact"/>
+      <TableColumn fx:id="notesCol" text="Notes"/>
+      <TableColumn fx:id="eventsCol" text="Events"/>
+    </columns>
+  </TableView>
 </VBox>
