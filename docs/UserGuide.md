@@ -591,7 +591,7 @@ All persons will be removed from your contact list immediately. This action is i
 
 #### 2.1. Adding a task: `addTask`
 
-You can add a task to your task list, so that you can keep track of important things to do.
+You can add new tasks to your task list, so that you can keep track of important things to do.
 
 <h4>Format:</h4>
 
