@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.event.Event;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable EventBook that is serializable to JSON format.
  */
 @JsonRootName(value = "eventbook")
 class JsonSerializableEventBook {

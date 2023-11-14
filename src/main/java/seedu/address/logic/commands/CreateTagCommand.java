@@ -83,7 +83,9 @@ public class CreateTagCommand extends Command {
 
         for (Tag tag : tags) {
             String tagCategory = tag.getTagCategory();
-            distinctCategories.add(tagCategory);
+            if (!tagCategory.equals("uncategorised")) {
+                distinctCategories.add(tagCategory);
+            }
         }
 
         return distinctCategories.size();
