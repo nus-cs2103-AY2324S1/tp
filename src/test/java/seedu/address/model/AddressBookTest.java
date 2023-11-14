@@ -3,11 +3,11 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRsvps.ALICE_FSC_CC;
+import static seedu.address.testutil.TypicalRsvps.CARL_CODING_TBC;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,8 +18,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.displayable.DisplayableListViewItem;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.rsvp.Rsvp;
+import seedu.address.model.vendor.Vendor;
+import seedu.address.model.venue.Venue;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -46,7 +51,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -73,7 +78,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -81,6 +86,27 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasRsvp_nullRsvp_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasRsvp(null));
+    }
+
+    @Test
+    public void hasRsvp_rsvpNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasRsvp(CARL_CODING_TBC));
+    }
+
+    @Test
+    public void hasRsvp_rsvpInAddressBook_returnsTrue() {
+        addressBook.addRsvp(ALICE_FSC_CC);
+        assertTrue(addressBook.hasRsvp(ALICE_FSC_CC));
+    }
+
+    @Test
+    public void getRsvpList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getRsvpList().remove(0));
     }
 
     @Test
@@ -94,6 +120,14 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
+        private final ObservableList<Venue> venues = FXCollections.observableArrayList();
+        private final ObservableList<Person> eventAttendees = FXCollections.observableArrayList();
+        private final ObservableList<Vendor> eventVendors = FXCollections.observableArrayList();
+        private final ObservableList<DisplayableListViewItem> displayableItems = FXCollections.observableArrayList();
+        private final ObservableList<Rsvp> rsvps = FXCollections.observableArrayList();
+        private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -102,6 +136,41 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            return events;
+        }
+
+        @Override
+        public ObservableList<Person> getEventAttendeesList() {
+            return eventAttendees;
+        }
+
+        @Override
+        public ObservableList<Vendor> getEventVendorsList() {
+            return eventVendors;
+        }
+
+        @Override
+        public ObservableList<DisplayableListViewItem> getDisplayableItemList() {
+            return displayableItems;
+        }
+
+        @Override
+        public ObservableList<Venue> getVenueList() {
+            return venues;
+        }
+
+        @Override
+        public ObservableList<Rsvp> getRsvpList() {
+            return rsvps;
+        }
+
+        @Override
+        public ObservableList<Vendor> getVendorList() {
+            return vendors;
         }
     }
 

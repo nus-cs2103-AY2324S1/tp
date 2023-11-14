@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes DeleteCommand;
+if () then ([all parameters are valid])
+  :Delete Person from model;
+  if () then ([Person deleted is part of one or more Event])
+    :Delete Person from Event;
+    :Create edited Event without Person;
+    :Update Event in Model;
+    if () then ([RSVP Object for Person exists])
+       :Delete RSVP Object;
+       :Update RSVP List in Model;
+    else ([else])
+    stop
+    endif
+  else ([else]))
+  stop
+  endif
+else ([else])
+  :Error: Invalid command format;
+  stop
+endif
+
+stop
+
+@enduml

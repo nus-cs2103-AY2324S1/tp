@@ -31,6 +31,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private DisplayableListPanel displayableListPanel;
+    private EventDetailsDisplay eventDetailsDisplay;
+    private VendorListPanel vendorListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -40,6 +43,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane displayableItemListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventDetailsPlaceholder;
+
+    @FXML
+    private StackPane vendorListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -110,8 +122,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        displayableListPanel = new DisplayableListPanel(logic.getFilteredDisplayableItemsList());
+        displayableItemListPanelPlaceholder.getChildren().add(displayableListPanel.getRoot());
+
+        eventDetailsDisplay = new EventDetailsDisplay();
+        eventDetailsPlaceholder.getChildren().add(eventDetailsDisplay.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getFilteredEventAttendeesList(), logic.getFilteredEventRsvpList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        vendorListPanel = new VendorListPanel(logic.getFilteredEventVendorsList());
+        vendorListPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -191,6 +212,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        } finally {
+            eventDetailsDisplay.setEventDetails(logic.getEventToView());
         }
     }
 }

@@ -8,7 +8,11 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.displayable.DisplayableListViewItem;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.rsvp.Rsvp;
+import seedu.address.model.vendor.Vendor;
 
 /**
  * API of the Logic component
@@ -32,6 +36,26 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Event> getFilteredEventList();
+
+    /** Returns an unmodifiable view of the filtered list of event attendees */
+    ObservableList<Person> getFilteredEventAttendeesList();
+
+    /** Returns an unmodifiable view of the filtered list of event vendors */
+    ObservableList<Vendor> getFilteredEventVendorsList();
+
+    /** Returns an unmodifiable view of the filtered list of event attendees */
+    ObservableList<DisplayableListViewItem> getFilteredDisplayableItemsList();
+
+    /** Returns an unmodifiable view of the filtered list of rsvps */
+    ObservableList<Rsvp> getFilteredRsvpList();
+
+    ObservableList<Rsvp> getFilteredEventRsvpList();
+
+    /** Returns the current event to be viewed */
+    Event getEventToView();
 
     /**
      * Returns the user prefs' address book file path.

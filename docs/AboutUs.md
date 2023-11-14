@@ -5,55 +5,35 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Dominic Ng Jun Yao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dom-buri.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/dom-buri)]
+[[portfolio](team/dom-buri.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code Quality
 
-### Jean Doe
+### Kevin Toh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ktzy0305.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://kevintoh.cc)]
+[[github](https://github.com/ktzy0305)]
+[[portfolio](team/ktzy0305.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UX
 
-### James Doe
+### He Ruoqing Vivien
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vivienherq.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vivienherq)]
+[[portfolio](team/vivienherq.md)]
 
 * Role: Developer
 * Responsibilities: UI

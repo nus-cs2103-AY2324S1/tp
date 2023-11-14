@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes EditCommand;
+if () then ([all parameters are valid])
+  :Get Person to edit;
+  :Create edited Person;
+  :Update Person in model;
+  if () then ([Person to edit is part of one or more Event])
+    :Replace Person in event with edited Person;
+    :Create edited Event;
+    :Update Event in Model;
+    if () then ([RSVP Object for Person exists])
+       :Update RSVP for Person;
+       :Update RSVP List in Model;
+    else ([else])
+    stop
+    endif
+  else ([else]))
+  stop
+  endif
+else ([else])
+  :Error: Invalid command format;
+  stop
+endif
+
+stop
+
+@enduml
