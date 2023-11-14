@@ -26,7 +26,7 @@ activate CommandParser
 CommandParser --> MainParser : parser
 deactivate CommandParser
 
-MainParser -> CommandParser : parse()
+MainParser -> CommandParser : parse(commandText)
 activate CommandParser
 
 create Comparator
@@ -36,27 +36,27 @@ activate Comparator
 Comparator -> ComparatorClass : generateComparator(field, order)
 activate ComparatorClass
 
-ComparatorClass --> Comparator
+ComparatorClass --> Comparator : comparator
 deactivate ComparatorClass
 
-Comparator --> CommandParser : Comparator
+Comparator --> CommandParser : comparator
 deactivate Comparator
 
 create Command
 CommandParser -> Command : new SortCommand(comparator)
 activate Command
 
-Command --> CommandParser : Command
+Command --> CommandParser : command
 deactivate Command
 
-CommandParser --> MainParser : Command
+CommandParser --> MainParser : command
 deactivate CommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 CommandParser -[hidden]-> CommandParser
 destroy CommandParser
 
-MainParser --> Logic : Command
+MainParser --> Logic : command
 deactivate MainParser
 
 @enduml
