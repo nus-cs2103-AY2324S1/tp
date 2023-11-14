@@ -14,7 +14,7 @@ package CustomerObjectDiagram {
     }
     Object "<u>:Budget" as Budget {
     }
-    Object "<u>:Tags" as Tags {
+    Object "<u>:Tag" as Tag {
     }
 }
 
@@ -22,6 +22,6 @@ Name <-- Customer : has <
 Phone <-- Customer : has <
 Email <-- Customer : has <
 Budget <-- Customer : has <
-Tags <-- Customer : has <
+Tag <-- Customer : has <
 
 @enduml

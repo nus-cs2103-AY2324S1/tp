@@ -38,8 +38,12 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** <br> 
+- The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+- The diagrams are merely to showcase the general idea of how our codebase work. They do not serve as exact replicas of our code.
 </div>
+
+
 
 ### 3.1 Architecture
 [Back to top](#table-of-contents)
@@ -946,10 +950,10 @@ testers are expected to do more *exploratory* testing.
 
 ### C.1 Improved GUI
 
-#### C.1.1 Motivation:
+#### C.1.1 Motivation
 Our current GUI is not as user-friendly as we would like it to be. A well-designed and aesthetic GUI provides a more intuitive and user-friendly interface, making it easier for users to navigate, access features, and perform tasks within the app. It can also lead to higher user satisfaction.
 
-#### C.1.2 Implementation:
+#### C.1.2 Implementation
 1. Update the color scheme to make the GUI more visually appealing. Use colors that resonate with our brand or that create a pleasant atmosphere.
 2. Integrate relevant icons and imagery to represent different features and functions within the app, providing visual cues for users.
 3. Add whitespace effectively to create a clean and organized layout and reduce visual clutter.
@@ -957,19 +961,19 @@ Our current GUI is not as user-friendly as we would like it to be. A well-design
 
 ### C.2 Improved Error Messages
 
-#### C.2.1 Motivation:
+#### C.2.1 Motivation
 Some of our current error messages can be quite vague. As a user, this can be hard for them to decipher what is wrong. Upon receiving the error message, they may not know what is wrong. Knowing what they entered wrongly can lead to higher user satisfaction.
 
-#### C.2.2 Implementation:
+#### C.2.2 Implementation
 1. Update the error messages to be more specific. For example, if the user enters an invalid command, the error message should tell the user which part of the command is invalid, instead of just saying that the command is invalid.
 2. Allow the `INDEX` for commands to accept very large numbers. Currently, the computer is unable to parse the number because it is too large, and PropertyMatch will mention that the command is invalid instead of mentioning that the number is too large.
 
 ### C.3 Importing client data
 
-#### C.3.1 Motivation:
+#### C.3.1 Motivation
 We realise that many property agents already have existing customers and properties. They may not want to manually enter all the data into the application. This feature will allow them to import their existing data into the application, saving them time and resources.
 
-#### C.3.2 Implementation:
+#### C.3.2 Implementation
 1. Add an `Import` button to the menu bar.
 2. Create a file selection mechanism in which the user can import data from CSV files.
 3. Parse and process the data in the file.
@@ -980,10 +984,10 @@ We realise that many property agents already have existing customers and propert
 
 ### C.4 Exporting client data
 
-#### C.4.1 Motivation:
+#### C.4.1 Motivation
 We realise that many property agents may want to export their existing data in PropertyMatch to other platforms. This feature will allow them to easily export their data into other platforms to perform other functions (such as data analysis) not supported on PropertyMatch.
 
-#### C.4.2 Implementation:
+#### C.4.2 Implementation
 1. Add an `Export` button to the menu bar.
 2. Create a file selection mechanism in which the user can import data from CSV files.
 3. Convert the data in the json files to CSV file.
@@ -993,20 +997,20 @@ We realise that many property agents may want to export their existing data in P
 
 ### C.5 Ability to filter data less strictly
 
-#### C.5.1 Motivation:
+#### C.5.1 Motivation
 Right now, the `filter` commands require all characteristics to match the customer's or property's characteristics. This is too strict, and may not be useful for the property agent. This feature will allow the property agent to filter customers or properties based on a subset of characteristics.
 
-#### C.5.2 Implementation:
+#### C.5.2 Implementation
 1. Allow `filter` commands to take in an extra parameter called `loose`.
 2. Add code to filter customers/properties that only match one of the criteria.
 3. Implement error handling and logging.
 
 ### C.6 Budget for customer should be a range
 
-#### C.6.1 Motivation:
+#### C.6.1 Motivation
 Customers should be able to indicate their budget as a range instead of a set number. This is because customers may not have a fixed budget, and may be willing to pay more or less for a property.
 
-#### C.6.2 Implementation:
+#### C.6.2 Implementation
 1. Add code in `Budget` to have a range of values.
 2. Add test cases to verify that `find`, `filter`, `match` still works with a budget range.
 3. Implement error handling and logging.
