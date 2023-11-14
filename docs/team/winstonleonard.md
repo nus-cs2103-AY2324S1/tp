@@ -16,7 +16,6 @@ still having the benefits of a Graphical User Interface (GUI).
   
 
   * Refactored the `add` and `edit` command.
-
     * Allowed tutees to take in `Subject`, `Day`, `Begin`, `End` fields. 
     * (Pull Requests [#72](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/72))
 
