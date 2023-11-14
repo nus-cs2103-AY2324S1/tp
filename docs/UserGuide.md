@@ -317,6 +317,8 @@ Examples:
 #### Edit an Enrolment: `editEnrolment`
 * Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 
+Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]
+`
 <div markdown="block" class="alert alert-info">
 :information_source: Remember to provide at least one field to be edited!
 </div>
@@ -430,6 +432,8 @@ Finds and lists event(s) which name(s) contain the provided `EVENT_NAME`.
 Format: `findEvent EVENT_NAME [MORE_NAMES]...`
 * Finds and lists event(s) which name(s) contain the specified `EVENT_NAME`.
 * More than 1 `EVENT_NAME` can be provided to find more events.
+
+<div style="page-break-after: always;"></div>
 
 Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
