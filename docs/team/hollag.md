@@ -38,8 +38,9 @@ Given below are my contributions to the project.
 * **Contributions to Developer Guide**:
     * Storage [#118](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/118)
     * User Stories [#45](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/45)
-    * Add Planned Enhancements [#338](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/338)
+    * Added Planned Enhancements [#338](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/338)
     * Basic image formatting [#338](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/338)
+    * Added Link feature [#368](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/368)
 
 * **Contributions to team-based tasks**:
     * tP Team Organization Setup
