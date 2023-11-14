@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":AppointmentsWindow" as AppointmentsWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "v:ViewAppointmentCommand" as ViewAppointmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> MainWindow : "viewappointment"
+activate MainWindow
+
+MainWindow -> LogicManager : execute("viewappointment")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewappointment")
+activate AddressBookParser
+
+create ViewAppointmentCommand
+AddressBookParser -> ViewAppointmentCommand
+activate ViewAppointmentCommand
+
+ViewAppointmentCommand --> AddressBookParser : v
+deactivate ViewAppointmentCommand
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewAppointmentCommand : execute(model)
+activate ViewAppointmentCommand
+
+create CommandResult
+ViewAppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewAppointmentCommand
+deactivate CommandResult
+
+ViewAppointmentCommand --> LogicManager : result
+deactivate ViewAppointmentCommand
+ViewAppointmentCommand -[hidden]-> LogicManager : result
+
+MainWindow <-- LogicManager : result
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleAppointment()
+activate MainWindow
+
+MainWindow -> AppointmentsWindow : show()
+activate AppointmentsWindow
+
+AppointmentsWindow -> AppointmentsWindow : fillInnerParts()
+activate AppointmentsWindow
+deactivate AppointmentsWindow
+
+AppointmentsWindow --> MainWindow
+deactivate AppointmentsWindow
+
+deactivate MainWindow
+
+[<-- MainWindow
+deactivate MainWindow
+
+@enduml

@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.record.Record;
 
 /**
  * The API of the Model component.
@@ -13,6 +16,10 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Record> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,9 +60,15 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in
+     * the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if the same record exists under the patient in the Medbook
+     */
+    boolean hasRecord(Record record, Index index);
 
     /**
      * Deletes the given person.
@@ -72,7 +85,8 @@ public interface Model {
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another
+     * existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -80,8 +94,38 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Updates the filter of the filtered person list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException
+     *                              if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the pinned person list */
+    ObservableList<Person> getPinnedPersonList();
+
+    /** Returns an unmodifiable view of the filtered appointment list */
+    ObservableList<Appointment> getAppointmentList();
+
+    void resetAppointmentList();
+
+    ObservableList<Record> getRecordList();
+
+    /** Returns an unmodifiable view of the filtered record list */
+    ObservableList<Record> getFilteredRecordList();
+
+    void updateRecordList(Person person);
+
+    /**
+     * Updates the filter of the filtered record list to filter by the given
+     * {@code predicate}.
+     *
+     * @throws NullPointerException
+     *                              if {@code predicate} is null.
+     */
+    void updateFilteredRecordList(Predicate<Record> predicate);
+
+    ObservableList<Person> getPersonBeingViewed();
+
 }

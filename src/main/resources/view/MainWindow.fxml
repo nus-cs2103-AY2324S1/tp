@@ -11,50 +11,81 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
-  <icons>
-    <Image url="@/images/address_book_32.png" />
-  </icons>
-  <scene>
-    <Scene>
-      <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-      </stylesheets>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    title="Medbook" minWidth="1280" minHeight="600" onCloseRequest="#handleExit">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
 
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+            <VBox>
+                <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+                    <Menu mnemonicParsing="false" text="File">
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Help">
+                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
+                            onAction="#handleHelp"
+                            text="Help" />
+                    </Menu>
+                </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+                <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder"
+                    styleClass="pane-with-border"
+                    minHeight="100" prefHeight="100" maxHeight="100">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+                <SplitPane dividerPositions="0.3, 0.7" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="recordList" styleClass="pane_with-border" minWidth="340"
+                        prefWidth="340"
+                        VBox.vgrow="ALWAYS">
+                        <Label text="PATIENT BEING VIEWED" styleClass="cell_big_label"
+                            style="-fx-text-fill:#FFFF" />
+                        <StackPane fx:id="personBeingViewedPanelPlaceholder" minHeight="110" />
+                        <Label text="RECORDS" styleClass="cell_big_label"
+                            style="-fx-text-fill:#FFFF" />
+                        <StackPane fx:id="recordListPanelPlaceholder" VBox.vgrow="ALWAYS"
+                            prefHeight="850" />
+                    </VBox>
+                    <VBox>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+                        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340"
+                            prefWidth="600"
+                            VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+                            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        </VBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-      </VBox>
-    </Scene>
-  </scene>
+                    </VBox>
+
+                    <VBox fx:id="pinnedPersonList" styleClass="pane-with-border" minWidth="340"
+                        prefWidth="340" VBox.vgrow="ALWAYS">
+                        <Label text="PINNED PATIENT" styleClass="cell_big_label"
+                            style="-fx-text-fill:#FFFF" />
+                        <StackPane fx:id="pinnedPersonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                    </VBox>
+                </SplitPane>
+                <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder"
+                    styleClass="pane-with-border">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                </StackPane>
+                <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            </VBox>
+        </Scene>
+    </scene>
 </fx:root>

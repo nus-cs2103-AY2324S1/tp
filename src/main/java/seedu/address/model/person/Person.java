@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -8,37 +9,59 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.UniqueAppointmentList;
+import seedu.address.model.record.Record;
+import seedu.address.model.record.UniqueRecordList;
+import seedu.address.model.shared.Name;
+import seedu.address.model.shared.Nric;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
     // Identity fields
     private final Name name;
+    private final Nric nric;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Gender gender;
+    private final Age age;
+    private final BloodType bloodType;
+    private final Set<Allergy> allergies = new HashSet<>();
+    private final UniqueRecordList records = new UniqueRecordList();
+    private final UniqueAppointmentList appointments = new UniqueAppointmentList();
+    private boolean isPinned;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a Person
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Nric nric, Email email, Phone phone, Gender gender, Age age,
+            BloodType bloodType, Set<Allergy> allergies, UniqueRecordList records, UniqueAppointmentList appointments,
+            boolean isPinned) {
+        requireAllNonNull(name, phone, email, gender, age, allergies, appointments, isPinned);
         this.name = name;
-        this.phone = phone;
+        this.nric = nric;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.phone = phone;
+        this.gender = gender;
+        this.age = age;
+        this.bloodType = bloodType;
+        this.allergies.addAll(allergies);
+        this.records.setRecords(records);
+        this.appointments.setAppointments(appointments);
+        this.isPinned = isPinned;
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Phone getPhone() {
@@ -49,20 +72,45 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Gender getGender() {
+        return gender;
+    }
+
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public Age getAge() {
+        return age;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
+    }
+
+    public UniqueRecordList getRecords() {
+        return this.records;
+    }
+
+    public UniqueAppointmentList getAppointments() {
+        return this.appointments;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns true if the same appointment as {@code appointment} exists in the
+     * person.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(appointment);
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same nric.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +119,15 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
+    }
+
+    /**
+     * Adds a record to the patient
+     */
+    public void addRecord(Record record) {
+        requireNonNull(record);
+        this.records.add(record);
     }
 
     /**
@@ -91,27 +147,38 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && nric.equals(otherPerson.nric)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && gender.equals(otherPerson.gender)
+                && age.equals(otherPerson.age)
+                && bloodType.equals(otherPerson.bloodType)
+                && allergies.equals(otherPerson.allergies)
+                && records.equals(otherPerson.records)
+                && appointments.equals(otherPerson.appointments)
+                && isPinned == otherPerson.isPinned;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, email, phone, gender, age, bloodType, allergies);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("nric", nric)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("phone", phone)
+                .add("gender", gender)
+                .add("age", age)
+                .add("bloodType", bloodType)
+                .add("allergies", allergies)
+                .add("records", records)
+                .add("appointments", appointments)
+                .add("isPinned", isPinned)
                 .toString();
     }
-
 }

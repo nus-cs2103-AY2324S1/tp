@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+UniqueRecordList -down-> "*" Record
+Record *-down-> "1" DateTime
+Record *-down-> "*" Condition
+Record *-down-> "*" Medication
+@enduml

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    title="Appointments" minWidth="1000" minHeight="800">
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+
+            <VBox>
+                <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="appointmentList" styleClass="pane_with-border" minWidth="200"
+                        prefWidth="200" maxWidth="300"
+                        VBox.vgrow="ALWAYS">
+                        <Label text="APPOINTMENTS" styleClass="cell_big_label"
+                            style="-fx-text-fill:#FFFF" />
+                        <StackPane fx:id="appointmentListPanelPlaceholder" VBox.vgrow="ALWAYS"
+                            prefHeight="850" />
+                    </VBox>
+                    <VBox fx:id="appointmentCalender" styleClass="pane-with-border" minWidth="600"
+                        prefWidth="600"
+                        VBox.vgrow="ALWAYS">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10" />
+                        </padding>
+                        <StackPane fx:id="appointmentCalenderPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                    </VBox>
+
+                </SplitPane>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

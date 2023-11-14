@@ -1,8 +1,21 @@
 {
-  "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
-  } ]
+  "persons": [
+    {
+      "name": "Hans Muster",
+      "nric": "S9999999A",
+      "email": "invalid@email!3e",
+      "phone": "9482424",
+      "gender": "M",
+      "age": "18",
+      "bloodType": "A+",
+      "allergies": ["Peanuts"],
+      "isPinned": true,
+      "appointments": [
+        {
+          "name": "Eye Examination",
+          "dateTime": "18-09-2023 1800"
+        }
+      ]
+    }
+  ]
 }

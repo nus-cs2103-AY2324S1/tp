@@ -11,17 +11,21 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.record.Record;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    private static ModelManager instance;
     private final AddressBook addressBook;
-    private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Record> filteredRecords;
+    private final UserPrefs userPrefs;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,13 +38,23 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredRecords = new FilteredList<>(this.addressBook.getRecordList());
+        instance = this;
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    public static Model getInstance() {
+        if (instance == null) {
+            instance = new ModelManager(/* necessary initializations */);
+        }
+        return instance;
+    }
+
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -75,7 +89,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -94,6 +109,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasRecord(Record record, Index index) {
+        requireAllNonNull(record, index);
+        return addressBook.hasRecord(record, index);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -107,14 +128,15 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -126,6 +148,56 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getPinnedPersonList() {
+        FilteredList<Person> pinnedPersons = new FilteredList<>(this.addressBook.getPersonList());
+        pinnedPersons.setPredicate(person -> person.isPinned());
+        return pinnedPersons;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Appointment> getAppointmentList() {
+        return this.addressBook.getAppointmentList();
+    }
+
+    @Override
+    public void resetAppointmentList() {
+        this.addressBook.resetAppointmentList();
+    }
+
+    @Override
+    public ObservableList<Record> getRecordList() {
+        return this.addressBook.getRecordList();
+    }
+
+    @Override
+    public ObservableList<Record> getFilteredRecordList() {
+        return filteredRecords;
+    }
+
+    @Override
+    public void updateRecordList(Person person) {
+        requireNonNull(person);
+        this.addressBook.setRecords(person);
+        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+    }
+
+    @Override
+    public void updateFilteredRecordList(Predicate<Record> predicate) {
+        requireNonNull(predicate);
+        filteredRecords.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getPersonBeingViewed() {
+        return this.addressBook.getPersonBeingViewed();
     }
 
     @Override
@@ -142,7 +214,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredRecords.equals(otherModelManager.filteredRecords);
     }
-
 }

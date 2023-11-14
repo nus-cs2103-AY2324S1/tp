@@ -1,13 +1,56 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+  "persons": [
+    {
+      "name": "Valid Person",
+      "nric": "S6789123A",
+      "email": "hans@example.com",
+      "phone": "9482424",
+      "gender": "M",
+      "age": "18",
+      "bloodType": "A+",
+      "allergies": ["Peanuts"],
+      "records": [
+        {
+          "dateTime": "09-10-2023 1800",
+          "conditions": ["Fever"],
+          "medications": ["Tylenol"],
+          "filename": null,
+          "personIndex": 0
+        }
+      ],
+      "appointments": [
+        {
+          "name": "Eye Examination",
+          "dateTime": "18-09-2023 1800"
+        }
+      ],
+      "isPinned": true
+    },
+    {
+      "name": "Person With Invalid Phone Field",
+      "nric": "S6789125A",
+      "email": "hans@example.com",
+      "phone": "948asdf2424",
+      "gender": "M",
+      "age": "18",
+      "bloodType": "A+",
+      "allergies": ["Peanuts"],
+      "records": [
+        {
+          "dateTime": "09-10-2023 1800",
+          "conditions": ["Fever"],
+          "medications": ["Tylenol"],
+          "filename": null,
+          "personIndex": 0
+        }
+      ],
+      "appointments": [
+        {
+          "name": "Eye Examination",
+          "dateTime": "18-09-2023 1800"
+        }
+      ],
+      "isPinned": true
+    }
+  ]
 }

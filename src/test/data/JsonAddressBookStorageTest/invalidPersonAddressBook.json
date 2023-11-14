@@ -1,8 +1,30 @@
 {
-  "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+  "persons": [
+    {
+      "name": "Person with invalid name field: Ha!ns Mu@ster",
+      "nric": "L1234567A",
+      "email": "hans@example.com",
+      "phone": "9482424",
+      "gender": "M",
+      "age": "18",
+      "bloodType": "A+",
+      "allergies": ["Peanuts"],
+      "records": [
+        {
+          "dateTime": "09-10-2023 1800",
+          "conditions": ["Fever"],
+          "medications": ["Tylenol"],
+          "filename": null,
+          "personIndex": 0
+        }
+      ],
+      "appointments": [
+        {
+          "name": "Eye Examination",
+          "dateTime": "18-09-2023 1800"
+        }
+      ],
+      "isPinned": false
+    }
+  ]
 }

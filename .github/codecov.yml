@@ -1,0 +1,3 @@
+ignore:
+  - "src/main/java/seedu/address/ui"
+  - "src/main/java/seedu/address/model/util/SampleDataUtil.java"

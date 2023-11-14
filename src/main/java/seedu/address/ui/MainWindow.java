@@ -24,6 +24,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static MainWindow mainWindow;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -34,19 +35,24 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    private AppointmentsWindow appointmentsWindow;
+    private PinnedPersonListPanel pinnedPersonListPanel;
+    private RecordListPanel recordListPanel;
+    private PersonListPanel personBeingViewedPanel;
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
     private StackPane personListPanelPlaceholder;
-
+    @FXML
+    private StackPane pinnedPersonListPanelPlaceholder;
+    @FXML
+    private StackPane personBeingViewedPanelPlaceholder;
+    @FXML
+    private StackPane recordListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -66,6 +72,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        appointmentsWindow = new AppointmentsWindow(new Stage(), logic.getFilteredAppointmentList());
+        mainWindow = this;
     }
 
     public Stage getPrimaryStage() {
@@ -76,8 +84,17 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    public static MainWindow getInstance() {
+        return mainWindow;
+    }
+
+    public void setResultDisplay(String s) {
+        resultDisplay.setFeedbackToUser(s);
+    }
+
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -113,6 +130,15 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        pinnedPersonListPanel = new PinnedPersonListPanel(logic.getPinnedPersonList());
+        pinnedPersonListPanelPlaceholder.getChildren().add(pinnedPersonListPanel.getRoot());
+
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+        recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
+
+        personBeingViewedPanel = new PersonListPanel(logic.getPersonBeingViewed());
+        personBeingViewedPanelPlaceholder.getChildren().add(personBeingViewedPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -144,6 +170,18 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the appointments window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAppointments() {
+        if (!appointmentsWindow.isShowing()) {
+            appointmentsWindow.show();
+        } else {
+            appointmentsWindow.focus();
         }
     }
 
@@ -180,6 +218,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowAppointments()) {
+                handleAppointments();
             }
 
             if (commandResult.isExit()) {

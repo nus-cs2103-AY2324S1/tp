@@ -1,14 +1,59 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
-  } ]
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "nric": "S1234567B",
+      "email": "alice@example.com",
+      "phone": "94351253",
+      "bloodType": "AB+",
+      "gender": "F",
+      "age": 20,
+      "allergies": ["Chocolate"],
+      "records": [
+        {
+          "dateTime": "09-10-2023 1800",
+          "conditions": ["Fever"],
+          "medications": ["Tylenol"],
+          "filename": null,
+          "personIndex": 0
+        }
+      ],
+      "appointments": [
+        {
+          "name": "Eye Exam",
+          "dateTime": "01-01-2001 1200",
+          "nric": "S1234567B"
+        }
+      ],
+      "isPinned": true
+    },
+    {
+      "name": "Alice Pauline",
+      "nric": "S1234567B",
+      "email": "alice@example.com",
+      "phone": "94351253",
+      "bloodType": "AB+",
+      "gender": "F",
+      "age": 20,
+      "allergies": ["Chocolate"],
+      "records": [
+        {
+          "dateTime": "09-10-2023 1800",
+          "conditions": ["Fever"],
+          "medications": ["Tylenol"],
+          "filename": null,
+          "personIndex": 0
+        }
+      ],
+      "appointments": [
+        {
+          "name": "Eye Exam",
+          "dateTime": "01-01-2001 1200",
+          "nric": "S1234567B"
+        }
+      ],
+      "isPinned": true
+    }
+  ]
 }
