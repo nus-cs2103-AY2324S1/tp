@@ -146,10 +146,13 @@ Format: `create /name [name] [optional field prefix] [optional field value] ...`
 Parameters:
 
 * `[name]`  is the name of the contact you wish to add.
-* `[optional fields]` are non-mandatory fields you can associate with the contact at the point of creation (these include every field you can associate with a contact except the `name` field). The fields can also be added using the add command.
+* `[optional fields]` are non-mandatory fields you can associate with the contact at the point of creation.
 
 <div markdown="block" class="alert alert-info">
-:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+:information_source: Non-mandatory fields you can associate with a contact at the point of creation comprise the contact's `phones`, `emails`, `links`, `graduation semester`, `courses`, `specialisations`, `tags` and `priority level`. (These fields can also be subsequently added to the contact using the `add` command.)
+
+To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
 </div>
 
 When creating a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive).
@@ -164,7 +167,7 @@ Example usage:
 
 #### Add details to contact: `add [index] [fields]`
 
-You can use the `add` command to add one or more contact details under multi-valued fields associated with an existing contact. No new contact will be created.
+You can use the `add` command to add contact details under fields associated with an existing contact. No new contact will be created. 
 
 Format: `add [index] [field prefix] [field value] ...`
 
@@ -176,7 +179,9 @@ Parameters:
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: To view a comprehensive list of multi-valued fields and their prefixes, go to the start of the [Features section](#features).
+:information_source: Fields you can add contact details to for an existing contact comprise the contact's `phones`, `emails`, `links`, `graduation semester`, `courses`, `specialisations`, `tags` and `priority level`.
+
+To view a comprehensive list of multi-valued fields and their prefixes, go to the start of the [Features section](#features).
 
 </div>
 
@@ -227,7 +232,10 @@ If index of a multi-valued field is not specified, it will **default to 1**.
 </div>
 
 <div markdown="block" class="alert alert-info">
-:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+:information_source: Fields you can edit contact details for in an existing contact comprise the contact's `name`, `phones`, `emails`, `links`, `graduation semester`, `courses`, `specialisations`, `tags` and `priority level`.
+
+To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
 </div>
 
 Example usage:
@@ -282,7 +290,10 @@ If index of a multi-valued field is not specified, it will **default to 1**.
 </div>
 
 <div markdown="block" class="alert alert-info">
-:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+:information_source: Fields you can delete contact information for in an existing contact comprise the contact's `phones`, `emails`, `links`, `graduation semester`, `courses`, `specialisations`, `tags` and `priority level`.
+
+To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
 </div>
 
 Example usage:
