@@ -57,9 +57,11 @@ Given below are my contributions to the project.
 
 User Guide:
 
-* Added documentation for the features `addp`, `editp`
+* Add documentation for the features `addp`, `editp`, `findp`
 
-* Added examples for the features `addm`, `findm`, `deletem`, `sfm`
+* Add examples for the features `addm`, `findm`, `deletem`, `sfm`
+
+* Smoke test and update all documentation description and examples
 
 Developer Guide:
 
