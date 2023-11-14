@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +65,17 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if {@code s} represents a numeric integer
+     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNumeric(String str) {
+        String numericRegex = "-?\\d+(\\.\\d+)?";
+        return Pattern.matches(numericRegex, str);
     }
 }

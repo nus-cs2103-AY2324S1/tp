@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "c:SortCompanyCommand" as SortCompanyCommand LOGIC_COLOR
+participant ":RegularCommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("sort c start/...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sort c start/...")
+activate AddressBookParser
+
+create SortCommandParser
+AddressBookParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> AddressBookParser
+deactivate SortCommandParser
+
+AddressBookParser -> SortCommandParser : parse("c start/...")
+activate SortCommandParser
+
+
+
+'SortCommandParser -> Predicate : createPredicateFromMultimap(nameKeywordsList, tagKeywordsList)
+'activate Predicate
+'
+'Predicate --> SortCommandParser
+'deactivate Predicate
+
+create SortCompanyCommand
+note over SortCommandParser : Details of parsing not shown
+
+SortCommandParser -> SortCompanyCommand : new(t1, t2)
+activate SortCompanyCommand
+
+SortCompanyCommand --> SortCommandParser : c
+deactivate SortCompanyCommand
+
+SortCommandParser --> AddressBookParser : c
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> AddressBookParser
+destroy SortCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> SortCompanyCommand : execute()
+activate SortCompanyCommand
+
+SortCompanyCommand -> Model : sortCompanyList(t1, t2)
+activate Model
+
+ref over Model : Sort companies in the model
+
+Model --> SortCompanyCommand
+
+deactivate Model
+
+
+deactivate Model
+create CommandResult
+SortCompanyCommand -> CommandResult : new(m)
+activate CommandResult
+
+CommandResult --> SortCompanyCommand
+deactivate CommandResult
+
+SortCompanyCommand --> LogicManager : result
+deactivate SortCompanyCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

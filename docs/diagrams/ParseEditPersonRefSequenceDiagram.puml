@@ -1,0 +1,29 @@
+@startuml
+group sd [Parse fields edited by user]
+    !include style.puml
+    skinparam ArrowFontStyle plain
+    skinparam sequenceReferenceBackgroundColor white
+
+    box Logic LOGIC_COLOR_T1
+    participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+    participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+    end box
+
+    [-> EditCommandParser
+     activate EditCommandParser
+
+    EditCommandParser -> EditCommandParser : parseIndexToEdit()
+    activate EditCommandParser
+
+    EditCommandParser --> EditCommandParser : index
+    deactivate EditCommandParser
+
+    EditCommandParser -> ParserUtil : parseEditPerson()
+    activate ParserUtil
+
+    ParserUtil --> EditCommandParser : desc:EditPersonDescriptor
+    deactivate ParserUtil
+
+    [<--EditCommandParser
+end
+@enduml

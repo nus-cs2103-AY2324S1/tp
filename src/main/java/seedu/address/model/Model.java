@@ -1,10 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.company.Company;
+import seedu.address.model.company.internship.Internship;
+import seedu.address.model.company.internship.InternshipInterviewDateTime;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +17,10 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
+    // Predicate to display all internships
+    Predicate<Internship> PREDICATE_SHOW_ALL_INTERNSHIPS = unused -> true;
+    Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +92,43 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a company with the same identity as {@code company} exists in the address book.
+     */
+    boolean hasCompany(Company company);
+
+    /**
+     * Deletes the given company.
+     * The company must exist in the address book.
+     */
+    void deleteCompany(Company target);
+
+    /**
+     * Adds the given company.
+     * {@code company} must not already exist in the address book.
+     */
+    void addCompany(Company company);
+
+    /**
+     * Replaces the given company {@code target} with {@code editedCompany}.
+     * {@code target} must exist in the address book.
+     * The company identity of {@code editedCompany} must not be the same
+     * as another existing company in the address book.
+     */
+    void setCompany(Company target, Company editedCompany);
+
+    /**
+     * Returns an unmodifiable view of the filtered company list.
+     */
+    ObservableList<Company> getFilteredCompanyList();
+
+    /**
+     * Updates the filter of the filtered company list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCompanyList(Predicate<Company> predicate);
+
+    void sortCompanyList(Optional<InternshipInterviewDateTime> startDateTime,
+                         Optional<InternshipInterviewDateTime> endDateTime);
 }

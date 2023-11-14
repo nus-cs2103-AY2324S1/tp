@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.commandresults.CommandResult;
+import seedu.address.logic.commands.commandresults.DisplayableCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,7 +33,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private CompanyListPanel companyListPanel;
     private ResultDisplay resultDisplay;
+    private ViewDisplay viewDisplay;
     private HelpWindow helpWindow;
 
     @FXML
@@ -45,7 +48,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane companyListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane viewDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -113,8 +122,14 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
+        companyListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        viewDisplay = new ViewDisplay();
+        viewDisplayPlaceholder.getChildren().add(viewDisplay);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -167,6 +182,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public CompanyListPanel getCompanyListPanel() {
+        return companyListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -184,6 +203,16 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isDisplayableCommandResult()) {
+                DisplayableCommandResult displayableCommandResult = (DisplayableCommandResult) commandResult;
+
+                if (displayableCommandResult.isDisplayingPerson()) {
+                    viewDisplay.displayEntity(displayableCommandResult.getPersonToDisplay().get());
+                } else {
+                    viewDisplay.displayEntity(displayableCommandResult.getCompanyToDisplay().get());
+                }
             }
 
             return commandResult;

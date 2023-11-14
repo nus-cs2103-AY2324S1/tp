@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+mainframe: **sd** Parse the parameters and create predicate
+
+box Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:NameAndTagContainKeywordsPredicate" as Predicate MODEL_COLOR
+end box
+
+box Utility UTIL_COLOR
+participant "ArgumentTokenizer" as ArgumentTokenizer <<class>> UTIL_COLOR
+end box
+
+activate FindCommandParser
+
+FindCommandParser -> ArgumentTokenizer : tokenizeArguments("n/bob t/friend")
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> FindCommandParser
+deactivate ArgumentTokenizer
+
+create Predicate
+FindCommandParser -> Predicate : createPredicateFromMultimap(\nnameKeywordsList, tagKeywordsList)
+activate Predicate
+
+Predicate --> FindCommandParser : p
+deactivate Predicate
+
+@enduml

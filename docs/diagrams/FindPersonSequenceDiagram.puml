@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "f:FindPersonCommand" as FindPersonCommand LOGIC_COLOR
+participant ":RegularCommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:NameAndTagContainKeywordsPredicate" as Predicate MODEL_COLOR
+end box
+
+box Utility UTIL_COLOR
+participant "ArgumentTokenizer" as ArgumentTokenizer <<class>> UTIL_COLOR
+end box
+
+[-> LogicManager : execute("find p n/bob t/friend")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find p n/bob t/friend")
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> AddressBookParser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse("p n/bob t/friend")
+activate FindCommandParser
+
+FindCommandParser -> ArgumentTokenizer : tokenizeArguments("n/bob t/friend")
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> FindCommandParser
+deactivate ArgumentTokenizer
+
+create Predicate
+FindCommandParser -> Predicate : createPredicateFromMultimap(nameKeywordsList, tagKeywordsList)
+activate Predicate
+
+Predicate --> FindCommandParser : p
+deactivate Predicate
+
+create FindPersonCommand
+FindCommandParser -> FindPersonCommand : new(p)
+activate FindPersonCommand
+
+FindPersonCommand --> FindCommandParser : f
+deactivate FindPersonCommand
+
+FindCommandParser --> AddressBookParser : f
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> AddressBookParser
+destroy FindCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindPersonCommand : execute()
+activate FindPersonCommand
+
+FindPersonCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model --> FindPersonCommand
+deactivate Model
+
+create CommandResult
+FindPersonCommand -> CommandResult : new(messageToShow)
+activate CommandResult
+
+CommandResult --> FindPersonCommand
+deactivate CommandResult
+
+FindPersonCommand --> LogicManager : result
+deactivate FindPersonCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

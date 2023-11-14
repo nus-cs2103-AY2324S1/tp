@@ -1,0 +1,52 @@
+@startuml
+group sd [Update person with edited fields]
+    !include style.puml
+    skinparam ArrowFontStyle plain
+    skinparam sequenceReferenceBackgroundColor white
+
+    box Logic LOGIC_COLOR_T1
+    participant "e:EditPersonCommand" as EditPersonCommand LOGIC_COLOR
+    participant ":RegularCommandResult" as RegularCommandResult LOGIC_COLOR
+    end box
+
+    box Model MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+    end box
+
+    [-> EditPersonCommand
+     activate EditPersonCommand
+
+    EditPersonCommand -> Model : getFilteredPersonList()
+    activate Model
+
+    Model --> EditPersonCommand : personToEdit
+    deactivate Model
+
+    EditPersonCommand -> EditPersonCommand : createEditedPerson(personToEdit, editPersonDescriptor)
+    activate EditPersonCommand
+
+    EditPersonCommand --> EditPersonCommand : editedPerson
+    deactivate EditPersonCommand
+
+    EditPersonCommand -> Model : setPerson(personToEdit, editedPerson)
+    activate Model
+
+    Model --> EditPersonCommand
+    deactivate Model
+
+    EditPersonCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+    activate Model
+
+    Model --> EditPersonCommand
+    deactivate Model
+
+    create RegularCommandResult
+    EditPersonCommand -> RegularCommandResult
+    activate RegularCommandResult
+
+    RegularCommandResult --> EditPersonCommand : result
+    deactivate RegularCommandResult
+
+    [<--EditPersonCommand : result
+end
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+group sd [Retrieve person to view from list of persons]
+    !include style.puml
+    skinparam ArrowFontStyle plain
+    skinparam sequenceReferenceBackgroundColor white
+
+    box Logic LOGIC_COLOR_T1
+    participant "v:ViewPersonCommand" as ViewPersonCommand LOGIC_COLOR
+    participant "result:DisplayableCommandResult" as DisplayableCommandResult LOGIC_COLOR
+    end box
+
+    box Model MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+    participant "pred:ContactIsEqualsPredicate" as ContactIsEqualsPredicate MODEL_COLOR
+    end box
+
+    [-> ViewPersonCommand
+     activate ViewPersonCommand
+
+    ViewPersonCommand -> Model : getFilteredPersonList()
+    activate Model
+
+    Model --> ViewPersonCommand
+    deactivate Model
+
+    create ContactIsEqualsPredicate
+    ViewPersonCommand -> ContactIsEqualsPredicate
+    activate ContactIsEqualsPredicate
+
+    ContactIsEqualsPredicate --> ViewPersonCommand : pred
+    deactivate ContactIsEqualsPredicate
+
+    ViewPersonCommand -> Model : updateFilteredPersonList(pred)
+    activate Model
+
+    Model --> ViewPersonCommand
+    deactivate Model
+
+    create DisplayableCommandResult
+    ViewPersonCommand -> DisplayableCommandResult
+    activate DisplayableCommandResult
+
+    DisplayableCommandResult --> ViewPersonCommand : result
+    deactivate DisplayableCommandResult
+
+    [<--ViewPersonCommand : result
+    deactivate ViewPersonCommand
+end
+@enduml

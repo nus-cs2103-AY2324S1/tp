@@ -9,16 +9,13 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
+Class ViewDisplay
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
-Class PersonCard
 Class StatusBarFooter
 Class CommandBox
-}
-
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+Class CompanyListPanel
 }
 
 package Logic <<Rectangle>> {
@@ -26,34 +23,36 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside ...> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
+UiManager -down--> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" ViewDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down--> "1" CompanyListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-
-PersonListPanel -down-> "*" PersonCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
+ViewDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+CompanyListPanel --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+UiManager -up-> Logic
+MainWindow -up-> Logic
 
+CompanyListPanel -[hidden]left- PersonListPanel
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
+CommandBox -[hidden]left- ViewDisplay
+ViewDisplay -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart

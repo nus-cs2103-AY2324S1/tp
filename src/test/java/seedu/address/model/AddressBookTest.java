@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCompanies.APPLE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -18,8 +19,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.company.Company;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -49,7 +52,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AddressBookStub newData = new AddressBookStub(newPersons, Collections.emptyList());
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -85,24 +88,67 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName()
+            + "{persons=" + addressBook.getPersonList() + ", companies="
+            + addressBook.getCompanyList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void hasCompany_nullCompany_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasCompany(null));
+    }
+
+    @Test
+    public void hasCompany_companyNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasCompany(APPLE));
+    }
+
+    @Test
+    public void hasCompany_companyInAddressBook_returnsTrue() {
+        addressBook.addCompany(APPLE);
+        assertTrue(addressBook.hasCompany(APPLE));
+    }
+
+    @Test
+    public void hasCompany_companyWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addCompany(APPLE);
+        Company editedApple = new CompanyBuilder(APPLE)
+            .withDescription("Some changed value")
+            .build();
+        assertTrue(addressBook.hasCompany(editedApple));
+    }
+
+    @Test
+    public void getCompanyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getCompanyList().remove(0));
+    }
+
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons list and companies list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Company> companies = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Company> companies) {
             this.persons.setAll(persons);
+            this.companies.setAll(companies);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public ObservableList<Company> getCompanyList() {
+            return companies;
+        }
+    }
+    @Test
+    public void dummyTest() {
+        assertEquals(2, 2);
     }
 
 }

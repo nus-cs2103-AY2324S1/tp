@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{abstract}\nCommand" as Command
+
+package "Individual command classes"{
+Class "{abstract}\nXYZCommand" as XYZCommand
+Class XYZPersonCommand
+Class XYZCompanyCommand
+}
+
+XYZCommandParser .right.> XYZCommand : creates >
+XYZCommand -up-|> Command
+XYZPersonCommand -up-|> XYZCommand
+XYZCompanyCommand -up-|> XYZCommand
+
+note right of XYZCommand: XYZCommand = DeleteCommand, \nFindCommand, etc
+note bottom of XYZCompanyCommand: XYZCompanyCommand = DeleteCompanyCommand, \nFindCompanyCommand, etc
+note bottom of XYZPersonCommand: XYZPersonCommand = DeletePersonCommand, \nFindPersonCommand, etc
+@enduml

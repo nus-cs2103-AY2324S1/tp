@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "e:EditPersonCommand" as EditPersonCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("edit p 1 n/John")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit p 1 n/John")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("p 1 n/John")
+activate EditCommandParser
+
+'Hidden arrow to space out the call to parseIndexToEdit() and the ref frame.
+EditCommandParser -[hidden]-> AddressBookParser
+
+ref over EditCommandParser
+Parse fields edited by user
+end ref
+
+create EditPersonCommand
+EditCommandParser -> EditPersonCommand
+activate EditPersonCommand
+
+EditPersonCommand --> EditCommandParser : e
+deactivate EditPersonCommand
+
+EditCommandParser --> AddressBookParser : e
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditPersonCommand : execute()
+activate EditPersonCommand
+
+ref over EditPersonCommand
+Update person with edited fields
+end ref
+
+EditPersonCommand --> LogicManager : result
+deactivate EditPersonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

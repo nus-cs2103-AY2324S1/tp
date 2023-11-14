@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+mainframe: **sd** Sort companies in the model
+
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+participant "x:CompanyDateRangePredicate" as DateRangePredicate MODEL_COLOR
+participant "y:CompanyDateComparator" as DateComparator MODEL_COLOR
+end box
+
+
+activate Model
+
+create DateRangePredicate
+Model -> DateRangePredicate : new(t1, t2)
+activate DateRangePredicate
+DateRangePredicate --> Model : x
+deactivate DateRangePredicate
+
+Model -> Model : filteredCompaniesRaw.setPredicate(x)
+activate Model
+Model --> Model
+deactivate Model
+
+create DateComparator
+Model -> DateComparator : new(isWithinDateRange)
+activate DateComparator
+DateComparator --> Model : y
+deactivate DateComparator
+
+Model -> Model : filteredCompanies.setComparator(y)
+activate Model
+Model --> Model
+deactivate Model
+
+@enduml
