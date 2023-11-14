@@ -117,10 +117,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `NetworkBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `NetworkBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 Here is an overview of what the other classes in `Logic` do:
+
 * `ArgumentMultiMap` and `ArgumentTokeniser` are used to map the parameters of 
 the user's input into key-value pairs, where the keys are specified using `ArgumentTokeniser`
 * `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser` to process the user input into: `{keyword : parameter}` pairs.
@@ -207,6 +209,7 @@ The `UniqueList<T>` class,
 <img src="images/StorageClassDiagram.png" width="900" />
 
 The `Storage` component,
+
 * can save both NetworkBook data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `NetworkBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -250,6 +253,7 @@ Upon execution, `CreateCommand` first queries the supplied model if it contains 
 If no such person exists, `CreateCommand` then calls on `model::addPerson` to add the person into the networkBook data.
 
 We have considered the following alternative implementations:
+
 * Implement `CreateCommandParser` to parse the arguments using regular expressions.
   This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
 
@@ -312,7 +316,8 @@ If any of the above constraints are violated, `EditCommandParser` throws a `Pars
 Otherwise, it creates a new instance of `EditCommand` that corresponds to the user input.
 
 `EditCommand` makes use of `EditPersonDescriptor`, which is an editable version of `Person` class.
-Most importantly, 
+Most importantly,
+
 * `EditPersonDescriptor` constructor copies the details of the person.
 * `EditPersonDescriptor` has setter methods to allow changing the details.
 * `EditPersonDescriptor` has a `toPerson` method that returns a new instance of `Person` that matches the current details.
@@ -331,6 +336,7 @@ Upon execution, `EditCommand` first obtains the `Person` at the index `index` in
 `EditCommand` then asks the `model` to update the original `Person` with the edited `Person`.
 
 We have considered the following alternative implementations:
+
 * Implement `EditCommand` with only `EditPersonDescriptor` and without `EditAction`,
 and `EditCommandParser` generates the instance of `EditPersonDescriptor` directly.
 `EditCommandParser` then must know the details of the person editing
@@ -413,6 +419,7 @@ The implementation of the opening link/email command follows the convention of n
 `OpenLinkCommand` then executes on the `Model` to open the link at `personIndex` (index of contact) and `linkIndex` (index of contact). The `Model` calls on the `NetworkBook`, which then calls on the `Person` at the correct index to open the link at `linkIndex`.
 
 The `Person` opens the link by first detects which OS the application is running on.
+
 * On Windows, the `Person` executes `Desktop::browse(URI)`, where [`Desktop`](https://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html) and [`URI`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/net/URI.html) are java classes from default packages.
 * On Mac OS, the `Person` executes the `open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class, which is a built-in class in java language. The `open` command in the terminal opens the computer's default browser if the `URI` supplied is correctly formatted to be a web link.
 * On Ubuntu, the `Person` executes the `xdg-open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class.
@@ -429,6 +436,7 @@ The undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `Ne
 * `VersionedNetworkBook::redo` — Restores a previously undone NetworkBook state from its history.
 
 These operations are called in functions of the `Model` interface:
+
 * `VersionedNetworkBook::undo` is called in `Model::undoNetworkBook`.
 * `VersionedNetworkBook::redo` is called in `Model::redoNetworkBook`.
 * `VersionedNetworkBook::commit` is called in `Model::setPerson`, `Model::addPerson`, `Model::deletePerson` and `Model::updateDisplayedPersonList`.
@@ -494,19 +502,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire NetworkBook state.
+
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
+
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: Additional implementation of each individual command requires more time and effort spent on achieving undo/redo behaviour for said command.
 
-<!-- @@author -->
-
-<!-- @@author xenosf -->
-
-### Sorting feature
+### Sorting displayed contacts
 
 #### Implementation
 
