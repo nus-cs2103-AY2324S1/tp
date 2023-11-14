@@ -133,18 +133,18 @@ Throughout this guide, you will see different text styles that are used to highl
 
 4. Open a command terminal.
 
-5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `Enter`: <br><br>
+5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `<img width=30px src='assets/svg/ug/enter-button-icon.svg'>: <br><br>
     ```
     cd Downloads
     ```
-6. To launch CoordiMate, type the following command and press `Enter`: <br><br>
+6. To launch CoordiMate, type the following command and press <img width=30px src='assets/svg/ug/enter-button-icon.svg'>: <br><br>
     ```
     java -jar CoordiMate.jar
     ```
     After a few seconds, a GUI should appear, showing some sample data, as in the screenshot below. <br><br>
     ![Ui](images/Ui.png)
 
-7. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
+7. Type the command in the command box and press <img width=30px src='assets/svg/ug/enter-button-icon.svg'> to execute it. e.g. typing `help` and pressing <img width=30px src='assets/svg/ug/enter-button-icon.svg'> will open the help window.
 
    Some example commands you can try:
 
@@ -1537,7 +1537,7 @@ For more information, see <a href='https://en.wikipedia.org/wiki/ASCII' rel='noo
 
 A text-based interface used to interact with a computer or software by entering commands into a terminal or command prompt.
 
-Example: In order to delete a task, user types `deleteTask 1` and pressing Enter. The task specified is deleted.
+Example: In order to delete a task, user types `deleteTask 1` and pressing <img width=30px src='assets/svg/ug/enter-button-icon.svg'>. The task specified is deleted.
 
 For more information on CoordiMate's commands, read more about it [here](#usage).
 
