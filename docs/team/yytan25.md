@@ -55,6 +55,7 @@ Given below are my contributions to the project.
     * Features: `DeleteBandCommand`, `RemoveMusicianFromBandCommand`
   * Developer Guide: [\#117](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/117)
     * Added user stories
+    * Added two enhancements and polished up the Planned Enhancements section
 
 
 * **Community**:
