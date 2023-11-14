@@ -170,14 +170,14 @@ Not to worry, here are some steps you can take to fix this:
     ![UiBreakdown](images/uibreak.png)
 
    | Colour                                                   | Component                   | Description                                                                                                                                      |
-   | ---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+   |----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
    | <img src="images/red_1.png" width="10px" height="10px">  | Menu Bar                    | Provides buttons for exiting, opening Help window, and opening Events window.                                                                    |
    | <img src="images/orange.png" width="10px" height="10px"> | Command Box                 | Allows you to enter a command.                                                                                                                   |
    | <img src="images/yellow.png" width="10px" height="10px"> | Result Display              | Displays the result of the command execution.                                                                                                    |
    | <img src="images/green.png" width="10px" height="10px">  | Applicant List Panel        | Displays a list of all applicants in JABPro.                                                                                                     |
-   | <img src="images/blue.png" width="10px" height="10px">   | Applicant Card              | Displays certain details of an applicant for quick view, such as name, address, phone, email, tags, LinkedIn/GitHub username.                    |
-   | <img src="images/purple.png" width="10px" height="10px"> | Applicant Information Panel | Displays a detailed view of an applicant, providing information of status and remarks, in addition to the basic information about the applicant. |
-   | <img src="images/brown.png" width="10px" height="10px">  | Summary Statistics Panel    | Displays summary statistics for a particular applicant pertaining to a specific tag.                                                             |
+   | <img src="images/brown.png" width="10px" height="10px">  | Applicant Card              | Displays certain details of an applicant for quick view, such as name, address, phone, email, tags, LinkedIn/GitHub username.                    |
+   | <img src="images/blue.png" width="10px" height="10px">   | Applicant Information Panel | Displays a detailed view of an applicant, providing information of status and remarks, in addition to the basic information about the applicant. |
+   | <img src="images/purple.png" width="10px" height="10px"> | Summary Statistics Panel    | Displays summary statistics for a particular applicant pertaining to a specific tag.                                                             |
 
     In addition, there are windows such as:
    * Help Window [accessed by the `help` command, or through Menu Bar].
@@ -906,16 +906,17 @@ An example of the `filter` command being successfully executed with `median`:
 
 **Error handling for `filter` command:**
 
-| Reason for Error                              | Error Message                                                                              | Remedy / Suggested course of action                                                                                                                                     |
-|-----------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Missing filter keyword: `filter`              | Unknown command!                                                                           | Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.             |
-| Missing parameters                            | Incomplete parameter inputs. t/TAG and met/SCORE are compulsory fields. | Enter the command again with the correct parameters.                                                                                                                    |
-| Tag does not exist on any applicant           | Tag does not exist!                                                                        | Check that the tag is used on at least one applicant. Add the tag to the applicants using `edit`                                                                        |
-| Invalid metric                                | Invalid metric provided. Needs to be one of: score, mean, median, percentile               | Check that the metric is one of the following: `score`, `mean`, `median`, `percentile` and that it is spelt correctly. Enter the command again with any of the 4 metric |
- | Invalid value                                 | Invalid value provided. Needs to be a non negative integer that is more than or equal to 0 | Check that the value is a non-negative integer that is more than or equal to 0. Enter the command again with the correct value.                                         |
- | Missing value                                 | val/VALUE is missing, it is compulsory.                                                    | Enter a value for `val/VALUE` since the metric requires it.                                                                                                             |
-| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/`              | Remove the duplicate prefix. The command should only have 1 of every prefix                                                                                             |
-| Tag name does not have an `assessment` category      | Tag category does not exist! | Check that the tag name has an `assessment` category using `listT`. Use `create` to create an `assessment` category for the tag if it does not.                         |                                                                                                              
+| Reason for Error                                | Error Message                                                                              | Remedy / Suggested course of action                                                                                                                                     |
+|-------------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing filter keyword: `filter`                | Unknown command!                                                                           | Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.             |
+| Missing parameters                              | Incomplete parameter inputs. t/TAG and met/SCORE are compulsory fields. | Enter the command again with the correct parameters.                                                                                                                    |
+| Tag does not exist on any applicant             | Tag does not exist!                                                                        | Check that the tag is used on at least one applicant. Add the tag to the applicants using `edit`                                                                        |
+| Invalid tag name                                | Invalid tag provided. Needs to be non-empty name | Check that the tag name is not empty and is alphanumeric (a valid tag name) and does not contain space |                                                                  |                                                                                           |
+| Invalid metric                                  | Invalid metric provided. Needs to be one of: score, mean, median, percentile               | Check that the metric is one of the following: `score`, `mean`, `median`, `percentile` and that it is spelt correctly. Enter the command again with any of the 4 metric |
+ | Invalid value                                   | Invalid value provided. Needs to be a non negative integer that is more than or equal to 0 | Check that the value is a non-negative integer that is more than or equal to 0. Enter the command again with the correct value.                                         |
+ | Missing value                                   | val/VALUE is missing, it is compulsory.                                                    | Enter a value for `val/VALUE` since the metric requires it.                                                                                                             |
+| Multiple prefixes of the same type being used   | Multiple values specified for the following single-valued field(s): `prefix/`              | Remove the duplicate prefix. The command should only have 1 of every prefix                                                                                             |
+| Tag name does not have an `assessment` category | Tag category does not exist! | Check that the tag name has an `assessment` category using `listT`. Use `create` to create an `assessment` category for the tag if it does not.                         |                                                                                                              
 
 <box type="tip" seamless>
 
@@ -1079,10 +1080,9 @@ Exports the entries into a .csv file located in the current directory as (/data/
 
 **Notes regarding `csv` command:**
 * Export only exports the following: Name, Phone, Email, Address, Tags, Linkedin, Github, Remark, Status.
-  <box type="tip" seamless>
-* JABPro must have write permissions, this means that if the .csv file is open,
-    exporting again will not be possible.
-
+* JABPro must have write permissions, this means that if the .csv file is open, 
+  exporting again will not be possible.
+    
 Examples:
 * `export` exports the data to /data/export.csv
 

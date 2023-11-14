@@ -15,7 +15,6 @@
 
 This is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +70,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="/diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"> </puml>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `PersonInformationPanel`, `SummaryStatisticScreen` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -89,7 +88,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram." width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete st/interviewed t/developer")` API call as an example.
 
@@ -304,7 +303,7 @@ This is done by setting the `isView` property to true in the `CommandResult` obj
 
 ### Create feature
 
-### Implementation
+#### Implementation
 
 The `create` feature is implemented using the `CreateTagCommand` class. It extends `Command` and overrides the `execute()` method
 to create tags of specific categories.
@@ -314,6 +313,10 @@ To initiate the creation of tags, users utilize the create command with the foll
 Parsing of the create command's tag parameters is handled by the `parse` method in the `CreateTagCommandParser` class. This method receives a string containing user input and separates it into individual tags based on the /t prefix. The resulting tags are then passed as an array of tag category and name pairs to the constructor of the CreateTagsCommand class.
 
 Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object for each element in the array of tag category and name pairs. These newly created tags are then added to the model.
+
+The following activity diagram summarize what happens when a user attempts to execute the `create` command.
+
+<puml src="diagrams/CreateTagActivityDiagram.puml" />
 
 ### Search feature
 
@@ -346,7 +349,7 @@ The following sequence diagram shows how the search operation works:
 
 **Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<puml src="diagrams/SearchSequenceDiagram.puml" width="550" />
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" width/>
 
 Step 3. The user should see the UI below upon entering `search t/intern`.
 
@@ -354,7 +357,7 @@ Step 3. The user should see the UI below upon entering `search t/intern`.
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `search` command.
 
-<puml src="diagrams/SearchActivityDiagram.puml" width="550" />
+<puml src="diagrams/SearchActivityDiagram.puml" />
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
@@ -405,7 +408,7 @@ Step 3. Assuming Bernice is the applicant matching the requirements, the user sh
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `delete` command.
 
-<puml src="diagrams/DeleteActivityDiagram.puml" width="550" />
+<puml src="diagrams/DeleteActivityDiagram.puml" />
 
 **Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
@@ -513,8 +516,7 @@ The following sequence diagram shows how the `Event` operation works:
 
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
-
-![EventWindow](images/eventwin.png)
+<img src="images/eventwin.png" alt="EventWindow" width="550"/>
 
 The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 

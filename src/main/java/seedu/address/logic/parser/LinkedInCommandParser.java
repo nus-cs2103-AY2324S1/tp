@@ -7,7 +7,7 @@ import seedu.address.logic.commands.LinkedInCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new GithubCommand object.
+ * Parses input arguments and creates a new LinkedInCommand object.
  */
 public class LinkedInCommandParser implements Parser<LinkedInCommand> {
     /**
