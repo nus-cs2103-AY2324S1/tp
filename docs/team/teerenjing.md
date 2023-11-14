@@ -28,8 +28,14 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `listConflicts`, `listAllConflicts`, `find` (Pull requests [\#164](), [\#215]())
     * Did cosmetic tweaks to existing documentation of features `delete`, `help`, `exit` (Pull requests [\#81](), [\#82](), [\#83](), [\#87]())
+    * Added Known Issues for BayMeds (Pull requests [\#242]())
   * Developer Guide:
     * Added OODM of the conflicting drugs feature.
+    * Added Planned Enhancements for BayMeds (Pull requests [\#242]())
+
+* **Team-based tasks**:
+  * Minor admin matters such as setting up the GitHub organisation, tp repository and MarkBind for the product website.
+  * Ran code inspection on entire codebase and removed commented out code (Pull request [\#241](), [\#243]())
 
 * **Community**:
   * Reported more than 5 bugs and gave suggestions during the PE Dry Run.
