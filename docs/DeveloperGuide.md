@@ -15,7 +15,6 @@
 
 This is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +70,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="/diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `PersonInformationPanel`, `SummaryStatisticScreen` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -89,9 +88,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram." width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete st/interviewed t/developer")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -192,8 +191,9 @@ User should see the UI as shown below.
 
 The following sequence diagram shows how the AddL and AddG operations work:
 
-<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram" />
-<puml src="diagram/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram" />
+<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram"> </puml>
+
+<puml src="diagrams/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram"> </puml>
 
 User should see the UI as shown below after entering `addL 1 u/alexyeoh`
 
@@ -264,12 +264,11 @@ Step 2. The user wants to see the full information displayed for the first perso
 
 The following sequence diagram shows how the view operation works:
 
-<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram"></puml>
 
 **Note:** The lifeline for `ViewCommand` and `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-User should see the UI as shown below after entering `View 1`  
-
+User should see the UI as shown below after entering `view 1`  (The command shown in Command Box is re-inputted for the sake of clarity. After entering the command, command should be cleared)
 ![View](images/viewState.png)
 
 Step 3. The user can then read or process the information stored for the viewed person.
@@ -295,17 +294,31 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram shows how command such as `add`, `edit`, `set`, `remark`, `addL`, `addG` (Commands that trigger view) lead to the update of the Person Information Panel in the UI.
 This is done by setting the `isView` property to true in the `CommandResult` object.
 
 <puml src="diagrams/ViewActivityDiagram.puml" alt="Event Activity Diagram"></puml>
 
+### Create feature
+
+#### Implementation
+
+The `create` feature is implemented using the `CreateTagCommand` class. It extends `Command` and overrides the `execute()` method
+to create tags of specific categories.
+
+To initiate the creation of tags, users utilize the create command with the following format: `create t/CATEGORY TAGNAME`. Each `/t` prefix denotes the start of a new tag definition. If users intend to create multiple tags, they can employ multiple `/t` prefixes in the command, such as `create t/CATEGORY1 TAGNAME t/CATEGORY2 TAGNAME`.
+
+Parsing of the create command's tag parameters is handled by the `parse` method in the `CreateTagCommandParser` class. This method receives a string containing user input and separates it into individual tags based on the /t prefix. The resulting tags are then passed as an array of tag category and name pairs to the constructor of the CreateTagsCommand class.
+
+Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object for each element in the array of tag category and name pairs. These newly created tags are then added to the model.
 
 ### Search feature
 
 #### Implementation
 
-The search feature is implemented using the `FindCommand` class. It extends `Command` and overrides the `execute()` method to
+The `search` feature is implemented using the `FindCommand` class. It extends `Command` and overrides the `execute()` method to
 filter users by the specified parameters.
 
 The search parameters from the user input are parsed using the parse method in the `FindCommandParser` class. `FindCommandParser::Parse`
@@ -326,35 +339,85 @@ Given below is an example usage scenario and how the search mechanism behaves at
 
 Step 1. The user launches the application.
 
-Step 2. The user executes `search n/john st/offered t/swe` command to filter candidates having the name john,
-offered status and tagged as swe. 
+Step 2. The user executes `search t/intern` command to filter candidates whose status are offered. 
 
 The following sequence diagram shows how the search operation works:
 
 **Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<puml src="diagrams/SearchSequenceDiagram.puml" width="550" />
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram"/>
 
-Step 3. The user should see the UI below upon entering `search n/john st/interviewed t/friends`.
+Step 3. The user should see the UI below upon entering `search t/intern`.
 
-![View](images/search.png)
+![Search](images/search-dg.png)
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `search` command.
 
-<puml src="diagrams/SearchActivityDiagram.puml" width="550" />
+<puml src="diagrams/SearchActivityDiagram.puml" />
 
-**Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
+**Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
+
+## Delete feature
+
+### Implementation
+
+The delete feature is implemented using the `DeleteCommand` class. It extends `Command` and overrides the `execute()` method to
+filter users by the specified parameters.
+
+The delete parameters from the user input are parsed using the parse method in the `DeleteCommandParser` class. `DeleteCommandParser::Parse`
+takes in the search parameters from the user input and, depending on the input, either leave it as a number (for delete by index) or combines them into a list of predicates
+(for delete tags & status).
+
+The `DeleteCommand` constructor can take either a positive integer number (for delete by index) or a list of predicates (for delete by tags & status) and both constructor
+will always return a `DeleteCommand` instance with a number and a list of predicates.
+For delete by index, the constructor will return a `DeleteCommand` instance with the associated input number and an empty list of predicates.
+For delete by tags & status, the constructor will return a `DeleteCommand` instance with a default index and the associated list of predicates.
+
+Currently, the delete parameters for delete by tags & status could only belong to either `Tag` or `Status`. 
+Prefixes `t/` and `st/` are used to denote the category of the delete parameters respectively. E.g. `delete st/interviewed t/developer`
+
+The list of predicates is a list comprising predicate objects whose classes implement the `Predicate` class in Java.
+Each category has its own predicate class i.e. `TagContainsKeywordPredicate`,  `StatusContainsKeywordPredicate`,
+and each class overrides the `test` method which returns true if the persons list contains any of the given tags/status.
+
+Finally, the execute method in `DeleteCommand` class retrieves a person or a list of persons to delete and 
+invokes the `deletePerson(personToDelete)` method from the Model class that deletes the associated person(s).
+Additionally, it also retrieves a list of events associated with the person(s) to delete and 
+invokes the `deleteEvent(eventToDelete)` method from the Model class that deletes the event(s) associated with the deleted person(s).
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `delete st/interviewed t/developer` command to delete applicants that has been interviewed and tagged as swe.
+
+The following sequence diagram shows how the search operation works:
+
+**Note:** The lifeline for `DeleteCommand` and `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
+
+Step 3. Assuming Bernice is the applicant matching the requirements, the user should see the UI below upon entering `delete st/interviewed t/developer`.
+
+![View](images/delete.png)
+
+The following activity diagram shows summarizes what happens when a user attempts to execute the `delete` command.
+
+<puml src="diagrams/DeleteActivityDiagram.puml" />
+
+**Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
+It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
 
 ### Set feature
 
 #### Implementation
 
-The search feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
+The set feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
 edit the status of the user.
 
-The search parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
-takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then
+The set parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
+takes in the set parameters from the user input and combines them into a list of predicates. This list of predicates is then
 passed as an argument to the `SetCommand` constructor and the method returns a `SetCommand` instance with the associated list of predicates.
 
 Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Preliminary", "Interviewed", "Rejected", "Accepted".
@@ -362,15 +425,15 @@ Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Prelimi
 Finally, the execute method in `SetCommand` class returns a new updated `Person` which will
 be used to update the status of the Person displayed.
 
-Given below is an example usage scenario and how the search mechanism behaves at each step.
+Given below is an example usage scenario and how the set mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
 Step 2. The user executes `set 1 Interviewed` command to set the first user to "Interviewed".
 
-Step 3. The user should see the update upon calling the `view` command on the Person again.
+Step 3. The user should see the update upon calling the `view` command on the Person again. In this case, `view 1`
 
-The following activity diagram shows how the search operation works:
+The following activity diagram shows how the set operation works:
 
 <puml src="diagrams/SetActivityDiagram.puml" alt="SetActivityDiagram" />
 
@@ -378,16 +441,17 @@ The following activity diagram shows how the search operation works:
 
 #### Implementation
 
-The search feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
+The export feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
 export to a csv file.
 
-The search parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
-takes in the search parameters from the user input and combines them into a list of predicates. 
-However, export need to be used with any parameters.
+The export parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
+takes in the export parameters from the user input and combines them into a list of predicates. 
+However, export does not need to be used with any parameters.
 
-Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file.
+Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file and returns a `CommandResult` that 
+indicates success or failure.
 
-Given below is an example usage scenario and how the search mechanism behaves at each step.
+Given below is an example usage scenario and how the export mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
@@ -398,7 +462,6 @@ Step 3. The user should see the exported .csv file in the directory /data/export
 The following activity diagram shows how the export operation works:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
-
 
 ## Events feature
 
@@ -450,7 +513,7 @@ The following sequence diagram shows how the `Event` operation works:
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
 
-![EventWindow](images/eventwindow.png)
+![EventWindow](images/eventwin.png)
 
 The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 
@@ -477,7 +540,6 @@ Pros: It prevents redundant data from being stored and accidental addition of mu
 Cons: It restricts users from entering data that might be understandable or convenient for them. [For example: If the user creates two Events with the description "Interview" for the same person, they might have a distinct idea of what each of those Events mean, but the system prevents them for making this addition].
 
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -500,7 +562,6 @@ Cons: It restricts users from entering data that might be understandable or conv
 * wants an organized way to keep track of candidates information
 * wants to view and manage candidates information in a single place
 * wants to filter and sort candidates based on their details
-* wants to compare candidates using their information
 * wants to view a schedule/summary of events relating to the candidates
 * wants to attach a score to candidate performance over interview and assessments
 * wants to be able to use scores in order to quantitatively compare candidates
@@ -529,14 +590,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager | delete job applicants information                                                                                | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
 | `* * *`  | Hiring Manager | view a specific job applicant's resume or portfolio                                                              | I can check whether they meet the requirements requested by other department heads                                                         |
 | `* * *`  | Hiring Manager | search for all job applicants matching a given profile                                                           | I can find suitable candidates for a project                                                                                               |
-| `* * *`  | Hiring Manager | List all candidate's information                                                                                 | I can easily view each candidates information                                                                                              |
+| `* * *`  | Hiring Manager | list all applicants information                                                                                  | I can easily get an overview of all of the applicants                                                                                      |
 | `* * *`  | Hiring Manager | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
 | `* * *`  | Hiring Manager | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
 | `* * *`  | Hiring Manager | create tags and categorise them                                                                                  | I can colour code them based on categories and use them to tag applicants to easily distinguish them                                       |
+| `* * *`  | Hiring Manager | list all tags I have created                                                                                     | I can easily get an overview of all of the tags that I have made                                                                           |
 | `* * *`  | Hiring Manager | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
-| `* * *`  | Hiring Manager | add social profile [LinkedIn/Github]  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities                                                                                |
+| `* * *`  | Hiring Manager | add social profile (LinkedIn/Github)  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities                                                                                |
 | `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-| `**`     | Hiring Manager | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
+| `* *`    | Hiring Manager | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
+| `*`      | Hiring Manager | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
+| `*`      | Hiring Manager | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
+
 
 
 ### Use cases
@@ -592,11 +657,11 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 2a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
-  * 2a1. JABPro shows an error message and provides course of action for remedy.  
+* 1a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
+  * 1a1. JABPro shows an error message and provides course of action for remedy.  
   Use case resumes at step 1.
-* 2b. User attempts to list persons when there are no entries in the address book.
-  * 2b1. JABPro shows a message indicating that there are no persons to display.   
+* 1b. User attempts to list persons when there are no entries in the address book.
+  * 1b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
 **Use case: Search persons matching the given profile**
@@ -617,7 +682,6 @@ Use case ends.
 * 5a. No person match the given profile.
   * 5a1. JABPro shows a message indicating that there are no persons to display.
     Use case ends.
-
 
 **Use case: Delete a person**
 
@@ -852,10 +916,50 @@ Additionally, you can only use the summary statistic table for comparison after 
 Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
 This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
 
+### Disabling view when using `search` and `filter`
+**Improve the search and filter feature**
+Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
+
+### Improve on `remark` feature
+**Improve the remark feature**
+Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus, we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+
+### Improve on `edit` feature
+**Improve on the edit feature**
+Currently, for tagging, once you add a tag to a person, it does not update when you add the tag categories to the same tag name using `create`.   
+This is a feature flaw since a user would expect the tag to be updated and would not need to be re-tag again. We would like to improve on this by updating the tag when the tag category is updated.    
+That is if you add an extra category to the tag name, the tag will be updated to include the tag category. Thus, a user would not need to re-tag the person again to update the tag category.
+
 
 ## **Appendix: Effort**
 
-### Based on over-arching features
+### ScoreList, Score, Summary Statistic, Filter
+In terms of integration of features, this was by far the biggest and most complex. This is due to how `Summary Statistic` relied on `Score`, `ScoreList` and `Tag` to function and Filter requiring all of them to function properly.
+The thought process came when we first tried to implement 1 score for each applicant. This was the naive approach. However, we realise that with only 1 score, would mean that it can only represent 1 thing.
+This means that the Hiring Manager would have to keep track of what each score means individually and any point in arranging these scores would lead to massive confusion. Hence, we decided to attach a score to a tag.
+However, this meant that with optional and possibly multiple tagging, we will need a flexible way of attaching scores to tags. This led to the HashMap implementation of `ScoreList`.
+Additionally, we had to decide on the constraint of scores. While a common approach was to let it be between 0 and 100, we wanted to maintain great flexibility and thus constraint it as a positive integer >= 0.
+
+For storage wise, we had to learn how to store `ScoreList` in a key-value format and also decode it. So that was one big challenge in terms of storing it in a json format that can be decoded.
+
+One of the biggest problem with using the `Parser` and `Command` model is that the `Parser` has no access to the model. So at the parsing stage, you are unable to determine if the tag exists or is valid since we only want to enable it for `assessment` tags.
+This meant that it had to be carried out at the `Command` stage of execution. Additionally, it might have been a misstep trying to implement the editing of scores in the `edit` command.
+This is due to the complexity of how the `edit` command was implemented. Since you could add a tag in edit while simultaneously trying to add a score to the tag, it led to a lot of need to check.
+Additionally since tags can be easily edited, it meant that we needed to check if the ScoreList was updated and if the tag was edited. 
+This also led to many errors, since you could remove all tags, and the ScoreList would still remain. Especially since EditPersonDescriptor did not have access to the tags that the person currently have.
+Additionally, since tag was not cumulative, you would want to keep track of the scores of the current tag if they are being kept. This meant that you would need to keep track of the current tag and the current score while also allowing for changes.
+
+After that, there was the choice of implementing Summary Statistic. A lot of thought went into how we can make the scores useful. What would be a great visualisation. We chose the couple of simple statistic that we thought would be useful.
+However, the calculation of the statistic was not simple since we decided to use streams for implementation. This meant that misconception of how streams work would lead to a lot of errors. The most common 1 being that the stream is closed due to a close operation.
+Additionally, percentile was originally implemented incorrectly. This was because we did not account for the edge case of people scoring the same. This meant that the percentile would vary for same score. This was fixed by then subtracting the number of people with the same score from the total number of people.
+
+
+Following that we had filter which relied on all of the above. This was simpler to implement once all the logic was down.
+Overall, the implementation of the feature was complex due to nature of Streams and UI updates for JavaFX. 
+
+### View 
+UI generation was rather tedious in terms of using CSS and trying to get things to align properly. Additionally, the design implementation using `Commands` meant that commands did not have access to other commands during runtime.  
+This meant that we had to add an extra parameter to the CommandResult in order to get commands to auto execute view after executing the command. The implementation was simple but the design was not.
 
 ###  Flexibility for further analysis
 We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
@@ -872,7 +976,13 @@ further analysis outside JABPro if they wish to.
 In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
 In the case of `ScoreList` and `UniqueTagList`, we used a hashmap to save the details of the score and tags for `ScoreList` or tag category and tag name for `Tags`. This was more complicated to implement as the conversion from hashmap to json and vice versa was more complicated than the conversion of a list to json and vice versa.
 
+### Redirection Implementation
 
+Adhering closely to our viewpoint of hiring managers, we realised that JABPro can only add value to their workflows if it goes above and beyond what existing low-level applications such as spreadsheets can provide. This helped us identify a key aspect of reviewing applications - the existence of a social profile linked with candidates.
+At the same time, we were bound by the limitations of what could and could not be implemented. For instance, the use of APIs or external libraries was prohibited. 
+Hence, we stumbled upon the idea of implementing a feature that simply redirects the user to the social profile, without the need for any external libraries.
+
+We believe this highlights the scope of adaptation that AB3 provided, and we could recognise. There still existed the notion of allowing users to provide the link, which could subsequently be copied to view the social profile. However, in lieu of making JABPro user-friendly, we focused on building redirection.
 
 ## **Appendix: Instructions for manual testing**
 
@@ -893,7 +1003,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -917,29 +1027,32 @@ testers are expected to do more *exploratory* testing.
       **Expected**: No person is added. Error details shown in the status message. List of persons remains the same.
 
 ### Deleting a person
-
 1. Deleting a person while all persons are being shown
+    1. Prerequisites:
+       1. List all persons using the `list` command. Multiple persons in the list.
+       2. Set one of the applicants' status in the sample data to `interviewed` by doing `set 1 interviewed`
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    2. Test case: `delete 1`<br>
+    2. Test case: `delete st/interviewed`
        **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: `delete 0`<br>
+    3. Test case: `delete 1`<br>
+       **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    4. Test case: `delete 0`<br>
        **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        **Expected**: Similar to previous.
 
 ### Viewing a person's details while all persons are being shown
 1. Viewing a person's details while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case 1:   
+    2. Test case 1 (Positive Test Case):     
        `view 1`  
        **Expected**: Person information panel is updated to reflect the details of the person.
 
-    3. Test case 2:  
+    3. Test case 2 (Negative Test Case):    
        `view 0`  
        **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
 
@@ -948,16 +1061,16 @@ testers are expected to do more *exploratory* testing.
 1. Adding a remark to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command.
 
-    2. Test case 1:   
+    2. Test case 1 (Positive Test Case):     
        `remark 1 r/John is a good candidate`  
        **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
 
-    3. Test case 2:  
+    3. Test case 2 (Positive Test Case):    
        `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
        **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
        Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.
 
-    4. Test case 3:   
+    4. Test case 3 (Negative Test Case):     
        `remark 1 r/`  
        **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.
 
@@ -1040,22 +1153,22 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       
    2. Test case 1 (Positive Test Case):   
-      `edit 1 t/Interview sc/Interview 70`  
+      `edit 1 t/Interview sc/Interview 70`   
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br>
       **Expected**: Score for the assessment type tag `Interview` is updated to 70.   
       Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).
 
-   3. Test case 2:  
-      `edit 1 t/swe sc/swe 70`  
+   3. Test case 2 (Negative Test Case):    
+      `edit 1 t/swe sc/swe 70`    
       **Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
 
-   4. Test case 3:  
+   4. Test case 3 (Negative Test Case):   
       `edit 1 t/Interview sc/Interview -10`  
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
    
-### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected)
 1. Setting a person's status in the list
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -1086,49 +1199,49 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       3. Edit the score for the `Interview` tag for at least two people using the `edit` command. This is done by entering `edit 1 t/Interview sc/Interview 70` and `edit 2 t/Interview sc/Interview 50` in the command box.
     
-   2. Test case 1:   
+   2. Test case 1 (Positive Test Case):   
    `filter t/Interview met/score val/60`  
    **Expected**: Person list is updated to reflect the persons with scores greater than 60 for the `Interview` tag. In this case its only the person with index 1. 
    
-   3. Test case 2:  
+   3. Test case 2 (Positive Test Case):  
    `filter t/Interview met/median`    
    **Expected**: Person list is updated to reflect the persons with scores greater than the median score for the `Interview` tag. In this case its only the person with index 1.
 
-   4. Test case 3:    
-   `filter t/Interview met/percentile val/0`  
+   4. Test case 3 (Positive Test Case):    
+   `filter t/Interview met/percentile val/0`     
    **Expected**: Person list is updated to reflect the persons with scores greater than the 0th percentile score for the `Interview` tag. In this case it will be all the persons with the `Interview` tag.
    
-   5. Test case 4:
-   `filter t/swe met/score val/60`
+   5. Test case 4 (Negative Test Case):      
+   `filter t/swe met/score val/60`  
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   6. Test case 5:
-   `filter t/Interview met/score val/-10`
+   6. Test case 5 (Negative Test Case):    
+   `filter t/Interview met/score val/-10`  
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   7. Test case 6:
-   `filter t/Interview met/variance val/100` 
+   7. Test case 6 (Negative Test Case):    
+   `filter t/Interview met/variance val/100`    
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   8. Test case 7:
-   `filter t/Interview met/percentile` 
+   8. Test case 7 (Negative Test Case):  
+   `filter t/Interview met/percentile`   
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
-### Adding LinkedIn/Github username to a person while all persons are being shown ###
+### Adding LinkedIn/GitHub username to a person while all persons are being shown ###
 
-1. Adding LinkedIn/Github username to a person while all persons are being shown
+1. Adding LinkedIn/GitHub username to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+    2. Test case (Positive test case): <br>`addL 1 u/alexyeoh` <br>
        **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
    
-    3. Test case (Negative test case): `addG -1 u/madlad`
+    3. Test case (Negative test case): <br>`addG -1 u/madlad` <br>
        **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
    
-    4. Test case (Negative test case): `addL u/maxcodes`
+    4. Test case (Negative test case): <br>`addL u/maxcodes` <br>
        **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
    
-    5. Test case (Negative test case): `addG 1`
+    5. Test case (Negative test case): <br>`addG 1` <br>
        **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
 
 ### Viewing person's social profile ###
@@ -1136,17 +1249,17 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person's social profile
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
    
-    2. Test case (Positive test case): `linkedin 1`
+    2. Test case (Positive test case): <br> `linkedin 1` <br>
        **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
    
-    3. Test case (Negative test case): `github 0`
+    3. Test case (Negative test case): <br> `github 0` <br>
        **Expected:** No Github profile shown. Error details shown in the status message.
    
-    4. Test case (Negative test case): `linkedin 2`
-       [Assumption: LinkedIn username has not been previously added for candidate 2]
+    4. Test case (Negative test case):  <br>`linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2] <br>
        **Expected:** No LInkedin profile shown. Error details shown in the status message.
    
-    5. Test case (Negative test case): `github`
+    5. Test case (Negative test case):  <br>`github` <br>
        **Expected:** No Github profile shown. Error details shown in the status message.
 
 ### Adding Event relating to a candidate ###
@@ -1154,22 +1267,22 @@ testers are expected to do more *exploratory* testing.
 1. Adding event relating to a candidate
     1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
    
-    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    2. Test case (Positive test case): <br>`event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
    
-    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    3. Test case (Negative test case): <br>`event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    4. Test case (Negative test case): <br>`event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+    5. Test case (Negative test case): <br>`event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+    6. Test case (Negative test case): <br>`event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+    7. Test case (Negative test case): <br>`event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
 
 ### Saving data

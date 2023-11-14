@@ -87,7 +87,6 @@ public class UniqueTagList {
      * @throws ParseException If the tag is not found in the list.
      */
     public Tag getTag(String tagName, String tagCategory) throws ParseException {
-
         Optional<Tag> foundTag = internalList.stream()
                 .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                 .findFirst();
@@ -99,12 +98,16 @@ public class UniqueTagList {
                     return tag;
                 }
             }
-            throw new ParseException("Tag category does not exist!");
+            Tag tag = new Tag(tagName, tagCategory);
+            add(tag);
+            return tag;
         } else if (foundTag.isPresent()) {
             // tag category not specified
             long occurrence = internalList.stream()
                     .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                     .count();
+
+
             // if tag occurs more than once in tag list
             if (occurrence > 1) {
                 throw new ParseException("Multiple tags exists with the same name! "
