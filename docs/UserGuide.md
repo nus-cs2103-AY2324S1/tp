@@ -287,7 +287,7 @@ If index of a multi-valued field is not specified, it will **default to 1**.
 
 Example usage:
 
-* `delete 1 /phone`
+* `delete 1 /phone /index 2`
     ![delete phone](images/delete/delete-phone.png)
 * `delete 5 /link /index 2`
 * `delete 10 /priority`
@@ -512,7 +512,7 @@ It is optional to provide the link index. If not specified, it will **default to
 
 Example usage:
 
-* `open 3 /index 2`
+* `open 2 /index 2`
     ![open link success](images/open/open-link.png)
     **Note:** The web browser used will be your computer's default web browser.
 * `open 1`
