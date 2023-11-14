@@ -47,18 +47,18 @@
     * [Remove dev from team command](#delete-developers-from-an-existing-team)
         * [Feature usage](#usage-8)
         * [Function implementation](#function-implementation-8)
-    * [Edit team name command](#)
-        * [Feature usage](#)
-        * [Function implementation](#)
+    * [Edit team name command](#Edit-team-name-of-an-existing-team)
+        * [Feature usage](#usage-9)
+        * [Function implementation](#function-implementation-9)
     * [Edit team leader command](#)
-        * [Feature usage](#)
-        * [Function implementation](#)
-    * [Find team command](#)
-        * [Feature usage](#)
-        * [Function implementation](#)
-    * [List team command](#list-teams)
         * [Feature usage](#usage-10)
-        * [Feature implementation](#function-implementation-10)
+        * [Function implementation](#function-implementation-10)
+    * [Find team command](#Find-Team-by-Keywords)
+        * [Feature usage](#usage-11)
+        * [Function implementation](#function-implementation-11)
+    * [List team command](#list-teams)
+        * [Feature usage](#usage-12)
+        * [Feature implementation](#function-implementation-12)
     * [Display tree command](#)
         * [Feature usage](#)
         * [Function implementation](#)
@@ -300,34 +300,33 @@ LinkTree provides a feedback based on whether the operation was successful or no
 
 ###  **Edit a developer**
 
-The add developer feature is facilitated by the AddCommand. It extends `Command` class.
-
-The operations are exposed in the `Model` interface as `Model#addTeam()`.
+The edit developer information feature is facilitated by the editCommand. It extends `Command` class.
 
 #### Usage
-Given below is an example usage scenario and how the function behaves at each step.
-
-Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
-
-
-
-Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
-
-
-
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
-
-
+- **Syntax**: `edit [DEVELOPER_INDEX] n/[NAME] p/[PHONE] e/[EMAIL] a/[ADDRESS] t/[TAG] ... t/[MORE_TAGS] `
+- **Example**: `edit 1 n/Peter`
+    - The first developer (with index 1) has changed his name to "Peter"
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+**Note:** You do not need to provide the information fo the fields that
+you do not want to change, which means if you only want to edit his name,
+then providing new name is enough.
 
 </box>
 
 #### Function Implementation
 
-(Add basic implementation here)
+- editCommandParser class parses the inputs and checks if the command format
+is given correctly. It throws an exception if there is no change between the
+original developer information and the new information.
+- The `execute` method in editCommand class create a new person object
+with original Identity code as the edited person and then checks if
+this edited person already exists in the addressbook. It throws an exception if this is true.
+- Upon successful execution of the `execute` method, a message is
+displayed to the user confirming that changes have been made to the
+developer.
+
 
 <br>
 
@@ -515,7 +514,7 @@ The `deletedev` command implemented in the DeleteDeveloperFromTeam class, allows
 Given below is an example usage scenario and how the function behaves at each step.
 
 - **Command Syntax**: `deletedev tn/[TEAMNAME] n/[Developer name]`
-- **Example**: `deletedev tn/Test Team 1 tl/Jason`
+- **Example**: `deletedev tn/Test Team 1 n/Jason`
   - Deletes `Jason` from a team called `Test Team 1`
 
 LinkTree provides a feedback based on whether the operation was successful or not.
@@ -538,36 +537,81 @@ LinkTree provides a feedback based on whether the operation was successful or no
 
 <puml src="diagrams/DeleteDeveloperFromTeamCommandDiagram.puml" width="1100"/>
 
-###  **List Teams**
 
-The list teams feature is facilitated by the ListTeamCommand. It extends `Command` class.
+
+
+### Edit team name of an existing team
+The `editTeamName` command implemented in the editTeamNameCommand class, allows the users to edit the team name of an existing team in the teambook.
+This editTeamNameCommand class extends the `Command` class in our implementation.
 
 #### Usage
 Given below is an example usage scenario and how the function behaves at each step.
 
-Case 1. The Ui is not displaying only the team list, and uses the `listt` command. In this case a list containing
-only all existing teams but not list of developers will be displayed.
+- **Command Syntax**: `editTeamName tn/[ORIGINAL_TEAMNAME] tn/[NEW_Developer name]`
+- **Example**: `editTeamName tn/Test Team 1 tn/Test Team 2`
+    - The team called `Test Team 1` is now changed its name to `Test Team 2`.
 
-Case 2. The user has just used the `listt` command, where the Ui is displaying the team list already, and the user
-uses `listt` command again. The app will go back to displaying both lists of developers and teams.
+LinkTree provides a feedback based on whether the operation was successful or not.
 
 <box type="info" seamless>
 
-**Note:** As long as the app is not displaying only the list of teams, the `listt` command will toggle it to do so,
-otherwise, the `listt` command will toggle the app to display both lists of developers and teams.
+**Note:** If a command fails its execution, its team name will remain unchanged.
 
 </box>
 
 #### Function Implementation
-- ListTeamCommand is executed.
-- if the Ui is listing only teams already: MainWindow toggles the HBox containing both lists of developers and teams to
-  be visible; MainWindow toggles the HBox containing the list of teams to be invisible; Display both lists of developers
-  and teams;
-- else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible;
-  MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
 
-<puml src="diagrams/ListTeamCommandDiagram.puml" width="1100"/>
-<br>
+- The `EditTeamNameCommandParser` class parses inputs from the users and checks if the command is in the correct format. An exception is thrown if there is any format mismatch.
+- The `execute` method checks if the specified team name is valid and exists in the teambook. If no, an exception is thrown to indicate this. The `Model#hasTeam` does this check.
+- The `execute` method also checks if the new team name exists in the teambook. If a team already has this new name, an error message is displayed to indicate this. The `Model#hasTeam` does this check.
+- In addition, the `execute` method also checks if the new team name
+is the same as the original team name.If they are the same,
+the `excecute` method will throw an exception to indicate that scenario.
+- If no exception is thrown, the team name will be changed.
+- A message is displayed to the user to indicate that the team name is changed. The change can be seen immediately on the Team panel of the UI.
+
+<puml src="diagrams/EditTeamNameCommandDiagram.puml" width="1100"/>
+
+
+
+
+
+
+
+### Edit team leader of an existing team
+The `editTeamLeader` command implemented in the editTeamLeaderCommand class, allows the users to edit the team leader of an existing team in the teambook.
+This editTeamLeaderCommand class extends the `Command` class in our implementation.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+- **Command Syntax**: `editTeamLeader tn/[ORIGINAL_TEAMNAME] tl/[NEW_Developer name]`
+- **Example**: `editTeamLeader tn/Test Team 1 tl/Bob`
+    - The team called `Test Team 1` is now changed its leader to `Bob`.
+
+LinkTree provides a feedback based on whether the operation was successful or not.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, its team leader will remain unchanged.
+
+</box>
+
+#### Function Implementation
+
+- The `EditTeamLeaderCommandParser` class parses inputs from the users and checks if the command is in the correct format. An exception is thrown if there is any format mismatch.
+- The `execute` method checks if the specified team name is valid and exists in the teambook. If no, an exception is thrown to indicate this. The `Model#hasTeam` does this check.
+- The `execute` method also checks if the new team leader exists in the addressbook. If this person does not exist, an error message is displayed to indicate this. The `Model#containsPerson` does this check.
+- In addition, the `execute` method also checks if the new team leader
+  is the same as the original team leader.If they are the same,
+  the `excecute` method will throw an exception to indicate that scenario.
+- If no exception is thrown, the team leader will be changed.
+- A message is displayed to the user to indicate that the team name is changed. The change can be seen immediately on the Team panel of the UI.
+
+<puml src="diagrams/EditTeamLeaderCommandDiagram.puml" width="1100"/>
+
+
+
 
 ### Find Team by Keywords
 
@@ -624,6 +668,81 @@ In designing the `findteam` command, two primary alternatives for matching team 
         - **User Unfriendliness**: Requires exact input.
 
 
+
+###  **List Teams**
+
+The list teams feature is facilitated by the ListTeamCommand. It extends `Command` class.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Case 1. The Ui is not displaying only the team list, and uses the `listt` command. In this case a list containing
+only all existing teams but not list of developers will be displayed.
+
+Case 2. The user has just used the `listt` command, where the Ui is displaying the team list already, and the user
+uses `listt` command again. The app will go back to displaying both lists of developers and teams.
+
+<box type="info" seamless>
+
+**Note:** As long as the app is not displaying only the list of teams, the `listt` command will toggle it to do so,
+otherwise, the `listt` command will toggle the app to display both lists of developers and teams.
+
+</box>
+
+#### Function Implementation
+- ListTeamCommand is executed.
+- if the Ui is listing only teams already: MainWindow toggles the HBox containing both lists of developers and teams to
+  be visible; MainWindow toggles the HBox containing the list of teams to be invisible; Display both lists of developers
+  and teams;
+- else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible;
+  MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
+
+<puml src="diagrams/ListTeamCommandDiagram.puml" width="1100"/>
+<br>
+
+
+###  **Show Tree**
+
+The show tree feature is facilitated by the treeCommand. It extends `Command` class.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Case 1. The Ui is not displaying the tree. Used `tree` command to show the tree.
+
+Case 2. The Ui is displaying the tree. Used `tree` command again to hide the tree.
+
+<box type="info" seamless>
+
+**Note:**  
+* Any additional words provided after the command will be ignored.
+(e.g. entering `tree list delete 1 HAHAHA-1234` is equivalent to entering `tree`)
+* The project name **cannot be edited** because our application is designed to hold
+  the contact information of all the developers in **one** software engineering project,
+  the naming of this project is not important since there is only one project, and
+  we do not need names to differentiate between different projects.
+* The content in the tree **will not be updated in real time** because that requires
+  too much computer resources. Instead, the tree is **updated every time you show it**.
+  So, when you have some changes to the data, you should **hide the tree first if it is
+  shown**, and call command `tree` again to show the tree. Then your changes will be
+  reflected in the new tree. With that being said, if you enter command `tree` to
+  show LinkTree and make some changes to the data, your changes will not be reflected
+  in the current tree. You should hide the tree first and then call `tree` again to
+  obtain a new tree which will reflect the changes you made.
+* Team names and team leaders' names may not be shown fully if they are too long.
+  You can refer back to the team list for their full names.
+
+
+</box>
+
+#### Function Implementation
+- treeCommand is executed.
+- if the Ui is not showing the tree: generate the tree and the tree will be shown in a new StackPane.
+- else if the Ui is showing the tree: the StackPane will be hided and the tree is cleared. A new tree will
+be generated next time showing the tree.
+
+<puml src="diagrams/TreeCommandDiagram.puml" width="1100"/>
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
