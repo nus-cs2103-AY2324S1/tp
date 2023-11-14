@@ -25,10 +25,11 @@ Given below are my contributions to the project.
   * Added support for timestamps in settlePerson command
 * **Contributions to the UG**:
   * Added descriptions for features I had implemented
-* **Contributions to the DG**: to be added soon
+* **Contributions to the DG**:
+  * Added descriptions for transaction commands
+  * Updated the logic architecture portion
 * **Contributions to team-based tasks**:
   * Participated in planning and designing the app
   * Actively fixed bugs
 * **Review/mentoring contributions**:
   * Actively reviewed pull requests
-* **Contributions beyond the project team**: to be added soon
