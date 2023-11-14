@@ -1058,7 +1058,7 @@ All completed tasks will be removed from your task list immediately. This action
 
 #### 3.1. Adding tag(s) to a person: `addTagPerson`
 
-You can add tag(s) to a person, so that you can better organise your persons.
+You can add tag(s) to a person, so that you can better organise your contact list.
 
 <h4>Format:</h4>
 
@@ -1105,7 +1105,7 @@ atagp
 
 #### 3.2. Adding tag(s) to a task: `addTagTask`
 
-You can add tag(s) to a task, so that you can better organise your tasks.
+You can add tag(s) to a task, so that you can better organise your task list.
 
 <h4>Format:</h4>
 
