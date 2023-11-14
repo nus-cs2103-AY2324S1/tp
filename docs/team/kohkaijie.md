@@ -26,22 +26,25 @@ Given below are my contributions to the project.
 * **Code contributed**: [Link to TP code dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=kohkaijie&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **Project management**:
-  * Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+  * Regularly reviewed teammates' PRs on GitHub with feedback.
   * Added issues on GitHub for various tasks.
+  * Did extensive manual testing to find new bugs during v1.4
 
 * **Enhancements to existing features**:
-  * Created classes for new fields for Patient and Doctor classes.
+  * Created classes for new fields for Patient and Doctor classes, such as BloodType, NRIC etc.
   * Wrote additional tests for existing features such as Patient fields, UndoCommand and Tags.
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `delete` and usage of special tags.
+    * Created Parameters table to highlight valid parameter inputs, their constraints and examples.
+    * Inserted UI screenshots for a few `find` commands.
   * Developer Guide:
     * Added implementation details of the `delete` feature.
     * Modified UML diagram for DeleteSequenceDiagram.
     * Added Use Case for UndoCommand and extensions for EditCommand.
+    * Added UML diagrams to illustrate the implementation of the UndoCommand and RedoCommand.
+    * Added section for manual testing and multiples test cases and their behaviours.
 
-* **Team-based tasks**:
-  * Reviewed PRs and approved when needed for merging.
 
 
