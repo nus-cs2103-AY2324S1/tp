@@ -5,7 +5,7 @@ title: "Qian Changru's Project Portfolio Page"
 
 ### Project: Class Manager 2023
 
-Class Manager 2023 aims to provide fast access to CS2103/T TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize data across and within classes.
+Class Manager 2023 aims to provide fast access to CS2103/T TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize students' data. Class Manager 2023 is written in Java, and has about 26 kLoC.
 
 Given below are my contributions to the project.
 
@@ -38,13 +38,14 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `present`, `absent`, `present-all`, and `absent-all`.
+    * Added documentation for the features `present`, `absent`, `present-all`, `absent-all`, and `random`.
     * Edited documentation for the features `edit`, and `delete`.
   * Developer Guide:
     * Added implementation details for the `present` feature.
-    * Added user stories.
-    * Added manual testing for `present`, `absent`, `present-all`, `absent-all`, `edit`, and `delete`.
+    * Added user stories and user cases.
+    * Added manual testing for `present`, `absent`, `present-all`, `absent-all`, `random`, `edit`, and `delete`.
     * Added Planned Enhancements section.(PR: [#205](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/205))
+    * Edited AB-3 UML diagrams to fit with our implementation.
 
 * **Team-based tasks**:
   * Reviewed and merged pull requests.
