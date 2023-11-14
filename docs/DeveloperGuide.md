@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is adapted from **[AddressBook 3(AB3)](https://github.com/se-edu/addressbook-level3)**
+* Undo and Redo features are adapted from proposed implementations from **[AddressBook 3(AB3)](https://github.com/se-edu/addressbook-level3)**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -222,6 +223,19 @@ the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or
 subject using their prefixes. Both parameters are optional, but at least one of them must be specified for the `find`
 command to work properly.
+
+`NameContainsKeywordsPredicate` is a class which takes a list of strings as input, and is used to test whether the input
+matches any of the names inside the tutee list.
+
+`SubjectContainsKeywordsPredicate` is a class which takes a list of string as input, and is used to test whether the input
+matches any of the subjects inside the tutee list.
+
+As for `NameSubjectPredicate`, it takes in two parameters `NameContainsKeywordsPredicate` and 
+`SubjectContainsKeywordsPredicate` as to accommodate for both input of fields n/ and sb/.
+
+However, since the method `updateFilteredPersonList` can only take one parameter, the merging of both 
+`NameContainsKeywordsPredicate` and `SubjectContainsKeywordsPredicate` into `NameSubjectPredicate` is the implementation
+we decided to go with.
 
 `FindCommand` takes in the following fields:
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
@@ -740,10 +754,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System displays the monthly revenue figure.
 
    Use case ends.
-
-*{More to be added}*
-<br>
-<br>
+   <br>
+   <br>
 
 ### Non-Functional Requirements
 
@@ -985,13 +997,58 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `redo`<br>
        Expected: No command is redone. Error details shown in the status message.
 
-### Saving data
+### Manually editing data file
 
-1. Dealing with missing/corrupted data files
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** <br>
+This section assumes that you are an advanced user and understand some basic computing terminologies
+</div>
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+The default save file is called `"tuitionconnect.json"`.
 
-1. _{ more test cases …​ }_
+Below is an example of a valid save file format:
+```
+{
+  "persons" : [ {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "subject" : "Physics",
+    "day" : "TUESDAY",
+    "begin" : "1000",
+    "end" : "1100",
+    "paid" : false,
+    "payRate" : "25.00"
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
+    "subject" : "Chemistry",
+    "day" : "WEDNESDAY",
+    "begin" : "1200",
+    "end" : "1300",
+    "paid" : false,
+    "payRate" : "30.00"
+  } ]
+}
+```
+
+| Parameter     | Description                                     | Requirement / Remarks                                                                                                      |
+|---------------|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **`name`**    | Name of tutee                                   | [Alphanumeric](#glossary) and may contain spaces                                                                           |
+| **`date`**    | Date of the upcoming application task           | In **dd-mm-yyyy** format                                                                                                   |
+| **`phone`**   | Contact number of tutee                         | Any number at least 3 digits long                                                                                          |
+| **`email`**   | Email address of tutee                          | In **XXXXXXXX@emaildomain** format <br> Example: `johndoee@gmail.com`                                                      |
+| **`address`** | Address of the tutee                            | [Alphanumeric](#glossary) and may contain spaces                                                                           |
+| **`subject`** | Subject of the tutee                            | [Alphanumeric](#glossary) and may contain spaces                                                                           |
+| **`day`**     | Day of weekly recurring lesson of the tutee     | Full name of day or first three letters of the full name <br> **Non-case sensitive** <br> Example: `Mon`/`Monday`/`monday` |
+| **`begin`**   | Begin time of a tutee's weekly recurring lesson | In **HHMM** format                                                                                                         |
+| **`end`**     | End time of a tutee's weekly recurring lesson   | In **HHMM** format                                                                                                         |
+| **`paid`**    | Indicates if the tutee paid                     | boolean value for whether tutee has paid                                                                                   |
+| **`payrate`** | dollars per hour you make teaching this tutee   | Numbers up to two decimal places only <br> Numbers must be **non-negative**                                                |
+
 
 ## **Planned Enhancements**
 
@@ -1011,7 +1068,7 @@ Idea: Add a scheduling mechanism within the command execution to mark individual
 
 Reason: To create a more sophisticated find feature for the best results. This enhancement allows users to get more specific results tailored to their criteria.
 
-Idea: Modify the NameContainsKeywordPredicate and SubjectContainsKeywordPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
+Idea: Modify the NameContainsKeywordsPredicate and SubjectContainsKeywordsPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
 
 ### Maximum PayRate
 

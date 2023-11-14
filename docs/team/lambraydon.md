@@ -38,14 +38,21 @@ Given below are my contributions to the project.
   * Created initial UI mockup in v1.2
 
 * **Enhancements to existing features**:
-    * Updated GUI by modifying UI of list tiles
-    * Refactored `Person#isSamePerson` such that a person is considered a duplicate if they have the `Name` and `Phone`
+    * Refactored code, added `Day` parameter (Pull requests [\#70](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/70))
+    * Updated GUI by modifying UI of list tiles (Pull requests [\#117](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/117))
+    * Refactored `Person#isSamePerson` such that a person is considered a duplicate if they have the `Name` and `Phone` (Pull requests [\#126](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/126))
 
 * **Documentation**:
-    * to be added soon
+  * User Guide:
+    * Added and modified documentation for the features `list` , `undo` and `redo` features (Pull requests [\#217](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/217))
+    * Added parameters requirement section
+  * Developer Guide:
+    * Added implementation details and sequence diagrams of the `list`, `undo`, `redo` and `add` feature. (Pull requests [\#188](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/188), [\#187](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/187), [\#201](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/201))
+    * Added planned enhancements (Pull requests [\#226](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/226))
+    * Added manual test cases for `undo`, `redo` and `list`(Pull requests [\#226](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/226))
 
 * **Community**:
-    * to be added soon
+    * Assisted other teams in finding bugs during the Practical Exam Dry Run
 
 * **Tools**:
-    * to be added soon
+    * codeCov
