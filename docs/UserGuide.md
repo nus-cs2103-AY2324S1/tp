@@ -349,15 +349,15 @@ Parameters:
 
 * `[name]` is a term found in the names of the contacts you wish to find.
 
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+Using the find command will update the filter status to `Filter by: name`. The find command will also override a filter command if you used it, and vice versa.
+</div>
+
 Example usage:
 
 * `find Dav`
     ![search](images/find/find.png)
 * `find Kai Jie`
-
-<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
-Using the find command will update the filter status to `Filter by: name`. The find command will also override a filter command if you used it, and vice versa.
-</div>
 
 [Table of Contents](#table-of-contents)
 
@@ -439,10 +439,12 @@ specified above.
     List of options:
 
     * `true` - Remove contacts who have finished/haven't started the course as of the current date of your system.
-    * `false` - (default). Include contacts who have finished/haven't started taking the course
-  as of the current date.
-    * NOTE: `[taken]` compares the dates of the course with the current date of
-    your system. It does not factor in other fields like graduation year.
+    * `false` - (default). Include all contacts with matching course terms in the filtered list regardless of course dates.
+
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+`taken` compares the dates of the course with the current date of
+your system. It does not factor in other fields like graduation year.
+</div>
 
 Example usage:
 
