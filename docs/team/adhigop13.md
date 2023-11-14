@@ -56,4 +56,5 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Used the IntelliJ tool to generate JavaDocs for selected elements.
+  * Used PlantUML tool to design our sequence and activity diagrams in the developer guide.
 
