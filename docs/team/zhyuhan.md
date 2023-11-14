@@ -5,7 +5,7 @@ title: zhyuhan's Project Portfolio Page
 
 ### Project: Connectify
 
-_Short description here_
+Connectify’s codebase, while short, is robust, made with extra care and deliberate design. We focus on creating easy-to-develop yet high quality product for both the users and the developers.
 
 These are my contributions:
 
