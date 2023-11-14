@@ -191,7 +191,7 @@ Format: `list [LIST] [KEYWORDS]`
 
 **Tips:**
 - `list` without specifying the `[LIST]` parameter defaults to showing the 📅 ___SCHEDULE list___.
-- Using the `[KEYWORDS]` parameter after `list` is not allowed!
+- Using the `[KEYWORDS]` parameter after `list` (without specifying `[LIST]`) is not allowed!
 
 </box>
 
@@ -312,7 +312,7 @@ Example usages:
 Success outputs:
 * Input: `show 1`
 ```
-Showing Lesson: Start: 12:30 PM; End: 2:30 PM
+Showing Lesson: Start: 1:30 PM; End: 3:30 PM
 ```
 ![Success for show 1](images/show/show_lesson_positive.png)
 
