@@ -10,8 +10,6 @@ import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.model.job.interview.Interview;
-import seedu.application.model.job.interview.exceptions.DuplicateInterviewException;
-import seedu.application.model.job.interview.exceptions.InterviewNotFoundException;
 
 /**
  * Represents a Job in the application book.
@@ -106,14 +104,6 @@ public class Job {
         requireAllNonNull(target, editedInterview);
 
         int index = interviews.indexOf(target);
-        if (index == -1) {
-            throw new InterviewNotFoundException();
-        }
-
-        if (!target.isSameInterview(editedInterview) && interviews.contains(editedInterview)) {
-            throw new DuplicateInterviewException();
-        }
-
         interviews.set(index, editedInterview);
     }
 

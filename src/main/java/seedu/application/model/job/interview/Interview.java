@@ -41,21 +41,6 @@ public class Interview {
         return interviewAddress;
     }
 
-    /**
-     * Returns true if both interview have the same interview type, date time and address.
-     * This defines a weaker notion of equality between two interview.
-     */
-    public boolean isSameInterview(Interview otherInterview) {
-        if (otherInterview == this) {
-            return true;
-        }
-
-        return otherInterview != null
-                && otherInterview.getInterviewType().equals(getInterviewType())
-                && otherInterview.getInterviewDateTime().equals(getInterviewDateTime())
-                && otherInterview.getInterviewAddress().equals(getInterviewAddress());
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
