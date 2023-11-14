@@ -1159,3 +1159,8 @@ pre-edited tutee as a schedule clash.
 
 Idea: Have an additional check with the index. If the edited person has the same index as the pre-edited person, then the
 system should allow the edit to happen.
+
+### Put more restrictions in phone number and email
+Reason: Users might be able to put in an infinitely-long phone number and email which may cut off the UI
+
+Idea: Add the restriction in the parsers.
