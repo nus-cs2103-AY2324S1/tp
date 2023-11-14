@@ -42,7 +42,7 @@
         * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
         * [Implementing `DeleteNoteCommand`](#implementing-deletenotecommand)
     * [Events feature](#events-feature)
-      * [Overview: Event](#overview--event-)
+      * [Overview: Event](#overview-event)
       * [Implementing `AddEventCommandParser`](#implementing-addeventcommandparser)
       * [Implementing `ListEventCommandParser`](#implementing-listeventcommandparser)
       * [Implementing `DeleteEventCommandParser`](#implementing-deleteeventcommandparser)
@@ -125,7 +125,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -139,7 +139,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -158,19 +158,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete contact 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("find John")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete contact 1` Command" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find John` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `FindCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `FindCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -179,12 +179,19 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
-* Some commands contains secondary command, like `add contact`, `add note` and `add event`.
-*   - In this case, the primary command parser (in the example it is `AddCommand`) will check the secondary command word and use the correspond secondary command parser (like `AddPersonCommandParser`, `AddEventCommandParser` and `AddNoteCommandParser`) to continue parsing the command.
+
+* Some commands contain secondary command, like `add contact`, `add note` and `add event`.
+
+    - In this case, the primary command parser (in the example it is `AddCommand`) will check the secondary command word and use the correspond secondary command parser (like `AddPersonCommandParser`, `AddEventCommandParser` and `AddNoteCommandParser`) to continue parsing the command.
+
 * The parser will turn the arguments in the command from raw `String` into corresponding Object. During this process, the parser also needs to check whether the arguments are valid or not.
-*   - The parsing method for each types of arguments are mainly in `ParserUtil.java`
+
+    - The parsing method for each types of arguments are mainly in `ParserUtil.java`
+    
 * If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
 ### Model Component
@@ -195,8 +202,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Event` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` and `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<Event>`, respectively, that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -283,14 +290,17 @@ The activity diagram below shows the action sequence of adding one or more `Tag`
 
 <box type="info" seamless>
 
-**Note:** The sequence diagram for removing `Tag` is similar to adding `Tag`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddTagCommandParser` with `DeleteTagCommandParser`, and `AddTagCommand` with `DeleteTagCommand`.
+**Note:** The sequence diagram for removing `Tag` is similar to adding `Tag`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddTagCommandParser` with `DeleteTagCommandParser`, and `AddTagCommand` with `DeleteTagCommand`, etc.
 
 </box>
 
 ##### Implementing `AddTagCommandParser` and `DeleteTagCommandParser`
 Both implements the `Parser` interface, parsing two main arguments:
+
 1. `contactId`: the one-based index of the contact shown in the GUI.
+
 1. `taglist`: the unique set of `Tag` to add/delete.
+
    * The set of tags is parsed using the `parseTags` method in the `ParseUtil` utility class, which puts the collection of tag names given by the user into a `HashSet`.
 
 `contactId` and `taglist` is then use to create the `AddTagCommand`/`DeleteTagCommand` object.
@@ -302,9 +312,13 @@ For the details of how parsing works, see the section on [Logic Component](#logi
 
 When the command is execute, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 1. The set of tags is then added to the person's tag list by calling the `addTags` method in `Person`.
+
 1. The `Model`'s `setPerson` method is used to update the person.
+
 1. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when `AddTagCommand` is executed:
@@ -316,10 +330,15 @@ The following activity diagram summarizes what happens when `AddTagCommand` is e
 
 When the command is execute, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 1. Loop through every `Tag` that the person has, separating those that be found in `toDelete` and those not found.
+
 1. The set of tags found in `toDelete` is then deleted from the person's tag list by calling the `removeTags` method in `Person`.
+
 1. The `Model`'s `setPerson` method is used to update the person.
+
 1. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when the `DeleteTagCommand` is executed:
@@ -376,8 +395,11 @@ For the details of how parsing works, see the section on [Logic Component](#logi
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 2. The note is then added to the person's note list by calling the `addNote` method in `Person`.
+
 3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when `AddNoteCommand` is executed:
@@ -389,9 +411,13 @@ The following activity diagram summarizes what happens when `AddNoteCommand` is 
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 2. Using the `noteIdToDelete`, it will delete the note from the person in the address book by calling `Person`'s `removeNoteByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the note does not exist.
+
 3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when the `DeleteNoteCommand` is executed:
@@ -469,9 +495,12 @@ It internally stores `contactId` (the index of the contact) and `toAdd` (the `Ev
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `Person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
-1. The `Event` is then added to the person's note list by calling the `addEvent` method in `Person`.
-1. Lastly a `CommandResult` with the success message is returned.
+
+2. The `Event` is then added to the person's note list by calling the `addEvent` method in `Person`.
+
+3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when `AddEventCommand` is executed:
 
@@ -498,10 +527,14 @@ It internally stores `contactId` (the index of the contact) and `eventIdToDelete
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `Person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
-1. Using the `eventIdToDelete`, it will delete the event from the person in the address book by calling `Person`'s `removeEventByUserFriendlyId` method.
+
+2. Using the `eventIdToDelete`, it will delete the event from the person in the address book by calling `Person`'s `removeEventByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the event does not exist.
-1. Lastly a `CommandResult` with the success message is returned.
+
+3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when the `DeleteEventCommand` is executed:
 
@@ -991,14 +1024,16 @@ testers are expected to do more *exploratory* testing.
    2. Double-click the jar file
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences
+
+1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.
     Expected: The most recent window size and location is retained.
 
-3. Exiting
+
+1. Exiting
 
     1.  Use the `exit` command to close the app.
     Expected: app closes without error.
@@ -1039,6 +1074,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add tag -id 1 -t HR representative`<br>
     Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
 
+
 1. Adding duplicate tag to a contact
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
@@ -1048,7 +1084,9 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add tag -id -t Frontend -t Frontend`<br>
     Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
 
+
 1. Adding tag while contact list is being filtered
+
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
 
     1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
@@ -1071,11 +1109,13 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete tag -id 1 -t HR representative`<br>
     Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
 
+
 1. Deleting tag while all contacts is shown but tag does not exist.
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
     Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
+
 
 1. Deleting tag while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
@@ -1104,12 +1144,14 @@ testers are expected to do more *exploratory* testing.
        Expected: No note is added as a note should have a note content. Error details shown in the status message.<br>
 
 1. Adding another note to a contact
+
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one note.
 
     1. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
 
 1. Adding note while contact list is being filtered
+
     1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
 
     1. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when no contact is shown<br>
@@ -1130,12 +1172,15 @@ testers are expected to do more *exploratory* testing.
        Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
 
 1. Deleting note while all contacts is shown but note does not exist.
+
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     1. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
        Expected: No note is deleted. Error details shown in the status message.
 
+
 1. Deleting note while contact list is being filtered
+
     1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
 
     1. Test case: `delete note -id 1 -nid 1`, when no contact is shown.<br>
@@ -1176,6 +1221,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
        Expected: No event is added. Error details shown in the status message.
+
 
 1. Adding event while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
@@ -1234,7 +1280,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No event is deleted. Error details (event not found) shown in the status message.
 
     1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
-       Expected: Similar to previous test cases.
+       Expected: Similar to previous test cases. <br>
+
 
 1. Deleting event while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
