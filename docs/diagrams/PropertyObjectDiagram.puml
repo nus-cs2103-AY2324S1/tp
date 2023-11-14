@@ -14,7 +14,7 @@ package PropertyObjectDiagram {
     }
     Object "<u>:Price" as Price {
     }
-    Object "<u>:Tags" as Tags {
+    Object "<u>:Tag" as Tag {
     }
 }
 
@@ -22,6 +22,6 @@ PropName <-- Property : has <
 PropAddress <-- Property : has <
 PropPhone <-- Property : has <
 Price <-- Property : has <
-Tags <-- Property : has <
+Tag <-- Property : has <
 
 @enduml
