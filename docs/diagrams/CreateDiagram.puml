@@ -6,15 +6,12 @@ box Logic LOGIC_COLOR_T1
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
 Participant ":CreateCommandParser" as createCommandParser LOGIC_COLOR
-Participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
-Participant ":ArgumentMultimap" as argMultimap LOGIC_COLOR
 Participant ":CreateCommand" as createCommand LOGIC_COLOR
+Participant "person:Person" as person MODEL_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-Participant ":Person" as person MODEL_COLOR
 Participant ":Model" as model MODEL_COLOR
-Participant ":VersionedNetworkBook" as versionedNetworkBook MODEL_COLOR
 end box
 
 -> logic : execute("create" + arguments)
@@ -24,7 +21,7 @@ logic -> networkBookParser : "create" + arguments
 activate networkBookParser
 
 create createCommandParser
-networkBookParser -> createCommandParser : new CreateCommandParser()
+networkBookParser -> createCommandParser
 activate createCommandParser
 
 createCommandParser --> networkBookParser
@@ -32,23 +29,6 @@ deactivate createCommandParser
 
 networkBookParser -> createCommandParser : parse(arguments)
 activate createCommandParser
-
-createCommandParser -> ArgumentTokenizer : tokenize
-activate ArgumentTokenizer
-
-create argMultimap
-ArgumentTokenizer -> argMultimap : new ArgumentMultimap()
-activate argMultimap
-argMultimap --> ArgumentTokenizer : argMultimap
-deactivate argMultimap
-
-ArgumentTokenizer --> createCommandParser : argMultimap
-deactivate ArgumentTokenizer
-
-createCommandParser -> argMultimap : parseName, ...
-activate argMultimap
-argMultimap --> createCommandParser : name, ...
-deactivate argMultimap
 
 create person
 createCommandParser -> person : new Person(name, ...)
@@ -79,10 +59,6 @@ deactivate model
 
 createCommand -> model : addPerson(person)
 activate model
-model -> versionedNetworkBook : addPerson(person)
-activate versionedNetworkBook
-versionedNetworkBook --> model :
-deactivate versionedNetworkBook
 model --> createCommand :
 deactivate model
 
@@ -91,5 +67,6 @@ deactivate model
 deactivate createCommand
 
 <-- logic : command success
+deactivate logic
 
 @enduml
