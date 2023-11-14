@@ -1,6 +1,10 @@
 @startuml Delete Patient Data
 start
 
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
 :Enter delete command;
 :Parse arguments;
 
