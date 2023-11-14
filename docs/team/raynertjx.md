@@ -30,7 +30,8 @@ Given below are my contributions to the project.
     * Designed the skeleton PPP used by teammates
     * Created labels that enabled us to track the different types of issues and PRs
     * Gathered tasks and improvements for the UG
-
+  
+<br>
 * **Documentation for Developer Guide**:
     * Edited developer guide based on changes to `FindCommand` [\#64](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/64)
     * Modified Storage component diagram due to addition of `CoursesStorage` [\#150](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/150)
