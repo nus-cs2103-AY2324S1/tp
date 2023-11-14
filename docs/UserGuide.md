@@ -364,13 +364,13 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [th/TELEHANDLE] [t/TAG]
 
 | Field            | Requirement | Description                                                                                                                                                                                                  |
 |------------------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| n/NAME           | Compulsory  | Your friend's name, because every name carries a unique story. If you want to add multiple "Johns" like "John 1, John 2, John 3," feel free to do so!                                                        |
-| p/PHONE_NUMBER   | Compulsory  | Stay connected with your local and overseas friends whose phone numbers may be of different lengths. Furthermore, the use of shared phone numbers is permissible, recognising that home numbers may be used. |
-| e/EMAIL          | Optional    | Ensure effortless digital connections using their email addresses. Additionally, the use of shared email accounts is permissible, recognising that numerous friends can collaborate on group projects.       |
-| a/ADDRESS        | Optional    | Specify their physical address, ideal for planning meetups.                                                                                                                                                  |
-| th/TELEHANDLE    | Optional    | Provide their telehandle, ensuring quick and easy communication.                                                                                                                                             |
-| t/TAG            | Optional    | Categorise your friend with relevant tags, simplifying your contact management.                                                                                                                              |
-| c/COURSE         | Optional    | Associate your friend with the courses they are enrolled in, for easy reference in your academic journey.                                                                                                    |
+| `n/NAME`         | Compulsory  | Your friend's name, because every name carries a unique story. If you want to add multiple "Johns" like "John 1, John 2, John 3," feel free to do so!                                                        |
+| `p/PHONE_NUMBER` | Compulsory  | Stay connected with your local and overseas friends whose phone numbers may be of different lengths. Furthermore, the use of shared phone numbers is permissible, recognising that home numbers may be used. |
+| `e/EMAIL`        | Optional    | Ensure effortless digital connections using their email addresses. Additionally, the use of shared email accounts is permissible, recognising that numerous friends can collaborate on group projects.       |
+| `a/ADDRESS`      | Optional    | Specify their physical address, ideal for planning meetups.                                                                                                                                                  |
+| `th/TELEHANDLE`  | Optional    | Provide their telehandle, ensuring quick and easy communication.                                                                                                                                             |
+| `t/TAG`          | Optional    | Categorise your friend with relevant tags, simplifying your contact management.                                                                                                                              |
+| `c/COURSE`       | Optional    | Associate your friend with the courses they are enrolled in, for easy reference in your academic journey.                                                                                                    |
 
 
 <div markdown="block" class="alert alert-tip">
@@ -409,12 +409,12 @@ Examples:
 
 **Here's what to do when you encounter errors:**
 
-| Errors Encountered                               | Reason                                                                       | Solution                                                                                                                                  |
-|--------------------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `This person already exists in NUSCoursemates`   | You are creating a student with the same name (case-sensitive).              | Ensure that you do not enter a student with the same name.                                                                                |
-| `Invalid command format! `                       | Some of the essential [prefixes](#Glossary) such as n/, p/ could be missing. | Follow the [Command Format](#command-format) for the add command.                                                                         |
-| `Unknown command `                               | The "add" command may be spelled incorrectly or not entirely in lowercase.   | Verify that you've spelled the add command correctly. It should be in lowercase.                                                          |
-| Errors regarding wrong [field](#Glossary) inputs | Invalid inputs may be entered.                                               | Cross-reference the constraints associated with each [field](#Glossary) using the [Input Table](#input-table) for additional information. |
+| Errors Encountered                               | Reason                                                                           | Solution                                                                                                                                  |
+|--------------------------------------------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `This person already exists in NUSCoursemates`   | You are creating a student with the same name (case-sensitive).                  | Ensure that you do not enter a student with the same name.                                                                                |
+| `Invalid command format! `                       | Some of the essential [prefixes](#Glossary) such as `n/`, `p/` could be missing. | Follow the [Command Format](#command-format) for the `add` command.                                                                       |
+| `Unknown command `                               | The `add` command may be spelled incorrectly or not entirely in lowercase.       | Verify that you've spelled the `add` command correctly. It should be in lowercase.                                                        |
+| Errors regarding wrong [field](#Glossary) inputs | Invalid inputs may be entered.                                                   | Cross-reference the constraints associated with each [field](#Glossary) using the [Input Table](#input-table) for additional information. |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -527,6 +527,14 @@ Examples:
 * The deleted student will no longer appear when the `findcourse`, `findstudent` or `list` commands are entered.
 </div>
 
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered                     | Reason                                                                        | Solution                                                                               |
+|----------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `The person index provided is invalid` | You have entered an invalid index.                                            | Ensure that the index entered is within the total number of students in NUSCoursemates |
+| `Invalid command format! `             | You might have left the index input [field](#glossary) empty.                 | Ensure that you have entered an index input after `delete`.                            |
+| `Unknown command `                     | The `delete` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `delete` command correctly. It should be in lowercase.  |
+
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -547,6 +555,12 @@ Format: `list`
 
 Examples:
 ![list](images/ListFeature.png)
+
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered                               | Reason                                                                      | Solution                                                                            |
+|--------------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `Unknown command `                               | The `list` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `list` command correctly. It should be in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -574,6 +588,13 @@ Examples:
 
 ![result for 'findstudent alex david'](images/findAlexDavidResult.png)
 
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered                               | Reason                                                                             | Solution                                                                                   |
+|--------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| `Invalid command format! `                       | You might have left the input [field](#glossary) empty.                            | Ensure that you have entered an input after `findstudent`.                                 |
+| `Unknown command `                               | The `findstudent` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `findstudent` command correctly. It should be in lowercase. |
+
 [Back to Table of Contents](#table-of-contents)
 
 ### Discover Coursemates with `findcourse`
@@ -597,6 +618,13 @@ Examples:
 * `findcourse cs2100 ma1521` returns `CS2100` and `MA1521`
 
 ![result for 'findcourse CS2100 MA1521'](images/FindcourseCS2100MA1521.png)
+
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered                               | Reason                                                                            | Solution                                                                                  |
+|--------------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `Invalid command format! `                       | You might have left the input [field](#glossary) empty.                           | Ensure that you have entered an input after `findcourse`.                                 |
+| `Unknown command `                               | The `findcourse` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `findcourse` command correctly. It should be in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -732,6 +760,11 @@ Examples:
 |-----------|--------------------------------------------------------|
 | **After** | ![clear-courses_after](images/ClearCoursesAfter.png)   |
 
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered | Reason                                                                               | Solution                                                                                     |
+|--------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `Unknown command ` | The `clear-courses` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `clear-courses` command correctly. It should be in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -756,6 +789,12 @@ Example:
 * Only enter the `clear` command if you are sure that you wish to remove all existing contacts. Once you run this command, you lose all data immediately. 
 </div>
 
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered | Reason                                                                       | Solution                                                                             |
+|--------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `Unknown command ` | The `clear` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `clear` command correctly. It should be in lowercase. |
+
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -776,11 +815,11 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
-<div markdown="block" class="alert alert-warning">
+**Here's what to do when you encounter errors:**
 
-**:exclamation: Caution:** <br>
-* If your command isn't recognised and you see "Unknown command," simply check your spelling and try again. Avoid variants like "helps" or "HELP."
-</div>
+| Errors Encountered | Reason                                                                      | Solution                                                                            |
+|--------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `Unknown command ` | The `help` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `help` command correctly. It should be in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -794,11 +833,11 @@ Format: `feedback`
 
 ![feedback message](images/feedbackMessage.png)
 
-<div markdown="block" class="alert alert-warning">
+**Here's what to do when you encounter errors:**
 
-**:exclamation: Caution:** <br>
-* If your command isn't recognised and you see "Unknown command," simply check your spelling and try again. Avoid variants like `feedbacks` or `FEEDBACK`."
-</div>
+| Errors Encountered | Reason                                                                          | Solution                                                                                |
+|--------------------|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `Unknown command ` | The `feedback` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `feedback` command correctly. It should be in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -821,10 +860,10 @@ Format: `theme THEME`
 
 **Here's what to do when you encounter errors:**
 
-| Errors Encountered         | Reason                                                                       | Solution                                                                           |
-|----------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| `Invalid command format! ` | You may not have entered a valid theme.                                      | Ensure that you enter `dark` or `light` for the themes.                            |
-| `Unknown command `         | The "theme" command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the theme command correctly. It should be in lowercase. |
+| Errors Encountered         | Reason                                                                       | Solution                                                                             |
+|----------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `Invalid command format! ` | You may not have entered a valid `theme`.                                    | Ensure that you enter `dark` or `light` for `theme`.                                 |
+| `Unknown command `         | The `theme` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `theme` command correctly. It should be in lowercase. |
 
 ### Exiting the program : `exit`
 > "The pain of parting is nothing to the joy of meeting again."
@@ -841,11 +880,11 @@ Format: `exit`
 * Your data would be saved automatically, feel free to exit anytime! <br>
 </div>
 
-<div markdown="block" class="alert alert-warning">
+**Here's what to do when you encounter errors:**
 
-**:exclamation: Caution:** <br>
-* If your command isn't recognised and you see "Unknown command," simply check your spelling and try again. Avoid variants like `exits` or `EXIT`."
-</div>
+| Errors Encountered | Reason                                                                      | Solution                                                                            |
+|--------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `Unknown command ` | The `exit` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `exit` command correctly. It should be in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
