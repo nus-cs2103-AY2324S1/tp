@@ -1,0 +1,26 @@
+@startuml
+start
+:User executes find command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+
+else ([else])
+    if () then ([command contains multiple prefix])
+    : Show multiple prefixes error message;
+    else ([else])
+            if () then ([description in empty])
+            : Show empty description error message;
+            else ([else])
+                : Displays the students that match the search criteria;
+            endif
+    endif
+endif
+stop
+
+
+@enduml

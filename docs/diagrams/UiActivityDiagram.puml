@@ -1,0 +1,30 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+group Startup
+:User launches application;
+:System displays MainWindow;
+:MainWindow loads all components;
+:DisplayPanel displays SplashPanel;
+:DisplayPanel displays CourseListPanel;
+end group
+
+repeat
+:User inputs command;
+
+if () then ([Exit command]);
+    stop
+else if () then ([Help command]);
+    :HelpWindow is shown;
+else ([else])
+endif
+if () then ([StageManager set to HOME]);
+    :DisplayPanel displays CourseListPanel;
+else ([StageManager set to SELECTED_COURSE])
+    :DisplayPanel displays CombinedPanel;
+endif
+
+@enduml

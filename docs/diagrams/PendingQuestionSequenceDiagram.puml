@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CodeSphereParser" as CodeSphereParser LOGIC_COLOR
+participant ":PendingQuestionCommandParser" as PendingQuestionCommandParser LOGIC_COLOR
+participant "d:PendingQuestionCommand" as PendingQuestionCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box StageManger STAGE_COLOR_T1
+participant ":StageManager" as StageManager STAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("pq 1 pq/Tut 10 Question 1")
+activate LogicManager
+
+LogicManager -> CodeSphereParser : parseCommand("pq 1 pq/Tut 10 Question 1")
+activate CodeSphereParser
+
+create PendingQuestionCommandParser
+CodeSphereParser -> PendingQuestionCommandParser
+activate PendingQuestionCommandParser
+
+PendingQuestionCommandParser --> CodeSphereParser
+deactivate PendingQuestionCommandParser
+
+CodeSphereParser -> PendingQuestionCommandParser : parse("1 pq/Tut 10 Question 1")
+activate PendingQuestionCommandParser
+
+create PendingQuestionCommand
+PendingQuestionCommandParser -> PendingQuestionCommand
+activate PendingQuestionCommand
+
+PendingQuestionCommand --> PendingQuestionCommandParser : p
+deactivate PendingQuestionCommand
+
+PendingQuestionCommandParser --> CodeSphereParser : p
+deactivate PendingQuestionCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PendingQuestionCommandParser -[hidden]-> CodeSphereParser
+destroy PendingQuestionCommandParser
+
+CodeSphereParser --> LogicManager : p
+deactivate CodeSphereParser
+
+LogicManager -> PendingQuestionCommand : execute()
+activate PendingQuestionCommand
+
+PendingQuestionCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> PendingQuestionCommand
+deactivate Model
+
+PendingQuestionCommand -> StageManager : getInstance()
+activate StageManager
+
+StageManager --> PendingQuestionCommand
+deactivate StageManager
+
+PendingQuestionCommand -> StageManager : instance.getSelectedCourse()
+activate StageManager
+
+StageManager --> PendingQuestionCommand
+deactivate StageManager
+
+PendingQuestionCommand -> Model : course.setStudent(studentToEdit, editedStudent)
+activate Model
+
+Model --> PendingQuestionCommand
+deactivate Model
+
+create CommandResult
+PendingQuestionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PendingQuestionCommand
+deactivate CommandResult
+
+PendingQuestionCommand --> CodeSphereParser : result
+deactivate PendingQuestionCommand
+
+CodeSphereParser --> LogicManager : result
+deactivate CodeSphereParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

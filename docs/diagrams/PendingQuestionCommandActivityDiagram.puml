@@ -1,0 +1,28 @@
+@startuml
+start
+:User executes pq command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+
+else ([else])
+    if () then ([Pending Question is empty])
+    : Show pending question should not be blank error message;
+    else([else])
+        if () then ([Student index is invalid])
+        : Show student index provided is invalid error message;
+        else ([else])
+        : Add pending question to the student;
+        : Update student in the course GUI;
+
+        endif
+    endif
+endif
+stop
+
+
+@enduml

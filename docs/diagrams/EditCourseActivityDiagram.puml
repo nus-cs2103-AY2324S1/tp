@@ -1,0 +1,29 @@
+@startuml
+start
+:User executes edit command on home page;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+else ([else])
+    if () then ([input index is invalid])
+        : Show invalid course index error message;
+    else ([else])
+        if () then ([course name is invalid])
+            : Show invalid course name error message;
+        else ([else])
+            if () then ([course already exists))
+                : Show duplicate course error message;
+            else ([else])
+                : Deletes the course in the displayed course list;
+                : Display the full updated course list;
+            endif
+        endif
+    endif
+endif
+stop
+
+@enduml

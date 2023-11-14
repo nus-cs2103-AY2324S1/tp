@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CodeSphereParser" as CodeSphereParser LOGIC_COLOR
+participant ":AddCourseCommandParser" as AddCourseCommandParser LOGIC_COLOR
+participant "a:AddCourseCommand" as AddCourseCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add c/CS2103T")
+activate LogicManager
+
+LogicManager -> CodeSphereParser : parseCommand("add c/CS2103T")")
+activate CodeSphereParser
+
+create AddCourseCommandParser
+CodeSphereParser -> AddCourseCommandParser
+activate AddCourseCommandParser
+
+AddCourseCommandParser --> CodeSphereParser
+deactivate AddCourseCommandParser
+
+CodeSphereParser -> AddCourseCommandParser : parse("c/CS2103T")
+activate AddCourseCommandParser
+
+create AddCourseCommand
+AddCourseCommandParser -> AddCourseCommand
+activate AddCourseCommand
+
+AddCourseCommand --> AddCourseCommandParser : a
+deactivate AddCourseCommand
+
+AddCourseCommandParser --> CodeSphereParser : a
+deactivate AddCourseCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCourseCommandParser -[hidden]-> CodeSphereParser
+destroy AddCourseCommandParser
+
+CodeSphereParser --> LogicManager : a
+deactivate CodeSphereParser
+
+LogicManager -> AddCourseCommand : execute()
+activate AddCourseCommand
+
+AddCourseCommand -> Model : hasCourse(toAdd)
+activate Model
+
+Model --> AddCourseCommand
+deactivate Model
+
+AddCourseCommand -> Model : addCourse(toAdd)
+activate Model
+
+Model --> AddCourseCommand
+deactivate Model
+
+create CommandResult
+AddCourseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCourseCommand : result
+deactivate CommandResult
+
+AddCourseCommand --> CodeSphereParser : result
+deactivate AddCourseCommand
+
+CodeSphereParser --> LogicManager : result
+deactivate CodeSphereParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

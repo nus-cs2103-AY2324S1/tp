@@ -1,59 +1,61 @@
 ---
-layout: page
-title: About Us
+  layout: page
+  title: "About Us"
 ---
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `devanshu[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Devanshu Bisht
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/devanshubisht.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/devanshubisht)]
+[[portfolio](team/devanshubisht.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: In charge of integration and overall logic of the application.
 
-### Johnny Doe
+### Phinehas Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/phiphi-tan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/phiphi-tan)]
+[[portfolio](team/phiphi-tan.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: User Interface (UI), Deliverables and Deadlines
+* Responsibilities: Implement user-interface related features for the application,
+ and ensure project deliverables are done on time and in the right format
 
-### Jean Doe
+### Sun Zihan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sunzihan23.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/sunzihan23)]
+[[portfolio](team/sunzihan23.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code quality, documentation
+* Responsibilities: Ensures adherence to coding standards, responsible for the quality of project documents
 
-### James Doe
+### Tiong Jjyi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tiongjjyi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tiongjjyi)]
+[[portfolio](team/tiongjjyi.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
+
+### Gallen Ong
+
+<img src="images/gongg21.png" width="200px">
+
+[[github](http://github.com/gongg21)]
+[[portfolio](team/gongg21.md)]
+
+* Role: Developing and Testing
+* Responsibilities: In charge of command logic, integration of code, and overall testing of app.

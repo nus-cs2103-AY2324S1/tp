@@ -1,0 +1,28 @@
+{
+  "_comment": "CourseList save file which contains the same Course values as in TypicalCourses#getTypicalCourseList()",
+  "courses" : [ {
+    "courseName" : "CS1101S",
+    "students": [ ]
+
+  }, {
+    "courseName" : "CS1231S",
+    "students" : [ ]
+
+  }, {
+    "courseName" : "CS2030S",
+    "students" : [ ]
+
+  }, {
+    "courseName" : "CS2040S",
+    "students" : [ ]
+
+  }, {
+    "courseName" : "CS3230",
+    "students" : [ ]
+
+  }, {
+    "courseName" : "ST2334",
+    "students" : [ ]
+
+  } ]
+}

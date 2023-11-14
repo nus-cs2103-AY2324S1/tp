@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes input;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([input recognised as valid])
+    :User input is stored in InputHistory as a valid command;
+
+else ([input not recognised as valid])
+    :User input is stored in InputHistory as an invalid command;
+endif
+stop
+
+@enduml

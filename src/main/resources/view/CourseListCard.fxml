@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+      </padding>
+      <HBox alignment="CENTER_LEFT" spacing="5">
+        <Label fx:id="id" styleClass="cell_big_label">
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
+        <Label fx:id="courseName" styleClass="cell_big_label" text="\$courseName" />
+      </HBox>
+         <HBox>
+            <children>
+               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/icons/person.png" />
+                  </image>
+               </ImageView>
+            <Label fx:id="classSize" styleClass="cell_small_label" text="\$classSize" translateX="5.0">
+                  <font>
+                     <Font name="System Italic" size="12.0" />
+                  </font>
+               </Label>
+            </children>
+            <padding>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+         </HBox>
+         <HBox>
+            <children>
+               <Pane fx:id="coursePqPane">
+                  <children>
+                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons/question.png" />
+                        </image>
+                     </ImageView>
+
+                  <Label fx:id="pqCount" layoutX="18.0" styleClass="cell_small_label" text="\$pqCount" translateX="2.0" />
+                  </children>
+               </Pane>
+            </children>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+            <padding>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+         </HBox>
+         <HBox>
+            <children>
+               <Label fx:id="goodTag" style="-fx-text-fill: #4f4f4f; -fx-background-color: #CAF2C2; -fx-padding: 1 3 1 3; -fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;" text="GOOD">
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+                  <font>
+                     <Font name="System Bold" size="10.0" />
+                  </font>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Label>
+            <Label fx:id="goodTagCount" styleClass="cell_small_label" text="\$goodTagCount" translateX="5.0" />
+            </children>
+            <padding>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+         </HBox>
+         <HBox>
+            <children>
+               <Label fx:id="averageTag" style="-fx-text-fill: #4f4f4f; -fx-background-color: #FFF8B8; -fx-padding: 1 3 1 3; -fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;" text="AVERAGE">
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+                  <font>
+                     <Font name="System Bold" size="10.0" />
+                  </font>
+               </Label>
+               <Label fx:id="averageTagCount" styleClass="cell_small_label" text="\$averageTagCount" translateX="5.0" />
+            </children>
+            <padding>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+         </HBox>
+         <HBox>
+            <children>
+               <Label fx:id="poorTag" style="-fx-text-fill: #4f4f4f; -fx-background-color: #FFD6C9; -fx-padding: 1 3 1 3; -fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;" text="POOR">
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+                  <font>
+                     <Font name="System Bold" size="10.0" />
+                  </font>
+               </Label>
+               <Label fx:id="poorTagCount" styleClass="cell_small_label" text="\$poorTagCount" translateX="5.0" />
+            </children>
+            <padding>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+         </HBox>
+    </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+      <HBox.margin>
+         <Insets />
+      </HBox.margin>
+  </GridPane>
+</HBox>
