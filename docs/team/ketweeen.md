@@ -19,12 +19,17 @@ It makes their life easier by allowing them to easily fetch important info about
 **Contribution to the UG**:
 * Updated the `list`and `delete` command sections of the user guide
 * Added `listT` command section
+* Added prefix summary and glossary tables
+* Added table of contents
 * Fixed grammar and formatting issues
-* Clean up the user guide so that it looks cohesive
+* Clean up & standardized the user guide so that it looks cohesive
 
 **Contribution to DG**:
 * Contributed to DG for non-functional requirements
 * Contributed to DG for use cases regarding `delete` and `list` features
+* Contributed to the DG for UML diagrams for `delete` feature
+* Standardized some DG format for activity diagram
+* Contributed to DG for manual test cases
 
 **Contribution to team-based tasks**:
 * Keeping track of deadlines and objectives
@@ -34,3 +39,7 @@ It makes their life easier by allowing them to easily fetch important info about
 * Conducted thorough reviews of pull requests and provided constructive comments
 
 **Contributions beyond the project team**:
+* Participated in the PE Dry Run and gave feedback to the other team
+
+**Test Case Contributions**:
+* Covered all the test cases for the commands that I have implemented. Contributed to the team's test case as well as AB3's test case.

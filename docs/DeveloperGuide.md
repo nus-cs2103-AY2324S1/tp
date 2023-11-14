@@ -266,15 +266,21 @@ The following sequence diagram shows how the view operation works:
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram"></puml>
 
+<box type="info" seamless>
+
 **Note:** The lifeline for `ViewCommand` and `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</box>
 User should see the UI as shown below after entering `view 1`  (The command shown in Command Box is re-inputted for the sake of clarity. After entering the command, command should be cleared)
 ![View](images/viewState.png)
 
 Step 3. The user can then read or process the information stored for the viewed person.
 
+<box type="info" seamless>
 
 **Note:** The view command can be most effectively used with `search` and `list`. Since the view index is dependent on the Index on the filtered list shown, the user can view the profile after filtering for specific properties in a person using `search` and sorting them using `list`.
+
+</box>
 
 Alternatives considered
 
@@ -316,7 +322,7 @@ Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object
 
 The following activity diagram summarize what happens when a user attempts to execute the `create` command.
 
-<puml src="diagrams/CreateTagActivityDiagram.puml" />
+<puml src="diagrams/CreateTagActivityDiagram.puml" alt="CreateTagActivityDiagram"/></puml>
 
 ### Search feature
 
@@ -346,8 +352,14 @@ Step 1. The user launches the application.
 Step 2. The user executes `search t/intern` command to filter candidates whose status are offered. 
 
 The following sequence diagram shows how the search operation works:
+<box type="info" seamless>
 
-**Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** 
+* The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* The `parse` method of `FindCommandParsers` also creates objects of the `NameContainsKeywordPredicate`, `StatusContainsKeywordPredicate` and `TagContainsKeywordPredicate` but these
+  were instantiations not included in the sequence diagram below for the sake of brevity. However, do note that the `n`, `s`, `t` arguments in `getPredicatesList(n, s, t)` in the sequence
+  diagram below refer to instances of `NameContainsKeywordPredicate`, `StatusContainstKeywordPredicate` and `TagContainsKeywordPredicate` respectively.
+</box>
 
 <puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" width/>
 
@@ -359,12 +371,16 @@ The following activity diagram shows summarizes what happens when a user attempt
 
 <puml src="diagrams/SearchActivityDiagram.puml" />
 
+<box type="info" seamless>
+
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
 
-## Delete feature
+</box>
 
-### Implementation
+### Delete feature
+
+#### Implementation
 
 The delete feature is implemented using the `DeleteCommand` class. It extends `Command` and overrides the `execute()` method to
 filter users by the specified parameters.
@@ -398,7 +414,11 @@ Step 2. The user executes `delete st/interviewed t/developer` command to delete 
 
 The following sequence diagram shows how the search operation works:
 
+<box type="info" seamless>
+
 **Note:** The lifeline for `DeleteCommand` and `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
@@ -410,8 +430,11 @@ The following activity diagram shows summarizes what happens when a user attempt
 
 <puml src="diagrams/DeleteActivityDiagram.puml" />
 
+<box type="info" seamless>
+
 **Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
+</box>
 
 ### Set feature
 
@@ -919,9 +942,14 @@ Additionally, you can only use the summary statistic table for comparison after 
 Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
 This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
 
-### Disabling view when using `search` and `filter`
-**Improve the search and filter feature**
-Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
+### Error Message for `filter` feature
+**Improve the error message for filter feature**
+Currently if you were use the filter feature with an invalid tag, that is a tag which does not have a alphanumeric name or is an `assessment` tag, it shows the error message: `Invalid tag provided. Needs to be non-empty name`.  
+This is attained from a sample input like `filter t/Intern met/median` where `Intern` is a tag that is on applicant but does not have a `assessment` category. Error message should contain  `Check that the tag contains an asssessment category, use create command if it does not`
+Additionally inputs like `filter t/Int@/a met/median` will also show the same error message. The current error message is too vague in nature, and should contain `Check that the tag name is not empty and is alphanumeric (a valid tag name) and does not contain space`.  
+The error message should be split into two in order to not confuse the user about what is wrong with the tag.
+Therefore, the final output should have 1 error message for invalid tag names that are not alphanumeric or contains space and another error message for when the tag does not have an assessment category in `listT`.   
+`
 
 ### Improve on `remark` feature
 **Improve the remark feature**
@@ -1013,7 +1041,7 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-## Adding a person while all persons are being shown 
+### Adding a person while all persons are being shown 
 
 1. Adding a person while all persons are being shown  
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
