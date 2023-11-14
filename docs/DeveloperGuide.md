@@ -1373,3 +1373,4 @@ Testers are expected to do more *exploratory* testing.
 7. All parameters do not support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add values of any length that will not get cut off in the future.
 8. The name field does not accept special characters such as `\` or `/`. We plan to allow users to add special characters to the name field in the future, so that names such as "Ravi s/o Veegan" will be allowed.
 9. The phone field only accepts numbers and should be at least three digits long. We plan to allow users to have more flexibility to the phone field in the future, such as allowing special characters.
+10. `TUTORIAL_INDEX` and `TUTORIAL_SESSION` have the same meaning but with different names. We plan to switch every occurrence into `TUTORIAL_INDEX` in the future, so that no confusion will be caused.
