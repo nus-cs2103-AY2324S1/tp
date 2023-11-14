@@ -104,7 +104,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel` etc. Some parts are made up of even smaller parts. All of these parts, including the `MainWindow`, are subclasses of the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-Some parts (`PersonListPanel`, `TransactionListPanel`, `PersonCard`, `CommandBox`, `ResultDisplay`, `HelpWindow`) inherit from `UiPartFocusable` (a subclass of `UiPart`) which enables the to be focused on. This is used for the keyboard navigation feature as `MainWindow` keeps track of the currently focused part and can switch focus to another part when certain keyboard shortcuts are pressed.
+Some parts (`PersonListPanel`, `TransactionListPanel`, `PersonCard`, `CommandBox`, `ResultDisplay`, `HelpWindow`) inherit from `UiPartFocusable` (a subclass of `UiPart`) which enables them to be focused on. This is used for the keyboard navigation feature as `MainWindow` keeps track of the currently focused part and can switch focus to another part when certain keyboard shortcuts are pressed.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W17-3/tp/blob/master/src/main/java/seedu/spendnsplit/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W17-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
