@@ -522,6 +522,11 @@ helps users efficiently manage and keep up with their friendships.
 
       Use case ends.
 
+* 3b. User has no common free time with all friends.
+   * 3b1. TimetaBRO indicates to the user that they have no common free time with all their added friends.
+
+      Use case ends.
+
 **Use case: UC06 - Check for common free times with a specific friend**
 
 **MSS**
@@ -565,6 +570,12 @@ helps users efficiently manage and keep up with their friendships.
 
    Use case ends.
 
+**Extensions**
+
+* 2a. User has no added friends.
+
+  TimetaBRO shows an empty list. Use case ends.
+
 **Use case: UC08 - Add event to schedule**
 
 **MSS**
@@ -598,6 +609,11 @@ Use case ends.
 
       Use case continues from step 1.
 
+* 1e. Index is not provided.
+   * 1e1. TimetaBRO shows an error message.
+
+      Use case continues from step 1.
+
 **Use case: UC09 - Remove an event from schedule**
 
 **MSS**
@@ -624,6 +640,11 @@ Use case ends.
   * 1c1. TimetaBRO shows an error message with command instructions.
 
     Use case continues from step 1.
+
+* 1d. Index is not provided.
+   * 1d1. TimetaBRO shows an error message.
+
+      Use case continues from step 1.
 
 **Use case: UC10 - Remove reminder from non-recurring event**
 
@@ -652,6 +673,11 @@ Use case ends.
 
       Use case continues from step 1.
 
+* 1d. Index is not provided.
+   * 1d1. TimetaBRO shows an error message.
+
+      Use case continues from step 1.
+
 **Use case: UC11 - Set reminder for non-recurring event**
 
 **MSS**
@@ -676,6 +702,11 @@ Use case ends.
 * 1c. Event name not provided.
 
     * 1c1. TimetaBRO shows an error message.
+
+      Use case continues from step 1.
+
+* 1d. Index is not provided.
+   * 1d1. TimetaBRO shows an error message.
 
       Use case continues from step 1.
 
