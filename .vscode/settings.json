@@ -1,0 +1,29 @@
+{
+  "editor.tabSize": 4,
+  "editor.detectIndentation": false,
+  "files.trimTrailingWhitespace": true,
+  "formatFiles.extensionsToInclude": "java",
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "java.format.settings.url": "eclipse-formatter.xml",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "emeraldwalk.runonsave": {
+    "autoClearConsole": true,
+    "commands": [
+      {
+        "match": ".css$",
+        "cmd": " gradlew --stop"
+      },
+      {
+        "match": ".css$",
+        "cmd": "gradlew run"
+      }
+    ]
+  }
+}

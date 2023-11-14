@@ -1,4 +1,4 @@
-@startuml
+@startuml ModelClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -6,19 +6,27 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyTransactionBook" as ReadOnlyTransactionBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
+Class "<<interface>>\nEntry" as Entry
 Class AddressBook
+Class TransactionBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+note left: See diagram below\nfor all attributes
+Class Transaction
+note right: See diagram below\nfor all attributes
+
+Class "UniqueEntryMap<? extends Entry>" as UniqueEntryMap_T
+Class "UniqueEntryMap<Person>" as UniqueEntryMap_Person
+Class "UniqueEntryMap<Transaction>" as UniqueEntryMap_Transaction
+UniqueEntryMap_T <|-up- UniqueEntryMap_Person
+UniqueEntryMap_T <|-up- UniqueEntryMap_Transaction
+UniqueEntryMap_T .down.> Entry
+UniqueEntryMap_T -[hidden]up-> ModelManager
 
 Class I #FFFFFF
 }
@@ -27,28 +35,26 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+TransactionBook .up.|> ReadOnlyTransactionBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlyTransactionBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" TransactionBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueEntryMap_Person
+UniqueEntryMap_Person --> "~* all" Person
+UniqueEntryMap_Transaction --> "~* all" Transaction
+Person .right.|> Entry
+TransactionBook *--> "1" UniqueEntryMap_Transaction
+Transaction .left.|> Entry
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Person -[hidden]up-> UniqueEntryMap_T
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Transaction
 @enduml
