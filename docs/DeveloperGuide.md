@@ -404,6 +404,8 @@ The `lookup` command allows TAs to search and filter for students in the Class M
 
 #### How it is implemented
 
+Note: To shorten the sequence diagram, we use `SCKP` as an abbreviation for `StudentContainsKeywordsPredicate`.
+
 <puml src="diagrams/LookupCommand.puml" alt="Lookup Command" />
 
 The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`. 
