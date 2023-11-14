@@ -42,9 +42,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
         String tagName = argMultimap.getValue(PREFIX_TAG).orElse("");
         if (!(Tag.isValidTagName(tagName)
-                && ScoreList.isValidScoreTag(uniqueTagList.getTag(tagName, "assessment")))) {
+                && uniqueTagList.contains(new Tag(tagName, "assessment")))) {
             throw new ParseException(String.format(FilterCommand.MESSAGE_INVALID_TAG));
         }
+
 
         if (!StatisticMetric.isValidMetric(argMultimap.getValue(PREFIX_METRIC).orElse(""))) {
             throw new ParseException(String.format(FilterCommand.MESSAGE_INVALID_METRIC));
