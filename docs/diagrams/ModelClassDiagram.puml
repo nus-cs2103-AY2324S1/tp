@@ -4,51 +4,59 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+package Model as ModelPackage <<Rectangle>> {
+  Class "<<interface>>\nReadOnlyJobFestGo" as ReadOnlyJobFestGo
+  Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+  Class "<<interface>>\nModel" as Model
+  Class JobFestGo
+  Class ModelManager
+  Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+  Class UniqueContactList
+  Class UniqueTagList
+  Class UniqueEventList
+  Class UniqueTaskList
+  Class Task
+  Class Event
+  Class Contact
+  Class Tag
+  Class I #FFFFFF
 
-Class I #FFFFFF
+  hide circle
+    UniqueTaskList -[hidden]> I
+    UniqueEventList -[hidden]> I
+    UniqueContactList -[hidden]> I
+    UniqueTagList -[hidden]> I
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+JobFestGo .up.|> ReadOnlyJobFestGo
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyJobFestGo
+ModelManager --> "1" JobFestGo
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+JobFestGo *--> "1" UniqueTaskList
+JobFestGo *--> "1" UniqueContactList
+JobFestGo *--> "1" UniqueEventList
+JobFestGo *--> "1" UniqueTagList
+UniqueEventList --> "~* all" Event
+UniqueTaskList --> "~* all" Task
+UniqueContactList --> "~* all" Contact
+UniqueTagList --> "~* all" Tag
+Contact -> "0..*" Tag
+Event -down> "0..*" Contact
+Event "1" <-left-> "0..*" Task
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ModelManager -> "~* filtered" Contact
+ModelManager -> "~* filtered" Event
+ModelManager -> "~* filtered" Tag
+ModelManager -> "~* filtered" Task
 
-ModelManager --> "~* filtered" Person
 @enduml

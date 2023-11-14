@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Khaleelur Rahman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/khaleelur-rahman.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Khaleelur-Rahman)]
+[[portfolio](team/khaleelur-rahman.md)]
 
-* Role: Project Advisor
+* Role: Backend Developer
+* Responsibilities: Implementation of various backend features
 
-### Jane Doe
+### Tong Xinyao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xyt-t.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xyT-T)] [[portfolio](team/xyt-t.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Backend Developer
+* Responsibilities: Implementation of various features
 
-### Johnny Doe
+### Jaryl Goh Jun Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rionshocker.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/rionshocker)]
+[[portfolio](team/rionshocker.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: UI Lead
+* Responsibilities: Implementation of various features involving UI
 
-### Jean Doe
+### Shankar Anand
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vijay-shankaranand.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vijay-shankaranand)]
+[[portfolio](team/vijay-shankaranand.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Backend Developer
+* Responsibilities: Implementation of various features
 
-### James Doe
+### Choo Tze Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tjch-o.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tjch-o)]
+[[portfolio](team/tjch-o.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: UI Developer
+* Responsibilities: Implementation of various features involving UI
