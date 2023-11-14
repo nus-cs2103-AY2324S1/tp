@@ -31,7 +31,9 @@ Given below are my contributions to the project.
       * Changed the styling of the User Guide slightly [\#25](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/25/files)
        
     * Developer Guide:
-      * 
+      * Added relevant diagrams to the Developer Guide for conveying the class structure of the classes associated with the Mark and Attendance feature.
+      * Added testcases for the Mark and Attendance feature.
+      * Added use cases for the Mark and Attendance feature. 
 
 * **Team based Tasks**:
   * Morphed the initial code from AB3 to our product.
