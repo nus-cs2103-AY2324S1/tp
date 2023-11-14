@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class HiddenOutside #FFFFFF
+package Shared <<Rectangle>> {
+    class Name
+}
+package Enrolment <<Rectangle>> {
+    class Hours
+
+    class Remark
+}
+
+package Event <<Rectangle>> {
+    class Event {
+
+    }
+
+
+    class EventDate
+
+    class Location
+
+    class Tag
+    HiddenOutside ..> UniqueEventList
+    UniqueEventList -down-> "*" Event
+    Event *-down->"1" Name
+
+    Event *-down->"1" EventDate
+    Event *-down->"1" Location
+    Event *--down->"*" Tag
+    Event *---down->"0..1" Hours
+    Event *---down->"0..1" Remark
+
+
+
+}
+
+
+@enduml

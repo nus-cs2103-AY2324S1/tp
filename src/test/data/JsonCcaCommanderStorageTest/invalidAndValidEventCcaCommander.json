@@ -1,0 +1,13 @@
+{
+  "members": [],
+  "events": [ {
+    "name": "Valid Event",
+    "eventDate": "1999-09-20",
+    "location": "An old place"
+  }, {
+    "name": "Event with Invalid eventDate field",
+    "eventDate": "2023-99-99",
+    "location": "Somewhere invalid"
+  } ],
+  "enrolments" : [ ]
+}

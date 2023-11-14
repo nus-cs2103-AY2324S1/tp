@@ -75,10 +75,14 @@ img {
  */
 figure > img {
   display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  max-width: 80%;
 }
 
 figcaption {
   font-size: $small-font-size;
+  text-align: center;
 }
 
 
@@ -288,7 +292,7 @@ table {
     text-align: center;
   }
   .site-header:before {
-    content: "AB-3";
+    content: "CCACommander Ultra Promax Xtra 9000PLUS";
     font-size: 32px;
   }
 }

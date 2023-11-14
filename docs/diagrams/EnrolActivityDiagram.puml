@@ -1,0 +1,37 @@
+@startuml
+skin rose
+!include style.puml
+
+start
+
+:User enters an enrol command in
+the command box;
+
+:EnrolCommandParser parses the argument;
+
+if () then ([valid command input format])
+    if () then ([valid indexes])
+        :Get member and event
+        from the respective filtered lists;
+        :Create a new Enrolment object;
+        if () then ([non-duplicate enrolment]))
+        :Add new enrolment to
+        uniqueEnrolmentList in the model;
+        :Commit this state to the model;
+        else ([else])
+            :Throws CommandException
+            with error message;
+        endif
+    else ([else])
+        :Throws CommandException
+        with error message;
+    endif
+else ([else])
+    :Throws ParseException
+    with command usage
+    direction;
+endif
+:Returns feedback to user;
+
+stop
+@enduml

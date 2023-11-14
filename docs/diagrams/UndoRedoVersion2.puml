@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After command "createMember n/David ..."
+
+package Versions <<rectangle>> {
+    class Version1 as "<u>cc0:CcaCommander</u>"
+    class Version2 as "<u>cc1:CcaCommander</u>"
+    class Version3 as "<u>cc2:CcaCommander</u>"
+}
+
+Version1 -[hidden]right-> Version2
+Version2 -[hidden]right-> Version3
+
+class Pointer as "Current Version" #FFFFFF
+
+Pointer -up-> Version3
+@end
