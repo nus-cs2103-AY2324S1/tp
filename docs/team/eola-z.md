@@ -43,11 +43,12 @@ Here are my contributions to the project.
     * Developer Guide
         * Added documentation for the `Logic` component of the DG to further explain the classes used in the
       application, such as `ArgumentMultiMap` and `CliSyntax`
-        * Designed UML Diagrams to demonstrate the logical flow of command parser and the internal workings of each command parser
+        * Designed UML Diagrams to demonstrate the logical flow of command parser and the internal workings of the filter command parser
           * An Activity Diagram is used to illustrate the inner workings of
           `CommandParser`. An input string is passed to `CommandParser` which deciphers which parser
           the string should be passed onto to generate a specific class of `Command`, based on the identifying prefix
           of the command. If the prefix of the input string doesn't exist, throw an error.
+          * A sequence diagram is used to demonstrate how `FilterCommandParser` infers the type of `FilterCommand` to generate.
 * **Team-based tasks**:
   * Attended weekly meetings punctually
   * Reviews for major PRs:
@@ -78,9 +79,9 @@ user guide:
   Specialisations are displayed in the order they are added.
   * Format: `add /spec [specialisation] /index [index]`
 * Description of `filter`:
-  * > You can use the `filter` command to filter your list of conatacts,
+  * > You can use the `filter` command to filter your list of contacts,
     temporarily hiding contacts that don't contain certain keywords
-    for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the filtered list will be sorted.
+    for easy viewing. If the list is currently sorted (using `sort`, the filtered list will be sorted.
   * Format: `filter /by [field] /with [term] /taken true/false`
 * UI mockups:
   * Created the UI mockups in the user guide to emulate
