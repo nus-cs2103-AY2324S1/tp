@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.band.Band;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of bands.
  */
 public class BandListPanel extends UiPart<Region> {
     private static final String FXML = "BandListPanel.fxml";
@@ -30,7 +30,7 @@ public class BandListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Musician} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Band} using a {@code BandCard}.
      */
     class BandListViewCell extends ListCell<Band> {
         @Override
