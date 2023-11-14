@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPlanAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PLAN;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPlans.getTypicalAddressBookWithPlans;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +29,7 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithPlans = new ModelManager(getTypicalAddressBookWithPlans(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -77,6 +81,19 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_friendExistInPlan_throwsCommandException() {
+        // Creates first plan from TypicalPlans
+        showPersonAtIndex(modelWithPlans, INDEX_FIRST_PERSON);
+        showPlanAtIndex(modelWithPlans, INDEX_FIRST_PLAN);
+
+        Index firstPerson = INDEX_FIRST_PERSON;
+
+        DeleteCommand deleteCommand = new DeleteCommand(firstPerson);
+
+        assertCommandFailure(deleteCommand, modelWithPlans, Messages.MESSAGE_PERSON_PRESENT_IN_PLAN);
     }
 
     @Test

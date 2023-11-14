@@ -5,8 +5,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeletePlanCommandParser" as DeletePlanCommandParser LOGIC_COLOR
+participant "d:DeletePlanCommand" as DeletePlanCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -20,50 +20,50 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("delete 1")
 activate AddressBookParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeletePlanCommandParser
+AddressBookParser -> DeletePlanCommandParser
+activate DeletePlanCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DeletePlanCommandParser --> AddressBookParser
+deactivate DeletePlanCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+AddressBookParser -> DeletePlanCommandParser : parse("1")
+activate DeletePlanCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeletePlanCommand
+DeletePlanCommandParser -> DeletePlanCommand
+activate DeletePlanCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeletePlanCommand --> DeletePlanCommandParser : d
+deactivate DeletePlanCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DeletePlanCommandParser --> AddressBookParser : d
+deactivate DeletePlanCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeletePlanCommandParser -[hidden]-> AddressBookParser
+destroy DeletePlanCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeletePlanCommand : execute()
+activate DeletePlanCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeletePlanCommand -> Model : deletePlan(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeletePlanCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeletePlanCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeletePlanCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeletePlanCommand --> LogicManager : result
+deactivate DeletePlanCommand
 
 [<--LogicManager
 deactivate LogicManager

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,48 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains another equivalent person as the given argument.
+     */
+    public boolean otherContains(Person toCheck, Person originalPerson) {
+        requireNonNull(toCheck);
+        boolean containsPerson = internalList.stream()
+                .anyMatch(person -> !person.equals(originalPerson) && toCheck.isSamePerson(person));
+        return containsPerson;
+    }
+
+    /**
+     * Gets the Person that has the same {@code name} from the list.
+     * A Person with the same name must exist in the list, else Exception is thrown.
+     */
+    public Person getPersonByName(Name name) {
+        requireNonNull(name);
+        Optional<Person> matchingPerson = internalList.stream()
+                .filter(person -> person.getName().equals(name))
+                .findFirst();
+        if (matchingPerson.isPresent()) {
+            return matchingPerson.get();
+        } else {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Gets the Person that has the same {@code name} (case-insensitive) from the list.
+     * A Person with the same name must exist in the list, else Exception is thrown.
+     */
+    public Person getPersonByName(String name) {
+        requireNonNull(name);
+        Optional<Person> matchingPerson = internalList.stream()
+                .filter(person -> person.getName().toString().toLowerCase().equals(name))
+                .findFirst();
+        if (matchingPerson.isPresent()) {
+            return matchingPerson.get();
+        } else {
+            throw new PersonNotFoundException();
+        }
     }
 
     /**

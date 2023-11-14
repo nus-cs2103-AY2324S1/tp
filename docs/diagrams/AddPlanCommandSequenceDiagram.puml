@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddPlanCommandParser" as AddPlanCommandParser LOGIC_COLOR
+participant "a:AddPlanCommand" as AddPlanCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("add-plan n/Dota f/Alex d/...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-plan ...")
+activate AddressBookParser
+
+create AddPlanCommandParser
+AddressBookParser -> AddPlanCommandParser
+activate AddPlanCommandParser
+
+AddPlanCommandParser --> AddressBookParser
+deactivate AddPlanCommandParser
+
+AddressBookParser -> AddPlanCommandParser : parse("n/Dota f/Alex d/...")
+activate AddPlanCommandParser
+
+create AddPlanCommand
+AddPlanCommandParser -> AddPlanCommand
+activate AddPlanCommand
+
+AddPlanCommand --> AddPlanCommandParser : a
+deactivate AddPlanCommand
+
+AddPlanCommandParser --> AddressBookParser : a
+deactivate AddPlanCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddPlanCommand : execute()
+activate AddPlanCommand
+
+AddPlanCommand -> Model : getPersonByName(alex)
+activate Model
+
+Model --> AddPlanCommand : person
+deactivate Model
+
+AddPlanCommand -> Model : addPlan(plan)
+activate Model
+Model --> AddPlanCommand
+
+deactivate Model
+
+AddPlanCommand -[hidden]-> LogicManager : result
+
+create CommandResult
+AddPlanCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPlanCommand
+deactivate CommandResult
+
+AddPlanCommand --> LogicManager : result
+deactivate AddPlanCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

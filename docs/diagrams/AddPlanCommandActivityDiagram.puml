@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes 'add-plan n/Dota f/Alex d/2023-10-10-10:00' command;
+:Model finds Person with the name 'Alex';
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Model can find Person])
+    :Plan object created;
+    if () then ([Plan not in UniquePlansList])
+    :The new Plan is added into UniquePlansList;
+    else ([else])
+    endif
+else ([else])
+endif
+stop
+@enduml

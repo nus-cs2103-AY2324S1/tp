@@ -20,6 +20,11 @@ Class Name
 Class Phone
 Class Tag
 
+Class Plan
+Class UniquePlanList
+Class PlanDateTime
+Class PlanName
+
 Class I #FFFFFF
 }
 
@@ -35,13 +40,25 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+AddressBook *--> "1" UniquePlanList
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+UniquePlanList --> "~* all" Plan
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Plan *--> PlanName
+Plan *--> PlanDateTime
+Plan *-left-> "1" Person
+
+AddressBook *--> "1" UniquePlanList
+UniquePlanList --> "~* all" Plan
+Plan *--> PlanName
+Plan *--> PlanDateTime
+Plan *--> Person
+
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +68,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Plan
 @enduml

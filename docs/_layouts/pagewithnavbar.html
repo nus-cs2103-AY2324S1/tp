@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+    <html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+    {%- include head.html -%}
+
+    <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+        <nav class="navbar">
+            <div class="site-nav-top">
+                <div class="fw-bold" style="font-size: 1.25rem; margin-bottom: 2px;">Site Map</div>
+            </div>
+            <div class="nav-component slim-scroll">
+                <div>
+                    <ul>
+                        <li class="nav-partition">
+                            <a href="#">Go to Top</a>
+                        </li>
+                        <li class="nav-partition">
+                            <a href="#installation-guide">Installation Guide</a>
+                        </li>
+                        <li class="nav-partition">
+                            <a href="#disclaimers">Disclaimers</a>
+                        </li>
+                        <li class="nav-partition">
+                            <a href="#important-information">Important information</a>
+                        </li>
+                        <div class="nav-partition">
+                        <li>
+                            <a href="#friend-related-features">Friend-Related Features</a>
+                        </li>
+                        <ul>
+                            <li>
+                                <a href="#add-friend">add-friend</a>
+                            </li>
+                            <li>
+                                <a href="#delete-friend">delete-friend</a>
+                            </li>
+                            <li>
+                                <a href="#edit-friend">edit-friend</a>
+                            </li>
+                            <li>
+                                <a href="#find-friend">find-friend</a>
+                            </li>
+                            <li>
+                                <a href="#list-friend">list-friend</a>
+                            </li>
+                        </ul>
+                        </div>
+                        <div class="nav-partition">
+                        <li>
+                            <a href="#plan-related-features">Plan-Related Features</a>
+                        </li>
+                        <ul>
+                            <li>
+                                <a href="#add-plan">add-plan</a>
+                            </li>
+                            <li>
+                                <a href="#delete-plan">delete-plan</a>
+                            </li>
+                            <li>
+                                <a href="#edit-plan">edit-plan</a>
+                            </li>
+                            <li>
+                                <a href="#complete-plan">complete-plan</a>
+                            </li>
+                            <li>
+                                <a href="#uncomplete-plan">uncomplete-plan</a>
+                            </li>
+                            <li>
+                                <a href="#find-plan">find-plan</a>
+                            </li>
+                            <li>
+                                <a href="#list-plan">list-plan</a>
+                            </li>
+                        </ul>
+                        </div>
+                        <li class="nav-partition">
+                            <a href="#general-commands">General Commands</a>
+                        </li>
+                        <ul>
+                            <li>
+                                <a href="#clear">clear</a>
+                            </li>
+                            <li>
+                                <a href="#help">help</a>
+                            </li>
+                            <li>
+                                <a href="#exit">exit</a>
+                            </li>
+                        </ul>
+                        <li class="nav-partition">
+                            <a href="#faq">FAQs</a>
+                        </li>
+                        <li class="nav-partition">
+                            <a href="#command-summary">Command Summary</a>
+                        </li>
+                        <li class="nav-partition">
+                            <a href="#glossary">Glossary</a>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="wrapper">
+
+            <article class="post">
+
+                <header class="post-header">
+                    <h1 class="post-title">{{ page.title | escape }}</h1>
+                </header>
+
+                <div class="post-content">
+                    {{ content }}
+                </div>
+
+            </article>
+        </div>
+    </main>
+
+    </body>
+
+</html>

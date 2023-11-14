@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CompletePlanCommandParser" as CompletePlanCommandParser LOGIC_COLOR
+participant "d:CompletePlanCommand" as CompletePlanCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("complete 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("complete 1")
+activate AddressBookParser
+
+create CompletePlanCommandParser
+AddressBookParser -> CompletePlanCommandParser
+activate CompletePlanCommandParser
+
+CompletePlanCommandParser --> AddressBookParser
+deactivate CompletePlanCommandParser
+
+AddressBookParser -> CompletePlanCommandParser : parse("1")
+activate CompletePlanCommandParser
+
+create CompletePlanCommand
+CompletePlanCommandParser -> CompletePlanCommand
+activate CompletePlanCommand
+
+CompletePlanCommand --> CompletePlanCommandParser : d
+deactivate CompletePlanCommand
+
+CompletePlanCommandParser --> AddressBookParser : d
+deactivate CompletePlanCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CompletePlanCommandParser -[hidden]-> AddressBookParser
+destroy CompletePlanCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> CompletePlanCommand : execute()
+activate CompletePlanCommand
+
+CompletePlanCommand -> Model : completePlan(1)
+activate Model
+
+Model --> CompletePlanCommand
+deactivate Model
+
+create CommandResult
+CompletePlanCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CompletePlanCommand
+deactivate CommandResult
+
+CompletePlanCommand --> LogicManager : result
+deactivate CompletePlanCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes 'find-plan Alex' command;
+:Model finds Person with the name 'Alex';
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Model finds Person])
+    :PlanContainsFriendPredicate created,
+    checking for Person present in Plan;
+    :Model filters Plan List based on Predicate;
+else ([else])
+endif
+stop
+@enduml

@@ -28,6 +28,7 @@ public class StorageManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
+
     // ================ UserPrefs methods ==============================
 
     @Override

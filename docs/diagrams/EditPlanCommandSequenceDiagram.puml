@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditPlanCommandParser" as EditPlanCommandParser LOGIC_COLOR
+participant "e:EditPlanCommand" as EditPlanCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("edit-plan 3 n/Dota 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit-plan ...")
+activate AddressBookParser
+
+create EditPlanCommandParser
+AddressBookParser -> EditPlanCommandParser
+activate EditPlanCommandParser
+
+EditPlanCommandParser --> AddressBookParser
+deactivate EditPlanCommandParser
+
+AddressBookParser -> EditPlanCommandParser : parse("n/Dota 3")
+activate EditPlanCommandParser
+
+create EditPlanCommand
+EditPlanCommandParser -> EditPlanCommand
+activate EditPlanCommand
+
+EditPlanCommand --> EditPlanCommandParser : e
+deactivate EditPlanCommand
+
+EditPlanCommandParser --> AddressBookParser : e
+deactivate EditPlanCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditPlanCommand : execute()
+activate EditPlanCommand
+
+
+EditPlanCommand -> Model : getFilteredPlanList()
+activate Model
+
+Model --> EditPlanCommand : lastShownList
+deactivate Model
+
+EditPlanCommand -> EditPlanCommand: createEditedPlan(planToEdit, editPlanDescriptor)
+activate EditPlanCommand
+EditPlanCommand --> EditPlanCommand: editedPlan
+deactivate EditPlanCommand
+
+EditPlanCommand -> Model : setPlan(planToEdit, editedPlan)
+activate Model
+
+Model --> EditPlanCommand
+deactivate Model
+
+EditPlanCommand -> Model : updateFilteredPlanList()
+activate Model
+
+Model --> EditPlanCommand
+deactivate Model
+
+EditPlanCommand -[hidden]-> LogicManager : result
+
+create CommandResult
+EditPlanCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditPlanCommand
+deactivate CommandResult
+
+EditPlanCommand --> LogicManager : result
+deactivate EditPlanCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

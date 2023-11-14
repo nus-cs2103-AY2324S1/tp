@@ -13,6 +13,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.plan.PlanDateTime;
+import seedu.address.model.plan.PlanName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +122,38 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String planName} into a {@code PlanName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static PlanName parsePlanName(String planName) throws ParseException {
+        requireNonNull(planName);
+        String trimmedPlanName = planName.trim();
+        if (!PlanName.isValidPlanName(trimmedPlanName)) {
+            throw new ParseException(PlanName.MESSAGE_CONSTRAINTS);
+        }
+        return new PlanName(trimmedPlanName);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code PlanDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static PlanDateTime parsePlanDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTimeString = dateTime.trim();
+        if (!PlanDateTime.isValidDateTime(trimmedDateTimeString)) {
+            throw new ParseException(PlanDateTime.MESSAGE_CONSTRAINTS);
+        }
+        if (!PlanDateTime.isFutureDateTime(trimmedDateTimeString)) {
+            throw new ParseException(PlanDateTime.FUTURE_MESSAGE_CONSTRAINT);
+        }
+        return new PlanDateTime(trimmedDateTimeString);
     }
 }

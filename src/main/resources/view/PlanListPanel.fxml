@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane styleClass="plans_pane" minHeight="50" prefHeight="50">
+        <Label fx:id="plansHeader" text="Upcoming Plans" styleClass="plans_header"/>
+    </StackPane>
+
+    <ListView fx:id="planListView" VBox.vgrow="ALWAYS" />
+</VBox>

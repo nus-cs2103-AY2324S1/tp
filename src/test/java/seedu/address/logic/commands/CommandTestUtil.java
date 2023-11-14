@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,7 +21,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.plan.Plan;
+import seedu.address.model.plan.PlanNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditPlanDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -36,6 +41,12 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_PLAN_NAME_MEETING = "Meeting";
+    public static final String VALID_PLAN_DATETIME_MEETING = "2025-10-23-12:00";
+    public static final String VALID_PLAN_FRIEND_MEETING = "Alice Pauline";
+    public static final String VALID_PLAN_NAME_GAMING = "Gaming";
+    public static final String VALID_PLAN_DATETIME_GAMING = "2025-10-28-16:00";
+    public static final String VALID_PLAN_FRIEND_GAMING = "Alice Pauline";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,18 +58,29 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String PLAN_NAME_DESC_MEETING = " " + PREFIX_NAME + VALID_PLAN_NAME_MEETING;
+    public static final String PLAN_DATETIME_DESC_MEETING = " " + PREFIX_DATETIME + VALID_PLAN_DATETIME_MEETING;
+    public static final String PLAN_FRIEND_DESC_MEETING = " " + PREFIX_FRIEND + VALID_PLAN_FRIEND_MEETING;
+    public static final String PLAN_NAME_DESC_GAMING = " " + PREFIX_NAME + VALID_PLAN_NAME_GAMING;
+    public static final String PLAN_DATETIME_DESC_GAMING = " " + PREFIX_DATETIME + VALID_PLAN_DATETIME_GAMING;
+    public static final String PLAN_FRIEND_DESC_GAMING = " " + PREFIX_FRIEND + VALID_PLAN_FRIEND_GAMING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_PLAN_NAME_DESC = " " + PREFIX_NAME + "Meeting&";
+    public static final String INVALID_PLAN_DATETIME_DESC = " " + PREFIX_DATETIME + "2023-10-10:10:00";
+    public static final String INVALID_PLAN_FRIEND_DESC = " " + PREFIX_FRIEND + "Alice&";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPlanCommand.EditPlanDescriptor DESC_MEETING;
+    public static final EditPlanCommand.EditPlanDescriptor DESC_GAMING;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -67,6 +89,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_MEETING = new EditPlanDescriptorBuilder().withPlanName(VALID_PLAN_NAME_MEETING)
+                .withPlanDateTime(VALID_PLAN_DATETIME_MEETING).withPlanFriendName(VALID_PLAN_FRIEND_MEETING).build();
+        DESC_GAMING = new EditPlanDescriptorBuilder().withPlanName(VALID_PLAN_NAME_GAMING)
+                .withPlanDateTime(VALID_PLAN_DATETIME_GAMING).withPlanFriendName(VALID_PLAN_FRIEND_GAMING).build();
     }
 
     /**
@@ -111,6 +137,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -123,6 +150,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the plan at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showPlanAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPlanList().size());
+
+        Plan plan = model.getFilteredPlanList().get(targetIndex.getZeroBased());
+        final String[] splitPlanName = plan.getPlanName().planName.split("\\s+");
+        model.updateFilteredPlanList(new PlanNameContainsKeywordsPredicate(Arrays.asList(splitPlanName[0])));
+
+        assertEquals(1, model.getFilteredPlanList().size());
     }
 
 }

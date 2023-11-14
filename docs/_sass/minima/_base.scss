@@ -212,8 +212,6 @@ pre {
   }
 }
 
-
-
 /**
  * Clearfix
  */
@@ -288,8 +286,16 @@ table {
     text-align: center;
   }
   .site-header:before {
-    content: "AB-3";
+    content: "FriendBook";
     font-size: 32px;
   }
 }
 
+/**
+ * Custom CSS styles for PDF optimisation
+ */
+.pdfbreak {
+    @media print {
+        page-break-after: always;
+    }
+}

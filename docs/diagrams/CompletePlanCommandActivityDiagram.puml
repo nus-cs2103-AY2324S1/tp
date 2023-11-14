@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes 'complete-plan 1' command;
+:Model finds Plan with the index '1';
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([index <= total number of plans])
+    :Retrieve the Plan corresponding to
+    the index from the Plan List;
+    :Mark the Plan as completed;
+    :Update the changes in the Plan List;
+else ([else])
+endif
+stop
+@enduml

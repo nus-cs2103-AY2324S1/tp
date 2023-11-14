@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNCLEAR_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PLAN;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,20 +16,30 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPlanCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CompletePlanCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePlanCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindPlanCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPlanCommand;
+import seedu.address.logic.commands.UncompletePlanCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.plan.Plan;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PlanBuilder;
+import seedu.address.testutil.PlanUtil;
 
 public class AddressBookParserTest {
 
@@ -95,7 +107,56 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_unclearInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNCLEAR_COMMAND, () -> parser.parseCommand("delete 1"));
+    }
+
+    @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+                -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_completePlan() throws Exception {
+        CompletePlanCommand command = (CompletePlanCommand) parser.parseCommand(
+                CompletePlanCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new CompletePlanCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unCompletePlan() throws Exception {
+        UncompletePlanCommand command = (UncompletePlanCommand) parser.parseCommand(
+                UncompletePlanCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UncompletePlanCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_addPlan() throws Exception {
+        Plan plan = new PlanBuilder().build();
+        AddPlanCommand command = (AddPlanCommand) parser.parseCommand(PlanUtil.getAddPlanCommand(plan));
+        assertEquals(new AddPlanCommand(plan.getPlanName(), plan.getPlanDateTime(), plan.getPlanFriend().getName()),
+                command);
+    }
+
+    @Test
+    public void parseCommand_listPlan() throws Exception {
+        assertTrue(parser.parseCommand(ListPlanCommand.COMMAND_WORD) instanceof ListPlanCommand);
+        assertTrue(parser.parseCommand(ListPlanCommand.COMMAND_WORD + " 3") instanceof ListPlanCommand);
+    }
+
+    @Test
+    public void parseCommand_deletePlan() throws Exception {
+        DeletePlanCommand command = (DeletePlanCommand) parser.parseCommand(
+                DeletePlanCommand.COMMAND_WORD + " " + INDEX_FIRST_PLAN.getOneBased());
+        assertEquals(new DeletePlanCommand(INDEX_FIRST_PLAN), command);
+    }
+
+    @Test
+    public void parseCommand_findPlan() throws Exception {
+        String friendName = "Alice Pauline";
+        FindPlanCommand command = (FindPlanCommand) parser.parseCommand(
+                FindPlanCommand.COMMAND_WORD + " " + friendName);
+        assertEquals(new FindPlanCommand(new Name(friendName)), command);
     }
 }

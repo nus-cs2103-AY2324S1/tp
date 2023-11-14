@@ -1,0 +1,89 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindPlanCommandParser" as FindPlanCommandParser LOGIC_COLOR
+participant "f:FindPlanCommand" as FindPlanCommand LOGIC_COLOR
+participant "pred:PlanContainsFriendPredicate" as PlanContainsFriendPredicate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FilteredList" as FilteredList MODEL_COLOR
+end box
+[-> LogicManager : execute("find-plan Alex")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-plan Alex")
+activate AddressBookParser
+
+create FindPlanCommandParser
+AddressBookParser -> FindPlanCommandParser
+activate FindPlanCommandParser
+
+FindPlanCommandParser --> AddressBookParser
+deactivate FindPlanCommandParser
+
+AddressBookParser -> FindPlanCommandParser : parse("Alex")
+activate FindPlanCommandParser
+
+create FindPlanCommand
+FindPlanCommandParser -> FindPlanCommand
+activate FindPlanCommand
+
+FindPlanCommand --> FindPlanCommandParser : f
+deactivate FindPlanCommand
+
+FindPlanCommandParser --> AddressBookParser : f
+deactivate FindPlanCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindPlanCommand : execute()
+activate FindPlanCommand
+
+FindPlanCommand -> Model : getPersonByName(Alex)
+activate Model
+
+Model --> FindPlanCommand : person
+deactivate Model
+
+create PlanContainsFriendPredicate
+FindPlanCommand -> PlanContainsFriendPredicate
+activate PlanContainsFriendPredicate
+
+PlanContainsFriendPredicate --> FindPlanCommand : pred
+deactivate PlanContainsFriendPredicate
+
+FindPlanCommand -> Model : updateFilteredPlanList(pred)
+activate Model
+
+Model -> FilteredList : setPredicate(pred)
+activate FilteredList
+
+FilteredList --> Model
+deactivate FilteredList
+
+Model --> FindPlanCommand
+deactivate Model
+
+FindPlanCommand -[hidden]-> LogicManager : result
+
+create CommandResult
+FindPlanCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindPlanCommand : result
+deactivate CommandResult
+
+FindPlanCommand --> LogicManager : result
+deactivate FindPlanCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
