@@ -176,9 +176,9 @@ Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection o
 
 Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
 
-Step 5. `TagCommand` creates a new `Student` object with the new `Tag` and copy all other details.
+Step 5. `TagCommand` updates the `Student` with the new `Tag`.
 
-Step 6. `TagCommand` updates the `Model` with the new Student by calling `Model#setStudent()`.
+Step 6. `TagCommand` updates the `Model` with the updated Student by calling `Model#setStudent()`.
 
 Step 7. Finally, the `TagCommand` creates a CommandResult with a success message and returns it to the LogicManager to complete the command execution. The GUI would also be updated with the change of status.
 
@@ -403,6 +403,8 @@ In addition, the tutorial and assignment count was limited to an integer between
 The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to find the student they are looking for quickly, and perform subsequent operations such as editing Class Information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
 
 #### How it is implemented
+
+Note: To shorten the sequence diagram, we use `SCKP` as an abbreviation for `StudentContainsKeywordsPredicate`.
 
 <puml src="diagrams/LookupCommand.puml" alt="Lookup Command" />
 
