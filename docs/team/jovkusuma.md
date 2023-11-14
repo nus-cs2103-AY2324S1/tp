@@ -29,7 +29,7 @@ still having the benefits of a Graphical User Interface (GUI).
 
 * Write and fixing test cases:
   * Fixed the test cases for `StringUtilTest`, `AddressBookParserTest`, `FindCommandTest`, `FindCommandParserTest`, `NameContainsKeywordsPredicateTest`
-    to support refactored `find` command (Pull Requests [#68](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/68),[#127](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/127)).
+    to support refactored `find` command (Pull Requests [#68](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/68), [#127](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/127)).
   * Fixed the test cases for `AddCommandTest`, `EditCommandTest` to support the enforcement of begin time less than end time (Pull Requests [#111](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/111)).
   * Wrote test cases for `SubjectContainsKeywordsPredicateTest`, `NameSubjectPredicateTest`
     to test the `find` Command (Pull Requests [#127](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/127), [#199](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/199)).
