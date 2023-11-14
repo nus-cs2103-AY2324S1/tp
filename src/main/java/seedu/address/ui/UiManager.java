@@ -11,6 +11,11 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * The manager of the UI component.
@@ -20,16 +25,18 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/tutormate32.png";
 
     private Logic logic;
+    private Model model;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, Model model) {
         this.logic = logic;
+        this.model = model;
     }
 
     @Override
@@ -40,7 +47,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, model);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -83,6 +90,43 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+
+    /**
+     * Shows the details of the selected person.
+     *
+     * @param person The specified person to show the details of.
+     */
+    public void showPersonDetails(Person person) {
+        mainWindow.handleShowPerson(person);
+    }
+
+    /**
+     * Shows the details of the selected lesson.
+     *
+     * @param lesson The specified lesson to show the details of.
+     */
+    public void showLessonDetails(Lesson lesson) {
+        mainWindow.handleShowLesson(lesson);
+    }
+
+    /**
+     * Shows the details of the selected task.
+     *
+     * @param task The specified task to show the details of.
+     */
+    public void showTaskDetails(Task task) {
+        mainWindow.handleShowTask(task);
+    }
+
+    /**
+     * Sets the appropriate panels to display, hide all other panels.
+     *
+     * @param state The new state that determines which panels to show.
+     */
+    public void changeLayout(State state) {
+        mainWindow.changeLayout(state);
     }
 
 }

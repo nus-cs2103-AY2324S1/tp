@@ -5,7 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Helper functions for handling strings.
@@ -27,15 +28,12 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(word);
 
-        String preppedWord = word.trim();
+        String preppedWord = word.toLowerCase();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String preppedSentence = sentence.toLowerCase();
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return preppedSentence.contains(preppedWord);
     }
 
     /**
@@ -64,5 +62,15 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Converts an array into a string.
+     * @param array The array to convert
+     * @param delimiter What to put inbetween each element of the array
+     * @return The result string
+     */
+    public static <T> String joinArray(ArrayList<T> array, String delimiter) {
+        return array.stream().map(Object::toString).collect(Collectors.joining(delimiter));
     }
 }

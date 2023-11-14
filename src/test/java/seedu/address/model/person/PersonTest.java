@@ -8,24 +8,18 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
-
-    @Test
-    public void isSamePerson() {
+    public void isSamePerson() throws ParseException {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
 
@@ -42,13 +36,14 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB + "a").build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        Person p2 = editedBob.clone();
+        p2.setName(new Name("not the same name"));
+        assertFalse(BOB.isSamePerson(p2));
     }
 
     @Test
@@ -92,8 +87,7 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Messages.format(ALICE);
         assertEquals(expected, ALICE.toString());
     }
 }

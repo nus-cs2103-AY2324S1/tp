@@ -15,6 +15,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +30,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,14 +40,20 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.remark = remark;
+        if (subjects != null) {
+            this.subjects.addAll(subjects);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
+
     }
 
     /**
@@ -54,9 +64,13 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
+        subjects.addAll(source.getSubjectsSet()
+                .stream().map(JsonAdaptedSubject::new)
+                .collect(Collectors.toList()));
+        tags.addAll(source.getTagsSet().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        remark = source.getRemark().value;
     }
 
     /**
@@ -68,6 +82,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        final List<Subject> personSubjects = new ArrayList<>();
+        for (JsonAdaptedSubject subject : subjects) {
+            personSubjects.add(subject.toModelType());
         }
 
         if (name == null) {
@@ -81,29 +99,50 @@ class JsonAdaptedPerson {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        final Phone modelPhone;
+        if (phone.equals(Phone.DEFAULT_PHONE_MESSAGE)) {
+            modelPhone = Phone.DEFAULT_PHONE;
+        } else {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
         }
-        final Phone modelPhone = new Phone(phone);
-
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        final Email modelEmail;
+        if (email.equals(Email.DEFAULT_EMAIL_MESSAGE)) {
+            modelEmail = Email.DEFAULT_EMAIL;
+        } else {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelEmail = new Email(email);
         }
-        final Email modelEmail = new Email(email);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        final Address modelAddress;
+        if (address.equals(Address.DEFAULT_ADDRESS_MESSAGE)) {
+            modelAddress = Address.DEFAULT_ADDRESS;
+        } else {
+            if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            }
+            modelAddress = new Address(address);
         }
-        final Address modelAddress = new Address(address);
 
+        final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubjects, modelTags, modelRemark);
     }
 
 }

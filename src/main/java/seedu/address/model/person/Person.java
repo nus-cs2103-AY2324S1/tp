@@ -2,63 +2,124 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.model.ListEntry;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
-
-    // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+public class Person extends ListEntry<Person> {
+    private static final Person DEFAULT_PERSON = new Person(Name.DEFAULT_NAME);
+    private Phone phone = Phone.DEFAULT_PHONE;
+    private Email email = Email.DEFAULT_EMAIL;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private Address address = Address.DEFAULT_ADDRESS;
+    private Remark remark = Remark.DEFAULT_REMARK;
+    private Tags tags = new Tags();
+
+    private Subjects subjects = new Subjects();
+
 
     /**
-     * Every field must be present and not null.
+     * Make sense to only force the name to be non-null
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+    }
+    /**
+     * Every field must be present and not null in this constructor.
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Subject> subjects, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(name, phone, email, address, subjects, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.subjects = new Subjects(subjects);
+        this.tags = new Tags(tags);
+        this.remark = remark;
     }
-
-    public Name getName() {
-        return name;
+    public static Person getDefaultPerson() {
+        return DEFAULT_PERSON.clone();
     }
 
     public Phone getPhone() {
         return phone;
     }
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * Only update if arguement passes is not null. To ease the update and edit command
+     */
+    public void setPhoneIfNotDefault(Phone phone) {
+        if (phone != null && !phone.equals(Phone.DEFAULT_PHONE)) {
+            setPhone(phone);
+        }
+    }
 
     public Email getEmail() {
         return email;
+    }
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+    /**
+     * Only update if arguement passes is not null. To ease the update and edit command
+     */
+    public void setEmailIfNotDefault(Email email) {
+        if (email != null && !email.equals(Email.DEFAULT_EMAIL)) {
+            setEmail(email);
+        }
     }
 
     public Address getAddress() {
         return address;
     }
-
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Only update if arguement passes is not null. To ease the update and edit command
+     */
+    public void setAddressIfNotDefault(Address address) {
+        if (address != null && !address.equals(Address.DEFAULT_ADDRESS)) {
+            setAddress(address);
+        }
+    }
+    /**
+     * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Subject> getSubjectsSet() {
+        return subjects.getSubjectSetClone();
+    }
+    public Subjects getSubjects() {
+        return subjects;
+    }
+    public void setSubjects(Subjects subjects) {
+        requireAllNonNull(subjects);
+        this.subjects = subjects;
+    }
+
+    public void setSubjectsIfNotDefault(Subjects subjects) {
+        if (subjects != null && !subjects.equals(new Subjects())) {
+            setSubjects(subjects);
+        }
+    }
+    public void setSubjectsIfNotDefault(Set<Subject> subjects) {
+        if (subjects != null) {
+            setSubjectsIfNotDefault(new Subjects(subjects));
+        }
     }
 
     /**
@@ -72,6 +133,10 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean hasSameName(Person person) {
+        return person != null && person.getName().equals(getName());
     }
 
     /**
@@ -94,24 +159,80 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && subjects.equals(otherPerson.subjects)
+                && tags.equals(otherPerson.tags)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, subjects, tags, remark);
     }
 
     @Override
     public String toString() {
+        return Messages.format(this);
+        /*
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("subjects", subjects)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
+         */
+    }
+    /**
+     * Returns a clone of this person that is equal to this person.
+     */
+    public Person clone() {
+        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(),
+                subjects.getSubjectSetClone(), tags.getTagSetClone(), remark.clone());
     }
 
+    int compareTo(Person p) {
+        return name.compareTo(p.name);
+    }
+
+
+    public Tags getTags() {
+        return tags;
+    }
+
+    public void setTags(Tags tags) {
+        requireAllNonNull(tags);
+        this.tags = tags;
+    }
+    public void setTagsIfNotDefault(Set<Tag> tags) {
+        if (tags != null) {
+            setTagsIfNotDefault(new Tags(tags));
+        }
+    }
+
+    public void setTagsIfNotDefault(Tags tags) {
+        if (tags != null && !tags.equals(new Tags())) {
+            setTags(tags);
+        }
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public void setRemark(Remark remark) {
+        requireAllNonNull(remark);
+        this.remark = remark;
+    }
+
+    public void setRemarkIfNotDefault(Remark remark) {
+        if (remark != null && !remark.equals(Remark.DEFAULT_REMARK)) {
+            setRemark(remark);
+        }
+    }
+    public Set<Tag> getTagsSet() {
+        return tags.getTagSetClone();
+    }
 }

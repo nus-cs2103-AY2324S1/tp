@@ -32,6 +32,14 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Sets the text value in the command text field
+     * @param newText New text value to set
+     */
+    public void changeText(String newText) {
+        commandTextField.setText(newText);
+    }
+
+    /**
      * Handles the Enter button pressed event.
      */
     @FXML

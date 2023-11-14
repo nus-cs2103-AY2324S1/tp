@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -41,7 +43,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
+     * Replaces the contents of the student list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
@@ -68,6 +70,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same name as {@code person} exists in the address book.
+     */
+    public boolean hasPersonClashWith(Person person) {
+        requireNonNull(person);
+        return persons.hasPersonClashWith(person);
+    }
+
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return persons.getPersonsFulfill(predicate);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -82,7 +97,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 

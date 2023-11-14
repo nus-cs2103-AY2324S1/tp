@@ -1,14 +1,19 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +21,11 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -29,11 +39,23 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
+    private ArrayList<String> prevCommand = new ArrayList<>();
+    private int prevCommandId = 0;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private LessonListPanel lessonListPanel;
+    private StudentDetailListPanel studentDetailListPanel;
+    private LessonDetailListPanel lessonDetailListPanel;
+    private FullTaskListPanel fullTaskListPanel;
+    private TaskDetailPanel taskDetailPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
+
+    @FXML
+    private AnchorPane showPersonPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +64,34 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private VBox personList;
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private VBox scheduleList;
+    @FXML
+    private StackPane scheduleListPanelPlaceholder;
+
+    @FXML
+    private VBox fullTaskList;
+    @FXML
+    private StackPane fullTaskListPanelPlaceholder;
+
+    @FXML
+    private VBox taskDetailListPanel;
+    @FXML
+    private StackPane taskDetailListPanelPlaceholder;
+
+    @FXML
+    private VBox studentDetailList;
+    @FXML
+    private StackPane studentDetailListPanelPlaceholder;
+
+    @FXML
+    private VBox lessonDetailList;
+    @FXML
+    private StackPane lessonDetailListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -50,15 +99,19 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private SplitPane contentSplitPane;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -66,6 +119,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        commandBox = new CommandBox(this::executeCommand);
+
     }
 
     public Stage getPrimaryStage() {
@@ -99,6 +154,14 @@ public class MainWindow extends UiPart<Stage> {
          * in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.UP) {
+                String prevCommandText = model.getPrevCommandHistory();
+                commandBox.changeText(prevCommandText);
+            }
+            if (event.getCode() == KeyCode.DOWN) {
+                String nextCommandText = model.getNextCommandHistory();
+                commandBox.changeText(nextCommandText);
+            }
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
@@ -110,8 +173,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        lessonListPanel = new LessonListPanel(logic, model);
+        scheduleListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+
+        fullTaskListPanel = new FullTaskListPanel(logic);
+        fullTaskListPanelPlaceholder.getChildren().add(fullTaskListPanel.getRoot());
+
+        taskDetailPanel = new TaskDetailPanel(logic);
+        taskDetailListPanelPlaceholder.getChildren().add(taskDetailPanel.getRoot());
+
+        studentDetailListPanel = new StudentDetailListPanel(logic);
+        studentDetailListPanelPlaceholder.getChildren().add(studentDetailListPanel.getRoot());
+
+        lessonDetailListPanel = new LessonDetailListPanel(logic);
+        lessonDetailListPanelPlaceholder.getChildren().add(lessonDetailListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -119,8 +197,13 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        studentDetailList.setVisible(false);
+        lessonDetailList.setVisible(false);
+        taskDetailListPanel.setVisible(false);
+
+        contentSplitPane.getItems().removeAll(personList, studentDetailList, fullTaskList, taskDetailListPanel);
     }
 
     /**
@@ -175,6 +258,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            updateDetailPanels();
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -185,12 +269,93 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Sets the Person Details in the Student Detail Panel and shows it.
+     *
+     * @param person The person to show the details of.
+     */
+    public void handleShowPerson(Person person) {
+        if (person == null) {
+            studentDetailList.setVisible(false);
+            return;
+        }
+        studentDetailList.setVisible(true);
+        studentDetailListPanel.setPersonDetails(person, model);
+    }
+
+    /**
+     * Sets the Lesson Details in the Lesson Detail Panel and shows it.
+     *
+     * @param lesson The lesson to show the details of.
+     */
+    public void handleShowLesson(Lesson lesson) {
+        if (lesson == null) {
+            lessonDetailList.setVisible(false);
+            return;
+        }
+        lessonDetailList.setVisible(true);
+        lessonDetailListPanel.setLessonDetails(lesson, model);
+    }
+
+    /**
+     * Updates the detail panels if there is a detail of lesson or person shown.
+     */
+    public void updateDetailPanels() {
+        Person currentPerson = model.getCurrentlyDisplayedPerson();
+        Lesson currentLesson = model.getCurrentlyDisplayedLesson();
+        if (currentLesson != null) {
+            lessonDetailListPanel.setLessonDetails(currentLesson, model);
+        }
+        if (currentPerson != null) {
+            studentDetailListPanel.setPersonDetails(currentPerson, model);
+        }
+    }
+
+    /**
+     * Sets the Task Details in the Task Detail Panel and shows it.
+     *
+     * @param task The task to show the details of.
+     */
+    public void handleShowTask(Task task) {
+        if (task == null) {
+            taskDetailListPanel.setVisible(false);
+            return;
+        }
+        taskDetailListPanel.setVisible(true);
+        taskDetailPanel.setTaskDetails(task);
+    }
+
+    /**
+     * Sets the appropriate panels to display, hide all other panels.
+     *
+     * @param state The new state that determines which panels to show.
+     */
+    public void changeLayout(State state) {
+        double[] dividerPositions = contentSplitPane.getDividerPositions();
+        contentSplitPane.getItems().removeAll(personList, studentDetailList,
+                scheduleList, lessonDetailList, fullTaskList, taskDetailListPanel);
+        switch (state) {
+        case SCHEDULE:
+            contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
+            break;
+        case STUDENT:
+            contentSplitPane.getItems().addAll(personList, studentDetailList);
+            break;
+        case TASK:
+            contentSplitPane.getItems().addAll(fullTaskList, taskDetailListPanel);
+            break;
+        default:
+            System.out.println("unknown panel asked for");
+            break;
+        }
+        contentSplitPane.setDividerPositions(dividerPositions);
     }
 }

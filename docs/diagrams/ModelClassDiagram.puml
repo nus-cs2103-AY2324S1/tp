@@ -6,11 +6,22 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlySchedule" as ReadOnlySchedule
+Class "<<interface>>\nReadOnlyFullTaskList" as ReadOnlyFullTaskList
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class Schedule
 Class ModelManager
 Class UserPrefs
+Class State
+
+Class ScheduleList
+Class Lesson
+
+Class FullTaskList
+Class TaskList
+Class Task
 
 Class UniquePersonList
 Class Person
@@ -19,21 +30,44 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Subject
+Class Remark
 
 Class I #FFFFFF
+}
+
+package UI <<Rectangle>> {
+Class HiddenModel #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+ScheduleList .up.|> ReadOnlySchedule
+FullTaskList .up.|> ReadOnlyFullTaskList
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .left.> ReadOnlySchedule
+Model .left.> ReadOnlyFullTaskList
+
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -> UI
+ModelManager --> "1" State
+ModelManager -left-> "1" ScheduleList
+ModelManager -left-> "1" FullTaskList
 UserPrefs .up.|> ReadOnlyUserPrefs
+
+ScheduleList *--> "1" Schedule
+Schedule --> "~* all" Lesson
+Lesson --> "1" TaskList
+TaskList *--> Task
+
+FullTaskList --> "~* all" Task
+FullTaskList --> "~* all" Lesson
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
@@ -42,6 +76,8 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Subject
+Person *--> "1" Remark
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

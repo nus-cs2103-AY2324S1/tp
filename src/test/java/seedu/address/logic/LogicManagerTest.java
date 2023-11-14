@@ -1,37 +1,39 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ListCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
+import seedu.address.model.state.State;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonScheduleListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -43,13 +45,18 @@ public class LogicManagerTest {
     private Model model = new ModelManager();
     private Logic logic;
 
+    private LogicManager logicManager;
+
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+        JsonScheduleListStorage scheduleListStorage =
+                new JsonScheduleListStorage(temporaryFolder.resolve("scheduleList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleListStorage);
+        logicManager = new LogicManager(model, storage);
+        logic = logicManager;
     }
 
     @Test
@@ -60,14 +67,15 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "deletePerson 9";
+        assertCommandException(deleteCommand, "The index provided is invalid as the student list is empty.");
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String expectedMessage = ListCommand.MESSAGE_SUCCESS + " " + model.getState().toString();
+        assertCommandSuccess(listCommand, expectedMessage, model);
     }
 
     @Test
@@ -85,6 +93,20 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFullTaskList_modifyList_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> logic.getFullTaskList().remove(0));
+    }
+
+    @Test
+    public void getDisplayedFieldsList_modifyList_throwsUnsupportedOperationException() {
+        String[] fieldsNames = logic.getDisplayedFieldsList();
+        assertEquals(0, fieldsNames.length);
+        logicManager.setDisplayedFieldsList(new String[] {"phone"});
+        assertEquals(1, logic.getDisplayedFieldsList().length);
+        assertEquals(6, ListCommandParser.DISPLAYABLE_FIELDS.size());
     }
 
     /**
@@ -123,7 +145,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -160,16 +182,27 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleListStorage scheduleListStorage =
+                new JsonScheduleListStorage(temporaryFolder.resolve("ExceptionScheduleList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleListStorage);
 
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        String addCommand = AddPersonCommand.COMMAND_WORD + " -name Amy Bee -phone 11111111 -email amy@example.com "
+                + "-address Block 312, Amy Street 1 -subject Mathematics";
+        try {
+            Person expectedPerson = new Person(new Name("Amy Bee"));
+            expectedPerson.setPhone(new Phone("11111111"));
+            expectedPerson.setEmail(new Email("amy@example.com"));
+            expectedPerson.setAddress(new Address("Block 312, Amy Street 1"));
+            expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("Mathematics")));
+            ModelManager expectedModel = new ModelManager();
+            expectedModel.setState(State.STUDENT);
+            expectedModel.addPerson(expectedPerson);
+            assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        } catch (ParseException e1) {
+            throw new AssertionError("Parsing and execution of add command should succeed.", e1);
+        }
     }
 }

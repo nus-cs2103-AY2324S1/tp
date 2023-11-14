@@ -13,7 +13,7 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
-
+    //todo add tag detail in ug
     /**
      * Constructs a {@code Tag}.
      *
@@ -21,9 +21,11 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        checkArgument(isValidTagName(tagName),
+                "Invalid tag: " + tagName + " ." + MESSAGE_CONSTRAINTS);
+        this.tagName = tagName.trim();
     }
+
 
     /**
      * Returns true if a given string is a valid tag name.
@@ -31,7 +33,6 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -57,6 +58,10 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    public Tag clone() {
+        return new Tag(tagName);
     }
 
 }

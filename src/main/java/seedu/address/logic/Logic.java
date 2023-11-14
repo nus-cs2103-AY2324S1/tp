@@ -2,12 +2,15 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,11 +36,23 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered list of schedules */
+    ObservableList<Lesson> getFilteredScheduleList();
+
+    /** Returns a view of the full task list */
+    ObservableList<Task> getFullTaskList();
+
     /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
 
+    /**
+     * Returns the list of attributes that is to be displayed on the list in gui.
+     */
+    String[] getDisplayedFieldsList();
+
+    void setDisplayedFieldsList(String[] displayedFieldsList);
     /**
      * Returns the user prefs' GUI settings.
      */
@@ -47,4 +62,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    BooleanProperty getRefreshListUi();
+
+    void refreshListUi();
+
 }

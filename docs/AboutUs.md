@@ -1,59 +1,62 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Phua Zai Lian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pzl111.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/pzl111)]
+[[portfolio](team/pzl111.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Development
 
-### Jane Doe
+### Richie Hsieh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/richiehx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/richiehx)]
+[[portfolio](team/richiehx.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Development
 
-### Johnny Doe
+### Wang Yiwen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yiwen101.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yiwen101)]
+[[portfolio](team/yiwen101.md)]
+
+* Role: Developer
+* Responsibilities: User Usability
+
+### Marcus Soh
+
+<img src="images/hollag.png" width="200px">
+
+[[github](http://github.com/HollaG)]
+[[portfolio](team/hollag.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Loh Shi Jie, Elaine
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/elaineshijie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/elaineshijie)]
+[[portfolio](team/elaineshijie.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Development
+

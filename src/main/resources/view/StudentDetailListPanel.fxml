@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #231F31; -fx-background-radius: 10; -fx-border-width: 0; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.7" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="10.0" layoutY="6.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Student Details" />
+            <VBox layoutX="10.0" layoutY="48.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user.png" />
+                           </image>
+                        </ImageView>
+                           <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$user" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+                     <children>
+                           <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/phone.png" />
+                              </image>
+                           </ImageView>
+                           <TextField fx:id="phone" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$phone" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/mail.png" />
+                           </image>
+                        </ImageView>
+                           <TextField fx:id="email" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$email" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/map-pin.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="address" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$address" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <FlowPane fx:id="tags" prefHeight="25.0" prefWidth="320.0" />
+                  <FlowPane fx:id="subjects" prefHeight="25.0" prefWidth="320.0" />
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <Label style="-fx-text-fill: white;" text="Lesson(s): " />
+                        <TextField fx:id="lessons" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$students" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/remark.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="remark" alignment="BOTTOM_LEFT" editable="false" prefHeight="54.0" prefWidth="299.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$remark" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            </children>
+         </AnchorPane>
+   </content>
+</ScrollPane>
