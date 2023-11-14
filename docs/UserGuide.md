@@ -191,7 +191,7 @@ Format: `list [LIST] [KEYWORDS]`
 
 **Tips:**
 - `list` without specifying the `[LIST]` parameter defaults to showing the 📅 ___SCHEDULE list___.
-- Using the `[KEYWORDS]` parameter after `list` is not allowed!
+- Using the `[KEYWORDS]` parameter after `list` (without specifying `[LIST]`) is not allowed!
 
 </box>
 
