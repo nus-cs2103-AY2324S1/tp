@@ -5,7 +5,6 @@ import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.pharmhub.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.pharmhub.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -21,7 +20,6 @@ import seedu.pharmhub.model.allergy.Allergy;
 import seedu.pharmhub.model.medicine.Medicine;
 import seedu.pharmhub.model.person.Email;
 import seedu.pharmhub.model.person.Phone;
-import seedu.pharmhub.model.tag.Tag;
 
 public class FindPersonCommandParserTest {
 
