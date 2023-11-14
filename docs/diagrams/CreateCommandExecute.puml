@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Command Execution Stage
+
+package "Logic" {
+    class InternshipLogicManager as "InternshipLogicManager"
+}
+
+package "Model" {
+    class InternshipModel as "InternshipModel"
+}
+
+package "Command" {
+    class CreateCommand as "CreateCommand"
+}
+
+InternshipLogicManager -down- CreateCommand : > executes
+CreateCommand -up- InternshipModel : < checks if duplicate entry exists\nand creates new entry if unique
+
+@enduml

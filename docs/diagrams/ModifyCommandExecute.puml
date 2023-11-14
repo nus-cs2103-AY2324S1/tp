@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Command Execution Stage
+
+package "Logic" {
+    class InternshipLogicManager as "InternshipLogicManager"
+}
+package "Model" {
+    class InternshipModel as "InternshipModel"
+}
+
+package "Command" {
+    class ModifyCommand as "ModifyCommand"
+}
+
+InternshipLogicManager -down- ModifyCommand : > executes
+ModifyCommand -up- InternshipModel : < checks for duplicates and replaces\noriginal copy with edited one if unique
+
+@enduml

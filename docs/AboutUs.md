@@ -1,59 +1,63 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0958417@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Chen Jin Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jinyang628.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/chen-jin-yang-37baa8202/)]
+[[github](https://github.com/jinyang628)]
+[[portfolio](team/jinyang628.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Javin Chua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/javinchua.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/javinchua)]
+[[portfolio](team/javinchua.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Lee Yong Ning
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yongning0310.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yongning0310)]
+[[portfolio](team/yongning0310.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Kyriel Mortel Abad
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/s-kybound.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/s-kybound)]
+[[portfolio](team/s-kybound.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Shashamin Chokjaroenwathanakul
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shashahchk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shashahchk)]
+[[portfolio](team/shashahchk.md)]
 
 * Role: Developer
 * Responsibilities: UI

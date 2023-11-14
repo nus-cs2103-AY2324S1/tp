@@ -157,6 +157,19 @@
     -fx-text-fill: black !important;
 }
 
+.predicate-display {
+    -fx-background-color: transparent;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-control-inner-background: derive(#1d1d1d, 20%);
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+.predicate-display .label {
+    -fx-text-fill: black !important;
+}
+
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
@@ -333,6 +346,11 @@
 }
 
 #resultDisplay .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+}
+
+#predicateComparatorDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }

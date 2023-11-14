@@ -1,4 +1,5 @@
 @startuml
+!pragma layout smetana
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
@@ -6,14 +7,14 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic as LogicPackage {
 
-Class AddressBookParser
+Class InternshipBookParser
 Class XYZCommand
 Class CommandResult
-Class "{abstract}\nCommand" as Command
+Class "{abstract}\nInternshipCommand" as InternshipCommand
 
 
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
+Class "<<interface>>\nInternshipLogic" as InternshipLogic
+Class InternshipLogicManager
 }
 
 package Model {
@@ -24,23 +25,23 @@ package Storage {
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Logic
+HiddenOutside ..> InternshipLogic
 
-LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+InternshipLogicManager .right.|> InternshipLogic
+InternshipLogicManager -right->"1" InternshipBookParser
+InternshipBookParser ..> XYZCommand : creates >
 
-XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+XYZCommand -up-|> InternshipCommand
+InternshipLogicManager .left.> InternshipCommand : executes >
 
-LogicManager --> Model
-LogicManager --> Storage
+InternshipLogicManager --> Model
+InternshipLogicManager --> Storage
 Storage --[hidden] Model
-Command .[hidden]up.> Storage
-Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+InternshipCommand .[hidden]up.> Storage
+InternshipCommand .right.> Model
+note right of XYZCommand: XYZCommand = CreateCommand, \nFilterCommand, etc.
 
-Logic ..> CommandResult
-LogicManager .down.> CommandResult
-Command .up.> CommandResult : produces >
+InternshipLogic ..> CommandResult
+InternshipLogicManager .down.> CommandResult
+InternshipCommand .up.> CommandResult : produces >
 @enduml

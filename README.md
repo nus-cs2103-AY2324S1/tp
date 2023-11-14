@@ -1,14 +1,33 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W17-1/tp/graph/badge.svg?token=I19XFB7BJK)](https://codecov.io/gh/AY2324S1-CS2103T-W17-1/tp)
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+# Flagship
+Flagship is a desktop app for managing internship applications, optimized for use via a Command Line Interface
+(CLI). There is always a swarm of information to keep track of every application season, and many people miss out on important deadlines
+and valuable opportunities because information is not organised neatly. With Flagship, we want you to focus on preparing
+for the interviews, and leave the application management to us.
+
+Flagship has a host of awesome features that we are extremely proud of:
+1. **Sorting** internships based on deadlines
+2. **Filtering** internships based on interested roles
+3. **Modifying** existing entries in accordance with updates
+
+_... and many more!_
+
+Our main target users are english-speaking university students pursuing a computing-related degree.
+As such, this user guide (and Flagship in general) is designed with the following assumptions in mind:
+1. You have a basic understanding of command line syntax.
+2. You are comfortable using the command terminal to launch the application.
+3. You type fast and enjoy using the keyboard as the main tool of navigation.
+
+If these characteristics sound like you, Flagship can get your internship management tasks done faster than traditional GUI apps. That said, do not get too intimidated as we have kept the launching process and commands as simple as possible. You
+do not need prior knowledge of industry-level command line syntax to use this application effectively.
+
+# User Documentation
+[User Guide](https://ay2324s1-cs2103t-w17-1.github.io/tp/UserGuide.html)
+
+# Developer Documentation
+[Developer Guide](https://ay2324s1-cs2103t-w17-1.github.io/tp/DeveloperGuide.html)
+
+

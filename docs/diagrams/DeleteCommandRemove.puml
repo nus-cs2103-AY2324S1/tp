@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Internship Entry Deletion Stage
+
+package "Model" {
+    class InternshipModel as "InternshipModel"
+}
+
+package "Storage" {
+    class InternshipStorage as "InternshipStorage"
+}
+
+class ReadOnlyInternshipBook as "ReadOnlyInternshipBook"
+ReadOnlyInternshipBook -up- InternshipModel: < Retrieves
+ReadOnlyInternshipBook -up- InternshipStorage : < Uses to update storage
+
+@enduml

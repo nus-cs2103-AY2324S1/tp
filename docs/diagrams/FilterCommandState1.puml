@@ -1,0 +1,16 @@
+@startuml
+object "<u>:InternshipModelManager" as IL {
+  currentPredicate: CompanyNameContainsKeywordsPredicate
+  currentFilterParameter: "c/"
+  currentFilterValue: "citadel"
+
+}
+
+object "<u>:Internship" as I1 {
+  companyName: "Citadel"
+  role: "Site Reliability Engineer"
+}
+
+IL -down-> I1
+
+@enduml

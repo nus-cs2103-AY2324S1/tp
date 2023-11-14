@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+skinparam DefaultFontSize 30
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":InternshipLogicManager" as InternshipLogicManager LOGIC_COLOR
+participant ":InternshipBookParser" as InternshipBookParser LOGIC_COLOR
+participant ":ModifyCommandParser" as ModifyCommandParser LOGIC_COLOR
+participant "m:ModifyCommand" as ModifyCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":InternshipModel" as InternshipModel MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T3
+participant ":InternshipStorage" as Storage STORAGE_COLOR
+end box
+
+[-> InternshipLogicManager : execute("modify 1 c/Google ...")
+activate InternshipLogicManager
+
+InternshipLogicManager -> InternshipBookParser : parseCommand("modify 1 c/Google ...")
+activate InternshipBookParser
+
+create ModifyCommandParser
+InternshipBookParser -> ModifyCommandParser
+activate ModifyCommandParser
+
+ModifyCommandParser --> InternshipBookParser
+deactivate ModifyCommandParser
+
+InternshipBookParser -> ModifyCommandParser : parse("1 c/Google ...")
+activate ModifyCommandParser
+
+create ModifyCommand
+ModifyCommandParser -> ModifyCommand
+activate ModifyCommand
+
+ModifyCommand --> ModifyCommandParser : m
+deactivate ModifyCommand
+
+ModifyCommandParser --> InternshipBookParser : m
+deactivate ModifyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ModifyCommandParser -[hidden]-> InternshipBookParser
+destroy ModifyCommandParser
+
+InternshipBookParser --> InternshipLogicManager : m
+deactivate InternshipBookParser
+
+InternshipLogicManager -> ModifyCommand : execute(model)
+activate ModifyCommand
+
+ModifyCommand -> InternshipModel : modifyInternship(internshipToEdit, editedInternship)
+activate InternshipModel
+
+InternshipModel --> ModifyCommand : internshipBook
+deactivate InternshipModel
+
+create CommandResult
+ModifyCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ModifyCommand
+deactivate CommandResult
+
+ModifyCommand --> InternshipLogicManager : commandResult
+deactivate ModifyCommand
+
+InternshipLogicManager -> Storage : saveInternshipBook(internshipBook)
+activate Storage
+
+Storage --> InternshipLogicManager
+deactivate Storage
+
+[<-- InternshipLogicManager
+deactivate InternshipLogicManager
+@enduml

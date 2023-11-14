@@ -1,0 +1,21 @@
+{
+  "internships": [ {
+    "companyName": "Valid Company",
+    "role": "SWE",
+    "applicationStatus": "Applied",
+    "deadline" : "01/01/2001",
+    "startDate": "20/02/2002",
+    "duration": "4",
+    "requirements": [ "Coffee", "Loves Coffee" ]
+  }, {
+    "companyName": "Valid Company",
+    "role": "SWE",
+    "applicationStatus": "Yet to apply",
+    "deadline" : "01/01/2000",
+    "startDate": "20/02/2001",
+    "duration": "3",
+    "requirements": [ "Coffee lover" ]
+  } ]
+}
+
+

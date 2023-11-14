@@ -1,0 +1,11 @@
+{
+  "internships": [ {
+    "companyName": "Internship with invalid company name field: J@@@ S####",
+    "role": "Tea brewer",
+    "applicationStatus": "In progress",
+    "deadline" : "01/01/2001",
+    "startDate": "02/02/2002",
+    "duration": "3",
+    "requirements": [ "Coffee lover" ]
+  } ]
+}

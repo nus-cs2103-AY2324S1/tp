@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Filter Command Execution Stage
+
+package "Logic" {
+    class InternshipLogicManager as "InternshipLogicManager"
+}
+package "Model" {
+    class InternshipModel as "InternshipModel"
+}
+
+package "Command" {
+    class FilterCommand as "FilterCommand"
+
+InternshipLogicManager -down- FilterCommand : > executes
+FilterCommand -up- InternshipModel : > filters internship entries
+InternshipModel -[hidden]up-> FilterCommand
+@enduml

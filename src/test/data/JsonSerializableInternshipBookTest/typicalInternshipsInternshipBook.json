@@ -1,0 +1,20 @@
+{
+  "_comment": "InternshipBook save file which contains the same Internship values as in TypicalInternships#getTypicalInternshipBook()",
+  "internships" : [ {
+    "companyName" : "Optiver",
+    "role" : "UI Designer",
+    "applicationStatus" : "In progress",
+    "deadline" : "03/01/2025",
+    "startDate" : "06/06/2026",
+    "duration" : "5",
+    "requirements" : [ "Figma" ]
+  }, {
+    "companyName" : "Citadel",
+    "role" : "Software Engineer",
+    "applicationStatus" : "Yet to apply",
+    "deadline" : "01/12/2021",
+    "startDate" : "07/05/2023",
+    "duration" : "3",
+    "requirements" : [ "4 years of experience" ]
+  } ]
+}

@@ -2,18 +2,23 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.internship.ApplicationStatus;
+import seedu.address.model.internship.CompanyName;
+import seedu.address.model.internship.Deadline;
+import seedu.address.model.internship.Duration;
+import seedu.address.model.internship.Role;
+import seedu.address.model.internship.StartDate;
+import seedu.address.model.requirement.Requirement;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +30,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -36,89 +42,150 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String companyName} into a {@code CompanyName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code companyName} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static CompanyName parseCompanyName(String companyName) throws ParseException {
+        requireNonNull(companyName);
+        String trimmedCompanyName = companyName.trim();
+        if (!CompanyName.isValidCompanyName(trimmedCompanyName)) {
+            throw new ParseException(CompanyName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new CompanyName(trimmedCompanyName);
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String role} into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Role(trimmedRole);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String applicationStatus} into an {@code ApplicationStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code applicationStatus} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static ApplicationStatus parseApplicationStatus(String applicationStatus) throws ParseException {
+        requireNonNull(applicationStatus);
+        String trimmedApplicationStatus = applicationStatus.trim();
+        if (!ApplicationStatus.isValidApplicationStatus(trimmedApplicationStatus)) {
+            throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new ApplicationStatus(trimmedApplicationStatus);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String deadline} and {@code String startDate} into an {@code Deadline}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code deadline} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Deadline parseDeadline(String deadline, String startDate) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+        String trimmedStartDate = startDate.trim();
+
+        if (!StartDate.isValidStartDate(trimmedStartDate)) {
+            throw new ParseException(StartDate.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+
+        if (!Deadline.isValidDeadline(trimmedDeadline, trimmedStartDate)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        return new Deadline(trimmedDeadline, trimmedStartDate);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String deadline} into an {@code Deadline}.
+     * This is only for modify command, since user might not include startDate in the command
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code deadline} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Deadline parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+        if (!Deadline.isValidDate(trimmedDeadline)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        LocalDate maxDate = LocalDate.MAX;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String placeHolderStartDate = maxDate.format(formatter);
+        if (!Deadline.isValidDeadline(trimmedDeadline, placeHolderStartDate)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        return new Deadline(trimmedDeadline, placeHolderStartDate);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String startDate} into a {@code StartDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code startDate} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static StartDate parseStartDate(String startDate) throws ParseException {
+        requireNonNull(startDate);
+        String trimmedStartDate = startDate.trim();
+        if (!StartDate.isValidStartDate(trimmedStartDate)) {
+            throw new ParseException(StartDate.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new StartDate(trimmedStartDate);
+    }
+
+    /**
+     * Parses a {@code String duration} into a {@code Duration}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code duration} is invalid.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (!Duration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
+        return new Duration(trimmedDuration);
+    }
+
+    /**
+     * Parses {@code Collection<String> requirements} into a {@code Set<Requirement>}.
+     */
+    public static Set<Requirement> parseRequirements(Collection<String> requirements) throws ParseException {
+        requireNonNull(requirements);
+        final Set<Requirement> requirementSet = new TreeSet<>(
+                Comparator.comparing(Requirement::getRequirementName, String.CASE_INSENSITIVE_ORDER)
+        );
+        for (String requirementName : requirements) {
+            requirementSet.add(parseRequirement(requirementName.strip().replaceAll("\\s+", " ")));
+        }
+        return requirementSet;
+    }
+
+
+    /**
+     * Parses a {@code String requirement} into a {@code Requirement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code requirement} is invalid.
+     */
+    public static Requirement parseRequirement(String requirement) throws ParseException {
+        requireNonNull(requirement);
+        String trimmedRequirement = requirement.trim();
+        if (!Requirement.isValidRequirementName(trimmedRequirement)) {
+            throw new ParseException(Requirement.MESSAGE_CONSTRAINTS);
+        }
+        return new Requirement(trimmedRequirement);
     }
 }

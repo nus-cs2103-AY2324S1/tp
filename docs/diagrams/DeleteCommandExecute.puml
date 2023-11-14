@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Command Execution Stage
+
+package "Logic" {
+    class InternshipLogicManager as "InternshipLogicManager"
+}
+
+package "Model" {
+    class InternshipModel as "InternshipModel"
+}
+
+package "Command" {
+    class DeleteCommand as "DeleteCommand"
+}
+
+InternshipLogicManager -down- DeleteCommand : > executes
+DeleteCommand -up- InternshipModel : < checks if internship exists\nand removes it
+
+@enduml
