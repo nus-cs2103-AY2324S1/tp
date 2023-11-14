@@ -141,7 +141,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> instruments} into a {@code Set<Instrument>}.
+     * Parses {@code Collection<String> instruments} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseInstruments(Collection<String> instruments) throws ParseException {
         requireNonNull(instruments);
@@ -168,7 +168,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> genres} into a {@code Set<Genre>}.
+     * Parses {@code Collection<String> genres} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseGenres(Collection<String> genres) throws ParseException {
         requireNonNull(genres);

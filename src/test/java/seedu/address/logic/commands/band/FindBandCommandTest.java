@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.band.FindBandCommand.MESSAGE_NO_BAND_IN_LIST;
 import static seedu.address.testutil.typicalentities.TypicalAddressBook.getOneBandAddressBook;
 import static seedu.address.testutil.typicalentities.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.typicalentities.TypicalBands.ACE;
@@ -21,10 +22,12 @@ import static seedu.address.testutil.typicalentities.TypicalMusicians.FIONA;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.GEORGE;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,6 +38,7 @@ class FindBandCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     void execute_validBandNameNoMusician_success() {
         String expectedMessage = String.format(FindBandCommand.MESSAGE_SUCCESS, 0, "Ace Jazz");
@@ -57,6 +61,26 @@ class FindBandCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, DANIEL), model.getFilteredMusicianList());
         assertEquals(Arrays.asList(DRAGON), model.getFilteredBandList());
+    }
+
+    @Test
+    void execute_noBandInList_throwsCommandException() {
+        // First initialise empty AddressBooks
+        model = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+
+        BandNameContainsKeywordsPredicate predicate = new BandNameContainsKeywordsPredicate("test");
+        expectedModel.updateFilteredBandMusicianList(predicate);
+
+        // Message should be shown, and no runtime exception should be thrown.
+        FindBandCommand command = new FindBandCommand(predicate);
+        assertCommandFailure(command, model, MESSAGE_NO_BAND_IN_LIST);
+        assertEquals(List.of(), model.getFilteredMusicianList()); // Empty musician list
+        assertEquals(List.of(), model.getFilteredBandList()); // Empty band list
+
+        // Reset model and expectedModel back for other tests
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test

@@ -2,6 +2,7 @@ package seedu.address.model.band;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -190,7 +191,7 @@ public class UniqueBandListTest {
     @Test
     public void addMusician_musicianAdded_bandGetsUpdated() {
         uniqueBandList.add(ACE);
-        uniqueBandList.addMusician(0, ELLE);
+        uniqueBandList.addMusician(ACE, ELLE);
         assertTrue(uniqueBandList.hasMusician(ACE, ELLE));
     }
 
@@ -198,13 +199,13 @@ public class UniqueBandListTest {
     public void addMusician_nullMusician_throwsNullPointerException() {
         uniqueBandList.add(ACE);
         assertThrows(NullPointerException.class, () -> uniqueBandList.addMusician(
-            0, null));
+            ACE, null));
     }
 
     @Test
     public void addMusician_duplicateMusician_throwsDuplicateMusicianException() {
         uniqueBandList.add(ELISE);
-        assertThrows(DuplicateMusicianException.class, () -> uniqueBandList.addMusician(0, ELLE));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueBandList.addMusician(ELISE, ELLE));
     }
 
     @Test
@@ -233,7 +234,7 @@ public class UniqueBandListTest {
         Iterator<Band> emptyIterated = uniqueBandList.iterator();
         assertFalse(emptyIterated.hasNext());
         // empty iterator next -> throws exception
-        assertThrows(NoSuchElementException.class, () -> emptyIterated.next());
+        assertThrows(NoSuchElementException.class, emptyIterated::next);
         // iterator with a musician hasNext -> returns true
         uniqueBandList.add(ACE);
         Iterator<Band> iterated = uniqueBandList.iterator();
@@ -252,29 +253,29 @@ public class UniqueBandListTest {
         UniqueBandList copyList = new UniqueBandList();
         copyList.add(ACE);
         copyList.add(BOOM);
-        assertTrue(uniqueBandList.equals(copyList));
+        assertEquals(uniqueBandList, copyList);
 
         // same object -> returns true
-        assertTrue(uniqueBandList.equals(uniqueBandList));
+        assertEquals(uniqueBandList, uniqueBandList);
 
         // null -> returns false
-        assertFalse(uniqueBandList.equals(null));
+        assertNotEquals(null, uniqueBandList);
 
         // different type -> returns false
-        assertFalse(uniqueBandList.equals(ALICE));
+        assertNotEquals(uniqueBandList, ALICE);
 
         // empty list -> returns false
         UniqueBandList emptyList = new UniqueBandList();
-        assertFalse(uniqueBandList.equals(emptyList));
+        assertNotEquals(uniqueBandList, emptyList);
 
         // different musicians -> returns false
         UniqueBandList differentList = new UniqueBandList();
         differentList.add(CANDY);
         differentList.add(DRAGON);
-        assertFalse(uniqueBandList.equals(differentList));
+        assertNotEquals(uniqueBandList, differentList);
 
         // empty list and empty list -> returns true
         UniqueBandList emptyListTwo = new UniqueBandList();
-        assertTrue(emptyList.equals(emptyListTwo));
+        assertEquals(emptyList, emptyListTwo);
     }
 }

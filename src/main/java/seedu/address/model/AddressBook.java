@@ -145,10 +145,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a musician to a band.
      */
-    public void addMusicianToBand(int bandIndex, Musician musician) {
-        requireNonNull(bandIndex);
+    public void addMusicianToBand(Band band, Musician musician) {
+        requireNonNull(band);
         requireNonNull(musician);
-        bands.addMusician(bandIndex, musician);
+        bands.addMusician(band, musician);
     }
 
     /**

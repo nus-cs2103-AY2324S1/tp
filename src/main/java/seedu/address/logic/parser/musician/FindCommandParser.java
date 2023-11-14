@@ -30,8 +30,10 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_INSTRUMENT, PREFIX_GENRE);
@@ -55,6 +57,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(FindCommand.MESSAGE_MORE_THAN_ONE_WORD);
         }
 
+        HashSet<Predicate<Musician>> predicates = this.buildPredicates(names, tags, instruments, genres);
+
+        return new FindCommand(predicates);
+    }
+
+    /** Builds a set of predicates based on the given lists of keywords. If a list is empty, skip over it. */
+    private HashSet<Predicate<Musician>> buildPredicates(List<String> names, List<String> tags,
+                                                         List<String> instruments, List<String> genres) {
         HashSet<Predicate<Musician>> predicates = new HashSet<>();
         if (!names.isEmpty()) {
             predicates.add(new NameContainsKeywordsPredicate(names));
@@ -68,8 +78,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!genres.isEmpty()) {
             predicates.add(new GenreMatchesPredicate(genres));
         }
-
-        return new FindCommand(predicates);
+        return predicates;
     }
-
 }

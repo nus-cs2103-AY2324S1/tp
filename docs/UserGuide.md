@@ -54,11 +54,15 @@ Keep an eye out for them!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 1. Ensure you have [Java 11](#glossary) or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
@@ -102,6 +106,8 @@ Keep an eye out for them!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-success">
@@ -144,10 +150,18 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
 
 </div>
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Information** 
+
+When you use any features with `INDEX` as a parameter, kindly refer to the index in the **current displaying panels**.
+</div>
  
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Features for managing musicians
 
@@ -169,6 +183,11 @@ You have just met a talented musician and see him/her as a potential fit for you
 **Things to Note**
 * To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the ones included in a [pre-defined list](#list-of-valid-instrumentsgenres) of instruments and genres. 
 
+<div markdown="block" class="alert alert-danger">
+:exclamation: **Warnings** <br>
+
+Please ensure you input meaningful names and avoid ambiguous names like "123", unless you are confident that it will not cause future confusion:)
+</div>
 
 **Upon success:**
 
@@ -266,11 +285,11 @@ Edited Musician: Hans Leonhart; Phone: 98765430;
 Email: hansl@music.com; Tags: [german]; 
 Instruments: [violin]; Genres: [pop]
 ```
-* Before: From `list` state, Hans Leonhart's genre is classical and his phone number is 98765432
+* Before: From `list` state, Hans Leonhart's genre is classical and his phone number is 98009432
   ![edit_before.png](images%2Fmusician-features%2Fedit_before.png)
 
 
-* After: Hans Leonhart's genre is changed to pop and his phone number is changed to 98765430
+* After: Hans Leonhart's genre is changed to pop and his phone number is changed to 12344321
   ![edit_after.png](images%2Fmusician-features%2Fedit_after.png)
 
 
@@ -318,9 +337,8 @@ You are about to form a band and are looking for musicians who play certain inst
 The `My Musicians` panel will update to show all matching musicians, while the `My Bands` panel will list all bands.
 
 For example, when the input command is `find g/rock i/guitar i/piano`
-* Before: From `list` state
-![find_before.png](images%2Fmusician-features%2Flist_all.png)
-* After: On the left, `My Musicians` panel will display all musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
+
+`My Musicians` panel will display all 3 musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
 ![find_after.png](images%2Fmusician-features%2Ffind_after.png)
 
 **Upon failure:**
@@ -339,6 +357,8 @@ For example, when the input command is `find g/rock i/guitar i/piano`
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Features for managing bands
 
@@ -359,6 +379,15 @@ Now, with all the musician contacts in your list, you are ready to create your f
 
 **Things to Note:**
 * The name of the band must be unique.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
+
+Conditions for **unique** band name: Unique sequence of alphanumeric characters (case-insensitive)
+
+</div>
+
 * To add the genres the band specialises in using the `g/` prefix, you can only add the ones included in a [pre-defined list](#list-of-valid-instrumentsgenres) of genres.
 
 
@@ -413,7 +442,15 @@ You have just created a band and are ready to experiment with some cool band mak
 
 **:bulb: Tips:**
 
-You may want to use the `list` command to view all musicians and bands in the application _before_ using this command. This is especially important if you have just executed a `find` command and the musician list is not showing all musicians.
+If you want to view all your musician contact that you can choose from, you may want to use the `list` command _before_ using this command `addm`. This is especially important if you have just executed an irrelevant `find` or `findb` command and are viewing a filtered list.
+
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tips:**
+
+You may want to use the `find` command to filter musicians based on instruments or genre _before_ using this command. This allows you to identify musicians who are proficient in the same genre as the band requirement, and optimize your band makeup.
 
 </div>
 
@@ -421,12 +458,14 @@ You may want to use the `list` command to view all musicians and bands in the ap
 
 You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show **only** the band which the new musicians are added in. The `My Musicians` panel will update to show all **the members of that band.**
 
-For example, when the input command is `addm b/1 m/1 m/2`:
+For example, when we want to add musicians to a blues/jazz band called "Neo Pixel" (3rd in band panel):
+1. Let's first find all musicians who are proficient in blues or jazz with `find g/blues g/jazz`
+   ![addm_filter.png](images%2Fband-features%2Faddm_filter.png)
 
-* Before: From `list` state
-![addm_before.png](images%2Fband-features%2Flist_all.png)
-* After: On the right, `My Bands` panel will display the band "ACDC". On the left, `My Musicians` panel will display all musicians in that band.
-![addm_after.png](images%2Fband-features%2Faddm_after.png)
+
+2. Let's add all 4 musicians to band "Neo Pixel" with `addm b/3 m/1 m/2 m/3 m/4`.
+ On the right, `My Bands` panel will display the band "Neo Pixel". On the left, `My Musicians` panel will display all musicians in that band.
+![addm_after.png](images%2Fband-features%2Faddm_afteradding.png)
 
 **Upon failure:**
 
@@ -454,25 +493,44 @@ when there is 1 band), you will see an error message below:
 
 **Scenario:**
 
-You have created a few bands and added several musicians to each band. Now, you would like to find a particular band amd view all the members in it. 
+You have created a few bands and added several musicians to each band. Now, you would like to find a particular band and view all the members in it. 
 
 **Format:** 
 
 `findb BANDNAME`
 
 **Examples:**
-* `findb theory X` 
+* `findb TheoryX` 
 
     This command finds the band named "theory X" and displays all the members in it.
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
+
+Please ensure that the band name does not contain extra whitespaces
+
+</div>
+
 **Upon success:**
+
+On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
+
+For example, if we want to view all members in band "TheoryX" with command `findb TheoryX`
 * Before: From `list` state
-  ![findb_before.png](images%2Fband-features%2Ffindb_before.png)
-* After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
-  ![findb_after.png](images%2Fband-features%2Ffindb_after.png)
+  ![findb_before.png](images%2Fband-features%2Flistall.png)
+
+
+* After: On the left, `My Musicians` panel will display all musicians in "TheoryX". On the right, `My Bands` panel will display only "TheoryX".
+  ![findb_after.png](images%2Fband-features%2Ffindb.png)
 
 **Upon failure:**
-If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+
+If you input an invalid band name, you will see an error message as shown below.
+```
+Band does not exist!
+```
+Please input a valid band name and enter the command again.
 
 [Back To ToC](#table-of-contents)
 
@@ -504,10 +562,16 @@ You may want to use the [`findb`](#find-band-findb) command to view all the memb
 </div>
 
 **Upon success:**
-* Before: From `list` state
-  ![removem_before.png](images/band-features/removem_before.png)
-* After: You will see a message indicating successful removal of the musician from the band like below:
-  ![removem_after.png](images/band-features/removem_after.png)
+
+On the left, `My Musicians` panel will correctly display all musicians in the band, without the deleted musician. On the right, `My Bands` panel will display the band of interest.
+
+For example, we want to remove John Doe from band TheoryX.
+* Before: First double-check the band members in TheoryX with `findb TheoryX`.
+  ![findb_after.png](images%2Fband-features%2Ffindb.png)
+
+
+* After: Remove John Doe at position 1 with `removem m/1 b/1`. You will see a message indicating successful removal of the musician from the band like below:
+  ![removem_after.png](images%2Fband-features%2Fremovem_after.png)
 
 **Upon failure:**
 
@@ -605,6 +669,8 @@ Please verify that the index is correct and try again.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### General features
 
 #### Get help: `help`
@@ -682,6 +748,8 @@ You can always refer back to each feature above for detailed explanation and tip
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 ### List of Valid Instruments/Genres
@@ -736,6 +804,8 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Frequently Asked Questions
 
 **Q**: How do I install Java 11?<br>
@@ -745,7 +815,7 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Addressbook home folder.
 
 **Q**: Why is BandConnect++ not displaying all musicians/bands?<br>
-**A**:  It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands--list) to display all musicians and bands.
+**A**:  It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands-list) to display all musicians and bands.
 
 **Q**: What if I accidentally close BandConnect++ without using the exit command? Do I lost all my data?<br>
 **A**: Not to worry! BandConnect++ automatically saves all data after each change you make, so no data is lost.
@@ -773,6 +843,8 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Troubleshooting
 

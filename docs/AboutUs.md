@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Delton Cheng
@@ -27,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/shuyangk.md)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: Documentation, Deliverables, Testing
 
 ### Tan Yiming
 
@@ -37,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/tanyyyming.md)]
 
 * Role: Developer
-* Responsibilities: Scheduling and Tracking + Code Quality
+* Responsibilities: Scheduling and Tracking, Code Quality
 
 ### Wang Hejin
 
@@ -47,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/wanghejin.md)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: UI, Testing, Documentation
 
 ### Tan Yang Yi
 
@@ -57,4 +55,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yytan25.md)]
 
 * Role: Developer
-* Responsibilities: UI, Scheduling and Tracking
+* Responsibilities: Integration, Testing, In charge of `Band`

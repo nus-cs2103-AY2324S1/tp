@@ -59,7 +59,7 @@ Musician -[hidden]up--> I
 Band -[hidden]up--> I
 UniqueMusicianList -[hidden]right-> I
 UniqueBandList -[hidden]right-> I
-
+Musician -[hidden]up--> UniqueMusicianList
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Email

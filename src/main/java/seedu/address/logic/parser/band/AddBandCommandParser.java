@@ -24,11 +24,14 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddBandCommand object
  */
 public class AddBandCommandParser implements Parser<AddBandCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddBandCommand
      * and returns an AddBandCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public AddBandCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
