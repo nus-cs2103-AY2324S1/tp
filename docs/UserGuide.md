@@ -1,5 +1,6 @@
 ---
 layout: page
+title: User Guide
 ---
 <link rel="stylesheet" href="./assets/css/guide.css">
 <a id="top"></a>
