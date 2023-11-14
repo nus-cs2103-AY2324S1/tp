@@ -19,7 +19,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project uses the [TestFx](https://github.com/TestFX/TestFX) library for automated JavaFX GUI testing.
+* [JavaFX](https://openjfx.io/) was used to develop a Graphical User Interface (GUI).
+* [Jackson](https://github.com/FasterXML/jackson) was used for JSON local storage of data.
+* [JUnit5](https://github.com/junit-team/junit5) was used for automated unit and integration testing.
+* [TestFx](https://github.com/TestFX/TestFX) was used for automated JavaFX GUI testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -554,9 +557,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   <img src="images/CommitActivityDiagram.png" width="320" />
 </div>
 
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
+**Some design considerations:**
 
 * **Alternative 1 (current choice):** Saves the entire NetworkBook state.
 
@@ -570,8 +571,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: Additional implementation of each individual command requires more time and effort spent on achieving undo/redo behaviour for said command.
 
 ### Sorting displayed contacts
-
-#### Implementation
 
 The `NetworkBook` class wraps around the data displayed to the user.
 The sorting feature builds on the filter feature present in `NetworkBook`, which uses JavaFX's `FilteredList`, an implementation of the `ObservableList` interface.
@@ -651,8 +650,6 @@ The following sequence diagram shows how the sort operation works:
 
 ### Sort and filter status bar display
 
-#### Implementation
-
 The existing implementation has a status bar displaying the save file path.
 To display the current sort and filter status, another label was added to the status bar.
 
@@ -665,9 +662,7 @@ The following activity diagram summarizes what happens when a command is execute
   <img src="images/StatusBarActivityDiagram.png" width="520" />
 </div>
 
-#### Design considerations:
-
-**Aspect: How to update when sort or filter status changes:**
+**Some design considerations:**
 
 * **Alternative 1 (current choice):** Return subclass of `CommandResult` upon execution.
     * After command execution, the command result is returned to `MainWindow`, which has access to the status bar element.

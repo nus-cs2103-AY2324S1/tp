@@ -9,10 +9,10 @@ Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
 Participant ":AddCommandParser" as addCommandParser LOGIC_COLOR
 Participant ":AddPersonDescriptor" as addPersonDescriptor LOGIC_COLOR
 Participant ":AddCommand" as addCommand LOGIC_COLOR
+Participant ":Person" as person MODEL_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-Participant ":Person" as person MODEL_COLOR
 Participant ":Model" as model MODEL_COLOR
 end box
 
