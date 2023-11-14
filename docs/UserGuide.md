@@ -395,8 +395,8 @@ Restrictions:
 * The assigned volunteers cannot be edited with eedit, to do so, refer to [eaddv](#adding-a-volunteer-into-an-event-eaddv) and [eremovev](#removing-a-volunteer-from-an-event-eremovev) for more detail information.
 
 Examples:
-* `eedit 1 n/clean beach r/10 cleaner sd/30/11/2023 1200 l/east coast park dsc/help clean east coast park m/ `
-    * Edits the event to name `clean beach`, roles needed `10 cleaner`, event date from `30th November 2023, 12pm`, location `east coast park`, description `help clean east coast park` and materials needed to empty.
+* `eedit 1 r/10 cleaner sd/30/11/2023 1200 l/east coast park dsc/help clean east coast park m/ `
+    * Edits the event to roles needed `10 cleaner`, event date from `30th November 2023, 12pm`, location `east coast park`, description `help clean east coast park` and materials needed to empty.
 
 #### Adding and tracking quantity of materials into an event: `eaddm`
 
