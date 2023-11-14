@@ -3,9 +3,11 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * The API of the Model component.
@@ -53,6 +55,31 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the Dashboard.
+     */
+    Dashboard getDashboard();
+
+    /**
+     * Opens the Dashboard.
+     */
+    void openDashboard();
+
+    /**
+     * Closes the Dashboard.
+     */
+    void closeDashboard();
+
+    /**
+     * Starts the reminder scheduler
+     */
+    void startReminderScheduler();
+
+    /**
+     * Stop the reminder scheduler
+     */
+    void stopReminderScheduler();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -84,4 +111,28 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the currently selected person.
+     */
+    SimpleObjectProperty<Person> getSelectedPerson();
+
+    /**
+     * Sets the currently selected person.
+     */
+    void setSelectedPerson(Person person);
+
+    /**
+     * Updates the reminder list
+     */
+    void updateReminderList();
+
+    /** Returns an unmodifiable view of the filtered reminder list */
+    ObservableList<Reminder> getFilteredReminderList();
+
+    /**
+     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReminderList(Predicate<Reminder> predicate);
 }

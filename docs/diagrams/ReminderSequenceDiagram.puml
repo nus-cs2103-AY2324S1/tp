@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":DashboardDisplay" as dashboardDisplay UI_COLOR
+Participant ":Dashboard" as dashboard MODEL_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":UniqueReminderList" as uniqueReminderList MODEL_COLOR
+Participant ":Person" as person MODEL_COLOR
+
+
+dashboardDisplay -[UI_COLOR]> dashboard : getDateReminders()
+activate dashboard MODEL_COLOR
+dashboard -[UI_COLOR]> model : updateReminderList()
+activate model MODEL_COLOR
+
+model -[UI_COLOR]> uniqueReminderList
+activate uniqueReminderList MODEL_COLOR
+
+loop for all persons in list
+    uniqueReminderList -> person: updateReminder()
+    activate person MODEL_COLOR
+    person -[MODEL_COLOR]> person : setFollowUpDate()
+    person -[MODEL_COLOR]> uniqueReminderList : reminder
+    deactivate person MODEL_COLOR
+    uniqueReminderList -[MODEL_COLOR]> uniqueReminderList : addInternalList()
+end
+uniqueReminderList -[UI_COLOR]> model : reminderList
+model -[UI_COLOR]> uniqueReminderList : updateFilteredList()
+uniqueReminderList -[UI_COLOR]> uniqueReminderList : setPredicate()
+note right: Predicate is set to filter reminders due today
+uniqueReminderList -[UI_COLOR]> model : filteredList
+deactivate uniqueReminderList
+model -[UI_COLOR]> dashboard
+deactivate model MODEL_COLOR
+dashboard -[UI_COLOR]> dashboardDisplay : filteredReminderList
+
+@enduml

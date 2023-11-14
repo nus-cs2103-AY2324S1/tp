@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -13,6 +14,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Dashboard;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -67,8 +69,28 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Dashboard getDashboard() {
+        return model.getDashboard();
+    }
+
+    @Override
+    public void openDashboard() {
+        model.openDashboard();
+    }
+
+    @Override
+    public void closeDashboard() {
+        model.closeDashboard();
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public SimpleObjectProperty<Person> getSelectedPerson() {
+        return model.getSelectedPerson();
     }
 
     @Override

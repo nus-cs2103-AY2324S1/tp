@@ -2,11 +2,13 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Dashboard;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
@@ -30,8 +32,28 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the Dashboard.
+     *
+     * @see seedu.address.model.Model#getDashboard()
+     */
+    Dashboard getDashboard();
+
+    /**
+     * Opens the Dashboard.
+     */
+    void openDashboard();
+
+    /**
+     * Closes the Dashboard.
+     */
+    void closeDashboard();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns the currently selected person */
+    SimpleObjectProperty<Person> getSelectedPerson();
 
     /**
      * Returns the user prefs' address book file path.

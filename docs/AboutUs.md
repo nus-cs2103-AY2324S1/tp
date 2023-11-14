@@ -5,55 +5,56 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `connectify[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kamili Arsyad
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kamiliarsyad.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/KamiliArsyad)]
+[[portfolio](team/kamiliarsyad.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Reviewer and Repo maintainer
 
-### Johnny Doe
+### Dick Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dickongwd.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/dickongwd)]
+[[portfolio](team/dickongwd.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality and Documentation Reviewer
+* Responsibilities: UserGuide and DeveloperGuide
 
-### Jean Doe
+### Jair Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lilozz2.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lilozz2)]
+[[portfolio](team/lilozz2.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer & Integration Reviewer
+* Responsibilities: Component Design & Testing
 
-### James Doe
+### Sean Wang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/magnificentcreature.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/magnificentcreature)]
+[[portfolio](team/magnificentcreature.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing Reviewer
+* Responsibilities: DevOps + Testing + Threading
+
+### Zhang Yu Han
+
+<img src="images/zhyuhan.png" width="200px">
+
+[[github](http://github.com/zhyuhan)]
+[[portfolio](team/zhyuhan.md)]
+
+* Role: Frontend Developer
+* Responsibilities: Dashboard, UI

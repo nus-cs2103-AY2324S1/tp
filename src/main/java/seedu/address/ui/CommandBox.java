@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.CommandHistory;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -15,6 +16,8 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+
+    private static final CommandHistory history = new CommandHistory();
 
     private final CommandExecutor commandExecutor;
 
@@ -29,6 +32,21 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+            case UP:
+                commandTextField.setText(history.getPreviousCommand());
+                break;
+            case DOWN:
+                commandTextField.setText(history.getNextCommand());
+                break;
+            case ENTER:
+                history.resetCurrentCommandIndex();
+                break;
+            default:
+                break;
+            }
+        });
     }
 
     /**
@@ -44,6 +62,9 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+
+            // Only add to history if the command was successfully executed
+            history.addCommand(commandText);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

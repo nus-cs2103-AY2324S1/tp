@@ -28,14 +28,20 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("+91")); // less than 3 numbers with plus
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
+        assertFalse(Phone.isValidPhone("9312-1534")); //other characters
+        assertFalse(Phone.isValidPhone("123456789012345678901234567890")); // too long phone numbers with plus sign
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
+        assertTrue(Phone.isValidPhone("+911")); // exactly than 3 numbers with plus
+        assertTrue(Phone.isValidPhone("93121534")); // normal exactly 8 numbers
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("+651234")); // plus sign
+        assertTrue(Phone.isValidPhone("+651234567890123")); // long phone numbers with plus sign
     }
 
     @Test

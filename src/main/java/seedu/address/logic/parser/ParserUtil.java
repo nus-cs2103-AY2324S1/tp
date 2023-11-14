@@ -10,10 +10,17 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
+import seedu.address.model.person.Interaction.Outcome;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Profession;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -108,6 +115,92 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses {@code String lead} into a {@code Lead}.
+     */
+    public static Lead parseLead(String lead) throws ParseException {
+        requireNonNull(lead);
+        String trimmedLead = lead.trim();
+        if (!Lead.isValidLead(trimmedLead)) {
+            throw new ParseException(Lead.MESSAGE_CONSTRAINTS);
+        }
+        return Lead.of(lead);
+    }
+
+    /**
+     * Parses a {@code String telegram} into a {@code TelegramHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static TelegramHandle parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+        if (!TelegramHandle.isValidTelegramHandle(trimmedTelegram)) {
+            throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramHandle(trimmedTelegram);
+    }
+
+    /**
+     * Parses a {@code String profession} into a {@code Profession}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code profession} is invalid.
+     */
+    public static Profession parseProfession(String profession) throws ParseException {
+        requireNonNull(profession);
+        String trimmedProfession = profession.trim();
+        if (!Profession.isValidProfession(trimmedProfession)) {
+            throw new ParseException(Profession.MESSAGE_CONSTRAINTS);
+        }
+        return new Profession(trimmedProfession);
+    }
+
+    /**
+     * Parses a {@code String income} into a {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code income} is invalid.
+     */
+    public static Income parseIncome(String income) throws ParseException {
+        requireNonNull(income);
+        String trimmedIncome = income.trim();
+        if (!Income.isValidIncome(trimmedIncome)) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+        return new Income(trimmedIncome);
+    }
+
+    /**
+     * Parses a {@code String Details} into a {@code Details}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code details} is invalid.
+     */
+    public static Details parseDetails(String details) throws ParseException {
+        requireNonNull(details);
+        String trimmedDetails = details.trim();
+        if (!Details.isValidDetails(trimmedDetails)) {
+            throw new ParseException(Details.MESSAGE_CONSTRAINTS);
+        }
+        return new Details(trimmedDetails);
+    }
+
+    /**
+     * Parses a {@code String outcome} into a {@code Outcome}.
+     *
+     * @throws ParseException if the given {@code outcome} is invalid.
+     */
+    public static Outcome parseOutcome(String outcome) throws ParseException {
+        requireNonNull(outcome);
+        String trimmedOutcome = outcome.trim();
+        if (!Outcome.isValidOutcome(trimmedOutcome)) {
+            throw new ParseException(Outcome.MESSAGE_CONSTRAINTS);
+        }
+        return Outcome.valueOf(trimmedOutcome.toUpperCase());
     }
 
     /**

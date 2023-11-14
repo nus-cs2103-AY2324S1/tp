@@ -15,17 +15,25 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Profession;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "+65123498249780459780457905427952";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TELEGRAM = "~rachel";
+    private static final String INVALID_PROFESSION = "d@ctor";
+    private static final String INVALID_INCOME = "lots of money";
+    private static final String INVALID_DETAILS = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +41,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TELEGRAM = "@benson";
+    private static final String VALID_PROFESSION = "Realtor";
+    private static final String VALID_INCOME = "300000";
+    private static final String VALID_DETAILS = "Benson is rich";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +205,69 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTelegram_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTelegram(null));
+    }
+
+    @Test
+    public void parseTelegram_invalidHandle_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram(INVALID_TELEGRAM));
+    }
+
+    @Test
+    public void parseTelegram_validHandle_returnsTelegramHandle() throws Exception {
+        TelegramHandle expectedTelegramHandle = new TelegramHandle(VALID_TELEGRAM);
+        assertEquals(expectedTelegramHandle, ParserUtil.parseTelegram(VALID_TELEGRAM));
+    }
+
+    @Test
+    public void parseProfession_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProfession(null));
+    }
+
+    @Test
+    public void parseProfession_invalidProfession_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseProfession(INVALID_PROFESSION));
+    }
+
+    @Test
+    public void parseProfession_validProfession_returnsProfession() throws Exception {
+        Profession expectedProfession = new Profession(VALID_PROFESSION);
+        assertEquals(expectedProfession, ParserUtil.parseProfession(VALID_PROFESSION));
+    }
+
+    @Test
+    public void parseIncome_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIncome(null));
+    }
+
+    @Test
+    public void parseIncome_invalidIncome_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIncome(INVALID_INCOME));
+    }
+
+    @Test
+    public void parseIncome_validIncome_returnsIncome() throws Exception {
+        Income expectedIncome = new Income(VALID_INCOME);
+        assertEquals(expectedIncome, ParserUtil.parseIncome(VALID_INCOME));
+    }
+
+    @Test
+    public void parseDetails_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDetails(null));
+    }
+
+    @Test
+    public void parseDetails_invalidDetails_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDetails(INVALID_DETAILS));
+    }
+
+    @Test
+    public void parseDetails_validDetails_returnsDetails() throws Exception {
+        Details expectedDetails = new Details(VALID_DETAILS);
+        assertEquals(expectedDetails, ParserUtil.parseDetails(VALID_DETAILS));
     }
 }
