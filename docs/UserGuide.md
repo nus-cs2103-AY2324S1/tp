@@ -8,7 +8,7 @@ title: User Guide
 MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to manage patients and
 doctors details within clinics.
 
-Hereʼs an overview of how MediLink Contacts can help you streamline your hospital management
+Hereʼs an overview of how MediLink Contacts can help you streamline your clinic management
 processes:
 
 * Store and edit information about your patients and doctors.
@@ -39,7 +39,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![quickview](images/quickorientation.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
@@ -51,7 +51,7 @@ hospital management tasks done faster than current GUI apps in the industry.
     * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
       doctor named `John Doe` to MediLink Contacts.
 
-    * `delete S9851386G` : Deletes the person with ic S9851386G.
+    * `delete S9851386G` : Deletes the person with NRIC S9851386G.
 
     * `clear` : Deletes all contacts.
 
@@ -64,7 +64,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 
 The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands. Users should follow these constraints for all commands, unless otherwise stated.
 
-**Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so do please follow them when necessary!
+**Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so please do follow them when necessary!
 
 | Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples                   |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------|
@@ -134,9 +134,9 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 - A doctor **MUST** have all fields non-empty except TAG.
   Failure to include these details may result in an error.
-- The order is not important (i.e, IC can come before NAME). What matters is that all the mandatory fields are declared,
+- The order is not important (i.e, NRIC can come before NAME). What matters is that all the mandatory fields are declared,
 and the format for each field is adhered to.
-- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
+- A person can either be a doctor or a patient, but not both. Hence, if the doctor's NRIC is already in the app
 as a patient, it may result in an error.
 
 </div>
@@ -191,7 +191,7 @@ Format: `new-appt pic/NRIC dic/NRIC time/yyyy-MM-dd HH:mm`
 - All fields are Required.
 - NRIC for pic/ must contain the valid NRIC of a Patient in MediLink Contacts.
 - NRIC for dic/ must contain the valid NRIC of a Doctor in MediLink Contacts.
-- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
+- There must not be conflicting Appointments (eg. the doctor already has an appointment with another patient at the same time). However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
@@ -245,7 +245,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the MediLink Contacts.
+Edits an existing person in MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -259,12 +259,12 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 However, if it is different, there will be an error.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition, blood type or
 emergency contact of a doctor).
-* Existing values will be updated to the input values.g
+* Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 * If extraneous parameters are provided, it may lead to an error.
-* Note: In our app, the Remark Section will be left blank by default. The edit Command can be used to add any miscellaneous info not captured by other fields such as possible allergies, medical history, etc.
+* Note: In our app, the Remark Section will be left blank by default. The Edit Command can be used to add any miscellaneous info not captured by other fields such as possible allergies, medical history, etc.
 
 </div>
 
@@ -487,7 +487,7 @@ the data of your previous MediLink Contacts home folder.
 | **Redo**               | `redo`                                                                                                                                                                                                                                                                                           |
 | **Delete**             | `delete NRIC`<br> e.g., `delete T0666485G`                                                                                                                                                                                                                                                       |
 | **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                               |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                       |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br> `find GENDER`<br> e.g., `find M`, `find F`<br> `find NRIC`<br> e.g., `find T0137689Y`                                                                                                                                             |
 | **List**               | `list`                                                                                                                                                                                                                                                                                           |
 | **Help**               | `help`                                                                                                                                                                                                                                                                                           |
 | **Exit**               | `exit`                                                                                                                                                                                                                                                                                           |
