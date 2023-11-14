@@ -164,9 +164,9 @@ with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
    and enter the command `java -jar JobFindr.jar` to run the application.
 
-<div style="page-break-after: always;">
+    <div style="page-break-after: always;">
 
-</div>
+    </div>
 
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.
    <br><br>
