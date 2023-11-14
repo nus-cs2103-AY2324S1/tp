@@ -446,6 +446,7 @@ Screenshots:
 Command
 </pic>
 <pic src="images/screenshots/delete%20-%20after.jpg" width="300">
+Output
 </pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
