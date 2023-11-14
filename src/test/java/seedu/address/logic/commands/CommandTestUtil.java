@@ -46,6 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "manager";
     public static final String VALID_ROLE_BOB = "subordinate";
     public static final String VALID_MANAGER_AMY = "Amy Bee";
+    public static final String VALID_MANAGER_BOB = "Bob Choo";
     public static final String VALID_DEPARTMENT_LOGISTIC = "logistics";
     public static final String VALID_DEPARTMENT_INVESTMENT = "investment";
 
@@ -64,6 +65,7 @@ public class CommandTestUtil {
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
     public static final String MANAGER_DESC_AMY = " " + PREFIX_MANAGER + VALID_MANAGER_AMY;
+    public static final String MANAGER_DESC_BOB = " " + PREFIX_MANAGER + VALID_MANAGER_BOB;
     public static final String DEPARTMENT_DESC_INVESTMENT = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_INVESTMENT;
     public static final String DEPARTMENT_DESC_LOGISTIC = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_LOGISTIC;
     public static final String DEPARTMENT_COMMAND_TYPE_ADD = " " + PREFIX_TYPE + "add";
