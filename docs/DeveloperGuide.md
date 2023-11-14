@@ -372,7 +372,7 @@ The `SortCommand` class implements this command. It accepts a `FieldComparator` 
 
 The following sequence diagrams illustrate the process of parsing and execution for the command:
 
-<img src="images/developer-guide/SortCommandParserSequenceDiagram.png"style="display: block; margin: auto;" width="600"/>
+<img src="images/developer-guide/SortCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 <br>
 <img src="images/developer-guide/SortCommandSequenceDiagram.png" style="display: block; margin: auto;" width="400"/>
 
