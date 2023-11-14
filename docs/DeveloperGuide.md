@@ -964,7 +964,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `deletep 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `deletep 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -976,7 +976,7 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person with valid index
     1. Prerequisites: There is at least 1 person in the persons list of PharmHub. This can be done using the command in 1.i. This can be checked using the command: `listp`
     1. Test case: `viewp 1`<br>
-       Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message.
 
     1. Test case: `viewp 0`<br>
        Expected: No person is shown. Error details shown in the status message. Status bar remains the same.
@@ -988,20 +988,20 @@ testers are expected to do more *exploratory* testing.
 1. Editing a person using valid fields
     1. Test case: `editp 1 n/John Doe p/98765432`
  
-       Expected: First contact is edited. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is edited. Details of the edited contact shown in the status message.
 
 ### Finding person(s)
 1. Finding person(s) using valid fields 
     1. Test case: `findp n/John`
-       Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message. 
     1. Test case: `findp n/Alex John`
-       Expected: All person(s) with name containing "Alex" or "John" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with name containing "Alex" or "John" is shown in the details panel. Details of the deleted contact shown in the status message. 
     1. Test case: `findp no/Aspirin Paracetamol`
-       Expected: All person(s) with allergy containing "Aspirin" or "Paracetamol" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with allergy containing "Aspirin" or "Paracetamol" is shown in the details panel. Details of the deleted contact shown in the status message.
     1. Test case: `findp p/123456`
-       Expected: All person(s) with phone number equal to "123456" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with phone number equal to "123456" is shown in the details panel. Details of the deleted contact shown in the status message. 
     1. Test case: `findp e/john@gmail.com`
-       Expected: All person(s) with email equal to "john@gmail.com" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with email equal to "john@gmail.com" is shown in the details panel. Details of the deleted contact shown in the status message.
 
 2. Finding person(s) using invalid input
     1. Test case: `findp`
