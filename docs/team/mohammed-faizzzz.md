@@ -27,6 +27,10 @@ Given below are my contributions to the project.
 * **Code Quality**: Removed Unnecessary Code and Classes to prevent confusion
   * Removed AddCommandClass and made adjustments to code to accomodate changes
 
+* **Testing**: Created JUnit Test Classes
+  * Created Testcases for Doctor and related Classes (e.g AddDoctorCommand, AddDoctorCommandParser)
+  * Created Testcases for BloodTypePredicate
+
 * **Project management**:
   * Managed milestones and issues
   * Did Peer Reviews on other teammates' Pull Requests
