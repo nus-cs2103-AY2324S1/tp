@@ -7,7 +7,7 @@ title: Kee Song Yang's Project Portfolio Page
 
 HouR is a desktop HR management application used for managing and organising personnel data.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 8 kLoC.
+It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
@@ -25,11 +25,14 @@ Given below are my contributions to the project.
   * Reviewing, approving and merging pull requests on GitHub (Pull requests [#127](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/127), [#144](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/144), [#149](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/149))
   * Resolve merge conflicts on GitHub ([Merge Commit](https://github.com/AY2324S1-CS2103T-W12-1/tp/commit/7f05c752c5fe887db5fee74b0e9e4b1b8eca145b))
   * Maintaining Team Project Notes on Google Docs
+  * Maintaining issues assigned to me on GitHub
 
 * **Enhancements to existing features**:
   * Improve EmployeeCard GUI (Pull request [#151](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/151))
   * Added "On Leave" attribute to UI (Pull request [#117](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/117))
   * Change `delete` command to delete by employee ID instead of index (Pull request [#95](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/95))
+  * Added "isOnLeave" attribute to Employee class which was subsequently replaced with a method call in Employee
+  (Pull request [#130](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/130))
 
 * **Documentation**:
     * User Guide: 
@@ -37,5 +40,10 @@ Given below are my contributions to the project.
       * Check through overall formatting and content of UG
     * Developer Guide:
       * Added implementation guide for `overtime` feature
+      * Added sequence and activity diagrams for `overtime` feature
+      * Added instructions for manual testing for `overtime` feature
+      * Added instructions for manual testing for saving data
+      * Added glossary section
+      * Check through overall formatting and content of DG
 
-* **Tools**: JavaFX, SceneBuilder, GitHub, Git, Gradle
+* **Tools**: IntelliJ, SceneBuilder, GitHub, Git
