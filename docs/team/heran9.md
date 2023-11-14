@@ -26,7 +26,7 @@ Given below are my contributions to the project.
   * Highlights: This feature is a combination feature of list and paid features, combine the both functionalities of these two features，it comes up with a new and powerful feature.
 
 * **Code contributed**:
-  * https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=heran9&breakdown=true
+  * [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=heran9&breakdown=true)
 
 * **Enhancements to existing features**:
   * Enhancements to the list command. Add the ability to list all unpaid students.
