@@ -692,26 +692,19 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
-
     1. Download the jar file and copy into an empty folder
-
-    1. Double-click the jar file 
-   
+    1. Double-click the jar file  
        **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.
-   
 
 1. Saving window preferences
-
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
     1. Re-launch the app by double-clicking the jar file.
- 
         **Expected:** The most recent window size and location is retained.
 
 ### Add a musician
 
 1. Adding a musician with only compulsory fields
-   1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`
+   1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`  
         **Expected:** New Musician is added to the Musician List with the details
 
 2. Adding a musician with missing fields
@@ -727,22 +720,23 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a musician while all musicians are being shown
 
    **Prerequisites:** List all musicians using the `list` command. Ensure that there are multiple musicians in the list.
-
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       **Expected:** First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   
     2. Test case: `delete 0`<br>
-       Expected: No musician is deleted. Error details shown in the status message. Status bar remains the same.
+       **Expected:** No musician is deleted. Error details shown in the status message. Status bar remains the same.
+   
     3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+       **Expected:** Similar to previous.
 
 
 ### Edit a musician
 
 **Prerequisite:** Musician List should have at least 1 musician
-
 1. Editing a musician with invalid tag
     1. Test case: `edit 1 i/piana`  
        **Expected:** Error message saying instrument should be a valid genre name and to use `tags` function for the list of valid genres.
+
 2. Editing a musician to an existing musician  
     **Prerequisite:** Add an additional musician using `add n/Rolando Loom p/91919191 e/RolandoLoom@music.com`. you should have at least 2 musicians now.
     1. Test case: `edit 1 n/Rolando Loom`  
@@ -751,7 +745,6 @@ testers are expected to do more *exploratory* testing.
 ### Find a musician
 
 **Prerequisite:** Musician List should have at least 1 musician
-
 1. Find a musician without any input
     1. Test case: `find`  
        **Expected:** An invalid command format error should be shown with the correct command format.
@@ -759,102 +752,102 @@ testers are expected to do more *exploratory* testing.
 ### Create a band
 
 1. Adding a band with only compulsory fields
-    1. Test case: `addb n/TwoRepublic`
+    1. Test case: `addb n/TwoRepublic`  
        **Expected:** New Band is added to the Musician List with the details
 
 ### Add musician to band
 
 **Prerequisite:** Musician List should have at least 1 musician. Band List should have at least 1 band
-
 1. Adding a musician to a band
-   1. Test case: `addm b/1 m/1`
+   1. Test case: `addm b/1 m/1`  
    **Expected:** Success message is shown and musician is added to band. Address book shows band with the musician added to it.
 
 ### Find band
 
 **Prerequisite:** Band List should be empty
 1. Finding a band with an empty band list
-    1. Test case: `findb ABC`
+    1. Test case: `findb ABC`  
        **Expected:** No bands yet error shows.
 
 **Prerequisite:** Band List should have at least 1 band
 2. Finding a band with wrong command
-    1. Test case: `findb n/TwoRepublic`
+    1. Test case: `findb n/TwoRepublic`  
     **Expected:** An invalid command format error should be shown with the correct command format.
 
 ### Remove musician from band
 
 **Prerequisite:** Musician List has 1 musician. Band List has 1 band with no musician.
 1. Removing a musician that is not in the band
-    1. Test case: `removem b/1 m/1`
+    1. Test case: `removem b/1 m/1`  
        **Expected:** Musician (details omitted) is not in the band.
 
 **Prerequisite:** Musician List should have at least 1 musician. Band List should have at least 1 band with at least 1 musician.
 2. Removing a musician from an invalid band
-    1. Test case: `addm b/0 m/1`
+    1. Test case: `addm b/0 m/1`  
        **Expected:** An invalid command format error should be shown with the correct command format.
 
 ### Edit a band
+
 **Prerequisite:** Band List is empty
 1. Edit a non-existent band
-    1. Test case: `editb 1`
+    1. Test case: `editb 1`  
        **Expected:** The band index provided in invalid error is shown.
 
 **Prerequisite:** Band List should have at least 1 band
 1. Editing genre of band
-    1. Test case: `editb 1 g/jazz`
+    1. Test case: `editb 1 g/jazz`  
        **Expected:** Band's old genre is replaced by the new genre(jazz). 
 
 ### Delete a band
 
 **Prerequisite:** Band List is empty
 1. Delete a non-existent band
-    1. Test case: `deleteb 1`
+    1. Test case: `deleteb 1`  
        **Expected:** The band index provided in invalid error is shown.
 
 ### Viewing help
 
 1. Help command is used
-    1. Test case: `help`
+    1. Test case: `help`  
        **Expected:** A pop-up window is shown with url to BandConnect's User Guide.
 2. Additional input after help command
-    1. Test case: `help 111`
+    1. Test case: `help 111`  
        **Expected:** A pop-up window is shown with url to BandConnect's User Guide.
 
 ### List all musicians and bands
 
 1. List command is used
-    1. Test case: `list`
+    1. Test case: `list`  
        **Expected:** All existing musicians and bands are shown.
 2. Additional input after help command
-    1. Test case: `list 111`
+    1. Test case: `list 111`  
        **Expected:** All existing musicians and bands are shown.
 
 ### List all tags
 
 1. Tags command is used
-    1. Test case: `tags`
+    1. Test case: `tags`  
        **Expected:** All valid are shown.
 2. Additional input after help command
-    1. Test case: `tags 111`
+    1. Test case: `tags 111`  
        **Expected:** All valid tags are shown.
 
 ### Clear all data
 
 1. Clear command is used
-    1. Test case: `clear`
+    1. Test case: `clear`  
        **Expected:** All data from musician list and band list are cleared. The address book is empty.
 2. Additional input after help command
-    1. Test case: `clear 111`
+    1. Test case: `clear 111`  
        **Expected:** All data from musician list and band list are cleared. The address book is empty.
 
 ### Exit application
 
 1. Exit command is used
-    1. Test case: `exit`
+    1. Test case: `exit`  
        **Expected:** Application is closed.
 2. Additional input after help command
-    1. Test case: `exit 111`
+    1. Test case: `exit 111`  
        **Expected:** Application is closed.
 
 --------------------------------------------------------------------------------------------------------------------
