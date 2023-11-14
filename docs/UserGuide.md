@@ -1080,10 +1080,9 @@ Exports the entries into a .csv file located in the current directory as (/data/
 
 **Notes regarding `csv` command:**
 * Export only exports the following: Name, Phone, Email, Address, Tags, Linkedin, Github, Remark, Status.
-  <box type="tip" seamless>
-* JABPro must have write permissions, this means that if the .csv file is open,
-    exporting again will not be possible.
-
+* JABPro must have write permissions, this means that if the .csv file is open, 
+  exporting again will not be possible.
+    
 Examples:
 * `export` exports the data to /data/export.csv
 
