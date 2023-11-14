@@ -42,10 +42,12 @@
         * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
         * [Implementing `DeleteNoteCommand`](#implementing-deletenotecommand)
     * [Events feature](#events-feature)
-      * [Overview: Event](#overview--event-)
+      * [Overview: Event](#overview-event)
       * [Implementing `AddEventCommandParser`](#implementing-addeventcommandparser)
+      * [Implementing `ListEventCommandParser`](#implementing-listeventcommandparser)
       * [Implementing `DeleteEventCommandParser`](#implementing-deleteeventcommandparser)
       * [Implementing `AddEventCommand`](#implementing-addeventcommand)
+      * [Implementing `ListEventCommand`](#implementing-listeventcommand)
       * [Implementing `DeleteEventCommand`](#implementing-deleteeventcommand)
     * [Enhanced help feature](#enhanced-help-feature)
     * [[Proposed] Undo/redo feature](#proposed-undo-redo-feature)
@@ -66,6 +68,7 @@
     * [Adding note](#adding-note)
     * [Deleting note](#deleting-note)
     * [Adding event](#adding-event)
+    * [Listing events](#listing-events)
     * [Deleting event](#deleting-event)
 * [Appendix C: Planned enhancements](#appendix-c-planned-enhancements)
     * [User Interface](#user-interface)
@@ -426,13 +429,21 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 
 This feature allows users to add and remove `Event` to any `Person` in the contact list. It provides an easy way for users to keep track of events with the contacts.
 
-#### Overview: Event
-The adding and removing of `Event` begins with the parsing of the `AddEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser` and `DeleteEventCommandParser` respectively.
-The `AddEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
+#### Overview: Event:
+The adding, listing and removing of `Event` begins with the parsing of the `AddEventCommand`, `ListEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser`, `ListEventCommandParser` and `DeleteEventCommandParser` respectively.
+The `AddEventCommand`, `ListEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding an `Event` to a contact.
 
-<puml src="diagrams/event/EventSequenceDiagram.puml"/>
+<puml src="diagrams/event/AddEventSequenceDiagram.puml"/>
+
+The activity diagram below shows the action sequence of listing events by executing `list events` command.
+
+<puml src="diagrams/event/ListEventsSequenceDiagram.puml"/>
+
+The activity diagram below shows the action sequence of deleting an event by contact ID and event ID.
+
+<puml src="diagrams/event/DeleteEventSequenceDiagram.puml"/>
 
 <box type="info" seamless>
 
@@ -443,23 +454,35 @@ Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddEventCommandPa
 </box>
 
 ##### Implementing `AddEventCommandParser`
-Implements the `Parser` interface, parsing these arguments:
+Implements the `Parser` interface, parsing six main arguments:
 1. `contactId`: the one-based index of the contact shown in the GUI.
-2. `eventName`: the name of the event.
-3. `eventStartTime`: the start time of the event.
-4. `eventEndTime`: the end time of the event.
-5. `eventLocation`: the location of where the event will be held.
-6. `eventInformation`: the description of the event.
+1. `eventName`: the name of the event.
+1. `eventStartTime`: the start time of the event.
+1. `eventEndTime`: the end time of the event.
+1. `eventLocation`: the location of where the event will be held.
+1. `eventInformation`: the description of the event.
 
 `eventName`, `eventStartTime`, `eventEndTime`, `eventLocation`, and `eventInformation`are then used to create the `Event` object.
 After that, `contactId` and the `Event` object created are then used to create the `AddEventCommand` object.
 
 For the details of how parsing works, see the section on [Logic Component](#logic-component).
 
+##### Implementing `ListEventCommandParser`
+Implements the `Parser` interface, parsing three main arguments:
+1. `filterStartTime`: the start time for filtering the events
+1. `filterEndTime`: the end time for filtering the events
+1. `useAscendingOrder`: should use ascending order when sorting the events?
+
+`filterStartTime`, `filterEndTime` and `useAscendingOrder` are then used to create the `ListEventCommand` object.
+
+`filterStartTime` and `filterEndTime` can both be `null` (to disable filtering) or neither be `null`, but can NOT only one of them be `null`.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
 ##### Implementing `DeleteEventCommandParser`
 Implements the `Parser` interface, parsing two main arguments:
 1. `contactId`: the one-based index of the contact shown in the GUI.
-2. `eventId`: the one-based index of the event shown in the GUI.
+1. `eventId`: the one-based index of the event shown in the GUI.
 
 `contactId` and `eventId` are then used to create the `DeleteEventCommand` object.
 
@@ -482,6 +505,20 @@ When the command is executed, it carries out the following operations:
 The following activity diagram summarizes what happens when `AddEventCommand` is executed:
 
 <puml src="diagrams/event/AddEventActivityDiagram.puml"/>
+
+##### Implementing `ListEventCommand`
+`ListEventCommand` extends from the abstract class `ListCommand`,
+inheriting `list` as the primary command word and having `events` as its secondary command word.
+It internally stores `filterStartTime`, `filterEndTime` (both can be null if filtering is not used) and `sortAscending` which are given by the [parser](#implementing-addeventcommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `filterStartTime` and `filterEndTime` to filter all events in the global event list, or set the filter to always returns `true` if both `filterStartTime` and `filterEndTime` is null (in order to show the full event list to the user)
+1. Sort the filtered event list in ascending or descending order based on `sortAscending`
+1. Lastly a `CommandResult` with the filtered-sorted event list in String and with `listEvent = true` to tell `MainWindow` to show the event list window.
+
+The following activity diagram summarizes what happens when user executes `list events` from UI.
+
+<puml src="diagrams/event/ListEventsActivityDiagram.puml"/>
 
 ##### Implementing `DeleteEventCommand`
 `DeleteEventCommand` extends from the abstract class `DeleteCommand`,
@@ -984,15 +1021,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
+   2. Double-click the jar file
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 
-2. Saving window preferences
+1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.
+   2. Re-launch the app by double-clicking the jar file.
     Expected: The most recent window size and location is retained.
 
 
@@ -1016,18 +1053,17 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-
-2. Deleting a contact while event list is showing
+1. Deleting a contact while event list is showing
 
     1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list. Add events to the first contact in the index and remove all event from the second contact in the index.
 
-    2. Test case: `delete contact 1`<br>
+    1. Test case: `delete contact 1`<br>
         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
 
 ### Adding tag
 
 1. Adding tag while all contacts is shown.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
 
     1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
     Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
@@ -1040,7 +1076,7 @@ testers are expected to do more *exploratory* testing.
 
 
 1. Adding duplicate tag to a contact
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
     1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
     Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.
@@ -1049,7 +1085,8 @@ testers are expected to do more *exploratory* testing.
     Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
 
 
- 1. Adding tag while contact list is being filtered
+1. Adding tag while contact list is being filtered
+
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
 
     1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
@@ -1061,7 +1098,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting tag
 
 1. Deleting tag while all contacts is shown and tag exists.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
     1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
     Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.
@@ -1074,7 +1111,7 @@ testers are expected to do more *exploratory* testing.
 
 
 1. Deleting tag while all contacts is shown but tag does not exist.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
     Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
@@ -1097,30 +1134,30 @@ testers are expected to do more *exploratory* testing.
 1. Adding note while all contacts is shown.
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
 
-    2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
+    1. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
 
-    3. Test case: `add note -id 0 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
+    1. Test case: `add note -id 0 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
        Expected: No note is added. Error details shown in the status message.
 
-    4. Test case: `add note -id 1 -tit Meeting Topics`<br>
+    1. Test case: `add note -id 1 -tit Meeting Topics`<br>
        Expected: No note is added as a note should have a note content. Error details shown in the status message.<br>
 
+1. Adding another note to a contact
 
-2. Adding another note to a contact
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one note.
 
-    2. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
+    1. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
 
+1. Adding note while contact list is being filtered
 
-3. Adding note while contact list is being filtered
     1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
 
-    2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when no contact is shown<br>
+    1. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when no contact is shown<br>
        Expected: No note is added. Error details shown in the status message.
 
-    3. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when at least 1 contact is shown<br>
+    1. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when at least 1 contact is shown<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
 
 ### Deleting note
@@ -1128,36 +1165,37 @@ testers are expected to do more *exploratory* testing.
 1. Deleting note while all contacts is shown and note exists.
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one note.
 
-    2. Test case: `delete note -id 1 -nid 0`<br>
+    1. Test case: `delete note -id 1 -nid 0`<br>
        Expected: No note is deleted as note id is invalid. Error details shown in the status message.
 
-    3. Test case: `delete note -id 1 -nid 1`<br>
+    1. Test case: `delete note -id 1 -nid 1`<br>
        Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
 
+1. Deleting note while all contacts is shown but note does not exist.
 
-2. Deleting note while all contacts is shown but note does not exist.
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
-    2. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
+    1. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
        Expected: No note is deleted. Error details shown in the status message.
 
 
-3. Deleting note while contact list is being filtered
+1. Deleting note while contact list is being filtered
+
     1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
 
-    2. Test case: `delete note -id 1 -nid 1`, when no contact is shown.<br>
+    1. Test case: `delete note -id 1 -nid 1`, when no contact is shown.<br>
        Expected: No note is deleted. Error details shown in the status message.
 
-    3. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown but has no notes.<br>
+    1. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown but has no notes.<br>
        Expected: No note is deleted. Error details shown in the status message.
 
-    4. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown has at least 1 note.<br>
+    1. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown has at least 1 note.<br>
        Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
 
 ### Adding event
 
 1. Adding event while all contacts are shown.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
        Use the `list events` command to open a new window with a list of all events without the respective contacts.<br>
 
     1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 12:00:00 -et 2024-11-17 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
@@ -1176,7 +1214,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No event is added as date and time is not in the correct format. Error details shown in the status message.<br>
 
 1. Adding duplicate or clashing events
-    1. Prequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
+    1. Prerequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
 
     1. Test case: `add event -id 1 ...`, where `...` is an already existing event in the event list.<br>
        Expected: No event is added. Error details shown in the status message.
@@ -1194,6 +1232,35 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add event -id 1 ...`, when at least 1 contact is shown<br>
        Expected: The new event will appear in the first contact's (in the filtered list) event column. It will also be added in the event list window. The title of the event added is shown in the status message.
+
+### Listing events
+
+1. Listing events without using filters
+    1. Prerequisites: There are at least 2 events in the address book
+
+    1. Test case: `list events`<br>
+       Expected: All events in the address book are shown in the status message and a new "Event List" window, sorted by start time in **ascending** order.
+
+    1. Test case: `list events -descending`<br>
+       Expected: All events in the address book are shown in the status message and a new "Event List" window, sorted by start time in **descending** order.
+
+    1. Test case: `list events -descending xxx`<br>
+       Expected: Error message about the wrong command format is shown in the status message.
+
+1. Listing events with filters:
+    1. Prerequisites: There are at least 2 events in the address book
+
+    1. Test case: `list events -st 2023-11-14 00:00 -et 2023-11-20 00:00`<br>
+       Expected: Only the events that the start time is within `2023-11-14 00:00:00` and `2023-11-20 00:00:00` are shown in the status message and a new "Event List" window, sorted by start time in **ascending** order.
+
+    1. Test case: `list events -st 2023-11-14 00:00 -et 2023-11-20 00:00 -descending`<br>
+       Expected: Only the events that the start time is within `2023-11-14 00:00:00` and `2023-11-20 00:00:00` are shown in the status message and a new "Event List" window, sorted by start time in **descending** order.
+
+    1. Test case: `list events -st 2023-11-14 00:00`<br>
+       Expected: Error message about the wrong command format is shown in the status message.
+
+    1. Test case: `list events -et 2023-11-14 00:00`<br>
+       Expected: Error message about the wrong command format is shown in the status message.
 
 ### Deleting event
 

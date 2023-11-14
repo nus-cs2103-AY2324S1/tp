@@ -3,6 +3,8 @@
   title: "Wang Zihan's Project Portfolio Page"
 ---
 
+# Wang Zihan's Project Portfolio Page
+
 ### Project  Overview:
 **_KeepInTouch_** is a desktop application designed for job seekers. It can help the job-seekers to manage contacts and events conveniently. Here is my work and contributions to this project:
 
@@ -22,7 +24,6 @@
   - #### Enhancements implemented
     - Enhanced the logic of command parser to support secondary command word [#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33)
 
-
   - #### Contributions to the UG
 
       - During drafting stage: Wrote the command formats for most of the commands in the user guide draft.
@@ -38,10 +39,16 @@
 
      - Wrote the User Stories part in the DG [#10](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/10)
      - Add details about secondary command parser in DG [#47](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/47/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b)
+     - Add details about implementation on `ListEventCommandParser` and `ListEventCommand` [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206) [#208](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/208)
+     - Add manual test cases for `list events` command [#211](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/211)
+     - UML diagrams contributions:
+       - UML diagrams that I added:
+         - docs/diagrams/event/ListEventsSequenceDiagram.puml [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206)
+         - docs/diagrams/event/ListEventsActivityDiagram.puml [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206)
+         - docs/diagrams/event/DeleteEventSequenceDiagram.puml [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206)
+       - UML diagram that I updated:
+         - docs/diagrams/event/AddEventSequenceDiagram.puml [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206)
 
-  - #### Contributions to team-based tasks
-
-     - to be added soon
 
   - #### Review/mentoring contributions
 
@@ -50,7 +57,6 @@
        - [#69](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/69)
        - [#163](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/163)
        - [#168](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/168)
-
+  
   - #### Contributions beyond the project team
-
-     - to be added soon
+    - Reported 6 bugs to other team's product during PE-D

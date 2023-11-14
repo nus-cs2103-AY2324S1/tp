@@ -94,16 +94,26 @@ public interface Model {
     ObservableList<Event> getFilteredEventList();
 
     /**
+     * Generate a new list from sorting the filtered event list by the given {@code comparator}
+     * and return the generated list.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    List<Event> generateSortedFilteredEventList(Comparator<? super Event> comparator);
+
+    /**
+     * Return the sorted-filtered-list generated
+     * by {@code generateSortedFilteredEventList(Comparator<? super Event> comparator)}
+     * @throws NullPointerException if {@code sorted-filtered-list} is null
+     *     (never called {@code generateSortedFilteredEventList(Comparator<? super Event> comparator)} before).
+     */
+    ObservableList<Event> getSortedFilteredEventList();
+
+    /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
 
-    /**
-     * Get a list from sorting the filtered event list by the given {@code comparator}.
-     * @throws NullPointerException if {@code comparator} is null.
-     */
-    List<Event> getSortedFilteredEventList(Comparator<? super Event> comparator);
 
     /**
      * Find a person by index.
