@@ -341,7 +341,7 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 
 #### Valid JSON format
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+<img alt="sample_contents" src="images/sample-contents.png" width="650"> <br><br>
 
 #### Parsing user input
 
