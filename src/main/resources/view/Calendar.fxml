@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <Label id="calendarHeader" text="Your Calendar" maxWidth="Infinity"/>
+    <Label fx:id="calendarDate" text="PLACEHOLDER" maxWidth="Infinity"/>
+    <GridPane fx:id="calendar" minWidth="-1">
+        <columnConstraints>
+            <ColumnConstraints  hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+            <ColumnConstraints  hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+            <ColumnConstraints  hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+            <ColumnConstraints  hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+            <ColumnConstraints  hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+            <ColumnConstraints  hgrow="ALWAYS" percentWidth="14.28571428571429"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+            <RowConstraints vgrow="ALWAYS" prefHeight="125"/>
+        </rowConstraints>
+    </GridPane>
+
+    <HBox styleClass="calendarControls">
+        <ToggleButton alignment="BOTTOM_RIGHT" onAction="#handleCalendarLeftClick">Previous</ToggleButton>
+        <Label maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <ToggleButton alignment="CENTER_RIGHT" onAction="#handleCalendarRightClick">Next</ToggleButton>
+    </HBox>
+</VBox>

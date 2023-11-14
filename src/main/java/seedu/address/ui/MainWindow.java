@@ -1,14 +1,21 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +23,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.View;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -25,30 +33,87 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private final View defaultView = View.INTERNSHIPS;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private YearMonth selectedCalendarView = YearMonth.of(LocalDate.now().getYear(), LocalDate.now().getMonth());
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+
+    // Assignments
+    private AssignmentListPanel assignmentListPanel;
+
+    // Internships
+
+    private InternshipRolePanel internRolePanel;
+
+    private InternshipTaskPanel internTaskPanel;
+
+    private InternPanel internPanel;
+
+    // Calendar
+
+    private Calendar calendar;
+
+
     private ResultDisplay resultDisplay;
+
     private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private VBox calendarContainer;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private VBox assignmentList;
+
+    @FXML
+    private StackPane assignmentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Label currViewHeader;
+
+    @FXML
+    private VBox selectedList;
+
+    @FXML
+    private StackPane selectedListPanelPlaceholder;
+
+    private final ListChangeListener<View> onViewChange = (change) -> {
+        change.next();
+        if (change.wasReplaced() || change.wasAdded()) {
+            ObservableList<? extends View> selectedView = change.getList();
+            View v = selectedView.get(0);
+            setViewHeaderName(v.toString());
+            switch (v) {
+            case ASSIGNMENTS:
+                calendar.setSelectedList(logic.getUnfilteredAssignmentList());
+                handleSetAssignmentView();
+                break;
+            case INTERNSHIPS:
+                calendar.setSelectedList(logic.getUnfilteredInternshipTaskList());
+                handleSetInternshipView();
+                break;
+            default:
+                break;
+            }
+        }
+    };
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +131,11 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+    }
+
+    private void setViewHeaderName(String header) {
+        String newHeader = header.charAt(0) + header.substring(1).toLowerCase();
+        currViewHeader.setText(newHeader);
     }
 
     public Stage getPrimaryStage() {
@@ -110,8 +180,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        assignmentListPanel = new AssignmentListPanel(logic.getFilteredAssignmentList());
+        internRolePanel = new InternshipRolePanel(logic.getFilteredInternshipRoleList());
+        internTaskPanel = new InternshipTaskPanel(logic.getFilteredInternshipTaskList());
+        internPanel = new InternPanel(internRolePanel, internTaskPanel);
+
+        selectedListPanelPlaceholder.getChildren().add(internPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +195,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        calendar = new Calendar(FXCollections.observableArrayList());
+        calendarContainer.getChildren().add(calendar.getRoot());
+
+        initDefaultView();
+    }
+
+    private void initDefaultView() {
+        logic.subscribeViewChange(onViewChange, defaultView);
     }
 
     /**
@@ -163,8 +246,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public AssignmentListPanel getAssignmentListPanel() {
+        return assignmentListPanel;
     }
 
     /**
@@ -186,11 +269,34 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        } finally {
+            calendar.handleCalendarChange(0);
         }
+    }
+
+    /**
+     * Display a list of assignment
+     * when button is clicked
+     */
+    @FXML
+    private void handleSetAssignmentView() {
+        selectedListPanelPlaceholder.getChildren().clear();
+        selectedListPanelPlaceholder.getChildren().add(assignmentListPanel.getRoot());
+    }
+
+    /**
+     * Display a list of internship cards
+     * when button is clicked
+     */
+    @FXML
+    private void handleSetInternshipView() {
+        selectedListPanelPlaceholder.getChildren().clear();
+        selectedListPanelPlaceholder.getChildren().add(internPanel.getRoot());
     }
 }

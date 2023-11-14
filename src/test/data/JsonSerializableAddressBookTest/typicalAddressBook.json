@@ -1,0 +1,33 @@
+{
+  "assignments": [{
+    "name" : "CS2100 Lab 7",
+    "description" : "Draw diagrams",
+    "status" : false,
+    "endDate" : "2023-11-29 18:00",
+    "plannedFinishDate" : "2023-11-29 18:00",
+    "tags" : [ "CS2100" ]
+  }, {
+    "name" : "CS2101 UG",
+    "description" : "Check formatting",
+    "status" : false,
+    "endDate" : "2023-12-12 21:30",
+    "plannedFinishDate" : "2023-12-12 21:30",
+    "tags" : [ "CS2101", "Group" ]
+  }, {
+    "name" : "CS2105 Assignment",
+    "description" : "Do programming assignment",
+    "status" : false,
+    "endDate" : "2023-12-16 22:30",
+    "plannedFinishDate" : "2023-12-16 22:30",
+    "tags" : [ "Programming" ]
+  }, {
+    "name" : "CS2105 Milestone 2",
+    "description" : "Add test cases",
+    "status" : false,
+    "endDate" : "2023-12-15 21:30",
+    "plannedFinishDate" : "2023-12-15 21:30",
+    "tags" : [ "Milestone" ]
+  }],
+  "roles" : [ ],
+  "internshipTasks" : [ ]
+}

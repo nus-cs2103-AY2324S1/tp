@@ -1,0 +1,13 @@
+{
+  "assignments": [    {
+    "name" : "task1",
+    "description" : "",
+    "status" : true,
+    "endDate" : "1111-11-11",
+    "plannedFinishDate" : null,
+    "tags" : [ "cs2100" ]
+  }],
+  "persons": [],
+  "roles" : [ ],
+  "internshipTasks" : [ ]
+}

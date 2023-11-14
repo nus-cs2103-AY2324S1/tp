@@ -1,0 +1,92 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteAssignmentParser" as DeleteAssignmentParser LOGIC_COLOR
+participant "a:DeleteAssignmentCommand" as DeleteAssignmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete-a 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete-a 1", model::isValidOperation)
+activate AddressBookParser
+
+AddressBookParser -> AddressBookParser : verifyView(model::isValidOperation, View.ASSIGNMENT)
+activate AddressBookParser
+
+AddressBookParser -> LogicManager : model.isValidOperation(View.ASSIGNMENT)
+activate LogicManager
+
+LogicManager --> AddressBookParser : isValid
+deactivate LogicManager
+
+AddressBookParser --> AddressBookParser
+
+deactivate AddressBookParser
+
+
+
+create DeleteAssignmentParser
+AddressBookParser -> DeleteAssignmentParser
+activate DeleteAssignmentParser
+
+DeleteAssignmentParser --> AddressBookParser
+deactivate DeleteAssignmentParser
+
+AddressBookParser -> DeleteAssignmentParser : parse("1")
+activate DeleteAssignmentParser
+
+create DeleteAssignmentCommand
+DeleteAssignmentParser -> DeleteAssignmentCommand
+activate DeleteAssignmentCommand
+
+DeleteAssignmentCommand --> DeleteAssignmentParser : a
+deactivate DeleteAssignmentCommand
+
+DeleteAssignmentParser --> AddressBookParser : a
+deactivate DeleteAssignmentParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteAssignmentParser -[hidden]-> AddressBookParser
+destroy DeleteAssignmentParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> DeleteAssignmentCommand : execute()
+activate DeleteAssignmentCommand
+
+
+
+DeleteAssignmentCommand -> Model : deleteAssignment(1)
+activate Model
+
+Model --> DeleteAssignmentCommand
+deactivate Model
+
+DeleteAssignmentCommand -> Model : sortAssignments()
+activate Model
+
+Model --> DeleteAssignmentCommand
+deactivate Model
+
+create CommandResult
+DeleteAssignmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteAssignmentCommand
+deactivate CommandResult
+
+DeleteAssignmentCommand --> LogicManager : result
+deactivate DeleteAssignmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

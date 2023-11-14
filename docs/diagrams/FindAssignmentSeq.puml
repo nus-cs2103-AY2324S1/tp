@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindAssignmentParser" as FindAssignmentParser LOGIC_COLOR
+participant "f:FindAssignmentCommand" as FindAssignmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "predicate:AssignmentContainsKeywordsPredicate" as AssignmentContainsKeywordsPredicate MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("find-a args")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-a args", model::isValidOperation)
+activate AddressBookParser
+
+AddressBookParser -> AddressBookParser : verifyView(model::isValidOperation, View.ASSIGNMENT)
+activate AddressBookParser
+
+AddressBookParser -> LogicManager : model.isValidOperation(View.ASSIGNMENT)
+activate LogicManager
+
+LogicManager --> AddressBookParser : isValid
+deactivate LogicManager
+
+AddressBookParser --> AddressBookParser
+
+deactivate AddressBookParser
+
+create FindAssignmentParser
+AddressBookParser -> FindAssignmentParser
+activate FindAssignmentParser
+
+FindAssignmentParser --> AddressBookParser
+deactivate FindAssignmentParser
+
+AddressBookParser -> FindAssignmentParser : parse("args")
+activate FindAssignmentParser
+
+create AssignmentContainsKeywordsPredicate
+FindAssignmentParser -> AssignmentContainsKeywordsPredicate
+activate AssignmentContainsKeywordsPredicate
+
+AssignmentContainsKeywordsPredicate --> FindAssignmentParser : predicate
+deactivate AssignmentContainsKeywordsPredicate
+
+create FindAssignmentCommand
+FindAssignmentParser -> FindAssignmentCommand
+activate FindAssignmentCommand
+
+FindAssignmentCommand --> FindAssignmentParser : f
+deactivate FindAssignmentCommand
+
+FindAssignmentParser --> AddressBookParser : f
+deactivate FindAssignmentParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindAssignmentParser -[hidden]-> AddressBookParser
+destroy FindAssignmentParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindAssignmentCommand : execute()
+activate FindAssignmentCommand
+
+FindAssignmentCommand -> Model : updateFilteredAssignmentList(predicate)
+activate Model
+
+Model --> FindAssignmentCommand
+deactivate Model
+
+create CommandResult
+FindAssignmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindAssignmentCommand
+deactivate CommandResult
+
+FindAssignmentCommand --> LogicManager : result
+deactivate FindAssignmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

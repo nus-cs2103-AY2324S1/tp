@@ -4,6 +4,13 @@ on: [push, pull_request]
 
 jobs:
   build:
+    permissions:
+      # Required to upload/save artifact, otherwise you'll get
+      # "Error: Resource not accessible by integration"
+      contents: write
+      # Required to post comment, otherwise you'll get
+      # "Error: Resource not accessible by integration"
+      pull-requests: write
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-latest]
@@ -43,3 +50,14 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Run shadowJar
+        if: runner.os == 'Linux'
+        run:
+          ./gradlew shadowJar
+
+      - name: Upload jar file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: CampusCompanion executable
+          path: build/libs/CampusCompanion.jar

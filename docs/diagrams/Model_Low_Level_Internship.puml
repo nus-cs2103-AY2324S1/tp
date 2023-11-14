@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+
+Class ModelManager
+Class InternshipRole
+Class InternshipTask
+Class Status
+Class IsoDate
+Class Cycle
+Class Pay
+Class Role
+Class Location
+Class ApplicationOutcome
+Class TaskOutcome
+Class Name
+Class Description
+Class Tag
+
+ModelManager --> "filtered ~*" InternshipRole
+ModelManager --> "filtered ~*" InternshipTask
+
+InternshipTask *--> "1" Name
+
+InternshipRole *--> "1" Role
+InternshipRole *--> "1" Cycle
+InternshipRole *--> "0..1" Description
+InternshipRole *--> "0..1" Pay
+InternshipRole *--> "1" ApplicationOutcome
+InternshipRole *--> "0..1" Location
+InternshipRole *--> "*" Tag
+
+InternshipTask *--> "1" InternshipRole
+InternshipTask *--> "1" TaskOutcome
+InternshipTask *--> "1" Status
+InternshipTask *--> "1" IsoDate
+InternshipTask *--> "*" Tag
+
+
+
+Name -[hidden]right-> IsoDate
+IsoDate -[hidden]right-> Status
+Status -[hidden]right-> Description
+
+
+@enduml

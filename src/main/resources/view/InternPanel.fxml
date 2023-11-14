@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css"/>
+    </stylesheets>
+
+    <HBox>
+        <Label HBox.hgrow="ALWAYS" maxWidth="Infinity" ></Label>
+        <Label HBox.hgrow="ALWAYS"  styleClass="h2">Applications</Label>
+        <Label HBox.hgrow="ALWAYS" maxWidth="Infinity"></Label>
+    </HBox>
+    <VBox fx:id="internshipRolePlaceHolder" VBox.vgrow="ALWAYS"/>
+    <HBox>
+        <Label HBox.hgrow="ALWAYS" maxWidth="Infinity"></Label>
+        <Label HBox.hgrow="ALWAYS" styleClass="h2">Tasks</Label>
+        <Label HBox.hgrow="ALWAYS" maxWidth="Infinity"></Label>
+    </HBox>
+    <VBox fx:id="internshipTaskPlaceHolder" VBox.vgrow="ALWAYS"/>
+</VBox>
+

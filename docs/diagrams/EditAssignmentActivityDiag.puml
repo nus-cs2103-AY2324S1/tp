@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes edit-a command;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([correct format])
+    :Assignment is edited;
+    :Save Assignment to model;
+    :Update filteredAssignments list;
+else ([else])
+    :System throws
+    ParseException;
+endif
+stop
+@enduml

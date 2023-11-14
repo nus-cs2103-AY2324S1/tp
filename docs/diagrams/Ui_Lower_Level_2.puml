@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class AssignmentCard
+Class InternshipRoleCard
+Class InternshipTaskCard
+Class Calendar
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+AssignmentCard ...> Model
+InternshipRoleCard ..> Model
+InternshipTaskCard ..> Model
+Calendar ..> Model
+
+@enduml

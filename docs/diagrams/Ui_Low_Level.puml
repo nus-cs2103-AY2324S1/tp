@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class AssignmentListPanel
+Class AssignmentCard
+Class InternPanel
+Class InternshipRolePanel
+Class InternshipTaskPanel
+Class InternshipRoleCard
+Class InternshipTaskCard
+}
+
+InternPanel -down-> "1" InternshipRolePanel
+AssignmentListPanel -down-> "*" AssignmentCard
+InternPanel -down-> "1" InternshipTaskPanel
+InternshipRolePanel -down-> "*" InternshipRoleCard
+InternshipTaskPanel -down-> "*" InternshipTaskCard
+
+
+AssignmentListPanel --|> UiPart
+AssignmentCard --|> UiPart
+
+
+InternshipRolePanel --|> UiPart
+InternshipTaskPanel --|> UiPart
+InternshipRoleCard --|> UiPart
+InternshipTaskCard --|> UiPart
+
+@enduml

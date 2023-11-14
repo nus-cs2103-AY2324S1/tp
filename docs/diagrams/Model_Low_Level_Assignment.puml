@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+Class ModelManager
+Class Assignment
+Class Status
+Class IsoDate
+Class Name
+Class Description
+Class Tag
+
+ModelManager --> "filtered ~*" Assignment
+
+Assignment *--> "1" Name
+Assignment *--> "1" IsoDate
+Assignment *--> "1" Status
+Assignment *--> "0..1" Description
+Assignment *--> "*" Tag
+
+Name -[hidden]right-> IsoDate
+IsoDate -[hidden]right-> Status
+Status -[hidden]right-> Description
+
+@enduml
