@@ -33,6 +33,7 @@ Given below are my contributions to the project.
     * Edited developer guide based on changes to Course [\#63](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/63)
     * Updated user stories based on our product [\#122](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/122)
     * Added links for ease of navigation [\#145](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/145)
+    * Extensive language and consistency changes [\#165](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/165)
 
 * **Documentation for User Guide**:
     * Updated index page and user guide based on changes to Course [\#28](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/28), [\#58](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/58)
@@ -40,4 +41,5 @@ Given below are my contributions to the project.
     * Fixed various formatting issues and inconsistencies in UG [\#124](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/124)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#27](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/27), [\#49](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49), [\#68](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/68)
+    * PRs reviewed (with non-trivial review comments): [\#27](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/27), [\#49](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49), 
+  [\#68](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/68), [\#149](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/149)
