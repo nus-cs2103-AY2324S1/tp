@@ -49,14 +49,15 @@ Given below are my contributions to the project.
     * Added the ***If you're new*** sections and other tips which to help less technical readers (Pull request [\#194](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/194), [\#207](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/207), [\#218](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/218))
     * Added ***Glossary*** section to define technical terms used in the UG [\#220](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/220) 
   * Developer Guide:
-    * Added user stories [\#16](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/16)
-    * Added simple uses cases for adding `interaction` and marking `lead` [\#22](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/22)  
+    * Added user stories (Pull request [\#16](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/16))
+    * Added uses cases (Pull request [\#22](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/22), [\#240](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/240))  
     * Added implementation details of the `interaction` feature (Pull request [\#78](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/78))
+    * Added implementation feature of the `edit single field` feature (Pull request [\#240](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/240))
     * Tweaked Model diagram to be less complex and more comprehensible (Pull request [\#221](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/221))
 
 * **Community**:
   * Some PRs reviewed (with review comments): [\#29](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/29), [\#85](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/85), [\#178](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/178), but most reviews were done in telegram chat or zoom with my teammates, especailly if I found bugs after merging code
-  * Constantly engage groupmates with discussions and meetings for and on the project![Telegram Chat analysis](../images/TelegramAnalysis.png)
+  * Constantly engage groupmates with discussions and meetings for and on the project usually done in chat![Telegram Chat analysis](../images/TelegramAnalysis.png)
   * Contributed to forum discussions (examples: [10](https://github.com/nus-cs2103-AY2324S1/forum/issues/10), [119](https://github.com/nus-cs2103-AY2324S1/forum/issues/119), [132](https://github.com/nus-cs2103-AY2324S1/forum/issues/132), [235](https://github.com/nus-cs2103-AY2324S1/forum/issues/235), [449](https://github.com/nus-cs2103-AY2324S1/forum/issues/449))
   * Helped members in other teams with bug fixes, suggestions to improve app and smoke testing. 
 
