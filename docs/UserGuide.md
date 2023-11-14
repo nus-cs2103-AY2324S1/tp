@@ -438,7 +438,7 @@ Examples:
 
 * To ensure that your customer list remains neat, PropertyMatch will not allow you to edit your customer to have the same **phone number** as an existing customer.
 * Only the phone number is used to differentiate between customers. i.e. Other [parameters](#glossary) can be edited to be the same as other customers.
-* Duplicate `CHARACTERISTICS` will be omitted, e.g. entering`c/bright c/BRIGHT` will only record 1 `bright` characteristic.
+* Duplicate `CHARACTERISTIC` will be omitted, e.g. entering`c/bright c/BRIGHT` will only record 1 `bright` characteristic.
 
 </div>
 
@@ -477,7 +477,7 @@ Examples:
 * To ensure that your property list remains neat, PropertyMatch will not allow you to edit your property to have the same **address** as an existing property.
 * Only the address is used to differentiate between properties. i.e. Other [parameters](#glossary) can be edited to be the same as other properties.
 * Additional spaces in `ADDRESS` will be considered as unique properties, e.g. `J'den` and `J' den` will be considered as 2 distinct properties.
-* Duplicate `CHARACTERISTICS` will be omitted, e.g. entering`c/bright c/BRIGHT` wil only record 1 `bright`characteristic.
+* Duplicate `CHARACTERISTIC` will be omitted, e.g. entering`c/bright c/BRIGHT` wil only record 1 `bright`characteristic.
 
 </div>
 
