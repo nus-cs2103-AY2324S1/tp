@@ -333,9 +333,9 @@ To enter the client view see Use case UC01:
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 2b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
 
