@@ -26,10 +26,10 @@ title: Developer Guide
     2. [User Stories](#user-stories)
     3. [Use Cases](#use-cases)
     4. [Non-Functional Requirements](#non-functional-requirements)
+    5. [Glossary](#glossary)
 1. [Appendix: Instruction for Manual Testing](#appendix-instructions-for-manual-testing)
 1. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 1. [Appendix: Effort](#appendix-effort)
-1. [Glossary](#glossary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -888,6 +888,23 @@ Guarantees: The list of Orders that fulfills the status or medicine or both will
 1. Application should be smaller than 100mb so that application can be run on space constrained systems.
 1. Generated storage file shouldn't take up more than 100mb of storage so that the application can be run on space constrained systems.
 
+### Glossary
+
+#### Application
+* **Patient**: A person who is under the care of a **Pharmacist**.
+* **Pharmacist**: A person who is responsible for dispensing **Medicine** to **Patient**s.
+* **Order**: An order by a **Patient** for one or multiple **Medicine**s from a Pharmacy.
+* **Medicine**: A substance used for medical treatment.
+* **Allergy**: A Medicine that a **Patient** is allergic to.
+
+#### General
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **CLI**: Command Line Interface
+* **GUI**: Graphical User Interface
+* **API**: Application Programming Interface
+* **MSS**: Main Success Scenario (or, Happy Path)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1241,23 +1258,3 @@ This required significant effort.
 ### **Achievements**
 Despite the steep learning curve and difficulties, we managed to build a product that we believe will be beneficial to our target audience.  
 It has features that  cater to their needs and solves their pain points.
-
-
-
-## Glossary
-
-### Application
-* **Patient**: A person who is under the care of a **Pharmacist**.
-* **Pharmacist**: A person who is responsible for dispensing **Medicine** to **Patient**s.
-* **Order**: An order by a **Patient** for one or multiple **Medicine**s from a Pharmacy.
-* **Medicine**: A substance used for medical treatment.
-* **Allergy**: A Medicine that a **Patient** is allergic to.
-
-### General
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **CLI**: Command Line Interface
-* **GUI**: Graphical User Interface
-* **API**: Application Programming Interface
-* **MSS**: Main Success Scenario (or, Happy Path)
