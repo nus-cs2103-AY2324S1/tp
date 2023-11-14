@@ -31,9 +31,10 @@ Given below are my contributions to the project.
     * `calculateCap` Command: elaboration and cleanup
     * `calculateMCs` Command: elaboration and cleanup
   * Developer Guide:
-    * `Storage` section of Implementation and associated diagrams.
+    * `Module Storage` section of Implementation and overall associated diagrams.
     * `add` command section and associated diagrams.
     * Added use cases UC06 and UC07
+    * Contributed to creation of user stories in the ideation and the development stage.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): 4
