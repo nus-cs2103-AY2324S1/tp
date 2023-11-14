@@ -21,7 +21,7 @@ public class Course implements Identifiable<Course> {
             "Courses can take any value, but should not be blank.\n"
                     + "Additionally, multiple spaces is not allowed, and the course may not start with spaces";
     public static final String DATE_CONSTRAINTS =
-            "Dates must always follow the DD-MM-YYYY format.";
+            "Dates must be valid and follow the DD-MM-YYYY format.";
     public static final String DATE_TIMING_CONSTRAINTS =
             "End date of the course must occur after the start date of the course!";
     public static final String NO_COURSE_NAME = "Courses must have a name!";
@@ -134,7 +134,7 @@ public class Course implements Identifiable<Course> {
             LocalDate endDate = LocalDate.parse(end, dtf);
             return endDate.isAfter(startDate);
         } catch (DateTimeParseException | NullPointerException e) {
-            throw new IllegalArgumentException("Both dates must follow DD-MM-YYYY format");
+            throw new IllegalArgumentException("Both dates must be valid and follow DD-MM-YYYY format");
         }
     }
 
