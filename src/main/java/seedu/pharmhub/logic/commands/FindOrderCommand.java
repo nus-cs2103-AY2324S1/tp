@@ -46,13 +46,13 @@ public class FindOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (statusToFind == null && medicineToFind == null) {
+        if (statusToFind == null && medicineToFind.isEmpty()) {
             return new CommandResult(FindOrderCommand.MESSAGE_USAGE);
         }
 
         Predicate<Order> statusMatches = order -> statusToFind == null
                 || order.getStatus().getStatus() == statusToFind.getStatus();
-        Predicate<Order> medicineMatches = order -> medicineToFind == null
+        Predicate<Order> medicineMatches = order -> medicineToFind.isEmpty()
                 || order.getMedicines().stream()
                 .anyMatch(medicine -> medicineToFind.stream()
                         .anyMatch(checkMedicine -> checkMedicine.isSameMedicine(medicine)));
