@@ -25,14 +25,14 @@ Given below are my contributions to the project.
   * What it does: Allows the user to add contact into the contact list and add that contact to the group at the same time.
   * Justification: This feature makes it convenient for the user to add their new contacts into the group at the same time with just one command.
   * Highlights: This feature needed to handle input when there is no group name type and when there is group name type. It also needed to ensure that when the group name is typed, the contact needed to be added inside the `uniquePersonList` and the group inside the `addressbook#grouplist` if the group does not exist. It also needed to ensure that in the group was added into contact and the contact was added into the group because group and contact are dependent with one another.
-*  **Updated the GUI to fit ProjectPRO requirements** (Pull requests [\#70](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/70), [\#100](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/100), [\#136](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/136), [\#136](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/137))
+*  **Updated the GUI to fit ProjectPRO requirements** (Pull requests [\#70](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/70), [\#100](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/100), [\#136](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/136))
    * Justification: This update allows the user to see a weekly schedule and track when their next group meeting is.
    * Highlights: The challenges faced was converting the data to GUI friendly and ensuring the GUI gets updated when new group meeting time was added to a group
 
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `list`, `new`, `delete`, `find`. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/146)
+    * Added documentation for the features `list`, `new`, `delete`, `find`. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
     * Made some updates to the documentation for the final release. [\#290](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/290), [\#277](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/277), [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271)
   * Developer Guide:
     * Added implementation details of the `add` and `addtime`feature. [\#271] (https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files)
