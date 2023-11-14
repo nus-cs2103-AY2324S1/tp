@@ -36,19 +36,10 @@
    1. [Product Scope](#product-scope)
    2. [User Stories](#user-stories)
    3. [Use Cases](#use-cases)
-      1. [Use Case 1: Adding more tags to client records](#use-case-1---adding-more-tags-to-client-records)
-      2. [Use Case 2: Deleting tags from client records](#use-case-2---deleting-tags-from-client-records)
-      3. [Use Case 3: Adding client preferred form of contact](#use-case-3---adding-client-preferred-form-of-contact)
-      4. [Use Case 4: Filtering client information through tags](#use-case-4---filtering-client-information-using-tags)
-      5. [Use Case 5: Storing client documents nearly in a folder](#use-case-5---storing-client-documents-neatly-in-a-folder)
-      6. [Use Case 6: Grouping clients based on the nearest MRT station fromm their residence to a region](#use-case-6---grouping-clients-based-on-the-nearest-mrt-station-from-their-residence-to-a-region)
-      7. [Use Case 7: Delete a person](#use-case-7---delete-a-person)
-      8. [Use Case 8: Filter Policy](#use-case-8---filter-policy)
    4. [Non-Functional Requirements](#non-functional-requirements)
    5. [Glossary](#glossary)
 7. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
 8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
-   <page-nav-print />
 
 ---
 
