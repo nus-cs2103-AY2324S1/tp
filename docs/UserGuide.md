@@ -310,7 +310,7 @@ t/friends tg/@yuyubern pf/Graphic Designer i/60000
 <figure>
     <img src="images/ExampleCreateAfter.png" alt="Bernice Yu's client card after creating">
     <figcaption align="center">
-        <em>Result of executing the above create command: Bernice Yu's profile is at index 7. Indices may be different.</em>
+        <em>Result of executing the above create command: Bernice Yu's profile is at index 21. Indices may be different.</em>
     </figcaption>
 </figure>
 <br>
@@ -345,7 +345,7 @@ interaction INDEX o/OUTCOME [DETAILS]
 
 **Example**
 ```
-interaction 7 o/INTERESTED First meeting with client, she seems interested!
+interaction 21 o/INTERESTED First meeting with client, she seems interested!
 ```
 
 <figure>
@@ -451,7 +451,7 @@ view INDEX
 
 **Example**
 ```text
-view 4
+view 3
 ```
 
 <figure>
@@ -459,7 +459,7 @@ view 4
        <img src="images/ExampleEditBefore.png" alt="Client list view" width="500">
    </p>
     <figcaption align="center">
-        <em>The client list view. Note that David's profile is at index 4.</em>
+        <em>The client list view. Note that David's profile is at index 3.</em>
     </figcaption>
 </figure>
 <br>
@@ -547,7 +547,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [l/LEAD]
 
 Example
 1. `edit 1 l/HOT`
-2. `edit 2 e/berniceyu@gmail.com p/123456789`
+2. `edit 2 e/charoliveiro@gmail.com p/123456789`
 3. `edit 3 t/buddies t/relatives`
 
 <figure>
