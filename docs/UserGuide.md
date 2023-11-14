@@ -804,10 +804,10 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 **A**: Follow this [link](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for steps to download Java 11.
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Addressbook home folder.
+**A**: Go to the application's home directory and copy the `data/addressbook.json` file containing your data into the empty data folder created by BandConnect++ on the other computer.
 
 **Q**: Why is BandConnect++ not displaying all musicians/bands?<br>
-**A**:  It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands-list) to display all musicians and bands.
+**A**: It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands-list) to display all musicians and bands.
 
 **Q**: What if I accidentally close BandConnect++ without using the exit command? Do I lost all my data?<br>
 **A**: Not to worry! BandConnect++ automatically saves all data after each change you make, so no data is lost.
