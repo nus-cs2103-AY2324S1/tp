@@ -19,49 +19,19 @@
     * [Common classes](#common-classes)
 * [Implementation](#implementation)
     * [Add developer command](#add-a-developer)
-        * [Feature usage](#usage)
-        * [Function implementation](#function-implementation)
     * [Remove developer command](#remove-a-developer)
-        * [Feature usage](#usage-2)
-        * [Function implementation](#function-implementation-2)
     * [Edit developer command](#edit-a-developer)
-        * [Feature usage](#usage-3)
-        * [Function implementation](#function-implementation-3)
     * [Find developer command](#find-a-developer)
-        * [Feature usage](#usage-4)
-        * [Function implementation](#function-implementation-4)
     * [List command](#list-developers)
-        * [Feature usage](#usage-5)
-        * [Feature implementation](#function-implementation-5)
     * [Create team command](#create-a-new-team)
-        * [Feature usage](#usage-5)
-        * [Function implementation](#function-implementation-5)
-        * [Design considerations](#design-considerations)
     * [Add dev to team command](#add-developers-to-an-existing-team)
-        * [Feature usage](#usage-6)
-        * [Function implementation](#function-implementation-6)
-        * [Design considerations](#design-considerations)
-    * [Delete team command](#remove-an-existing-team)
-        * [Feature usage](#usage-7)
-        * [Function implementation](#function-implementation-7)
+    * [Remove team command](#remove-an-existing-team)
     * [Remove dev from team command](#delete-developers-from-an-existing-team)
-        * [Feature usage](#usage-8)
-        * [Function implementation](#function-implementation-8)
-    * [Edit team name command](#Edit-team-name-of-an-existing-team)
-        * [Feature usage](#usage-9)
-        * [Function implementation](#function-implementation-9)
-    * [Edit team leader command](#)
-        * [Feature usage](#usage-10)
-        * [Function implementation](#function-implementation-10)
+    * [Edit team name command](#edit-team-name-of-an-existing-team)
+    * [Edit team leader command](#edit-team-leader-of-an-existing-team)
     * [Find team command](#Find-Team-by-Keywords)
-        * [Feature usage](#usage-11)
-        * [Function implementation](#function-implementation-11)
     * [List team command](#list-teams)
-        * [Feature usage](#usage-12)
-        * [Feature implementation](#function-implementation-12)
-    * [Display tree command](#)
-        * [Feature usage](#)
-        * [Function implementation](#)
+    * [Show tree command](#show-tree)
 * [Documentation, logging, testing, configuration & dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix A: Requirements](#appendix-a-requirements)
     * [Product Scope](#product-scope)
@@ -162,7 +132,7 @@ displays the statistical information of how many developers and teams are there 
 
 Here's a (partial) class diagram of the `Logic` component:
 
-![Logic Class Diagram](images/UML_images/LogicClassDiagram.png)
+<puml src="diagrams/LogicClassDiagram.puml" width="574" />
 
 The display in UI is depended on the `CommandResult` returned by Logic component.
 For example, UI will have a **new window** for displaying "LinkTree" if command
@@ -170,7 +140,6 @@ For example, UI will have a **new window** for displaying "LinkTree" if command
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Delete Sequence Diagram](images/UML_images/DeleteSequenceDiagram.png)
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
@@ -187,7 +156,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-![Parser Class Image](images/UML_images/ParserClasses.png)
+<puml src="diagrams/ParserClasses.puml" width="574" />
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -468,7 +437,7 @@ LinkTree provides a feedback based on whether the operation was successful or no
 <puml src="diagrams/AddDevToTeamCommandDiagram.puml" width="1100"/>
 
 
-#### Design considerations:
+#### Design consideration:
 
 **Aspect: Can a team leader also be a developer in his team? :**
 
@@ -505,7 +474,7 @@ LinkTree provides a feedback based on whether the operation was successful or no
 - If no exception is thrown, the team will be deleted from the teambook. This process is carried out by the `Model#deleteTeam`
 - A message is displayed to the user to indicate that the team has been deleted from the teambook. The change can immediately be seen on the TeamBook part of the UI.
 
-<puml src="diagrams/DeleteTeamCommandDiagram.puml" width="1100"/>
+<puml src="diagrams/DeleteTeamCommandDiagram.puml" width="500"/>
 
 ### Delete developers from an existing team
 The `deletedev` command implemented in the DeleteDeveloperFromTeam class, allows the users to delete developers from an existing team in the teambook. This `DeleteDeveloperFromTeam` class extends the `Command` class in our implementation.
@@ -697,7 +666,7 @@ otherwise, the `listt` command will toggle the app to display both lists of deve
 - else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible;
   MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
 
-<puml src="diagrams/ListTeamCommandDiagram.puml" width="1100"/>
+<puml src="diagrams/ListTeamCommandDiagram.puml" width="900"/>
 <br>
 
 
@@ -741,7 +710,7 @@ Case 2. The Ui is displaying the tree. Used `tree` command again to hide the tre
 - else if the Ui is showing the tree: the StackPane will be hided and the tree is cleared. A new tree will
 be generated next time showing the tree.
 
-<puml src="diagrams/TreeCommandDiagram.puml" width="1100"/>
+<puml src="diagrams/TreeCommandDiagram.puml" width="500"/>
 <br>
 --------------------------------------------------------------------------------------------------------------------
 
