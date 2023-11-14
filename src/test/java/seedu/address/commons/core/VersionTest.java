@@ -10,25 +10,25 @@ import org.junit.jupiter.api.Test;
 public class VersionTest {
     @Test
     public void compareTo_sameVersion_equalsOne() {
-        Version version_1_1_1 = new Version(1, 0, 0, false);
-        Version version_1_1_1_ea = new Version(1, 0, 0, true);
-        assertEquals(version_1_1_1.compareTo(version_1_1_1_ea), 1);
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        Version versionOneOneOneEarly = new Version(1, 0, 0, true);
+        assertEquals(versionOneOneOne.compareTo(versionOneOneOneEarly), 1);
     }
     @Test
     public void equals_sameObject_success() {
-        Version version_1_1_1 = new Version(1, 0, 0, false);
-        assertTrue(version_1_1_1.equals(version_1_1_1));
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        assertTrue(versionOneOneOne.equals(versionOneOneOne));
     }
     @Test
     public void equals_nullInput_failure() {
-        Version version_1_1_1 = new Version(1, 0, 0, false);
-        assertFalse(version_1_1_1.equals(null));
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        assertFalse(versionOneOneOne.equals(null));
     }
     @Test
     public void equals_similarObjects_success() {
-        Version version_1_1_1 = new Version(1, 0, 0, false);
-        Version version_1_1_1_b = new Version(1, 0, 0, false);
-        assertTrue(version_1_1_1.equals(version_1_1_1_b));
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        Version versionOneOneOneBeta = new Version(1, 0, 0, false);
+        assertTrue(versionOneOneOne.equals(versionOneOneOneBeta));
     }
 
     @Test
