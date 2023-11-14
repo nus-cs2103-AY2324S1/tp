@@ -311,7 +311,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
   * Pros: Ensures that Class Manager will not run into issues such as inconsistent states when undoing `load` for missing saved files.
-  * Cons: Unable to restore student's class information after `config` command resets student class information.
+  * Cons: Unable to restore student's Class Information after `config` command resets student Class Information.
 * **Alternative 2:** Supporting undo/redo for all commands.
   * Pros: Ensures that app is consistent with undo/redo, and users will not be unsure if a certain command can be undone.
   * Cons: Can be confusing for the user to use undo/redo with `load` and `config`.
@@ -370,7 +370,7 @@ The `config` command allows TAs to set the number of tutorials and the number of
 
 <puml src="diagrams/ConfigSequenceDiagram.puml" alt="ConfigSequenceDiagram" />
 
-The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`. `ConfigCommand` updates the tutorial and assignment count of Class Manager by calling `setTutorialCount` and `setAssignmentCount` of `Model` to update the `preferences.json` file. Simultaneously, it updates the static tutorial and assignment count of `ClassDetails` to recreate the `ClassDetails` objects for students accurately. All students in the current file will have their class information updated to reflect the new configuration. `ConfigCommand` then resets the student shown in the view panel, as well as `VersionedClassManager`, to clear the undo/redo history of Class Manager.
+The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`. `ConfigCommand` updates the tutorial and assignment count of Class Manager by calling `setTutorialCount` and `setAssignmentCount` of `Model` to update the `preferences.json` file. Simultaneously, it updates the static tutorial and assignment count of `ClassDetails` to recreate the `ClassDetails` objects for students accurately. All students in the current file will have their Class Information updated to reflect the new configuration. `ConfigCommand` then resets the student shown in the view panel, as well as `VersionedClassManager`, to clear the undo/redo history of Class Manager.
 
 #### Parsing user input
 
@@ -384,7 +384,7 @@ The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`
 
 In v1.2, `config` was initially implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed-length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
 
-However, this implementation was changed in v1.3 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count were smaller or larger than the previous configuration.
+However, this implementation was changed in v1.3 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the Class Information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count were smaller or larger than the previous configuration.
 
 In addition, the tutorial and assignment count was limited to an integer between 1 and 40 inclusive in v1.4. This prevents division by zero bugs encountered in data visualisation, as well as Class Manager being unresponsive when the user enters a large number of tutorials and assignments.
 
@@ -392,7 +392,7 @@ In addition, the tutorial and assignment count was limited to an integer between
 
 * **Alternative 1 (current choice):** Class Manager can be configured multiple times.
   * Pros: Provides more flexibility to TAs as they may enter the wrong information when configuring.
-  * Cons: Student class information is completely reset upon configuration, which may be an issue for the user.
+  * Cons: Student Class Information is completely reset upon configuration, which may be an issue for the user.
 * **Alternative 2:** Class Manager can only be configured once.
   * Pros: Ensures that Class Manager will not run into issues with data visualisation.
   * Cons: Unable to change the tutorial and assignment count of Class Manager after it has been configured.
@@ -400,7 +400,7 @@ In addition, the tutorial and assignment count was limited to an integer between
 
 ### Lookup feature
 
-The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to find the student they are looking for quickly, and perform subsequent operations such as editing class information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
+The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to find the student they are looking for quickly, and perform subsequent operations such as editing Class Information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
 
 #### How it is implemented
 
@@ -426,7 +426,7 @@ The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`
 * **Alternative 1 (current choice):** Only basic student information can be used as criteria for lookup.
     * Pros: Easy to implement.
     * Cons: Users may want to use other types of student information as criteria for lookup.
-* **Alternative 2:** Allows users to use any type of student information (Including class information) as criteria for lookup.
+* **Alternative 2:** Allows users to use any type of student information (Including Class Information) as criteria for lookup.
     * Pros: Users have more flexibility when searching for students.
     * Cons: There will be more coupling between classes.
 
@@ -507,12 +507,12 @@ Below is a sequence diagram that shows how the `theme` command is executed.
 The proposed class details mechanism for each student will be facilitated by `ClassDetails`. It allows for the tracking
 of a `Student`'s class details, such as their tutorial group, tutorial attendance, class participation, and assignment
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details (We will
-call them "class information"), and a tracker
-class to act as the manager for each of the class information, with the trackers composing the `ClassDetails` class.
+call them "Class Information"), and a tracker
+class to act as the manager for each of the Class Information, with the trackers composing the `ClassDetails` class.
 
 <puml src="diagrams/ClassInformation.puml" alt="ClassInformation" />
 
-The 3 different types of class information are:
+The 3 different types of Class Information are:
 
 * `Attendance` - Stores the details of a student's attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
@@ -544,7 +544,7 @@ or assignments.
 
 **Aspect: `Class Information` classes**
 
-* **Alternative 1 (current choice):** Use a class for each type of class information.
+* **Alternative 1 (current choice):** Use a class for each type of Class Information.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
   change the data structure/details of each instance, it can be done easily.
   * Cons: May have performance issues in terms of memory usage.
@@ -556,7 +556,7 @@ or assignments.
 
 **Aspect: Tracker classes**
 
-* **Alternative 1 (current choice):** Use a tracker class for each type of class information.
+* **Alternative 1 (current choice):** Use a tracker class for each type of Class Information.
   * Pros: Easy to implement. Shared functions can be abstracted out, and polymorphism can be applied.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -608,7 +608,7 @@ The feature should be implemented based on the current design of Student and Cla
 
 #### About this feature
 
-The view feature allows users to view the class information of their students.
+The view feature allows users to view the Class Information of their students.
 
 <box type="info" seamless>
 
@@ -639,11 +639,11 @@ The following activity diagram will show what happens when a user executes a `vi
 
 **Aspect: ViewCommand**
 
-* **Alternative 1 (current choice):** Using a command to view the class information of a student.
+* **Alternative 1 (current choice):** Using a command to view the Class Information of a student.
   * Pros: Reduces clutter in the `GUI`.
-  * Cons: User has to enter a command whenever they want to view the class information of a different student.
+  * Cons: User has to enter a command whenever they want to view the Class Information of a different student.
 
-* **Alternative 2:** Listing all the class information of every student.
+* **Alternative 2:** Listing all the Class Information of every student.
   * Pros: Easy to implement.
   * Cons: Very messy and clutters the `GUI`.
 
@@ -838,7 +838,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to select a specific number of students randomly.
+1.  User requests to randomly select a specific number of students.
 2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
@@ -860,13 +860,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC06 - Modifying a student's class information**
+**Use case: UC06 - Modifying a student's Class Information**
 
 **MSS**
 
-1.  User requests to modify a student's class information.
-2.  Class Manager modifies the student's class information.
-3.  Class Manager shows the student's updated class information.
+1.  User requests to modify a student's Class Information.
+2.  Class Manager modifies the student's Class Information.
+3.  Class Manager shows the student's updated Class Information.
 
     Use case ends.
 
@@ -892,7 +892,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to configure Class Manager.
 2.  Class Manager modifies the tutorial and assignment count.
-3.  Class Manager updates the app to show the new class information.
+3.  Class Manager updates the app to show the new Class Information.
 
     Use case ends.
 
@@ -941,12 +941,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC11 - Viewing a student's class information**
+**Use case: UC11 - Viewing a student's Class Information**
 
 **MSS**
 
-1. User request to view a student's class information.
-2. Class manager displays the student's class information.
+1. User request to view a student's Class Information.
+2. Class manager displays the student's Class Information.
 
 **Extensions**
 
@@ -973,7 +973,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **CLI**: Command Line Interface.
-* **Class information**: The grades, attendance and class participation details of a student in Class Manager.
+* **Class Information**: The grades, attendance and class participation details of a student in Class Manager.
 * **Email**: An electronic mail address, such as NUS email addresses (eXXXXXXX@u.nus.edu).
 * **GUI**: Graphical User Interface.
 * **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
@@ -998,16 +998,16 @@ Testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy it into an empty folder.
+   1. Download the JAR file and copy it into an empty folder.
 
-   2. Double-click the jar file.<br>
+   2. Launch the app by double-clicking the JAR file icon in your file explorer or running `java -jar class-manager-2023.jar` in command terminal.<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 2. Save window preferences
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the JAR file icon in your file explorer or running `java -jar class-manager-2023.jar` in command terminal.<br>
        Expected: The most recent window size and window location are retained.
       <br><br>
 
@@ -1022,15 +1022,15 @@ Testers are expected to do more *exploratory* testing.
     - Enter: `config #t/3 #a/3`<br>
         Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`.
     - Enter: `add n/John Doe p/999 e/john@gmail.com s/A0981234X c/T11`<br>
-        Expected: The student John Doe is added to the bottom of the Student List. Details of John Doe are shown in the result display box.
+        Expected: The student John Doe is added to the bottom of the Student List. Details of John Doe are shown in the Result Display Box.
     - Enter: `view s/A0981234X`<br>
-        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel, with the tutorial and assignment count both updated to 3.
+        Expected: The student John Doe is shown in the view panel. The student's Class Information is shown in the view panel, with the tutorial and assignment count both updated to 3.
     - Enter: `present-all tut/1`<br>
         Expected: All the students have their attendance marked for tutorial 1. The bar graph for all student's attendance is updated to show the attendance for tutorial 1. The attendance of John Doe for tutorial 1 is now present in the view panel.
     - Enter: `config #t/4 #a/4`<br>
         Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`, but their attendance bar graph is reset to 0.
     - Enter: `view s/A0981234X`<br>
-        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel, with the tutorial and assignment count both updated to 4. The student's attendance for tutorial 1 is now absent.
+        Expected: The student John Doe is shown in the view panel. The student's Class Information is shown in the view panel, with the tutorial and assignment count both updated to 4. The student's attendance for tutorial 1 is now absent.
     <br><br>
 
 2. Configure Class Manager with a tutorial count that is less than 1
@@ -1060,18 +1060,18 @@ Testers are expected to do more *exploratory* testing.
 1. Add a new student to Class Manager.
 
    1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`<br>
-      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student are shown in the result display box.
+      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student are shown in the Result Display Box.
       <br><br>
    
 2. Add an already existing student to Class Manager.
 
    1. Test case: Student Number that is already present in the list <br>
-      Expected: No student is added. Error details are shown in the result display box.
+      Expected: No student is added. Error details are shown in the Result Display Box.
       <br><br>
    
 3. Add a student without some required fields.<br>
    1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
-      Expected: No student is added. Error details are shown in the result display box.
+      Expected: No student is added. Error details are shown in the Result Display Box.
       <br><br>
    
 ### Add a comment to a student
@@ -1085,7 +1085,7 @@ Testers are expected to do more *exploratory* testing.
 2. Add a comment to a student where the student is not in Class Manager (Invalid Student Number). 
 
    1. Test case: Comment command with Student Number that is not present in the list.<br>
-      Expected: No student is edited. Error details are shown in the result display box.
+      Expected: No student is edited. Error details are shown in the Result Display Box.
       <br><br>
    
 3. Add a comment to a student where the new comment is empty.
@@ -1099,12 +1099,12 @@ Testers are expected to do more *exploratory* testing.
 1. Delete a student from Class Manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student are shown in the result display box.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student are shown in the Result Display Box.
       <br><br>
 2. Delete a student with an invalid student number.
 
    1. Test case: `delete s/vnqvq1924`<br>
-      Expected: No student is deleted. Student Number error and its details are shown in the result display box.
+      Expected: No student is deleted. Student Number error and its details are shown in the Result Display Box.
       <br><br>
    
 ### Edit a student
@@ -1119,7 +1119,7 @@ Testers are expected to do more *exploratory* testing.
 2. Edit a student's details who do not exist in Class Manager.
 
    1. Test case: Edit command with Student number that does not belong to any student in Class Manager.<br>
-      Expected: No student is edited. Error details shown in the result display box.
+      Expected: No student is edited. Error details shown in the Result Display Box.
       <br><br>
 
 ### List students
@@ -1228,7 +1228,7 @@ Testers are expected to do more *exploratory* testing.
 1. Randomly select a specified number of students from the list of displayed students.
 
    1. Test case: `random 2`<br>
-      Expected: Two students from the list of displayed students are selected randomly. Ensure at least two students are displayed.
+      Expected: Two students from the list of displayed students are randomly selected. Ensure at least two students are displayed.
       <br><br>
 
 ### View a student
@@ -1236,7 +1236,7 @@ Testers are expected to do more *exploratory* testing.
 1. View a student who exists in Class Manager.
 
    1. Test case: `view s/STUDENT_NUMBER`<br>
-      Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
+      Expected: The Class Information of the student with STUDENT_NUMBER will be displayed in the Class Information panel on the right.
       <br><br>
 2. View a student who does not exist not in Class Manager.
 
@@ -1266,11 +1266,11 @@ Testers are expected to do more *exploratory* testing.
    - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
    - Enter: `load f/t2`<br>
         Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged.
-        File error details are shown in the result display box.
+        File error details are shown in the Result Display Box.
     <br><br>
 3. Load a missing data file.
    - Enter: `load f/t3`<br>
-       Expected: The status bar on the bottom left is unchanged. File error details are shown in the result display box.
+       Expected: The status bar on the bottom left is unchanged. File error details are shown in the Result Display Box.
      <br><br>
    
 ### Undo/redo commands
@@ -1298,13 +1298,13 @@ Testers are expected to do more *exploratory* testing.
 ###### Test cases
 1. View command history
     - Enter: `history`<br>
-      Expected: The command history is shown in the result display box. The command history is empty.
+      Expected: The command history is shown in the Result Display Box. The command history is empty.
     - Enter: `list`<br>
       Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
     - Enter: `help`<br>
       Expected: The help window is shown. The command history is updated to show the command `help`.
     - Enter: `history`<br>
-      Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
+      Expected: The command history is shown in the Result Display Box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
     <br><br>
       
 ### Launching with erroneous data files
@@ -1364,10 +1364,10 @@ Testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` in the future.
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` and `ADD` in the future.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
 3. Clicking on a student in the student list currently highlights the student's card. We plan to remove this interaction as it affects the visibility of the student's contact details and visualised graphs.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc., to allow for better representation of student's efforts in class.
 5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with average grades or attendance percentage less than a certain value.
-6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
-7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
+6. The `lookup` command currently does not check for invalid fields. We plan to add field validation to the `lookup` command in the future.
+7. The `comment` command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
