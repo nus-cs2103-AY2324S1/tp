@@ -6,10 +6,6 @@ pageNav: 2
 
 # Developer Guide
 
-<!-- * Table of Contents -->
-
-<page-nav-print/>
-
 ## Acknowledgements
 
 This project has not used any third-party libraries.
