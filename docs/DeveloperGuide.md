@@ -129,7 +129,7 @@ The `Model` component,
 <div markdown="span" class="alert alert-info">:information_source: **Note:** A simpler model of the Person class is given below. 
 Firstly the Addressbook is a list of all the `Person` objects in the `AddressBook`. It also has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="700" />
 
 </div>
 
@@ -258,6 +258,26 @@ Step 4. `UniqueReminderList` should also be updated daily with `ReminderSchedule
     * Pros: Reminders will always be up to date
     * Cons: Will require more processing power and might slow down the application
 
+
+### Edit Single field Macro feature
+
+Keying in the ***edit*** command can be a little tedious to use especially if the user only want to edit a single field of a client profile. The edit single field is a macro to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
+
+#### Current Implementation
+
+The proposed Edit Single field Macro mechanism is facilitated by `AddressBookParser` and `EditCommandMacroParser`
+
+`AddressBookParser` contains an enum with the different person fields to expect as command words.
+
+Then in its parseCommand method, if it is not another valid command word, it will check in the default if it is a valid person field by iterating through the enum. If it is, it will create a `EditCommandMacroParser` and pass the command to it through its constructor.
+
+`EditCommandMacroParser` will then take in the input, and parse the `index` and the argument to the command without any prefix similar to the `FindCommand`. It will then create a `EditCommand` with only the `commandWord` changed to its single argument input and pass said `EditCommand` to the `LogicManager` to execute.
+
+`EditCommandMacroParser` does the argument checking using `ParseUtil` commands to check if they are valid arguments. However other checks like whether it is a valid index or duplicated person is done by the `EditCommand` itself.
+
+#### Design considerations:
+This is a huge step up in terms of code efficiency as compared to creating a new command for each field.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -307,14 +327,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a client**
+For each use case, "User is in client view" means an expectation that user has already executed the `list` command and is viewing the list of clients. However the user could be in the dashboard view, in this case the command will still work, but as an additional step, the user will be redirected to the client view after the command finishes executing. 
+
+To enter the client view see Use case UC01:
+
+**Use case: UC01 - Enter client view**
 
 **MSS**
 
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  Connectify deletes the client
+1.  User opens the app and is in dashboard view
+2.  User requests to enter client view
+3.  Connectify shows the client view
+
+    Use case ends.
+
+**Use case: UC02 - Delete a client**
+
+**MSS**
+
+1.  User is in client view
+2.  User requests to delete a specific client in the list
+3.  Connectify deletes the client
 
     Use case ends.
 
@@ -324,65 +357,130 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
-**Use case: Add a client interaction**
+**Use case: UC02 - Add a client interaction**
 
 **MSS**
 
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests create a client interaction
-4.  Connectify adds the interaction to the client profile
+1. User is in client view
+2.  User requests create a client interaction
+3.  Connectify adds the interaction to the client profile
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The user does not exist.
+* 2a. The user does not exist.
 
-    * 3a1. Connectify shows an error message.
+    * 2a1. Connectify shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The client interaction is empty
+* 2b. The entered client interaction is invalid
    
-    * 3b1. Connectify shows an error message.
+    * 2b1. Connectify shows an error message.
    
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
-**Use case: Mark a client as “Cold”, “Warm” or “Hot” Leads**
+**Use case: UC03 - Edit a client’s profile**
+
+**Guarantees:**
+
+* The client’s profile will be updated only if the command is executed successfully.
 
 **MSS**
 
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests to mark a client as “Cold”, “Warm” or “Hot” Lead
-4.  Connectify displays the updated client profile
+1. User is in client view
+2. User requests to edit a client’s profile
+3. Connectify shows the updated client’s profile
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The user does not exist.
+* 2a. The user does not exist.
 
-    * 3a1. Connectify shows an error message.
+    * 2a1. Connectify shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The lead category is key'ed in wrong or empty
-   
-    * 3b1. Connectify shows an error message.
-   
-      Use case resumes at step 2.
+* 2b. The edited fields are invalid
 
-*{More to be added}*
+    * 2b1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC04 - View a client’s full profile**
+
+**MSS**
+
+1. User is in client view
+2. User requests to view a client’s full profile
+3. Connectify shows the client’s full profile
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not exist.
+
+    * 2a1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: UC05 - Mark a client as “Cold”, “Warm” or “Hot” Leads**
+
+**Guarantees:**
+
+* The client’s profile will be updated only if the command is executed successfully.
+
+**MSS**
+
+Very similar to UC03, the difference being that only the `lead` field is updated only if the entered field is a valid lead.
+
+**Use case: UC06 - View dashboard analytics**
+
+**MSS**
+1. User is in client view
+2. User requests to view dashboard analytics
+3. Connectify shows the dashboard analytics
+
+    Use case ends.
+
+**Use case: UC07 - View Help**
+
+**MSS**
+1. User requests to view help
+2. The help window is shown
+
+    Use case ends.
+
+**Use case: UC08 - Find a client**
+
+**MSS**
+1. User is in client view
+2. User requests to find a client
+3. Connectify filters the address book list to show only clients that match the search query
+
+    Use case ends.
+
+**Use case: UC09 - Clear the address book**
+
+**MSS**
+1. User is in client view
+2. User requests to clear the address book
+3. Connectify clears the address book
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -398,8 +496,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Hot/Warm/Cold Lead**: A hot lead is a potential client who is ready to buy. A warm lead is a potential client who is interested in buying. A cold lead is a potential client who is not ready to buy.
-
-*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -418,16 +514,23 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file or run `java -jar connectify.jar`
+   
+      Expected: Shows the GUI with a set of sample clients.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.
+   
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Saving client data
+
+   1. Run a simple command like `list` or a `create` command. All client data should be automatically saved.
+   
+   2. Close the app, and re-launch. All client data from the previous session should be retained.
 
 ### Deleting a person
 
@@ -435,24 +538,71 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`
+   
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`
+   
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
+   
+      Expected: Error details shown in the status message.
 
-1. _{ more test cases …​ }_
+### Creating a person
 
+1. Create a person using the `create` command.
+
+    1. Test case:
+       ```text
+       create n/Bernice Yu p/99272758 e/berniceyu@example.com 
+       a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues 
+       t/friends tg/@yuyubern pf/Graphic Designer i/60000
+       ```
+       Expected: The new client should be created in your client list.
+   
+   2. Test case;
+       ```text
+       create n/Bernice Yu e/berniceyu@example.com 
+       a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues 
+       t/friends tg/@yuyubern pf/Graphic Designer i/60000
+      ```
+      Expected: Client should not be created. Error details shown in the output window. Compulsory fields like `phone` should be specified.
+
+   3. Test case;
+       ```text
+       create n/Bernice Yu p/99272758 e/berniceyu@example.com 
+       a/Blk 30 Lorong 3 Serangoon Gardens, #07-18
+      ```
+      Expected: The new client should be created in your client list. Client should be able to be created even if optional fields are not specified.
+   
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   - The app should start up as usual, with a new set of sample data.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+   - The app should start with an empty client list. Remove the corrupted `addressbook.json` data file, and the app will automatically generate a new sample client list on the next start-up.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+
+Due to time and resource constraints, we were unable to implement all the features we wanted to. This section will describe some of the more essential features that could be implemented in the future.
+
+1. Follow-up reminders are currently implemented as a one-time event. If a follow-up for a client has been missed, it will not be added to the dashboard again. We plan to implement recurring reminders that will be added to the dashboard again if they have been missed.
+2. Currently, the content in the dashboard is only updated when the user switches to the dashboard view. In the future, we will be implementing a mechanism to track changes to the client data, and trigger the dashboard to update accordingly. This will allow the dashboard to be updated in real-time.
+3. All user data is currently stored in a fixed location `data/addressbook.json`. We plan to implement a feature that allows the user to specify a custom location to store their data.
+4. Currently, the user can only edit one client at a time. We plan to implement batch editing so that the user can edit common fields across multiple clients at once. The command syntax will be similar to the current `edit` command, but allowing multiple indices to be specified, e.g. `edit 1 2 3 l/HOT`.
+5. There is currently no way to import or export client data. In the future, we will support importing and exporting their data in various formats, such as CSV.
+6. The client list currently only has one fixed order. We plan to implement a feature that allows the user to sort the client list by different fields, such as name, lead category, etc. The command will be in the form of `sort FIELD [ASC|DESC]`.
+7. The `clear` command does not have any confirmation. We plan to implement a confirmation dialog to prevent accidental deletion of data.
+8. Our app works best at a medium to large window size. Resizing the window to a smaller size will cause the UI to break. We plan to implement a responsive UI that will work well at any window size.
+9. The app currently shows the dashboard view on launch. New users may not be familiar with how to switch to the client view. We plan to implement a welcome screen that will guide new users on how to use the app.
+10. Currently, the app only supports one instance at a time. Making changes to the data from another instance of the app will not be reflected in real-time. We plan to implement a feature that allows multiple instances of the app to run concurrently.
 
 ## **Appendix: Effort**
 
