@@ -2,6 +2,7 @@
   layout: default.md
   title: "Adhitya's Project Portfolio Page"
 ---
+# Adhitya's Project Portfolio Page
 
 ### Project: LinkTree
 
