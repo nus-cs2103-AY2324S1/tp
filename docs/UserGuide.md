@@ -50,7 +50,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 4. Open a _command terminal_ <sup>[4](#glossary)</sup>, navigate into the _home folder_ <sup>[5](#glossary)</sup> using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
    A _GUI_ <sup>[2](#glossary)</sup> similar to the picture below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/about.png)
+![Ui](images/about.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -69,7 +69,9 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Important Notes
 
 ### Basic Usage
@@ -90,7 +92,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 <div style="page-break-after: always;"></div>
 
 ### Terminologies / Symbols
-* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
+* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. `-name`.
 
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
@@ -149,23 +151,23 @@ This box denotes command outputs.
 
 ### Parameter Summary
 
-| Parameter                             | Used in                                                                                | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                                  | Invalid examples            |
-|---------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------|
-| `INDEX`                               | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`                 | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                                 | "-1", "2147483648", "10000" |
-| `LIST`                                | `list`                                                                                 | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                          | "task", "student"           |
-| `KEYWORDS`                            | `list`                                                                                 | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | "none", "all", "subJeCts"                                                                                       | "subject", ""               |
-| `NAME`, `LESSON_NAME`, `STUDENT_NAME` | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find`<br/>`linkTo` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                                 | "", "jo!"                   |   
-| `SUBJECT`                             | `addLesson` `editLesson`                                                               | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "mathematics", "MATHEMATICS",                                                                                   | "math"                      |
-| `SUBJECTS`                            | `addPerson` `editPerson`<br/>`filter`                                                  | Must be a valid SUBJECT (see row above) or multiple entries of SUBJECT separated using a comma (,).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "mathematics", "mathematics, physics"                                                                           | "math, physics"             | 
-| `PHONE`                               | `addPerson` `editPerson`                                                               | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                            | "+6592212341", "98"         |
-| `EMAIL`                               | `addPerson` `editPerson`                                                               | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                                 | "hello.com", "f@f"          |
-| `ADDRESS`                             | `addPerson` `editPerson`                                                               | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                             | ""                          |  
-| `REMARK`                              | `addPerson` `editPerson`                                                               | Must be either alphanumeric or a symbol (!, @, #...). Can be empty                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road", "", "@"                                                                    | "💼", "爱"                   |  
-| `TAG`                                 | `addPerson` `editPerson`<br/>`filter`                                                  | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                            | "junior college"            |
-| `DATE`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming today is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
-| `TIME`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either HH:MM or H:MM (only for 0:00 to 9:59)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | "13:30", "9:17"                                                                                                 | "9:1", "13:70"              |
-| `SEARCH_STRING`                       | `find`                                                                                 | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                   | ""                          |
-| `DESCRIPTION`                         | `addTask`                                                                              | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Mark Alkanes Extra Practice", "Make Forces Notes"                                                              | ""                          |
+| Parameter                             | Used in                                                                                            | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                                  | Invalid examples            |
+|---------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `INDEX`                               | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`<br/> `addTask` `deleteTask` | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                                 | "-1", "2147483648", "10000" |
+| `LIST`                                | `list`                                                                                             | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                          | "task", "student"           |
+| `KEYWORDS`                            | `list`                                                                                             | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | "none", "all", "subJeCts"                                                                                       | "subject", ""               |
+| `NAME`, `LESSON_NAME`, `STUDENT_NAME` | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find`<br/>`linkTo`             | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                                 | "", "jo!"                   |   
+| `SUBJECT`                             | `addLesson` `editLesson`                                                                           | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "mathematics", "MATHEMATICS",                                                                                   | "math"                      |
+| `SUBJECTS`                            | `addPerson` `editPerson`<br/>`filter`                                                              | Must be a valid SUBJECT (see row above) or multiple entries of SUBJECT separated using a comma (,).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "mathematics", "mathematics, physics"                                                                           | "math, physics"             | 
+| `PHONE`                               | `addPerson` `editPerson`                                                                           | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                            | "+6592212341", "98"         |
+| `EMAIL`                               | `addPerson` `editPerson`                                                                           | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                                 | "hello.com", "f@f"          |
+| `ADDRESS`                             | `addPerson` `editPerson`                                                                           | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                             | ""                          |  
+| `REMARK`                              | `addPerson` `editPerson`                                                                           | Must be either alphanumeric or a symbol (!, @, #...). Can be empty                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road", "", "@"                                                                    | "💼", "爱"                   |  
+| `TAG`                                 | `addPerson` `editPerson`<br/>`filter`                                                              | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                            | "junior college"            |
+| `DATE`                                | `addLesson` `editLesson`<br/>`filter`                                                              | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming today is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
+| `TIME`                                | `addLesson` `editLesson`<br/>`filter`                                                              | Must follow either HH:MM or H:MM (only for 0:00 to 9:59)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | "13:30", "9:17"                                                                                                 | "9:1", "13:70"              |
+| `SEARCH_STRING`                       | `find`                                                                                             | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                   | ""                          |
+| `DESCRIPTION`                         | `addTask`                                                                                          | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Mark Alkanes Extra Practice", "Make Forces Notes"                                                              | ""                          |
 
 [Back to Table of Contents](#table-of-contents)
  
@@ -182,13 +184,14 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. When used for 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. Specifying the `[KEYWORDS]` parameter without specifying the `[LIST]` parameter is not allowed. When used for displaying the 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, `[KEYWORDS]` will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
 - `list` without specifying the `[LIST]` parameter defaults to showing the 📅 ___SCHEDULE list___.
+- Using the `[KEYWORDS]` parameter after `list` is not allowed!
 
 </box>
 
@@ -207,6 +210,8 @@ Showing list STUDENT
 
 #### For Schedule:
 
+
+
 Example usages:
 * `list` and `list schedule` displays the 📅 ___SCHEDULE list___ with all the lessons with their names in time order.
 
@@ -217,6 +222,11 @@ Showing list SCHEDULE
 ```
 ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
 
+<box type="info" seamless>
+
+**Note:** `list schedule subjects` will display the 📅 ___SCHEDULE list___ with all the lessons with their names in time order. `subjects` will be ignored.
+
+</box>
 
 #### For Task:
 
@@ -270,7 +280,8 @@ The show command has different behaviours depending on the current list. It show
 Format: `show INDEX`
 * The command format is the same for all lists.
 * Shows the details of the lesson/task/student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed list.
+* The `INDEX` refers to the index number shown in the displayed list.
+* The `INDEX` has to be within the range of the displayed 👨‍🎓 ___STUDENTS list___, 📅 ___SCHEDULE list___ or 💼 ___TASKS list___.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 
@@ -341,6 +352,7 @@ The lesson index provided is invalid
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Add Feature
 
@@ -440,12 +452,14 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
  If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
  Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
 ```
+
 <div style="page-break-after: always;"></div>
 
 #### For Task:
 
 Format: `addTask [INDEX] DESCRIPTION`
 * Adds the task to the lesson at specified `INDEX` of the displayed 📅 ___SCHEDULE list___ or to the shown lesson (if `INDEX` is omitted).
+* The `INDEX` has to be within the range of the displayed 📅 ___SCHEDULE list___. 
 * A new task cannot have the same description as existing tasks in the task list of that specific lesson.
 * Refer to the parameter constraints [here](#parameter-summary).
 
@@ -490,7 +504,8 @@ Deletes a student in the 👨‍🎓 ___STUDENTS list___ of the application.
 
 Format: `deletePerson INDEX`
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed 👨‍🎓 ___STUDENTS list___.
+* The `INDEX` refers to the index number shown in the displayed 👨‍🎓 ___STUDENTS list___.
+* The `INDEX` has to be within the range of the displayed 👨‍🎓 ___STUDENTS list___.
 * The command is case-insensitive: e.g. `deleteperson`, `deletePerson` and `DELETEPERSON` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
@@ -530,7 +545,8 @@ Deletes a lesson in the 📅 ___SCHEDULE list___ of the application.
 Format: `deleteLesson INDEX`
 
 * Deletes the lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed 📅 ___SCHEDULE list___.
+* The `INDEX` refers to the index number shown in the displayed 📅 ___SCHEDULE list___.
+* The `INDEX` has to be within the range of the displayed 📅 ___SCHEDULE list___.
 * The command is case-insensitive: e.g. `deletelesson`, `deleteLesson` and `DELETELESSON` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
@@ -566,15 +582,16 @@ Example: deletelesson 1
 Deletes the specified task from the shown lesson in the application. User must be in the 📅 ___SCHEDULE list___ and showing a lesson.
 
 Format: `deleteTask INDEX`
-* Deletes the task at the specified `INDEX` of the 💼 ___TASKS list___ in the shown lesson.
-* The index refers to the index number shown in the displayed 💼 ___TASKS list___ of the lesson.
+* Deletes the task at the specified `INDEX` of the task list in the shown lesson.
+* The `INDEX` refers to the index number shown in the displayed task list of the lesson.
+* The `INDEX` has to be within the range of the displayed task list.
 * The command is case-insensitive: e.g. `deletetask`, `deleteTask` and `DELETETASK` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="warning" seamless>
 
 **Caution:**
-The deleteTask command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
+The `deleteTask` command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
 </box>
 
 Example usages:
@@ -620,6 +637,7 @@ Edits the specified item in the  👨‍🎓 ___STUDENTS list___ or 📅 ___SCHE
 Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
 [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Edits the student at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown student.
+* The `INDEX` has to be within the range of the displayed 👨‍🎓 ___STUDENTS list___.
 * The name of the student after editing cannot be the same (case-insensitive) as other existing students in the contact list.
 * You must specify at least one field to edit.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -671,11 +689,12 @@ Note your edited 'name' must not already in the address book.
 <!-- use "-subject SUBJECTS" for lesson -->
 Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [-subject SUBJECT]` (for list specific format)
 * Edits the lesson at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown lesson.
+* The `INDEX` has to be within the range of the displayed  📅 ___SCHEDULE list___.
 * You must specify at least one field to edit.
 * The name of the lesson after editing cannot be the same (case-insensitive) as other existing lessons in the schedule list.
 * The start time of the lesson after editing cannot be after the end time of the lesson, if the end time is specified, and vice versa.
 * The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
-* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is SUBJECT, not SUBJECTS).
+* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is `SUBJECT`, not `SUBJECTS`).
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -748,7 +767,7 @@ Format: `find SEARCH_STRING`
 <box type="warning" seamless>
 
 **Caution:**
-* Find tasks by name/description is disabled.
+* Finding tasks by name/description is disabled.
 * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see list of tasks of the lesson.
   </box>
 
@@ -810,6 +829,7 @@ Unknown command
 <br>
 <div style="page-break-after: always;"></div>
 
+
 ### Filter Feature
 
 #### For Student:
@@ -849,6 +869,7 @@ Invalid filter format: Names should only contain alphanumeric characters and spa
 Usage: filter (any number of unique -[name|subject|tag|remark] [value]). 
 For example, filter -name John -subject physics,english
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
@@ -884,7 +905,10 @@ Failure outputs:
 * Input: `filter -before 2022/10/10 -after 2022/01/01`
     * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
-TODO
+Invalid filter format: You can only use one of -before, -on, -after at a time. 
+Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+For example, filter -before 2023/10/10 -subject physics
+Note you should only use one of -before, -on, -after at a time.
 ```
 
 * Input: `filter -on 2/2/2`
@@ -899,7 +923,7 @@ Note you should only use one of -before, -on, -after at a time.
 <div style="page-break-after: always;"></div>
 
 #### For Task:
-Filtering is not supported in the Task List at this time!
+Filtering is not supported in the 💼 ___TASKS list___ at this time!
 
 #### General Examples
 
@@ -950,13 +974,12 @@ The student is already linked to this lesson
 ```
 * Input: `link -student alexxxx -lesson lesson1` (_No student with alexxxx in application_)
 ```
-No such student with name alexf found
+No such student with name alexxxx found
 ```
 <box type="tip" seamless>  
 
 **Tips:** `LESSON_NAME` is case-insensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
 </box>     
-
 <div style="page-break-after: always;"></div>
 
 #### For Student:
@@ -1112,7 +1135,9 @@ No student is currently displayed
 ```
 This student has no linked lessons
 ```
+<div style="page-break-after: always;"></div>
 
+#### For Schedule:
 <box type="info" seamless>
 
 You must be in the 📅 ___SCHEDULE list___ and are viewing a lesson to run this command. Type `list schedule` to go to the 📅 ___SCHEDULE list___, then type `show INDEX` to select a lesson.</box>
@@ -1147,18 +1172,6 @@ No lesson is currently displayed
 ```
 This lesson has no linked students
 ```
-* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is not selected
-* Input: `nav`
-    * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
-```
-No student is currently displayed
-```
-* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student without any lessons students is selected
-* Input: `nav`
-    * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
-```
-This student has no linked lessons
-```
 
 
 #### For Task:
@@ -1172,15 +1185,15 @@ This feature is not used for tasks!
 
 The command history feature allows you to retrieve previously typed commands into the command text box.
 
-* To start navigating the command history, press the up or down arrow, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
-* Cycle through the command history using the up arrow to go back to previous commands, and down arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively.
+* To start navigating the command history, press the up <kbd style="font-size: 20px;">⇧</kbd> or down <kbd style="font-size: 20px;">⇩</kbd> arrow on your keyboard, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
+* Cycle through the command history using the up <kbd style="font-size: 20px;">⇧</kbd> arrow to go back to previous commands, and down <kbd style="font-size: 20px;">⇩</kbd> arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively.
 
 <box type="tip" seamless>
 
 **Tips:**
 - Command history is only valid per session, it does not save into storage.
 - Invalid commands are also saved into command history.
-- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up or down arrow will point and return the most recent command text.
+- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up <kbd style="font-size: 20px;">⇧</kbd> or down <kbd style="font-size: 20px;">⇩</kbd> will point and return the most recent command text.
 - Retrieved commands will replace the existing text in command box.
 
 </box>
@@ -1189,14 +1202,14 @@ The command history feature allows you to retrieve previously typed commands int
 
 **Caution:**
 * The index in command history remains when user clears the command box while scrolling through the history.
-* e.g. For the history [`list tasks`, `list students`, `list schedule`], if user is retrieves the command history with `list students` and clears his command box, pressing up again will retrieve `list tasks`.
+* e.g. For the history [`list tasks`, `list students`, `list schedule`], if user retrieves the command history with `list students` and clears his command box, pressing up <kbd style="font-size: 20px;">⇧</kbd> again will retrieve `list tasks`.
   </box>
 
 Example usages:
 * Input: `list students`, `list schedule`, `list tasks` were entered in this order.
-1. Pressing up arrow will go back in the command history and retrieve: `list tasks`.
-2. Pressing up arrow will go further back in the command history and retrieve: `list schedule`.
-3. Pressing down arrow will go forward in the command history and retrieve: `list tasks`.
+1. Pressing up <kbd style="font-size: 20px;">⇧</kbd> arrow will go back in the command history and retrieve: `list tasks`.
+2. Pressing up <kbd style="font-size: 20px;">⇧</kbd> arrow will go further back in the command history and retrieve: `list schedule`.
+3. Pressing down <kbd style="font-size: 20px;">⇩</kbd> arrow will go forward in the command history and retrieve: `list tasks`.
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -1233,9 +1246,7 @@ Format: `help`
 ### Saving Data
 
 TutorMate data is saved in the _hard disk_<sup>[9](#glossary)</sup> automatically after any command that changes the data. There is no need to save manually.
-
 <br>
-
 ### Editing Data File
 
 TutorMate data is saved automatically as _JSON_<sup>[10](#glossary)</sup> files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. It is possible to update data directly by editing that data file, but we do not recommend doing so.
@@ -1280,24 +1291,25 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 ## Command Summary
 
-| Action       | List                                    | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
-|--------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| **List**     | Any                                     | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the 📅 ___SCHEDULE list___     |
-| **Show**     | Any                                     | `show INDEX`                                                                                                                              | `show 1`, `show 3`                                                                                             | `show` will show the specified item at the given index of the current list |
-| **Add**      | Students(`add`), Any(`addPerson`)       | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                         |
-| **Add**      | Schedule(`add`), Any(`addLesson`)       | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                         |
-| **Add**      | Schedule                                | `addTask [INDEX] DESCRIPTION`                                                                                                             | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                         |
-| **Delete**   | Students(`delete`), Any(`deletePerson`) | `deletePerson INDEX`                                                                                                                      | `deletePerson 1`                                                                                               | NA                                                                         |
-| **Delete**   | Schedule(`delete`), Any(`deleteLesson`) | `deleteLesson INDEX`                                                                                                                      | `deleteLesson 1`                                                                                               | NA                                                                         |
-| **Delete**   | Schedule                                | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`       |
-| **Edit**     | Students(`edit`), Any(`editPerson`)     | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | `INDEX` can be  omitted when editing the currently shown person            |
-| **Edit**     | Schedule(`edit`), Any(`editLesson`)     | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | `INDEX` can be  omitted when editing the currently shown lesson            |
-| **Find**     | Students, Schedule                      | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in 💼 ___TASKS list___                                            |
-| **Filter**   | Students                                | `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`                                                                     | `filter -name Alex -tag primary -subject Mathematics`                                                          | NA                                                                         |
-| **Filter**   | Schedule                                | `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`                                        | `filter -before 2023/12/20 -subject Mathematics`                                                               | NA                                                                         |
-| **Link**     | Students                                | `linkTo LESSON_NAME`                                                                                                                      | `linkTo CS2103T Lab`                                                                                           | There is no way to unlink lesson to student                                |
-| **Link**     | Schedule                                | `linkTo STUDENT_NAME`                                                                                                                     | `linkTo Bernice Yu`                                                                                            | There is no way to unlink student to lesson                                |
-| **Navigate** | Students, Schedule                      | `nav`                                                                                                                                     | `nav`                                                                                                          | Student/Lesson should have at least one linked lesson/student              |
+| Action       | List                                      | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
+|--------------|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **List**     | Any                                       | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the 📅 ___SCHEDULE list___     |
+| **Show**     | Any                                       | `show INDEX`                                                                                                                              | `show 1`, `show 3`                                                                                             | `show` will show the specified item at the given index of the current list |
+| **Add**      | Students(`add`), Any(`addPerson`)         | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                         |
+| **Add**      | Schedule(`add`), Any(`addLesson`)         | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                         |
+| **Add**      | Schedule                                  | `addTask [INDEX] DESCRIPTION`                                                                                                             | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                         |
+| **Delete**   | Students(`delete`), Any(`deletePerson`)   | `deletePerson INDEX`                                                                                                                      | `deletePerson 1`                                                                                               | NA                                                                         |
+| **Delete**   | Schedule(`delete`), Any(`deleteLesson`)   | `deleteLesson INDEX`                                                                                                                      | `deleteLesson 1`                                                                                               | NA                                                                         |
+| **Delete**   | Schedule                                  | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`       |
+| **Edit**     | Students(`edit`), Any(`editPerson`)       | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | `INDEX` can be  omitted when editing the currently shown person            |
+| **Edit**     | Schedule(`edit`), Any(`editLesson`)       | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | `INDEX` can be  omitted when editing the currently shown lesson            |
+| **Find**     | Students, Schedule                        | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in 💼 ___TASKS list___                                            |
+| **Filter**   | Students                                  | `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`                                                                     | `filter -name Alex -tag primary -subject Mathematics`                                                          | NA                                                                         |
+| **Filter**   | Schedule                                  | `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`                                        | `filter -before 2023/12/20 -subject Mathematics`                                                               | NA                                                                         |
+| **Link**     | Students, Schedule                        | `link -student STUDENT_NAME -lesson LESSON_NAME`                                                                                          | `link -student Alex Yeoh -lesson CS2103T Lab`                                                                  | There is no way to unlink lesson to student                                |
+| **Link**     | Students                                  | `linkTo LESSON_NAME`                                                                                                                      | `linkTo CS2103T Lab`                                                                                           | There is no way to unlink lesson to student                                |
+| **Link**     | Schedule                                  | `linkTo STUDENT_NAME`                                                                                                                     | `linkTo Bernice Yu`                                                                                            | There is no way to unlink student to lesson                                |
+| **Navigate** | Students, Schedule                        | `nav`                                                                                                                                     | `nav`                                                                                                          | Student/Lesson should have at least one linked lesson/student              |
 
 [Back to Table of Contents](#table-of-contents)
 

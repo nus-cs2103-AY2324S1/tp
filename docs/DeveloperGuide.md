@@ -104,7 +104,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <p style="text-align: center;">
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
@@ -112,7 +112,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -127,7 +127,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 At a high level, the `Logic` component is responsible for making sense of the user inputs, and modifying storage and ui accordingly.
 It acts like a controller to glue the other components together.
@@ -180,7 +180,7 @@ How the parsing works:
 <div style="page-break-after: always;"></div>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <p style="text-align: center;">
 <puml src="diagrams/ModelClassDiagram.puml" />
@@ -210,7 +210,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <p style="text-align: center;">
 <puml src="diagrams/StorageClassDiagram.puml" />
@@ -222,7 +222,7 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Entry point classes
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -495,11 +495,11 @@ Given below is an example usage scenario and how the show feature behaves at eac
 
 Step 1. The user launches the application for the first time. The initial state of the Model will be set to `SCHEDULE`. The schedule list will be initialized with the initial schedule.
 
-Step 2. The user executes show 5 command to show the details of the 5th lesson in the schedule list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showLesson` method in the ModelManager which displays the `LessonDetailListPanel` in the Ui.
+Step 2. The user executes `show 5` command to show the details of the 5th lesson in the schedule list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showLesson` method in the ModelManager which displays the `LessonDetailListPanel` in the Ui.
 
 Step 3. The user wants to display the details of a person and switches to the student list with the `list students` command in the Command Line Interface(CLI) Ui. The current list will display the students and the Model state will change to `STUDENT`.
 
-Step 4. The user executes show 1 command to show the details of the 1st person in the student list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showPerson` method in the ModelManager which displays the `StudentDetailListPanel` in the Ui.
+Step 4. The user executes `show 1` command to show the details of the 1st person in the student list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showPerson` method in the ModelManager which displays the `StudentDetailListPanel` in the Ui.
 
 The following sequence diagram shows how the show operation works for showing a person from the `STUDENT` list:
 
@@ -531,7 +531,7 @@ The following sequence diagram shows how the show operation works for showing a 
 
 The task list functionality is facilitated by multiple related classes. The `TaskList` can contain any number of `Task` objects. The `TaskList` is implemented as a component of each Lesson so that each lesson will have its own individual Task List.
 
-The `FullTaskList` class is implemented as a list to view all the collective tasks of all the lessons. It uses a similar structure to ScheduleList to display the list.
+The `FullTaskList` class is implemented as a list to view all the collective tasks of all the lessons. It uses a similar structure to `ScheduleList` to display the list.
 
 #### Design considerations:
 
@@ -551,11 +551,11 @@ The `FullTaskList` class is implemented as a list to view all the collective tas
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Documentation.html)
+* [Testing guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Testing.html)
+* [Logging guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Logging.html)
+* [Configuration guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Configuration.html)
+* [DevOps guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/DevOps.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -616,7 +616,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User enters the required details to create a student.
 3. TutorMate creates the student.
 
-Use Case ends
+Use Case ends.
 
 **Extensions**
 * 2a. Student's name is not specified and / or details specified are incorrect.
