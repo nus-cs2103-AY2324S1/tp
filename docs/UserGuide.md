@@ -536,7 +536,7 @@ This person will be removed from your contact list immediately. This action is i
 
 <h4>Example:</h4>
 
-- `listPerson` followed by `deletePerson 2`.<br><br>
+- `listPerson` followed by `deletePerson 2`<br><br>
   ![deletePerson_success_with_listPerson](images/output/deletePerson_success.png)
 
   *<center>CoordiMate deletes the 2nd person who was previously <code>Bernice Yu</code>.</center>*
@@ -804,7 +804,7 @@ The task will be removed from your task list immediately. This action is irrever
 
 <h4>Example:</h4>
 
-- `listTask` followed by `deleteTask 2`.<br><br>
+- `listTask` followed by `deleteTask 2`<br><br>
   ![deleteTask_success](images/output/deleteTask_success.png)
 
   *<center>CoordiMate deletes the 2nd task which was previously <code>Create budget</code>.</center>*
@@ -1086,7 +1086,7 @@ atagp
 
 <h4>Example:</h4>
 
-- `addTagPerson 1 t/friends t/expensive`.<br><br>
+- `addTagPerson 1 t/friends t/expensive`<br><br>
   ![addTagPerson success](images/output/addTagPerson_success.png)
 
   *<center>CoordiMate adds tag <code>expensive</code> to the 1st person, while <code>friends</code> is not added because it already exists in the list of tags.</center>*
@@ -1133,7 +1133,7 @@ atagt
 
 <h4>Example:</h4>
 
-- `addTagTask 1 t/day1 t/day2`.<br><br>
+- `addTagTask 1 t/day1 t/day2`<br><br>
   ![addTagTask success](images/output/addTagTask_success.png)
 
   *<center>CoordiMate adds tag <code>day2</code> to the 1st task, while <code>day1</code> is not added because it already exists in the list of tags.</center>*
