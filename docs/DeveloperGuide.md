@@ -179,9 +179,9 @@ Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection o
 
 Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
 
-Step 5. `TagCommand` creates a new `Student` object with the new `Tag` and copy all other details.
+Step 5. `TagCommand` updates the `Student` with the new `Tag`.
 
-Step 6. `TagCommand` updates the `Model` with the new Student by calling `Model#setStudent()`.
+Step 6. `TagCommand` updates the `Model` with the updated Student by calling `Model#setStudent()`.
 
 Step 7. Finally, the `TagCommand` creates a CommandResult with a success message and returns it to the LogicManager to complete the command execution. The GUI would also be updated with the change of status.
 
@@ -406,6 +406,8 @@ In addition, the tutorial and assignment count was limited to an integer between
 The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to find the student they are looking for quickly, and perform subsequent operations such as editing Class Information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
 
 #### How it is implemented
+
+Note: To shorten the sequence diagram, we use `SCKP` as an abbreviation for `StudentContainsKeywordsPredicate`.
 
 <puml src="diagrams/LookupCommand.puml" alt="Lookup Command" />
 
@@ -1373,6 +1375,7 @@ Testers are expected to do more *exploratory* testing.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
 5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
-7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
+7. All parameters do not support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add values of any length that will not get cut off in the future.
 8. The name field does not accept special characters such as `\` or `/`. We plan to allow users to add special characters to the name field in the future, so that names such as "Ravi s/o Veegan" will be allowed.
 9. The phone field only accepts numbers and should be at least three digits long. We plan to allow users to have more flexibility to the phone field in the future, such as allowing special characters.
+10. `TUTORIAL_INDEX` and `TUTORIAL_SESSION` have the same meaning but with different names. We plan to switch every occurrence into `TUTORIAL_INDEX` in the future, so that no confusion will be caused.

@@ -474,7 +474,6 @@ Creates and adds a student to **Class Manager 2023**.
 
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
-* **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a positive integer that contains 3 or more digits.
 * [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
@@ -508,7 +507,7 @@ Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 * The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
-    * Note that the `COMMENT` string must not include any prefix.
+    * Note that the `COMMENT` string must not include any prefix or ` /` characters (space followed by '/').
     * e.g. `comment s/A0249112A cm/This student is very hardworking. t/Hardworking` is not allowed.
     * This means comments such as "This student is very hardworking. t/Hardworking" is not allowed.
 * `comment` can only be performed after the student is created.
@@ -593,9 +592,9 @@ Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and [email address](#glossary) of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
 
-The following image shows a successful execution of the `edit A0249112A n/Bob` command.
+The following image shows a successful execution of the `edit` command.
 
-<img src="images/edit-success.png" alt="result for `edit A0249112A n/Bob" width="700" /> <br>
+<img src="images/edit-success.png" alt="result for `edit A0245234A n/Bob" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -783,7 +782,7 @@ Record the class participation for an existing student in **Class Manager 2023**
 
 <box type="info" seamless>
 
-**Note:** Currently, we allow an absent student have their class participation recorded as `true`. This will be changed in the future.
+**Note:** Currently, we allow an absent student to have their class participation recorded as `true`. This will be changed in the future.
 
 </box>
 
