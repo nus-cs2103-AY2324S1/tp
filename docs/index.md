@@ -16,5 +16,5 @@ title: UNOFAS
 
 **Acknowledgements**
 
-* This project is based on AddressBook-Level3 project created by [SE-EDU initiative](https://se-education.org/addressbook-level3/).
+* This project is based on AddressBook-Level3 project created by [SE-EDU initiative](https://se-education.org).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
