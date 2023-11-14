@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 * **New Feature**: Edit finance
   * What it does: Edit finance using any parameter
   * Justification: In case freelancers made a mistake manually and need to readjust the values/client linked
-  * Highlights: Allows editing of client (that exists in contacts), but once it edits, it no longer validates whether client exists or not
+  * Highlights: Edit is able to differentiate between commission and expense (i.e., you can remove a client from expense but not commission with edit command)
 
 * **New Feature**: Tabs
   * What it does: Allows users to navigate between tabs
@@ -37,19 +37,38 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=flexibo&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
-  * To be added
+  * Check for code quality throughout the project
+  * Managed releases `v1.2`, `v1.3` (2 releases) on GitHub
 
 * **Enhancements to existing features**:
-  * To be added
+  * For the edit method in finance, able to edit for both commissions and expense even though they have different compulsory requirements
+  * Refactor the tab command to make use of a Tab object
+  * Implemented 2 new books, `financebook.json` and `eventsbook.json` besides the `addressbook.json`.
 
 * **Documentation**:
   * User Guide:
-    * To be added
+    * `Edit` commands for events and finance
+    * `filter-n` and` filter-c` commands for contacts
+    * Adding hyperlinks
+    * Standardize formatting and error messages for the whole UG as much as possible
+    * Images for all `filter` commands
+    * Data storage
   * Developer Guide:
-    * To be added
+    * Add tab change implementation
+      * Add Sequence Diagram
+    * Update storage UML diagram 
+    * Add test cases for storage
+    * Add instruction for manual testing for Storage
 
 * **Community**:
-  * To be added
+  * [PR reviews for group mates](https://github.com/AY2324S1-CS2103T-W09-2/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aflexibo)
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2324S1/forum/issues/417), [2](https://github.com/nus-cs2103-AY2324S1/forum/issues/277), [3](https://github.com/nus-cs2103-AY2324S1/forum/issues/191))
+  * Helping group mates
+    * Every week or so I checked the whole code to see if theres anything that can be improved or needs refactoring.
+    * Communicate often with my team to clarify any doubts or issues 
 
 * **Tools**:
-  * To be added
+  * Intellij
+  * GitHub
+  * PlantUML
+  * MarkBind

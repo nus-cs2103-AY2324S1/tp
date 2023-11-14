@@ -25,6 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -67,6 +69,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -94,6 +98,8 @@ In the future, we aim to be able to abstract out the Card, ListPanel, and Tab (U
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -120,6 +126,8 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
@@ -128,6 +136,8 @@ How the parsing works:
 * When called upon to parse a user command, the respective Parsers (i.e. `ContactParser`, `FinanceParser`, `EventParser`) class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddEventCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `ContactParser` returns back as a `Command` object.
   * `DateTimeParser` is included here to show all Parser Classes. However, only a few Command Parsers interact with the `DateTimeParser` (when date-time inputs are involved).
 * All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteFinanceCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -141,6 +151,8 @@ The `Model` component,
 * stores the currently 'selected' objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable i.e., `ObservableList<Person>` where `Person` objects can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This is the same for `Event` and `Finance`.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other seven components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
 
@@ -162,6 +174,7 @@ The `Model` component,
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -183,6 +196,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -219,6 +234,8 @@ This dummy `Person` object is important as it allows us to fetch the **actual** 
 **Step 5.** Lastly, the `Commission` in `AddCommissionCommand` is added to the `Model`, while returning a `CommandResult` with the details of the `Commission` formatted into a result `String`. This result `String` is then printed in the status box.
 
 <puml src="diagrams/AddFinanceSequenceDiagram3.puml" alt="AddFinanceSequenceDiagram3" /> 
+
+<div style="page-break-after: always;"></div>
 
 ### Filtering Lists
 
@@ -261,6 +278,7 @@ report. The method returns the summary as a string which is then passed as an ar
 **Step 5.** The summary report is then displayed in the status box. The list of finances displayed in the finance tab will
 also update to only show finances related to the given client. 
 
+<div style="page-break-after: always;"></div>
 
 ### Changing Tabs
 
@@ -312,6 +330,7 @@ The following activity diagram summarise what happens when a user changes a tab.
 
 <puml src="diagrams/TabActivityDiagram.puml" alt="TabActivityDiagram" />
 
+<div style="page-break-after: always;"></div>
 
 ### Date-time Parsing
 
@@ -331,6 +350,8 @@ The choice to implement a more advanced date-time parser than what is available 
 First, we start off by accepting more formats of `Date` and `Time` that Java's `LocalDateTime` library provides (Numbered Date-time formats). All summarised in the [User Guide](https://ay2324s1-cs2103t-w09-2.github.io/tp/UserGuide.html#accepted-date-time-formats).
 
 Parsing for this is done by "brute force" handled by the number of elements the date-time format has (the reason it is done this way will be explained in a later section):
+
+<div style="page-break-after: always;"></div>
 
 To illustrate how parsing of multiple formats is done, the sequence diagram shows `parseTwoElementsNumberTimeFormat()`, one of the methods that parses multiple formats, and how it matches the input with a format and parses it:
 
@@ -353,6 +374,8 @@ This method is repeated with the other Numbered Time and Numbered Date formats.
 
 With this, this will enable date-time inputs to be **faster** and **more convenient** as users have a wide variety of formats to choose from.
 
+<div style="page-break-after: always;"></div>
+
 ##### Accepting More Formats - Natural Language
 
 Another feature we wanted to achieve is for users to use natural language formats that maybe not be as easily expressed in a date or a time.
@@ -373,6 +396,8 @@ To explain, we have described the implementation of one of methods that parse en
 
 <puml src="diagrams/EnglishFormatsParsingActivityDiagram.puml" alt="ParsingAD" />
 
+<div style="page-break-after: always;"></div>
+
 ##### Parsing Date-Time Instance
 
 Now we have built the base of how to parse Date, Time and Date Time inputs (both Numbered and Natural Language formats) by their elements. We need a master method to pull all these together. 
@@ -384,15 +409,21 @@ To demonstrate how a string is parsed into a `LocalDateTime` value given that it
 
 <puml src="diagrams/ParseDateTimeInstanceAD.puml" alt="DTIAD" />
 
+<div style="page-break-after: always;"></div>
+
 To further explain what happens within a "Parse X Inputs" we take a look at one of the implementations, `parseThreeElements`.
 
 <puml src="diagrams/ParseThreeElementsAD.puml" alt="ParseThreeElementsActivityDiagram" width="600"/>
 
 As you can see this is how given the number of words of input, date-time can be parsed even if input can be a date, time or date-time.
 
+<div style="page-break-after: always;"></div>
+
 **On a higher level, a general flow will look something like this:** (note that this is greatly simplified)
 
 <puml src="diagrams/InstanceDateTimeHighLevel.puml" alt="InstanceDateTimeHighLevel" />
+
+<div style="page-break-after: always;"></div>
 
 ##### Parsing Smartly
 
@@ -412,6 +443,8 @@ This is further shown when parsing durations using `parseDateTimeDuration()`
 For more information on the assumptions that the parser makes when there are missing `<DATE>` or `<TIME>` inputs for either start or end time, you can check out the User guide section for this [here](https://ay2324s1-cs2103t-w09-2.github.io/tp/UserGuide.html#accepted-date-time-combinations-of-s-and-e).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Planned Enhancements**
 
@@ -468,8 +501,9 @@ which is inconsistent with real-world scenarios where telegram names are unique 
 
 We plan to implement a check for telegram names to prevent duplicate entries.
 
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -480,6 +514,8 @@ We plan to implement a check for telegram names to prevent duplicate entries.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -509,6 +545,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |  `* *`   |   user    | see an overview of all my tabs        | quickly get a look at the important details without needing to navigating into tabs unnecessarily |
 |   `* `   | lazy user | FreelanceBuddy to predict my commands | quickly input commands without typing the entire command                                          |
 
+<div style="page-break-after: always;"></div>
+
 #### For Client Contact Management
 
 | Priority |     As a …​      | I want to …​                            | So that I can…​                                                     |
@@ -523,6 +561,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |   `*`    |  long-term user  | see if clients have been worth the time | better choose my clients for the future                             |
 |   `*`    |  long-term user  | be able to manage client notes          | keep important notes about clients for future references            |
 |   `*`    |       user       | create invoices with client details     | save time with manual inputting of client details                   |
+
+<div style="page-break-after: always;"></div>
 
 #### For Finance Management
 
@@ -542,6 +582,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |  `* *`   | financially savvy user | filter by a timeframe                           | know what C/E i received in that given timeframe             |
 |  `* *`   | financially savvy user | get a summary of total C/E in a given day/month | get an idea of my financial situation for the time period    |
 
+<div style="page-break-after: always;"></div>
+
 #### For Events Management
 
 | Priority |     As a …​      | I want to …​                       | So that I can…​                                          |
@@ -555,6 +597,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |   `*`    |  forgetful user  | set recurring reminders for events | be alerted to task that I might forget                   |
 |   `*`    |       user       | add location of events             | know where this event is taking place                    |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -593,6 +636,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. User decides to stay on the current tab.
 
     User case resumes at step 4.
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: UC3 - Add a client contact
 
@@ -642,6 +687,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: UC6 - Find a specific client contact by name
 
 **Precondition**: User is on **Contacts** tab, **Contacts** list must have at least one entry
@@ -679,6 +726,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: UC8 - Editing a client contact
 
 **Precondition**: User is on **Contacts** tab, **Contacts** list must have at least one entry
@@ -714,6 +763,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FreelanceBuddy shows an error message.
 
       Use case resumes at step 1.
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: UC10 - Delete an event
 
@@ -756,6 +807,7 @@ Use case ends.
 
 Use case ends.
 
+<div style="page-break-after: always;"></div>
 
 #### Use Case: UC13 - Filter events by name
 
@@ -798,6 +850,7 @@ Use case ends.
   
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 #### Use Case: UC15 - Filter events by client
 
@@ -840,6 +893,8 @@ Use case ends.
 
         Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: UC17 - Delete a finance entry
 
 **Precondition**: User is on **Finance** tab, **Finance** list must have at least one entry
@@ -868,6 +923,8 @@ Use case ends.
 2. FreelanceBuddy shows a list of all finance entries.
 
 Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: UC19 - Filter by finance entry type
 
@@ -910,6 +967,8 @@ Use case ends.
 
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: UC21 - Filter finance entries by client
 
 **Precondition**: User is on **Finance** tab
@@ -946,6 +1005,8 @@ Use case ends.
 
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: UC23 - Filter finance entries by a timeframe
 
 **Precondition**: User is on **Finance** tab
@@ -964,6 +1025,8 @@ Use case ends.
 
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 |      Aspect       | Description                                                                                                                                                                                                                                                                                                                                     |
@@ -979,6 +1042,8 @@ Use case ends.
 * **Performance degradation**: Slowdown in performance, particularly in task execution times or data save/load times
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
@@ -1018,6 +1083,8 @@ of the features we added (e.g. `summary`, `filter-t`) were different from all th
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1035,7 +1102,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file 
+   
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -1043,6 +1112,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+<div style="page-break-after: always;"></div>
 
 ## Test cases for Contacts
 
@@ -1168,6 +1239,8 @@ For the following tests we assume that you are on the Contacts tab.
     5. Test case (without keyword): `filter-c`
 
         Expected: Error details shown in the status message. List remains the same.
+
+<div style="page-break-after: always;"></div>
 
 ## Test cases for Finance
 
@@ -1342,6 +1415,8 @@ For the following tests, we assume that you are on the Finance tab.
    5. Test case: `summary`<br>
       Expected: Summary fails. Error details shown in the status message. List remains unchanged.
 
+<div style="page-break-after: always;"></div>
+
 ## Test cases for Events
 
 For the following tests, we assume that you are on the Events tab.
@@ -1372,7 +1447,7 @@ For the following tests, we assume that you are on the Events tab.
 
 1. Adding a new event into FreelanceBuddy
     
-    1. Prerequisites: There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the client `John Doe` and `Amy Bee` exists in our contacts.
+    1. Prerequisites: There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the clients `John Doe` and `Amy Bee` exists in our contacts.
 
     2. Test case (only compulsory fields): `add n/Dinner s/24-01-2024 20:30 e/24-01-2024 21:30`<br>
        Expected: A new `event` with the corresponding details is added chronologically to the list.
@@ -1401,7 +1476,7 @@ For the following tests, we assume that you are on the Events tab.
 1. Editing an event in FreelanceBuddy
 
     1. Prerequisites: There exists an event made with the command `add n/Dinner s/24-01-2024 20:30 e/24-01-2024 21:30` and its index in the events list is `1`.
-There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the client `John Doe` and `Amy Bee` exists in our contacts,
+       There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the client `John Doe` and `Amy Bee` exists in our contacts.
 
     2. Test case (compulsory field edit): `edit 1 n/Watch Television`<br>
        Expected: The `event` edited will now reflect the corresponding details.
@@ -1426,7 +1501,7 @@ There has to be at least 2 clients saved in FreelanceBuddy. For our example, we 
 1. Deleting an event from FreelanceBuddy
 
     1. Prerequisites: There exists an event made with the command `add n/Dinner s/24-01-2024 20:30 e/24-01-2024 21:30` and its index in the events list is `1`.
-       There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the client `John Doe` and `Amy Bee` exists in our contacts,
+       There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the clients `John Doe` and `Amy Bee` exists in our contacts.
 
     2. Test case: `delete 1`<br>
        Expected: The `event` deleted will be removed from the list. 
@@ -1439,7 +1514,7 @@ There has to be at least 2 clients saved in FreelanceBuddy. For our example, we 
 1. Filtering events in FreelanceBuddy
 
     1. Prerequisites: There exists an event made with the command `add n/Dinner s/24-01-2024 20:30 e/24-01-2024 21:30 c/John Doe`.
-       There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the client `John Doe` and `Amy Bee` exists in our contacts,
+       There has to be at least 2 clients saved in FreelanceBuddy. For our example, we shall assume the clients `John Doe` and `Amy Bee` exists in our contacts.
 
     2. Test case: `filter-n Dinner`<br>
        Expected: The events list will only show `events` with the name `Dinner`.
@@ -1455,6 +1530,8 @@ There has to be at least 2 clients saved in FreelanceBuddy. For our example, we 
 
     6. Test case (No Event with Amy Bee): `filter-c Amy`<br> 
        Expected: The events list will be empty.
+
+<div style="page-break-after: always;"></div>
 
 ## Test cases for Storage
 
@@ -1545,7 +1622,8 @@ Dummy data can also generate by just deleting the json files.
     2. Test case: Edit timeEnd in the first entry of `eventsbook.json` to "tomorrow" <br>
        Expected: All data is erased
 
-
+<div style="page-break-after: always;"></div>
+ 
 ### Loading data
 
 <box type="tip" seamless>

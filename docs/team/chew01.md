@@ -57,6 +57,7 @@ This means that if the list is filtered, the filtered entries are renumbered and
     * Added helpful links for different audience groups (new, advanced) in Getting Started section (PR [\#236](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/236)).
     * Added more helpful links in Quick Start and Features section so that users can easily get to related sections (PR [\#236](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/236)).
     * Added documentation for the following Finance-related features: `add-e`, `list`, `delete` (PR [\#146](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/146)).
+    * Added documentation for Configuration Files under Data Storage (PR [\#258](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/258)).
   * Developer Guide:
     * Structured use cases for the project (PR [\#34](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/34)). 
     * Added Finance-related user stories and use cases (PR [\#34](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/34), [\#119](https://github.com/AY2324S1-CS2103T-W09-2/tp/pull/119)).

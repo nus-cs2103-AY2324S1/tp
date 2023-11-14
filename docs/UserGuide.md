@@ -321,7 +321,7 @@ Format: `exit`
 
 [Back to General Commands](#general-commands)
 
-#### Clearing all entries : `clear`
+#### Clearing all entries → `clear`
 
 Clears all entries from the Tab you are on.
 
@@ -334,6 +334,8 @@ Format: `clear`
 </box>
 
 [Back to General Commands](#general-commands)
+
+<div style="page-break-after: always;"></div>
 
 ### Contacts Management
 --------------------------------------------------------------------------------------------------------------------
@@ -618,6 +620,8 @@ Format: `list [TYPE]`
 
 [Back to Finance Management](#finance-management)
 
+<div style="page-break-after: always;"></div>
+
 #### Adding a Commission: Finance Tab → `add-c`
 
 Adds a **commission** to the **Finance** tab. Once added, the `AMOUNT` will be highlighted in #g#**green**## to indicate that
@@ -632,7 +636,7 @@ Format: `add-c d/DESCRIPTION a/AMOUNT c/CLIENT [t/TIME]`
 <box type="tip" seamless>
     <ul>
         <li>
-            The <code>DESCRIPTION</code> is used to provide details about the expense
+            The <code>DESCRIPTION</code> is used to provide details about the commission
         </li>
         <li>
             The default <code>[t/TIME]</code> will be the time at which the command is entered
@@ -642,8 +646,6 @@ Format: `add-c d/DESCRIPTION a/AMOUNT c/CLIENT [t/TIME]`
         </li>
     </ul>
 </box>
-
-<div style="page-break-after: always;"></div>
 
 <box type="warning" seamless>
 
@@ -687,7 +689,7 @@ Format: `add-e d/DESCRIPTION a/AMOUNT [c/CLIENT] [t/TIME]`
 <box type="tip" seamless>
     <ul>
         <li>
-            The <code>DESCRIPTION</code> is used to provide details about the commission
+            The <code>DESCRIPTION</code> is used to provide details about the expense
         </li>
         <li>
             The default <code>[t/TIME]</code> will be the time at which the command is entered
@@ -1015,7 +1017,7 @@ Refer to [the filter-n command](#filtering-contacts-by-name-contacts-tab-filter-
 
 <div style="page-break-after: always;"></div>
 
-#### Editing an event: Events tab → `edit`
+#### Editing an event: Events Tab → `edit`
 
 Edits an existing event in the **Events** tab.
 
@@ -1046,13 +1048,13 @@ Refer to [the filter-n command](#filtering-contacts-by-name-contacts-tab-filter-
 
 <div style="page-break-after: always;"></div>
 
-|          Parameter          | Format                                                                 | Examples (#g#Valid##/#r#Invalid##)                                                  |
-|:---------------------------:|------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-|          `[NAME]`           | Text up to 256 characters<br>Must be unique                            | #g#Annie Dunkins##<br>#g#'Chewbaca' The 1st##                                       |
-| `[TIMESTART]` / `[TIMEEND]` | Refer to the [accepted Date-time formats](#accepted-date-time-formats) | #g#31-12-2024 21:30##<br>#g#tmr noon##<br>#r#next fortnight##<br>#r#01092023 1130## |
-|         `[CLIENT]`          | Text up to 256 characters                                              | #g#John Doe##<br>#g#Ranchoddas Shamaldas Chanchad##                                 |
-|        `[LOCATION]`         | Text up to 256 characters                                              | #g#50 Cuscaden Rd, #02-01 Hpl House, Singapore 249724##<br>#g#My House##            |
-|       `[DESCRIPTION]`       | Text up to 256 characters                                              | #g#Bring notes for Davidson##<br>#g#Concerning new commission##                     |
+|          Parameter          | Format                                                                 | Examples (#g#Valid##/#r#Invalid##)                                       |
+|:---------------------------:|------------------------------------------------------------------------|--------------------------------------------------------------------------|
+|          `[NAME]`           | Text up to 256 characters<br>Must be unique                            | #g#Annie Dunkins##<br>#g#'Chewbaca' The 1st##                            |
+| `[TIMESTART]` / `[TIMEEND]` | Refer to the [accepted Date-time formats](#accepted-date-time-formats) |                                                                          |
+|         `[CLIENT]`          | Text up to 256 characters                                              | #g#John Doe##<br>#g#Ranchoddas Shamaldas Chanchad##                      |
+|        `[LOCATION]`         | Text up to 256 characters                                              | #g#50 Cuscaden Rd, #02-01 Hpl House, Singapore 249724##<br>#g#My House## |
+|       `[DESCRIPTION]`       | Text up to 256 characters                                              | #g#Bring notes for Davidson##<br>#g#Concerning new commission##          |
 
 |                            #g#Positive Examples##                             |                                              #r#Negative Examples##                                               | <span style ='color: darkred; font-weight: bold;'>Reason for Error</span>                                                                                   |
 |:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1122,6 +1124,8 @@ Format: `filter-c KEYWORD [MORE_KEYWORDS]...`
 | Parameter | Format                    | Examples (#g#Valid##/#r#Invalid##) |
 |:---------:|---------------------------|------------------------------------|
 | `KEYWORD` | Text up to 256 characters | #g#Hans##<br>#g#3##                |
+
+<div style="page-break-after: always;"></div>
 
 | #g#Positive Examples## | #r#Negative Examples## | <span style ='color: darkred; font-weight: bold;'>Reason for Error</span>                                                                     |
 |:----------------------:|:----------------------:|-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1248,7 +1252,7 @@ While these files come with defaults that are tried and tested to be effective f
 <box type="warning" seamless>
 <ul>
   <li>
-    AddressBuddy may fail to start if illegal values are given for the configuration.
+    FinanceBuddy may fail to start if illegal values are given for the configuration.
   </li>
   <li>
     Particularly, there should not be any null values!
@@ -1389,7 +1393,7 @@ Below is a table of accepted natural language time formats, these represent `<TI
 
 <span class="badge rounded-pill bg-success" style="font-size: 14px; vertical-align: middle;">Beginner</span>
 
-Below is a table of accepted natural language time formats, these represent **`<DATE>` AND `<TIME>`**!
+Below is a table of accepted natural language time formats, these represent `<DATE>` **AND** `<TIME>`!
 
 > **Note for all inputs,**
 > * they are not case-sensitive
@@ -1435,7 +1439,7 @@ Relevant for:
 
 🏷 ****TO NOTE****<br>
 
-There are several **rules** and [**assumptions**](#assumptions-using-date-time-combinations) that FreelanceBuddy date time reader makes use of that would be useful to understand to optimise your user experience.
+There are several **rules** and [**assumptions**](#assumptions-when-using-date-time-combinations) that FreelanceBuddy date time reader makes use of that would be useful to understand to optimise your user experience.
 
 </box>
 
@@ -1591,60 +1595,60 @@ Modify `TIMESTART` and `TIMEEND` inputs together! If you understood how to use d
 
 A quick overview of all the commands and their formats.
 
-_Click on the commands or description to jump to the desired section!_
+_Click on the action to jump to the desired section!_
 
 ### General
 Commands that applies to ALL tabs
 
-| Action                                                              | Format, Examples                                                                           |
-|---------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| [<p style="color:black">**Help**</p>](#viewing-help-help)           | [`help`](#viewing-help-help)                                                               |
-| [<p style="color:black">**Tab**</p>](#switching-tabs-tab)           | [<p style="color:black">`tab TAB_NAME` <br> e.g., `tab contacts`</p>](#switching-tabs-tab) |
-| [<p style="color:black">**Exit**</p>](#exiting-the-program-exit)    | [`exit`](#exiting-the-program-exit)                                                        |
-| [<p style="color:black">**Clear**</p>](#clearing-all-entries-clear) | [`clear`](#clearing-all-entries-clear)                                                     |
+| Action                                                              | Format, Examples                                                                          |
+|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| [<p style="color:black">**Help**</p>](#viewing-help-help)           | `help`                                                          |
+| [<p style="color:black">**Tab**</p>](#switching-tabs-tab)           | `tab TAB_NAME` <br> e.g., `tab contacts` |
+| [<p style="color:black">**Exit**</p>](#exiting-the-program-exit)    | `exit`                                                    |
+| [<p style="color:black">**Clear**</p>](#clearing-all-entries-clear) | `clear`                                                   |
 
 <div style="page-break-after: always;"></div>
 
 ### Contacts Tab
 
-| Action                                                                                                   | Format, Examples                                                                                                                                                                                                     |
-|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [<p style="color:black">**List all contacts**</p>](#listing-all-contacts-contacts-tab-list)              | [`list`](#listing-all-contacts-contacts-tab-list)                                                                                                                                                                    |
-| [<p style="color:black">**Add**</p>](#adding-a-contact-contacts-tab-add)                                 | [<p style="color:black">`add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [c/COMPANY] [t/TELEGRAM_NAME]` <br> e.g., `add n/‘Chewbaca’ The 1st p/+659123139 e/chewie@gmail.com`</p>](#adding-a-contact-contacts-tab-add) |
-| [<p style="color:black">**Edit**</p>](#editing-a-contact-contacts-tab-edit)                              | [<p style="color:black">`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [t/TELEGRAM_NAME]` <br/> e.g., `edit 2 n/Betsy Crower t/`</p>](#editing-a-contact-contacts-tab-edit) 	               |
-| [<p style="color:black">**Delete**</p>](#deleting-a-contact-entry-contacts-tab-delete)                   | [<p style="color:black">`delete INDEX` <br> e.g., `delete 1`</p>](#deleting-a-contact-entry-contacts-tab-delete)                                                                                          |
-| [<p style="color:black">**Filter by Name**</p>](#filtering-contacts-by-name-contacts-tab-filter-n)       | [<p style="color:black">`filter-n KEYWORD [MORE_KEYWORDS]…​` <br> e.g., `filter-n David Li`</p>](#filtering-contacts-by-name-contacts-tab-filter-n)                                                                  |
-| [<p style="color:black">**Filter by Company**</p>](#filtering-contacts-by-company-contacts-tab-filter-c) | [<p style="color:black">`filter-c KEYWORD [MORE_KEYWORDS]…​` <br> e.g., `filter-c Google`</p>](#filtering-contacts-by-company-contacts-tab-filter-c)                                                                 |
+| Action                                                                                                   | Format, Examples                                                                                                                                                                                                 |
+|----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [<p style="color:black">**List all contacts**</p>](#listing-all-contacts-contacts-tab-list)              | `list`                                                                                                                                                                 |
+| [<p style="color:black">**Add**</p>](#adding-a-contact-contacts-tab-add)                                 | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [c/COMPANY] [t/TELEGRAM_NAME]` <br> e.g., `add n/‘Chewbaca’ The 1st p/+659123139 e/chewie@gmail.com` |
+| [<p style="color:black">**Edit**</p>](#editing-a-contact-contacts-tab-edit)                              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [t/TELEGRAM_NAME]` <br/> e.g., `edit 2 n/Betsy Crower t/`	            |
+| [<p style="color:black">**Delete**</p>](#deleting-a-contact-entry-contacts-tab-delete)                   | `delete INDEX` <br> e.g., `delete 1`                                                                                     |
+| [<p style="color:black">**Filter by Name**</p>](#filtering-contacts-by-name-contacts-tab-filter-n)       | `filter-n KEYWORD [MORE_KEYWORDS]…​` <br> e.g., `filter-n David Li`                                                          |
+| [<p style="color:black">**Filter by Company**</p>](#filtering-contacts-by-company-contacts-tab-filter-c) | `filter-c KEYWORD [MORE_KEYWORDS]…​` <br> e.g., `filter-c Google`                                                            |
 
 <div style="page-break-after: always;"></div>
 
 ### Finance Tab
 
-| Action                                                                                                                | Format, Examples                                                                                                                                                                                   |
-|-----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [<p style="color:black">**List**</p>](#listing-finances-finance-tab-list)                                             | [<p style="color:black">`list [TYPE]`<br> e.g., `list commission`</p>](#listing-finances-finance-tab-list)                                                                                         |
-| [<p style="color:black">**Add Commission**</p>](#adding-a-commission-finance-tab-add-c)                               | [<p style="color:black">`add-c a/AMOUNT n/CLIENT d/DESCRIPTION [t/time]` <br> e.g., `add-c n/Betsy Crower a/800 d/UI design for NinjaVan t/tmr`</p>](#adding-a-commission-finance-tab-add-c)       |
-| [<p style="color:black">**Add Expense**</p>](#adding-an-expense-finance-tab-add-e)                                    | [<p style="color:black">`add-e a/AMOUNT n/CLIENT [d/DESCRIPTION] [t/time]` <br> e.g., `add-e n/Betsy Crower a/100 d/Adobe Photoshop subscription t/now`</p>](#adding-an-expense-finance-tab-add-e) |
-| [<p style="color:black">**Edit**</p>](#editing-a-finance-finance-tab-edit)                                            | [<p style="color:black">`edit INDEX [d/DESCRIPTION] [a/AMOUNT] [c/CLIENT] [t/TIME]` <br/> e.g., `edit 1 d/Photoshop subscription a/300`</p>](#editing-a-finance-finance-tab-edit)                  |
-| [<p style="color:black">**Delete**</p>](#deleting-a-finance-entry-finance-tab-delete)                                 | [<p style="color:black">`delete INDEX`<br> e.g., `delete 3`</p>](#deleting-a-finance-entry-finance-tab-delete)                                                                                     |
-| [<p style="color:black">**Filter by Client Name**</p>](#filtering-finances-by-client-finance-tab-filter-c)    | [<p style="color:black">`filter-c KEYWORD`<br> e.g., `filter-c John`</p>](#filtering-finances-by-client-finance-tab-filter-c)                                                                      |
-| [<p style="color:black">**Filter by Time Frame**</p>](#filtering-finances-by-time-frame-finance-tab-filter-t) | [<p style="color:black">`filter-t s/START_TIME e/END_TIME`<br> e.g., `filter-t s/tdy e/next week`</p>](#filtering-finances-by-time-frame-finance-tab-filter-t)                                     |
-| [<p style="color:black">**Summary**</p>](#generating-a-finance-summary-of-a-client-finance-tab-summary)               | [<p style="color:black">`summary CLIENT`<br> e.g., `summary John Doe`</p>](#generating-a-finance-summary-of-a-client-finance-tab-summary)                                                          |
+| Action                                                                                                         | Format, Examples                                                                                                                |
+|----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| [<p style="color:black">**List**</p>](#listing-finances-finance-tab-list)                                      | `list [TYPE]`<br> e.g., `list commission`                                                                                       |
+| [<p style="color:black">**Add Commission**</p>](#adding-a-commission-finance-tab-add-c)                        | `add-c d/DESCRIPTION a/AMOUNT c/CLIENT [t/TIME]` <br> e.g., `add-c n/Betsy Crower a/800 d/UI design for NinjaVan t/tmr`         |
+| [<p style="color:black">**Add Expense**</p>](#adding-an-expense-finance-tab-add-e)                             | `add-e d/DESCRIPTION a/AMOUNT [c/CLIENT] [t/TIME]` <br> e.g., `add-e n/Betsy Crower a/100 d/Adobe Photoshop subscription t/now` |
+| [<p style="color:black">**Edit**</p>](#editing-a-finance-finance-tab-edit)                                     | `edit INDEX [d/DESCRIPTION] [a/AMOUNT] [c/CLIENT] [t/TIME]` <br/> e.g., `edit 1 d/Photoshop subscription a/300`                 |
+| [<p style="color:black">**Delete**</p>](#deleting-a-finance-entry-finance-tab-delete)                          | `delete INDEX`<br> e.g., `delete 3`             |
+| [<p style="color:black">**Filter by Client Name**</p>](#filtering-finances-by-client-finance-tab-filter-c)     | `filter-c KEYWORD`<br> e.g., `filter-c John`             |
+| [<p style="color:black">**Filter by Time Frame**</p>](#filtering-finances-by-time-frame-finance-tab-filter-t)  | `filter-t s/START_TIME e/END_TIME`<br> e.g., `filter-t s/tdy e/next week`               |
+| [<p style="color:black">**Summary**</p>](#generating-a-finance-summary-of-a-client-finance-tab-summary)        | `summary CLIENT`<br> e.g., `summary John Doe`          |
 
 <div style="page-break-after: always;"></div>
 
 ### Events Tab
 
-| Action                                                                                                  | Format, Examples                                                                                                                                                                                                                          |
-|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [<p style="color:black">**List Upcoming**</p>](#listing-all-upcoming-events-events-tab-list)            | [`list`](#listing-all-upcoming-events-events-tab-list)                                                                                                                                                                                    |
-| [<p style="color:black">**List All**</p>](#listing-all-events-events-tab-list-all)                      | [<p style="color:black">`list-all`<br> e.g., `list-all`</p>](#listing-all-events-events-tab-list-all)                                                                                                                                     |
-| [<p style="color:black">**Add**</p>](#adding-an-event-events-tab-add)                                   | [<p style="color:black">`add n/NAME s/TIMESTART e/TIMEEND [c/CLIENT] [l/LOCATION] [d/DESCRIPTION]` <br> e.g., `add n/Tennis s/31-09-2023 19:30 e/31-09-2023 21:30 l/20 Lower Kent Ridge Road, 119080`</p>](#adding-an-event-events-tab-add) |
-| [<p style="color:black">**Edit**</p>](#editing-an-event-events-tab-edit)                                | [<p style="color:black">`edit INDEX [n/NAME] [s/TIMESTART] [e/TIMEEND] [c/CLIENT]…​ [l/LOCATION] [d/DESCRIPTION]` <br/> e.g., `edit 1 n/Tennis`</p>](#editing-an-event-events-tab-edit) 	                                                 |
-| [<p style="color:black">**Delete**</p>](#deleting-an-event-entry-events-tab-delete)                     | [<p style="color:black">`delete INDEX`<br> e.g., `delete 3`</p>](#deleting-an-event-entry-events-tab-delete)                                                                                                                              |
-| [<p style="color:black">**Filter by Client Name**</p>](#filtering-events-by-client-events-tab-filter-c) | [<p style="color:black">`filter-c KEYWORD`<br> e.g., `filter-c Alex`</p>](#filtering-events-by-client-events-tab-filter-c)                                                                                                                |
-| [<p style="color:black">**Filter by Event Name**</p>](#filtering-events-by-name-events-tab-filter-n)    | [<p style="color:black">`filter-n KEYWORD`<br> e.g., `filter-n birthday` </p>](#filtering-events-by-name-events-tab-filter-n)                                                                                                             |
-| [<p style="color:black">**Filter by Time**</p>](#filtering-events-by-time-events-tab-filter-t)          | [<p style="color:black">`filter-t TIMESTAMP`<br> e.g., `filter-t next week`</p>](#filtering-events-by-time-events-tab-filter-t)                                                                                                           |
+| Action                                                                                                  | Format, Examples                                                                                                                                                              |
+|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [<p style="color:black">**List Upcoming**</p>](#listing-all-upcoming-events-events-tab-list)            | `list`                                                                                                                                                                        |
+| [<p style="color:black">**List All**</p>](#listing-all-events-events-tab-list-all)                      | `list-all`<br> e.g., `list-all`                                                                                                                                               |
+| [<p style="color:black">**Add**</p>](#adding-an-event-events-tab-add)                                   | `add n/NAME s/TIMESTART e/TIMEEND [c/CLIENT] [l/LOCATION] [d/DESCRIPTION]` <br> e.g., `add n/Tennis s/31-09-2023 19:30 e/31-09-2023 21:30 l/20 Lower Kent Ridge Road, 119080` |
+| [<p style="color:black">**Edit**</p>](#editing-an-event-events-tab-edit)                                | `edit INDEX [n/NAME] [s/TIMESTART] [e/TIMEEND] [c/CLIENT]…​ [l/LOCATION] [d/DESCRIPTION]` <br/> e.g., `edit 1 n/Tennis`                                                       |
+| [<p style="color:black">**Delete**</p>](#deleting-an-event-entry-events-tab-delete)                     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                           |
+| [<p style="color:black">**Filter by Client Name**</p>](#filtering-events-by-client-events-tab-filter-c) | `filter-c KEYWORD`<br> e.g., `filter-c Alex`                                                                                                                                  |
+| [<p style="color:black">**Filter by Event Name**</p>](#filtering-events-by-name-events-tab-filter-n)    | `filter-n KEYWORD`<br> e.g., `filter-n birthday`                                                                                                                              |
+| [<p style="color:black">**Filter by Time**</p>](#filtering-events-by-time-events-tab-filter-t)          | `filter-t TIMESTAMP`<br> e.g., `filter-t next week`                                                                                                                           |
 
 [↑ Back to Table of Contents](#table-of-contents)
 
