@@ -304,13 +304,14 @@ Finds persons whose names, phone numbers, emails, tags, and allergies match the 
 
 Format: `findp [n/KEYWORD [MORE_KEYWORDS]…] [p/PHONE_NUMBER] [e/EMAIL] [t/KEYWORD [MORE_KEYWORDS]…] [no/KEYWORD [MORE_KEYWORDS]…]`
 
-* The search for name, tags and allergies are case-insensitive. e.g `hans` will match `Hans`
+* The search for name and allergies are case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * The search for phone number and email are case-sensitive and must be an exact match.
   e.g. `9123456` will not match `91234567` and `johndoe@example` does not match `johndoe@example.com`
+* At least one of the parameters must be specified.
 
 Examples:
 * `findp n/Alex david` returns `Alex Yeoh`, `David Li`<br>
