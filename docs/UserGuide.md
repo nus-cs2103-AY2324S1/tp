@@ -46,7 +46,7 @@ With MedBook, experience a new level of convenience and control:
     - [Adding a patient](#adding-a-patient-addpatient)
     - [Editing a patient](#editing-a-patient-editpatient)
     - [Deleting a patient](#deleting-a-patient-delete)
-    - [Locating patients by keywords](#locating-patients-by-keywords-search)
+    - [Searching patients by keywords](#searching-patients-by-keywords-search)
     - [Listing all patients](#listing-all-patients-list)
     - [Pinning a patient](#pinning-a-patient-pin)
     - [Unpinning a patient](#unpinning-a-patient-unpin)
@@ -55,7 +55,7 @@ With MedBook, experience a new level of convenience and control:
     - [Viewing patient medical records](#viewing-patient-medical-records-view)
     - [Editing a medical record](#editing-a-medical-record-editrecord)
     - [Deleting a medical record](#deleting-a-medical-record-deleterecord)
-    - [Locating medical records by keywords](#locating-medical-records-by-keywords-searchrecord)
+    - [Searching medical records by keywords](#searching-medical-records-by-keywords-searchrecord)
     - [Attaching files to a patient's medical record](#attaching-files-to-a-patient-s-medical-record)
   - [Appointment Features](#appointment-features)
     - [Adding an appointment](#adding-an-appointment-addappointment)
@@ -168,8 +168,6 @@ Here are some definitions of the terms used throughout this user guide.
 
 **Main Window**:
 ![Ui Component](images/UiComponent.png)
-
-Here is a brief summary of the GUI components in MedBook.
 
 | **Name of Component** | **Description**                                                                                          |
 | --------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -455,7 +453,7 @@ Output
 
 <div style="page-break-after: always;"></div>
 
-#### Locating patients by keywords: `search`
+#### Searching patients by keywords: `search`
 
 Searches for patients with details containing the corresponding `KEYWORD`.
 
@@ -696,7 +694,7 @@ Example:
 
 ---
 
-#### Locating medical records by keywords: `searchrecord`
+#### Searching medical records by keywords: `searchrecord`
 
 Searches for medical records of the Patient Being Viewed with details containing the corresponding `KEYWORD`.
 
