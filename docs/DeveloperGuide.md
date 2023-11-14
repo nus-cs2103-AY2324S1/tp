@@ -710,7 +710,7 @@ Guarantees: The short form for the medicine will be removed.
 
 **MSS**
 
-1. User adds a short form [U07](#use-case-uc06---adding-a-medicine-short-form).
+1. User adds a short form [U06](#use-case-uc06---adding-a-medicine-short-form).
 2. User chooses to delete the short form.
 3. PharmHub updates Medicine list with an empty short form.
 <br>**Use case ends**
@@ -929,13 +929,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.
+   
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Adding a person
+
 1. Adding a Person with Valid Details
+
     1. Test Case: `addp n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
  
        Expected: John Doe is added as a new person to PharmHub. All provided details, including the name, phone number, email, and address, are correctly saved. No errors or warnings are displayed.
@@ -943,21 +944,27 @@ testers are expected to do more *exploratory* testing.
     1. Test Case: `addp n/Betsy Crowe t/diabetic e/betsycrowe@example.com a/19 Kent Ridge Crescent p/1234567 t/senior`
        
         Expected: Betsy Crowe is added as a new person to PharmHub. All provided details, including the name, phone number, email, and address, tags, and allergies, are correctly saved. No errors or warnings are displayed.
+   
 2.  Adding a Person with Incorrect/Incomplete Information
+
     1. `addp n/Jane Doe`
     
        Expected: An error message is displayed due to the absence of the phone number, email, and address. The person isn’t added as these details are mandatory.
     
 3. Adding a Person with Duplicate Name 
+
     1. Prerequisites: A person with name "John Doe" already exists in PharmHub. This can be done using the command in 1.i.
+
     1. Test case: `addp n/John Doe p/9872 e/anotherjohnd@example.com a/Jane street, block 42, #03-02`
     
        Expected: An error message is displayed due to the presence of a person with the same name. The person isn’t added as names must be unique.
    
 4. Adding a Person with an allergy which is not yet in the Medicine list
-   1. Prerequisites: A persons list without the person with name "John Doe". A medicine list without the medicine "Aspirin". You can run the command `clear` to clear all entries in PharmHub. 
+
+   1. Prerequisites: A persons list without the person with name "John Doe". A medicine list without the medicine "Aspirin".
+
    1. Test case: `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 no/Aspirin`
-      
+
       Expected: An error message is displayed due to the presence of an allergy which is not in the medicine list. The person isn’t added as the allergy must be in the medicine list.
 
 ### Deleting a person
@@ -967,62 +974,92 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `listp` command. Multiple persons in the list.
 
     1. Test case: `deletep 1`<br>
-       Expected: First person is deleted from the list. Details of the deleted person shown in result display box.
+   
+       Expected: First contact is deleted from the list. Details of the deleted contact is shown in Info Display.
 
     1. Test case: `deletep 0`<br>
-       Expected: No person is deleted. Error details shown in the result display box.
+       Expected: No person is deleted. An error message is displayed due to an invalid index being used.
 
-    1. Other incorrect delete commands to try: `deletep`, `deletep x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deletep`, `deletep x`, `...` (where x is larger than the list size)
+   
        Expected: Similar to previous.
 
 ### Viewing a person
+
 1. Viewing a person with valid index
+
     1. Prerequisites: There is at least 1 person in the persons list of PharmHub. This can be done using the command in 1.i. This can be checked using the command: `listp`
-    1. Test case: `viewp 1`<br>
-       Expected: First person is shown in the details panel. Details of the person shown in the result display box.
+   
+    1. Test case: `viewp 1`
+   
+       Expected: First contact is shown in the Info Display.
 
-    1. Test case: `viewp 0`<br>
-       Expected: No person is shown. Error details shown in the result display box.
+    1. Test case: `viewp 0`
+   
+       Expected: No person is shown. An error message is displayed due to an invalid index being used.
 
-    1. Other incorrect view commands to try: `viewp`, `viewp x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Other incorrect view commands to try: `viewp` || `viewp x` (where x is larger than the list size)
+   
+       Expected: No person is shown. An error message id displayed due to an invalid index being used.
 
 ### Editing a person 
+
 1. Editing a person using valid fields
-    1. Test case: `editp 1 n/John Doe p/98765432`
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. No person named 'Johnson Doe' in PharmHub.
+   
+    1. Test case: `editp 1 n/Johnson Doe p/98765432`
  
-       Expected: First person is edited. Details of the edited person shown in the result display box.
+       Expected: First person is edited. Details of the edited person is shown in the Info Display.
 
 ### Finding person(s)
 1. Finding person(s) using valid fields 
+
     1. Test case: `findp n/John`
+   
        Expected: The person(s) with the word "John" or "john" in his/her name are listed in the display list panel.
+
     1. Test case: `findp n/Alex John`
+   
        Expected: All person(s) with name containing "Alex", "alex", "John", or "john" are listed in the display list panel.
+   
     1. Test case: `findp no/Aspirin Paracetamol`
+   
        Expected: All person(s) with allergy containing "Aspirin" or "Paracetamol" are listed in the display list panel.
+   
     1. Test case: `findp p/123456`
+   
        Expected: All person(s) with phone number exactly equal to "123456" are listed in the display list panel.
+   
     1. Test case: `findp e/john@gmail.com`
+   
        Expected: All person(s) with email exactly equal to "john@gmail.com" are listed in the display list panel.
 
 2. Finding person(s) using invalid input
+
     1. Test case: `findp`
+   
        Expected: An error message is displayed due to the absence of any field. No person is shown.
+   
     1. Test case: `findp n/`
+   
        Expected: An error message is displayed due to the absence of the name. No person is shown.
 
 ### Listing all medicines
 
 1. Test case: `listm` <br>
-   Expected: All medicines listed in the display list panel. "Listed all medicines" shown in result display box.
+
+   Expected: All medicines listed in the display panel.
 
 ### Finding medicine(s)
 
-1. Test case: `findm pan` <br> 
-   Expected: All medicine whose names have `pan` as a substring listed in the display panel. The number of medicines listed shown in result display box.
-2. Test case: `findm pan ol` <br> 
-   Expected: All medicine whose names have `pan` or `ol`  as a substring listed in the display panel. The number of medicines listed shown in result display box.
+1. Test case: `findm pan` 
+
+   Expected: All medicine whose names have `pan` as a substring listed in the list display. The number of medicines listed shown in result display box.
+
+2. Test case: `findm pan ol`
+
+   Expected: All medicine whose names have either `pan` or `ol`  as a substring are listed in the list display. The number of medicines listed shown in result display box.
 
 
 ### Adding a medicine
@@ -1031,19 +1068,25 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all medicines using the `listm` command. No medicine named `metformin` should be in the list.
 
-    1. Test case: `addm m/metformin`<br>
-       Expected: Medicine is added. Details of added medicine shown in the result display box.
+    1. Test case: `addm m/metformin`
+   
+       Expected: Medicine is added.
 
-    1. Test case: `addm m/`<br>
-       Expected: No medicine is added. Error message shows in result display box.
+    1. Test case: `addm m/`
+   
+       Expected: No medicine is added. An error message is displayed due to the invalid command format.
 
-    1. Other incorrect `addm` commands to try: `addm `, `addm p/`, `addm 1` <br>
+    1. Other incorrect `addm` commands to try: `addm `, `addm p/`, `addm 1`
+   
        Expected: Similar to previous.
 
 2. Adding a medicine that already exists
+
     1. Prerequisites: List all medicines using the `listm` command. A medicine named `metformin` should be in the list.
-    1. Test case: `addm m/metformin` <br>
-       Expected: Medicine is not added. Error message is shown in result display box.
+   
+    1. Test case: `addm m/metformin`
+   
+       Expected: Medicine is not added. An error message is displayed because 'metformin' already exists in PharmHub.
     
 
 
@@ -1051,78 +1094,102 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a medicine no person is allergic to and not part of any order. 
 
-    1. Prerequisites: `metformin` should be in the medicine list. Find it using `findm metformin`
+    1. Prerequisites: `metformin` should be in the medicine list. Find it using `findm metformin`. No `Order` contains `metformin` and no `Person` has an allergy to `metformin`.
 
-    1. Test case: `deletem 1`<br>
-       Expected: First medicine is deleted from the list. Details of the deleted medicine is shown in result display box.
+    1. Test case: `deletem 1`
+   
+       Expected: First medicine is deleted from the list.
 
-    1. Test case: `deletem 0`<br>
-       Expected: No medicine is deleted. Error details shown in the result display box.
+    1. Test case: `deletem 0`
+   
+       Expected: No medicine is deleted. An error message is shown due to an invalid index being used.
 
-    1. Other incorrect delete commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)
+   
        Expected: Similar to previous.
 
 2. Deleting a medicine a person is allergic to.
     
     1. Prerequisites: `panadol` should be in the medicine list. If not add it using `addm`. At least one person should be allergic to `panadol`.
-       If not use `editp` to make a person allergic to `panadol`. Find `panadol` using `findm panadol`
-    1. Test case: `deletem 1` <br>
-       Expected: No medicine is deleted. Error details shown in the result display box.
+       If not use `editp` to make a person allergic to `panadol`. `panadol` should be the 1st medicine in the list. If not, find `panadol` using `findm panadol`
+   
+    1. Test case: `deletem 1`
+   
+       Expected: No medicine is deleted. An error message is shown as a `Person` or and `Order` uses this medicine.
 
 ### Short form of medicine
 
 1. Adding a short form to a medicine 
 
-    1. Prerequisites: `metformin` should be in the medicine list, it should have no short form and no medicine should have `met` as the short form. Find it using `findm metformin`
+    1. Prerequisites: `metformin` should be in the medicine list, it should have no short form and no medicine should have `met` as the short form. It should be the 1st medicine in the medicine list. If not, find it using `findm metformin`
 
-    1. Test case: `sfm 1 m/met`<br>
-       Expected: Short form of `met` is added to the `metformin` medicine. Details of medicine shown in result display box.
-    1. Test case: `sfm 1 met`<br>
-          Expected: Short form is not added to the `metformin` medicine. Error message shown in result display box.
+    1. Test case: `sfm 1 m/met`
+   
+       Expected: Short form of `met` is added to the `metformin` medicine.
+   
+    1. Test case: `sfm 1 met`
+   
+    Expected: Short form is not added to the `metformin` medicine. An error message is shown due to an invalid command format used.
 
 2. Deleting a short form of a medicine.
 
-    1. Prerequisites: `metformin` should be in the medicine list, it should have a short form. Find it using `findm metformin`
-    1. Test case: `sfm 1 d/` <br>
-       Expected: Short form of `metformin` medicine is deleted. Details of medicine shown in result display box.
-    1. Test case: `sfm 1 m/ d/` <br>
-         Expected: Short form of `metformin` medicine is deleted. Details of medicine shown in result display box.
-    1. Test case: `sfm m/ d/` <br>
-         Expected: Short form of `metformin` medicine is not deleted. Error message shown in result display box.
+    1. Prerequisites: `metformin` should be in the medicine list, it should have a short form. It should be the first medicine in the medicine list. If not, find it using `findm metformin`
+   
+    1. Test case: `sfm 1 d/`
+   
+       Expected: Short form of `metformin` medicine is deleted.
 
+    1. Test case: `sfm 1 m/ d/`
+   
+         Expected: Short form of `metformin` medicine is deleted.
+   
+    1. Test case: `sfm m/ d/`
 
-
+         Expected: Short form of `metformin` medicine is not deleted. An error message is shown due to an invalid format being used.
 
 
 ### Listing all orders
 
 1. Test case: `listo`
-<br> Expected: All orders listed in the display list panel. "Listed all orders" shown in result display box.
+
+ Expected: All orders listed in the display list panel.
 
 ### Finding order(s)
 
-1. Test case: `findo s/pd` Finding by status short form only <br>
-   Expected: All orders with `PENDING` Status will be listed in the display list panel. The number of orders listed shown in result display box.
+1. Finding an order by status short form only
 
-2. Test case: `findo s/pending` Finding by status full form only <br>
-   Expected: All orders with `PENDING` Status will be listed in the display list panel. The number of orders listed shown in result display box.
+   1. Test case: `findo s/pd`
 
-3. Test case: `findo m/pan` Finding by one medicine keyword only <br>
-   Expected: All orders with medicine whose names have `pan` as a substring will be listed in the display list panel. The number of order listed shown in result display box.
+      Expected: All orders with `PENDING` Status will be listed in the display list panel. The number of orders listed shown in result display box.
 
-4. Test case: `findo m/pan ol` Finding by multiple medicine keyword <br>
+1. Finding an order by status full form only
+
+   1. Test case: `findo s/pending`
+   
+      Expected: All orders with `PENDING` Status will be listed in the display list panel. The number of orders listed shown in result display box.
+
+1. Finding an order by multiple medicine keywords
+
+    1. Test case: `findo m/pan m/ol`
+   
    Expected: All orders with medicine whose names have `pan` or `ol`  as a substring will be listed in the display list panel. The number of orders listed shown in result display box.
 
-5. Test case: `findo s/pd m/pan ol` Finding by both status and medicine keywords <br>
-   Expected: All orders that has both `PENDING` status and with medicine whose names have `pan` or `ol` as a substring 
-    will be listed in the display list panel(both conditions must be fulfilled). The number of orders listed shown in result display box. 
+1. Finding an order by both status and medicine keywords
 
-6. Test case: `findo s/wowow` Invalid Status <br>
-   Expected: No orders will be listed in the display list panel. `Invalid Status` error message shown on result display box.
+   1. Test case: `findo s/pd m/pan m/ol` 
+   
+   Expected: All orders that has both `PENDING` status and with medicine whose names have either `pan` or `ol` as a substring 
+       will be listed in the display list panel(both conditions - Status and Medicine - must be fulfilled). The number of orders listed shown in result display box. 
+
+1. Finding an order with an invalid status
+
+   1. Test case: `findo s/wowow` 
+   
+      Expected: No orders will be listed in the display list panel. An error message will be shown due to an invalid status searched for
 
 ### Adding an order
 
-1. Adding an order that doesn't exist(i.e. Unique OrderNumber)
+1. Adding an order that doesn't exist 
 
    1. Prerequisites: List all order using the `listo` command. No order with the order number `1234` should be in the list.
    
@@ -1132,72 +1199,76 @@ testers are expected to do more *exploratory* testing.
    
    4. Prerequisites: Person should not be assigned to medicine they are allergy to.
    
-   5. Test case: `addo 1 m/pan o/1234` <br>
-      Expected: Order is added. Details of the order shown in the Detail information display.
+   5. Test case: `addo 1 m/pan o/1234`
    
-   6. Test case: `addo m/pan o/1234` || `addo 1 o/1234` || `addo 1 m/pan` <br>
-      Expected: No Order is added due to missing details. `Invalid Command Format`shown in the result display.
+      Expected: Order is added. Details of the order shown in the Information display.
+   
+   6. Test case: `addo 1 o/1234` || `addo 1 m/pan`
+   
+      Expected: No Order is added due to missing details. An error is displayed due to an invalid format being used.
 
-   7. Test case: `addo m/` || `addo` <br>
+   7. Test case: `addo m/` || `addo`
+   
       Expected: Similar to previous.
 
-2. Adding an order that already exists(i.e. OrderNumber already exist)
+2. Adding an order that already exists (i.e. OrderNumber already exist)
 
    1. Prerequisites: List all orders using the `listo` command. An order with order number `1234` should be in the list.
    
-   2. Test case: `addo 1 m/pan o/1234` <br>
-      Expected: Order is not added. `Order Already exist` Error message is shown in result display box.
+   2. Test case: `addo 1 m/pan o/1234`
+   
+      Expected: Order is not added. An error message is shown because an order with the same order number already exists.
 
 3. Adding an order with medicine the person is allergy to.
 
    1. Prerequisites: List all orders using the `listo` command. An order with order number `2222` should not be in the list.
 
-   2. Prerequisites: List all person using the `listp` command. Pick one person with an allergy and take note.
+   2. Prerequisites: List all person using the `listp` command. The 1st person in the person list should be allergic to `paracetamol`. If not, edit his details to make him so.
    
-   3. Test case: `addo 1 m/paracetamol` <br>
-      Expected: Order is not added. `Patient is Allergy` Warning message will be displayed.
+   3. Test case: `addo 1 m/paracetamol`
+   
+      Expected: Order is not added. A warning message is displayed as the patient is allergic to `paracetamol`.
 
-   4. Test case: `addo 1 m/paracetamol ia/` (ignore allergy flag `ia`)<br>
-      Expected: Order is added. Details of tht order shown in the Detail information display.
+   4. Test case: `addo 1 m/paracetamol ia/` (ignore allergy flag `ia`)
+   
+      Expected: Order is added. Details of tht order shown in the Information display.
 
 ### Updating the order status
 
 1. Updating an order status with valid chronological order.
 
-   1. Prerequisites: List all orders using the `listo` command. The new status should be of a higher chronological order than the old status.
+   1. Prerequisites: List all orders using the `listo` command. The status of the 1st order should be `PENDING`. If not, add a new order and make that order the 1st in the order list using `findo`.
    
-   2. Test case: old orderStatus `PENDING`, command: `updates 1 s/pr` <br>
-      Expected: Order status updated to `PREPARING`. Details of the updated order is shown in the detail information display box.
+   2. Test case: `updates 1 s/pr`
    
-   3. Test case: old orderStatus `PREPARING`, command: `updates 1 s/completed` <br>
-      Expected: Order status updated to `COMPLETED`. Details of the updated order is shown in the detail information display box.
+      Expected: Order status updated to `PREPARING`. Details of the updated order is shown in the Information display box.
+   
+   3. Test case: `updates 1 s/completed`
+   
+      Expected: Order status updated to `COMPLETED`. Details of the updated order is shown in the Information display box.
 
-   4. Test case: old orderStatus `COMPLETED`, command: `updates 1 s/pending` <br>
-      Expected: Order status not updated. `Invalid Chronological Order` error message shown in result display box.
+   4. Test case: `updates 1 s/pending`
+   
+      Expected: Order status not updated. An error message is shown as orders can only be updated to a status of higher hierarchy.
 
-   5. Test case: old orderStatus `COMPLETED`, command: `updates 1 s/pwpw` <br>
-      Expected: Order status not updated. `Invalid Status` error message shown in result display box.
+   5. Test case: `updates 1 s/pwpw` 
+   
+      Expected: Order status not updated. An error message is shown due to an invalid status being entered.
 
 ### Deleting an order
 
 1. Deleting an order
 
-   1. Prerequisites: List all orders using the `listo` command. The order to delete should be in the list shown.
+   1. Prerequisites: List all orders using the `listo` command. The order to delete should be the 1st in the list shown.
 
-   2. Test case: `deleteo 1`<br>
-      Expected: First order is deleted from the list. Details of the deleted order is shown in detail information display box.
-
-   3. Test case: `deleteo `<br>
-      Expected: No order deleted. `Invalid Command Format` error message shown.
-
+   2. Test case: `deleteo 1`
    
-    1. Test case: `editp 0 n/John Doe p/98765432`<br>
-       
-       Expected: No person is edited. Error details shown in the result display box.
+      Expected: First order is deleted from the list. Details of the deleted order is shown in Information display box.
 
-    1. Other incorrect edit commands to try: `editp`, `editp x`, `...` (where x is larger than the list size)<br>
-       
-       Expected: Similar to previous.
+   3. Test case: `deleteo `
+   
+      Expected: No order deleted. An error message is shown due to an invalid command format being used.
+
        
 ### Saving data
 
@@ -1205,7 +1276,6 @@ testers are expected to do more *exploratory* testing.
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
 
 ## **Appendix: Planned Enhancements**
 
