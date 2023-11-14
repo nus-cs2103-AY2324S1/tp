@@ -441,8 +441,6 @@ specified above.
     * `true` - Remove contacts who have finished/haven't started the course as of the current date of your system.
     * `false` - (default). Include contacts who have finished/haven't started taking the course
   as of the current date.
-    * NOTE: `[taken]` compares the dates of the course with the current date of
-    your system. It does not factor in other fields like graduation year.
 
 Example usage:
 
@@ -452,6 +450,16 @@ Example usage:
 * `filter /by course /with robotics`
 * `filter /by spec /with Industry AI`
 * `filter /by grad /with 2022 2023 2024 2025`
+
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+`[taken]` compares the dates of the course with the current date of
+    your system. It does not factor in other fields like graduation year.
+</div>
+
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+When `[taken]` is set to `false`, all contacts that have matching course names will be included in the filtered list,
+regardless of start and end date.
+</div>
 
 [Table of Contents](#table-of-contents)
 
