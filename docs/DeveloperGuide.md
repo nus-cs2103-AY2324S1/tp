@@ -378,7 +378,8 @@ Abbreviations are used to reduce the clutter in the diagram.
    Our current error condition:
    
     ~~~
-   if (model.getFilteredBandList().size() > 1 || !predicate.test(model.getFilteredBandList().get(0)) {
+   if (model.getFilteredBandList().size() > 1 || 
+      !predicate.test(model.getFilteredBandList().get(0)) {
        // throw exception
    }
     ~~~
