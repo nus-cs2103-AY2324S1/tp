@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Command <|-- FilterCommand
+Predicate <|.. ContainsAllPredicate
+FilterCommand *-- "1" ContainsAllPredicate
+FilterCommand - FilterCommandParser
+Parser <|.. FilterCommandParser
+
+ContainsAllPredicate o-- "*" EmployeeName
+ContainsAllPredicate o-- "*" Phone
+ContainsAllPredicate o-- "*" Email
+ContainsAllPredicate o-- "*" Address
+ContainsAllPredicate o-- "*" Salary
+ContainsAllPredicate o-- "*" Leave
+ContainsAllPredicate o-- "*" DepartmentName
+@enduml

@@ -192,17 +192,17 @@ Examples:
 
 Acceptable values for each parameter:
 
-| Parameters     | Accepted input                                             |
-|----------------|------------------------------------------------------------|
-| `NAME`         | Alphabets and Numbers                                      |
-| `PHONE_NUMBER` | At least 3 digits                                          |                                                  |
-| `EMAIL`        | Email with the pattern x@x.com where ‘x’ are alphanumerics |
-| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -               |
-| `SALARY`       | Numerals                                                   |
-| `LEAVE`        | Numerals                                                   |
-| `ROLE`         | `manager` or `subordinate` (Case-insensitive)              |
-| `DEPARTMENT`   | Optional. Alphabets and ascii characters i.e. &, -         |
-| `MANAGER_NAME` | Optional. Name of an existing manager in ManageHR.         |
+| Parameters     | Accepted input                                         |
+|----------------|--------------------------------------------------------|
+| `NAME`         | Alphabets and Numbers                                  |
+| `PHONE_NUMBER` | At least 3 digits                                      |                                                  |
+| `EMAIL`        | Email with the pattern x@x where ‘x’ are alphanumerics |
+| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -           |
+| `SALARY`       | Numerals                                               |
+| `LEAVE`        | Numerals                                               |
+| `ROLE`         | `manager` or `subordinate` (Case-insensitive)          |
+| `DEPARTMENT`   | Optional. Alphabets and ascii characters i.e. &, -     |
+| `MANAGER_NAME` | Optional. Name of an existing manager in ManageHR.     |
 
 Expected outputs:
 
@@ -264,31 +264,35 @@ Examples:
 
 Filters employees by prefix parameters.
 
-Format: `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]`
+Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME] [d/DEPARTMENT]`
 
 * The filter is case-sensitive. e.g. `R&D` will not match `r&d`
 * At least one of the optional fields must be provided.
+* Able to filter by multiple prefixes
 
 Examples:
-* `filter d/R&D` returns employees with the `R&D` department
+* `filter d/investment` returns employees with the `investment` department
 * `filter s/4000` returns employees with salary equal to or less than 4000
+* `filter l/14 r/manager` returns employees with 14 days of leave and the manager role
 
-| Parameters | Accepted input | Remarks                                                                         |
-| --- |-------------------------------------|---------------------------------------------------------------------------------|
-| `NAME` | Alphabets                           | Full name is needed (case-sensitive)                                            |
-| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics ||
-| `ADDRESS` | Alphanumerics and ascii characters i.e. #, - ||
-| `SALARY` | Numerals                            | Returns employees with salary less than or equals to the given salary parameter |
-| `LEAVE` | Numerals                            ||
-| `ROLE` | `manager` or `subordinate` (Case-insensitive) | `m/MANAGER` shows subordinates of `MANAGER`                                     |
-| `DEPARTMENT` | Alphabets and ascii characters i.e. &, - | Able to filter by multiple `d/` parameters                                      |
+| Parameters     | Accepted input                                         | Remarks                                                                              |
+|----------------|--------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `NAME`         | Alphabets and Numbers                                  | Full name is needed (case-sensitive)                                                 |
+| `PHONE_NUMBER` | At least 3 digits                                      | Exact phone number is needed                                                         |
+| `EMAIL`        | Email with the pattern x@x where ‘x’ are alphanumerics | Exact email is needed (case-sensitive)                                               |
+| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -           | Exact address is needed (case-sensitive)                                             |
+| `SALARY`       | Numerals                                               | Returns employees with salary __less than or equal__ to the given `SALARY` parameter |
+| `LEAVE`        | Numerals                                               | Returns employees with leave __equal__ to the given `LEAVE` parameter                |
+| `ROLE`         | `manager` or `subordinate` (case-insensitive)          | Returns employees with either the `manager` role or the `subordinate` role           |
+| `MANAGER_NAME` | Alphabets and Numbers                                  | Returns subordinates of given `MANAGER_NAME` parameter                               |
+| `DEPARTMENT`   | Alphabets and ascii characters i.e. &, -               | Returns employees with the given `DEPARTMENT` parameter                              |
 
 Expected outputs:
 
-| Outcome | Output                            |
-| --- |-----------------------------------|
-| **Success** | X employees listed!    |
-| **Fail** | Invalid command format!|
+| Outcome     | Output                  |
+|-------------|-------------------------|
+| **Success** | X employees listed!     |
+| **Fail**    | Invalid command format! |
 
 ![filterCommandExample](images/filterCommandExample.png)
 
@@ -315,9 +319,6 @@ Examples:
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
-
-### Filtering Employees : `filter`
-Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
 
 ### Adding/Deleting a department : `department`
 

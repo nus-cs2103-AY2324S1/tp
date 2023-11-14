@@ -271,20 +271,30 @@ Upon calling execute, the Model returns a filtered employee list, and the deleti
 On completion, a command result is thrown back with the appropriate success/failure values.
 
 
-### Filter feature
+### Filter command
 
-The filter feature filters employees by parameters/prefixes.
-- `filter d/DEPARTMENT`
-  - example: `filter d/R&D`
-  - expected: shows employees with the `R&D` department tag
+The filter command filters employees by prefixes/parameters.
 
-- `filter s/4000`
-  - example: `filter s/4000`
-  - expected: shows employees with salary less than or equal to 4000
+Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME] [d/DEPARTMENT]`
+
+* The filter is case-sensitive. e.g. `R&D` will not match `r&d`
+* At least one of the optional fields must be provided.
+* Able to filter by multiple prefixes
+
+Examples:
+* `filter d/investment` returns employees with the `investment` department
+* `filter s/4000` returns employees with salary equal to or less than 4000
+* `filter l/14 r/manager` returns employees with 14 days of leave and the manager role
+
 
 The following activity diagram summarizes what happens when a user executes the filter command:
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
+The following is the filter feature's class diagram, illustrating the interaction between the FilterCommand,
+FilterCommandParser and the ContainsAllPredicate classes.
+
+![FilterCommandClassDiagram](images/FilterCommandClassDiagram.png)
 
 ### Department feature
 
