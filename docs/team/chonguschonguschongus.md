@@ -13,8 +13,8 @@ JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Enhanced the Find feature to function with NRIC, blood type, gender as well as name.
-    * What it does: Allows users to search for Patients/Doctors by their NRIC, blood type, gender or simply name
+* **New Feature**: Enhanced the Find feature to function with NRIC, gender as well as name.
+    * What it does: Allows users to search for Patients/Doctors by their NRIC and gender or simply name
     * Justification: Users can search by a specific attribute, increasing convenience
 
 * **New Feature**: Added a Find Appointment function to locate a specific appointment by NRIC of people involved
