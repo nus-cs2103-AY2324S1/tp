@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/tanyyyming.md)]
 
 * Role: Developer
-* Responsibilities: Scheduling and Tracking + Code Quality
+* Responsibilities: Scheduling and Tracking, Code Quality
 
 ### Wang Hejin
 
@@ -55,4 +55,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/yytan25.md)]
 
 * Role: Developer
-* Responsibilities: UI, Scheduling and Tracking
+* Responsibilities: Integration, Testing, In charge of `Band`

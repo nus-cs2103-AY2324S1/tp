@@ -53,10 +53,11 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide: [\#54](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/54) [\#150](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/150) 
     * Features: `DeleteBandCommand`, `RemoveMusicianFromBandCommand`
-  * Developer Guide: [\#117](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/117)
+  * Developer Guide: [\#117](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/117) [\#241](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/241)
     * Added user stories
     * Added two enhancements and polished up the Planned Enhancements section
 
 
 * **Community**:
-  * Participated in PE Dry Run and gave 7 detailed bug reports
+  * Participated in PE Dry Run and gave 7 detailed bug reports for team T12-2
+  * Participated in CATcher smoke and load testing
