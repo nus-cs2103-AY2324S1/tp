@@ -442,15 +442,6 @@ specified above.
     * `false` - (default). Include contacts who have finished/haven't started taking the course
   as of the current date.
 
-Example usage:
-
-* `filter /by tag /with friend colleague`
-    ![filter](images/filter/filter.png)
-* `filter /by course /with computer /taken true`
-* `filter /by course /with robotics`
-* `filter /by spec /with Industry AI`
-* `filter /by grad /with 2022 2023 2024 2025`
-
 <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
 `[taken]` compares the dates of the course with the current date of
     your system. It does not factor in other fields like graduation year.
@@ -460,6 +451,16 @@ Example usage:
 When `[taken]` is set to `false`, all contacts that have matching course names will be included in the filtered list,
 regardless of start and end date.
 </div>
+
+Example usage:
+
+* `filter /by tag /with friend colleague`
+    ![filter](images/filter/filter.png)
+* `filter /by course /with computer /taken true`
+* `filter /by course /with robotics`
+* `filter /by spec /with Industry AI`
+* `filter /by grad /with 2022 2023 2024 2025`
+
 
 [Table of Contents](#table-of-contents)
 
