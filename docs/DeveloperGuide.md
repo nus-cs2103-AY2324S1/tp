@@ -1532,6 +1532,14 @@ testers are expected to do more <i>exploratory testing</i>.
   - Currently, the error message for `addTask` states that the task title and note cannot start with a whitespace. However, when the user tries to add a task with a title and note that starts with a whitespace, the task is added successfully as the starting whitespace is automatically trimmed.
   - This enhancement will update the error message to state that leading and trailing whitespaces are automatically trimmed.
 
+### Enable Partial Matching in Filtering Features
+
+- **Enhancement**: Refine our commands that help users filter the task list and person list to support partial matching.
+- **Reason**: To allow users to easily locate their contact or task without necessity of inputting the complete information, thereby minimizing limitations and optimizing user experience, especially users with long contact and task list.
+- **Example**:
+  - Currently, all of the `find…` commands exclusively display results that precisely match at least one `KEYWORD` in the fields. It overlooks items that partially match the criteria.
+  - This enhancement aims to broaden the scope by including partial matches in the search results, providing users a more easier approach to locate their required information, especially users with a reasonably long list of persons or tasks. Users do not need to give the exact keyword for the find command to match in order to view the person or task.
+
 ---
 
 <div style="page-break-after: always;"></div>
