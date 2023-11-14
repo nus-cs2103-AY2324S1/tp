@@ -801,7 +801,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1.  The application should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  The application should be able to hold up to 1000 people and 1000 transactions without a noticeable sluggishness in performance for typical usage.
+2.  The application should be able to hold up to 200 people and 500 transactions with an average of 10 portions each without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e, not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The application should work without internet access.
 5.  The application should not take more than 50MB of space.
