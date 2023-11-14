@@ -1,10 +1,17 @@
 package seedu.address.model;
 
+import static seedu.address.logic.parser.CliSyntax.FIELD_HIDDEN;
+
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ListPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +20,20 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /**
+     * {@code Predicate} that filters for all hidden persons
+     */
+    Predicate<Person> PREDICATE_SHOW_ALL_HIDDEN_PERSONS = new ListPredicate(FIELD_HIDDEN, true);
+    /**
+     * {@code Predicate} that filters for all unhidden persons
+     */
+    Predicate<Person> PREDICATE_SHOW_ALL_UNHIDDEN_PERSONS = new ListPredicate(FIELD_HIDDEN, false);
+
+    /**
+     * {@code Predicate} that filters for all bookmarked applicants
+     */
+    Predicate<Person> PREDICATE_SHOW_ALL_BOOKMARKED_PERSONS = new ListPredicate(FIELD_HIDDEN, true);
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -76,6 +97,17 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Displays the given person.
+     * The person must exist in the address book.
+     */
+    void showPersonAtIndex(Index index);
+
+    /**
+     * CLears details of person displayed in detail view of UI.
+     */
+    void clearPersonDetails();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +116,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the sorted person list to sort by the given {@code comparator}.
+     *  @throws NullPointerException if {@code predicate} is null.
+     */
+    void sortFilteredPersonList(Comparator<Person> comparator);
+
+    /** Returns the current person being viewed in detail */
+    ObservableValue<Optional<Person>> getCurrentPerson();
 }

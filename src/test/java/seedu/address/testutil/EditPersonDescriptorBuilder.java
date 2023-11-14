@@ -5,12 +5,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gpa;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreviousGrade;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,7 +39,14 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setGpa(person.getGpa());
+        descriptor.setPreviousGrade(person.getPreviousGrade());
+        if (person.getInterviewScore().isPresent()) {
+            descriptor.setInterviewScore(person.getInterviewScore().get());
+        }
+        if (person.getComment().isPresent()) {
+            descriptor.setComment(person.getComment().get());
+        }
         descriptor.setTags(person.getTags());
     }
 
@@ -64,10 +75,34 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Gpa} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withGpa(double gpa) {
+        descriptor.setGpa(new Gpa(gpa));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PreviousGrade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPreviousGrade(String grade) {
+        descriptor.setPreviousGrade(new PreviousGrade(grade));
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewScore} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withInterviewScore(double score) {
+        descriptor.setInterviewScore(new InterviewScore(score));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Comment} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withComment(String comment) {
+        descriptor.setComment(new Comment(comment));
         return this;
     }
 

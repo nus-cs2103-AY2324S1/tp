@@ -1,0 +1,30 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters "attach 1 f/resume.pdf" command;
+:AttachCommandParser parses the command;
+if () then ([successful parse])
+    :Valid argument format;
+else ([else])
+    :Display error message;
+    stop
+endif
+:Begin AttachCommand execution;
+if () then ([index within visible range])
+    :Fetch applicant to attach to;
+else ([else])
+    :Display error message;
+    stop
+endif
+:Copy attachments into data directory;
+if () then ([found errors while copying])
+    :Display error message;
+    stop
+else ([else])
+    :Update person with new attachments;
+endif
+:Display success message;
+stop
+@enduml

@@ -1,0 +1,17 @@
+.bordered-table {
+    border-collapse: collapse;
+}
+
+.bordered-table th {
+    border: 1px solid black;
+    border-bottom: 2px solid black;
+}
+
+.bordered-table td {
+    border: 1px solid black;
+    padding: 6px;
+}
+
+.bordered-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}

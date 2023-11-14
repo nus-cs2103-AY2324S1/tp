@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+
+actor User
+
+box Ui UI_COLOR_T1
+participant ":UI" as UI UI_COLOR
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager BLUE_COLOR
+participant ":AddressBookParser" as AddressBookParser BLUE_COLOR
+participant ":ViewCommandParser" as ViewCommandParser BLUE_COLOR
+participant ":ParserUtil" as ParserUtil BLUE_COLOR
+participant "b:ViewCommand" as ViewCommand BLUE_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+
+User -> UI: "view 1 2"
+activate UI
+
+UI -> LogicManager : execute(view)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(view)
+activate AddressBookParser
+
+create ViewCommandParser
+AddressBookParser -> ViewCommandParser : parseCommand(view)
+activate ViewCommandParser
+
+ViewCommandParser -> ParserUtil: Input
+activate ParserUtil
+
+ParserUtil --> ViewCommandParser: Valid index
+deactivate ParserUtil
+
+create ViewCommand
+ViewCommandParser -> ViewCommand: Valid index
+activate ViewCommand
+
+ViewCommand --> ViewCommandParser: b
+deactivate ViewCommand
+
+ViewCommandParser --> AddressBookParser: b
+deactivate ViewCommandParser
+
+AddressBookParser --> LogicManager: b
+destroy ViewCommandParser
+deactivate AddressBookParser
+
+LogicManager -> ViewCommand: execute()
+activate ViewCommand
+
+ViewCommand -> Model: showPersonAtIndex()
+activate Model
+
+Model --> ViewCommand
+deactivate Model
+
+ViewCommand --> LogicManager: result
+deactivate ViewCommand
+
+LogicManager --> UI: Updated detail view
+destroy ViewCommand
+deactivate LogicManager
+
+UI --> User: Success Message
+deactivate
+
+@enduml

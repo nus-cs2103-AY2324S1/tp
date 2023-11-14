@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.Double?>
+
+<HBox id="detailsPane" fx:id="detailsPane" styleClass="detail-content" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <padding>
+    <Insets bottom="5" left="5" right="5" top="5" />
+  </padding>
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+    <Label fx:id="name" styleClass="cell-huge-label" />
+    <HBox GridPane.rowIndex="1">
+      <padding>
+        <Insets bottom="5" left="0" right="0" top="5" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Tags">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <FlowPane fx:id="tags" maxWidth="150" alignment="CENTER_RIGHT" />
+    </HBox>
+    <Separator GridPane.rowIndex="2" />
+    <HBox GridPane.rowIndex="3">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Phone">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+      </maxWidth>
+      </Label>
+      <Label fx:id="phone" styleClass="detail-content-value" />
+    </HBox>
+    <Separator GridPane.rowIndex="4" />
+    <HBox GridPane.rowIndex="5">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Email">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <Label fx:id="email" styleClass="detail-content-value" />
+    </HBox>
+    <Separator GridPane.rowIndex="6" />
+    <HBox GridPane.rowIndex="7">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="GPA">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <Label fx:id="gpa" styleClass="detail-content-value" />
+    </HBox>
+    <Separator GridPane.rowIndex="8" />
+    <HBox GridPane.rowIndex="9">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Previous Grade">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <Label fx:id="previousGrade" styleClass="detail-content-value" />
+    </HBox>
+    <Separator GridPane.rowIndex="10" />
+    <HBox GridPane.rowIndex="11">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Interview Score (optional)">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <Label fx:id="interviewScore" styleClass="detail-content-value" />
+    </HBox>
+    <Separator GridPane.rowIndex="12" />
+    <HBox GridPane.rowIndex="13">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Comment (optional)">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <Label fx:id="comment" styleClass="detail-content-value" />
+    </HBox>
+    <Separator GridPane.rowIndex="14" />
+    <HBox GridPane.rowIndex="15">
+      <padding>
+        <Insets bottom="5" top="5" left="0" right="0" />
+      </padding>
+      <Label HBox.hgrow="ALWAYS" styleClass="detail-content-label" text="Attachments">
+        <maxWidth>
+          <Double fx:constant="MAX_VALUE" />
+        </maxWidth>
+      </Label>
+      <FlowPane fx:id="attachments" maxWidth="150" alignment="CENTER_RIGHT" />
+    </HBox>
+  </GridPane>
+</HBox>

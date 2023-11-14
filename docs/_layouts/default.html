@@ -5,13 +5,19 @@
 
   <body>
 
-    {%- include header.html -%}
+  {%- include header.html -%}
 
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </main>
+  <main class="page-content" aria-label="Content">
+    <!-- Adapted from https://github.com/AY2324S1-CS2103T-W10-3/tp/blob/master/docs/_layouts/default.html -->
+    {% if page.show-sticky-toc %}
+      <aside class="sticky-toc">
+        {% include toc.html html=content %}
+      </aside>
+    {% endif %}
+    <div class="wrapper">
+      {{ content }}
+    </div>
+  </main>
 
   </body>
 

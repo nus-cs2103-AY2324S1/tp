@@ -1,14 +1,22 @@
 {
   "persons": [ {
+    "studentNo": "A0222222A",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "gpa": "3.1",
+    "previousGrade": "A+",
+    "interviewScore": "3.2",
+    "tags": [ "friends" ],
+    "comment": ""
   }, {
+    "studentNo": "A0222222A",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "gpa": "4.0",
+    "previousGrade": "A+",
+    "interviewScore": "3.2",
+    "comment": ""
   } ]
 }

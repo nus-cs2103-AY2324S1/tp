@@ -1,0 +1,69 @@
+#markdown-toc {
+  //@@author ravern-reused
+  //Reused from https://github.com/AY2324S1-CS2103T-W10-3/tp/blob/master/docs/_sass/toc.scss
+  //with minor modifications
+
+  //Adapted from https://stackoverflow.com/a/51007932/9311854
+  ol {
+    counter-reset: item;
+  }
+
+  > li,
+  ol > li {
+    counter-increment: item;
+  }
+
+  ol > li {
+    display: block;
+    position: relative;
+  }
+
+  ol > li:before {
+    content: counters(item, ".") ". ";
+    margin-left: -1em;
+  }
+}
+
+
+article.post {
+  counter-reset: section;
+
+  h2:not(.no_toc) {
+    counter-reset: subsection;
+  }
+
+  h3:not(.no_toc) {
+    counter-reset: subsubsection;
+  }
+
+  h4:not(.no_toc) {
+    counter-reset: subsubsubsection;
+  }
+
+  h2:not(.no_toc)::before {
+    color: inherit !important;
+    counter-increment: section;
+    content: counter(section) ". ";
+  }
+
+  h3:not(.no_toc)::before {
+    color: inherit !important;
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) ". ";
+  }
+
+  h4:not(.no_toc)::before {
+    color: inherit !important;
+    counter-increment: subsubsection;
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+  }
+}
+
+
+article.post {
+  h2:not(.no_toc)::before,
+  h3:not(.no_toc)::before,
+  h4:not(.no_toc)::before {
+    color: black;
+  }
+}

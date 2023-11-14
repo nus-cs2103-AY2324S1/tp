@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters "view" command with APPLICANT_INDEX;
+:ViewCommandParser parses the command and APPLICANT_INDEX;
+if () then ([valid command])
+    :Valid APPLICANT_INDEX obtained;
+else ([else])
+    :Display error message;
+    stop
+endif
+:Execute ViewCommand;
+:Update currentPerson in Model as applicant at APPLICANT_INDEX;
+:Display details of applicant at APPLICANT_INDEX;
+:Display success message;
+stop
+@enduml

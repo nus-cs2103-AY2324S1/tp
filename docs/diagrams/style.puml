@@ -33,6 +33,14 @@
 
 !define USER_COLOR #000000
 
+!define RED_COLOR #FF0000
+!define ORANGE_COLOR #FF7F00
+!define YELLOW_COLOR #FFFF00
+!define GREEN_COLOR #00DE00
+!define BLUE_COLOR #0000FF
+!define INDIGO_COLOR #4B0082
+!define VIOLET_COLOR #9400D3
+
 skinparam Package {
     BackgroundColor #FFFFFF
     BorderThickness 1

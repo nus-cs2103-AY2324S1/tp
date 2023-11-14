@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Tutorial: Adding a command"
 ---
 
@@ -257,7 +256,7 @@ Then insert the following into [`main/resources/view/PersonListCard.fxml`](https
 **`PersonListCard.fxml`:**
 
 ``` xml
-<Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+<Label fx:id="remark" styleClass="cell-small-label" text="\$remark" />
 ```
 
 That’s it! Fire up the application again and you should see something like this:

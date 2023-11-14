@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters "comment 3 c/Hardworking" command;
+:CommentCommandParser parses the command;
+if () then ([successful parse])
+    :Valid index;
+else ([else])
+    :Display error message;
+    stop
+endif
+
+:Execute CommentCommand;
+:Update applicant;
+:Display success message;
+stop
+@enduml

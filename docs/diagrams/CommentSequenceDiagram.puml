@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+
+actor User
+
+box Ui MODEL_COLOR_T1
+participant ":UI" as UI RED_COLOR
+
+box Logic LOGIC_COLOR_T1
+participant ":CommentCommand" as CommentCommand BLUE_COLOR
+participant ":CommentCommandParser" as CommentCommandParser GREEN_COLOR
+participant ":ParserUtil" as ParserUtil GREEN_COLOR
+
+
+User -> UI: "comment 3 c/Hardworking"
+activate UI
+
+UI -> CommentCommand: Execute command
+activate CommentCommand
+
+CommentCommand -> CommentCommandParser: Parse command
+activate CommentCommandParser
+
+CommentCommandParser -> ParserUtil: Parse index
+activate ParserUtil
+ParserUtil -> ParserUtil: Validate index
+activate ParserUtil
+deactivate ParserUtil
+
+ParserUtil --> CommentCommandParser: Valid index
+deactivate ParserUtil
+CommentCommandParser --> CommentCommand: Valid index
+deactivate CommentCommandParser
+CommentCommand --> UI: Valid applicant
+deactivate CommentCommand
+UI --> User: MainWindow
+deactivate
+
+@enduml

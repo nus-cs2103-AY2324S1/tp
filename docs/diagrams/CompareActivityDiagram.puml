@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters "compare 1 2" command;
+:CompareCommandParser parses the command;
+if () then ([successful parse])
+    :Valid indices;
+else ([else])
+    :Display error message;
+    stop
+endif
+:Execute CompareCommand;
+if () then ([distinct indices])
+    :Fetch applicants from list;
+else ([else])
+    :Display error message;
+    stop
+endif
+
+:Create CompareWindow;
+:Display comparison results;
+:Display success message;
+stop
+@enduml

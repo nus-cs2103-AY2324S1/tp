@@ -4,7 +4,9 @@
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+  "minima/initialize",
+  "toc",
+  "tafinder";
 
 .icon {
     height: 21px;

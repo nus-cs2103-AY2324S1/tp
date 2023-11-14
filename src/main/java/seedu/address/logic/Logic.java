@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -32,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns the current person being viewed in detail */
+    ObservableValue<Optional<Person>> getCurrentPerson();
 
     /**
      * Returns the user prefs' address book file path.

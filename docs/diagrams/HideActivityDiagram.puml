@@ -1,0 +1,13 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+:Command is parsed;
+:Command is executed;
+:Replace Person in Model with hidden Person;
+:Update Model to display only non-hidden Persons;
+
+stop
+@enduml

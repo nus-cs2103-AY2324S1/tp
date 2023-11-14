@@ -1,7 +1,8 @@
 ---
-layout: page
 title: "Tutorial: Removing Fields"
 ---
+
+# Tutorial: Removing Fields
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 >
@@ -17,10 +18,6 @@ This tutorial aims to give you some practice on such a code 'removal' activity b
 <br>
 However, if you have no such prior knowledge, removing a field can take a quite a bit of detective work. This tutorial takes you through that process. **At least have a read even if you don't actually do the steps yourself.**
 </div>
-
-
-* Table of Contents
-{:toc}
 
 ## Safely deleting `Address`
 
@@ -82,9 +79,9 @@ private Label address;
 
 ``` xml
 ...
-<Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-<Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-<Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+<Label fx:id="phone" styleClass="cell-small-label" text="\$phone" />
+<Label fx:id="address" styleClass="cell-small-label" text="\$address" />
+<Label fx:id="email" styleClass="cell-small-label" text="\$email" />
 ...
 ```
 

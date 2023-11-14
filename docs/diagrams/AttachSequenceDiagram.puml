@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AttachCommandParser" as AttachCommandParser LOGIC_COLOR
+participant ":AttachCommand" as AttachCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "attachedPerson:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("attach 1 f/resume.pdf f/transcript.pdf")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("attach 1 f/resume.pdf f/transcript.pdf")
+activate AddressBookParser
+
+create AttachCommandParser
+AddressBookParser -> AttachCommandParser
+activate AttachCommandParser
+
+AttachCommandParser --> AddressBookParser
+deactivate AttachCommandParser
+
+AddressBookParser -> AttachCommandParser : parse("1 f/resume.pdf f/transcript.pdf")
+activate AttachCommandParser
+
+create AttachCommand
+AttachCommandParser -> AttachCommand
+activate AttachCommand
+
+AttachCommand --> AttachCommandParser
+deactivate AttachCommand
+
+AttachCommandParser --> AddressBookParser
+deactivate AttachCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AttachCommandParser -[hidden]-> AddressBookParser
+destroy AttachCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> AttachCommand : execute()
+activate AttachCommand
+
+loop 2 times
+    AttachCommand --> AttachCommand : copyAttachment()
+    activate AttachCommand
+    deactivate AttachCommand
+end
+
+create Person
+AttachCommand --> Person
+activate Person
+
+Person --> AttachCommand
+deactivate Person
+
+AttachCommand -> Model : setPerson(person)
+activate Model
+
+Model --> AttachCommand
+deactivate Model
+
+create CommandResult
+AttachCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AttachCommand
+deactivate CommandResult
+
+AttachCommand --> LogicManager : result
+deactivate AttachCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters "bookmark" command with APPLICANT_INDEX;
+:BookmarkCommandParser parses the command and APPLICANT_INDEX;
+if () then ([valid command])
+    :Valid APPLICANT_INDEX obtained;
+else ([else])
+    :Display error message;
+    stop
+endif
+:Execute BookmarkCommand;
+:Update applicant at APPLICANT_INDEX as bookmarked in Model;
+:Display updated list with applicant at APPLICANT_INDEX bookmarked;
+:Display success message;
+stop
+@enduml

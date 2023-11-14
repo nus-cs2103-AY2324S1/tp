@@ -1,12 +1,6 @@
 ---
-layout: page
-title: Testing guide
+title: Testing
 ---
-
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Running tests
 

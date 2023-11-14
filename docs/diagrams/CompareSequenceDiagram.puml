@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+
+actor User
+
+box Ui MODEL_COLOR_T1
+participant ":UI" as UI RED_COLOR
+
+box Logic LOGIC_COLOR_T1
+participant ":CompareCommand" as CompareCommand BLUE_COLOR
+participant ":CompareCommandParser" as CompareCommandParser GREEN_COLOR
+participant ":ParserUtil" as ParserUtil GREEN_COLOR
+
+
+User -> UI: "compare 1 2"
+activate UI
+
+UI -> CompareCommand: Execute command
+activate CompareCommand
+
+CompareCommand -> CompareCommandParser: Parse command
+activate CompareCommandParser
+
+CompareCommandParser -> ParserUtil: Parse index
+activate ParserUtil
+ParserUtil -> ParserUtil: Validate indices
+activate ParserUtil
+deactivate ParserUtil
+
+ParserUtil --> CompareCommandParser: Valid indices
+deactivate ParserUtil
+CompareCommandParser --> CompareCommand: Valid indices
+deactivate CompareCommandParser
+CompareCommand --> UI: Valid applicants
+deactivate CompareCommand
+UI --> User: CompareWindow
+deactivate
+
+@enduml
