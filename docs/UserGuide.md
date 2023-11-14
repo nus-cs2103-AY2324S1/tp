@@ -76,7 +76,7 @@ paired up with simple and beginner-friendly features, anyone can learn how to us
 3. **Calendar Sanity**: Prevent clashes in your schedules, and find slots where you are available!
 
 :bulb: **Make the Switch Today!**
-Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** today!
+Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** now!
 
 ## Using this guide
 If you're feeling a bit lost, worry not!
