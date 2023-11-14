@@ -19,7 +19,6 @@ Choose a topic from the table of contents to find out how to manage your clients
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 # Quick start
@@ -93,19 +92,25 @@ For most commands, **parameters** are prefixed by **flags**. They are indicators
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Glossary
 
-This section contains a list of terms used in this user guide. Some terms defined will be repeated here so feel free to refer back to this section if you have forgotten or are unsure of what a term means!
+This section contains a list of terms used in this user guide. Feel free to refer back to this section if you are unsure of what a term means!
 
-* **Command Line Interface (CLI)**: A type of user interface where the user types in commands to interact with the application. [Back to start](#welcome-to-connectify)
+* **Command Line Interface (CLI)**: A type of user interface where the user types in commands to interact with the application.
+* **Graphical User Interface (GUI)**: A user interface that allows users to interact with through graphical icons like buttons.
 * **Commands**: The string of text you type into the command box. They usually start with a command word. Read more about it [here](#if-youre-new-what-are-commands).
 * **Parameters**: Additional information to be supplied by the user into commands.
-* **Flags**: Indicators to differentiate various parts of the command. They consist of a letter, followed by a `/`. e.g. `n/` is the flag for the `NAME` parameter.
-* **Hot/Warm/Cold Lead**: The likelihood of a client to become a buying customer. A hot lead is a potential client who is ready to buy. A warm lead is a potential client who is interested in buying. A cold lead is a potential client who is not ready to buy.
-* **Graphical User Interface (GUI)**: A screen with buttons and windows to interact with the application.
-* **Dashboard**: A screen that displays a summary of your client interactions and important follow-ups. Find out about Connectify's dashboard [here](#graphical-user-interface-components).
+* **Flags**: Indicators to differentiate various parts of the command. They consist of a letter, followed by a `/`. For example, `n/` is the flag for the `NAME` parameter.
+* **Hot/Warm/Cold Lead**: A client's lead represents their likelihood of becoming a customer. Hot leads represent a customer with high potential, and cold leads represent a customer with low potential.
+* **Dashboard**: Connectify's view that displays a summary of your client interactions and important follow-ups. Find out more about Connectify's dashboard [here](#graphical-user-interface-components).
 * **Follow-up**: A meeting with a client to follow up on their interest in your product. You can find out about how Connectify calculates follow-up dates [here](#follow-up-calculation).
-
+* **Interaction Outcome**: The outcome of an interaction/meeting. This indicates the success of an interaction and how likely a deal can be closed. 
+   * **Closed:** The client has bought your product and the deal has been closed.
+  * **Interested:** Indicates that the client is interested in your product, but has some hesitations before buying.
+  * **Not interested:** Client is not interested despite best efforts.
+  * **Unknown:** All other categories of outcomes that do not fall into the above mentioned categories. For example, the client is going through family mourning, which is not a good time to talk about the product.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -151,30 +156,39 @@ Let's first discuss the top half of the interface.
 
 3. **Output Window:** a box where the results of your [commands](#if-youre-new-what-are-commands) will be displayed. Any errors that arise will also be shown here.
 
-    <figure id="dashboard-information">
-       <img src="images/UiBottomHalf.png" alt="Connectify's Analytics (left) and Upcoming Follow-ups (right)">
-       <figcaption align="center">
-           <em>Connectify's Analytics (left) and Upcoming Follow-ups (right)</em>
-       </figcaption>
-    </figure>
+This is Connectify's dashboard view. By default, this view is shown on start-up. However, if you are on another view, you can switch to the dashboard view using the [***dashboard***](#viewing-the-dashboard-dashboard) command.
 
+ <figure id="dashboard-information">
+   <p align="center">
+      <img src="images/UiBottomHalf.png" alt="Connectify's Analytics (left) and Upcoming Follow-ups (right)" width="500">
+   </p>
+    <figcaption align="center">
+        <em>Connectify's Analytics (left) and Upcoming Follow-ups (right)</em>
+    </figcaption>
+ </figure>
+
+{:start="4"}
 4. **Connectify's Analytics:** insightful statistics that are automatically calculated for you. This includes:
    - Number of uncontacted / contacted / closed clients
    - Average interactions among all clients
    - Breakdown of the different interaction outcomes
    - Number of hot / warm / cold [leads](#common-use-case-marking-a-clients-lead)
 
-5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. They are also updated daily while the app remains open. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
+5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
-    <div style="page-break-after: always;"></div>
+ <div style="page-break-after: always;"></div>
 
-    <figure>
-       <img src="images/UiClientList.png" alt="Connectify's List of Clients">
-       <figcaption align="center">
-           <em>Connectify's List of Clients</em>
-       </figcaption>
-    </figure>
+This is Connectify's client list view. You can switch to it using the [***list***](#viewing-the-list-of-clients-list) command.
+ <figure>
+    <p align="center">
+       <img src="images/UiClientList.png" alt="Connectify's List of Clients" width="500">
+    </p>
+    <figcaption align="center">
+        <em>Connectify's List of Clients</em>
+    </figcaption>
+ </figure>
 
+{:start="6"}
 6. **Client List:** a scrollable list of clients that you have. You can see the details of each client, including:
    - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
    - **Name:** the name of the client, specified after the index number.
@@ -186,7 +200,9 @@ Let's first discuss the top half of the interface.
    <div style="page-break-after: always;"></div>
    <br>
    <figure>
-       <img src="images/UiDetailedView.png" alt="Detailed View of Client">
+      <p align="center">
+          <img src="images/UiDetailedView.png" alt="Detailed View of Client" width="500">
+      </p>
        <figcaption align="center">
            <em>Detailed View of Bernice Yu's Profile</em>
        </figcaption>
@@ -364,6 +380,32 @@ Sometimes, you may want to view the details of a client profile or the interacti
 
 This section contains multiple commands that allow you to view various details of your clients that are collated in a single view for your convenience.
 
+### Viewing the dashboard: ***dashboard***
+
+To keep track of comprehensive statistics about your performance, Connectify provides you with the ***dashboard*** command.
+Use the ***dashboard*** command to view summarised information on your client interactions and your important follow-ups.
+
+**Format**
+````text
+dashboard
+````
+
+You should see the following dashboard view in the application window.
+
+<figure>
+   <p align="center">
+      <img src="images/Ui.png" alt="Dashboard view" width="400">
+   </p>
+   <figcaption align="center">
+       <em>The dashboard view. Data shown may vary.</em>
+   </figcaption>
+</figure>
+<br>
+
+See [what each section of the dashboard means.](#dashboard-information)
+
+[↑ Back to Table of Contents](#table-of-contents)
+
 ### Viewing the list of clients: ***list***
 
 From the dashboard, you may wish to see a comprehensive list of your clients. Use the ***list*** command to view all clients.
@@ -477,31 +519,6 @@ find David
 <br>
 
 [↑ Back to Table of Contents](#table-of-contents)
-<div style="page-break-after: always;"></div>
-
-### Viewing the dashboard: ***dashboard***
-
-To keep track of comprehensive statistics about your performance, Connectify provides you with the ***dashboard*** command.
-Use the ***dashboard*** command to view summarised information on your client interactions and your important follow-ups.
-
-**Format**
-````text
-dashboard
-````
-
-You should see the following dashboard view in the application window.
-
-<figure>
-   <img src="images/Ui.png" alt="Dashboard view">
-   <figcaption align="center">
-       <em>The dashboard view. Data shown may vary.</em>
-   </figcaption>
-</figure>
-<br>
-
-See [what each section of the dashboard means.](#dashboard-information)
-
-[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -585,9 +602,9 @@ FIELD INDEX NEW_VALUE
 
 </div>
 
-#### Common use case: marking a client's lead
+#### Common use case: marking a client as a hot, warm, or cold lead
 
-As salespeople, we need to record the likelihood of a client to become a buying customer, the term for this is leads. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
+As salespeople, we need to gauge the likelihood of a client of becoming a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
 
 You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. For example, if you wish to mark the client at index 4 as a cold lead, enter `lead 4 cold`. 
 
@@ -679,7 +696,7 @@ This is especially useful if you find yourself having to re-enter a command that
 
 **Q**: How do I save my progress?
 <br>
-**A**: Your progress is saved after every command automatically. So if you close the app and open it again, your data will still be there!
+**A**: Your progress is saved after every command automatically.
 
 **Q**: How do I transfer my data to another computer?
 <br>
@@ -691,7 +708,7 @@ This is especially useful if you find yourself having to re-enter a command that
 
     <div markdown="block" class="alert alert-warning">
    
-    **:bulb: If you're having trouble finding the data folder, you can refer to the [status bar](#status-bar).**
+    **:bulb: If you're having trouble finding the data folder, refer to the [status bar](#status-bar).**
    
     </div>
 
@@ -733,32 +750,19 @@ This is especially useful if you find yourself having to re-enter a command that
 
 # Known Issues
 
-1. Changing Leads to hotter leads (ie **warm** to **hot**) could "silently remove" them from follow-ups.
-    <details>
-    <summary>Details</summary>
-    <br>
-    A client with a **cold lead** and a latest interaction of not more than 8 weeks would appear in the follow-ups (since cold 8 weeks + the last interaction date).<br>
-    However, upon changing the lead to a **hot lead** without any new interactions, the next follow-up will be calculated to be one week afterwards.
-    <br>
-    If that date has already passed, it will no longer be reflected in the follow-ups section when the user may not have necessarily contacted the client.
-    </details>
-    <br>
+## New follow-ups may not be added after a client is marked as a "hotter" lead
 
-    Fix: You can manually add a new interaction to the client to update the follow-up date. But you should still be aware of this issue.
+Changing a client's lead to a "hotter" lead, e.g. from `COLD` to `HOT`, may not add a new follow-up to the dashboard. This is because the follow-up date is calculated based on the client's last interaction date and the lead type. Since a hotter lead type has a shorter follow-up period, if the new follow-up date has already passed, no follow-ups are added to the dashboard for the client.
 
-2. Minor visual bug collapses follow-ups when updated overnight.
-    <details>
-    <summary>Details</summary>
-    <br>
-    When follow-ups are updated overnight, a long follow-up list might be compressed into "...". 
-    </details>
-    <br>
-    Fix: This is a rare issue, but should you encounter it, you can just click anywhere on the follow-up section of the dashboard.
+## Follow-ups do not update automatically on a new day
+
+The content of the dashboard will only update whenever the view is switched to the dashboard. This means that if you leave the dashboard open overnight, the follow-ups will not be updated until you switch to the client view and then back to the dashboard view.
 
 
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 # Command summary
