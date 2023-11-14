@@ -188,8 +188,6 @@ It is currently implemented as a `DashboardCommand` that is executed by the `Log
 The following sequence diagram shows how the dashboard feature is currently implemented.
 ![Ui](images/UiSequenceDiagram.png)
 
-#### Design Considerations
-
 ### Viewing a client's full profile
 
 As we add more attributes and interactions with clients, we will need a better way to view all of the information associated with a client. Therefore instead of displaying all information in a `PersonCard` within the list of clients, we will need a new component to display the client profile in a better way.
@@ -305,17 +303,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-For each use case, "User is in list view" means an expectation that user has already executed the `list` command and is viewing the list of clients. However the user could be in the dashboard view, in this case the command will still work, but as an additional step, the user will be redirected to the list view after the command finishes executing. 
+For each use case, "User is in client view" means an expectation that user has already executed the `list` command and is viewing the list of clients. However the user could be in the dashboard view, in this case the command will still work, but as an additional step, the user will be redirected to the client view after the command finishes executing. 
 
-To enter the list view see Use case UC01:
+To enter the client view see Use case UC01:
 
-**Use case: UC01 - Enter list view**
+**Use case: UC01 - Enter client view**
 
 **MSS**
 
 1.  User opens the app and is in dashboard view
-2.  User requests to enter list view
-3.  Connectify shows the list view
+2.  User requests to enter client view
+3.  Connectify shows the client view
 
     Use case ends.
 
@@ -323,7 +321,7 @@ To enter the list view see Use case UC01:
 
 **MSS**
 
-1.  User is in list view
+1.  User is in client view
 2.  User requests to delete a specific client in the list
 3.  Connectify deletes the client
 
@@ -346,7 +344,7 @@ To enter the list view see Use case UC01:
 
 **MSS**
 
-1. User is in list view
+1. User is in client view
 2.  User requests create a client interaction
 3.  Connectify adds the interaction to the client profile
 
@@ -375,7 +373,7 @@ To enter the list view see Use case UC01:
 
 **MSS**
 
-1. User is in list view
+1. User is in client view
 2. User requests to edit a client’s profile
 3. Connectify shows the updated client’s profile
 
@@ -399,7 +397,7 @@ To enter the list view see Use case UC01:
 
 **MSS**
 
-1. User is in list view
+1. User is in client view
 2. User requests to view a client’s full profile
 3. Connectify shows the client’s full profile
 
@@ -427,7 +425,7 @@ Very similar to UC03, the difference being that only the `lead` field is updated
 **Use case: UC06 - View dashboard analytics**
 
 **MSS**
-1. User is in list view
+1. User is in client view
 2. User requests to view dashboard analytics
 3. Connectify shows the dashboard analytics
 
@@ -444,7 +442,7 @@ Very similar to UC03, the difference being that only the `lead` field is updated
 **Use case: UC08 - Find a client**
 
 **MSS**
-1. User is in list view
+1. User is in client view
 2. User requests to find a client
 3. Connectify filters the address book list to show only clients that match the search query
 
@@ -453,7 +451,7 @@ Very similar to UC03, the difference being that only the `lead` field is updated
 **Use case: UC09 - Clear the address book**
 
 **MSS**
-1. User is in list view
+1. User is in client view
 2. User requests to clear the address book
 3. Connectify clears the address book
 
