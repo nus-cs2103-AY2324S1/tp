@@ -267,6 +267,10 @@ of tags is not cumulative.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+As your list of clients might be long, you can consider using the [Find](#locating-clients-by-name-financial-plan-andor-tag--find) command first to filter the list before editing details of your client.
+</div>
+
 Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st client to be `john doe` and `woodlands ave 123` respectively.
 
@@ -326,6 +330,10 @@ Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
   eg. `finan` will match `financial` or `financial plan`.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You may find this command especially useful to quickly contact your clients when there is a financial policy change.
+</div>
 
 Examples:
 * `gather t/Elderly`
@@ -408,8 +416,7 @@ Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 - If you input an `INDEX`, the command will complete appointment with the client at the specified index.
 - The index refers to the index number shown in the displayed contact list.
 - If you input an `APPOINTMENT_DATE`, the command will complete all appointments in contact book that have a date
-matching the one input by user, **and is regardless of the currently displayed contact list**. This allows you to clear all your appointments finished throughout the
-entire day quickly.
+matching the one input by user, **and is regardless of the currently displayed contact list**.
 - After performing the complete, the contact list displayed will be reset to display all contacts in the contact book.
 
 <div markdown="span" class="alert alert-primary">:information_source:
@@ -417,6 +424,10 @@ Note that an appointment's date is considered to be a match with user's input `A
 </div>
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
+
+<div markdown="span" class="alert alert-primary">:information_source:
+To save time, you may find it useful to `complete` by `APPOINTMENT_DATE` once at the end of the day. This will clear all your completed appointments for the entire day.
+</div>
 
 Examples:
 - `complete 1`
