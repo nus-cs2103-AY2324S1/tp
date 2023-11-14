@@ -942,9 +942,14 @@ Additionally, you can only use the summary statistic table for comparison after 
 Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
 This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
 
-### Disabling view when using `search` and `filter`
-**Improve the search and filter feature**
-Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
+### Error Message for `filter` feature
+**Improve the error message for filter feature**
+Currently if you were use the filter feature with an invalid tag, that is a tag which does not have a alphanumeric name or is an `assessment` tag, it shows the error message: `Invalid tag provided. Needs to be non-empty name`.  
+This is attained from a sample input like `filter t/Intern met/median` where `Intern` is a tag that is on applicant but does not have a `assessment` category. Error message should contain  `Check that the tag contains an asssessment category, use create command if it does not`
+Additionally inputs like `filter t/Int@/a met/median` will also show the same error message. The current error message is too vague in nature, and should contain `Check that the tag name is not empty and is alphanumeric (a valid tag name) and does not contain space`.  
+The error message should be split into two in order to not confuse the user about what is wrong with the tag.
+Therefore, the final output should have 1 error message for invalid tag names that are not alphanumeric or contains space and another error message for when the tag does not have an assessment category in `listT`.   
+`
 
 ### Improve on `remark` feature
 **Improve the remark feature**
