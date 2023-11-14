@@ -1103,7 +1103,7 @@ Testers are expected to do more *exploratory* testing.
 1. Delete an existing student from Class Manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student are shown in the Result Display Box.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from Class Manager. Details of the deleted student are shown in the Result Display Box.
       <br><br>
 2. Delete a student with an invalid student number.
 
@@ -1116,7 +1116,7 @@ Testers are expected to do more *exploratory* testing.
 1. Edit an existing student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
-      Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
