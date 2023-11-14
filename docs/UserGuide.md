@@ -571,6 +571,8 @@ Example
 </figure>
 <br>
 
+[↑ Back to Table of Contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### Clearing all tags of a client
@@ -588,9 +590,7 @@ FIELD INDEX NEW_VALUE
 
 **Example**
 
-- `name 1 John Doe`
-
-  Changes the name of the client at index 1 to `John Doe`.
+- `name 1 John Doe`: Changes the name of the client at index 1 to `John Doe`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -610,7 +610,9 @@ As salespeople, we need to gauge the likelihood of a client of becoming a buying
 
 You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. For example, if you wish to mark the client at index 4 as a cold lead, enter `lead 4 cold`. 
 
-Note that this [changes the follow-up period of the client](#follow-up-calculation) and might [unintentionally remove follow-ups](#known-issues).
+Note that this [changes the follow-up period of the client](#follow-up-calculation).
+
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -630,6 +632,15 @@ delete INDEX
 **Example**
 ```
 delete 1
+```
+
+### Deleting all clients: ***clear***
+
+If you want a fresh start, use the ***clear*** command. **Be careful**, this clears your entire client list!
+
+**Format**
+```text
+clear
 ```
 
 [↑ Back to Table of Contents](#table-of-contents)
