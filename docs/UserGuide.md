@@ -488,6 +488,19 @@ Examples:
   invalidated (none will be performed until the errors are fixed).
 </div>
 
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered                               | Reason                                                                              | Solution                                                                                                                                  |
+|--------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `This person already exists in NUSCoursemates`   | You are editing a student to the same name as an existing student (case-sensitive). | Ensure that you do not enter a student with the same name.                                                                                |
+| `Invalid command format! `                       | Some of the essential [parameters](#Glossary) such as `INDEX` could be missing.     | Follow the Command Format as stated above.                                                                                                |
+| `Unknown command `                               | The `edit` command may be spelled incorrectly or not entirely in lowercase.         | Verify that you've spelled the `edit` command correctly. It should be in lowercase.                                                       |
+| `The person index provided is invalid`           | You have entered an invalid index.                                                  | Ensure that the index entered is within the total number of students in NUSCoursemates                                                    |
+| `At least one field to edit must be provided. `  | You need to input at least one field.                                               | Include at least one of the optional field.                                                                                               |
+| `Person XYZ doesn't have Course XYZ!`            | You are trying to edit a course that the person does not have.                      | Edit another course that the person has.                                                                                                  |
+| Errors regarding wrong [field](#Glossary) inputs | Invalid inputs may be entered.                                                      | Cross-reference the constraints associated with each [field](#Glossary) using the [Input Table](#input-table) for additional information. |
+
+
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting a student : `delete`
