@@ -468,6 +468,8 @@ If you want to find specific transactions, you can use the `listTransaction` com
 
 Format: `listTransaction [KEYWORD]...`
 
+Need help with the formatting of commands? [Click here](#features)
+
 - You can enter one or more keywords separated by spaces to search for specific transactions by description. If no keywords are entered, all transactions will be listed.
 - The search is case-insensitive, meaning that `lunch` will match `Lunch`.
 - Keep in mind that only the entire keyword will be matched. For instance, a transaction with description `fast` will not be displayed when you execute `listTransaction breakfast`.
