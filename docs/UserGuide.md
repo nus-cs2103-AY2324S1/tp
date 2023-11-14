@@ -577,6 +577,11 @@ Format: `report EMPLOYEE_ID`
 * The report is downloaded in a `.txt` file, located in the `reports` folder in the location of `hour.jar`.
   * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
     and `NAME` is the name of the corresponding employee.
+  
+  <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    Note that unlike the **hour.json** file in the **data** folder, making changes in the **.txt** file in the **reports** folder does not change the data seen in the HouR app.
+  </div>
+  
 * The overtime pay is calculated based on the overtime hours and the salary of the employee.
   * The following [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) is used to calculate overtime pay.
 
