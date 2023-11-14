@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.assignment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandAssignmentTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAddressBook;
 
@@ -54,5 +56,30 @@ public class ListAssignmentCommandTest {
                         model.getFilteredAssignmentList().size()),
                 commandResult.getFeedbackToUser()
         );
+    }
+
+    @Test
+    public void equals() {
+        String[] dates = new String[] {"2023-11-31 18:45", "2024-11-31 18:45"};
+        List<String> datesAsList = Arrays.asList(dates);
+        ListAssignmentCommand listFirstCommand = new ListAssignmentCommand();
+        ListAssignmentCommand listSecondCommand =
+                new ListAssignmentCommand(new AssignmentBetweenStartandEndPredicate(datesAsList));
+
+        // same object -> returns true
+        assertTrue(listFirstCommand.equals(listFirstCommand));
+
+        // same values -> returns true
+        ListAssignmentCommand listFirstCommandCopy = new ListAssignmentCommand();
+        assertTrue(listFirstCommand.equals(listFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(listFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(listFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(listFirstCommand.equals(listSecondCommand));
     }
 }

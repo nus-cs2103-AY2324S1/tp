@@ -43,7 +43,7 @@ public class AddInternshipTaskCommand extends InternshipCommand {
             + "[" + PREFIX_OUTCOME + "awaiting/follow-up/ghosted/rejected/offered" + "]\n"
             + "[" + PREFIX_TAG + "TAG" + "]\n"
             + "Example: " + COMMAND_WORD
-            + " add-a n/Assignment 1 d/description e/2023-12-18 19:00 p/2023-08-19 18:00 t/group s/incomplete";
+            + " add-i-task i/1 n/Interview e/2023-12-18 19:00 s/incomplete o/follow-up t/group";
     public static final String MESSAGE_SUCCESS = "New internship task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This internship task already exists in the address book";
     public static final String MESSAGE_INVALID_ROLE_INDEX = "There is no such internship role with that index";

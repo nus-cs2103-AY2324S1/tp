@@ -17,15 +17,15 @@ public class DeleteInternshipTaskParser implements Parser<DeleteInternshipTaskCo
      * Parses the given {@code String} of arguments in the context of the DeleteInternshipTaskCommand
      * and returns a DeleteInternshipTaskCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteInternshipTaskCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteInternshipTaskCommand(index);
-        } catch (ParseException pe) {
+        if (args.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInternshipTaskCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            DeleteInternshipTaskCommand.MESSAGE_USAGE)
+            );
         }
+        Index index = ParserUtil.parseIndex(args);
+        return new DeleteInternshipTaskCommand(index);
     }
 }

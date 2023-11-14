@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ASSIGNMENTS;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
@@ -64,6 +65,8 @@ public class ListAssignmentCommand extends AssignmentCommand {
 
     @Override
     public String toString() {
-        return this.predicate.toString();
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }

@@ -17,16 +17,15 @@ public class UnMarkInternshipTaskParser implements Parser<UnMarkInternshipTaskCo
      * Parses the given {@code String} of arguments in the context of the UnMarkInternshipTaskCommand
      * and returns a UnMarkInternshipTaskCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
      */
     public UnMarkInternshipTaskCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new UnMarkInternshipTaskCommand(index);
-        } catch (ParseException parseException) {
+        if (args.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            UnMarkInternshipTaskCommand.MESSAGE_USAGE), parseException);
+                            UnMarkInternshipTaskCommand.MESSAGE_USAGE)
+            );
         }
+        Index index = ParserUtil.parseIndex(args);
+        return new UnMarkInternshipTaskCommand(index);
     }
 }

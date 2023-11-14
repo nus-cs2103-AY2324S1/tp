@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -66,19 +66,25 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-This is a **partial diagram** of the UI component. This diagram gives a high level view of the structure.
+Given below is a **partial diagram** of the UI component. This diagram gives a high level view of the structure of the Ui components.
 
-<img src="images/Ui_High_Level.png" width="850" />
+<img src="images/Ui_High_Level.png" width="900" />
 
-We also have a **partial diagram** to show the dependencies between the higher level UI components (such as `InternPanel`), and the lower level components (such as `InternshipRolePanel` etc.).
+In particular, the UI consists of a ``MainWindow`` that is made up of smaller components. Some notable examples are `CommandBox`, 
+`ResultDisplay`, `AssignmentListPanel`, `InternPanel` and `Calendar`.
+All these, including the `MainWindow`,
+inherit from the abstract `UiPart` class which captures the commonalities between classes that
+represent parts of the visible GUI.
+
+Below is another **partial diagram** to show the dependencies between the higher level UI components (such as `InternPanel`), and the lower level components (such as `InternshipRolePanel` etc.).
 
 <img src="images/Ui_Low_Level.png" width="500" />
-
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `selectedViewPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -89,7 +95,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Assignment`, `InternshipRole` or `InternshipTask`  objects residing in the `Model`.
 
-Below is a **partial diagram** to show the dependency on the `Model` class:
+This dependency on the `Model` class is given in the below **partial diagram**:
 
 <img src="images/Ui_Lower_Level_2.png" width="500" />
 
@@ -105,6 +111,8 @@ The `UI` component is responsible for the following key features:
 * Whenever a user performs an add, or delete operation, update the names of the tasks in the calendar accordingly
 * Switching between different calendar months using buttons
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -115,7 +123,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddAssignmentCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddAssignmentParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddAssignmentCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add an assignment).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -132,24 +140,26 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` 
-(`XYZ` is a placeholder for the specific command name e.g., `AddAssignmentCommandParser`) which uses the other classes 
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZParser` 
+(`XYZ` is a placeholder for the specific command name e.g., `AddAssignmentParser`) which uses the other classes 
 shown above to parse the user command and create a `XYZCommand` object (e.g., `AddAssignmentCommand`) which the 
 `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddAssignmentCommandParser`, `DeleteAssignmentCommandParser`, ...) inherit 
+* All `XYZParser` classes (e.g., `AddAssignmentParser`, `DeleteAssignmentParser`, ...) inherit 
 from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-**Overall high level view of the Model component**
+Below is an **overall high level view of the `Model` component**
 <img src="images/Model_High_Level.png" width="450"/>
 
 **Assignment portion of the Model component**
 <img src="images/Model_Low_Level_Assignment.png" width="400"/>
 
 **Internship portion of the Model component**
-<img src="images/Model_Low_Level_Internship.png" width="550"/>
+<img src="images/Model_Low_Level_Internship.png" width="600"/>
 
 The `Assignment`, `InternshipRole`, `InternshipTask` components:
 
@@ -160,7 +170,7 @@ unmodifiable `ObservableList` that can be 'observed' e.g. the UI can be bound to
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as these components represent data entities of the domain, they should make sense on their own without depending on other components)
 
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -174,9 +184,9 @@ its key features, dependencies, and the classes it interacts with.
 
 The Storage component is responsible for the following key features:
 
-* Data Serialization: It can save data, such as address book entries and user preferences, in JSON format. Serialization is the process of converting these data objects into a structured text format, making them suitable for storage and future retrieval.
+* **Data Serialization**: It can save data, such as address book entries and user preferences, in JSON format. Serialization is the process of converting these data objects into a structured text format, making them suitable for storage and future retrieval.
 
-* Data Deserialization: It can read data back from the storage, deserialize it, and recreate corresponding objects. This feature is essential for restoring the application's state from previously saved data.
+* **Data Deserialization**: It can read data back from the storage, deserialize it, and recreate corresponding objects. This feature is essential for restoring the application's state from previously saved data.
 
 * Inheritance from AddressBookStorage and UserPrefStorage: The Storage component is designed to be versatile. It inherits from both AddressBookStorage and UserPrefStorage, allowing it to be treated as either one, depending on whether you need to work with address book data or user preference data. This inheritance simplifies the codebase by providing a single entry point for storage operations, regardless of the data type.
 
@@ -203,13 +213,17 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The implementation for `InternshipRole` and `InternshipTask` are very similar to `Assignment`, hence we only detail the implementation for `Assignment` features.
+We have included for reference which internship features are similar to the assignment feature. Please note this does not mean they are exactly identical, there 
+may be some differences between the implementation. 
 
 ### Add Assignment feature
+
+**Similar internship feature**: `Add internship Role` feature and `Add internship Task` feature
 
 #### What it does 
 {: .no_toc}
 
-Adds a assignment to the list of currently existing assignments. Users are able to add any valid assignment to the list. 
+Adds an assignment to the list of currently existing assignments. Users are able to add any valid assignment to the list. 
 If a record of the same assignment already exists in the list, the command will not be allowed and an error will be thrown to alert user.
 
 Example Use: `add-a n/Assignment 1 e/2023-11-11 16:00 d/Important Assignment s/complete p/2023-11-10 t/Individual`
@@ -242,6 +256,8 @@ The following sequence diagram illustrates how the add assignment operation work
 * `args`: Refers to a valid sequence of arguments provided by the user.
 
 ### Delete Assignment Feature
+
+**Similar internship feature**: `Delete internship Role` feature and `Delete internship Task` feature
 
 #### What it does
 {: .no_toc}
@@ -277,6 +293,8 @@ The following sequence diagram illustrates how the delete assignment operation w
 <img src="images/DeleteAssignmentSeq.png" width="850" />
 
 ### Edit Assignment Feature
+
+**Similar internship feature**: `Edit internship Task` feature
 
 #### What it does
 {: .no_toc}
@@ -318,6 +336,8 @@ The following sequence diagram illustrates how the edit assignment operation wor
 
 ### Mark Assignment Feature
 
+**Similar internship feature**: `Mark internship Task` feature
+
 #### What it does
 {: .no_toc}
 
@@ -335,13 +355,13 @@ abstract `Command` class and implements the `execute()` method.
 
 Before execution of this method, the `verifyView()` method is called, to verify that the user is in the `Assignment` view.
 
-Upon execution of this method, the `status` assignment at specified **one-based index** is updated to `complete`.
+Upon execution of this method, the `status` of the assignment at specified **one-based index** is updated to `complete`.
 
 Given below is an example usage scenario of how the mark assignment command behaves at each step.
 
 Step 1. User launches the application
 
-Step 2. User executes `mark-a 1` to change the status of the assignment index 1 to `complete`.
+Step 2. User executes `mark-a 1` to change the status of the assignment at index 1 to `complete`.
 
 Step 3. If the index provided is valid and assignment is currently `incomplete`, the assignment at index 1 is updated to be `complete`
 
@@ -350,6 +370,8 @@ The following sequence diagram illustrates how the mark assignment operation wor
 <img src="images/MarkAssignmentSeq.png" width="850" />
 
 ### UnMark Assignment Feature
+
+**Similar internship feature**: `UnMark internship Task` feature
 
 #### What it does
 {: .no_toc}
@@ -363,18 +385,18 @@ Example Use: `unmark-a 1`
 #### Implementation
 {: .no_toc}
 
-Upon entry of the mark assignment command, a `UnMarkAssignmentCommand` class is created. The `UnMarkAssignmentCommand` class extends the
+Upon entry of the unmark assignment command, a `UnMarkAssignmentCommand` class is created. The `UnMarkAssignmentCommand` class extends the
 abstract `Command` class and implements the `execute()` method.
 
 Before execution of this method, the `verifyView()` method is called, to verify that the user is in the `Assignment` view.
 
-Upon execution of this method, the `status` assignment at specified **one-based index** is updated to `incomplete`.
+Upon execution of this method, the `status` of the assignment at specified **one-based index** is updated to `incomplete`.
 
 Given below is an example usage scenario of how the unmark assignment command behaves at each step.
 
 Step 1. User launches the application
 
-Step 2. User executes `unmark-a 1` to change the status of the assignment index 1 to `incomplete`.
+Step 2. User executes `unmark-a 1` to change the status of the assignment at index 1 to `incomplete`.
 
 Step 3. If the index provided is valid and assignment is currently `complete`, the assignment at index 1 is updated to be `incomplete`
 
@@ -384,10 +406,12 @@ The following sequence diagram illustrates how the unmark assignment operation w
 
 ### Find Assignment Feature
 
+**Similar internship feature**: `Find internship Role` feature and `Find internship Task` feature
+
 #### What it does
 {: .no_toc}
 
-Finds a assignment with the specified parameters.
+Finds an assignment with the specified parameters.
 
 Example Use: `find-a CS2100`
 
@@ -460,10 +484,9 @@ The following sequence diagram illustrates how the list assignment operation wor
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix A: Product Scope**
 
 **Target user profile**:
 
@@ -476,8 +499,9 @@ The following sequence diagram illustrates how the list assignment operation wor
 
 **Value proposition**: manage assignments deadlines and internship applications faster than a typical mouse/GUI driven app
 
+--------------------------------------------------------------------------------------------------------------------
 
-### User stories
+## **Appendix B: User stories**
 
 In the table below, **_user_** refers to the Computer Science student.
 
@@ -489,7 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                   | add a new assignment                                                                                                                                    | keep track of the assignments that I need to complete                                                                             |
 | `* * *`  | user                                   | see the status and the deadline of my assignments                                                                                                       | monitor my progress and plan my time based on the number of tasks that needs to be completed                                      |
 | `* * *`  | user                                   | delete an assignment                                                                                                                                    | remove entries that I no longer need to track                                                                                     |
-| `* * *`  | user                                   | mark an assignment as completed                                                                                                                         | track my progress of my assignments, and plan my time better                                                                      |
+| `* * *`  | user                                   | mark an assignment as completed                                                                                                                         | track my progress of my assignments                                                                                               |
 | `* * *`  | user                                   | unmark an assignment which is currently completed                                                                                                       | track my progress if I marked something wrongly without needing to delete the entry                                               |
 | `* * *`  | user with many assignments             | see all the current assignments, and all their details                                                                                                  | have a understanding of how many assignments I have in total currently                                                            |
 | `* * *`  | user with many assignments             | view my assignments in chronological order of the deadlines (ie, assignment with earliest deadline first)                                               | understand which assignment is due earlier, and therefore I can prioritise it                                                     |
@@ -524,7 +548,7 @@ For all use cases below, we assume the following unless specified otherwise
 
 Furthermore, some use cases are similar when manipulating **assignments**, internship **roles** and internship **tasks**. 
 
-Therefore, to keep the developer guide concise, the use cases elaborated upon below are only detailed for assignments. 
+Therefore, to keep the developer guide concise, the use cases elaborated upon below are only detailed for assignments (UC1 to 8 in the table below). 
 Nonetheless, they can be extrapolated for internships roles and tasks too, without changes to the major details within the use case. 
 Such associated pairs of use cases are listed in the table below.
 
@@ -544,8 +568,8 @@ Such associated pairs of use cases are listed in the table below.
 
 **MSS**
 
-1.  User requests to add an assignment
-2.  CampusCompanion adds the assignment and shows success message
+1.  User requests to add an assignment by specifying information about the assignment
+2.  CampusCompanion adds the assignment 
 
     Use case ends.
 
@@ -640,7 +664,7 @@ Such associated pairs of use cases are listed in the table below.
 1.  User requests to list all assignments
 2.  CampusCompanion shows a list of assignments with their details
 3.  User requests to unmark a specific assignment in the list
-4.  CampusCompanion unmark the assignment
+4.  CampusCompanion unmarks the assignment
 
     Use case ends.
 
@@ -765,14 +789,13 @@ Such associated pairs of use cases are listed in the table below.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 assignments or internship details without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 assignments or internship details without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The user interface should be intuitive enough for users who are not IT-savvy.
 5. The product should be for a single user.
 6. The software should work without requiring an installer.
 7. The GUI should work well for standard resolutions.
-8. The file sizes of the deliverables should be reasonable and not exceed the limits given below.
 
 ### Glossary
 
@@ -786,7 +809,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more **exploratory** testing.
 
 </div>
 

@@ -8,6 +8,10 @@ title: Yuan Jing's Project Portfolio Page
 CampusCompanion - your all-in-one solution to manage your university life.
 
 
+
+Given below are my contributions to the project.
+
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=seewhyjay&breakdown=true)
 
 * **Enhancements implemented**:
@@ -37,9 +41,11 @@ CampusCompanion - your all-in-one solution to manage your university life.
       * Allows user to list all assignments
     * Finding
       * Allows user to find assignments by keyword.
+  
   #### CI/CD
   * Implemented GitHub workflow to build and upload CampusCompanion's executable as an artifact on every PR for easy testing by reviewers.
-    * Example: [PR#193](https://github.com/AY2324S1-CS2103T-T12-3/tp/actions/runs/6815714173?pr=193)
+  * This is to circumvent the need to clone our teammates personal repositories to build the jar file then test their changes.
+    * Example: Scroll down to `Artifacts` on [PR#193](https://github.com/AY2324S1-CS2103T-T12-3/tp/actions/runs/6815714173?pr=193) and download `CampusCompanion executable`.
 
 * **Documentation**:
   * User Guide:
@@ -52,7 +58,8 @@ CampusCompanion - your all-in-one solution to manage your university life.
   * Maintaining issue tracker
 
 * **Review and mentoring**:
-  * Notable PRs reviewed: [#95](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/95),[#127](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/127),[#128](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/128),[#189](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/189)
+  * Notable PRs reviewed: [#95](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/95),[#127](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/127),[#128](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/128),[#136](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/136),[#189](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/189),[#206](https://github.com/AY2324S1-CS2103T-T12-3/tp/pull/206),
+  * Discussed with and helped teammates through Telegram chat.
 
 * **Community**:
   * Contributions during the PE-D to provide bug reports to other groups.

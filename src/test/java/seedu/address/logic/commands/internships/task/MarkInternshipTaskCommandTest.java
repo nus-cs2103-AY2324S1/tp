@@ -77,7 +77,7 @@ public class MarkInternshipTaskCommandTest {
         assertFalse(markFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(markFirstCommand == null);
+        assertFalse(markFirstCommand.equals(null));
 
         // different person -> returns false
         assertFalse(markFirstCommand.equals(markSecondCommand));

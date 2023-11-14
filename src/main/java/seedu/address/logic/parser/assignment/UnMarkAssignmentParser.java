@@ -15,16 +15,16 @@ public class UnMarkAssignmentParser implements Parser<UnMarkAssignmentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the UnMarkAssignmentCommand
      * and returns a UnMarkAssignmentCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
      */
     public UnMarkAssignmentCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new UnMarkAssignmentCommand(index);
-        } catch (ParseException parseException) {
+        if (args.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            UnMarkAssignmentCommand.MESSAGE_USAGE), parseException);
+                            UnMarkAssignmentCommand.MESSAGE_USAGE)
+            );
         }
+        Index index = ParserUtil.parseIndex(args);
+        return new UnMarkAssignmentCommand(index);
     }
 }

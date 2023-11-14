@@ -77,7 +77,7 @@ public class UnMarkInternshipTaskCommandTest {
         assertFalse(unMarkFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(unMarkFirstCommand == null);
+        assertFalse(unMarkFirstCommand.equals(null));
 
         // different person -> returns false
         assertFalse(unMarkFirstCommand.equals(unMarkSecondCommand));

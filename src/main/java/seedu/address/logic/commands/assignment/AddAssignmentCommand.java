@@ -37,8 +37,8 @@ public class AddAssignmentCommand extends AssignmentCommand {
             + "[" + PREFIX_STATUS + "STATUS " + "]\n"
             + "[" + PREFIX_PLANNEDFINISHDATE + "PLAN TO FINISH BY IN YYYY-MM-DD [HH:mm] FORMAT" + "] "
             + "[" + PREFIX_TAG + "TAG" + "]\n"
-            + "Example: " + COMMAND_WORD
-            + " add-a n/Assignment 1 d/description e/2023-12-18 19:00 p/2023-08-19 18:00 t/group s/incomplete";
+            + "Example:"
+            + " add-a n/Assignment 1 d/description e/2023-12-18 19:00 p/2023-12-17 18:00 t/group s/incomplete";
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
 

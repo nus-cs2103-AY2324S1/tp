@@ -17,7 +17,7 @@ import seedu.address.model.fields.TaskOutcome;
 import seedu.address.model.internship.task.InternshipTask;
 
 /**
- * A command that edits the outcome of an InternshipRole when executed.
+ * A command that edits the outcome of an InternshipTask when executed.
  */
 public class EditInternshipTaskCommand extends InternshipCommand {
     public static final String COMMAND_WORD = "edit-i-task";
@@ -38,8 +38,8 @@ public class EditInternshipTaskCommand extends InternshipCommand {
 
     /**
      * The constructor for an EditInternshipRoleCommand
-     * @param index The index of the InternshipRole to be edited
-     * @param newOutcome The new outcome for the target InternshipRole
+     * @param index The index of the InternshipTask to be edited
+     * @param newOutcome The new outcome for the target InternshipTask
      */
     public EditInternshipTaskCommand(Index index, TaskOutcome newOutcome) {
         this.index = index;
@@ -59,12 +59,6 @@ public class EditInternshipTaskCommand extends InternshipCommand {
         if (!model.hasInternshipTask(taskToEdit)) {
             throw new CommandException(MESSAGE_INVALID_TASK);
         }
-
-        /*if (newOutcome.getTaskOutcome() == Outcome.OFFERED) {
-            EditInternshipRoleCommand editRoleCommand = new EditInternshipRoleCommand(index,
-                    new ApplicationOutcome(Outcome.OFFERED));
-            editRoleCommand.execute(model);
-        }*/
 
         InternshipTask taskWithNewOutcome = taskToEdit.getNewInternshipTaskWithOutcome(newOutcome);
         model.setInternshipTask(taskToEdit, taskWithNewOutcome);
