@@ -1,0 +1,27 @@
+{
+  "employees": [
+    {
+      "name": "Alice Pauline",
+      "position": "CEO",
+      "id": "EID1234-5678",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "departments": [
+        "Management"
+      ],
+      "salary": "14000",
+      "leaveList": [ ],
+      "remarkList": [ ]
+    },
+    {
+      "name": "Alice Pauline",
+      "position": "CEO",
+      "id": "EID1234-5678",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "salary": "14000",
+      "leaveList": [ ],
+      "remarkList": [ ]
+    }
+  ]
+}

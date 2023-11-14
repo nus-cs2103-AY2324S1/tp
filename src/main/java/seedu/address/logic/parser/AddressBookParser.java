@@ -9,15 +9,26 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.logic.commands.AddRemarkCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
+import seedu.address.logic.commands.DeleteRemarkCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListLeaveCommand;
+import seedu.address.logic.commands.OvertimeCommand;
+import seedu.address.logic.commands.ReportCommand;
+import seedu.address.logic.commands.ResetCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.
@@ -76,6 +87,36 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case AddLeaveCommand.COMMAND_WORD:
+            return new AddLeaveCommandParser().parse(arguments);
+
+        case DeleteLeaveCommand.COMMAND_WORD:
+            return new DeleteLeaveCommandParser().parse(arguments);
+
+        case EditLeaveCommand.COMMAND_WORD:
+            return new EditLeaveCommandParser().parse(arguments);
+
+        case ListLeaveCommand.COMMAND_WORD:
+            return new ListLeaveCommandParser().parse(arguments);
+
+        case ResetCommand.COMMAND_WORD:
+            return new ResetCommandParser().parse(arguments);
+
+        case ReportCommand.COMMAND_WORD:
+            return new ReportCommandParser().parse(arguments);
+
+        case AddRemarkCommand.COMMAND_WORD:
+            return new AddRemarkCommandParser().parse(arguments);
+
+        case DeleteRemarkCommand.COMMAND_WORD:
+            return new DeleteRemarkCommandParser().parse(arguments);
+
+        case OvertimeCommand.COMMAND_WORD:
+            return new OvertimeCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

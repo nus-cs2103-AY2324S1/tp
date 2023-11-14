@@ -1,0 +1,14 @@
+{
+  "employees": [
+    {
+      "name": "Employee with invalid name field: Ha!ns Mu@ster",
+      "position": "CEO",
+      "id": "EID1234-5678",
+      "phone": "9482424",
+      "email": "hans@example.com",
+      "salary": "$1,000,000",
+      "leaveList": [ ],
+      "remarkList": [ ]
+    }
+  ]
+}

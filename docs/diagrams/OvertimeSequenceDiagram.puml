@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":OvertimeCommandParser" as OvertimeCommandParser LOGIC_COLOR
+participant "r:OvertimeCommand" as OvertimeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("overtime id/EID1234-5678 o/inc a/2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("overtime id/EID1234-5678 o/inc a/2")
+activate AddressBookParser
+
+create OvertimeCommandParser
+AddressBookParser -> OvertimeCommandParser
+activate OvertimeCommandParser
+
+OvertimeCommandParser --> AddressBookParser
+deactivate OvertimeCommandParser
+
+AddressBookParser -> OvertimeCommandParser : parse("overtime id/EID1234-5678 o/inc a/2")
+activate OvertimeCommandParser
+
+create OvertimeCommand
+OvertimeCommandParser -> OvertimeCommand
+activate OvertimeCommand
+
+OvertimeCommand --> OvertimeCommandParser : r
+deactivate OvertimeCommand
+
+OvertimeCommandParser --> AddressBookParser : r
+deactivate OvertimeCommandParser
+
+OvertimeCommandParser -[hidden]-> AddressBookParser
+destroy OvertimeCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> OvertimeCommand : execute()
+activate OvertimeCommand
+
+OvertimeCommand -> Model : setEmployee(employeeToUpdate, updatedEmployee)
+activate Model
+
+Model --> OvertimeCommand
+
+OvertimeCommand -> Model : updateFilteredEmployeeList()
+
+Model --> OvertimeCommand
+deactivate Model
+
+create CommandResult
+OvertimeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> OvertimeCommand
+deactivate CommandResult
+
+OvertimeCommand --> LogicManager : result
+deactivate OvertimeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

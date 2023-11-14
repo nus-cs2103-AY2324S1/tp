@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ReportCommandParser" as ReportCommandParser LOGIC_COLOR
+participant "r:ReportCommand" as ReportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":ReportStorage" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("Report EID1234-5678")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("Report EID1234-5678")
+activate AddressBookParser
+
+create ReportCommandParser
+AddressBookParser -> ReportCommandParser
+activate ReportCommandParser
+
+ReportCommandParser --> AddressBookParser
+deactivate ReportCommandParser
+
+AddressBookParser -> ReportCommandParser : parse("EID1234-5678")
+activate ReportCommandParser
+
+create ReportCommand
+ReportCommandParser -> ReportCommand
+activate ReportCommand
+
+ReportCommand --> ReportCommandParser : r
+deactivate ReportCommand
+
+ReportCommandParser --> AddressBookParser : r
+deactivate ReportCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ReportCommandParser -[hidden]-> AddressBookParser
+destroy ReportCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> ReportCommand : execute()
+activate ReportCommand
+
+ReportCommand -> Model : getFilteredEmployeeList()
+activate Model
+
+Model --> ReportCommand
+deactivate Model
+
+ReportCommand -> ReportCommand : generateReport(employee)
+activate ReportCommand
+
+ReportCommand --> ReportCommand
+deactivate ReportCommand
+
+ReportCommand -> Storage : saveReport(report)
+activate Storage
+
+Storage --> ReportCommand
+deactivate Storage
+
+create CommandResult
+ReportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ReportCommand
+deactivate CommandResult
+
+ReportCommand --> LogicManager : result
+deactivate ReportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
