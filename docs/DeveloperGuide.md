@@ -2,6 +2,16 @@
 layout: page
 title: Developer Guide
 ---
+
+<style>
+.diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+</style>
+
 * Table of Contents
 {:toc}
 
@@ -24,11 +34,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
+
 <!-- @@author awhb -->
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<div class="diagram">
+  <img src="images/ArchitectureDiagram.png" width="280" />
+</div>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -54,7 +67,9 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<div class="diagram">
+  <img src="images/ArchitectureSequenceDiagram.png" width="580" />
+</div>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -63,7 +78,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<div class="diagram">
+  <img src="images/ComponentManagers.png" width="310" />
+</div>
 
 The sections below give more details of each component.
 
@@ -75,7 +92,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<div class="diagram">
+  <img src="images/UiClassDiagram.png" width="980" />
+</div>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -102,8 +121,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
-
+<div class="diagram">
+  <img src="images/LogicClassDiagram.png" width="570" />
+</div>
 
 How the `Logic` component works:
 
@@ -114,7 +134,9 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<div class="diagram">
+  <img src="images/ParserClasses.png" width="670" />
+</div>
 
 How the parsing works:
 
@@ -143,13 +165,17 @@ the user's input into key-value pairs, where the keys are specified using `Argum
 The activity diagram below describes the workflow of `NetworkBookParser`
 when determining which `Parser` to use:
 
-<img src="images/AddressBookParser.png" width="1200"/>
+<div class="diagram">
+  <img src="images/AddressBookParser.png" width="1130" />
+</div>
 
 The sequence diagram below illustrates the interactions within the
 `FilterCommand` class to generate a `FilterCommand` object, using
 `ArgumentMultiMap` and `ArgumentTokeniser`:
 
-<img src="images/FilterCommandParser.png" width="1200"/>
+<div class="diagram">
+  <img src="images/FilterCommandParser.png" width="1250" />
+</div>
 
 <!-- @@author -->
 
@@ -159,8 +185,9 @@ The sequence diagram below illustrates the interactions within the
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="1200" />
-
+<div class="diagram">
+  <img src="images/ModelClassDiagram.png" width="1320" />
+</div>
 
 The `Model` component,
 
@@ -206,7 +233,9 @@ The `UniqueList<T>` class,
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="900" />
+<div class="diagram">
+  <img src="images/StorageClassDiagram.png" width="930" />
+</div>
 
 The `Storage` component,
 
@@ -233,7 +262,9 @@ The implementation of the create command follows the convention of a normal comm
 where `CreateCommandParser` is responsible for parsing the user input string
 into an executable command.
 
-![create_contact](images/create/CreateDiagram.png)
+<div class="diagram">
+  <img src="images/create/CreateDiagram.png" width="1800" />
+</div>
 
 `CreateCommandParser` first obtains the values corresponding to the prefixes
 `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority` and `/tag`.
@@ -265,7 +296,9 @@ We have considered the following alternative implementations:
 
 The implementation of the add command follows the convention of a normal command, where `AddCommandParser` is responsible for parsing the user input string into an executable command.
 
-<img src="images/add-remark/AddDiagram.png" width="1200">
+<div class="diagram">
+  <img src="images/add-remark/AddDiagram.png" width="1430" />
+</div>
 
 `AddCommandParser` first obtains the values corresponding to the prefixes
 `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority` and `/tag`.
@@ -302,7 +335,9 @@ The implementation of the edit command follows the convention of a normal comman
 where `EditCommandParser` is responsible for parsing the user input string
 into an executable command.
 
-<img src="images/edit/EditDiagram.png" width="1200">
+<div class="diagram">
+  <img src="images/edit/EditDiagram.png" width="1160" />
+</div>
 
 `EditCommandParser` first obtains the values corresponding to the prefixes 
 `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
@@ -358,7 +393,9 @@ and hence any mutation of the `Person` object might introduce bugs.
 
 The implementation of the filter command follows the convention of a normal command, where `FilterCommandParser` is responsible for parsing the user input string into an executable `FilterCommand`.
 
-![filter diagram](images/filter/FilterDiagram.png)
+<div class="diagram">
+  <img src="images/filter/FilterDiagram.png" width="1110" />
+</div>
 
 `FilterCommandParser` first obtains the values corresponding to the prefixes `/by` and `/with`, and ensures that each prefix is indicated once and only once.
 If the value corresponding to `/by` is `course`, the value of the tag `/taken` is obtained from the value of the prefix `/with`.
@@ -378,7 +415,9 @@ Upon execution, `FilterCommand` passes the instance of `Predicate<Person>` to th
 
 The command responsible for removing an entire contact is `DeletePersonCommand`. Below illustrates the process of parsing and executing a `DeletePersonCommand`.
 
-<img src="images/delete/DeletePersonDiagram.png" width="1200">
+<div class="diagram">
+  <img src="images/delete/DeletePersonDiagram.png" width="1110" />
+</div>
 
 `NetworkBookParser` will instantiate a `DeleteCommandParser` when it detects the `delete` preamble. The `DeleteCommandParser` then checks if any field prefix is present in the command string (including `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority` and `/tag`).
 
@@ -409,7 +448,9 @@ We have considered the following alternative implementation:
 
 The implementation of the opening link/email command follows the convention of normal command, where `OpenEmailCommandParser`/`OpenLinkCommandParser` is responsible for parsing the user input string into an executable command. Below illustrates the process for open link command. The process of opening email is similar, where the reader can simply replace `link` with `email` to get the process for opening email.
 
-![open link diagram](images/open/OpenDiagram.png)
+<div class="diagram">
+  <img src="images/open/OpenDiagram.png" width="1020" />
+</div>
 
 `OpenLinkCommandParser` first obtains the values corresponding to the preamble and the prefix `/index`, and return an object of class `OpenLinkCommand`.
 
@@ -445,15 +486,21 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedNetworkBook` will be initialized with the initial NetworkBook state, and the `currentStatePointer` pointing to that single state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<div class="diagram">
+  <img src="images/UndoRedoState0.png" width="480" />
+</div>
 
 Step 2. The user executes `delete 5` command to delete the 5th person displayed in NetworkBook. The `delete` command calls `Model::deletePerson` which in turn calls `VersionedNetworkBook::commit`, causing the modified state of the NetworkBook after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted NetworkBook state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<div class="diagram">
+  <img src="images/UndoRedoState1.png" width="480" />
+</div>
 
 Step 3. The user executes `create /name David …​` to add a new person. The `create` command also calls `Model::addPerson` which also in turn calls `VersionedNetworkBook::commit`, causing another modified NetworkBook state to be saved into the `networkBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<div class="diagram">
+   <img src="images/UndoRedoState2.png" width="480" />
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `VersionedNetworkBook::commit`, so the NetworkBook state will not be saved into the `networkBookStateList`.
 
@@ -462,7 +509,9 @@ Step 3. The user executes `create /name David …​` to add a new person. The `
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model::undoNetworkBook`, which will shift the `currentStatePointer` once to the left, pointing it to the previous NetworkBook state, and restores the NetworkBook to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<div class="diagram">
+  <img src="images/UndoRedoState3.png" width="480" />
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial state of NetworkBook when the user began the current session, then there are no previous NetworkBook states to restore. The `undo` command uses `Model::canUndoNetworkBook` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -472,7 +521,9 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<div class="diagram">
+  <img src="images/UndoSequenceDiagram.png" width="1010" />
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -487,15 +538,21 @@ The `redo` command does the opposite — it calls `Model::redoNetworkBook`, 
 
 Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model::undoNetworkBook`, `Model::redoNetworkBook`, or any `Model` commands that call `VersionedNetworkBook::commit`. Thus, the `networkBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<div class="diagram">
+  <img src="images/UndoRedoState4.png" width="480" />
+</div>
 
 Step 6. The user executes `clear`, which calls `Model::setNetworkBook` which in turn calls `VersionedNetworkBook::commit`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<div class="diagram">
+  <img src="images/UndoRedoState5.png" width="550" />
+</div>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<div class="diagram">
+  <img src="images/CommitActivityDiagram.png" width="320" />
+</div>
 
 #### Design considerations:
 
@@ -556,7 +613,9 @@ Current displayed contacts:
 The NetworkBook parser parses this into a sort command using a sort command parser.
 The sort command parser constructs a new `PersonSortComparator`, which uses the static method `generateComparator()` to generate the appropriate comparator.
 
-![SortingParsingSequenceDiagram](images/SortingParsingSequenceDiagram.png)
+<div class="diagram">
+  <img src="images/SortingParsingSequenceDiagram.png" width="1000" />
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -582,7 +641,9 @@ Current displayed contacts:
 
 The following sequence diagram shows how the sort operation works:
 
-![SortingSequenceDiagram](images/SortingSequenceDiagram.png)
+<div class="diagram">
+  <img src="images/SortingSequenceDiagram.png" width="1330" />
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -600,7 +661,9 @@ Likewise, when a command that changes filtering (e.g. `filter`, `find`, `list`) 
 
 The following activity diagram summarizes what happens when a command is executed:
 
-![StatusBarActivityDiagram](images/StatusBarActivityDiagram.png)
+<div class="diagram">
+  <img src="images/StatusBarActivityDiagram.png" width="520" />
+</div>
 
 #### Design considerations:
 
@@ -630,7 +693,9 @@ The following activity diagram summarizes what happens when a command is execute
 
 The implementation of the command to find contacts by their names follows the convention of a normal command, where `FindCommandParser` class is responsible for parsing the user input string into an executable command. 
 
-![find diagram](images/find/FindDiagram.png)
+<div class="diagram">
+  <img src="images/find/FindDiagram.png" width="1690" />
+</div>
 
 `FindCommandParser` first obtains the values input by the user after the keyword `find`.
 `FindCommandParser` ensures that there is at least one key term value after trimming the user input for space characters.
