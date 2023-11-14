@@ -25,16 +25,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yihfei.md)]
 
 * Role: Developer
-* Responsibilities: Not determined yet
+* Responsibilities: Quality Assurance, UI
 
 ### Lam Jin Heng Braydon
 
 <img src="images/lambraydon.png" width="200px">
 
-[[github](https://github.com/lambraydon)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/lambraydon)] [[portfolio](team/lambraydon.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Feature Development, Quality Assurance, UI
 
 ### Armando Jovan Kusuma
 

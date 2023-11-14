@@ -4,9 +4,9 @@ title: User Guide
 ---
 
 # Welcome to TuitionConnect's User Guide!
-:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :rocket:
+:rocket: Introducing **TuitionConnect**: Revolutionising your Tutoring Business! :rocket:
 
-Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
+Fed up with setting up numerous unorganised spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
 
 Or feeling overwhelmed with the ugly-looking chaos of your Google Calendar as your number of teaching schedules increase?
 
@@ -21,6 +21,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
 <!-- TOC -->
 * [Welcome to TuitionConnect's User Guide!](#welcome-to-tuitionconnects-user-guide)
   * [Table of Contents](#table-of-contents)
+  * [<div style="page-break-after: always;"></div>](#div-stylepage-break-after-alwaysdiv)
   * [Introduction](#introduction)
   * [Using this guide](#using-this-guide)
   * [Symbols and Syntax](#symbols-and-syntax)
@@ -38,13 +39,13 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Marking a tutee as paid : `paid`](#marking-a-tutee-as-paid--paid)
     * [Marking a tutee as unpaid : `unpaid`](#marking-a-tutee-as-unpaid--unpaid)
-    * [Show all the unpaid tutees : `list unpaid`](#show-all-the-unpaid-tutees--list-unpaid)
     * [Mark all tutee as unpaid: `unpaidAll`](#mark-all-tutee-as-unpaid-unpaidall)
     * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
     * [Undo previous command : `undo`](#undo-previous-command--undo)
     * [Redo previous undone command : `redo`](#redo-previous-undone-command--redo)
-    * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
+    * [Calculating monthly revenue: `rev`](#calculating-monthly-revenue-rev)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [<div style="page-break-after: always;"></div>](#div-stylepage-break-after-alwaysdiv-1)
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
