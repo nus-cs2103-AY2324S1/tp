@@ -53,10 +53,10 @@ activate FindCommand
 
 note right
 predicate:
-the keyword for the prefix n/
+the predicate for the prefix name n/
 
 subject:
-the keyword for the prefix sb/
+the predicate for the prefix subject sb/
 end note
 
 FindCommand --> FindCommandParser : command
@@ -85,7 +85,7 @@ FindCommand -> Model : updateFilteredPersonList(nameSubject)
 activate Model
 deactivate Model
 
-note right
+note left
 nameSubject:
 the predicate of both inputs for keywords n/ and sb/
 end note
