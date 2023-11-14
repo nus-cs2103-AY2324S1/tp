@@ -694,14 +694,6 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The contact list is empty.
-
-  * 1a1. CoordiMate informs the user that there are no contacts to be deleted.
-
-      Use case ends.
-
 ---
 
 **Use case: UC07 - Add tag to a person in the contact list**
@@ -842,14 +834,6 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 2. CoordiMate clears entire task list.
 
    Use case ends.
-
-**Extensions**
-
-* 1a. The task list is empty.
-
-  * 1a1. CoordiMate informs the user that there are no tasks to be deleted.
-
-      Use case ends.
 
 ---
 
