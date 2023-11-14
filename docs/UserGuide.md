@@ -81,9 +81,9 @@ paired up with simple and beginner-friendly features, anyone can learn how to us
 :bulb: **Make the Switch Today!**
 Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** now!
 
-<div style="page-break-after: always;"></div>
-
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
+<div style="page-break-after: always;"></div>
 
 ## Using this guide
 If you're feeling a bit lost, worry not!
@@ -502,11 +502,15 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **A**: You can submit your issues [here](https://github.com/AY2324S1-CS2103T-F10-4/tp/issues)
 
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
