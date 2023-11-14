@@ -26,6 +26,7 @@ Given below are my contributions to the project.
     * Maintained the team collaboration google docs (e.g. documenting features for v1.3)
     * Renamed the product
     * Created the icon for product
+    * Drafted the mock UI
 
 * **Enhancements to existing features**:
   * Enhanced the GUI (Implement coloured tags for paid indicator, tags for subject, rounded corners for result display and search bar)
@@ -36,8 +37,7 @@ Given below are my contributions to the project.
     * Added and modified documentation for the features `add` , `edit` and `rev` features
     * Updated GUI pictures
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
-
+    * Added implementation details and sequence diagrams of the `add` and `rev` feature.
 
 * **Community**:
     * to be added soon
