@@ -38,7 +38,8 @@
   * [Requirements]({{ baseUrl }}/DeveloperGuide.html#6-appendix-requirements)
   * [Manual Testing]({{ baseUrl }}/DeveloperGuide.html#7-appendix-instructions-for-manual-testing)
   * [Effort]({{ baseUrl }}/DeveloperGuide.html#8-appendix-effort)
-* [About us] ({{ baseUrl }}/AboutUs.html)
+* [About us] ({{ baseUrl }}/AboutUs.html) :expanded
+  * [Introduction]({{ baseUrl }}/AboutUs.html#about-us)
       </site-nav>
     </div>
   </nav>
