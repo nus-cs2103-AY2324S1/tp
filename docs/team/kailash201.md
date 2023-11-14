@@ -35,7 +35,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `list`, `new`, `delete`, `find`. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
     * Made some updates to the documentation for the final release. [\#290](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/290), [\#277](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/277), [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271)
   * Developer Guide:
-    * Added implementation details of the `add` and `addtime`feature. [\#271] (https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files)
+    * Added implementation details of the `add` and `addtime`feature. [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files)
     * Made diagrams for `add` and `addtime` feature.
     * Updated old architecture models to projectPROs implementation for `model` and `UI` [\#263](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/263/files)
     * Added and updated the planned enhancements section. [\#248](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/248/files)
