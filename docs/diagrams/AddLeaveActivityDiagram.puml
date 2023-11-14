@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User finds the index of employee of interest;
+:User enters addleave command;
+:ManaGease reads and parses command;
+if () then ([1 day of leave to add])
+    :ManaGease adds in the date
+    provided by user as leave;
+else ([multiple days of leave to add])
+    :ManaGease adds in all the
+    dates in the date range
+    provided by user as leave;
+endif
+:Updated leave is saved and stored in ManaGease;
+stop
+
+@enduml

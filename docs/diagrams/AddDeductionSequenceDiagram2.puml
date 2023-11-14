@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe ref
+
+participant "dc:DeductCommand" as DeductCommand LOGIC_COLOR
+
+box Person PERSON_COLOR
+participant ":Person" as Person PERSON_COLOR
+participant ":PayrollStorage" as PayrollStorage PERSON_COLOR
+participant ":Payroll" as Payroll PERSON_COLOR
+participant ":Salary" as Salary PERSON_COLOR
+participant ":Deduction" as Deduction PERSON_COLOR
+end box
+
+activate DeductCommand
+DeductCommand -> Person : getPayrollStorage()
+activate Person
+
+Person -> PayrollStorage
+activate PayrollStorage
+
+PayrollStorage -> Payroll : getLatestPayroll()
+activate Payroll
+
+Payroll -> Salary : addDeduction()
+activate Salary
+
+create Deduction
+Salary -> Deduction : new
+activate Deduction
+Deduction --> Salary
+deactivate Deduction
+Salary --> Payroll :
+deactivate Salary
+
+Payroll --> PayrollStorage :
+deactivate Payroll
+PayrollStorage --> Person :
+deactivate PayrollStorage
+
+Person --> DeductCommand :
+deactivate Person
+
+@enduml

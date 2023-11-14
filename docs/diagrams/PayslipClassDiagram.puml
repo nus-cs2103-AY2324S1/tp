@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+Class PayslipCommandParser {
+    +parse(args: String): PayslipCommand
+}
+Class PayslipCommand {
+    +execute(model: Model)
+}
+Class PayslipGenerator {
+    +{static}OUTPUT_DIRECTORY_PATH: String
+    +{static}TEMPLATE: String
+    +{static}generatePayslip(employee: Person)
+    +{static}generatePayslipWithMonth(employee: Person, monthYear: LocalDate)
+    +{static}getFieldMap(employee: Person, payroll: Payroll): Map<String, String>
+}
+Class PayrollStorage {
+    +getPayrolls(): ArrayList<Payroll>
+}
+Class Payroll {
+    +addDeduction(deduction: Deduction)
+}
+
+Parser <|-- PayslipCommandParser
+Command <|-- PayslipCommand
+PayslipCommandParser --> PayslipCommand
+PayslipGenerator ..> Person
+PayslipCommand --> Person
+PayslipCommand --> PayslipGenerator
+Person --> "1" PayrollStorage
+PayrollStorage *--> "*" Payroll
+PayslipGenerator ..> Payroll
+
+@enduml

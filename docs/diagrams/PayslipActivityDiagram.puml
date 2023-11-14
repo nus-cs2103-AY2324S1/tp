@@ -1,0 +1,36 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User finds the index or name of employee of interest;
+:User enters payslip command;
+:ManaGease reads and parses command;
+
+    if () then ([User specifies the index of employee])
+    else ([User specifies the name of employee])
+        repeat
+        :ManaGease shows all employees
+        whose name contains the name keyword;
+        backward:User selects the employee of interest;
+        repeat while () is ([More than one
+        matching employees])
+    endif
+
+if () then ([User does not specify
+the month and year of the payslip to generate])
+    :ManaGease generates payslip for
+    the current month and year;
+else ([User specifies
+the month and year of the payslip to generate])
+    :ManaGease generates payslip for
+    the given month and year;
+endif
+
+:Payslip is saved as a PDF file
+and stored in the payslip directory;
+stop
+
+@enduml

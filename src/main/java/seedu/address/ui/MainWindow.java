@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -35,6 +37,11 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private List<Integer> indexes = null;
+
+    private CalendarComponent calendarComponent;
+    private YearMonthComponent yearMonthComponent;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -49,6 +56,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane clockDisplayPlaceholder;
+
+    @FXML
+    private StackPane calendarDisplayPlaceholder;
+
+    @FXML
+    private StackPane yearMonthDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this.indexes);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -121,6 +137,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ClockComponent clockComponent = new ClockComponent();
+        clockDisplayPlaceholder.getChildren().add(clockComponent);
+
+        calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+
+        yearMonthComponent = new YearMonthComponent();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
     }
 
     /**
@@ -163,8 +188,79 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleRead(String fieldToRead) {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), fieldToRead);
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    private void handleLeave() {
+        calendarDisplayPlaceholder.getChildren().clear();
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+    }
+
+    private void handleNextMonth() {
+        LocalDate newDate = calendarComponent.getCurrentDate().plusMonths(1);
+        this.calendarComponent.setCurrentDate(newDate);
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList(), newDate);
+
+        if (newDate.getMonth() == LocalDate.now().getMonth() && newDate.getYear() == LocalDate.now().getYear()) {
+            CalendarComponent calendarComponent1 = new CalendarComponent(logic.getFilteredPersonList());
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent1);
+        } else {
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+        }
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent(newDate);
+        yearMonthDisplayPlaceholder.getChildren().clear();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
+    }
+
+    private void handlePreviousMonth() {
+        LocalDate newDate = calendarComponent.getCurrentDate().minusMonths(1);
+        this.calendarComponent.setCurrentDate(newDate);
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList(), newDate);
+        if (newDate.getMonth() == LocalDate.now().getMonth() && newDate.getYear() == LocalDate.now().getYear()) {
+            CalendarComponent calendarComponent1 = new CalendarComponent(logic.getFilteredPersonList());
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent1);
+        } else {
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+        }
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent(newDate);
+        yearMonthDisplayPlaceholder.getChildren().clear();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
+    }
+
+    private void handleCurrentMonth() {
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        this.calendarComponent.setCurrentDate(LocalDate.now());
+        calendarDisplayPlaceholder.getChildren().clear();
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent();
+        yearMonthDisplayPlaceholder.getChildren().clear();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Reset the MainWindow after displaying PersonCardWithSpecificField
+     *
+     * @see seedu.address.logic.Logic#execute(String)
+     */
+    private void resetMainWindow() {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -174,7 +270,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            resetMainWindow();
             CommandResult commandResult = logic.execute(commandText);
+            this.indexes = commandResult.getIndexes();
+            this.personListPanel.indexesSetter(this.indexes);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -184,6 +283,26 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isRead()) {
+                handleRead(commandResult.getFieldToRead());
+            }
+
+            if (commandResult.isLeave()) {
+                handleLeave();
+            }
+
+            if (commandResult.isNextMonth()) {
+                handleNextMonth();
+            }
+
+            if (commandResult.isPreviousMonth()) {
+                handlePreviousMonth();
+            }
+
+            if (commandResult.isCurrentMonth()) {
+                handleCurrentMonth();
             }
 
             return commandResult;

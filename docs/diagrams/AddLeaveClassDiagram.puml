@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+Class AddLeaveCommandParser {
+    +parse(args: String): AddLeaveCommand
+}
+Class AddLeaveCommand {
+    +execute(model: Model)
+}
+
+Parser <|-- AddLeaveCommandParser
+Command <|-- AddLeaveCommand
+AddLeaveCommandParser --> AddLeaveCommand
+AddLeaveCommand --> Person
+
+@enduml

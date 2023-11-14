@@ -9,14 +9,27 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.logic.commands.AttendanceCommand;
+import seedu.address.logic.commands.BenefitCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CurrentMonthCommand;
+import seedu.address.logic.commands.DeductCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.NextMonthCommand;
+import seedu.address.logic.commands.PayrollCommand;
+import seedu.address.logic.commands.PayslipCommand;
+import seedu.address.logic.commands.PreviousMonthCommand;
+import seedu.address.logic.commands.ReadCommand;
+import seedu.address.logic.commands.ViewLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,6 +89,45 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case PayrollCommand.COMMAND_WORD:
+            return new PayrollCommandParser().parse(arguments);
+
+        case ReadCommand.COMMAND_WORD:
+            return new ReadCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case AddLeaveCommand.COMMAND_WORD:
+            return new AddLeaveCommandParser().parse(arguments);
+
+        case PayslipCommand.COMMAND_WORD:
+            return new PayslipCommandParser().parse(arguments);
+
+        case DeductCommand.COMMAND_WORD:
+            return new DeductCommandParser().parse(arguments);
+
+        case BenefitCommand.COMMAND_WORD:
+            return new BenefitCommandParser().parse(arguments);
+
+        case DeleteLeaveCommand.COMMAND_WORD:
+            return new DeleteLeaveCommandParser().parse(arguments);
+
+        case NextMonthCommand.COMMAND_WORD:
+            return new NextMonthCommand();
+
+        case PreviousMonthCommand.COMMAND_WORD:
+            return new PreviousMonthCommand();
+
+        case CurrentMonthCommand.COMMAND_WORD:
+            return new CurrentMonthCommand();
+
+        case AttendanceCommand.COMMAND_WORD:
+            return new AttendanceCommandParser().parse(arguments);
+
+        case ViewLeaveCommand.COMMAND_WORD:
+            return new ViewLeaveCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

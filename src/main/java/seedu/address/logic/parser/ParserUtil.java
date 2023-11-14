@@ -2,30 +2,42 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.Benefit;
+import seedu.address.model.person.Deduction;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Reason;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes.
  */
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero
+     *                        unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -96,29 +108,189 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String bankAccount} into an {@code BankAccount}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code bankAccount} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static BankAccount parseBankAccount(String bankAccount) throws ParseException {
+        requireNonNull(bankAccount);
+        String trimmedBankAccount = bankAccount.trim();
+        if (!BankAccount.isValidBankAccount(trimmedBankAccount)) {
+            throw new ParseException(BankAccount.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new BankAccount(trimmedBankAccount);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String joinDate} into an {@code JoinDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code joinDate} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static JoinDate parseJoinDate(String joinDate) throws ParseException {
+        requireNonNull(joinDate);
+        String trimmedJoinDate = joinDate.trim();
+        if (!JoinDate.isValidJoinDate(trimmedJoinDate)) {
+            throw new ParseException(JoinDate.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new JoinDate(trimmedJoinDate);
+    }
+
+    /**
+     * Parses a {@code String salary} into an {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValid(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
+    }
+
+    /**
+     * Parses a {@code String annualLeave} into an {@code AnnualLeave}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code annualLeave} is invalid.
+     */
+    public static AnnualLeave parseAnnualLeave(String annualLeave) throws ParseException {
+        requireNonNull(annualLeave);
+        String trimmedAnnualLeave = annualLeave.trim();
+        if (!AnnualLeave.isValidAnnualLeave(trimmedAnnualLeave)) {
+            throw new ParseException(AnnualLeave.MESSAGE_CONSTRAINTS);
+        }
+        return new AnnualLeave(trimmedAnnualLeave);
+    }
+
+    /**
+     * Parses a {@code String attendanceType} into an {@code AttendanceType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendanceType} is invalid.
+     */
+    public static AttendanceType parseAttendanceType(String attendanceType) throws ParseException {
+        requireNonNull(attendanceType);
+        String trimmedAttendanceType = attendanceType.trim();
+        if (!AttendanceType.isValidAttendanceType(trimmedAttendanceType)) {
+            throw new ParseException(AttendanceType.MESSAGE_CONSTRAINTS);
+        }
+        return AttendanceType.valueOf(attendanceType.toUpperCase());
+    }
+    /**
+     * Returns LocalDate object from String
+     * @param date The String containing date from user input
+     * @return LocalDate
+     * @throws DateTimeParseException if the format of String is wrong
+     */
+    public static LocalDate stringToDate(String date) throws DateTimeParseException {
+        String dateFormat = "dd/MM/uuuu";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT);
+        return LocalDate.parse(date, formatter);
+    }
+
+    /**
+     * Returns String from LocalDate object.
+     * @param date The LocalDate object
+     * @return String format of LocalDate object
+     */
+    public static String dateToString(LocalDate date) {
+        String dateFormat = "dd/MM/yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        return date.format(formatter);
+    }
+
+    /**
+     * Parses a {@code String reason} into an {@code Reason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reason} is invalid.
+     */
+    public static Reason parseDeductionReason(String reason) throws ParseException {
+        requireNonNull(reason);
+        String trimmedReason = reason.trim();
+        Reason inputReason = null;
+
+        for (Reason r : Reason.values()) {
+            String expected = String.join(" ", r.toString().split("_"));
+            if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 50) {
+                inputReason = r;
+            }
+        }
+
+        if (inputReason == null) {
+            throw new ParseException(Reason.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Deduction.isValidReason(inputReason)) {
+            throw new ParseException(Deduction.MESSAGE_CONSTRAINTS_INVALID_REASON);
+        }
+
+        return inputReason;
+    }
+
+    /**
+     * Parses a {@code String reason} into an {@code Reason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reason} is invalid.
+     */
+    public static Reason parseBenefitReason(String reason) throws ParseException {
+        requireNonNull(reason);
+        String trimmedReason = reason.trim();
+        Reason inputReason = null;
+
+        for (Reason r : Reason.values()) {
+            String expected = String.join(" ", r.toString().split("_"));
+            if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 50) {
+                inputReason = r;
+            }
+        }
+
+        if (inputReason == null) {
+            throw new ParseException(Reason.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Benefit.isValidReason(inputReason)) {
+            throw new ParseException(Benefit.MESSAGE_CONSTRAINTS_INVALID_REASON);
+        }
+
+        return inputReason;
+    }
+
+    /**
+     * Parses a {@code String deduction} into an {@code Deduction}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deduction} is invalid.
+     */
+    public static Deduction parseDeduction(String value, Reason reason) throws ParseException {
+        requireNonNull(value);
+        requireNonNull(reason);
+        String trimmedDeduction = value.trim();
+        if (!Deduction.isValid(trimmedDeduction)) {
+            throw new ParseException(Deduction.MESSAGE_CONSTRAINTS);
+        }
+        return new Deduction(trimmedDeduction, reason);
+    }
+
+    /**
+     * Parses a {@code String benefit} into an {@code Benefit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code benefit} is invalid.
+     */
+    public static Benefit parseBenefit(String value, Reason reason) throws ParseException {
+        requireNonNull(value);
+        requireNonNull(reason);
+        String trimmedBenefit = value.trim();
+        if (!Benefit.isValid(trimmedBenefit)) {
+            throw new ParseException(Benefit.MESSAGE_CONSTRAINTS);
+        }
+        return new Benefit(trimmedBenefit, reason);
     }
 }

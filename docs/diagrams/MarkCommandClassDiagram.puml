@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+class MarkCommand {
+  + execute(model: Model)
+
+}
+
+class Model {
+  + getFilteredPersonList(): List<Person>
+  + setSpecificPersonToDisplay(Person)
+}
+
+class MarkCommandParser {
+    +parse(args: String): MarkCommand
+}
+
+class Person {
+
+}
+
+
+Parser <|-- MarkCommandParser
+Command <|-- MarkCommand
+MarkCommandParser --> MarkCommand
+MarkCommand --> Model
+MarkCommand --> Person
+
+
+
+
+
+@enduml

@@ -1,0 +1,21 @@
+CommitActivityDiagram.puml@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters viewleave command;
+:ManaGease reads and parses viewleave command;
+:ManaGease generates a hashmap with name and date;
+
+if () then ([There is/are employee(s) on leave on that date])
+        :ManaGease displays the name of the employee(s);
+
+else ([no employee on leave on that date])
+
+
+endif
+
+
+stop
+@enduml
+ReadActivityDiagram.puml

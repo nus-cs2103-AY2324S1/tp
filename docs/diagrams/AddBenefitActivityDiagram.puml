@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User finds the index or name of employee of interest;
+:User enters benefit command;
+:ManaGease reads and parses command;
+
+    if () then ([User specifies the index of employee])
+        :ManaGease adds given benefit
+        to the employee's salary;
+    else ([User specifies the name of employee])
+        repeat
+        :ManaGease shows all employees
+        whose name contains the name keyword;
+        backward:User selects the employee of interest;
+        repeat while () is ([More than one
+        matching employees])
+            :ManaGease adds given benefit
+            to the employee's salary;
+    endif
+
+:Updated benefit is saved and stored in ManaGease;
+stop
+
+@enduml

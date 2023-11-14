@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PayslipCommandParser" as PayslipCommandParser LOGIC_COLOR
+participant "pc:PayslipCommand" as PayslipCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Commons ATTENDANCE_COLOR_T1
+participant "<<class>>\nPayslipGenerator" as PayslipGenerator ATTENDANCE_COLOR
+end box
+
+
+[-> LogicManager : execute("payslip 1 /t 09/10/2023")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("payslip 1 /t 09/10/2023")
+activate AddressBookParser
+
+create PayslipCommandParser
+AddressBookParser -> PayslipCommandParser
+activate PayslipCommandParser
+
+PayslipCommandParser --> AddressBookParser
+deactivate PayslipCommandParser
+
+AddressBookParser -> PayslipCommandParser : parse("1 /t 09/10/2023")
+activate PayslipCommandParser
+
+create PayslipCommand
+PayslipCommandParser -> PayslipCommand
+activate PayslipCommand
+
+PayslipCommand --> PayslipCommandParser : pc
+deactivate PayslipCommand
+
+PayslipCommandParser --> AddressBookParser : pc
+deactivate PayslipCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PayslipCommandParser -[hidden]-> AddressBookParser
+destroy PayslipCommandParser
+
+AddressBookParser --> LogicManager : pc
+deactivate AddressBookParser
+
+LogicManager -> PayslipCommand : execute()
+activate PayslipCommand
+
+PayslipCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> PayslipCommand:
+deactivate Model
+
+PayslipCommand -> PayslipGenerator : generatePayslip()
+activate PayslipGenerator
+
+ref over PayslipGenerator: generatePayslip()
+
+PayslipGenerator --> PayslipCommand
+
+deactivate PayslipGenerator
+
+create CommandResult
+PayslipCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PayslipCommand : result
+deactivate CommandResult
+
+PayslipCommand --> LogicManager : result
+deactivate PayslipCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

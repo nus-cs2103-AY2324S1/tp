@@ -2,15 +2,19 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BANK_ACCOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,23 +24,28 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_NAME + " NAME "
+            + PREFIX_PHONE + " PHONE "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_ADDRESS + " ADDRESS "
+            + PREFIX_BANK_ACCOUNT + " BANK ACCOUNT "
+            + PREFIX_JOIN_DATE + " JOIN DATE "
+            + PREFIX_SALARY + " SALARY "
+            + PREFIX_ANNUAL_LEAVE + " ANNUAL LEAVE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_BANK_ACCOUNT + " 12345678 "
+            + PREFIX_JOIN_DATE + " 12/02/2023 "
+            + PREFIX_SALARY + " 2000.00 "
+            + PREFIX_ANNUAL_LEAVE + " 14";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the employee database";
 
     private final Person toAdd;
 
@@ -57,6 +66,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        toAdd.addPayroll(new Payroll(toAdd.getSalary()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

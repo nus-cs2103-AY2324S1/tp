@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -70,11 +71,12 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given person {@code target} with {@code editedEmployee}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedEmployee} must not be the same as
+     * another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Person target, Person editedEmployee);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -84,4 +86,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns an array of index corresponding to the entries in the filtered person list
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    List<Integer> getIndexOfFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sets a specific person to be displayed.
+     *
+     * @param targetPerson The person that you want to set as the specific person to be displayed.
+     */
+    void setSpecificPersonToDisplay(Person targetPerson);
 }

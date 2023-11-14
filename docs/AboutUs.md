@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Joey Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/applepiofmyeye.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/applepiofmyeye)]
+[[portfolio](team/applepiofmyeye.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Scheduling and tracking tasks
 
-### Jean Doe
+### Wee Ming Qing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weemingqing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/WeeMingQing)]
+[[portfolio](team/weemingqing.md)]
+
+* Role: Documentation
+* Responsibilities: Logic
+
+
+### He Yifan
+
+<img src="images/jibtaf.png" width="200px">
+
+[[github](http://github.com/jibtaf)] [[portfolio](team/jibtaf.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data Management
 
-### James Doe
+### Shixin Liu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kevin-liusx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Kevin-Liusx)]
+[[portfolio](team/kevin-liusx.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Development and Operations
+
+### Jin Hao
+
+<img src="images/leb14.png" width="200px">
+
+[[github](http://github.com/Leb14)]
+[[portfolio](team/leb14.md)]
+
+* Role: Developer
+* Responsibilities: Logic

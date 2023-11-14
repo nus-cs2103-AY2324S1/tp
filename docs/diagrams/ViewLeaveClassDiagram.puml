@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+class ViewLeaveCommand {
+  +execute(model: Model)
+  + getNameList(List<Person>): List<String>
+  + nameListToString(List<String>): String
+}
+
+class Model {
+  + getFilteredPersonList(): List<Person>
+}
+
+class ViewLeaveCommandParser {
+    +parse(args: String): ViewLeaveCommand
+}
+
+class Person {
+  + getLeaveList(): List<LocalDate>
+  + getName(): Name
+}
+
+
+Parser <|-- ViewLeaveCommandParser
+Command <|-- ViewLeaveCommand
+ViewLeaveCommandParser --> ViewLeaveCommand
+ViewLeaveCommand --> Model
+ViewLeaveCommand --> Person
+
+
+
+
+
+@enduml

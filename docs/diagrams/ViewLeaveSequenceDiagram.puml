@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewLeaveCommandParser" as ViewLeaveCommandParser LOGIC_COLOR
+participant "r:ViewLeaveCommand" as ViewLeaveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Person PERSON_COLOR
+participant ":Person" as Person PERSON_COLOR
+end box
+
+[-> LogicManager : execute("viewleave /on 23/11/2023")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewleave /on 23/11/2023")
+activate AddressBookParser
+
+create ViewLeaveCommandParser
+AddressBookParser -> ViewLeaveCommandParser
+activate ViewLeaveCommandParser
+
+ViewLeaveCommandParser --> AddressBookParser
+deactivate ViewLeaveCommandParser
+
+AddressBookParser -> ViewLeaveCommandParser : parse("/on 23/11/2023")
+activate ViewLeaveCommandParser
+
+create ViewLeaveCommand
+ViewLeaveCommandParser -> ViewLeaveCommand
+activate ViewLeaveCommand
+
+ViewLeaveCommand --> ViewLeaveCommandParser : vl
+deactivate ViewLeaveCommand
+
+ViewLeaveCommandParser --> AddressBookParser : vl
+deactivate ViewLeaveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewLeaveCommandParser -[hidden]-> AddressBookParser
+destroy ViewLeaveCommandParser
+
+AddressBookParser --> LogicManager : vl
+deactivate AddressBookParser
+
+LogicManager -> ViewLeaveCommand : execute()
+activate ViewLeaveCommand
+
+
+ViewLeaveCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ViewLeaveCommand
+deactivate Model
+
+ViewLeaveCommand -> ViewLeaveCommand : getNameList(model)
+activate ViewLeaveCommand
+
+loop
+ViewLeaveCommand -> Person : getLeaveList()
+activate Person
+
+ViewLeaveCommand -> Person : getName()
+activate Person
+
+Person --> ViewLeaveCommand
+deactivate Person
+
+end loop
+deactivate ViewLeaveCommand
+
+ViewLeaveCommand -> ViewLeaveCommand : nameListToString(nameList)
+activate ViewLeaveCommand
+
+ViewLeaveCommand --> ViewLeaveCommand
+deactivate ViewLeaveCommand
+
+create CommandResult
+ViewLeaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewLeaveCommand
+deactivate CommandResult
+
+ViewLeaveCommand --> LogicManager : result
+deactivate ViewLeaveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
