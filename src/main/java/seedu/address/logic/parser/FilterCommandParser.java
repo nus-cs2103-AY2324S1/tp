@@ -11,7 +11,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Score;
-import seedu.address.model.person.ScoreList;
 import seedu.address.model.statistics.StatisticMetric;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
