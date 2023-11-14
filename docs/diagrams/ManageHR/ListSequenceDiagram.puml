@@ -45,7 +45,7 @@ activate CommandResult
 CommandResult --> ListCommand
 deactivate CommandResult
 
-ListCommand --> LogicManager : result
+ListCommand --> LogicManager
 deactivate ListCommand
 
 [<--LogicManager
