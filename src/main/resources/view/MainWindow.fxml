@@ -13,7 +13,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="JobFindr" minWidth="1000" minHeight="785" onCloseRequest="#handleExit">
+         title="JobFindr" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
     <icons>
         <Image url="@/images/address_book_32.png"/>
     </icons>
@@ -43,9 +43,9 @@
                     </Menu>
                 </MenuBar>
 
-                <HBox fx:id="listAndDetailsSplitPanePlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" minHeight="510"
-                      styleClass="pane-with-border">
-                    <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="400" maxWidth="400" minHeight="350"
+                <HBox fx:id="listAndDetailsSplitPanePlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" minHeight="300"
+                      prefHeight="500" styleClass="pane-with-border">
+                    <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="400" maxWidth="400" minHeight="200"
                           prefHeight="350" VBox.vgrow="ALWAYS">
                         <padding>
                             <Insets top="20" right="10" bottom="10" left="20"/>
@@ -58,7 +58,7 @@
                         <padding>
                             <Insets top="20" right="20" bottom="10" left="10"/>
                         </padding>
-                        <VBox fx:id="jobDetailsPanel" minWidth="400" prefWidth="300"
+                        <VBox fx:id="jobDetailsPanel" minWidth="300" prefWidth="300"
                               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <StackPane fx:id="jobDetailsPanelPlaceholder" VBox.vgrow="ALWAYS"/>
