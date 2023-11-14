@@ -18,7 +18,7 @@ I implemented the UI [#114](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/11
 `viewEvent` [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181).
 Relevant tests were added for the commands. Details of some non-trivial commands are stated below.
 * **Designed a new UI for CCACommander** [#114](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/114)
-  * **Feature details:** Changing the UI layout and color theme of application.
+  * **Feature details:** Changing the UI layout, color theme and logo of application.
   * **Justifications:** The change in design is needed because CCACommander's core is in tracking both members and events,
     hence the two respective columns must be presented. With the new design, users are able to see both members and events simultaneously.
 
@@ -46,17 +46,13 @@ Relevant tests were added for the commands. Details of some non-trivial commands
 
 ### Documentation:
 * **User Guide**
-  * Updated the sections: Introduction, About, Quick Start, Navigate UI, Command History, Notes for command format.
+  * Updated non-command sections: Introduction, About, Quick Start, Navigate UI, Command History, Notes for command format.
   * Added command details and summaries for `enrol`, `unenrol` commands for draft UG.
 * **Developer Guide**
   * Added diagram for updated UI, Member and Event class, updated general model class diagram.
+  * Updated parts of old diagrams where there were instances of AddressBook [#174](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/174)
   * Added alternative design consideration for Member and Event sections.
   * Added glossary section and use cases: UC09 - Add member to an event, UC10 - Delete member from an event.
-
-### Contributions to team-based tasks:
-* Changing the application logo [#114](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/114)
-* Updating UG introduction, About, Quick Start, Navigate UI, Command History, Notes for command format sections [#286](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/286)
-* Updated parts of old diagrams where there were instances of AddressBook [#174](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/174)
 
 ### Community:
 * This is the full [list](https://github.com/AY2324S1-CS2103T-F11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aph-nathan) of pull requests which I have reviewed.
