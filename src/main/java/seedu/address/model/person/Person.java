@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.course.Course;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,19 +24,26 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private final FreeTime freeTime;
+    private final Set<Course> courses = new HashSet<>();
+    private final Hour hour;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags,
+                  FreeTime freeTime, Set<Course> courses, Hour hour) {
+        requireAllNonNull(name, phone, email, telegram, tags, hour);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.telegram = telegram;
         this.tags.addAll(tags);
+        this.freeTime = freeTime == null ? FreeTime.EMPTY_FREE_TIME : freeTime;
+        this.courses.addAll(courses);
+        this.hour = hour;
     }
 
     public Name getName() {
@@ -49,8 +58,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     /**
@@ -59,6 +68,35 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public FreeTime getFreeTime() {
+        return freeTime;
+    }
+
+    /**
+     * Returns an immutable mod set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Course> getCourses() {
+        return Collections.unmodifiableSet(courses);
+    }
+
+    public Hour getHour() {
+        return hour;
+    }
+
+
+    /**
+     * Updates the work hours of this person and returns a new Person object with the updated work hours.
+     *
+     * @param duration The number of hours to add or subtract from the work hours.
+     * @return A new Person object with the updated work hours.
+     */
+    public Person updateHour(Integer duration) {
+        Hour updatedHour = this.hour.addHour(duration);
+        return new Person(this.name, this.phone, this.email, this.telegram, this.tags,
+                this.freeTime, this.courses, updatedHour);
     }
 
     /**
@@ -93,14 +131,17 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telegram.equals(otherPerson.telegram)
+                && tags.equals(otherPerson.tags)
+                && freeTime.equals(otherPerson.freeTime)
+                && courses.equals(otherPerson.courses)
+                && hour.equals(otherPerson.hour);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, telegram, tags, courses, hour);
     }
 
     @Override
@@ -109,9 +150,11 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("telegram", telegram)
                 .add("tags", tags)
+                .add("free time", freeTime)
+                .add("courses", courses)
+                .add("hours", hour)
                 .toString();
     }
-
 }

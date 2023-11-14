@@ -1,11 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.FindCommandPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -15,23 +26,33 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all teaching assistants whose names contain "
+            + "any "
+            + "of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: PREFIX KEYWORD [MORE_KEYWORDS]...\n"
+            + "Examples: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie" + ", "
+            + COMMAND_WORD + " " + PREFIX_COURSE + "cs1231s" + ", "
+            + COMMAND_WORD + " " + PREFIX_TAG + "tutorial" + ", "
+            + COMMAND_WORD + " " + PREFIX_DAY + "3" + " " + PREFIX_FROM + "10:00" + " " + PREFIX_TO + "12:00";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ArrayList<Predicate<Person>> predicateList = new ArrayList<>();
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public FindCommand(ArrayList<Predicate<Person>> predicates) {
+        this.predicateList.addAll(predicates);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        Predicate<Person> combinedPredicate = predicateList.stream().reduce(x -> true, Predicate::and);
+        model.updateFilteredPersonList(combinedPredicate);
+        String filtersApplied = "Filters applied: " + predicateList.stream()
+                .map(predicate -> ((FindCommandPredicate) predicate).toFilterString())
+                .collect(Collectors.joining(", "));
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(filtersApplied + "\n"
+                        + Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
@@ -46,13 +67,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicateList.equals(otherFindCommand.predicateList);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", predicateList)
                 .toString();
     }
 }

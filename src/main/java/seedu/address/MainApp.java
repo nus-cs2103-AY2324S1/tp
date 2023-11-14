@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,9 +22,13 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CoursesStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCoursesStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -36,7 +41,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -50,7 +55,6 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
-
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
         initLogging(config);
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CoursesStorage coursesStorage = new JsonCoursesStorage(userPrefs.getCoursesFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, coursesStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,20 +81,34 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<List<Course>> coursesOptional;
         ReadOnlyAddressBook initialData;
+        List<Course> courseData;
         try {
+            coursesOptional = storage.readCourses();
+            if (!coursesOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCoursesFilePath()
+                        + " populated with sample Courses.");
+            }
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            courseData = coursesOptional.orElseGet(SampleDataUtil::getSampleCoursesData);
+            UniqueCourseList.setCourses(courseData);
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getCoursesFilePath() + " could not be loaded."
+                    + " Will be starting with empty Courses.");
+            courseData = List.of();
+            UniqueCourseList.setCourses(courseData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 

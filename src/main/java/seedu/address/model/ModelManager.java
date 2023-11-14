@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.TeachingCoursePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -34,6 +38,12 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        String courseCode = this.userPrefs.getTeaching();
+        if (!courseCode.equals("")) {
+            Course course = UniqueCourseList.findByCourseCode(courseCode);
+            TeachingCoursePredicate predicate = new TeachingCoursePredicate(List.of(course));
+            updateFilteredPersonList(predicate);
+        }
     }
 
     public ModelManager() {
@@ -62,6 +72,16 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public String getTeaching() {
+        return userPrefs.getTeaching();
+    }
+    @Override
+    public void setTeaching(Course course) {
+        requireNonNull(course);
+        userPrefs.setTeaching(course.getCourseCode());
     }
 
     @Override

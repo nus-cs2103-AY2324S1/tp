@@ -24,6 +24,26 @@ h2, h3, h4, h5, h6 {
   font-weight: $alert-link-font-weight;
 }
 
+.command-succeed {
+    border: 1px solid #155724;
+    p, .highlight, .alert {
+        margin: 0;
+    }
+    margin-bottom: 1em;
+    margin-top: 2em;
+    border-radius: 0.25rem;
+}
+
+.command-fail {
+    border: 1px solid #721C23;
+    p, .highlight, .alert, table {
+        margin: 0;
+    }
+    margin-bottom: 1em;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
 // Generate contextual modifier classes for colorizing the alert.
 
 @each $color, $value in $theme-colors {

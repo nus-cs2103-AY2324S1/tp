@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -87,6 +87,32 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equals() {
+        final AddressBook standardAddressBook = new AddressBook();
+
+        // same values -> returns true
+        AddressBook copyAddressBook = new AddressBook();
+        assertEquals(standardAddressBook, copyAddressBook);
+
+        // same object -> returns true
+        assertEquals(standardAddressBook, standardAddressBook);
+
+        // null -> returns false
+        assertFalse(standardAddressBook.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardAddressBook.equals(5));
+
+        // different object -> returns false
+        assertFalse(standardAddressBook.equals(new Object()));
+
+        // different persons -> returns false
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.addPerson(ALICE);
+        assertFalse(standardAddressBook.equals(differentAddressBook));
     }
 
     /**

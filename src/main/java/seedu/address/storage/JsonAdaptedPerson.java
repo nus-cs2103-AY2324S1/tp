@@ -10,11 +10,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.availability.TimeInterval;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,23 +31,45 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedTimeInterval> intervals = new ArrayList<>();
+    private final List<JsonAdaptedCourse> courses = new ArrayList<>();
+    private final Integer hour;
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("freeTime") List<JsonAdaptedTimeInterval> intervals,
+                             @JsonProperty("courses") List<JsonAdaptedCourse> courses,
+                             @JsonProperty("hour") Integer hour) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.telegram = telegram;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+
+        if (intervals != null) {
+            this.intervals.addAll(intervals);
+        } else {
+            for (int i = 0; i < FreeTime.NUM_DAYS; i++) {
+                this.intervals.add(null);
+            }
+        }
+
+        if (courses != null) {
+            this.courses.addAll(courses);
+        }
+
+        this.hour = hour;
     }
 
     /**
@@ -53,21 +79,50 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        telegram = source.getTelegram().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        courses.addAll(source.getCourses().stream()
+                .map(JsonAdaptedCourse::new)
+                .collect(Collectors.toList()));
+        source.getFreeTime().getIntervals().forEach(interval -> {
+            if (interval != null) {
+                intervals.add(new JsonAdaptedTimeInterval(interval));
+            } else {
+                intervals.add(null);
+            }
+        });
+        hour = source.getHour().value;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Course> personCourses = new ArrayList<>();
+        for (JsonAdaptedCourse course : courses) {
+            personCourses.add(course.toModelType());
+        }
+
+        int countNulls = 0;
+        final List<TimeInterval> personTimeIntervals = new ArrayList<>();
+        for (JsonAdaptedTimeInterval timeInterval : intervals) {
+            if (timeInterval != null) {
+                personTimeIntervals.add(timeInterval.toModelType());
+            } else {
+                personTimeIntervals.add(null);
+                countNulls += 1;
+            }
         }
 
         if (name == null) {
@@ -94,16 +149,34 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (!FreeTime.isValidFreeTime(personTimeIntervals)) {
+            throw new IllegalValueException(FreeTime.MESSAGE_CONSTRAINTS);
+        }
+        final FreeTime modelFreeTime = countNulls == FreeTime.NUM_DAYS
+                ? FreeTime.EMPTY_FREE_TIME : new FreeTime(personTimeIntervals);
+
+        final Set<Course> modelCourses = new HashSet<>(personCourses);
+
+        if (hour == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Hour.class.getSimpleName()));
+        }
+        if (!Hour.isValidHour(hour)) {
+            throw new IllegalValueException(Hour.MESSAGE_CONSTRAINTS);
+        }
+        final Hour modelHour = new Hour(hour);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags,
+                modelFreeTime, modelCourses, modelHour);
     }
 
 }

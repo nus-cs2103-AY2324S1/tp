@@ -1,15 +1,20 @@
 package seedu.address.testutil;
 
+import java.time.LocalTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
+import seedu.address.model.availability.TimeInterval;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,7 +22,9 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPersonDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    public static final TimeInterval DUMMY_TIME_INTERVAL = new TimeInterval(LocalTime.of(12, 0),
+            LocalTime.of(13, 0));
+    private final EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
         descriptor = new EditPersonDescriptor();
@@ -35,8 +42,11 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setTelegram(person.getTelegram());
+        descriptor.setTags(person.getTags().size() == 0 ? null : person.getTags());
+        descriptor.setCourses(person.getCourses().size() == 0 ? null : person.getCourses());
+        descriptor.setHour(person.getHour());
+        descriptor.setTimeInterval(DUMMY_TIME_INTERVAL);
     }
 
     /**
@@ -64,10 +74,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Telegram} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withTelegram(String address) {
+        descriptor.setTelegram(new Telegram(address));
         return this;
     }
 
@@ -78,6 +88,25 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code courses} into a {@code Set<Course>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withCourses(String... courses) {
+        Set<Course> courseSet = Stream.of(courses).map(UniqueCourseList::findByCourseCode).collect(Collectors.toSet());
+        descriptor.setCourses(courseSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code hour}  and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withHour(Integer hour) {
+        descriptor.setHour(new Hour(hour));
         return this;
     }
 

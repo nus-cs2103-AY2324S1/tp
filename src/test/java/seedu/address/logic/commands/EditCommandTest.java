@@ -45,7 +45,6 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -128,7 +127,6 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
@@ -163,6 +161,9 @@ public class EditCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different object -> returns false
+        assertFalse(standardCommand.equals(new Object()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));

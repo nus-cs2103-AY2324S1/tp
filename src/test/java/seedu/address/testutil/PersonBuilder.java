@@ -1,13 +1,17 @@
 package seedu.address.testutil;
 
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,13 +23,16 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-
+    public static final String DEFAULT_TELEGRAM = "@amybee";
+    public static final Integer DEFAULT_HOUR = 8;
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
+    private Telegram telegram;
     private Set<Tag> tags;
+    private FreeTime freeTime;
+    private Set<Course> courses;
+    private Hour hour;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +41,11 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
+        freeTime = FreeTime.EMPTY_FREE_TIME;
+        courses = new HashSet<>();
+        hour = new Hour(DEFAULT_HOUR);
     }
 
     /**
@@ -45,8 +55,11 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
+        telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
+        freeTime = personToCopy.getFreeTime();
+        courses = new HashSet<>(personToCopy.getCourses());
+        hour = personToCopy.getHour();
     }
 
     /**
@@ -60,16 +73,24 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Parses the {@code courses} into a {@code Set<Course>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withCourses(String... courses) {
+        this.courses = SampleDataUtil.getCourseSet(courses);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Telegram} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
         return this;
     }
 
@@ -89,8 +110,36 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code FreeTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFreeTime(String from, String to) {
+        if (from == null || to == null) {
+            this.freeTime = FreeTime.EMPTY_FREE_TIME;
+        } else {
+            this.freeTime = new FreeTime(LocalTime.parse(from), LocalTime.parse(to));
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code FreeTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFreeTime(FreeTime freeTime) {
+        this.freeTime = freeTime;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hour} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withHour(Integer hour) {
+        this.hour = new Hour(hour);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, telegram, tags, freeTime, courses, hour);
     }
 
 }

@@ -2,12 +2,18 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -34,7 +40,8 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).withCourses(VALID_COURSE_CS1231S)
+                .withHour(VALID_HOUR_FIVE).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -55,45 +62,91 @@ public class PersonTest {
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        assertEquals(ALICE, aliceCopy);
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertEquals(ALICE, ALICE);
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertNotEquals(null, ALICE);
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertNotEquals(5, ALICE);
+
+        // different object -> returns false
+        assertNotEquals(new Object(), ALICE);
 
         // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertNotEquals(ALICE, BOB);
 
         // different name -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different email -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different telegram -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertNotEquals(ALICE, editedAlice);
+
+        // different free time -> returns false
+        editedAlice = new PersonBuilder(ALICE).withFreeTime(VALID_FROM_BOB, VALID_TO_BOB).build();
+        assertNotEquals(ALICE, editedAlice);
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
+
+        // different mods -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCourses(VALID_COURSE_CS2103T).build();
+        assertNotEquals(ALICE, editedAlice);
+
+        // different hour -> returns false
+        editedAlice = new PersonBuilder(ALICE).withHour(VALID_HOUR_FIVE).build();
+        assertNotEquals(ALICE, editedAlice);
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail()
+                + ", telegram=" + ALICE.getTelegram() + ", tags=" + ALICE.getTags()
+                + ", free time=" + ALICE.getFreeTime() + ", courses=" + ALICE.getCourses()
+                + ", hours=" + ALICE.getHour() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void updateHourMethod() {
+
+        Person increasedAlice = ALICE.updateHour(4);
+        Person decreasedAlice = ALICE.updateHour(-4);
+
+        // check invalid hour
+        assertThrows(IllegalArgumentException.class, () -> ALICE.updateHour(80000));
+        assertThrows(IllegalArgumentException.class, () -> ALICE.updateHour(-80000));
+
+        // check Alice is the same person
+        assertTrue(ALICE.isSamePerson(increasedAlice));
+        assertTrue(ALICE.isSamePerson(decreasedAlice));
+
+        // check updated Alice has correct updated hours
+        assertEquals(12, increasedAlice.getHour().value);
+        assertEquals(4, decreasedAlice.getHour().value);
+
+        // check Alice still has same hours
+        assertEquals(8, ALICE.getHour().value);
     }
 }

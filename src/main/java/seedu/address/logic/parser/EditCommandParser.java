@@ -2,11 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.Course;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,12 +32,14 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                        PREFIX_TAG, PREFIX_COURSE, PREFIX_FROM, PREFIX_TO, PREFIX_HOUR);
 
         Index index;
 
@@ -42,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_HOUR);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -55,12 +62,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
+            editPersonDescriptor.setTelegram(ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        Set<Tag> tags = parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).orElse(null);
+        editPersonDescriptor.setTags(tags);
+        Set<Course> courses = parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).orElse(null);
+        editPersonDescriptor.setCourses(courses);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (argMultimap.getValue(PREFIX_HOUR).isPresent()) {
+            editPersonDescriptor.setHour(ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get()));
+        }
+
+        if (editPersonDescriptor.isNoFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
@@ -80,6 +94,21 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> courses} into a {@code Set<Course>} if {@code courses} is non-empty.
+     * If {@code courses} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Course>} containing zero courses.
+     */
+    private Optional<Set<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
+        assert courses != null;
+
+        if (courses.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> courseSet = courses.size() == 1 && courses.contains("") ? Collections.emptySet() : courses;
+        return Optional.of(ParserUtil.parseCourses(courseSet));
     }
 
 }

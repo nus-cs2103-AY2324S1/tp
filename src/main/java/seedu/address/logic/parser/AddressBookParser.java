@@ -10,13 +10,18 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearTeachCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CourseCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditFreeTimeCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HourCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TeachCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -71,11 +76,26 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case CourseCommand.COMMAND_WORD:
+            return new CourseCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case HourCommand.COMMAND_WORD:
+            return new HourCommandParser().parse(arguments);
+
+        case EditFreeTimeCommand.COMMAND_WORD:
+            return new EditFreeTimeCommandParser().parse(arguments);
+
+        case TeachCommand.COMMAND_WORD:
+            return new TeachCommandParser().parse(arguments);
+
+        case ClearTeachCommand.COMMAND_WORD:
+            return new ClearTeachCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

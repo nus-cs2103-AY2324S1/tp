@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +11,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.availability.TimeInterval;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +32,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -66,18 +74,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String telegram} into an {@code Telegram}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code telegram} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Telegram(trimmedTelegram);
     }
 
     /**
@@ -120,5 +128,67 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String course} into a {@code Course}.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim().toUpperCase();
+        try {
+            return UniqueCourseList.findByCourseCode(trimmedCourse);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage()); // If course is not found
+        }
+    }
+
+    /**
+     * Parses a {@code String course} into a {@code Course}.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<Course> courseSet = new HashSet<>();
+        for (String courseName : courses) {
+            courseSet.add(parseCourse(courseName));
+        }
+        return courseSet;
+    }
+
+    /**
+     * Parses a {@code String hour} into a {@code hour}.
+     *
+     * @throws ParseException if the given {@code hour} is invalid.
+     */
+    public static Hour parseHour(String hour) throws ParseException {
+        requireNonNull(hour);
+        String trimmedHour = hour.trim();
+        try {
+            Integer intHour = Integer.parseInt(trimmedHour);
+            if (!Hour.isValidHour(intHour)) {
+                throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
+            }
+            return new Hour(intHour);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a collection of {@code String from} and {@code String to} into a {@code TimeInterval}.
+     */
+    public static TimeInterval parseTimeInterval(String from, String to) throws DateTimeParseException, ParseException {
+        try {
+            LocalTime fromTime = LocalTime.parse(from);
+            LocalTime toTime = LocalTime.parse(to);
+            if (!TimeInterval.isValidTimeInterval(fromTime, toTime)) {
+                throw new ParseException(TimeInterval.MESSAGE_TO_BEFORE_FROM);
+            }
+            return new TimeInterval(fromTime, toTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
+        }
     }
 }

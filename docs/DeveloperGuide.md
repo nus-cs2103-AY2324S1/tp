@@ -7,12 +7,6 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -21,10 +15,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
@@ -36,7 +26,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +58,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +75,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,34 +104,27 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/ModelClassDiagram.png" width="550" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), and all `Course` objects (which are contained in a `UniqueCourseList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, user preference data and courses data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `UserPrefStorage` and `CoursesStorage`, which means it can be treated as any of them (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -154,90 +137,84 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Find Availability Feature
 
-#### Proposed Implementation
+**API** : [`FreeTime.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/availability/FreeTime.java)
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Implementation
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+To find a suitable replacement TA, the user needs to know the availability of the TAs.
+As such we need to have classes that represent the time and availability.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+`TimeInterval` is used to represent a period of time.
+A `TimeInterval` is only considered valid if the end time is after the start time.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+`FreeTime` is used to represent a TA's availability in the week.
+We assume that TAs are only available during weekdays, so each `FreeTime` consist of 5
+`TimeInterval`s where each `TimeInterval` represents a day in the week.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+The following class diagram illustrates the structure of `FreeTime`.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+![FreeTimeClassDiagram](images/FreeTimeClassDiagram.png)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+`EMPTY_FREE_TIME` will be assigned to TAs that do not have availability information.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Valid input to `FreeTime#getDay(day)` are integers from [1,5] where 1 represents Monday, 2 represents Tuesday and so on.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+`TimeInterval#GetFrom()` and `TimeInterval#GetTo()` represents the string representation of time in `HH:mm` format.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+### Finding TA feature
 
-</div>
+#### Implementation
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The finding TA feature allows users to search for a specific TA, using various filters
+such as name, course and free time. With this feature, users can easily search for TAs
+that fall under a certain set of filters.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+To key in the command, type `find n/alex c/cs2103t d/1 from/12:00 to/14:00`. This will
+search for all TAs with the name `alex` and course `cs2103t` that are free from `12:00`
+to `14:00` on Monday.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+The following sequence diagram displays how the finding TA feature is implemented.
 
-</div>
+![FindDiagram](images/FindDiagram.png)
 
-The following sequence diagram shows how the undo operation works:
+### Teaching course Feature
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+#### Implementation
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The teaching course feature allows users to enter the specific course they are teaching
+and store the information in `UserPrefs`. With this feature, users can easily browse
+through the list of TAs teaching under them.
 
-</div>
+To key in the command, type `teach t/courseName`. This will set the default teaching
+course for the users and save it in UserPrefs.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+Hence, the next time users log into TAManager, the page will automatically display the
+TAs teaching under the users' course.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+The following sequence diagram displays how the teaching course feature is implemented.
 
-</div>
+![TeachingDiagram](images/TeachingDiagram.png)
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+### Updating Hour Feature
 
-![UndoRedoState4](images/UndoRedoState4.png)
+#### Implementation
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+The updating hour feature allows users to update hours for all the TAs in the current list.
+This feature allows users to easily update the working hours for TAs in batches. This feature
+can be applied concurrently with the `find` command allowing users to update working hours for
+filtered target users.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+To key in the command, type `hour 10`. This will increase the working hours of all TAs in the
+current list by 10, while others not showing in the list will not be changed. Similarly, users
+can type `hour -10` and hours for TAs in the current users will be decreased by 10. The updated
+hour must be within the valid range(0 - 9999).
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following sequence diagram displays how updating hour Feature is implemented.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+![UpdateHourSequenceDiagram](images/UpdateHourSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,42 +234,58 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* SoC professor
+* has a need to manage a significant number of teaching assistants (TAs)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Fast access to TA contact details and availability
+* Track teaching hours conveniently
+* Easily view course information and TAs for the course
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                                 | So that I can…​                                        |
+|----------|---------|--------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | user    | see usage instructions                                       | refer to instructions when I forget how to use the App |
+| `* * *`  | user    | add new TA to my address book                                |                                                        |
+| `* * *`  | user    | remove a TA from my address book                             | remove entries that I no longer need                   |
+| `* * *`  | user    | view all TAs in my address book                              |                                                        |
+| `* *`    | user    | add a TA’s email address and telegram handle                 | facilitate communication with that TA                  |
+| `* *`    | user    | update the contact information of my TA                      | ensure I have the latest contact information           |
+| `* *`    | user    | update the availability of my TA                             | contact the TA for replacement sessions if needed      |
+| `* *`    | user    | update the teaching hours of my TA                           | keep track of the TA's teaching hours                  |
+| `* *`    | user    | update the tags and courses of my TA                         | keep track of the TA's responsibilities                |
+| `* *`    | user    | have my records saved for the next session                   | use the information over multiple sessions             |
+| `*`      | user    | find a TA by name                                            | find the contact details of a specific TA              |
+| `*`      | user    | find a TA by course                                          | focus on management of a specific course               |
+| `*`      | user    | find a TA by tag                                             | easily sort my TAs                                     |
+| `* `     | user    | find a TA by free time                                       | find potential replacement TAs                         |
+| `*`      | user    | set a course to prioritise                                   | filter TAs on startup and save time                    |
+| `*`      | user    | remove my prioritised course                                 | view all TAs on startup                                |
+| `*`      | user    | view the list of courses I'm teaching and their assigned TAs | filter TAs based on the courses they can teach         |
+| `*`      | user    | view the lesson timeslots of my course                       | plan for TA availability around these timeslots        |
+| `*`      | user    | use a prepopulated data file                                 | skip the process of populating the data manually       |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAManager` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a TA**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list TAs
+2.  TAManager shows a list of TAs
+3.  User requests to delete a specific TA in the list
+4.  TAManager deletes the TA
 
     Use case ends.
 
@@ -304,24 +297,109 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAManager shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+--------------------------------------------------------------------------------------------------------------------
+
+**Use case: Update Contact Information**
+
+**MSS**
+
+1.  User requests to list TAs
+2.  TAManager shows a list of TAs
+3.  User requests to update the contact of a specific TA in the list and key in the necessary information
+4.  TAManager updates the contact information of that TA
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TAManager shows an error message.
+
+      Use case resumes at step 2.
+* 3b. The given contact information is invalid.
+  * 3b1. TAManager shows an error message.
+
+    Use case resumes at step 2.
+
+--------------------------------------------------------------------------------------------------------------------
+
+**Use case: View TAs of specific course**
+
+**MSS**
+
+1.  User requests to list courses
+2.  TAManager shows a list of courses
+3.  User requests to show TAs of a specific course
+4.  TAManager shows a list of TAs of specific course
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given course is invalid.
+
+    * 3a1. TAManager shows an error message.
+
+      Use case resumes at step 2.
+
+--------------------------------------------------------------------------------------------------------------------
+
+**Use case: Update Availability**
+
+**MSS**
+
+1.  User requests to list TAs
+2. TAManager shows a list of TAs
+3. User requests to update the availability of a specific TA in the list and key in the necessary information
+4. TAManager updates the availability of that TA
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TAManager shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given availability is invalid.
+  * 3b1. TAManager shows an error message.
+
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 TA entries without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Data should persist across user sessions
+5.  Project should be able to handle information from across academic years
+6.  Project should be able to handle any invalid input without crashing
 
 ### Glossary
 
+* **Course**: A program students are enrolled in to work towards a degree
+* **Teaching Assistant (TA)**: Students who support the teaching of a course
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Availability**: The time slots a TA is available for teaching (e.g. 9am-12pm on Monday, 2pm-5pm on Tuesday)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -340,38 +418,192 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### TA Management Commands
 
-### Deleting a person
+1. Adding a person
 
-1. Deleting a person while all persons are being shown
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com tele/@johnd h/10 t/fulltime c/CS1231S`<br>
+        Expected: A person with the given details is added to the list. Person will be at the end of the list.
+
+2. Editing a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `edit 1 n/John Doe p/98765432`<br>
+   Expected: First contact is edited with the given details. Details of the edited contact shown in the command result box.
+   
+   3. Test case: `edit 0 n/John Doe p/98765432`<br>
+   Expected: No person is edited as 0 is an invalid index. Error details shown in the command result box.
 
-   1. Test case: `delete 0`<br>
+3. Deleting a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+4. Finding a person by free time while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. There is a person with free time on Monday from 12:00 to 14:00.
+
+    2. Test case: `find d/1 from/12:00 to/14:00`<br>
+       Expected: Persons with free time on Monday from 12:00 to 14:00 are shown in the list.
+
+    3. Test case: `find d/0 from/12:00 to/14:00`<br>
+        Expected: No person is found as 0 is an invalid day. Error details shown in the status message.
+
+    4. Test case: `find d/1 from/14:00 to/12:00`<br>
+        Expected: No person is found as the start time is after the end time. Error details shown in the status message.
+
+5. Updating hours of all persons
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `hour 10`<br>
+       Expected: All persons' hours are increased by 10.
+
+6. Updating hours of selected persons
+
+    1. Prerequisites: Use the `find` command to find a list of persons. This list is not the full list of persons.
+
+    2. Test case: `hour 10`<br>
+       Expected: All persons' hours in the list are increased by 10. Run `list` command to see the full list of persons. The hours of the persons not in the filtered list remain unchanged.
+
+7. Updating free time of a person while all person are shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `editft 1 d/1 from/12:00 to/14:00`<br>
+       Expected: First contact is edited with free time `12:00-14:00` on Monday. Details of the edited contact shown in the command result box.
+
+### Course Management Commands
+
+1. Viewing course information
+
+   1. Test case: `course`<br>
+      Expected: Invalid command format. List of available courses is shown.
+
+   2. Test case: `course c/cs2103t`<br>
+      Expected: Information of the course CS2103T is shown.
+
+2. Saving teaching course preferences
+
+    1. Type `teach t/cs2103t` in the command box and press Enter.<br>
+       Expected: The default teaching course is set to `CS2103T`. The title of the window includes `CS2103T`.
+
+    2. Close the window and re-launch the app.<br>
+       Expected: The default teaching course remains as `CS2103T` and list of TAs only contains those teaching `CS2103T`.
+
+3. Clearing teaching course preference
+
+    1. Prerequisite: Teaching course preference is set to `CS2103T`. 
+
+    2. Type `clearteach` in the command box and press Enter.<br>
+       Expected: The default teaching course is cleared. The title of the window no longer includes `CS2103T`.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Modify `addressbook.json` file to corrupt the data inside (e.g. remove a closing brace).<br>
+      Expected: App starts up with an empty address book.
 
-1. _{ more test cases …​ }_
+   2. Modify `courses.json` file to corrupt the data inside (e.g. remove a closing brace).<br>
+      Expected: App starts up with an empty address book.
+
+2. Restarting with clean data files
+
+   1. Delete `addressbook.json` and `courses.json` files.<br>
+      Expected: New json files are created with sample data.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+Overall, we are satisfied with our work in the team project and believe that we have put in a commensurate 
+amount of effort to 5 individual projects.
+
+The following are some of our achievements:
+
+1. Successfully adding and replacing simple fields (e.g. Telegram)
+
+Difficulty: **Easy**
+
+We started with these tasks to familiarise ourselves with the codebase and workflow.
+Overall, it was not difficult to add or remove simple fields, but there was some effort 
+in finding all instances of the field and updating them accordingly.
+
+2. Successfully adding the FreeTime field and corresponding findft command
+
+Difficulty: **Moderate**
+
+The representation of TAs' availability went through several iterations, especially
+with regards to how ot save the day of week. We eventually settled on using an array
+in the FreeTime object. The findft command had to be implemented from scratch in 
+finding TAs with the correct availability.
+
+3. Successfully implementing hour tracking features
+
+Difficulty: **Moderate**
+
+Though the Hour field is just a simple field, the hour command required us to work
+with the FilteredPersonList to update the hours of all TAs in the list. 
+
+4. Successfully representing courses in our app
+
+Difficulty: **Hard**
+
+This was the most challenging task as we had to come up with new architecture to
+model a Course with its corresponding details and Lessons. It was also challenging
+to navigate the storage system to create a `courses.json` file which advanced users
+could edit to add their own courses. While AB3 deals with only one entity type, 
+TAManager deals with two types which were also linked to each other.
+
+5. Successfully implementing default course features
+
+Difficulty: **Moderate**
+
+The default course feature required us to dive into the architecture of UserPrefs
+and the startup logic of the app. We had to ensure that the default course was
+saved and loaded correctly, and that the list of TAs was filtered correctly.
+
+6. Ensuring consistency between our product and the UG/DG
+
+Difficulty: **Easy**
+
+We went through many iterations of the UG and DG based on our own testing and 
+feedback from others. We wanted to make sure that the information they contained 
+are accurate and consistent with our product. Though it was not difficult, 
+it was a time-consuming process.
+
+## **Appendix: Planned Enhancements**
+
+### 1. Add Course Command
+
+- **Enhancement:** Add a new command to allow users to add courses instead of directly modifying the `courses.json` file.
+- **Reason:** This is to avoid direct manipulation of data, and actions on data by users should be handled by TAManager software.
+- **Examples:** `addCourse CS2109S` will add `CS2109S` as a course.
+
+
+### 2. Limit character length for TA fields
+
+- **Enhancement:** Limit the character length for various fields for TAs to ensure data and UI consistency.
+- **Reason:** To uphold an organized format for inputting data and avoid excessively lengthy entries that might impact the system's presentation and user-friendliness.
+- **Examples:**
+    1. **Name**: Limit to 1 - 50 characters to ensure the name has appropriate length.
+    2. **Tags**: Limit to 1 - 50 characters to ensure the tag meanings are valid but not too long to impact UI presentations. 
+    
