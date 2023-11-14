@@ -135,7 +135,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * For all bands, remove target and replace with editedMusician. If editedMusician is null, just remove target.
+     * Remove target and replace with editedMusician for all bands. (for edit)
+     * If editedMusician is null, just remove target. (for delete)
      */
     public void updateMusicianInAllBands(Musician target, Musician editedMusician) {
         requireNonNull(target);
