@@ -1254,5 +1254,18 @@ It has features that  cater to their needs and solves their pain points.
 
 ## Glossary
 
+### Application
+* **Patient**: A person who is under the care of a **Pharmacist**.
+* **Pharmacist**: A person who is responsible for dispensing **Medicine** to **Patient**s.
+* **Order**: An order by a **Patient** for one or multiple **Medicine**s from a Pharmacy.
+* **Medicine**: A substance used for medical treatment.
+* **Allergy**: A Medicine that a **Patient** is allergic to.
+
+### General
+
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface
+* **GUI**: Graphical User Interface
+* **API**: Application Programming Interface
+* **MSS**: Main Success Scenario (or, Happy Path)
