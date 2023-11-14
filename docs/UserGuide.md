@@ -420,7 +420,7 @@ matching the one input by user, **and is regardless of the currently displayed c
 - After performing the complete, the contact list displayed will be reset to display all contacts in the contact book.
 
 <div markdown="span" class="alert alert-primary">:information_source:
-**Note that** an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the **year, month and day are the same**. Time of the appointment does not matter in this command.
+**Do note** an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the **year, month and day are the same**. Time of the appointment does not matter in this command.
 </div>
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
@@ -518,9 +518,10 @@ Certain edits to the file may also cause unexpected behaviours. Please only edit
 2. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we intend to implement this in the next release to enable users to return list to original order should they wish to.
 3. **It is possible to add appointments with dates** before the current date and time.
 4. **On macOS Systems**, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
-5. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other.
-6. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be concurrently resolved when fixing issue 5.
-7. **Checking for duplicate clients** is done by checking their full name, case-sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number than compared to name.
+5. **On macOs Systems**, executing clear and appointment override might result in some slight UI bugs when application is used in full screen. Don't worry as the program should still work with intended functionality.
+6. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other.
+7. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be concurrently resolved when fixing issue 6.
+8. **Checking for duplicate clients** is done by checking their full name, case-sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number than compared to name.
 
 --------------------------------------------------------------------------------------------------------------------
 
