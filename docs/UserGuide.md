@@ -301,7 +301,7 @@ Example usages:
 Success outputs:
 * Input: `show 1`
 ```
-Showing Lesson: Start: 12:30 PM; End: 2:30 PM
+Showing Lesson: Start: 1:30 PM; End: 3:30 PM
 ```
 ![Success for show 1](images/show/show_lesson_positive.png)
 
