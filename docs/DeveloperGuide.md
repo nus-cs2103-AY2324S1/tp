@@ -414,28 +414,28 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### 4.5.1 Implementation
 The sort feature sorts the students in the `UniquePersonList` object in `AddressBook` according to a specified sorting criterion.
 
-The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`. The latter extends the existing `Command` class and overrides the following method: 
-* `Command#execute()`: Executes the command and returns the result message 
+The sorting mechanism is facilitated by `SortCommandParser` and `SortCommand`. The latter extends the existing `Command` class and implements the following method: 
+* `SortCommand#execute()`: Executes the sort command and returns the result message. 
 
 After the user specifies the sorting criterion, the corresponding subclass of `PersonSorter` will be instantiated. There are different `PersonSorter` objects that each sorts differently. The `PersonSorter` object, which implements the Comparable interface, directly sorts the `UniquePersonList` object in `AddressBook`.
 
-Format: `sort CRITERION`
+Format: `sort SORT_CRITERION`
 
 There are 3 ways to sort the students in NUSCoursemates:
 
 1. **Sort by Name**
     - Function: Sorts students by name in alphabetical order
-    - Criterion: name, name-ascending, name-descending
+    - Criterion: `name`, `name-ascending`, `name-descending`
     - Example usage: `sort name-ascending`
 
 2. **Sort by Course size**
     - Function: Sorts students by the number of courses taken
-    - Criterion: course, course size-ascending, course size-descending
+    - Criterion: `course`, `course size-ascending`, `course size-descending`
     - Example usage: `sort course size-ascending`
 
 3. **Sort by Tags**
     - Function: Sorts students by their tags
-    - Criterion: tags
+    - Criterion: `tags`
     - Example usage: `sort tags`
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
@@ -698,7 +698,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### 4.9.1 Implementation
 
-The add course mechanism is facilitated by `ThemeCommand`. It extends `Command` which overrides the following operation:
+The change theme mechanism is facilitated by `ThemeCommand`. It extends `Command` which implements the following operation:
 * `ThemeCommand#execute():` Changes the Theme of NUSCoursemates
 
 Given below is an example usage scenario and how the theme mechanism behaves at each step.
@@ -743,12 +743,12 @@ The following activity diagram summarizes what happens when a user executes the 
 
     * Cons: Learning Curve. Users unfamiliar with CLI commands may face a learning curve.
 
-* **Alternative 2:** Menu Bar Button
+* **Alternative 2:** Menu Bar Button.
     * Pros: Intuitiveness. A graphical button on the menu bar may be more intuitive for users who prefer visual interactions.
 
     * Cons: Inconsistency. May deviate from the overall CLI theme of the application.
 
-* **Alternative 3 (current choice):** Hybrid Approach - CLI Command and Graphical Button
+* **Alternative 3 (current choice):** Hybrid Approach - CLI Command and Graphical Button.
     * Pros: Flexibility. Providing both options caters to a wider audience, accommodating users with different preferences.
     * Pros: User Preference. Users can choose their preferred method of interaction, enhancing the overall user experience. 
     * Pros: Discoverability. The graphical button enhances discoverability for users who might not be familiar with CLI commands.
@@ -1487,13 +1487,22 @@ While there are various sort features implemented for users to sort NUSCoursemat
     * Step 3: The command is parsed, and a priority is attached to each tag. 
     * Step 4: The students in NUSCoursemates are arranged by their highest priority tags according to the tag priorities given by the user.  
 
-
 ### C.7 Updating Telehandle's requirement
 The current `telehandle` requirements do not align with the real requirements of the `telehandle` for Telegram.
 * Proposed Enhancement:
   We aim to adhere to Telegram's telehandle requirements, which include constraints such as not starting with a number or underscore, not ending with an underscore, and limiting the use of more than one underscore.
 * Implementation Details:
     * Make changes to the regex pattern in the `Telehandle` class.
+
+### C.8 Improving error messages
+Currently, the error messages returned for commands such as `add` and `edit` are not comprehensive enough. When users enter multiple invalid fields for these long commands, the error message returned suggests one incorrect field among the many multiple invalid fields that may be present.
+* Proposed Enhancement:
+  Instead of displaying an error message that shows the first error in the user input, we plan to combine all the errors found in the user input into one single error message. Afterwards, this error message will be displayed to the user.
+* Implementation Details:
+  * Step 1: The user input is deconstructed into various fields.
+  * Step 2: The fields are parsed. If an error is thrown while parsing the field, the error message will be stored.
+  * Step 3: When there are multiple errors, the respective error messages will be appended into one long error message.
+  * Step 4: An exception is thrown, and this error message (consisting of multiple smaller errors) is displayed to the user.
 
 ### C.9 Finding tags
 The current feature set includes search capabilities with `findstudent` and `findcourse`, 
@@ -1502,8 +1511,7 @@ based on specific tags. This enhancement proposes the addition of the `findtag` 
 users with a more comprehensive search experience.
 
 * Proposed Enhancement:
-  We plan to allow users to be able to `findtag ` so that they can easily find their list of `
-Close Friend`, `Friend` or `Emergency`.
+  We plan to allow users to be able to `findtag` so that they can easily find their list of `Close Friend`, `Friend` or `Emergency`.
 * Implementation Details:
   * Step 1: Update `AddressBookParser` to recognise and route the `findtag` command.
   * Step 2: Introduce `FindTagCommandParser` for extracting tag keywords from user input.

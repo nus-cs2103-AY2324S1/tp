@@ -33,6 +33,8 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**: Refined the find command to findstudent to align with the findcourse command for consistency.
     * Credits: the original AB3 address book.
 
+* **Project management**
+    * Responsible for overseeing and ensuring the consistency and quality of documentation for the project.
 
 * **Documentation**:
     * User Guide:
