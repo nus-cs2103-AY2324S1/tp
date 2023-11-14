@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 - **Enhancements to existing features**:
   - Add info command
   - Add Database component
-  - Add ModuleData into Model componentn
+  - Add ModuleData into Model component
   - Refactor Module class
   - Improved command execution logic
 
@@ -30,8 +30,7 @@ Given below are my contributions to the project.
 
 - **Community**:
 
-  - PRs reviewed: 24
-    - with non-trivial review comments: #167 #170 #180 #238
+  - PRs reviewed with non-trivial review comments: [#167](https://github.com/AY2324S1-CS2103T-T13-0/tp/pull/167)  [#170](https://github.com/AY2324S1-CS2103T-T13-0/tp/pull/170)  [#180](https://github.com/AY2324S1-CS2103T-T13-0/tp/pull/180) [#238](https://github.com/AY2324S1-CS2103T-T13-0/tp/pull/238) [#243](https://github.com/AY2324S1-CS2103T-T13-0/tp/pull/243)
   - Reported 12 bugs for group [CS2103T-F10-1](https://github.com/AY2324S1-CS2103T-F10-1/tp/issues?q=is%3Aissue+%5BPE-D%5D%5BTester+C%5D+) during PE-D
 
 - **Tools**:
