@@ -6,9 +6,11 @@
 
 # Class Manager 2023 Developer Guide
 
-<!-- * Table of Contents -->
+<!-- * Table of Contents Remove after PDF conversion-->
+# Table of Contents
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
