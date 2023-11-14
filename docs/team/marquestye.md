@@ -1,3 +1,8 @@
+---
+  layout: default.md
+  title: "Marques's Project Portfolio Page"
+---
+
 # Marques's Project Portfolio Page
 
 ## Project ModCraft
