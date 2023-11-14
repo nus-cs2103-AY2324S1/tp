@@ -57,6 +57,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(FindCommand.MESSAGE_MORE_THAN_ONE_WORD);
         }
 
+        HashSet<Predicate<Musician>> predicates = this.buildPredicates(names, tags, instruments, genres);
+
+        return new FindCommand(predicates);
+    }
+
+    /** Builds a set of predicates based on the given lists of keywords. If a list is empty, skip over it. */
+    private HashSet<Predicate<Musician>> buildPredicates(List<String> names, List<String> tags,
+                                                         List<String> instruments, List<String> genres) {
         HashSet<Predicate<Musician>> predicates = new HashSet<>();
         if (!names.isEmpty()) {
             predicates.add(new NameContainsKeywordsPredicate(names));
@@ -70,8 +78,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!genres.isEmpty()) {
             predicates.add(new GenreMatchesPredicate(genres));
         }
-
-        return new FindCommand(predicates);
+        return predicates;
     }
-
 }
