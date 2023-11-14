@@ -236,6 +236,26 @@ Step 4. `UniqueReminderList` should also be updated daily with `ReminderSchedule
     * Pros: Reminders will always be up to date
     * Cons: Will require more processing power and might slow down the application
 
+
+### Edit Single field Macro feature
+
+Keying in the ***edit*** command can be a little tedious to use especially if the user only want to edit a single field of a client profile. The edit single field is a macro to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
+
+#### Current Implementation
+
+The proposed Edit Single field Macro mechanism is facilitated by `AddressBookParser` and `EditCommandMacroParser`
+
+`AddressBookParser` contains an enum with the different person fields to expect as command words.
+
+Then in its parseCommand method, if it is not another valid command word, it will check in the default if it is a valid person field by iterating through the enum. If it is, it will create a `EditCommandMacroParser` and pass the command to it through its constructor.
+
+`EditCommandMacroParser` will then take in the input, and parse the `index` and the argument to the command without any prefix similar to the `FindCommand`. It will then create a `EditCommand` with only the `commandWord` changed to its single argument input and pass said `EditCommand` to the `LogicManager` to execute.
+
+`EditCommandMacroParser` does the argument checking using `ParseUtil` commands to check if they are valid arguments. However other checks like whether it is a valid index or duplicated person is done by the `EditCommand` itself.
+
+#### Design considerations:
+This is a huge step up in terms of code efficiency as compared to creating a new command for each field.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -360,7 +380,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: View a client’s full profile**
+
+**MSS**
+
+1.  User requests to list clients
+2.  Connectify shows a list of clients
+3.  User requests to view a client’s full profile
+4.  Connectify displays the client’s full profile
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
