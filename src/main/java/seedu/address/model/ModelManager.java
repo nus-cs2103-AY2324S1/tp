@@ -4,14 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +28,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Schedule> filteredSchedules;
+    private final FilteredList<Schedule> filteredCalendarSchedules;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +42,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
+        filteredCalendarSchedules = new FilteredList<>(filteredSchedules);
     }
 
     public ModelManager() {
@@ -95,6 +105,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        ObservableList<Schedule> associatedSchedules = this.getSchedulesFromTutor(target);
+        this.deleteSchedules(associatedSchedules);
         addressBook.removePerson(target);
     }
 
@@ -109,6 +121,38 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return addressBook.hasSchedule(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(Schedule target) {
+        addressBook.removeSchedule(target);
+    }
+
+    @Override
+    public void deleteSchedules(ObservableList<Schedule> targets) {
+        List<Schedule> copyOfTargets = new ArrayList<>(targets);
+        for (Schedule target : copyOfTargets) {
+            this.deleteSchedule(target);
+        }
+    }
+
+    @Override
+    public void addSchedule(Schedule schedule) {
+        addressBook.addSchedule(schedule);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+    }
+
+    @Override
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireAllNonNull(target, editedSchedule);
+
+        addressBook.setSchedule(target, editedSchedule);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -128,6 +172,58 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Schedule List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Schedule} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Schedule> getFilteredCalendarScheduleList() {
+        return filteredCalendarSchedules;
+    }
+
+    @Override
+    public void updateFilteredCalendarScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredCalendarSchedules.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Schedule> getSchedulesFromTutor(Person tutor) throws PersonNotFoundException {
+        if (!hasPerson(tutor)) {
+            throw new PersonNotFoundException();
+        }
+        ObservableList<Schedule> schedules = this.addressBook.getScheduleList();
+        return schedules.stream().filter(schedule -> schedule.getTutor().equals(tutor))
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    @Override
+    public void updateTutorSchedules(Person oldPerson, Person editedPerson) {
+        ObservableList<Schedule> schedules = getSchedulesFromTutor(oldPerson);
+        schedules.forEach(schedule -> {
+            Schedule newSchedule = new Schedule(
+                editedPerson,
+                schedule.getStartTime(),
+                schedule.getEndTime(),
+                schedule.getStatus()
+            );
+            setSchedule(schedule, newSchedule);
+        });
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +238,9 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredSchedules.equals(otherModelManager.filteredSchedules)
+                && filteredCalendarSchedules.equals(otherModelManager.filteredCalendarSchedules);
     }
 
 }

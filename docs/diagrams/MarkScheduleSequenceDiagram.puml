@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkScheduleCommandParser" as MarkScheduleCommandParser LOGIC_COLOR
+participant "d:MarkScheduleCommand" as MarkScheduleCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "e:Schedule" as EditedSchedule MODEL_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mark 1 m/1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mark 1 m/1")
+activate AddressBookParser
+
+create MarkScheduleCommandParser
+AddressBookParser -> MarkScheduleCommandParser
+activate MarkScheduleCommandParser
+
+MarkScheduleCommandParser --> AddressBookParser
+deactivate MarkScheduleCommandParser
+
+AddressBookParser -> MarkScheduleCommandParser : parse("1 m/1")
+activate MarkScheduleCommandParser
+
+create MarkScheduleCommand
+MarkScheduleCommandParser -> MarkScheduleCommand
+activate MarkScheduleCommand
+
+MarkScheduleCommand --> MarkScheduleCommandParser : d
+deactivate MarkScheduleCommand
+
+MarkScheduleCommandParser --> AddressBookParser : d
+deactivate MarkScheduleCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkScheduleCommandParser -[hidden]-> AddressBookParser
+destroy MarkScheduleCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> MarkScheduleCommand : execute()
+activate MarkScheduleCommand
+
+create EditedSchedule
+MarkScheduleCommand -> EditedSchedule ++
+return e
+
+MarkScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, e)
+return
+
+MarkScheduleCommand -> Model ++ : updateFilteredScheduleList()
+return
+
+deactivate Model
+
+create CommandResult
+MarkScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkScheduleCommand : r
+deactivate CommandResult
+
+MarkScheduleCommand --> LogicManager : r
+deactivate MarkScheduleCommand
+
+[<--LogicManager: r
+deactivate LogicManager
+@enduml

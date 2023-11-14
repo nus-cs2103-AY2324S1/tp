@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * Container for user visible messages.
@@ -15,16 +16,20 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX = "The schedule index provided is invalid";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d tutors listed!";
+    public static final String MESSAGE_SCHEDULES_LISTED_OVERVIEW = "%1$d schedules listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_SCHEDULE_STATUS_INDEX =
+            "The schedule status index provided is invalid";
+    public static final String MESSAGE_THEME_SHOWN = "Changed theme to %1$s";
+    public static final String MESSAGE_UNKNOWN_THEME = "Theme provided does not exist";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
-        assert duplicatePrefixes.length > 0;
-
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
@@ -40,11 +45,20 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append(person.getEmail());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code schedule} for display to the user.
+     */
+    public static String format(Schedule schedule) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(schedule.getTutor().getName())
+                .append("; Start Time: ")
+                .append(schedule.getStartTime())
+                .append("; End Time: ")
+                .append(schedule.getEndTime());
         return builder.toString();
     }
 

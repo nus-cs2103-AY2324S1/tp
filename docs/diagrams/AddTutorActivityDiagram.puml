@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User runs add-t command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+
+if () then ([input is valid])
+    :Construct new Person object;
+    :Construct AddTutorCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes AddTutorCommand;
+    if () then ([person does not already exist])
+        :Insert person to PersonList;
+        :Update UI;
+    else ([else])
+        :Display duplicate person error message;
+    endif
+else ([else])
+:Display error message;
+
+endif
+stop
+@enduml

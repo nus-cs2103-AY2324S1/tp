@@ -1,0 +1,115 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListSchedule\nCommandParser" as ListScheduleCommandParser LOGIC_COLOR
+participant "l:ListSchedule\nCommand" as ListScheduleCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant ":Person" as Person LOGIC_COLOR
+participant ":Tutor\nPredicate" as TutorPredicate LOGIC_COLOR
+participant ":Status\nPredicate" as StatusPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list-s 1 m/0")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("list-s 1 m/0")
+activate AddressBookParser
+
+create ListScheduleCommandParser
+AddressBookParser -> ListScheduleCommandParser
+activate ListScheduleCommandParser
+
+ListScheduleCommandParser --> AddressBookParser
+deactivate ListScheduleCommandParser
+
+AddressBookParser -> ListScheduleCommandParser : parse("1 m/0")
+activate ListScheduleCommandParser
+
+create ListScheduleCommand
+ListScheduleCommandParser -> ListScheduleCommand : ListScheduleCommand(1, 0)
+activate ListScheduleCommand
+
+ListScheduleCommand --> ListScheduleCommandParser : l
+deactivate ListScheduleCommand
+
+ListScheduleCommandParser --> AddressBookParser : l
+deactivate ListScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListScheduleCommandParser -[hidden]-> AddressBookParser
+destroy ListScheduleCommandParser
+
+AddressBookParser --> LogicManager : l
+deactivate AddressBookParser
+
+LogicManager -> ListScheduleCommand : execute()
+activate ListScheduleCommand
+
+ListScheduleCommand -> Model: getFilteredPersonList()
+activate Model
+
+Model --> ListScheduleCommand: List<Person>
+deactivate Model
+
+alt TRANSPARENT targetIndex is not null
+    ListScheduleCommand -> Person: get(targetIndex)
+    activate Person
+
+    Person --> ListScheduleCommand: tutor
+    deactivate Person
+
+    ListScheduleCommand -> TutorPredicate: TutorPredicate(tutor)
+    activate TutorPredicate
+
+    TutorPredicate --> ListScheduleCommand : t
+    deactivate TutorPredicate
+
+    ListScheduleCommand -> Model: updateFilteredScheduleList(t)
+    activate Model
+
+    Model --> ListScheduleCommand:
+    deactivate Model
+end
+
+alt TRANSPARENT status is not null
+    ListScheduleCommand -> StatusPredicate: StatusPredicate(status)
+    activate StatusPredicate
+
+    StatusPredicate --> ListScheduleCommand : s
+    deactivate StatusPredicate
+
+    ListScheduleCommand -> Model: updateFilteredScheduleList(s)
+    activate Model
+
+    Model --> ListScheduleCommand:
+    deactivate Model
+end
+
+alt TRANSPARENT targetIndex is null and status is null
+    ListScheduleCommand -> Model: updateFilteredScheduleList(ALL)
+    activate Model
+
+    Model --> ListScheduleCommand:
+    deactivate Model
+end
+
+create CommandResult
+ListScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListScheduleCommand : r
+deactivate CommandResult
+
+ListScheduleCommand --> LogicManager : r
+deactivate ListScheduleCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml

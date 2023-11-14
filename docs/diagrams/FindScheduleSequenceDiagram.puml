@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindSchedule\nCommandParser" as FindScheduleCommandParser LOGIC_COLOR
+participant "e:TutorNameContains\nKeywordsPredicate" as TutorNameContainsKeywordsPredicate LOGIC_COLOR
+participant "d:FindSchedule\nCommand" as FindScheduleCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find-s John Doe")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-s John Doe")
+activate AddressBookParser
+
+create FindScheduleCommandParser
+AddressBookParser -> FindScheduleCommandParser
+activate FindScheduleCommandParser
+
+FindScheduleCommandParser --> AddressBookParser
+deactivate FindScheduleCommandParser
+
+AddressBookParser -> FindScheduleCommandParser : parse("John Doe")
+activate FindScheduleCommandParser
+
+create TutorNameContainsKeywordsPredicate
+FindScheduleCommandParser -> TutorNameContainsKeywordsPredicate
+activate TutorNameContainsKeywordsPredicate
+
+TutorNameContainsKeywordsPredicate --> FindScheduleCommandParser : e
+deactivate TutorNameContainsKeywordsPredicate
+
+create FindScheduleCommand
+FindScheduleCommandParser -> FindScheduleCommand
+activate FindScheduleCommand
+
+FindScheduleCommand --> FindScheduleCommandParser : d
+deactivate FindScheduleCommand
+
+FindScheduleCommandParser --> AddressBookParser : d
+deactivate FindScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindScheduleCommandParser -[hidden]-> AddressBookParser
+destroy FindScheduleCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> FindScheduleCommand : execute()
+activate FindScheduleCommand
+
+FindScheduleCommand -> Model ++ : updateFilteredScheduleList(e)
+return
+
+deactivate Model
+
+create CommandResult
+FindScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindScheduleCommand : r
+deactivate CommandResult
+
+FindScheduleCommand --> LogicManager : r
+deactivate FindScheduleCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

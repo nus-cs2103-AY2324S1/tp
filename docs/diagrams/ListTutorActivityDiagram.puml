@@ -1,0 +1,14 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User runs list-t command;
+:Constructs ListTutorCommand object;
+:Return back to LogicManager;
+:LogicManager executes ListTutorCommand;
+:Display PersonList;
+:Update UI;
+
+stop
+@enduml

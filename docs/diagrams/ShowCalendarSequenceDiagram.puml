@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ShowCalendarCommandParser" as ShowCalendarCommandParser LOGIC_COLOR
+participant "d:ShowCalendarCommand" as ShowCalendarCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("show 2023-09-15")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("show 2023-09-15")
+activate AddressBookParser
+
+create ShowCalendarCommandParser
+AddressBookParser -> ShowCalendarCommandParser
+activate ShowCalendarCommandParser
+
+ShowCalendarCommandParser --> AddressBookParser
+deactivate ShowCalendarCommandParser
+
+AddressBookParser -> ShowCalendarCommandParser : parse("2023-09-15")
+activate ShowCalendarCommandParser
+
+create ShowCalendarCommand
+ShowCalendarCommandParser -> ShowCalendarCommand
+activate ShowCalendarCommand
+
+ShowCalendarCommand --> ShowCalendarCommandParser : d
+deactivate ShowCalendarCommand
+
+ShowCalendarCommandParser --> AddressBookParser : d
+deactivate ShowCalendarCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ShowCalendarCommandParser -[hidden]-> AddressBookParser
+destroy ShowCalendarCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> ShowCalendarCommand : execute()
+activate ShowCalendarCommand
+
+ShowCalendarCommand -> Model ++ : updateFilteredScheduleList()
+return
+
+ShowCalendarCommand -> Model ++ : updateFilteredCalendarScheduleList()
+return
+
+deactivate Model
+
+create CommandResult
+ShowCalendarCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ShowCalendarCommand : r
+deactivate CommandResult
+
+ShowCalendarCommand --> LogicManager : r
+deactivate ShowCalendarCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

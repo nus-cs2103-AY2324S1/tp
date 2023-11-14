@@ -3,11 +3,32 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+    @Test
+    public void isTheme() {
+        CommandResult nonThemeCommandResult = new CommandResult("feedback");
+        assertFalse(nonThemeCommandResult.isTheme());
+
+        CommandResult themeCommandResult = new CommandResult("feedback", "dark");
+        assertTrue(themeCommandResult.isTheme());
+    }
+
+    @Test
+    public void getTheme() {
+        CommandResult nonThemeCommandResult = new CommandResult("feedback");
+        assertNull(nonThemeCommandResult.getTheme());
+
+        String theme = "dark";
+        CommandResult themeCommandResult = new CommandResult("feedback", theme);
+        assertEquals(themeCommandResult.getTheme(), theme);
+    }
+
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");

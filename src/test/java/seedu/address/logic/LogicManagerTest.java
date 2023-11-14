@@ -1,9 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -13,14 +13,16 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTutorCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -60,14 +62,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteTutorCommand = "delete-t 9";
+        assertCommandException(deleteTutorCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String listTutorCommand = ListTutorCommand.COMMAND_WORD;
+        assertCommandSuccess(listTutorCommand, ListTutorCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -85,6 +87,16 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredScheduleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredScheduleList().remove(0));
+    }
+
+    @Test
+    public void getFilteredCalendarScheduleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCalendarScheduleList().remove(0));
     }
 
     /**
@@ -165,11 +177,43 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addTutorCommand = AddTutorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        Person expectedPerson = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(addTutorCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getAddressBook_success() {
+        assertEquals(model.getAddressBook(), logic.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBookFilePath_success() {
+        Model model2 = new ModelManager();
+        model2.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        assertNotEquals(model2.getAddressBookFilePath(), logic.getAddressBookFilePath());
+
+        JsonAddressBookStorage addressBookStorage =
+            new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        Logic logic2 = new LogicManager(model2, storage);
+        assertEquals(model2.getAddressBookFilePath(), logic2.getAddressBookFilePath());
+
+        assertEquals(model.getAddressBookFilePath(), logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getGuiSettings_success() {
+        assertEquals(model.getGuiSettings(), logic.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings_success() {
+        GuiSettings newGuiSettings = new GuiSettings(1000, 800, 0, 100, "dark");
+        logic.setGuiSettings(newGuiSettings);
+        assertEquals(newGuiSettings, logic.getGuiSettings());
     }
 }

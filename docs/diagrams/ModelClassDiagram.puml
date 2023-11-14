@@ -14,11 +14,15 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+
+Class UniqueScheduleList
+Class Schedule
+Class StartTime
+Class EndTime
+Class Status
 
 Class I #FFFFFF
 }
@@ -40,15 +44,25 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueScheduleList
+UniqueScheduleList --> "~* all" Schedule
+Schedule o--> Person
+Schedule *--> StartTime
+Schedule *--> EndTime
+Schedule *--> Status
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+Schedule -[hidden]up--> I
+UniqueScheduleList -[hidden]right-> I
+
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+
+StartTime -[hidden]right-> EndTime
+EndTime -[hidden]right-> Status
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Schedule
 @enduml
