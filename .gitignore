@@ -9,7 +9,8 @@ src/main/resources/docs/
 /*.iml
 
 # Storage/log files
-/data/
+data/*
+!data/logicmanagertest.json
 /config.json
 /preferences.json
 /*.log.*
@@ -21,3 +22,4 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+docs/_markbind/logs/

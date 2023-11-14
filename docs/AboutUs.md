@@ -1,59 +1,62 @@
 ---
-layout: page
-title: About Us
+layout: default.md
+title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0968907@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Kieron Seven Lee Jun Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cikguseven.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/cikguseven)]
+[[portfolio](team/cikguseven.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Features, Code Quality, Documentation, Testing
 
-### Jean Doe
+### Liang Wenzhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lwz19.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lwz19)]
+[[portfolio](team/lwz19.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Features, UI, Testing, Documentation
+
+### Lim Ngee Yong
+
+<img src="images/ngeeyonglim.png" width="200px">
+
+[[github](http://github.com/ngeeyonglim)]
+[[portfolio](team/ngeeyonglim.md)]
+
+* Role: Developer
+* Responsibilities: Features, UI, Testing, Documentation
+
+### Qian Changru
+
+<img src="images/changruhenryqian.png" width="200px">
+
+[[github](http://github.com/changruhenryqian)]
+[[portfolio](team/changruhenryqian.md)]
+
+* Role: Developer
+* Responsibilities: Features, Code Quality, Documentation, Testing
+
+### Yeo Boh Shin
+
+<img src="images/yeobohshin.png" width="200px">
+
+[[github](http://github.com/yeobohshin)]
+[[portfolio](team/yeobohshin.md)]
+
+* Role: Developer
+* Responsibilities: Features, UI, Testing, Documentation

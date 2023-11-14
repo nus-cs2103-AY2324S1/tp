@@ -1,0 +1,28 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "studentNumber": "A0224917A",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
+    },
+    "tags": [ "friends" ],
+    "comment" : "She is a very nice person"
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "studentNumber": "A0224917A",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
+    },
+    "comment" : "She is a very nice person"
+  } ]
+}

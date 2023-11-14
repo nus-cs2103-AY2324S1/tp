@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+start
+:User executes tag command;
+
+if () then ([command format invalid])
+    :show invalid command\n format message;
+else ([else])
+    if () then ([student number is invalid])
+        : show invalid student\n number message;
+    else ([else])
+        if () then ([action identifier is invalid])
+            : show invalid action\n identifier message;
+        else ([else])
+            if () then ([tag is invalid])
+                : show invalid\n tag message;
+            else ([else]))
+                if () then ([student not in Class Manager])
+                    : show student does\n not exist message;
+                else ([else])
+                    : tags the student;
+                endif
+            endif
+        endif
+    endif
+endif
+stop
+@enduml

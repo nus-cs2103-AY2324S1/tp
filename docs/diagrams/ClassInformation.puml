@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Trackers as TrackerPackage {
+Class "<<interface>>\nTracker" as Tracker
+Class Tracker
+Class AttendanceTracker
+Class AssignmentTracker
+Class ClassParticipationTracker
+}
+
+package ClassInformation\n as ClassGradesPackage {
+Class Attendance
+Class Assignment
+Class ClassParticipation
+}
+
+Attendance -[hidden]up-> AttendanceTracker
+Assignment -[hidden]up-> AssignmentTracker
+ClassParticipation -[hidden]up-> ClassParticipationTracker
+
+AttendanceTracker .up.|> Tracker
+AssignmentTracker .up.|> Tracker
+ClassParticipationTracker .up.|> Tracker
+
+Attendance "*" <--* AttendanceTracker
+Assignment "*" <--* AssignmentTracker
+ClassParticipation "*" <--* ClassParticipationTracker
+
+@enduml

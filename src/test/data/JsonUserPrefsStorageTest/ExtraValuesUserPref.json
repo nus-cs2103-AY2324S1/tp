@@ -9,5 +9,7 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "addressbook.json"
+  "classManagerFilePath": "data/classmanager.json",
+  "tutorialCount" : 13,
+  "assignmentCount" : 3
 }
