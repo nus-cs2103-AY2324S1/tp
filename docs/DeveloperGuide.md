@@ -427,28 +427,94 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app.<br>
        Expected: The most recent window size and location is retained.
 
-3. Saving teaching course preferences
+### TA Management Commands
 
-   1. Type `teach t/cs2103t` in the command box and press Enter.<br>
-      Expected: The default teaching course is set to `CS2103T`.
+1. Adding a person
 
-   2. Close the window and re-launch the app.<br>
-      Expected: The default teaching course remains as `CS2103T` and list of TAs only contains those teaching CS2103T.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com tele/@johnd h/10 t/fulltime c/CS1231S`<br>
+        Expected: A person with the given details is added to the list. Person will be at the end of the list.
 
-### Deleting a person
+2. Editing a person while all persons are being shown
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `edit 1 n/John Doe p/98765432`<br>
+   Expected: First contact is edited with the given details. Details of the edited contact shown in the command result box.
+   
+   3. Test case: `edit 0 n/John Doe p/98765432`<br>
+   Expected: No person is edited as 0 is an invalid index. Error details shown in the command result box.
+
+3. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+4. Finding a person by free time while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. There is a person with free time on Monday from 12:00 to 14:00.
+
+    2. Test case: `find d/1 from/12:00 to/14:00`<br>
+       Expected: Persons with free time on Monday from 12:00 to 14:00 are shown in the list.
+
+    3. Test case: `find d/0 from/12:00 to/14:00`<br>
+        Expected: No person is found as 0 is an invalid day. Error details shown in the status message.
+
+    4. Test case: `find d/1 from/14:00 to/12:00`<br>
+        Expected: No person is found as the start time is after the end time. Error details shown in the status message.
+
+5. Updating hours of all persons
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `hour 10`<br>
+       Expected: All persons' hours are increased by 10.
+
+6. Updating hours of selected persons
+
+    1. Prerequisites: Use the `find` command to find a list of persons. This list is not the full list of persons.
+
+    2. Test case: `hour 10`<br>
+       Expected: All persons' hours in the list are increased by 10. Run `list` command to see the full list of persons. The hours of the persons not in the filtered list remain unchanged.
+
+7. Updating free time of a person while all person are shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `editft 1 d/1 from/12:00 to/14:00`<br>
+       Expected: First contact is edited with free time `12:00-14:00` on Monday. Details of the edited contact shown in the command result box.
+
+### Course Management Commands
+
+1. Viewing course information
+
+   1. Test case: `course`<br>
+      Expected: Invalid command format. List of available courses is shown.
+
+   2. Test case: `course c/cs2103t`<br>
+      Expected: Information of the course CS2103T is shown.
+
+2. Saving teaching course preferences
+
+    1. Type `teach t/cs2103t` in the command box and press Enter.<br>
+       Expected: The default teaching course is set to `CS2103T`. The title of the window includes `CS2103T`.
+
+    2. Close the window and re-launch the app.<br>
+       Expected: The default teaching course remains as `CS2103T` and list of TAs only contains those teaching `CS2103T`.
+
+3. Clearing teaching course preference
+
+    1. Prerequisite: Teaching course preference is set to `CS2103T`. 
+
+    2. Type `clearteach` in the command box and press Enter.<br>
+       Expected: The default teaching course is cleared. The title of the window no longer includes `CS2103T`.
 
 ### Saving data
 
