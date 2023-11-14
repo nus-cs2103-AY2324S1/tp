@@ -132,10 +132,10 @@ It will open a new help window, that shows all the commands in linktree.
 Linktree's GUI has been designed to be simple and user-friendly. This guide will mention some of these UI elements:
 1. **Command Box**: You'll have to type the commands in this box.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
-3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to 
+3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to
 this UserGuide. The Result Display will also show a summary of commands.
 4. **File Button**: Click the `File` button and then you will see a `exit` button to close the application.
-5. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
+5. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command,
 check out [find developer command](#find-developer) for more details).
 6. **Teams Panel**: Lists all the teams (or a filtered list of developers after the `findteam` command,
 check out [find team command](#find-team) for more details).
@@ -196,15 +196,15 @@ Click [here](#table-of-contents) to go back to contents.
 
 
 --------------------------------------------------------------------------------------------------------------------
-**The following commands are for managing developers.** 
+**The following commands are for managing developers.**
 ### Add command
 #### What this command does:
 * This command allows you to add a new developer to the addressbook.
 
 
-#### Command format: 
+#### Command format:
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
-  
+
 #### Example usage:
 - For example, to add a new developer John to the addressboook, type
 `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`.
@@ -264,7 +264,7 @@ Click [here](#table-of-contents) to go back to contents.
 `edit [Index number] n/[Name] p/[Phone] e/[Email] a/[Address] r/[Remark] t/[Tag]...`
 
 #### Example usage:
-- For example, to edit a details of developer **John Wick**, firstly find the index number of **John Wick**. Then type 
+- For example, to edit a details of developer **John Wick**, firstly find the index number of **John Wick**. Then type
 `edit 1 n/John Wick e/new.email@example.com` to change John's name and email address.
 - In the following example, you can see that now index `1` has a new name `John Wick` and a new email address `new.email@example.com`.
   ![EditCommand](images/UG_images/EditCommand.png)
@@ -297,21 +297,21 @@ Click [here](#table-of-contents) to go back to contents.
     * Only full words will be matched e.g. Han will not match Hans
     * Multiple developer names can also be given as paramaters. The program will display the developers that have those names.
 
-#### Command Format: 
+#### Command Format:
 `find [Keyword1] ...`
 
 #### Example Usage:
 - For example, to find developers whose first or last name is **John**, type `find John`.
 - In the following example, you can see that there are 3 developers with their first name **John** in the list of developers.
   ![FindCommandUsing1Keyword](images/UG_images/FindCommand1.png)
-- You can use `find` command with multiple keywords. For example, if you type `find alex david` you get all the developers 
+- You can use `find` command with multiple keywords. For example, if you type `find alex david` you get all the developers
 with first or last name being **Alex** or **David**.
   ![FindCommandUsingMultipleKeyword](images/UG_images/FindCommand2.png)
 
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-- The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. 
+- The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command.
 - To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
 - The search is case-insensitive. e.g hans will match Hans
 - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
@@ -368,7 +368,7 @@ Click [here](#table-of-contents) to go back to contents.
 * `newteam tn/[TeamName] tl/[TeamLeader]`
 
 #### Example usage:
-* For example, to add a new team with team name **Team Delta** and team leader **David Li**, 
+* For example, to add a new team with team name **Team Delta** and team leader **David Li**,
 type `newteam tn/Team Delta tl/David Li`
 * In the following example, you can see new team **Team Delta** is added to the team list.
   ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
@@ -376,7 +376,7 @@ type `newteam tn/Team Delta tl/David Li`
 Click [here](#table-of-contents) to go back to contents.
 
 <br>
- 
+
 ### Add developers to team
 #### What this command does:
 * Helps to add existing developers in the addressbook to a team.
@@ -423,7 +423,7 @@ Click [here](#table-of-contents) to go back to contents.
 
 #### Example usage:
 * For example: if you want to delete developer **John Lim** from **Team Bravo**.
-* You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
+* You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer
 **John Lim** will be removed from **Team Bravo**.
   ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
 
@@ -439,8 +439,8 @@ Click [here](#table-of-contents) to go back to contents.
 <br>
 
 ### Edit team name
-#### What this command does: 
-* Takes a team name and a new name for the team. Changes team name if it doesn't already exist in the teambook. 
+#### What this command does:
+* Takes a team name and a new name for the team. Changes team name if it doesn't already exist in the teambook.
 
 #### Command format:
 * `editTeamName tn/[Existing team name] tn/[New team name]`
@@ -464,14 +464,14 @@ Click [here](#table-of-contents) to go back to contents.
 #### What this command does:
 * Edits the team leader of a team.
 
-#### Command format: 
+#### Command format:
 * `editTeamLeader tn/[Team name] tl/[New Team leader]`
 
-#### Example usage: 
+#### Example usage:
 - For example, if want to change the team leader of `Team Romeo` to `John Lim`, you need to type `editTeamLeader tn/Team Romeo tl/John Lim`.
 - Now, you will see that the team leader for `Team Romeo` has changed to `John Lim`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
-  
+
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
@@ -486,14 +486,14 @@ Click [here](#table-of-contents) to go back to contents.
 #### What this command does:
 - Finds matching teams whose names contain any of the given keywords.
 
-#### Command Format: 
+#### Command Format:
 * `findteam [Keyword1] ...`
 
 #### Example usage:
 - For example, type `findteam Alpha` to find all the teams with keyword **Alpha**.
 - In the following example, you can see that the matching results are **Team Alpha** and **Alpha Squad**.
   ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
-- You can also use multiple keywords, for example type `findteam Bravo Charlie` which will show the all the teams 
+- You can also use multiple keywords, for example type `findteam Bravo Charlie` which will show the all the teams
 with keywords Bravo or Charlie.
 
 
@@ -578,10 +578,10 @@ Click [here](#table-of-contents) to go back to contents.
     You can refer back to the team list for their full names.
 </div>
 
-#### Command format: 
+#### Command format:
 * `tree`
 
-#### Example usage: 
+#### Example usage:
 * Type `tree` and you will see a tree similar to the one shown below.
 ![TreeResultExample](images/UG_images/TreeResultExample.png)
 
@@ -700,13 +700,13 @@ including Windows, Mac and Linux, and it runs on systems that support Java 11, s
 4. **Refer to the user guide**:
   - Look for the section that explains the command's usage and syntax. It provide examples and detailed explanations.
 
-5. **Ask for Help**:                                                                                                                                                                                                                                                                          
+5. **Ask for Help**:
   - If you've exhausted all other options and the command still isn't working, don't hesitate to seek help.
 Reach out to your us in email or Github for assistance.
 Describe the problem in detail, including the command you're using, the error messages received, and any relevant context.
 
 ##### Q: Why does Linktree not show all developers/teams in the database?
-**A:** If not all customers or properties are appearing, it's likely due to certain commands like find, or findteam. 
+**A:** If not all customers or properties are appearing, it's likely due to certain commands like find, or findteam.
 1. *If you wish to view the developer list, you should use the list command.*
 2. *To display the complete list of teams, use the listt command.*
 3. *If you need to list both at the same time, you can use the list command twice or the listt command twice to revert to the default state.*
@@ -723,7 +723,7 @@ Its main function is personal communication management for supervisors.
 Unfortunately, if it's not there, recovering lost data is not possible.
 
 ##### Q: How do I uninstall Linktree?
-**A:** To uninstall Linktree, simply delete the folder that contains `linktree.jar` 
+**A:** To uninstall Linktree, simply delete the folder that contains `linktree.jar`
 - no installation on the hard drive means no complex uninstallation process.
 
 ##### Q: Do I need to be online to use Linktree?
@@ -828,10 +828,10 @@ Click [here](#table-of-contents) to go back to contents.
 | .jar        | Java Archive - A file format used to package Java class files, associated metadata, and resources into a single archive file. It is a common format for distributing Java applications or libraries. |
 | Addressbook | A file that stores the list of developers in the application.                                                                                                                                        |
 | Teambook    | A file that stores the list of teams in the application.                                                                                                                                             |
-| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                               
+| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |
 | Tag         | A label or keyword assigned to developers for categorization and easy identification.                                                                                                                |
 | Tree        | A visual representation of the top-down project's structure, displaying teams and developers.                                                                                                        |
-| Index       | A numerical identifier assigned to developers or teams for reference.                                                                                                                                |             
+| Index       | A numerical identifier assigned to developers or teams for reference.                                                                                                                                |
 | FAQ         | Frequently Asked Questions which users can check out if needed.                                                                                                                                      |
 
 Click [here](#table-of-contents) to go back to contents.
