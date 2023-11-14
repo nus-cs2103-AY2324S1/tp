@@ -88,7 +88,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram." width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete st/interviewed t/developer")` API call as an example.
 
@@ -314,6 +314,10 @@ Parsing of the create command's tag parameters is handled by the `parse` method 
 
 Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object for each element in the array of tag category and name pairs. These newly created tags are then added to the model.
 
+The following activity diagram summarize what happens when a user attempts to execute the `create` command.
+
+<puml src="diagrams/CreateTagActivityDiagram.puml" />
+
 ### Search feature
 
 #### Implementation
@@ -345,7 +349,7 @@ The following sequence diagram shows how the search operation works:
 
 **Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram"/>
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" width/>
 
 Step 3. The user should see the UI below upon entering `search t/intern`.
 
@@ -512,8 +516,7 @@ The following sequence diagram shows how the `Event` operation works:
 
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
-
-![EventWindow](images/eventwin.png)
+<img src="images/eventwin.png" alt="EventWindow" width="550"/>
 
 The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 
