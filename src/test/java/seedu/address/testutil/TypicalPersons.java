@@ -48,6 +48,21 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
+    public static final Person JAMES = new PersonBuilder().withName("James Watson")
+            .withAddress("789, Ang Mo Kio Ave 6, #12-111").withEmail("james@example.com")
+            .withPhone("91351251")
+            .withTags("colleague", "syndicateA").build();
+
+    public static final Person KAREN = new PersonBuilder().withName("Karen Chen")
+            .withAddress("159, Tampines St 21, #03-10")
+            .withEmail("karen@example.com").withPhone("91765431")
+            .withTags("colleague", "syndicateB").build();
+
+    public static final Person LUCAS = new PersonBuilder().withName("Lucas Yang").withPhone("91352853")
+            .withEmail("lucas@example.com").withAddress("2, Serangoon North Ave 2")
+            .withTags("colleague", "syndicateA").build();
+
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
@@ -71,6 +86,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JAMES, KAREN, LUCAS));
     }
 }

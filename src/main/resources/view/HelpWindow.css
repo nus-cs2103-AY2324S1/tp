@@ -1,16 +1,16 @@
-#copyButton, #helpMessage {
+#copyButton, #openButton, #helpMessage {
     -fx-text-fill: white;
 }
 
-#copyButton {
+#copyButton, #openButton {
     -fx-background-color: dimgray;
 }
 
-#copyButton:hover {
+#copyButton:hover, #openButton:hover {
     -fx-background-color: gray;
 }
 
-#copyButton:armed {
+#copyButton:armed, #openButton:armed {
     -fx-background-color: darkgray;
 }
 

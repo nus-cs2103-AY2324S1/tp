@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Edit task in task list
+
+participant "cmd:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate EditTaskCommand
+
+EditTaskCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model --> EditTaskCommand : filteredTaskList
+deactivate Model
+
+'Create edited task
+EditTaskCommand -> EditTaskCommand : createEditedTask(taskToEdit, descriptor)
+activate EditTaskCommand
+EditTaskCommand --> EditTaskCommand : editedTask
+deactivate EditTaskCommand
+
+EditTaskCommand -> Model : setTask(taskToEdit, editedTask)
+activate Model
+Model --> EditTaskCommand
+deactivate Model
+
+EditTaskCommand -> Model : updateFilteredTaskList(SHOW_ALL_TASKS)
+activate Model
+Model --> EditTaskCommand
+deactivate Model
+
+@enduml
+

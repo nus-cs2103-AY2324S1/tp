@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="349px" preserveAspectRatio="none" style="width:460px;height:349px;background:#FFFFFF;" version="1.1" viewBox="0 0 460 349" width="460px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="338.3926" style="stroke:#000000;stroke-width:1.5;" width="440" x="14" y="5"/><path d="M176,5 L176,14.4883 L166,24.4883 L14,24.4883 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="17" x="17" y="19.5352">sd</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="38" y="19.5352">Edit task in task list</text><rect fill="#F97181" height="294.6621" style="stroke:#181818;stroke-width:0.5;" width="92" x="356" y="32.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="41" x="379.5" y="45.0566">Model</text><rect fill="#FFFFFF" height="230.8633" style="stroke:#181818;stroke-width:1.0;" width="10" x="103" y="93.2871"/><rect fill="#FFFFFF" height="40.3105" style="stroke:#181818;stroke-width:1.0;" width="10" x="108" y="181.2188"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#181818;stroke-width:1.0;" width="10" x="397" y="114.5977"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="397" y="257.8398"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="397" y="301.1504"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="108" x2="108" y1="83.2871" y2="333.1504"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="402" x2="402" y1="83.2871" y2="333.1504"/><rect fill="#3333C4" height="30.4883" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="176" x="20" y="51.7988"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="27" y="72.334">cmd:EditTaskCommand</text><rect fill="#9D0012" height="30.4883" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="370" y="51.7988"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="379" y="72.334">:Model</text><rect fill="#FFFFFF" height="230.8633" style="stroke:#181818;stroke-width:1.0;" width="10" x="103" y="93.2871"/><rect fill="#FFFFFF" height="40.3105" style="stroke:#181818;stroke-width:1.0;" width="10" x="108" y="181.2188"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#181818;stroke-width:1.0;" width="10" x="397" y="114.5977"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="397" y="257.8398"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="397" y="301.1504"/><polygon fill="#181818" points="385,110.5977,395,114.5977,385,118.5977,389,114.5977" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="113" x2="391" y1="114.5977" y2="114.5977"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="191" y="109.8555">getFilteredTaskList()</text><polygon fill="#181818" points="124,139.9082,114,143.9082,124,147.9082,120,143.9082" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="118" x2="401" y1="143.9082" y2="143.9082"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="208.5" y="139.166">filteredTaskList</text><line style="stroke:#181818;stroke-width:1.0;" x1="113" x2="160" y1="168.2188" y2="168.2188"/><line style="stroke:#181818;stroke-width:1.0;" x1="160" x2="160" y1="168.2188" y2="181.2188"/><line style="stroke:#181818;stroke-width:1.0;" x1="119" x2="160" y1="181.2188" y2="181.2188"/><polygon fill="#181818" points="129,177.2188,119,181.2188,129,185.2188,125,181.2188" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="254" x="125" y="163.4766">createEditedTask(taskToEdit, descriptor)</text><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="118" x2="160" y1="220.5293" y2="220.5293"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="160" x2="160" y1="220.5293" y2="233.5293"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="113" x2="160" y1="233.5293" y2="233.5293"/><polygon fill="#181818" points="123,229.5293,113,233.5293,123,237.5293,119,233.5293" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="125" y="215.7871">editedTask</text><polygon fill="#181818" points="385,253.8398,395,257.8398,385,261.8398,389,257.8398" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="113" x2="391" y1="257.8398" y2="257.8398"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="201" x="154.5" y="253.0977">setTask(taskToEdit, editedTask)</text><polygon fill="#181818" points="124,267.8398,114,271.8398,124,275.8398,120,271.8398" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="118" x2="401" y1="271.8398" y2="271.8398"/><polygon fill="#181818" points="385,297.1504,395,301.1504,385,305.1504,389,301.1504" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="113" x2="391" y1="301.1504" y2="301.1504"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="265" x="122.5" y="296.4082">updateFilteredTaskList(SHOW_ALL_TASKS)</text><polygon fill="#181818" points="124,311.1504,114,315.1504,124,319.1504,120,315.1504" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="118" x2="401" y1="315.1504" y2="315.1504"/><!--MD5=[140371d8776c3ed38220bbeebf522c8f]
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Edit task in task list
+
+participant "cmd:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate EditTaskCommand
+
+EditTaskCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model - -> EditTaskCommand : filteredTaskList
+deactivate Model
+
+'Create edited task
+EditTaskCommand -> EditTaskCommand : createEditedTask(taskToEdit, descriptor)
+activate EditTaskCommand
+EditTaskCommand - -> EditTaskCommand : editedTask
+deactivate EditTaskCommand
+
+EditTaskCommand -> Model : setTask(taskToEdit, editedTask)
+activate Model
+Model - -> EditTaskCommand
+deactivate Model
+
+EditTaskCommand -> Model : updateFilteredTaskList(SHOW_ALL_TASKS)
+activate Model
+Model - -> EditTaskCommand
+deactivate Model
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+skinparam Package {
+    BackgroundColor #FFFFFF
+    BorderThickness 1
+    FontSize 16
+}
+
+skinparam Class {
+    FontColor #FFFFFF
+    FontSize 15
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 20
+}
+
+skinparam ArrowFontStyle bold
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+hide footbox
+hide members
+hide circle
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Edit task in task list
+
+participant "cmd:EditTaskCommand" as EditTaskCommand #3333C4
+
+box Model #F97181
+participant ":Model" as Model #9D0012
+end box
+
+activate EditTaskCommand
+
+EditTaskCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model - -> EditTaskCommand : filteredTaskList
+deactivate Model
+
+EditTaskCommand -> EditTaskCommand : createEditedTask(taskToEdit, descriptor)
+activate EditTaskCommand
+EditTaskCommand - -> EditTaskCommand : editedTask
+deactivate EditTaskCommand
+
+EditTaskCommand -> Model : setTask(taskToEdit, editedTask)
+activate Model
+Model - -> EditTaskCommand
+deactivate Model
+
+EditTaskCommand -> Model : updateFilteredTaskList(SHOW_ALL_TASKS)
+activate Model
+Model - -> EditTaskCommand
+deactivate Model
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 SGT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

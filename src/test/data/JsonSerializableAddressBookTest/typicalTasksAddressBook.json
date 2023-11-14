@@ -1,0 +1,112 @@
+{
+  "_comment": "AddressBook save file which contains the same Task values as in TypicalTasks#getTypicalAddressBook()",
+  "persons": [],
+  "tasks": [
+    {
+      "title": "Prepare Agenda",
+      "note": "To book venue",
+      "isDone": false,
+      "tags": [
+        "location"
+      ]
+    },
+    {
+      "title": "Prepare Budget",
+      "note": "For CS2102",
+      "isDone": true,
+      "tags": [
+        "finance",
+        "class"
+      ]
+    },
+    {
+      "title": "Book Catering",
+      "note": "For CS2101",
+      "isDone": false,
+      "tags": [
+        "caterer",
+        "class"
+      ]
+    },
+    {
+      "title": "Send Budget and Draft",
+      "note": "For CS2100",
+      "isDone": false,
+      "tags": [
+        "finance",
+        "class"
+      ]
+    },
+    {
+      "title": "Book Entertainment",
+      "note": "For CS1101",
+      "isDone": true,
+      "tags": [
+        "class"
+      ]
+    },
+    {
+      "title": "Prepare Funding",
+      "note": "For MA2001",
+      "isDone": true,
+      "tags": [
+        "finance",
+        "class"
+      ]
+    },
+    {
+      "title": "Prepare Guestlist",
+      "note": "For CS2103T",
+      "isDone": true,
+      "tags": [
+        "admin",
+        "class"
+      ]
+    },
+    {
+      "title": "Ensure Hospitality",
+      "note": "For CS2103T",
+      "isDone": true,
+      "tags": [
+        "admin",
+        "class"
+      ]
+    },
+    {
+      "title": "Send Invitations and Guestlist",
+      "note": "For CS2103T",
+      "isDone": false,
+      "tags": [
+        "admin",
+        "class"
+      ]
+    },
+    {
+      "title": "Journal Review",
+      "note": "Review journals for Syndicate A updates",
+      "isDone": false,
+      "tags": [
+        "colleague",
+        "syndicateA"
+      ]
+    },
+    {
+      "title": "KPI Setting",
+      "note": "Set KPIs for Syndicate B this year",
+      "isDone": false,
+      "tags": [
+        "colleague",
+        "syndicateB"
+      ]
+    },
+    {
+      "title": "Lecture Preparation",
+      "note": "Redo content for syndicateA's lecture next month",
+      "isDone": false,
+      "tags": [
+        "colleague",
+        "syndicateA"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="568px" preserveAspectRatio="none" style="width:723px;height:568px;background:#FFFFFF;" version="1.1" viewBox="0 0 723 568" width="723px" zoomAndPan="magnify"><defs/><g><!--MD5=[175c782554955adfbccff2f3aa3fc879]
+cluster StoragePackage--><g id="cluster_StoragePackage"><rect fill="#FFFFFF" height="512" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="710" x="7" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="55" x="334.5" y="66.5332">Storage</text></g><!--MD5=[d86210c6e61f9b4d53a8a15eee312dea]
+cluster UserPrefs Storage--><g id="cluster_UserPrefs Storage"><rect fill="#F4F6F6" height="183" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="186" x="507" y="94"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="129" x="535.5" y="110.5332">UserPrefs Storage</text></g><!--MD5=[0d47e4037520f388ca49654263a24439]
+cluster AddressBook Storage--><g id="cluster_AddressBook Storage"><rect fill="#F4F6F6" height="444" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="327" x="31" y="94"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="153" x="118" y="110.5332">AddressBook Storage</text></g><!--MD5=[11b747870319a085bc745183e08c5f76]
+class Storage--><g id="elem_Storage"><rect codeLine="13" fill="#A38300" height="44.4971" id="Storage" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="98" x="382" y="130"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="92" x="385" y="149.0698">&lt;&lt;interface&gt;&gt;</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="51" x="405.5" y="166.3184">Storage</text></g><!--MD5=[c47c8d4c18673c3c891899ebd374dbd0]
+class StorageManager--><g id="elem_StorageManager"><rect codeLine="14" fill="#A38300" height="27.2485" id="StorageManager" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="113" x="374.5" y="234"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="107" x="377.5" y="253.0698">StorageManager</text></g><!--MD5=[8a5ced027b720c99ce7a6d28a509754b]
+class UserPrefsStorage--><g id="elem_UserPrefsStorage"><rect codeLine="9" fill="#A38300" height="44.4971" id="UserPrefsStorage" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="123" x="523.5" y="130"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="92" x="539" y="149.0698">&lt;&lt;interface&gt;&gt;</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="117" x="526.5" y="166.3184">UserPrefsStorage</text></g><!--MD5=[a9c1870f99109ebf18f8c33e121b649f]
+class JsonUserPrefsStorage--><g id="elem_JsonUserPrefsStorage"><rect codeLine="10" fill="#A38300" height="27.2485" id="JsonUserPrefsStorage" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="154" x="523" y="234"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="148" x="526" y="253.0698">JsonUserPrefsStorage</text></g><!--MD5=[d09063145501c39ae266fcfe6dbeb792]
+class AddressBookStorage--><g id="elem_AddressBookStorage"><rect codeLine="17" fill="#A38300" height="44.4971" id="AddressBookStorage" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="144" x="198" y="130"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="92" x="224" y="149.0698">&lt;&lt;interface&gt;&gt;</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="138" x="201" y="166.3184">AddressBookStorage</text></g><!--MD5=[ab8f2950840d66d33a3c886352020b67]
+class JsonAddressBookStorage--><g id="elem_JsonAddressBookStorage"><rect codeLine="18" fill="#A38300" height="27.2485" id="JsonAddressBookStorage" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="175" x="159.5" y="234"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="169" x="162.5" y="253.0698">JsonAddressBookStorage</text></g><!--MD5=[100324df0167de2f525d0f9ad2c3923f]
+class JsonSerializableAddressBook--><g id="elem_JsonSerializableAddressBook"><rect codeLine="19" fill="#A38300" height="27.2485" id="JsonSerializableAddressBook" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="199" x="142.5" y="321"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="193" x="145.5" y="340.0698">JsonSerializableAddressBook</text></g><!--MD5=[183e6faf3f270e7d01a52699df56be30]
+class JsonAdaptedPerson--><g id="elem_JsonAdaptedPerson"><rect codeLine="20" fill="#A38300" height="27.2485" id="JsonAdaptedPerson" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="137" x="47.5" y="408"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="131" x="50.5" y="427.0698">JsonAdaptedPerson</text></g><!--MD5=[a63d82560b977670df79edb170ca5c3c]
+class JsonAdaptedTask--><g id="elem_JsonAdaptedTask"><rect codeLine="21" fill="#A38300" height="27.2485" id="JsonAdaptedTask" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="122" x="220" y="408"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="116" x="223" y="427.0698">JsonAdaptedTask</text></g><!--MD5=[3404c0bee4d315985f002a229dd51c60]
+class JsonAdaptedTag--><g id="elem_JsonAdaptedTag"><rect codeLine="22" fill="#A38300" height="27.2485" id="JsonAdaptedTag" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="115" x="140.5" y="495"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="109" x="143.5" y="514.0698">JsonAdaptedTag</text></g><!--MD5=[f8dc820cca8808bdb695301f77a92b66]
+class HiddenOutside--><g id="elem_HiddenOutside"><rect codeLine="27" fill="#FFFFFF" height="27.2485" id="HiddenOutside" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="102" x="380" y="7"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="96" x="383" y="26.0698">HiddenOutside</text></g><!--MD5=[1f5c11850418f4bf7b91b8b8b7bf8934]
+link HiddenOutside to Storage--><g id="link_HiddenOutside_Storage"><path codeLine="28" d="M431,34.39 C431,55.26 431,96.88 431,124.33 " fill="none" id="HiddenOutside-to-Storage" style="stroke:#A38300;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#A38300" points="431,129.62,435,120.62,431,124.62,427,120.62,431,129.62" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[180c583bbd2e63c1867ef033c2cf1303]
+reverse link Storage to StorageManager--><g id="link_Storage_StorageManager"><path codeLine="30" d="M431,194.42 C431,208.76 431,223.78 431,233.98 " fill="none" id="Storage-backto-StorageManager" style="stroke:#A38300;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="424,194.22,431,174.22,438,194.22,424,194.22" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[591442ea361c2285f70f8b53803b7999]
+reverse link UserPrefsStorage to StorageManager--><g id="link_UserPrefsStorage_StorageManager"><path codeLine="31" d="M545.71,176.86 C515.72,195.06 475.6,219.42 451.62,233.98 " fill="none" id="UserPrefsStorage-backto-StorageManager" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="#A38300" points="550.06,174.22,540.2924,175.4827,545.789,176.8197,544.452,182.3163,550.06,174.22" style="stroke:#A38300;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="532.7293" y="195.8172">1</text></g><!--MD5=[b5f51cd60dbf39fb85bcb4ab4e435ebb]
+reverse link AddressBookStorage to StorageManager--><g id="link_AddressBookStorage_StorageManager"><path codeLine="32" d="M311.08,176.86 C342.43,195.06 384.37,219.42 409.44,233.98 " fill="none" id="AddressBookStorage-backto-StorageManager" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="#A38300" points="306.53,174.22,312.3033,182.1993,310.8535,176.7314,316.3215,175.2816,306.53,174.22" style="stroke:#A38300;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="308.4068" y="195.8172">1</text></g><!--MD5=[60a00bb8ad11b98962f16d21215359d9]
+reverse link UserPrefsStorage to Storage--><g id="link_UserPrefsStorage_Storage"><path codeLine="34" d="M503.46,152 C495.65,152 487.84,152 480.03,152 " fill="none" id="UserPrefsStorage-backto-Storage" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="none" points="503.49,145,523.49,152,503.49,159,503.49,145" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[56e72f0727c77245472fb419c9f9ca7f]
+link Storage to AddressBookStorage--><g id="link_Storage_AddressBookStorage"><path codeLine="35" d="M381.99,152 C375.43,152 368.87,152 362.31,152 " fill="none" id="Storage-to-AddressBookStorage" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="none" points="362.01,159,342.01,152,362.01,145,362.01,159" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[876da414b8f5f367f7d257bb4bf26450]
+reverse link UserPrefsStorage to JsonUserPrefsStorage--><g id="link_UserPrefsStorage_JsonUserPrefsStorage"><path codeLine="37" d="M591.6,194.17 C593.92,208.58 596.34,223.72 597.99,233.98 " fill="none" id="UserPrefsStorage-backto-JsonUserPrefsStorage" style="stroke:#A38300;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="584.66,195.07,588.4,174.22,598.48,192.86,584.66,195.07" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[8a8b6b89dd656a6ea225ff9499da0635]
+reverse link AddressBookStorage to JsonAddressBookStorage--><g id="link_AddressBookStorage_JsonAddressBookStorage"><path codeLine="38" d="M260,193.67 C256.41,208.23 252.63,223.6 250.08,233.98 " fill="none" id="AddressBookStorage-backto-JsonAddressBookStorage" style="stroke:#A38300;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="253.21,191.97,264.78,174.22,266.8,195.31,253.21,191.97" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[4a7081794e1b3171be21cff4cfd7a078]
+link JsonAddressBookStorage to JsonSerializableAddressBook--><g id="link_JsonAddressBookStorage_JsonSerializableAddressBook"><path codeLine="39" d="M246.26,261.04 C245.41,275.48 244.01,299.3 243.05,315.67 " fill="none" id="JsonAddressBookStorage-to-JsonSerializableAddressBook" style="stroke:#A38300;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#A38300" points="242.74,320.91,247.2733,312.1665,243.0403,315.919,239.2878,311.686,242.74,320.91" style="stroke:#A38300;stroke-width:1.1;"/></g><!--MD5=[0e98d1b63aa4185b86a3d0bcf0167929]
+link JsonSerializableAddressBook to JsonAdaptedPerson--><g id="link_JsonSerializableAddressBook_JsonAdaptedPerson"><path codeLine="40" d="M223.41,348.04 C200.98,363.17 163.28,388.61 139.03,404.96 " fill="none" id="JsonSerializableAddressBook-to-JsonAdaptedPerson" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="#A38300" points="134.67,407.91,144.3665,406.1844,138.8126,405.1102,139.8868,399.5563,134.67,407.91" style="stroke:#A38300;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="135.8348" y="397.1936">*</text></g><!--MD5=[e4d1cd4a79837356ecd01fdc51b71e6a]
+link JsonSerializableAddressBook to JsonAdaptedTask--><g id="link_JsonSerializableAddressBook_JsonAdaptedTask"><path codeLine="41" d="M247.75,348.04 C254.44,362.61 265.5,386.72 273.01,403.09 " fill="none" id="JsonSerializableAddressBook-to-JsonAdaptedTask" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="#A38300" points="275.22,407.91,275.1,398.0619,273.1338,403.366,267.8296,401.3998,275.22,407.91" style="stroke:#A38300;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="267.0633" y="397.1936">*</text></g><!--MD5=[0c71baab5306f574e9461ae3bc422a37]
+link JsonAdaptedPerson to JsonAdaptedTag--><g id="link_JsonAdaptedPerson_JsonAdaptedTag"><path codeLine="42" d="M128.1,435.04 C142.39,449.86 166.22,474.55 182.02,490.93 " fill="none" id="JsonAdaptedPerson-to-JsonAdaptedTag" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="#A38300" points="185.85,494.91,182.4822,485.6549,182.3793,491.3108,176.7234,491.2079,185.85,494.91" style="stroke:#A38300;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="175.2647" y="484.1936">*</text></g><!--MD5=[f6e4bf50d36b7db121d14078b78153f2]
+link JsonAdaptedTask to JsonAdaptedTag--><g id="link_JsonAdaptedTask_JsonAdaptedTag"><path codeLine="43" d="M268.75,435.04 C254.29,449.86 230.17,474.55 214.18,490.93 " fill="none" id="JsonAdaptedTask-to-JsonAdaptedTag" style="stroke:#A38300;stroke-width:1.1;"/><polygon fill="#A38300" points="210.3,494.91,219.4488,491.2631,213.7923,491.3318,213.7236,485.6754,210.3,494.91" style="stroke:#A38300;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="209.0363" y="484.1936">*</text></g><!--MD5=[37e9d82828357b694d342b9ecc05a0a4]
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage as StoragePackage {
+
+package "UserPrefs Storage" #F4F6F6{
+Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
+Class JsonUserPrefsStorage
+}
+
+Class "<<interface>>\nStorage" as Storage
+Class StorageManager
+
+package "AddressBook Storage" #F4F6F6{
+Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+Class JsonAddressBookStorage
+Class JsonSerializableAddressBook
+Class JsonAdaptedPerson
+Class JsonAdaptedTask
+Class JsonAdaptedTag
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Storage
+
+StorageManager .up.|> Storage
+StorageManager -up-> "1" UserPrefsStorage
+StorageManager -up-> "1" AddressBookStorage
+
+Storage -left-|> UserPrefsStorage
+Storage -right-|> AddressBookStorage
+
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableAddressBook - -> "*" JsonAdaptedPerson
+JsonSerializableAddressBook - -> "*" JsonAdaptedTask
+JsonAdaptedPerson - -> "*" JsonAdaptedTag
+JsonAdaptedTask - -> "*" JsonAdaptedTag
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+skinparam Package {
+    BackgroundColor #FFFFFF
+    BorderThickness 1
+    FontSize 16
+}
+
+skinparam Class {
+    FontColor #FFFFFF
+    FontSize 15
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 20
+}
+
+skinparam ArrowFontStyle bold
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+hide footbox
+hide members
+hide circle
+skinparam arrowThickness 1.1
+skinparam arrowColor #A38300
+skinparam classBackgroundColor #A38300
+
+package Storage as StoragePackage {
+
+package "UserPrefs Storage" #F4F6F6{
+Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
+Class JsonUserPrefsStorage
+}
+
+Class "<<interface>>\nStorage" as Storage
+Class StorageManager
+
+package "AddressBook Storage" #F4F6F6{
+Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+Class JsonAddressBookStorage
+Class JsonSerializableAddressBook
+Class JsonAdaptedPerson
+Class JsonAdaptedTask
+Class JsonAdaptedTag
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Storage
+
+StorageManager .up.|> Storage
+StorageManager -up-> "1" UserPrefsStorage
+StorageManager -up-> "1" AddressBookStorage
+
+Storage -left-|> UserPrefsStorage
+Storage -right-|> AddressBookStorage
+
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableAddressBook - -> "*" JsonAdaptedPerson
+JsonSerializableAddressBook - -> "*" JsonAdaptedTask
+JsonAdaptedPerson - -> "*" JsonAdaptedTag
+JsonAdaptedTask - -> "*" JsonAdaptedTag
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 SGT 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: SG
+--></g></svg>

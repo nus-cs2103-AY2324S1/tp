@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
+participant "cmd:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("editTask...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("editTask...")
+activate AddressBookParser
+
+create EditTaskCommandParser
+AddressBookParser -> EditTaskCommandParser : EditTaskCommandParser()
+activate EditTaskCommandParser
+
+EditTaskCommandParser --> AddressBookParser
+deactivate EditTaskCommandParser
+
+AddressBookParser -> EditTaskCommandParser : parse(args)
+activate EditTaskCommandParser
+
+ref over EditTaskCommandParser: Create EditTaskDescriptor\nfrom arguments
+
+'Constructor for EditTaskCommand
+create EditTaskCommand
+EditTaskCommandParser -> EditTaskCommand : EditTaskCommand(index, descriptor)
+activate EditTaskCommand
+EditTaskCommand --> EditTaskCommandParser : cmd
+deactivate EditTaskCommand
+
+EditTaskCommandParser --> AddressBookParser : cmd
+deactivate EditTaskCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditTaskCommandParser -[hidden]-> AddressBookParser
+destroy EditTaskCommandParser
+
+AddressBookParser --> LogicManager : cmd
+deactivate AddressBookParser
+
+LogicManager -> EditTaskCommand : execute()
+activate EditTaskCommand
+
+ref over EditTaskCommand: Edit task in task list
+
+ref over EditTaskCommand: Create successful CommandResult
+
+EditTaskCommand --> LogicManager : res
+deactivate EditTaskCommand
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditTaskCommand -[hidden]-> LogicManager
+destroy EditTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

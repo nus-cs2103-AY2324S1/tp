@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="219px" preserveAspectRatio="none" style="width:473px;height:219px;background:#FFFFFF;" version="1.1" viewBox="0 0 473 219" width="473px" zoomAndPan="magnify"><defs/><g><!--MD5=[d9efb80c2bd3bb699b927ccac912b33c]
+class AddressBook--><g id="elem_AddressBook"><rect fill="#9D0012" height="27.2485" id="AddressBook" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="93" x="7" y="12.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="87" x="10" y="31.2611">AddressBook</text></g><!--MD5=[868ed45abf0f905709752fc3fe3fe250]
+class UniquePersonList--><g id="elem_UniquePersonList"><rect fill="#9D0012" height="27.2485" id="UniquePersonList" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="121" x="121" y="99.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="115" x="124" y="118.2611">UniquePersonList</text></g><!--MD5=[a97be948b589b73a8e5432e9944b103b]
+class UniqueTagList--><g id="elem_UniqueTagList"><rect fill="#9D0012" height="27.2485" id="UniqueTagList" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="99" x="135" y="12.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="93" x="138" y="31.2611">UniqueTagList</text></g><!--MD5=[39d6d2ea03de602dbf4d534e70c872a9]
+class Tag--><g id="elem_Tag"><rect fill="#9D0012" height="27.2485" id="Tag" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="50" x="275.5" y="12.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="25" x="288" y="31.2611">Tag</text></g><!--MD5=[09ce52be0ee7de43c61b6e2d59bf108b]
+class Person--><g id="elem_Person"><rect fill="#9D0012" height="27.2485" id="Person" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="53" x="277" y="99.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="47" x="280" y="118.2611">Person</text></g><!--MD5=[53f6a92bd21ca2f2960392a061f3a1c6]
+class Name--><g id="elem_Name"><rect fill="#9D0012" height="27.2485" id="Name" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="50" x="151.5" y="186.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="39" x="157" y="205.2611">Name</text></g><!--MD5=[03be55fb4aae919908819e432b9694ea]
+class Phone--><g id="elem_Phone"><rect fill="#9D0012" height="27.2485" id="Phone" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="50" x="236.5" y="186.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="42" x="240.5" y="205.2611">Phone</text></g><!--MD5=[78bec0fde86ad92ec1dc3fb343b83709]
+class Email--><g id="elem_Email"><rect fill="#9D0012" height="27.2485" id="Email" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="50" x="321.5" y="186.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="37" x="328" y="205.2611">Email</text></g><!--MD5=[0f39e4cb6f03951afbf6d14bd2505654]
+class Address--><g id="elem_Address"><rect fill="#9D0012" height="27.2485" id="Address" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="60" x="406.5" y="186.1913"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="54" x="409.5" y="205.2611">Address</text></g><!--MD5=[c7dd86eaf2272b48c339932390e97c9a]
+link AddressBook to UniquePersonList--><g id="link_AddressBook_UniquePersonList"><path codeLine="6" d="M82.3888,45.8664 C82.3888,45.8664 131.14,78.2513 151.63,91.8513 " fill="none" id="AddressBook-UniquePersonList" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="162.54,99.1013,157.2476,90.7953,158.3722,96.3392,152.8282,97.4638,162.54,99.1013" style="stroke:#9D0012;stroke-width:1.1;"/><line style="stroke:#9D0012;stroke-width:1.1;" x1="158.3722" x2="151.705" y1="96.3392" y2="91.9063"/><polygon fill="#9D0012" points="72.39,39.2313,75.1777,45.8818,82.3888,45.8664,79.6011,39.2159,72.39,39.2313" style="stroke:#9D0012;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="146.9771" y="88.3849">1</text></g><!--MD5=[0614b851a9a06b224eb2c12e99b071c6]
+link AddressBook to UniqueTagList--><g id="link_AddressBook_UniqueTagList"><path codeLine="7" d="M112.07,25.6913 C112.07,25.6913 118.89,25.6913 121.67,25.6913 " fill="none" id="AddressBook-UniqueTagList" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="134.7,25.6913,125.7,21.6913,129.7,25.6913,125.7,29.6913,134.7,25.6913" style="stroke:#9D0012;stroke-width:1.1;"/><line style="stroke:#9D0012;stroke-width:1.1;" x1="129.7" x2="121.7" y1="25.6913" y2="25.6913"/><polygon fill="#9D0012" points="100.07,25.6913,106.07,29.6913,112.07,25.6913,106.07,21.6913,100.07,25.6913" style="stroke:#9D0012;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="119.8716" y="22.019">1</text></g><!--MD5=[c405e450ce4fd8a01ef4d120f1844f0f]
+link UniqueTagList to UniquePersonList--><!--MD5=[c405e450ce4fd8a01ef4d120f1844f0f]
+link UniqueTagList to UniquePersonList--><!--MD5=[3e504b887fd68e861d06f5e9394b74ec]
+link UniqueTagList to Tag--><g id="link_UniqueTagList_Tag"><path codeLine="11" d="M234.34,25.6913 C246.33,25.6913 258.31,25.6913 270.3,25.6913 " fill="none" id="UniqueTagList-to-Tag" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="275.43,25.6913,266.43,21.6913,270.43,25.6913,266.43,29.6913,275.43,25.6913" style="stroke:#9D0012;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="262.3313" y="20.8516">*</text></g><!--MD5=[03c7e7cbdb86e4f4cd514083b34aa6d4]
+link UniquePersonList to Person--><g id="link_UniquePersonList_Person"><path codeLine="12" d="M242.02,112.6913 C251.84,112.6913 261.66,112.6913 271.47,112.6913 " fill="none" id="UniquePersonList-to-Person" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="276.6,112.6913,267.6,108.6913,271.6,112.6913,267.6,116.6913,276.6,112.6913" style="stroke:#9D0012;stroke-width:1.1;"/></g><!--MD5=[f9a17e001dff321a41705c6e7ed723ec]
+reverse link Tag to Person--><g id="link_Tag_Person"><path codeLine="14" d="M301.13,44.4613 C301.7,60.8113 302.55,84.6413 303.06,99.1013 " fill="none" id="Tag-backto-Person" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="300.94,39.2313,297.2507,48.3631,301.1113,44.2284,305.246,48.089,300.94,39.2313" style="stroke:#9D0012;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="295.1546" y="60.9582">*</text></g><!--MD5=[d4e2208d976dafd0005648cdae563e6a]
+link Person to Name--><g id="link_Person_Name"><path codeLine="16" d="M274.7876,132.906 C274.7876,132.906 226.47,165.2513 206.14,178.8513 " fill="none" id="Person-Name" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="195.32,186.1013,205.0252,184.4254,199.4769,183.3227,200.5795,177.7744,195.32,186.1013" style="stroke:#9D0012;stroke-width:1.1;"/><line style="stroke:#9D0012;stroke-width:1.1;" x1="199.4769" x2="206.12" y1="183.3227" y2="178.8663"/><polygon fill="#9D0012" points="284.76,126.2313,277.5489,126.2445,274.7876,132.906,281.9987,132.8928,284.76,126.2313" style="stroke:#9D0012;stroke-width:1.1;"/></g><!--MD5=[8467688aabdc77a50d4548f73f3f2237]
+link Person to Phone--><g id="link_Person_Phone"><path codeLine="17" d="M291.9862,136.9907 C291.9862,136.9907 279.1,163.0713 273.49,174.4213 " fill="none" id="Person-Phone" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="267.72,186.1013,275.2918,179.803,269.9341,181.6182,268.1189,176.2605,267.72,186.1013" style="stroke:#9D0012;stroke-width:1.1;"/><line style="stroke:#9D0012;stroke-width:1.1;" x1="269.9341" x2="273.48" y1="181.6182" y2="174.4463"/><polygon fill="#9D0012" points="297.3,126.2313,291.0567,129.8397,291.9862,136.9907,298.2296,133.3822,297.3,126.2313" style="stroke:#9D0012;stroke-width:1.1;"/></g><!--MD5=[c84fd83c0ae0719e8dada1fc8106e17d]
+link Person to Email--><g id="link_Person_Email"><path codeLine="18" d="M315.2592,136.9379 C315.2592,136.9379 328.48,163.0713 334.22,174.4213 " fill="none" id="Person-Email" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="340.13,186.1013,339.6344,176.2649,337.872,181.6402,332.4967,179.8778,340.13,186.1013" style="stroke:#9D0012;stroke-width:1.1;"/><line style="stroke:#9D0012;stroke-width:1.1;" x1="337.872" x2="334.26" y1="181.6402" y2="174.4963"/><polygon fill="#9D0012" points="309.84,126.2313,308.9807,133.391,315.2592,136.9379,316.1185,129.7782,309.84,126.2313" style="stroke:#9D0012;stroke-width:1.1;"/></g><!--MD5=[b73c16dcbb300cfcfb8ac7b75475c389]
+link Person to Address--><g id="link_Person_Address"><path codeLine="19" d="M333.2325,132.6917 C333.2325,132.6917 384.27,165.3113 405.7,179.0113 " fill="none" id="Person-Address" style="stroke:#9D0012;stroke-width:1.1;"/><polygon fill="#9D0012" points="416.79,186.1013,411.3591,177.8852,412.5764,183.4095,407.0521,184.6268,416.79,186.1013" style="stroke:#9D0012;stroke-width:1.1;"/><line style="stroke:#9D0012;stroke-width:1.1;" x1="412.5764" x2="405.84" y1="183.4095" y2="179.0963"/><polygon fill="#9D0012" points="323.12,126.2313,326.0228,132.8324,333.2325,132.6917,330.3297,126.0907,323.12,126.2313" style="stroke:#9D0012;stroke-width:1.1;"/></g><!--MD5=[e4eb56fe185cd02ffc5ae47611aaf66c]
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueTagList
+UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniquePersonList
+
+UniqueTagList -right-> "*" Tag
+UniquePersonList -right-> Person
+
+Person -up-> "*" Tag
+
+Person *- -> Name
+Person *- -> Phone
+Person *- -> Email
+Person *- -> Address
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+skinparam Package {
+    BackgroundColor #FFFFFF
+    BorderThickness 1
+    FontSize 16
+}
+
+skinparam Class {
+    FontColor #FFFFFF
+    FontSize 15
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 20
+}
+
+skinparam ArrowFontStyle bold
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+hide footbox
+hide members
+hide circle
+skinparam arrowThickness 1.1
+skinparam arrowColor #9D0012
+skinparam classBackgroundColor #9D0012
+
+AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueTagList
+UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniquePersonList
+
+UniqueTagList -right-> "*" Tag
+UniquePersonList -right-> Person
+
+Person -up-> "*" Tag
+
+Person *- -> Name
+Person *- -> Phone
+Person *- -> Email
+Person *- -> Address
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 SGT 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: SG
+--></g></svg>

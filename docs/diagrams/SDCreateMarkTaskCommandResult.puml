@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create successful CommandResult
+
+participant "cmd:MarkTaskCommand" as MarkTaskCommand LOGIC_COLOR
+participant "res:CommandResult" as CommandResult LOGIC_COLOR
+
+activate MarkTaskCommand
+
+create CommandResult
+MarkTaskCommand -> CommandResult : CommandResult(MESSAGE_MARK_TASK_SUCCESS)
+activate CommandResult
+
+CommandResult --> MarkTaskCommand : res
+deactivate CommandResult
+
+@enduml

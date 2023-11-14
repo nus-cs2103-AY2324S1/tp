@@ -1,0 +1,56 @@
+name: Build master branch
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  create-build:
+    name: "Create build"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@main
+
+      - name: Set up repository
+        uses: actions/checkout@main
+        with:
+          ref: master
+
+      - name: Merge to master
+        run: git checkout --progress --force ${{ github.sha }}
+
+      - name: Run repository-wide tests
+        if: runner.os == 'Linux'
+        working-directory:  ${{ github.workspace }}/.github
+        run: ./run-checks.sh
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          java-package: jdk+fx
+
+      - name: Build and check with Gradle
+        run: ./gradlew clean build
+
+      - name: Create pre-release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true
+          automatic_release_tag: "latest-dev"
+          title: "Development Build"
+          files: "build/libs/addressbook.jar"
+
+      - name: Upload build as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: addressbook.jar.zip
+          path: build/libs/addressbook.jar
+          if-no-files-found: error

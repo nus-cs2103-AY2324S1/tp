@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="394px" preserveAspectRatio="none" style="width:507px;height:394px;background:#FFFFFF;" version="1.1" viewBox="0 0 507 394" width="507px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="383.6387" style="stroke:#000000;stroke-width:1.5;" width="492" x="9" y="5"/><path d="M333,5 L333,14.4883 L323,24.4883 L9,24.4883 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="17" x="12" y="19.5352">sd</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="293" x="33" y="19.5352">Create EditTaskDescriptor from arguments</text><rect fill="#FFFFFF" height="295.6621" style="stroke:#181818;stroke-width:1.0;" width="10" x="125" y="72.9766"/><rect fill="#FFFFFF" height="31.4883" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="104.2871"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="189.3965"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="264.0176"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="338.6387"/><rect fill="#FFFFFF" height="60.6211" style="stroke:#000000;stroke-width:1.5;" width="480" x="15" y="150.7754"/><rect fill="#FFFFFF" height="60.6211" style="stroke:#000000;stroke-width:1.5;" width="480" x="15" y="225.3965"/><rect fill="#FFFFFF" height="60.6211" style="stroke:#000000;stroke-width:1.5;" width="480" x="15" y="300.0176"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="130" x2="130" y1="62.9766" y2="377.6387"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="386" x2="386" y1="103.7207" y2="377.6387"/><rect fill="#3333C4" height="30.4883" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="35" y="31.4883"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="42" y="52.0234">:EditTaskCommandParser</text><rect fill="#FFFFFF" height="295.6621" style="stroke:#181818;stroke-width:1.0;" width="10" x="125" y="72.9766"/><rect fill="#FFFFFF" height="31.4883" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="104.2871"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="189.3965"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="264.0176"/><rect fill="#FFFFFF" height="14" style="stroke:#181818;stroke-width:1.0;" width="10" x="381" y="338.6387"/><polygon fill="#181818" points="285,90.2871,295,94.2871,285,98.2871,289,94.2871" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="135" x2="291" y1="94.2871" y2="94.2871"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="152" y="89.5449">EditTaskDescriptor()</text><rect fill="#3333C4" height="30.4883" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178" x="297" y="72.9766"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="304" y="93.5117">desc:EditTaskDescriptor</text><polygon fill="#181818" points="146,131.7754,136,135.7754,146,139.7754,142,135.7754" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="140" x2="385" y1="135.7754" y2="135.7754"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29" x="246" y="131.0332">desc</text><path d="M15,150.7754 L82,150.7754 L82,158.0859 L72,168.0859 L15,168.0859 L15,150.7754 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="60.6211" style="stroke:#000000;stroke-width:1.5;" width="480" x="15" y="150.7754"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="22" x="30" y="164.3438">opt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="53" x="97" y="163.4102">[has title]</text><polygon fill="#181818" points="369,185.3965,379,189.3965,369,193.3965,373,189.3965" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="135" x2="375" y1="189.3965" y2="189.3965"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="80" x="218" y="184.6543">setTitle(title)</text><polygon fill="#181818" points="146,199.3965,136,203.3965,146,207.3965,142,203.3965" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="140" x2="385" y1="203.3965" y2="203.3965"/><path d="M15,225.3965 L82,225.3965 L82,232.707 L72,242.707 L15,242.707 L15,225.3965 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="60.6211" style="stroke:#000000;stroke-width:1.5;" width="480" x="15" y="225.3965"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="22" x="30" y="238.9648">opt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="55" x="97" y="238.0313">[has note]</text><polygon fill="#181818" points="369,260.0176,379,264.0176,369,268.0176,373,264.0176" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="135" x2="375" y1="264.0176" y2="264.0176"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="215.5" y="259.2754">setNote(note)</text><polygon fill="#181818" points="146,274.0176,136,278.0176,146,282.0176,142,278.0176" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="140" x2="385" y1="278.0176" y2="278.0176"/><path d="M15,300.0176 L82,300.0176 L82,307.3281 L72,317.3281 L15,317.3281 L15,300.0176 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="60.6211" style="stroke:#000000;stroke-width:1.5;" width="480" x="15" y="300.0176"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="22" x="30" y="313.5859">opt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="54" x="97" y="312.6523">[has tags]</text><polygon fill="#181818" points="369,334.6387,379,338.6387,369,342.6387,373,338.6387" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="135" x2="375" y1="338.6387" y2="338.6387"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="216" y="333.8965">setTags(tags)</text><polygon fill="#181818" points="146,348.6387,136,352.6387,146,356.6387,142,352.6387" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="140" x2="385" y1="352.6387" y2="352.6387"/><!--MD5=[8f75550efc1d58627b5175dc02843047]
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create EditTaskDescriptor from arguments
+
+participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
+participant "desc:EditTaskDescriptor" as EditTaskDescriptor LOGIC_COLOR
+
+activate EditTaskCommandParser
+
+'Constructor for EditTaskDescriptor
+create EditTaskDescriptor
+
+EditTaskCommandParser -> EditTaskDescriptor : EditTaskDescriptor()
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser : desc
+deactivate EditTaskDescriptor
+
+opt has title
+EditTaskCommandParser -> EditTaskDescriptor : setTitle(title)
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+opt has note
+EditTaskCommandParser -> EditTaskDescriptor : setNote(note)
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+opt has tags
+EditTaskCommandParser -> EditTaskDescriptor : setTags(tags)
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+skinparam Package {
+    BackgroundColor #FFFFFF
+    BorderThickness 1
+    FontSize 16
+}
+
+skinparam Class {
+    FontColor #FFFFFF
+    FontSize 15
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 20
+}
+
+skinparam ArrowFontStyle bold
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+hide footbox
+hide members
+hide circle
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create EditTaskDescriptor from arguments
+
+participant ":EditTaskCommandParser" as EditTaskCommandParser #3333C4
+participant "desc:EditTaskDescriptor" as EditTaskDescriptor #3333C4
+
+activate EditTaskCommandParser
+
+create EditTaskDescriptor
+
+EditTaskCommandParser -> EditTaskDescriptor : EditTaskDescriptor()
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser : desc
+deactivate EditTaskDescriptor
+
+opt has title
+EditTaskCommandParser -> EditTaskDescriptor : setTitle(title)
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+opt has note
+EditTaskCommandParser -> EditTaskDescriptor : setNote(note)
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+opt has tags
+EditTaskCommandParser -> EditTaskDescriptor : setTags(tags)
+activate EditTaskDescriptor
+EditTaskDescriptor - -> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 SGT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

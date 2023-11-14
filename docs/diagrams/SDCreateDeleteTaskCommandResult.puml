@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create successful CommandResult
+
+participant "c:DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
+participant "res:CommandResult" as CommandResult LOGIC_COLOR
+
+activate DeleteTaskCommand
+
+create CommandResult
+DeleteTaskCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS)
+activate CommandResult
+
+CommandResult --> DeleteTaskCommand : r
+deactivate CommandResult
+
+@enduml

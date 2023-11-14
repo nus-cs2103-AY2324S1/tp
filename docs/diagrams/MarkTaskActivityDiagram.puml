@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+title <color:grey> Activity: User executes command `markTask 1`
+
+start
+:Get last shown task list;
+:Get Task with index 1;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Task is found])
+    :Get Task Status;
+    if () then ([Task Status is Not Done])
+        :Update to Status Done;
+        :Save task information;
+        :Show updated task list;
+    else ([else])
+        :Show Error Message;
+    endif
+else ([else])
+    :Show Error Message;
+endif
+stop
+
+@enduml

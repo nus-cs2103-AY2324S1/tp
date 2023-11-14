@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Add tag(s) to person in person list
+
+participant "c:AddTagPersonCommand" as AddTagPersonCommand LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate AddTagPersonCommand
+
+AddTagPersonCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AddTagPersonCommand : lastShownPersonList
+deactivate Model
+
+AddTagPersonCommand -> AddTagPersonCommand : createEditedPerson(personToEdit, tagsToAdd)
+activate AddTagPersonCommand
+AddTagPersonCommand --> AddTagPersonCommand : editedPerson
+deactivate AddTagPersonCommand
+
+AddTagPersonCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model --> AddTagPersonCommand
+deactivate Model
+
+AddTagPersonCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> AddTagPersonCommand
+deactivate Model
+
+@enduml
+

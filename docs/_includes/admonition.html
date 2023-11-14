@@ -1,0 +1,22 @@
+{% if false %}
+<!-- These comments are wrapped in an if block to prevent these comments from being rendered on GitHub Pages. -->
+<!-- Solution below adapted from Adam Douglas (https://www.adamsdesk.com/posts/admonitions-jekyll/), reused with modifications. -->
+{% endif %}
+
+{% if include.type.size > 0 and include.title.size > 0 %}
+    {% assign types = "note, abstract, info, tip, success, question, warning, failure, danger, bug, example, quote" | split: ", " %}
+    {% if types contains include.type and include.body.size > 0 %}
+<div class="admonition {{ include.type }} rounded">
+    <p class="admonition-title">{{ include.title }}</p>
+        <p>
+            {{ include.body }}
+        </p>
+</div>
+    {% else %}
+        {% if types contains include.type %}
+<div class="admonition {{ include.type }} rounded">
+    <p class="admonition-title">{{ include.title }}</p>
+</div>
+        {% endif %}
+    {% endif %}
+{% endif %}

@@ -7,15 +7,26 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.address.testutil.TypicalTasks.AGENDA;
+import static seedu.address.testutil.TypicalTasks.BUDGET;
+import static seedu.address.testutil.TypicalTasks.CATERING;
+import static seedu.address.testutil.TypicalTasks.DRAFT;
+import static seedu.address.testutil.TypicalTasks.ENTERTAINMENT;
+import static seedu.address.testutil.TypicalTasks.getTypicalTasks;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.tag.TagFrequencyTable;
+import seedu.address.model.task.Status;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -93,6 +104,74 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTask(AGENDA));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(AGENDA);
+        assertTrue(modelManager.hasTask(AGENDA));
+    }
+
+    @Test
+    public void markTask_validTask_success() {
+        modelManager.addTask(AGENDA);
+        Task markedTask = modelManager.markTask(AGENDA);
+
+        assertTrue(markedTask.getStatus().equals(Status.STATUS_DONE));
+
+        assertTrue(modelManager.getFilteredTaskList().get(0).getStatus().equals(Status.STATUS_DONE));
+    }
+
+    @Test
+    public void unmarkTask_validTask_success() {
+        modelManager.addTask(AGENDA);
+        Task markedTask = modelManager.markTask(AGENDA);
+        Task unmarkedTask = modelManager.unmarkTask(markedTask);
+
+        assertTrue(unmarkedTask.getStatus().equals(Status.STATUS_NOT_DONE));
+
+        assertTrue(modelManager.getFilteredTaskList().get(0).getStatus().equals(Status.STATUS_NOT_DONE));
+    }
+
+    @Test
+    public void deleteAllDone_validTaskList_success() {
+        List<Task> taskToAdd = Arrays.asList(AGENDA, BUDGET, CATERING, DRAFT, ENTERTAINMENT);
+        for (Task task: taskToAdd) {
+            modelManager.addTask(task);
+        }
+        modelManager.deleteAllDone();
+
+        List<Task> correctList = Arrays.asList(AGENDA, CATERING, DRAFT);
+        assertTrue(modelManager.getFilteredTaskList().equals(correctList));
+    }
+
+    @Test
+    public void getTagFrequencyTable_returnsSameTable() {
+        AddressBook typicalAddressBook = new AddressBook();
+        typicalAddressBook.setPersons(getTypicalPersons());
+        typicalAddressBook.setTasks(getTypicalTasks());
+        modelManager.setAddressBook(typicalAddressBook);
+
+        TagFrequencyTable tagFrequencyTable =
+                new TagFrequencyTable(getTypicalPersons(), getTypicalTasks());
+
+        assertEquals(modelManager.getTagFrequencyTable(), tagFrequencyTable);
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    // TODO: Improve on equals test after adding withTask to AddressBookBuilder
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();

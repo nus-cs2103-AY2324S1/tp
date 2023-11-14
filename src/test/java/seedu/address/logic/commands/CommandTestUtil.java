@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TITLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -19,13 +21,18 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskContainsKeywordsPredicate;
+import seedu.address.model.task.TitleContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
+    // person
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -35,7 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FRIEND = "friends";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -54,11 +61,34 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+
+    // task
+    public static final String VALID_NOTE_AGENDA = "To book venue";
+    public static final String VALID_NOTE_BUDGET = "For CS2102";
+    public static final String VALID_TITLE_AGENDA = "Prepare Agenda";
+    public static final String VALID_TITLE_BUDGET = "Prepare Budget";
+    public static final String VALID_TAG_LOCATION = "location";
+    public static final String VALID_TAG_FINANCE = "finance";
+
+    public static final String NOTE_DESC_AGENDA = " " + PREFIX_TASK_NOTE + VALID_NOTE_AGENDA;
+    public static final String NOTE_DESC_BUDGET = " " + PREFIX_TASK_NOTE + VALID_NOTE_BUDGET;
+    public static final String TITLE_DESC_AGENDA = " " + PREFIX_TASK_TITLE + VALID_TITLE_AGENDA;
+    public static final String TITLE_DESC_BUDGET = " " + PREFIX_TASK_TITLE + VALID_TITLE_BUDGET;
+    public static final String TAG_DESC_LOCATION = " " + PREFIX_TAG + VALID_TAG_LOCATION;
+    public static final String TAG_DESC_FINANCE = " " + PREFIX_TAG + VALID_TAG_FINANCE;
+
+    public static final String INVALID_NOTE_DESC = " " + PREFIX_TASK_NOTE; // empty string not allowed for notes
+    public static final String INVALID_TITLE_DESC = " " + PREFIX_TASK_TITLE; // empty string not allowed for titles
+    public static final String INVALID_TAG_TASK_DESC = " " + PREFIX_TAG + "location*"; // '*' not allowed in tags
+
+    public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_AGENDA;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_BUDGET;
+
+    // shared
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -67,6 +97,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_TASK_AGENDA = new EditTaskDescriptorBuilder().withTitle(VALID_TITLE_AGENDA)
+                .withNote(VALID_NOTE_AGENDA).withTags(VALID_TAG_LOCATION).build();
+        DESC_TASK_BUDGET = new EditTaskDescriptorBuilder().withTitle(VALID_TITLE_BUDGET)
+                .withNote(VALID_NOTE_BUDGET).withTags(VALID_TAG_FINANCE).build();
     }
 
     /**
@@ -111,6 +145,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -123,6 +158,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the tasks at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitName = task.getTitle().value.split("\\s+");
+        model.updateFilteredTaskList(new TaskContainsKeywordsPredicate(Arrays.asList(splitName[1])));
+        model.updateFilteredTaskList(new TitleContainsKeywordsPredicate(Arrays.asList(splitName[1])));
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 
 }

@@ -20,10 +20,27 @@ Class Name
 Class Phone
 Class Tag
 
+Class UniqueTaskList
+Class Task
+Class Title
+Class Note
+
+'hidden
 Class I #FFFFFF
+'end hidden
 }
 
+'hidden
 Class HiddenOutside #FFFFFF
+Class HiddenOutsideTopLeft #FFFFFF
+Class HiddenOutsideTopRight #FFFFFF
+
+HiddenOutsideTopLeft -[hidden]right-> HiddenOutside
+HiddenOutsideTopRight -[hidden]left-> HiddenOutside
+HiddenOutsideTopLeft -[hidden]down-> ReadOnlyAddressBook
+HiddenOutsideTopRight -[hidden]down-> ReadOnlyUserPrefs
+'end hidden
+
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
@@ -36,6 +53,17 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueTaskList
+
+'hidden
+I -[hidden]up-> ModelManager
+Task -[hidden]up-> I
+Person -[hidden]up--> I
+UniquePersonList -[hidden]right-> I
+UniqueTaskList -[hidden]left-> I
+UniqueTaskList -[hidden]up-> UserPrefs
+'end hidden
+
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
@@ -43,12 +71,21 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-
+'hidden
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+'end hidden
+
+UniqueTaskList --> "~* all" Task
+Task *--> Title
+Task *--> Note
+Task *--> "*" Tag
+
+'hidden
+Title -[hidden]right-> Note
+'end hidden
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Task
 @enduml

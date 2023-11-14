@@ -1,14 +1,15 @@
-title: "AB-3"
+title: "CoordiMate"
 theme: minima
 
 header_pages:
+  - DraftUserGuide.md
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
 
 markdown: kramdown
 
-repository: "se-edu/addressbook-level3"
+repository: "AY2324S1-CS2103T-T10-2/tp"
 github_icon: "images/github-icon.png"
 
 plugins:

@@ -1,0 +1,10 @@
+{
+  "persons": [],
+  "tasks": [
+    {
+      "title": " Note the whitespace!",
+      "description": "Remember to throw error",
+      "isDone": false
+    }
+  ]
+}

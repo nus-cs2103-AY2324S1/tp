@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "c:ListTaskCommand" as ListTaskCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("listTask")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("listTask")
+activate AddressBookParser
+
+create ListTaskCommand
+AddressBookParser -> ListTaskCommand
+activate ListTaskCommand
+
+ListTaskCommand --> AddressBookParser : c
+deactivate ListTaskCommand
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> ListTaskCommand : execute()
+activate ListTaskCommand
+
+ListTaskCommand -> Model : updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS)
+activate Model
+
+Model --> ListTaskCommand
+deactivate Model
+
+create CommandResult
+ListTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListTaskCommand
+deactivate CommandResult
+
+ListTaskCommand --> LogicManager : r
+deactivate ListTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+destroy ListTaskCommand
+@enduml

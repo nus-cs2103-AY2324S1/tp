@@ -1,0 +1,76 @@
+//@@author jiakai-17-reused
+// Original by Adam Douglas, reused with modifications to styles.
+// "Adding Admonitions to Jekyll", 29 Jul 2023
+// https://www.adamsdesk.com/posts/admonitions-jekyll/
+
+$primary-color: #eab308; // yellow-500
+$primary-bgcolor: #fef9c3; // yellow-100
+$admonitions:
+    //class (type), icon filename, icon/border color, title bg color
+    ('note', 'pen-solid.svg', '#0ea5e9', '#e0f2fe') // sky-500; sky-100
+    ('abstract', 'align-left-solid.svg', '#65a30d', '#ecfccb') // lime-600; lime-100
+    // ('info', 'info-circle-solid.svg', '#0ea5e9', '#e0f2fe') // sky-500; sky-100
+    ('tip', 'fire-solid.svg', '#14b8a6', '#cafdf8') // teal-500; turquoise-100?
+    ('success', 'check-circle-solid.svg', '#059669', '#d1fae5') // emerald-600; emerald-100
+    ('question', 'question-circle-solid.svg', '#4f46e5', '#e0e7ff') // indigo-600; indigo-100
+    ('warning', 'exclamation-triangle-solid.svg', '#d97706', '#fef3c7') // amber-600; amber-100
+    ('failure', 'times-circle-solid.svg', '#ea580c', '#ffedd5') // orange-600; orange-100
+    ('danger', 'bolt-solid.svg', '#dc2626', '#fee2e2') // red-600; red-100
+    ('bug', 'bug-solid.svg', '#be185d', '#fce7f3') // pink-700; pink-100
+    ('example', 'list-ol-solid.svg', '#a855f7', '#f3e8ff') // purple-500; purple-100
+    ('quote', 'quote-right-solid.svg', '#525252', '#f0f0f0') // neutral-600; neutral-150?
+;
+.admonition {
+	margin: 1.5625em 0;
+	overflow: hidden;
+	color: #000;
+	page-break-inside: avoid;
+	background-color: #ffffff;
+    border: .05rem solid $primary-color;
+	border-left: .3rem solid $primary-color;
+	border-radius: 0.25rem;
+}
+.admonition p {
+    margin-top: 15px;
+    padding: 0 1rem;
+}
+.admonition .admonition-title {
+    color: #000;
+    background-color: $primary-bgcolor;
+    font-weight: 700;
+    line-height: 3rem;
+    margin: 0;
+}
+.admonition-title::before {
+    margin-right: .75rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: inline-block;
+    content: '';
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    background-color: $primary-color;
+    vertical-align: text-bottom;
+}
+@each $name, $icon, $icon-color, $title-color in $admonitions {
+    @if $icon-color {
+        .admonition.#{$name} {
+            border-color: #{$icon-color};
+        }
+    }
+    @if $title-color {
+        .admonition.#{$name} .admonition-title {
+            background-color: #{$title-color};
+        }
+    }
+    .admonition.#{$name} .admonition-title::before {
+        // Adapted from: https://stackoverflow.com/a/39156436
+        -webkit-mask: url($baseurl + "/assets/img/icons/#{$icon}") no-repeat 50% 50%;
+        mask: url($baseurl + "/assets/img/icons/#{$icon}") no-repeat 50% 50%;
+        @if $icon-color {
+            background-color: #{$icon-color};
+        }
+    }
+}
+
+//@@author

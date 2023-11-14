@@ -1,0 +1,15 @@
+{
+  "persons": [],
+  "tasks": [
+    {
+      "title": "Prepare Agenda",
+      "note": "To book venue",
+      "isDone": true
+    },
+    {
+      "title": "Prepare Agenda",
+      "note": "To book venue",
+      "isDone": false
+    }
+  ]
+}

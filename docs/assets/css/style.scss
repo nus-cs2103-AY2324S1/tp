@@ -1,12 +1,32 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
+//@@author jiakai-reused
+
+// Solution below adapted from https://stackoverflow.com/a/39156436
+$baseurl: "{% if site.baseurl != '/' %}{{ site.baseurl }}{% endif %}";
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+  "minima/initialize",
+  "admonition";
 
 .icon {
     height: 21px;
     width: 21px
+}
+
+// Style below adapted from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd
+
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
 }

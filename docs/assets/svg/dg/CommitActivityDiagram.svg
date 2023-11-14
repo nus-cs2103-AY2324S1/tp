@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="386px" preserveAspectRatio="none" style="width:309px;height:386px;background:#FFFFFF;" version="1.1" viewBox="0 0 309 386" width="309px" zoomAndPan="magnify"><defs><filter height="300%" id="fiw5iz2zkvnn8" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="103" cy="20" fill="#000000" filter="url(#fiw5iz2zkvnn8)" rx="10" ry="10" style="stroke:#000000;stroke-width:1.0;"/><rect fill="#FEFECE" filter="url(#fiw5iz2zkvnn8)" height="38.8672" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="184" x="11" y="50"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="164" x="21" y="75.5713">User executes command</text><rect fill="#FEFECE" filter="url(#fiw5iz2zkvnn8)" height="38.8672" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="172" x="17" y="158.4141"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="152" x="27" y="183.9854">Purge redundant states</text><rect fill="#FEFECE" filter="url(#fiw5iz2zkvnn8)" height="57.7344" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="163" x="21.5" y="225.3477"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="140" x="31.5" y="250.9189">Save AddressBook to</text><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="143" x="31.5" y="269.7861">addressBookStateList</text><polygon fill="#FEFECE" filter="url(#fiw5iz2zkvnn8)" points="103,108.8672,103,108.8672,115,120.8672,103,132.8672,103,132.8672,91,120.8672,103,108.8672" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="190" x="107" y="145.3242">[command commits AddressBook]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="115" y="118.2305">[else]</text><polygon fill="#FEFECE" filter="url(#fiw5iz2zkvnn8)" points="103,303.082,115,315.082,103,327.082,91,315.082,103,303.082" style="stroke:#A80036;stroke-width:1.5;"/><ellipse cx="103" cy="358.082" fill="#FFFFFF" filter="url(#fiw5iz2zkvnn8)" rx="11" ry="11" style="stroke:#000000;stroke-width:1.0;"/><ellipse cx="103" cy="358.082" fill="#000000" rx="6" ry="6" style="stroke:#7F7F7F;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="103" x2="103" y1="30" y2="50"/><polygon fill="#A80036" points="99,40,103,50,107,40,103,44" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="103" x2="103" y1="197.2813" y2="225.3477"/><polygon fill="#A80036" points="99,215.3477,103,225.3477,107,215.3477,103,219.3477" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="103" x2="103" y1="132.8672" y2="158.4141"/><polygon fill="#A80036" points="99,148.4141,103,158.4141,107,148.4141,103,152.4141" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="115" x2="199" y1="120.8672" y2="120.8672"/><polygon fill="#A80036" points="195,207.2813,199,217.2813,203,207.2813,199,211.2813" style="stroke:#A80036;stroke-width:1.5;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="199" x2="199" y1="120.8672" y2="315.082"/><line style="stroke:#A80036;stroke-width:1.5;" x1="199" x2="115" y1="315.082" y2="315.082"/><polygon fill="#A80036" points="125,311.082,115,315.082,125,319.082,121,315.082" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="103" x2="103" y1="283.082" y2="303.082"/><polygon fill="#A80036" points="99,293.082,103,303.082,107,293.082,103,297.082" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="103" x2="103" y1="88.8672" y2="108.8672"/><polygon fill="#A80036" points="99,98.8672,103,108.8672,107,98.8672,103,102.8672" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.5;" x1="103" x2="103" y1="327.082" y2="347.082"/><polygon fill="#A80036" points="99,337.082,103,347.082,107,337.082,103,341.082" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[97d172c535dff04f499c3d4507810f19]
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command commits AddressBook])
+    :Purge redundant states;
+    :Save AddressBook to
+    addressBookStateList;
+else ([else])
+endif
+stop
+@enduml
+
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+
+
+if () then ([command commits AddressBook])
+    :Purge redundant states;
+    :Save AddressBook to
+    addressBookStateList;
+else ([else])
+endif
+stop
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 SGT 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: SG
+--></g></svg>

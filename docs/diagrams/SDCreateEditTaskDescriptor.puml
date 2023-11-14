@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create EditTaskDescriptor from arguments
+
+participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
+participant "desc:EditTaskDescriptor" as EditTaskDescriptor LOGIC_COLOR
+
+activate EditTaskCommandParser
+
+'Constructor for EditTaskDescriptor
+create EditTaskDescriptor
+
+EditTaskCommandParser -> EditTaskDescriptor : EditTaskDescriptor()
+activate EditTaskDescriptor
+EditTaskDescriptor --> EditTaskCommandParser : desc
+deactivate EditTaskDescriptor
+
+opt has title
+EditTaskCommandParser -> EditTaskDescriptor : setTitle(title)
+activate EditTaskDescriptor
+EditTaskDescriptor --> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+opt has note
+EditTaskCommandParser -> EditTaskDescriptor : setNote(note)
+activate EditTaskDescriptor
+EditTaskDescriptor --> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+opt has tags
+EditTaskCommandParser -> EditTaskDescriptor : setTags(tags)
+activate EditTaskDescriptor
+EditTaskDescriptor --> EditTaskCommandParser
+deactivate EditTaskDescriptor
+end opt
+
+@enduml

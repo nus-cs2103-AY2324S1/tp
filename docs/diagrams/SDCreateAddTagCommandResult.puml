@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+mainframe: **sd** Create successful CommandResult
+
+participant "c:AddTagPersonCommand" as AddTagPersonCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
+activate AddTagPersonCommand
+
+create CommandResult
+AddTagPersonCommand -> CommandResult : CommandResult(MESSAGE_EDIT_PERSON_SUCCESS)
+activate CommandResult
+
+CommandResult --> AddTagPersonCommand : r
+deactivate CommandResult
+
+@enduml

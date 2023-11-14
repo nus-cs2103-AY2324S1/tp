@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTagPersonCommandParser" as AddTagPersonCommandParser LOGIC_COLOR
+participant "c:AddTagPersonCommand" as AddTagPersonCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("addTagPerson 1 t/caterer")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addTagPerson 1 t/caterer")
+activate AddressBookParser
+
+create AddTagPersonCommandParser
+AddressBookParser -> AddTagPersonCommandParser : AddTagPersonCommandParser()
+activate AddTagPersonCommandParser
+
+AddTagPersonCommandParser --> AddressBookParser
+deactivate AddTagPersonCommandParser
+
+AddressBookParser -> AddTagPersonCommandParser : parse("1 t/caterer")
+activate AddTagPersonCommandParser
+
+create AddTagPersonCommand
+AddTagPersonCommandParser -> AddTagPersonCommand : AddTagPersonCommand(index, tags)
+activate AddTagPersonCommand
+
+AddTagPersonCommand --> AddTagPersonCommandParser : c
+deactivate AddTagPersonCommand
+
+AddTagPersonCommandParser --> AddressBookParser : c
+deactivate AddTagPersonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTagPersonCommandParser -[hidden]-> AddressBookParser
+destroy AddTagPersonCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> AddTagPersonCommand : execute(m)
+activate AddTagPersonCommand
+
+ref over AddTagPersonCommand : Add tag(s) to person in person list
+
+ref over AddTagPersonCommand : Create successful CommandResult
+
+AddTagPersonCommand --> LogicManager : r
+deactivate AddTagPersonCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTagPersonCommand -[hidden]-> LogicManager
+destroy AddTagPersonCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml
