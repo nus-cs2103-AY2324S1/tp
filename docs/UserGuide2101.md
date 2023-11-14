@@ -5,14 +5,18 @@ title: User Guide
 ## Introduction
 ***Taking care of your finances has never been easier!***
 
-Spend N Split (SNS) is an application meant for managing transactions from your contacts list. Built for university students that reside on campus, it utilises your fast typing skills to help you maintain financial accountability between yourself and your peers. All you need to do, is to record your transactions in Spend N Split. Filtering, sorting, as well as the calculations of balances owed will be automatically handled by Spend N Split.
+Welcome to Spend N Split (SNS), an application meant for managing transactions from your contacts list. Built for university students who reside on campus, it utilises your fast typing skills to help you maintain financial accountability between yourself and your peers. All you need to do, is to record your transactions in Spend N Split. Filtering, sorting, as well as the calculations of balances owed will be automatically handled by Spend N Split.
 
 Spend N Split is perfect for **you** if you are
 1. A university student staying on campus.
 2. A fast typist.
 3. Comfortable using a keyboard to make full use of the application.
 
+In this user guide, we'll provide you with everything you need to quickly become proficient in using SNS's essential features.
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
@@ -25,22 +29,40 @@ Spend N Split is perfect for **you** if you are
 7. [Navigating the App](#navigating-the-app)
 8. [Parameters](#parameters)
 9. [Features](#features)
-10. [Data](#data)
-11. [FAQ](#faq)
-12. [Acknowledgements](#acknowledgements)
-13. [Glossary](#glossary)
+    - [Add a contact](#add-your-friends-as-contacts-using-addperson)
+    - [Edit a contact](#edit-your-contacts-with-editperson)
+    - [Delete a contact](#delete-a-contact-using-deleteperson)
+    - [List your contacts](#find-your-contacts-using-listperson)
+    - [Sort your contacts](#order-your-contacts-by-their-outstanding-balance-using-sortperson)
+    - [Add a transaction](#create-a-new-transaction-with-addtransaction)
+    - [Edit a transaction](#update-your-transactions-with-edittransaction)
+    - [Delete a transaction](#delete-a-transaction-with-deletetransaction)
+    - [Duplicate a transaction](#duplicate-transactions-with-duplicatetransaction)
+    - [List your transactions](#list-your-transactions-with-listtransaction)
+    - [Settle your balances](#settle-your-balances-withsettleperson)
+    - [Create command shortcuts](#create-command-shortcuts-using-setshorthand)
+    - [Get help](#use-help-to-find-our-user-guide)
+    - [Clear your data](#reset-your-data-using-clear)
+    - [Exit SNS](#leaving-spend-n-split-use-exit)
+11. [Data](#data)
+12. [Features Summary](#features-summary)
+13. [Acknowledgements](#acknowledgements)
+14. [Glossary](#glossary)
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## How to use the User Guide
 
-1. If Spend N Split is not yet installed, kindly navigate to the [Quick Start](#quick-start) section, which includes steps for installation
-as well as sample commands for you to try.
+1. If Spend N Split is not yet installed, kindly navigate to the [Quick Start](#quick-start) section, which includes steps for installation as well as sample commands for you to try.
 
-2. If you are not yet familiar with Spend N Split and want a refresher, we highly recommend heading to the [Navigating the App](#navigating-the-app) section.
+2. Downloaded Spend N Split, but not yet familiar with app and want a refresher? We highly recommend heading to the [Navigating the App](#navigating-the-app) section.
 
-3. Already an experienced user? Well, head to the [Features](#features) section for a quick
-refresher on what Spend N Split can do for you!
+3. Looking to learn about our features? Well, head to the [Features](#features) section to see what Spend N Split can do for you!
+
+4. Already an experienced user? Check out our [Features Summary](#features-summary) for a quick recap on how to use Spend N Split!
 
 --------------------------------------------------------------------------------------------------------------------
 ## Labels
@@ -48,15 +70,15 @@ refresher on what Spend N Split can do for you!
 In our user guide, you may find coloured boxes that contain highlighted pieces of text.
 
 <div markdown="block" class="alert alert-info">
-:bulb: Cyan boxes represent helpful tips to enhance your experience.
+:bulb: Blue boxes offer helpful tips to enhance your experience.
 </div>
 
 <div markdown="block" class="alert alert-primary">
-:warning: Blue boxes represent warnings that you should be cautious about.
+:warning: Yellow boxes provide warnings that you should take note of.
 </div>
 
 <div markdown="span" class="alert alert-danger">
-:heavy_exclamation_mark: Red boxes represent dangers that you should pay a lot of attention to.
+:heavy_exclamation_mark: Red boxes signify dangers that require your attention.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -65,14 +87,15 @@ In our user guide, you may find coloured boxes that contain highlighted pieces o
 
 ## Key Terms
 
-The Spend N Split application links transactions and people. As such, it is important that you familiarise yourself
-with the structure of each person and each transaction in our application.
+<!-- The Spend N Split application links transactions and people. As such, it is important that you familiarise yourself with the structure of each person and each transaction in our application. -->
+
+In the Spend N Split application, transactions and people play a crucial role. It's important to familiarise yourself with the structure of both individuals and transactions within our application.
 
 ### Person
 
-A person is someone that you track your balance against. Before creating a transaction involving a specific
-person, that person has to exist in the application. If not, that person has to be added to the application before the transaction
-is created.
+<!-- A person is someone that you track your balance against. Before creating a transaction involving a specific person, that person has to exist in the application. If not, that person has to be added to the application before the transaction is created. -->
+
+A person represents an individual whom you track your financial balances against. To create a transaction involving a specific person, that person's contact must already have been added into the application. If not, you'll need to add them before recording the transaction.
 
 A person has the following attributes:
 - Name (Compulsory)
@@ -83,8 +106,7 @@ A person has the following attributes:
 - Email Address (Optional)
 - Address (Optional)
 
-Every person is identified by their name. Names are case-insensitive and the application does not support
-adding people with the same names. This means that you cannot add two or more people with the same name.
+Each person is identified by their names. Names are case-insensitive and the application does not support duplicate names. This means that you cannot add two or more people with the same name.
 
 <div markdown="block" class="alert alert-info">
 :bulb: If a positive balance is displayed on a person, it means that they owe you money. Conversely, if the balance displayed is
@@ -95,14 +117,14 @@ negative, you owe that person money instead.
 
 ### Transaction
 
-Transactions are events in which money is exchanged.
+Transactions represent events involving the exchange of money.
 
 A transaction has the following attributes:
 - Description (Compulsory)
 - Payee (Compulsory)
 - Payer (Compulsory)
 - Amount (Compulsory)
-- Timestamp (Optional. If this is not provided, the application will use the current system time of the computer for the Timestamp)
+- Timestamp (Optional. If this is not provided, the application will use the current time on your computer)
 - Portion(s)
 
 <div markdown="block" class="alert alert-primary">
@@ -127,10 +149,16 @@ After a transaction, each payer in the list of portions owes the payee a fractio
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Spend N Split.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar spendnsplit.jar`
-   command to run the application.<br>
-   An interface similar to the one shown below should appear in a few seconds. Note how the application contains some sample data.<br>
+4. Open a command terminal, navigate into the folder you've saved the jar file in using the `cd` command. Then, type`java -jar spendnsplit.jar`
+   into the command terminal to run the application.
+   
+   If you are unfamiliar with how to use the `cd` command on your command terminal, check out [this guide](https://tutorials.codebar.io/command-line/introduction/tutorial.html) to get started.
+   
+   <br>
+   An interface similar to the one shown below should appear in a few seconds. Notice that the application contains some sample data.<br>
    ![Ui](images/Ui.png)
+
+<div style="page-break-after: always;"></div>
 
 5. Type the command in the Command Input Field and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -147,6 +175,8 @@ After a transaction, each payer in the list of portions owes the payee a fractio
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Navigating the App
 
 Spend N Split has an intuitive Graphical User Interface (GUI) that allows you to navigate the application easily.
@@ -156,17 +186,19 @@ Spend N Split has an intuitive Graphical User Interface (GUI) that allows you to
 | Component                  | Description                                                                                                                |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | **Command Input Field**    | Type commands here and press `Enter` to execute them.                                                                      |
-| **Command Output Display** | Shows the result of the command execution.                                                                                 |
-| **Transaction List**       | Shows a list of transactions. <br/> The list can be filtered and sorted by the user.                                       |
+| **Command Output Display** | Displays the result after executing commands.                                                                                 |
+| **Transaction List**       | Shows the list of transactions stored in the app.                                       |
 | **Transaction Card**       | Shows the details of a transaction. <br/> Details include the description, date, payee, as well as the breakdown of costs. |
-| **Person List**            | Shows a list of persons. <br/> The list can be filtered and sorted by the user.                                            |
+| **Person List**            | Shows the list of persons stored in the app.                                    |
 | **Person Card**            | Shows the details of a person. <br/> Details include name, balance, phone number, etc.                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Parameters
 
-Some of our commands require parameters, which have specific formats and constraints applied on them. Before heading to the [Features](#features) section, we recommend taking a look at the type of parameters required by commands.
+Some of the commands will require you to include parameters, which have specific formats and constraints applied on them. Before heading to the [Features](#features) section, we recommend taking a look at the type of parameters required by commands.
 <br>
 
 <div markdown="span" class="alert alert-danger">
@@ -176,23 +208,22 @@ The following parameters are used for commands:
 
 | Parameter     | Prefix | Format                                                                                                                                                                                                         | Example |
 |---------------| --- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| Index         | - | Positive integers only                                                                                                                                                                                         | `1`, `2`, `3` |
-| Keyword       | - | Should not contain the "=" sign as mentioned above. No other restrictions                                                                                                                                      | `Bob`, `Lunch` |
-| Name          | n | Alphanumeric, can contain multiple words                                                                                                                                                                       | `Bob`, `Alex Yeoh` |
-| Phone number  | p | Numeric, minimum length of 3 digits                                                                                                                                                                            | `99999999`, `88888888` |
-| Telegram handle | tg | Starts with @, followed by a minimum of 5 alphanumeric characters or underscores                                                                                                                               | `@nus_cs2103` , `@spend_n_split` |
-| Email address | e | Valid email format only                                                                                                                                                                                        | `damithch@comp.nus.edu.sg`, `dcsdcr@nus.edu.sg` |
-| Address       | a |  Should not contain the "=" sign as mentioned above. No other restrictions                                                                                                                                                                                                             | `Kent Ridge Hall`, `RC4` |
-| Tag           | t | Single-word, alphanumeric                                                                                                                                                                                      | `friend`, `colleague` |
-| Description   | d |  Should not contain the "=" sign as mentioned above. No other restrictions                                                                                                                                                                                                             | `Lunch`, `Dinner @ UTown` |
-| Amount/ Cost  | c | Positive rational numbers either in decimal or fraction format. Spaces are allowed                                                                                                                             | `12`, `.5`, `0.5/3`, `1.25 / 1.56`, `12 000 000` |
-| Timestamp     | ts | Dates should be formatted as DD/MM/YYYY, and time as HH:MM. You have the option to include only the date or time, or both. When providing both, ensure that the date precedes the time, with a space in between | `12:12`, `31/12/2020`, `28/02/2021 00:00` |
-| Weight        | w | Positive rational numbers either in decimal or fraction format. Spaces are allowed                                                                                                                             | `12`, `.5`, `0.5/3`, `1.25 / 1.56`, `12 000 000` |
-| Original command | o | An original command keyword listed in this user guide                                                                                                                                                          | `setShorthand`, `addTransaction` |
-| Shorthand     | s | Single-word, English alphabet characters only                                                                                                                                                                  | `s`, `aT` |
+| Index         | - | No prefix required. Positive whole numbers only.                                                                                                                                                                                         | `1`, `2`, `3` |
+| Keyword       | - | Should not contain the "=" sign as mentioned above. No other restrictions apply.                                                                                                                                      | `Bob`, `Lunch` |
+| Name          | n | Alphanumeric, can contain multiple words.                                                                                                                                                                       | `Bob`, `Alex Yeoh` |
+| Phone number  | p | Numeric, minimum length of 3 digits.                                                                                                                                                                            | `99999999`, `88888888` |
+| Telegram handle | tg | Starts with @, followed by a minimum of 5 alphanumeric characters or underscores.                                                                                                                               | `@nus_cs2103` , `@spend_n_split` |
+| Email address | e | Valid email format only.                                                                                                                                                                                        | `damithch@comp.nus.edu.sg`, `dcsdcr@nus.edu.sg` |
+| Address       | a |  Should not contain the "=" sign as mentioned above. No other restrictions apply.                                                                                                                                                                                                             | `Kent Ridge Hall`, `RC4` |
+| Tag           | t | Single-word, alphanumeric.                                                                                                                                                                                      | `friend`, `colleague` |
+| Description   | d |  Should not contain the "=" sign as mentioned above. No other restrictions apply.                                                                                                                                                                                                             | `Lunch`, `Dinner @ UTown` |
+| Amount/ Cost  | c | Positive rational numbers either in decimal or fraction format. Spaces are allowed.                                                                                                                             | `12`, `.5`, `0.5/3`, `1.25 / 1.56`, `12 000 000` |
+| Timestamp     | ts | Dates should be formatted as DD/MM/YYYY, and time as HH:MM. You have the option to include only the date or time, or both. When providing both, ensure that the date precedes the time, with a space in between. | `12:12`, `31/12/2020`, `28/02/2021 00:00` |
+| Weight        | w | Positive rational numbers either in decimal or fraction format. Spaces are allowed.                                                                                                                             | `12`, `.5`, `0.5/3`, `1.25 / 1.56`, `12 000 000` |
+| Original command | o | An original command keyword listed in this user guide.                                                                                                                                                          | `setShorthand`, `addTransaction` |
+| Shorthand     | s | Single-word, English alphabet characters only.                                                                                                                                                                  | `s`, `aT` |
 
-Spend N Split checks the validity of Telegram handles and email addresses according to the formats defined in the table above. It will
-reject all Telegram handles and email addresses that do not follow the format.
+Spend N Split checks the validity of Telegram handles and email addresses according to the formats defined in the table above. It will reject all Telegram handles and email addresses that do not follow the format.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -207,13 +238,13 @@ reject all Telegram handles and email addresses that do not follow the format.
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   E.g. In `addPerson n=NAME`, `NAME` is a parameter to be provided by the user. <br>Example usage: `addPerson n=John Doe`.
 
-- Items in square brackets are optional.<br>
+- Parameters in square brackets are optional.<br>
   E.g. For `n=NAME [t=TAG]`: <br> Example usage `n=John Doe t=friend` or `n=John Doe`.
 
 - Items followed by `…` are optional and can be listed multiple times.<br>
   E.g. For `[t=TAG]…​`: <br> Example usage: " " (0 tags), or `t=friend` (1 tag) or `t=friend t=family` (2 tags).
 
-- If it is mentioned that the order of the parameters is flexible, it means that parameters can be in any order.<br>
+- Throughout this guide, if it is mentioned that the order of the parameters is flexible, it means that you can arrange the parameters in any order you prefer. <br>
   E.g. For `n=NAME p=PHONE` <br> Example usage: `n=Bob p=91722828` or `p=91722828 n=Bob` are both accepted and will be treated as equivalent inputs by the application.
 
 - Unnecessary parameters provided for commands (such as `help`, `clear`, `exit`) that do not accept them will be disregarded. <br> E.g. for the command `help` which does not accept any parameters, entering the command `help 123` will be interpreted by the application as `help`.
@@ -222,138 +253,127 @@ reject all Telegram handles and email addresses that do not follow the format.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Person-related features
 
-#### Adding a person: `addPerson`
+#### Add your friends as contacts using `addPerson`
 
-Adds a person to the application.
+Want to start tracking your expenses with someone new? Start by creating a new contact with the command `addPerson`. 
 
 Format: `addPerson n=NAME [p=PHONE] [tg=TELEGRAM_HANDLE] [e=EMAIL] [a=ADDRESS] [t=TAG]…​`
 
-The command word (addPerson) has to be at the front of the command. The order of the remaining parameters is flexible.
+Need help with the formatting of commands? [Click here](#features)
 
-After the command has been executed, every person in the application will be displayed in the Person List.
+Example: `addPerson n=Betsy Crowe p=90903211 tg=@betsy_crowe e=betsycrowe@gmail.com a=London Block 55 t=friend`
 
-Examples:
+You have now added **Betsy Crowe**, along with her phone number, Telegram, email and address! You have also tagged her as a friend using `t=friend`.
 
-* `addPerson n=John Doe p=98765432 e=johnd@example.com a=John street, block 123, #01-01`
-* `addPerson n=Betsy Crowe t=friend e=betsycrowe@example.com a=London Block 55 p=1234567 t=London`
-
-Note: Only the name is compulsory when adding a person. After a person has been added to the application, more attributes to that person can be added using the `editPerson` command.
-
-Once an attribute has been added to a person, it can only be edited and cannot be deleted, except for the tags of a person (as elaborated below under [Editing a person](#editing-a-person--editperson)).
 
 ![addPerson_success](images/user-guide/addPersonSuccess.png)
 
-#### Editing a person : `editPerson`
+#### Edit your contacts with `editPerson`
 
-Edits an existing person in the application.
+Already have your friend's contact in the app, but need to update their contact information? Do so easily with the `editPerson` command.
 
 Format: `editPerson INDEX [n=NAME] [p=PHONE] [tg=TELEGRAM_HANDLE] [e=EMAIL] [a=ADDRESS] [t=TAG]…​`
 
-The command word (editPerson) and the index has to be at the front of the command. The order of the remaining parameters is flexible.
+Need help with the formatting of commands? [Click here](#features)
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed Person List.
-  The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional parameters must be provided.
+<!-- would be nice to include how to "lookup" the index of the person. e.g. search for the person, then index = number on their card -->
+
+* Replace `INDEX` with the index number of the contact you want to edit. You can find the index number in the Person List.
+* You can edit one or more of the contact's details, such as name, phone number, Telegram handle, email, address, or tags.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t=` without
-  specifying any tags after it. However, this will only work if there is a single tag parameter. `t=` will work, but `t=Friend t=` will result in an input error.
+* When you edit tags, the existing tags will be replaced with the new ones you specify.
 
 After the command has been executed, every person in the application will be displayed in the Person List.
 
 Examples:
 
-* `editPerson 1 p=91234567 e=johndoe@example.com`
-    * Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com`
-      respectively.
+* `editPerson 1 p=90904139 e=aliceyu123@gmail.com`
+    * This command changes the phone number and email address of the first contact to be 90904139 and aliceyu123@gmail.com, respectively.
 * `editPerson 2 n=Betsy Crower t=`
-    * Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+    * This command changes the name of the second contact to Betsy Crower and clear all existing tags.
 
 ![editPerson_success](images/user-guide/editPersonSuccess.png)
 
-#### Deleting a person : `deletePerson`
+#### Delete a contact using `deletePerson`
 
-Deletes the specified person from the application.
+Need to remove a contact from your list? Whether you want to declutter your contacts or remove someone for any other reason, `deletePerson` handles the task.
 
 Format: `deletePerson INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Person List.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Transactions involving the deleted person will have the deleted person's name changed to "Others". All transactions involving
- the deleted person as a payee will also be automatically deleted.
+Need help with the formatting of commands? [Click here](#features)
 
-Examples:
+* Replace `INDEX` with the index number of the contact you want to edit. You can find the index number in the Person List.
 
-* `listPerson` followed by `deletePerson 6` deletes the 6th person in the application.
-* `listPerson alex` followed by `deletePerson 1` deletes the 1st person in the results of the `listPerson alex` command.
+Example: `deletePerson 1` 
+
+This command deletes the first contact from the Person List. All your existing expenses involving that person will be updated accordingly in the Transaction List.
 
 ![deletePerson_success](images/user-guide/deletePersonSuccess.png)
 
-#### Locating persons by name: `listPerson`
+#### Find your contacts using `listPerson`
 
-Lists every person whose name contain any of the given keywords. If no keywords are entered, every person is listed.
+If you want to find specific contacts in your list, you can use the `listPerson` command. It helps you search for and list persons whose names contain certain keywords.
 
 Format: `listPerson [KEYWORD]...`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the entire keyword will be matched e.g. A person named `Han` will not be displayed when `listPerson Hans` is executed.
-* If a person's name matches at least one keyword, they will be displayed.
-  E.g. `listPerson Hans Bo` will result in both `Hans Gruber` and `Bo Yang` being displayed, should both of them already exist in the application.
+Need help with the formatting of commands? [Click here](#features)
+
+* You can enter one or more keywords separated by spaces to search for specific contacts. If no keywords are entered, all contacts will be displayed.
+* The search is case-insensitive.
+* It is considered a match if any of the words in the person's name is exactly the same as any of the given keywords. For instance, a person named `Han Junior` will not be displayed when you execute `listPerson Hans Hanzala` where the two given keywords are `Hans` and `Hanzala` 
 
 Examples:
 
-* `listPerson` shows every person in the application.
-* `listPerson alex david` shows `Alex Yeoh` and `David Li`.
+* `listPerson`
+    * This command displays all of your contacts in the application.
+* `listPerson alex david`
+    * This command display all of your contacts with names that match at least one keyword, such as `Alex Yeoh` and `David Li`.
 
 ![listPersonFiltered_success](images/user-guide/listPersonFilteredSuccess.png)
 
-#### Sorting persons by balance: `sortPerson`
+#### Order your contacts by their outstanding balance using `sortPerson`
 
-Sorts the list of persons in the application based on their outstanding balances in either ascending or descending
-order. This allows you to quickly identify who owes the most or the least amount of money. Having a negative balance with someone means you
-own them money.
+You can sort your list of contacts in the application based on their outstanding balances, making it easy to identify who owes the most or the least amount of money. 
+
+If someone has a negative balance, it means that you owe them money!
 
 Format: `sortPerson ORDER`
 
-Parameters:
-- `ORDER`: Specifies the order in which to sort the balances. Use `-` for ascending order (Largest negative balance at the top) and `+` for descending order (Largest positive balance at the top).
+Specify `ORDER` to indicate the sorting order:
+  * Use `-` for ascending order (largest negative balance at the top).
+  * Use `+` for descending order (largest positive balance at the top).
 
 Examples:
 * `sortPerson -`
-    * This command will rearrange the Person List in ascending order.
+    * This command will rearrange the Person List in ascending order of balances.
 * `sortPerson +`
-    * This command will rearrange the Person List in descending order.
+    * This command will rearrange the Person List in descending order of balances.
 
 ![sortPersonDescending_success](images/user-guide/sortPersonDescendingSuccess.png)
 ![sortPersonAscending_success](images/user-guide/sortPersonAscendingSuccess.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Transaction-related features
 
-#### Adding a transaction: `addTransaction`
+#### Create a new transaction with `addTransaction`
 
-Adds a transaction for multiple persons with customised split ratios.
+To easily keep track of a new transaction, simply use the addTransaction command.
 
 Format: `addTransaction d=DETAILS n=NAME c=COST [ts=TIME] [n=NAME w=WEIGHT]...`
-- Cost and weights have to be decimal numbers or fractions, and they must be positive.
+
+Need help with the formatting of commands? [Click here](#features)
+
 - The first name refers to the payee (that is the person whom everyone else now owes money).
-- If the timestamp is not provided, the default time is the current system time.
+- If the timestamp is not provided, the default time is the current time on your computer.
 - If only the date is given, the default time is set as `00:00`.
 - If you want to reference yourself, use `n=Self`.
-- At least one pair of name and weight must be provided.
-- Payer names should not repeat.  E.g. `n=Bob w=1.0 n=Bob w=2.0` will be invalid. However, you are allowed to key in multiple portions for "Others" - the final weight for "Others" will be the sum of all the weights of the "Others" portions keyed in.
 - The cost for each person is calculated as follows:
     - `Individual Cost = Total Cost * (Individual Weight / Total Weight)`
-
-After the command has been executed, every transaction in the application will be displayed in the transaction list.
-
-
-<div markdown="span" class="alert alert-danger">
-:heavy_exclamation_mark: The order of the parameters is NOT flexible.
-</div>
 
 Examples:
 * `addTransaction d=Rent n=David Li c=600 ts=10/10/2020 12:00 n=Self w=1 n=David Li w=1 n=Alex Yeoh w=1`
@@ -364,25 +384,15 @@ Examples:
 Sample execution:
 
 ```
-$ addTransaction c=200 d=Textbooks
-
-Invalid command format!
-addTransaction: Adds a transaction.
-Parameters: d=DESCRIPTION n=NAME c=COST [ts=TIME] [n=NAME w=WEIGHT]...
-Example: addTransaction d=bread n=John Doe c=25.00 ts=10/10/2020 12:00
- n=Self w=1.5 n=John Doe w=1
-```
-
-```
 $ addTransaction d=Rent n=David Li c=600 ts=10/10/2020 12:00 
   n=Self w=1 n=David Li w=1 n=Alex Yeoh w=1
 ```
 
 ![addTransaction_success](images/user-guide/addTransactionSuccess.png)
 
-#### Editing a transaction: `editTransaction`
+#### Update your transactions with `editTransaction`
 
-Edits the transaction at the specified `INDEX`.
+Made a mistake and want to edit a transaction? Use the `editTransaction` command.
 
 Transaction details that can be edited:
 
@@ -393,15 +403,12 @@ Transaction details that can be edited:
 
 Format: `editTransaction INDEX [d=DESCRIPTION] [c=COST] [n=PAYEE] [ts=TIME]`
 
-The command word (editTransaction) and the index has to be at the front of the command. The order of the remaining parameters is flexible.
+Need help with the formatting of commands? [Click here](#features)
 
-* Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed transaction list.
-  The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* If the Timestamp is provided as a parameter but only the date is given, the default time will be set to 00:00.
 
-After the command has been executed, every transaction in the application will be displayed in the transaction list.
+- The index refers to the index number shown in the displayed transaction list for the transaction you want to edit.
+- At least one of the optional fields must be provided.
+- If the timestamp is provided as a parameter but only the date is given, by default the time will be set to 00:00.
 
 Examples:
 
@@ -416,13 +423,15 @@ editTransaction 1 c=100 ts=14/10/2023 17:00
 
 ![editTransaction_success](images/user-guide/editTransactionSuccess.png)
 
-#### Deleting a transaction: `deleteTransaction`
+#### Delete a transaction with `deleteTransaction`
 
-Deletes the specified transaction based on index.
+If you've added a transaction by mistake or no longer want to keep track of a transaction, you can remove it with `deleteTransaction`.
 
 Format: `deleteTransaction INDEX`
 
-* The index refers to the index number shown in the displayed transaction list. The index **must be a positive integer** 1, 2, 3, ...
+Need help with the formatting of commands? [Click here](#features)
+
+- The index refers to the index number shown in the displayed transaction list for the transaction you want to delete.
 
 Examples:
 
@@ -433,145 +442,91 @@ Sample Execution:
 
 ```
 $ deleteTransaction 1
-
-Deleted Transaction: Hall Dinner; Timestamp: 13/10/2023 16:00; 
-Amount: 90.00; Paid by: Bernice Yu; 
-Portions: [name: Bernice Yu, weight: 0.33][name: Self, weight: 0.67]
 ```
 
 ![deleteTransaction_success](images/user-guide/deleteTransactionSuccess.png)
 
-#### Duplicating a Transaction: `duplicateTransaction`
+#### Duplicate transactions with `duplicateTransaction`
 
-Duplicates the transaction at the specified `INDEX`. The duplicated transaction's timestamp will be the time at which
-this command is executed. The index refers to the index number shown in the displayed transaction list.
-The index **must be a positive integer** 1, 2, 3, ...
+Have a recurring transaction involving the same group of people? Use the `duplicateTransaction` command.
 
-Transaction details that can be changed when duplicating:
+Format: `duplicateTransaction INDEX`
 
-* Description
-* Cost
-* Payee
-* Timestamp
+Need help with the formatting of commands? [Click here](#features)
 
-Format: `duplicateTransaction INDEX [d=DESCRIPTION] [c=COST] [n=PAYEE] [ts=TIME]`
-
-The command word (duplicateTransaction) and the index has to be at the front of the command. The order of the remaining parameters is flexible.
+- The index refers to the index number shown in the displayed transaction list for the transaction you want to duplicate.
+- The timestamp of the new transaction will be the current time on your computer. Otherwise, the rest of the transaction details will be the same as that of the original transaction.
 
 Examples:
 
 * `duplicateTransaction 1`
   * Creates a new transaction that is identical to the 1st transaction in the displayed list, except for the timestamp of the new transaction being the time at which this command was executed.
-* `duplicateTransaction 2 c=20.5 d=Shared Lunch`
-  * Creates a new transaction that is identical to the 2nd transaction in the displayed list, except for the timestamp of the new transaction being the time at which this command was executed, the cost of the new transaction being $20.50, and the description of the new transaction being "Shared Lunch".
 
-![duplicateTransaction_success](images/user-guide/duplicateTransactionSuccess.png)
+#### List your transactions with `listTransaction`
 
-#### Listing transactions: `listTransaction`
+If you want to find specific transactions, you can use the `listTransaction` command.
 
-Shows a list of transactions whose descriptions include any of the keywords and which include any of the specified people. If no keywords are specified, it filters only by names; if no names are specified, it filters only by keywords. If neither are specified, all transactions will be listed.
+Format: `listTransaction [KEYWORD]...`
 
-Format: `listTransaction [KEYWORD]... [n=NAME]...`
-
-* The name refers to the name of the person in the transaction (either as a payee or a payer).
-* The name must contain only alphabets, numbers, and spaces. It cannot be empty and is case-insensitive.
-
-<div markdown="span" class="alert alert-danger">
-:heavy_exclamation_mark: The order of the parameters is NOT flexible.
-</div>
+- You can enter one or more keywords separated by spaces to search for specific transactions by description. If no keywords are entered, all transactions will be listed.
+- The search is case-insensitive, meaning that `lunch` will match `Lunch`.
+- Keep in mind that only the entire keyword will be matched. For instance, a transaction with description `fast` will not be displayed when you execute `listTransaction breakfast`.
+- It is a match if any of the words in a name is exactly the same as any of the keywords.
+- If a transaction's description matches at least one keyword, they will be displayed.
 
 Examples:
 
 * `listTransaction`
     * Shows all transactions.
-* `listTransaction Lunch n=Alice Pauline n=Carl Kurz`
-    * Shows all transactions that include Alice Pauline or Carl Kurz as a payee or payer, and whose descriptions include the keyword "Lunch".
+* `listTransaction Lunch Dinner`
+    * Shows all transactions with descriptions include either the keyword "Lunch", "Dinner", or both.
 
-Sample Execution:
+#### Settle your balances with`settlePerson`
 
-```
-$ listTransaction
+Just settled your balance with a person? Use the `settlePerson` command to record it.
 
-4 transaction(s) listed!
-```
+Format: `settlePerson INDEX`
 
-![listTransactionAll_success](images/user-guide/listTransactionAllSuccess.png)
+Need help with the formatting of commands? [Click here](#features)
 
-```
-$ listTransaction Dinner n=Bernice Yu
-
-1 transaction(s) listed!
-```
-
-![listTransactionFiltered_success](images/user-guide/listTransactionFilteredSuccess.png)
-
-<div style="page-break-after: always;"></div>
-
-### Settling transactions: `settlePerson`
-
-Settles the outstanding balance with a person at the specified `INDEX`. The index refers to the index number shown in the displayed transaction list.
-The outstanding balance refers to the overall balance calculated using only transactions that occur before or at the given timestamp.
-A new transaction will be created in the application for the settlement of balances.
-
-If no timestamp is given, the default timestamp is the current system time.
-If only the date is given, the default time is set as 23:59.
-
-Format: `settlePerson INDEX [ts=TIME]`
+- The index refers to the index number shown in the displayed person list for the person with whom you want to settle your balance.
 
 Example:
 
 *  `settlePerson 1`
-    *  Settles the outstanding balance with the 1st person in the displayed list.
+    *  Now, a new transaction is added so that your outstanding balance with the person at index 1 is 0.
 
-Sample Execution:
-
-```
-$ settlePerson
-
-Invalid command format!
-settlePerson: Settle any outstanding balance with another person.
-If a timestamp is provided, the balance at the instant before
-the timestamp is used. Else, the balance at the instant before
-the current system time is used.
-Parameters: INDEX (must be a positive integer) [ts=TIME]
-Example: settlePerson 2 ts=13/10/2020 12:00
-```
-
-```
-$ settlePerson 2 ts=13/10/2020 12:00
-
-Balance settled: Alex Yeoh
-```
-
-![settlePerson_success](images/user-guide/settlePersonSuccess.png)
+<div style="page-break-after: always;"></div>
 
 ### Other features
 
-#### Setting shorthands for commands : `setShorthand`
+#### Create command shortcuts using `setShorthand`
 
-Sets a shorthand for the original command. In the future, this shorthand can be used in place of the original command.
+Do you find yourself typing too much on long commands? Make things faster with `setShorthand`. Replace your most used commands with shorter aliases to make life easy and save time.
 
 Format: `setShorthand o=ORIGINAL_COMMAND s=SHORTHAND`
 
-The command word (setShorthand) has to be at the front of the command. The order of the remaining parameters is flexible.
-Commands and shorthands are case-sensitive.
+Need help with the formatting of commands? [Click here](#features)
 
 Example:
 
 * `setShorthand o=addTransaction s=at`
-    * Sets the shorthand `at` for the command `addTransaction`.
+
+Now, you can just type `at` to use the `addTransaction` command to save time!
+
+For example, you can now type `at d=Lunch n=Self c=1 n=Bob w=1` in place of `addTransaction d=Lunch n=Self c=1 n=Bob w=1`.
 
 ![setShorthand_success](images/user-guide/setShorthandSuccess.png)
 
-#### Getting help : `help`
+#### Use `help` to find our User Guide
 
-Displays a URL that contains a link to this user guide.
+Stuck with any of our features? Use the `help` command to link you to our extensive user guide to find any information you need about Spend N Split.
 
 Format: `help`
 
 ![help_success](images/user-guide/helpSuccess.png)
 
-#### Clearing all entries : `clear`
+#### Reset your data using `clear`
 
 Clears all entries from the application.
 
@@ -579,9 +534,9 @@ Format: `clear`
 
 ![clear_success](images/user-guide/clearSuccess.png)
 
-#### Exiting the program : `exit`
+#### Leaving Spend N Split? Use `exit`
 
-Exits the program.
+After managing your contacts and transactions, type `exit` to close Spend N Split.
 
 Format: `exit`
 
@@ -596,102 +551,52 @@ For our result display, persons list and transaction list, once selected, you ca
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Data
 
-### Saving the data
+### Saving your data
 
-Data is saved in the hard disk automatically after any command that changes the data. There is no need
-to save manually.
+Spend N Split automatically saves your data every time you run a command that affects it. This means your changes are always up to date in the application's data file. With Spend N Split, there's no need to save manually.
 
 ### Editing the data file
 
-Data is saved automatically as a JSON file `[JAR file location]/data/spendnsplitbook.json`. The data is human-readable.
+Feel free to check out your data within Spend N Split's file directory at `/data/spendnsplitbook.json`. The JSON file contains your data in a user-friendly format for you to edit.
+
 <br>
 <div markdown="span" class="alert alert-danger">
-:heavy_exclamation_mark: However, be warned that the application may wipe the data or behave unexpectedly if the data is not edited correctly.
+:heavy_exclamation_mark: However, be warned that the application may wipe your data or behave unexpectedly if the data is not edited correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## FAQ
+## Features Summary
 
-### 1) Why do the portions in the transaction list not add up exactly to the balances of certain people?
+Want to view all feautres in detail and learn about the format syntax? Check out our [Features](#features)!
 
-The portions and balances displayed are rounded to a fixed number of decimal places. This means there may be fractional differences
-between the actual portions and what is displayed. Values are rounded to 2 decimal places (i.e. 0.149 will be rounded down to 0.14,
-and 0.145 will be rounded up to 0.15). The positive and negative signs will still be kept (i.e. -0.0000001 will be rounded
-down to -0.00, and -1.015 will be rounded up to -1.02).
-
-Example:
-
-```
-If these are the stored balances of Roy and Tan in the application:
-Roy:      12.122345
-Tan:     -10.223231
+[Need help understanding the parameters?](#parameters)
 
 
-This is displayed instead in the application due to rounding off to 2 decimal places:
-Roy:      12.12
-Tan:     -10.22
+| Feature                | Format                                                                                     |
+|------------------------|--------------------------------------------------------------------------------------------|
+| [Add a contact](#add-your-friends-as-contacts-using-addperson)            | `addPerson n=NAME [p=PHONE] [tg=TELEGRAM_HANDLE] [e=EMAIL] [a=ADDRESS] [t=TAG]…​`          |
+| [Edit a contact](#edit-your-contacts-with-editperson)           | `editPerson INDEX [n=NAME] [p=PHONE] [tg=TELEGRAM_HANDLE] [e=EMAIL] [a=ADDRESS] [t=TAG]…​` |
+| [Delete a contact](#delete-a-contact-using-deleteperson)         | `deletePerson INDEX`                                                                       |
+| [List your contacts](#find-your-contacts-using-listperson)           | `listPerson [KEYWORD]...`                                                                  |
+| [Sort your contacts](#order-your-contacts-by-their-outstanding-balance-using-sortperson)           | `sortPerson ORDER`                                                                         |
+| [Add a transaction](#create-a-new-transaction-with-addtransaction)       | `addTransaction d=DETAILS n=NAME c=COST [ts=TIME] [n=NAME w=WEIGHT]...`                    |
+| [Edit a transaction](#update-your-transactions-with-edittransaction)    | `editTransaction INDEX [d=DESCRIPTION] [c=COST] [n=PAYEE] [ts=TIME]`                                                                  |
+| [Delete a transaction](#delete-a-transaction-with-deletetransaction)    | `deleteTransaction INDEX`                                                                  |
+| [Duplicate a transaction](#duplicate-transactions-with-duplicatetransaction) | `duplicateTransaction INDEX`                                                               |
+| [List your transactions](#list-your-transactions-with-listtransaction)      | `listTransaction [KEYWORD]...`                                                 |
+| [Settle your balances](#settle-your-balances-withsettleperson)        | `settlePerson INDEX`                                                             |
+| [Create command shortcuts](#create-command-shortcuts-using-setshorthand)         | `setShorthand o=ORIGINAL_COMMAND s=SHORTHAND`                                              |
+| [Get help](#use-help-to-find-our-user-guide)                 | `help`                                                                                     |
+| [Clear your data](#reset-your-data-using-clear)                | `clear`                                                                                    |
+| [Exit SNS](#leaving-spend-n-split-use-exit)                 | `exit`                                                                                     |
 
-```
-### 2) What happens when I enter an invalid command?
-
-When an invalid command is input, an error message will be reflected at the
-output panel at the top of Spend N Split. The error message will vary depending on the type of error.
-
-* Execution errors caused by invalid command format. This occurs when the command word
-is recognised but there are missing parameters or parameters are
-not supported.
-The error message reflected
-will state `Invalid command format!`,
-before giving details on the command and
-the parameters required, along with an example of a correct command
-input with the parameters required.
-    * Example: `settlePerson -1`
-      * Error message:
-    ```
-    Invalid command format!
-    settlePerson: Settle any outstanding balance with another person.
-    Parameters: INDEX (must be a positive integer)
-    Example: settlePerson 1
-    ```
-
-<div markdown="block" class="alert alert-info">
-:bulb: Note the differences between Execution errors and Input errors. An execution error refers to an error that will occur
-regardless of the state of the application or its data, whereas input errors are errors that occur when certain conditions in the application
-are met. 
-
-Attempting to settle the balance of a person at index 6 when there are only 5 people in the Person List, or attempting
-to add a person that has an identical name to someone that already exists in the Person List are both input errors.
-
-Meanwhile, attempting to settle the balance of a person at index -1 will result in an execution error, as it will occur for every
-form of data in the application.
-</div>
-
-* Unknown command. This occurs when the command word is not recognised.
-The error message reflected will state `Unknown command`.
-  * Example: `settleTransaction n=Ryan tg=@ryanzzzzz`
-    * Error message:
-  ```
-  Unknown command
-  ```
-* Input errors caused by invalid parameter values. This occurs when invalid parameter values are provided
-for the valid command word. The error message reflected is dependent on the
-valid command word.
-  * Example: `settlePerson 6` when there are only 5 people in the Person List.
-    * Error message:
-  ```
-  The person index provided is invalid
-  ```
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Acknowledgements
 
@@ -792,10 +697,12 @@ A label that can be applied to a person to provide additional details about them
 #### Telegram handle
 A unique identifier for a Telegram account. E.g. @ryanlim123
 #### Timestamp
-Refers to the time the transaction occurred. Timestamps in our application are displayed in the "DD/MM/YYYY HH:MM" format. DD refers to Day, MM refers to Month,
-YYYY refers to Year, HH refers to the 24-hour notation for Hour, and MM refers to Minute.
+Refers to the time the transaction occurred. Timestamps in our application are displayed in the `DD/MM/YYYY HH:MM` format. `DD` refers to Day, `MM` refers to Month,
+`YYYY` refers to Year, `HH` refers to the 24-hour notation for Hour, and `MM` refers to Minute.
 #### Transaction
 An interaction of buying or selling something where the exchange of money occurs.
 #### Weight
 A numerical value assigned to each person that is involved in a transaction. It is used to calculate the amount of money that
 a person should pay for their share of the transaction.
+
+--------------------------------------------------------------------------------------------------------------------
