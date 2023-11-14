@@ -639,6 +639,12 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
       Use case resumes from step 3.
 
+* 3b. The given particulars are invalid.
+
+  * 3b1. CoordiMate shows an error message.
+
+      Use case resumes from step 3.
+
 ---
 
 **Use case: UC04 - Find a person in the contact list**
@@ -731,14 +737,14 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **MSS**
 
-1. User requests to add a task with a title and note.
+1. User requests to add a task.
 2. CoordiMate adds the task.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No task title or note was provided.
+* 1a. The provided details are invalid.
 
   * 1a1. CoordiMate shows an error message.
 
