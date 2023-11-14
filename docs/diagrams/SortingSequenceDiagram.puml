@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
+
+box UI UI_COLOR_T1
+Participant ":MainWindow" as MainWindow UI_COLOR
+Participant ":StatusBarFooter" as StatusBar UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+Participant ":Logic" as Logic LOGIC_COLOR
+Participant ":SortCommand" as Command LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+-> MainWindow : executeCommand(commandText)
+activate MainWindow
+
+MainWindow -> Logic : execute(commandText)
+activate Logic
+
+ref over Logic, Command : Parse sort command
+
+Logic -> Command : execute(model)
+activate Command
+
+Command -> Model : updateDisplayedPersonList(null, comparator)
+activate Model
+
+deactivate Model
+
+Command --> Logic : result
+deactivate Command
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Command -[hidden]-> Command
+destroy Command
+
+Logic --> MainWindow : result
+deactivate Logic
+
+MainWindow -> MainWindow : handleSort(field, order)
+activate MainWindow
+
+MainWindow -> StatusBar : updateSortStatus(field, order)
+activate StatusBar
+
+'Hidden arrow for spacing purposes
+StatusBar -[hidden]-> MainWindow
+deactivate StatusBar
+
+'Hidden arrow for spacing purposes
+MainWindow -[hidden]-> MainWindow
+deactivate MainWindow
+
+@enduml

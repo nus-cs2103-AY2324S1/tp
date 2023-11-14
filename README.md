@@ -1,14 +1,30 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+# NetworkBook
+
+[![CI Status](https://github.com/ay2324s1-cs2103t-t08-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T08-2/tp/actions)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T08-2/tp/graph/badge.svg?token=EJ0Y5D4SRQ)](https://codecov.io/gh/AY2324S1-CS2103T-T08-2/tp)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+* This is **NetworkBook, developed for the team project component of CS2103T AY2324-S1**.
+* The project is based on the [_AddressBook-Level3_](https://se-education.org/addressbook-level3) software project created by the [SE-EDU initiative](https://se-education.org).
+* Networking is crucial to the career development of computing students and computing professionals. However, it can be hard to keep track of the many people we network with in university.
+* NetworkBook aims to be an **easy-to-use** tool which helps current and future computing professionals from NUS **manage contact information of their network**.
+
+## Project direction
+
+1. **Product name:** NetworkBook
+1. **Target user profile:** Computing Professionals from NUS/studying in NUS who are looking to network with each other.
+1. **Value proposition:** As computing students and professionals network with alumni to expand their career prospects, our app keeps a list of contacts of people that each user networks with.
+
+* Users can sort contacts by priority, courses taken/taking, specialisation(s) taken/intending to take.
+* This project is offline, and has a static online page that contains user manual and download link.
+
+## Contributors
+
+[[About Us](docs/AboutUs.md)]
+
+* Nguyen Khoi Nguyen
+* Luo Jiale
+* Edwin Zheng Yuanyi
+* Aw Hang Bin
+* Xenos Fiorenzo Anong

@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
+Participant ":CreateCommandParser" as createCommandParser LOGIC_COLOR
+Participant ":CreateCommand" as createCommand LOGIC_COLOR
+Participant "person:Person" as person MODEL_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+-> logic : execute("create" + arguments)
+activate logic
+
+logic -> networkBookParser : "create" + arguments
+activate networkBookParser
+
+create createCommandParser
+networkBookParser -> createCommandParser
+activate createCommandParser
+
+createCommandParser --> networkBookParser
+deactivate createCommandParser
+
+networkBookParser -> createCommandParser : parse(arguments)
+activate createCommandParser
+
+create person
+createCommandParser -> person : new Person(name, ...)
+activate person
+person --> createCommandParser : person
+deactivate person
+
+create createCommand
+createCommandParser -> createCommand : new CreateCommand(person)
+activate createCommand
+
+createCommand --> createCommandParser : createCommand
+deactivate createCommand
+
+createCommandParser --> networkBookParser : createCommand
+deactivate createCommandParser
+
+networkBookParser --> logic : createCommand
+deactivate networkBookParser
+
+logic -> createCommand: execute(model)
+activate createCommand
+
+createCommand -> model : hasPerson(person)
+activate model
+model --> createCommand : false
+deactivate model
+
+createCommand -> model : addPerson(person)
+activate model
+model --> createCommand :
+deactivate model
+
+createCommand --> logic : command success
+deactivate model
+deactivate createCommand
+
+<-- logic : command success
+deactivate logic
+
+@enduml

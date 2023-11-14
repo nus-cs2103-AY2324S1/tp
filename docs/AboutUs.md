@@ -3,57 +3,65 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
-
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team of students from the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project team
 
-### John Doe
+### Nguyen Khoi Nguyen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nknguyenhc.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://nknguyenhc.github.io/)]
+[[github](https://github.com/nknguyenhc)]
+[[portfolio](team/nknguyenhc.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities:
+  * Scheduling and tracking
+  * Deliverables and deadlines
+  * Integration
 
-### Johnny Doe
+### Luo Jiale
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/singa-pirate.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/singa-pirate)]
+[[portfolio](team/singa-pirate.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation
 
-### James Doe
+### Edwin Zheng Yuanyi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eola-z.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/eola-z)]
+[[portfolio](team/eola-z.md)]
+
+* Role: Developer, Mockup artist
+* Responsibilities: UI mockups and diagrams
+
+### Aw Hang Bin
+
+<img src="images/awhb.png" width="200px">
+
+[[github](http://github.com/awhb)]
+[[portfolio](team/awhb.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+  * Code Quality
+  * Troubleshooting
+
+### Xenos Fiorenzo Anong
+
+<img src="images/xenosf.png" width="200px">
+
+[[homepage](https://xenosf.io/)]
+[[github](http://github.com/xenosf)]
+[[portfolio](team/xenosf.md)]
+
+* Role: Developer
+* Responsibilities:
+  * Code Quality
+  * Documentation

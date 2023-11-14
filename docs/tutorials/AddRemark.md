@@ -25,7 +25,7 @@ For now, let’s keep `RemarkCommand` as simple as possible and print some outpu
 ``` java
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
+import model.networkbook.Model;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -57,7 +57,7 @@ Run `Main#main` and try out your new `RemarkCommand`. If everything went well, y
 
 While we have successfully printed a message to `ResultDisplay`, the command does not do what it is supposed to do. Let’s change the command to throw a `CommandException` to accurately reflect that our command is still a work in progress.
 
-![The relationship between RemarkCommand and Command](../images/add-remark/RemarkCommandClass.png)
+![The relationship between RemarkCommand and Command](../images/add-remark/CommandInterface.png)
 
 Following the convention in other commands, we add relevant messages as constants and use them.
 
@@ -91,7 +91,7 @@ Let’s change `RemarkCommand` to parse input from the user.
 We start by modifying the constructor of `RemarkCommand` to accept an `Index` and a `String`. While we are at it, let’s change the error message to echo the values. While this is not a replacement for tests, it is an obvious way to tell if our code is functioning as intended.
 
 ``` java
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static util.commons.networkbook.CollectionUtil.requireAllNonNull;
 //...
 public class RemarkCommand extends Command {
     //...
@@ -142,7 +142,7 @@ Now let’s move on to writing a parser that will extract the index and remark f
 
 Create a `RemarkCommandParser` class in the `seedu.address.logic.parser` package. The class must extend the `Parser` interface.
 
-![The relationship between Parser and RemarkCommandParser](../images/add-remark/RemarkCommandParserClass.png)
+![The relationship between Parser and RemarkCommandParser](../images/add-remark/ParserInterface.png)
 
 Thankfully, `ArgumentTokenizer#tokenize()` makes it trivial to parse user input. Let’s take a look at the JavaDoc provided for the function to understand what it does.
 
@@ -240,7 +240,7 @@ Let’s change `RemarkCommand` and `RemarkCommandParser` to use the new `Remark`
 
 Without getting too deep into `fxml`, let’s go on a 5 minute adventure to get some placeholder text to show up for each person.
 
-Simply add the following to [`seedu.address.ui.PersonCard`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-639834f1e05afe2276a86372adf0fe5f69314642c2d93cfa543d614ce5a76688).
+Simply add the following to [`ui.networkbook.PersonCard`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-639834f1e05afe2276a86372adf0fe5f69314642c2d93cfa543d614ce5a76688).
 
 **`PersonCard.java`:**
 
@@ -324,7 +324,7 @@ After the previous step, we notice a peculiar regression — we went from di
 ### Update `RemarkCommand` and `RemarkCommandParser`
 
 In this last step, we modify `RemarkCommand#execute()` to change the `Remark` of a `Person`. Since all fields in a `Person` are immutable, we create a new instance of a `Person` with the values that we want and
-save it with `Model#setPerson()`.
+save it with `Model#setItem()`.
 
 **`RemarkCommand.java`:**
 
@@ -346,7 +346,7 @@ save it with `Model#setPerson()`.
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), remark, personToEdit.getTags());
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setItem(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson));

@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+!include style.puml
+skinparam ArrowFontStyle plain
+
+start
+:Execute command;
+:Return command
+result to MainWindow;
+switch ()
+case ( [SortCommandResult] )
+    :Update status bar
+    **sort** text;
+case ( [FilterCommandResult] )
+    :Update status bar
+    **filter** text;
+case ( [else] )
+    :Do not update
+    status bar;
+endswitch
+stop
+
+@enduml

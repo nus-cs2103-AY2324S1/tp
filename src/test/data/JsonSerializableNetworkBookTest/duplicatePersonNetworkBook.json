@@ -1,0 +1,21 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phones": [ "94351253" ],
+    "emails": [ "alice@example.com" ],
+    "links": [ "paulice.sg" ],
+    "graduation": "AY2324-S1",
+    "courses": [ "Computer Science" ],
+    "specialisations": [ "Software Engineering" ],
+    "tags": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phones": [ "94351253" ],
+    "emails": [ "pauline@example.com" ],
+    "links": [ "paulice.sg" ],
+    "graduation": "AY2324-S1",
+    "courses": [ "Computer Science" ],
+    "specialisations": [ "Software Engineering" ],
+    "tags": [ "friends" ]
+  } ]
+}

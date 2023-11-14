@@ -4,49 +4,49 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":NetworkBookParser" as NetworkBookParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":VersionedNetworkBook" as VersionedNetworkBook MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+[-> LogicManager : execute("undo")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> NetworkBookParser : parseCommand("undo")
+activate NetworkBookParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+NetworkBookParser -> UndoCommand : new UndoCommand()
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> NetworkBookParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+NetworkBookParser --> LogicManager : u
+deactivate NetworkBookParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undoNetworkBook()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> VersionedNetworkBook : undo()
+activate VersionedNetworkBook
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+VersionedNetworkBook -> VersionedNetworkBook :resetData(previousData)
+VersionedNetworkBook --> Model :
+deactivate VersionedNetworkBook
 
 Model --> UndoCommand
 deactivate Model
 
-UndoCommand --> LogicManager : result
+UndoCommand --> LogicManager : command success
 deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
+UndoCommand -[hidden]-> LogicManager : command success
 destroy UndoCommand
 
 [<--LogicManager
