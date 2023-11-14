@@ -16,7 +16,6 @@ Given below are my contributions to the project:
 - [Link to My Code Contributins on tP Code Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jose%20miguel&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 ### Enhancements Implemented
-
 	- Added a Ui unique to npc_track
 		- Decided the color palette of the overall application (inspired by the hit video game 'Garry's Mod')
 		- Came up with the color palette of the person cards.
@@ -44,18 +43,25 @@ Given below are my contributions to the project:
 
 - Helped to contribute user stories, as well as filtering out what was needed for our project iterations for v1.2 and v1.3
 - Helped to make the video demos for both v1.2 and v1.3
+- Helped to facilitate meetings and helping to set out goals for each iteration
+- Contributed to ideas given during meetings.
 
 ### Contributions to the Developer Guide (DG) and UML Diagrams
 - Added extensions for use cases for attendance-marking commands.
 	- Specifically, added extensions for invalid statuses.
 - Added activity PUML diagrams for marking attendance and inputting participation.
+- Added considerations for implementing the attendance class with statuses, as well as other considerations.
 
 ### Review and Mentoring Contributions
 
-- Reviewed PR's accordingly.
+- Reviewed PR's given by teammates.
+- Facilitated, vetoed and helped to contribute ideas during meetings.
+- Merged PR's into the overall master branch/project.
+- Fixed and reasoned with some bugs given during the PE.
 
 ### Contributions Beyond the Project Team
 
 - Helped in the product demo and presentation for CS2101.
+- Gave my support ;)
 
 
