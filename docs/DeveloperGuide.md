@@ -305,6 +305,10 @@ To allow BayMeds to store a separate list of completed prescriptions to facilita
 
 Upon start up of BayMeds or after every command, BayMeds will check through the list of current prescriptions against a new `LocalDate.now()` to see if any of the end dates are beyond it (i.e. in the past). If it is, it will transfer the prescription over from one list to the other by deleting this prescription from the existing current `prescriptionList`, and adding it to the the `completedPrescriptionList`.
 
+Design considerations:
+
+We intentionaally chose to store completed prescriptions in its own `completedPrescriptionList.json` file, away from the original `prescriptionList.json`. By separating them into two different storages, we help to enhance security of the data as if users were to accidentally manually delete one of the files, the other would still be in tact, and the user would not lose their data in its entirety.
+
 ### Check prescription interaction feature
 
 The check prescription interaction feature is facilitated by the `AddCommandParser`.
@@ -602,12 +606,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Window size is automatically scaled strictly to a 16:9 ratio and **saved** upon start up. It will not be resizable.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   1. If you are using a screen of a different size, delete the `preferences.json` file and run BayMeds again.
 
 ### Deleting a medication
 
@@ -615,7 +616,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all medications using the `list` command. Multiple medications in the list.
 
-   1. Test case: `delete 1"`<br>
+   1. Test case: `delete 1`<br>
       Expected: Aspirin is deleted from the list. Details of the deleted medication shown in the Result Display.
 
    1. Test case: `delete 9`<br>
@@ -624,15 +625,14 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...`<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. To simimulate a corrupted file, feel free to edit the data inside `data/prescriptionList.json` and `data/CompletedPrescriptionList.json`. You may change the format entirely, or input an invalid value for one of the fields.
 
-1. _{ more test cases …​ }_
+   1. By design, if there are issues with the stored data files, BayMeds will begin with an empty prescription list.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -647,3 +647,22 @@ Given below are known issues and planned enhancements in the future.
 1. **When adding prescriptions**, if you name your prescriptions with numbers "1", "234" or "4 5 6", BayMeds will add this prescription as per normal. As these names do not properly identify the exact prescription stored in BayMeds, we will implement a fix for this in the future.
 1. **When taking prescriptions**, we will implement a feature that automatically reminds you when it is time to eat your medication.
    <br></br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort **
+
+Given below documents the tremendous efforts put in by each and every member of the BayMeds team.
+
+We implemented a combined total of 14 command features in BayMeds, to ensure that users have a comprehensive way to interact with their prescription lists. Apart from the basic functionalities of adding, deleting, editing and listing prescriptions, we have also expanded the product with several features. Users can find prescriptions easily either by keyword, or those that they have to consume today. Users are also able to view a list of completed prescriptions. We have also implemented the underlying logic infrastructure to faciliate the tracking of conflicting drugs. We have also added filtering functionalities that filter prescriptions that are running low in stock or about to expire.
+
+Apart from command related features, we have also implemented various implicit features, such as the automatic resetting of the consumption count. While we could have easily implemented an alternative version where users can just use the command reset, we decided to go above and beyond and make it much more convenient for users to track their prescriptions. By storing the relevant date information in the preferences.json, we enhanced the infrastructure to cater to the automatic date checking feature that occurs upon start up and after every command.
+
+Another implicit feature is the conversion of every field into an optional field, with the exception of the name. This is so that fast typists, or anyone who would like a convenient way to type can very easily manage their prescriptions with just their medication name. This means that even if they are uncertain o various information, such as the end date of the prescription, or how many pulls they have left in total, they are still able to input the prescription and continue tracking it with minimal details. This also caters to people with prescriptions that are conusmed "as and when required", as it provides flexibility with the usage of `Optionals`.
+
+We also expanded on the existing storage and model infrastructure to allow for the managing, interacting and tracking of the list of completed prescriptions. While we could have simply combined the completed prescription list into the same `json` as prescriptionList, we decided to put in the extra effort to separate them out, as mentioned in the design considerations section of the list completed feature. This involved adding new methods in both `Model` and `Storage` to interact with this completed prescriptions list. Apart from this, we also implemented an entirely new
+
+We also went ahead to revamp the UI of BayMeds. In our attempt to improve the aesthetics and enhance the user interactions and user experience, we created an entirely new UI. Apart from making the `commandResult` box more readable, we also included fields and their identifiers in the `prescriptionCard`, organised in a neat format. Using our knowledge of the importance of colours in visual communication, we added a functionality to allow the UI to switch colours to indicate the consumption status of the prescription, using a more striking colour (red) to indicate that the prescription has yet to be consumed.
+
+In line with efforts to enhance the aesthetics of the UI, we also proceeded to enhance the aesthetics of documentation. We adopted a consistent and aesthetic styling through the use of colours and icons, as well as formatting to improve the documentation from the original state to the new and improved BayMeds state.
+
