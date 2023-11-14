@@ -566,6 +566,10 @@ A check to ensure the entered student and lesson exists and that they are not al
 
 Then, `BiDirectionalMap#addMapping()` is called to create a map between the student and lesson. 
 
+<p style="text-align: center;">
+<puml src="diagrams/LinkSequenceDiagram.puml" alt="LinkSequenceDiagram" />
+</p>
+
 #### Design considerations
 **Aspect: How the mapping of students to lessons should be handled**
 * **Alternative 1:**: Store the lessons that a student has in the `Person` class as an `ArrayList<Lesson>`
