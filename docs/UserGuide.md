@@ -232,7 +232,7 @@ Here is a brief summary of the GUI components in MedBook.
 7. **Viewing Patient Records**:
    - Let us view the medical records of the first patient. Type in `view 1` and press Enter.
    - If no medical records were added for the first patient, you will see an empty **Medical Record List** as shown.
-     <br><img src="images/View.png" height="400"/>
+     <br><img src="images/View.png" height="300"/>
 
 Congratulations! You are now ready to explore MedBook on your own. Experiment with different features in the following section and discover the potential of MedBook!
 
@@ -340,6 +340,8 @@ The **domain** name must: <br>
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Patient Features
 
 #### Adding a patient: `addpatient`
@@ -364,12 +366,18 @@ His email and phone number is **johndoe@gmail.com** and **12345678** respectivel
 
 Screenshots:
 
-<img src="images/screenshots/addPatient.png" width="500" alt="AddPatient Screenshots">
-<img src="images/screenshots/addPatient%20-%20after.png" width="500" alt="AddPatient Screenshots">
+<pic src="images/screenshots/addPatient.png" width="300" alt="AddPatient Screenshots">
+Command
+</pic>
+<pic src="images/screenshots/addPatient%20-%20after.png" width="300" alt="AddPatient Screenshots">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Editing a patient: `editpatient`
 
@@ -380,7 +388,7 @@ Format: `editpatient PATIENTID PREFIX/NEWVALUE...`
 - Edits the details of the patient with the corresponding `PATIENTID`. <br>
 
 - Acceptable fields: `NAME`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`. <br>
-  
+
 <box type="info">
 
 **Note**: `NRIC` cannot be edited.
@@ -409,8 +417,12 @@ Examples:
 
 Screenshots:
 
-<img src="images/screenshots/editPatient.png" width="500">
-<img src="images/screenshots/editPatient%20-%20after.png" width="500">
+<pic src="images/screenshots/editPatient.png" width="300">
+Command
+</pic>
+<pic src="images/screenshots/editPatient%20-%20after.png" width="300">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -430,12 +442,17 @@ Example:
 
 Screenshots:
 
-<img src="images/screenshots/delete.jpg" width="500">
-<img src="images/screenshots/delete%20-%20after.jpg" width="500">
+<pic src="images/screenshots/delete.jpg" width="300">
+Command
+</pic>
+<pic src="images/screenshots/delete%20-%20after.jpg" width="300">
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Locating patients by keywords: `search`
 
@@ -471,12 +488,18 @@ Examples:
 
 Screenshots:
 
-<img src="images/screenshots/search.png" width="500">
-<img src="images/screenshots/search%20-%20after.png" width="500">
+<pic src="images/screenshots/search.png" width="300">
+Command
+</pic>
+<pic src="images/screenshots/search%20-%20after.png" width="300">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Listing all patients: `list`
 
@@ -516,12 +539,18 @@ Example:
 
 Screenshots:
 
-<img src="images/screenshots/pin.png" width="500">
-<img src="images/screenshots/pin%20-%20after.png" width="500">
+<pic src="images/screenshots/pin.png" width="300">
+Command
+</pic>
+<pic src="images/screenshots/pin%20-%20after.png" width="300">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Unpinning a patient: `unpin`
 
@@ -538,6 +567,8 @@ Examples:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Medical Record Features
 
@@ -560,12 +591,18 @@ Example:
 
 Screenshots:
 
-<img src="images/screenshots/addRecord.png" height="500">
-<img src="images/screenshots/addRecord%20-%20after.png" height="500">
+<pic src="images/screenshots/addRecord.png" height="300">
+Command
+</pic>
+<pic src="images/screenshots/addRecord%20-%20after.png" height="300">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Viewing patient medical records: `view`
 
@@ -589,12 +626,18 @@ Examples:
 
 Screenshots:
 
-<img src="images/screenshots/view.png" width="500">
-<img src="images/screenshots/view%20-%20after.png" width="500">
+<pic src="images/screenshots/view.png" width="300">
+Command
+</pic>
+<pic src="images/screenshots/view%20-%20after.png" width="300">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Editing a medical record: `editrecord`
 
@@ -633,6 +676,8 @@ Examples:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting a medical record: `deleterecord`
 
@@ -680,6 +725,8 @@ Examples:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Attaching files to a patient's medical record
 
 Attach local files to a patient's medical record by clicking on the **Attach** button located within each **Record Card**.
@@ -701,13 +748,21 @@ Attach local files to a patient's medical record by clicking on the **Attach** b
 
 Screenshots:
 
-<img src="images/screenshots/attachFile%20-%20buttonPress.png" height="400">
-<img src="images/screenshots/attachFile%20-%20selectFile.png" width="400">
-<img src="images/screenshots/attachFile%20-%20openFile.png" height="400">
+<pic src="images/screenshots/attachFile%20-%20buttonPress.png" height="250">
+Command
+</pic>
+<pic src="images/screenshots/attachFile%20-%20selectFile.png" width="300">
+Selecting File
+</pic>
+<pic src="images/screenshots/attachFile%20-%20openFile.png" height="250">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Appointment Features
 
@@ -725,8 +780,12 @@ Example:
 
 Screenshots:
 
-<img src="images/screenshots/addAppointment.png" width="500">
-<img src="images/screenshots/viewAppointment.png" width="500">
+<pic src="images/screenshots/addAppointment.png" width="300">
+Command
+</pic>
+<pic src="images/screenshots/viewAppointment.png" width="300">
+Output
+</pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -769,6 +828,8 @@ Format: `viewappointment`
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### General Features
 
@@ -819,6 +880,8 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
