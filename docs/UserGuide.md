@@ -92,7 +92,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 <div style="page-break-after: always;"></div>
 
 ### Terminologies / Symbols
-* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
+* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. `-name`.
 
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
@@ -184,13 +184,14 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. When used for 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. The `[KEYWORDS]` parameter can only be used after `list students`. When used for 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
 - `list` without specifying the `[LIST]` parameter defaults to showing the 📅 ___SCHEDULE list___.
+- Using the `[KEYWORDS]` parameter after `list` is not allowed!
 
 </box>
 
