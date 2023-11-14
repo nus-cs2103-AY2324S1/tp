@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs a `delcust INDEX` command;
+:Logic Manager passes command to AddressBookParser;
+:DeleteCommandParser parses the command;
+if () then ([Command is valid])
+:Parser extracts `INDEX` parameter from command;
+:Logic Manager executes DeleteCustomer(INDEX);
+:Customer data is deleted from the AddressBook;
+:CommandResult is returned;
+
+else ([Command is invalid])
+:Error for invalid command is thrown;
+
+endif
+:Results are displayed to user;
+
+stop
+
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditPropertyCommandParser" as EditPropertyCommandParser LOGIC_COLOR
+participant "command:EditPropertyCommand" as EditPropertyCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editprop 1 n/Skyview")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parse("editprop 1 n/Skyview")
+activate AddressBookParser
+
+create EditPropertyCommandParser
+AddressBookParser -> EditPropertyCommandParser :
+activate EditPropertyCommandParser
+
+EditPropertyCommandParser --> AddressBookParser
+deactivate EditPropertyCommandParser
+
+AddressBookParser -> EditPropertyCommandParser : parse("1 n/Skyview")
+activate EditPropertyCommandParser
+
+create EditPropertyCommand
+EditPropertyCommandParser -> EditPropertyCommand :
+activate EditPropertyCommand
+
+EditPropertyCommand --> EditPropertyCommandParser : command
+deactivate EditPropertyCommand
+
+EditPropertyCommandParser --> AddressBookParser : command
+deactivate EditPropertyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditPropertyCommandParser -[hidden]-> AddressBookParser
+destroy EditPropertyCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> EditPropertyCommand : execute()
+activate EditPropertyCommand
+
+EditPropertyCommand -> EditPropertyCommand : create(propertyToEdit, descriptor)
+activate EditPropertyCommand
+EditPropertyCommand --> EditPropertyCommand : editedProperty
+deactivate EditPropertyCommand
+
+EditPropertyCommand -> Model : setProp(prop, editedProp)
+
+EditPropertyCommand -> Model : updateFilteredPropertyList(ALL_PROPS)
+
+create CommandResult
+EditPropertyCommand -> CommandResult :
+activate CommandResult
+
+CommandResult --> EditPropertyCommand
+deactivate CommandResult
+
+EditPropertyCommand --> LogicManager : commandResult
+deactivate EditPropertyCommand
+
+[<--LogicManager : commandResult
+deactivate LogicManager
+@enduml

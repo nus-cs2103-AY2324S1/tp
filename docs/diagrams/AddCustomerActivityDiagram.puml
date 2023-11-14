@@ -1,0 +1,23 @@
+@startuml
+start
+:User executes add customer command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([User provided all required parameters])
+:Customer's name, budget, phone number, email are parsed;
+if () then ([characteristics provided])
+:Customer's characteristics is parsed;
+note left
+    For a customer, only its
+    characteristics are optional.
+end note
+else([else])
+endif
+#palegreen:New customer is returned;
+stop
+else([User failed to provide required parameters correctly])
+#pink:PropertyMatch displays an error;
+end
+@enduml

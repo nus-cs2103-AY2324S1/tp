@@ -1,0 +1,45 @@
+{
+  "properties" : [ {
+    "name" : "Aquavista",
+    "address" : "123 Orchid Lane, Singapore 456789",
+    "phone" : "94351253",
+    "price" : "123456",
+    "tags" : [ "pink" ]
+  }, {
+    "name" : "Skyvista",
+    "address" : "456 Sapphire Avenue, Singapore 987654",
+    "phone" : "98765432",
+    "price" : "8880000",
+    "tags" : [ "square", "garden" ]
+  }, {
+    "name" : "Horizonview",
+    "address" : "789 Palm Grove Road, Singapore 321012",
+    "phone" : "95352563",
+    "price" : "400000",
+    "tags" : [ ]
+  }, {
+    "name" : "Luxeloft",
+    "address" : "234 Amber Crescent, Singapore 567890",
+    "phone" : "87652533",
+    "price" : "100000",
+    "tags" : [ "garage" ]
+  }, {
+    "name" : "Riveria",
+    "address" : "567 Maple Lane, Singapore 109876",
+    "phone" : "94821224",
+    "price" : "4000000",
+    "tags" : [ ]
+  }, {
+    "name" : "Azure",
+    "address" : "101 Radiant Lane, Singapore 123456",
+    "phone" : "94821427",
+    "price" : "874000",
+    "tags" : [ ]
+  }, {
+    "name" : "Tranquilis",
+    "address" : "202 Shoreline Street, Singapore 654321",
+    "phone" : "94812442",
+    "price" : "321950",
+    "tags" : [ ]
+  } ]
+}

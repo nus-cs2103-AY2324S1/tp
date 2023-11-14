@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="PropertyMatch" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -46,14 +47,34 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <HBox spacing="20.0" style="-fx-background-color: #383838;" VBox.vgrow="ALWAYS">
+          <VBox HBox.hgrow="ALWAYS">
+            <VBox.margin>
+              <Insets bottom="5.0" left="10.0" top="5.0" />
+            </VBox.margin>
+            <VBox fx:id="customerList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="customerListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          </VBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          <VBox HBox.hgrow="ALWAYS">
+            <VBox.margin>
+              <Insets bottom="5.0" left="10.0" top="5.0" />
+            </VBox.margin>
+            <VBox fx:id="propertyList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <StackPane fx:id="propertyListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+            <StackPane fx:id="propertyStatusbarPlaceholder" VBox.vgrow="NEVER" />
+          </VBox>
+        </HBox>
+
       </VBox>
     </Scene>
   </scene>

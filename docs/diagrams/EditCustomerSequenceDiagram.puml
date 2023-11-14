@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCustomerCommandParser" as EditCustomerCommandParser LOGIC_COLOR
+participant "command:EditCustomerCommand" as EditCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editcust 1 n/Janet")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parse("edistcust 1 n/Janet")
+activate AddressBookParser
+
+create EditCustomerCommandParser
+AddressBookParser -> EditCustomerCommandParser :
+activate EditCustomerCommandParser
+
+EditCustomerCommandParser --> AddressBookParser
+deactivate EditCustomerCommandParser
+
+AddressBookParser -> EditCustomerCommandParser : parse("1 n/Janet")
+activate EditCustomerCommandParser
+
+create EditCustomerCommand
+EditCustomerCommandParser -> EditCustomerCommand :
+activate EditCustomerCommand
+
+EditCustomerCommand --> EditCustomerCommandParser : command
+deactivate EditCustomerCommand
+
+EditCustomerCommandParser --> AddressBookParser : command
+deactivate EditCustomerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCustomerCommandParser -[hidden]-> AddressBookParser
+destroy EditCustomerCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> EditCustomerCommand : execute()
+activate EditCustomerCommand
+
+EditCustomerCommand -> EditCustomerCommand : create(customerToEdit, descriptor)
+activate EditCustomerCommand
+EditCustomerCommand --> EditCustomerCommand : editedCustomer
+deactivate EditCustomerCommand
+
+EditCustomerCommand -> Model : setCustomer(customerToEdit, editedCustomer)
+
+EditCustomerCommand -> Model : updateFilteredCustomerList(ALL_CUST)
+
+create CommandResult
+EditCustomerCommand -> CommandResult :
+activate CommandResult
+
+CommandResult --> EditCustomerCommand
+deactivate CommandResult
+
+EditCustomerCommand --> LogicManager : commandResult
+deactivate EditCustomerCommand
+
+[<--LogicManager : commandResult
+deactivate LogicManager
+@enduml

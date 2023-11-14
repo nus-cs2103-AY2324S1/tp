@@ -1,0 +1,9 @@
+{
+  "properties" : [ {
+    "name" : "Aquavista",
+    "address" : "123 Orchid Lane, Singapore 456789",
+    "phone" : "94351253",
+    "price" : "invalid price",
+    "tags" : [ "pink" ]
+  } ]
+}

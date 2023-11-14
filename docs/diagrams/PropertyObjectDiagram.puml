@@ -1,0 +1,27 @@
+@startuml
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+package PropertyObjectDiagram {
+    Object "<u>:Property" as Property {
+    }
+
+    Object "<u>:PropName" as PropName {
+    }
+    Object "<u>:PropAddress" as PropAddress {
+    }
+    Object "<u>:PropPhone" as PropPhone {
+    }
+    Object "<u>:Price" as Price {
+    }
+    Object "<u>:Tag" as Tag {
+    }
+}
+
+PropName <-- Property : has <
+PropAddress <-- Property : has <
+PropPhone <-- Property : has <
+Price <-- Property : has <
+Tag <-- Property : has <
+
+@enduml

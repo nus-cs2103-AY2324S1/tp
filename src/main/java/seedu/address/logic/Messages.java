@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Person;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.property.Property;
+
 
 /**
  * Container for user visible messages.
@@ -14,8 +16,16 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX = "The customer index provided is invalid";
+
+    public static final String MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX = "The property index provided is invalid";
+
+    public static final String MESSAGE_CUSTOMERS_MATCH_OVERVIEW = "%1$d properties matched with customer ";
+
+    public static final String MESSAGE_PROPERTIES_MATCH_OVERVIEW = "%1$d customers matched with property ";
+    public static final String MESSAGE_CUSTOMERS_LISTED_OVERVIEW = "%1$d customers listed!";
+
+    public static final String MESSAGE_PROPERTIES_LISTED_OVERVIEW = "%1$d properties listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -32,20 +42,36 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code customer} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Customer customer) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(customer.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(customer.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
+                .append(customer.getEmail())
+                .append("; Budget: ")
+                .append(customer.getBudget())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        customer.getTags().forEach(builder::append);
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code property} for display to the user.
+     */
+    public static String format(Property property) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(property.getName())
+                .append("; Address: ")
+                .append(property.getAddress())
+                .append("; Phone: ")
+                .append(property.getPhone())
+                .append("; Price: ")
+                .append(property.getPrice())
+                .append("; Tags: ");
+        property.getTags().forEach(builder::append);
+        return builder.toString();
+    }
 }

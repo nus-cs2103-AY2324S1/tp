@@ -1,0 +1,27 @@
+@startuml
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+package CustomerObjectDiagram {
+    Object "<u>:Customer" as Customer {
+    }
+
+    Object "<u>:Name" as Name {
+    }
+    Object "<u>:Phone" as Phone {
+    }
+    Object "<u>:Email" as Email {
+    }
+    Object "<u>:Budget" as Budget {
+    }
+    Object "<u>:Tag" as Tag {
+    }
+}
+
+Name <-- Customer : has <
+Phone <-- Customer : has <
+Email <-- Customer : has <
+Budget <-- Customer : has <
+Tag <-- Customer : has <
+
+@enduml

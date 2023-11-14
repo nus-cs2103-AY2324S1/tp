@@ -1,0 +1,14 @@
+{
+  "customers": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "budget": "123456",
+    "tags": [ "pink" ]
+  }, {
+    "name": "Jack Tan",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "budget": "1234567"
+  } ]
+}

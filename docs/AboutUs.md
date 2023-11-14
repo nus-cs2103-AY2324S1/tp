@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Loh Jian Rong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jianrong7.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jianrong7)]
+[[portfolio](team/jianrong7.md)]
 
-* Role: Project Advisor
+* Role: Scheduling and Tracking, Integration
+* Responsibilities: Logic, UI
 
-### Jane Doe
+### Nicole Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicolengk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nicolengk)]
+[[portfolio](team/nicolengk.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code Quality
+* Responsibilities: UI, Logic
 
-### Johnny Doe
+### Sara Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/saraozn.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/saraozn)] [[portfolio](team/saraozn.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Jean Doe
+### Ferdinand Halim Santoso
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ferdihs.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ferdihs)]
+[[portfolio](team/ferdihs.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer and Tester
+* Responsibilities: Make sure the application runs properly
 
-### James Doe
+### Fredy Lawrence
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chrainx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/chrainx)]
+[[portfolio](team/chrainx.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentations
+* Responsibilities: Responsible for the quality of various project documents.
