@@ -311,6 +311,7 @@ Events added outside the current week are not visible! The application is stream
 #### 3.1.4 Deleting recurring event from user: `rmschedule user`
 
 Removes the specified recurring item from your schedule. Use it when your schedule changes!
+<br>If there are multiple recurring events with the same names, this command will the instance of the event that was added the earliest!</br>
 
 Format: `rmschedule user type/EVENT_TYPE en/EVENT_NAME`
 
@@ -369,6 +370,7 @@ If there are multiple time slots with the same names, the command will remove ti
 #### 3.1.5 Deleting non-recurring event from user: `rmevent user`
 
 Removes the specified event from your schedule. Use it when your plans changes!
+<br>If there are multiple non-recurring events with the same names, this command will the instance of the event that was added the earliest!</br>
 
 Format: `rmevent user en/EVENT_NAME`
 
@@ -685,13 +687,13 @@ Missing prefix(es) for en/ h/ r/ !
 
 * Timeslots added with this command will be green.
 * To add an event that lasts until the end of the day (midnight), set the end timing as `2400`.
-* You will not be allowed to add an event that clashes with any current or future events.
+* You will not be allowed to add an event that clashes with any current or future events. Tell your friends if they have clashes!
 
 </div>
 
 #### 3.2.8 Deleting recurring event from friend: `rmschedule`
 
-Removes the specified recurring item from the specified Person's schedule. Use it when they have a change in schedule!<br>If there are multiple schedules with the same names, this command will the instance of the event that was added the earliest!<br>
+Removes the specified recurring item from the specified Person's schedule. Use it when they have a change in schedule!<br>If there are multiple recurring events with the same names, this command will the instance of the event that was added the earliest!<br>
 
 Format: `rmschedule INDEX type/EVENT_TYPE en/EVENT_NAME`
 
@@ -766,7 +768,7 @@ If there are multiple time slots with the same names, the command will remove ti
 #### 3.2.9 Deleting non-recurring event from friend: `rmevent`
 
 Removes the specified event from the specified Person. Use this if there are a change in anyone's plans!<br>
-If there are multiple schedules with the same names, this command will the instance of the event that was added the earliest!<br>
+If there are multiple non-recurring events with the same names, this command will the instance of the event that was added the earliest!<br>
 
 Format: `rmevent INDEX en/EVENT_NAME`
 
@@ -940,7 +942,7 @@ No such event exists!
 
 #### 3.3.2 Remove reminder for non-recurring events: `rmReminder`
 
-Remove a reminder for a dated event from your schedule. You'll never be reminded again!
+Remove a reminder for a dated event from your schedule. You'll never be reminded about it again!
 
 Format: `rmReminder EVENT_NAME`
 - Remove reminder for an event titled `EVENT_NAME` in your schedule.

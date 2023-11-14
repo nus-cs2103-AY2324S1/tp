@@ -235,7 +235,7 @@ User can add a recurring event to their friend's timetable, such as a Module or 
 ### 4.3 Edit user details feature
 
 #### 4.3.1 Description
-User can edit and add their own details, such as their phone numbers and birthdays, and also their schedules using this command, with the command word `user` and the following prefixes:
+User can edit and add their own details, such as their phone numbers and birthdays using this command, with the command word `user` and the following prefixes:
 - `n/`: Name
 - `p/`: Phone number
 - `e/`: E-mail
@@ -272,7 +272,7 @@ In implementing the timetable model, we decided to use the OO domain model (OODM
 Given this description:\
 Each person has 1 schedule. A person is either the user or the user's friends. The schedule is viewed as a weekly timetable,
 which shows only the events for that are happening in the current week. The schedule consists of time blocks that are either recurring (module time slots or cca time slots)
-or non-recurring (dated events). All time slots have are displayed with a name, a start time and an end time.
+or non-recurring (dated events). All time slots are displayed with a name, a start time and an end time.
 The user can toggle reminders for one-off events, and can query when they can meet their friends, when both their schedules are free.
 A free time is also a timeslot in the schedule, but is not displayed hence does not have a name.
 
