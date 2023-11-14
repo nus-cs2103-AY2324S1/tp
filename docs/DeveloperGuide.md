@@ -174,45 +174,66 @@ When the user executes the `interaction` command, an `Interaction` is created an
 
 Interactions play a key role in the reminder feature, recall that a follow-up is made X weeks after the last interaction. The `Interaction` class has a `getFollowUpDate()` method that is used to calculate the date of the next follow up for the `Person`. It does this by getting the latest interaction date and adding the follow up period of the `Person` to it.
 
-### Dashboard Feature
+### Dashboard View
 
-Dashboard shows the statistics of the current address book as specified in the user stories or other agreed upon metrics. 
+The dashboard shows statistics of the user's client interactions, as well as upcoming follow-ups with clients. The dashboard view is a separate view that is mutually exclusive with the client view. The user can switch between the two views by entering the `list` and `dashboard` commands.
 
 #### Current Implementation
 
-It is currently implemented as a `DashboardCommand` that is executed by the `LogicManager` when the user enters the `dashboard` command. This command returns a `CommandResult` object that contains the following statistics:
-- Total number of interactions across all persons.
-- Percentage of person with `INTERESTED` outcome.
-- Percentage of person with `NOT_INTERESTED` outcome.
+The currently active view is managed by the `MainWindow` class. Depending on the `showDashboard` flag of the last `CommandResult`, the `MainWindow` will display either the `DashboardDisplay` or `ClientDisplay` object. By default, i.e. on launch, the dashboard view is shown first.
+
+Statistics shown on the dashboard currently include the following:
+- Breakdown of clients by interaction outcome
+  - `Uncontacted`: clients that have no interactions yet
+  - `Contacting`: clients that have at least one non-closing interaction (outcome is not `CLOSED`)
+  - `Closed`: clients that have at least one closing interaction (outcome is `CLOSED`)
+- Average number of interactions per client
+- Proportion of interactions by outcome
+- Number of clients by lead category (hot, warm, cold)
+
+The dashboard also shows the upcoming follow-ups with clients. The follow-ups are separated by date, sorted from earliest to latest. The follow-up date is calculated using the client's `lead` and the date of the latest interaction, see [Reminders](#Reminders) for more details.
+
+All data for statistics and follow-ups are retrieved from the `Dashboard` component.
 
 The following sequence diagram shows how the dashboard feature is currently implemented.
 ![Ui](images/UiSequenceDiagram.png)
 
 #### Design Considerations
 
+Currently, the dashboard only shows static data at a specific state in time. To achieve perceived dynamicism, any command that modifies the client list will switch the view to the client view. This is managed using the `showDashboard` flag mentioned previously. This will only work if there is only one instance of Connectify running at any time. If the data is modified from another instance of Connectify, the dashboard view will not be updated in real-time.
+
+In order to achieve real-time updates, we will need to implement a mechanism to track changes to the client data, and trigger the dashboard to update accordingly. However, this leads to another problem, which is the performance of the dashboard.
+
+As the amount of client data increases, the calculation of statistics and follow-ups may increase significantly. Therefore, the dashboard should be updated, and the statistics and reminders data recalculated, only when the dashboard view is actually shown, and data has been modified.
+
+The `Dashboard` component already has an `isDashboardDirty` flag to indicate if the dashboard data needs to be recalculated. However, due to time constraint, it is currently always set to `true` and not being used to track data changes to the client data. In the future, we can track changes to this flag, e.g. using observers, and update the dashboard accordingly.
+
 ### Viewing a client's full profile
 
 As we add more attributes and interactions with clients, we will need a better way to view all of the information associated with a client. Therefore instead of displaying all information in a `PersonCard` within the list of clients, we will need a new component to display the client profile in a better way.
 
-The new `ClientProfilePanel` UI component is the replacement for displaying client profiles. Beside the require and optional fields, the user can also see all of their past interactions with the client.
+#### Current Implementation
 
-The client profile to display is tracked using a `SimpleObjectProperty` inside a `Model`. Since a `SimpleObjectProperty` is an `ObservableValue`, we can add listeners to its change event and update our UI whenever the currently selected profile changes.
+The new `ClientProfilePanel` UI component is the replacement for displaying client profiles. Besides the required and optional fields, the user can also see all of their past interactions with the client.
 
-We currently support 2 ways of viewing a client's profile:
+The UI components uses the observer pattern. The active client profile to display is tracked using a `SimpleObjectProperty` inside a `Model`. Since a `SimpleObjectProperty` is an `ObservableValue`, we can add listeners to its change event and update our UI whenever the currently selected profile changes.
+
+We currently support 2 ways of manually selecting a client's profile to view:
 
 1. By clicking on a client's card from the client list
 2. By using the `view` command
 
 Both methods will update the currently selected client, which will then trigger a listener to update the UI to show the profile panel.
 
+In addition, any command that modifies a client's data (e.g. `interaction`, `edit` etc.) will also cause that client's profile to be set to active and shown.
+
 To exit out of the profile view, the user can enter the `list` command, which will hide the profile panel and restore the client list to occupy the full window width.
 
+### Reminders
 
-### Reminder feature
+#### Current Implementation
 
-#### Proposed Implementation
-
-The proposed Reminder mechanism is facilitated by `Reminder` and `UniqueReminderList` as shown below
+The Reminder mechanism is facilitated by `Reminder` and `UniqueReminderList` as shown below
 
 ![ReminderClassDiagram](images/ReminderClassDiagram.png)
 
