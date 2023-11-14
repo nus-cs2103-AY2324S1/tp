@@ -6,8 +6,11 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.ComparablePerson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 
 /**
  * Wraps all data at the address-book level
@@ -62,9 +65,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
+    public boolean hasPerson(ComparablePerson person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    public Person getPerson(ComparablePerson target) throws PersonNotFoundException {
+        requireNonNull(target);
+        for (Person person : persons) {
+            if (person.isSamePerson(target)) {
+                return person;
+            }
+        }
+        throw new PersonNotFoundException();
     }
 
     /**

@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Tags names only allows alphanumeric characters, spaces, and dashes.";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum} -]+$";
 
     public final String tagName;
 
@@ -18,8 +19,9 @@ public class Tag {
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
+     * @throws IllegalArgumentException if the tag does not have a valid name.
      */
-    public Tag(String tagName) {
+    public Tag(String tagName) throws IllegalArgumentException {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;

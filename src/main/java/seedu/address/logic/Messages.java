@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,10 +15,21 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+
+    public static final String MESSAGE_NO_STATUS_PREFIX = "Status is PENDING by default, do not enter `s/` \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_LEAVE_DISPLAYED_INDEX = "The leave index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_LEAVES_LISTED_OVERVIEW = "%1$d leaves listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+
+    public static final String EMPLOYEE_HEADER = "Employee: ";
+    public static final String TITLE_HEADER = "; Title: ";
+    public static final String START_HEADER = "; Start: ";
+    public static final String END_HEADER = "; End: ";
+    public static final String STATUS_HEADER = "; Status: ";
+    public static final String DESCRIPTION_HEADER = "; Description: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -45,6 +57,24 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code leave} for display to the user.
+     */
+    public static String format(Leave leave) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(EMPLOYEE_HEADER)
+                .append(leave.getEmployee().getName())
+                .append(TITLE_HEADER)
+                .append(leave.getTitle())
+                .append(START_HEADER)
+                .append(leave.getStart())
+                .append(END_HEADER)
+                .append(leave.getEnd())
+                .append(STATUS_HEADER)
+                .append(leave.getStatus());
         return builder.toString();
     }
 

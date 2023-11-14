@@ -16,16 +16,17 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alpha}][\\p{Alpha} \\d-/()]*$";
 
-    public final String fullName;
+    private final String fullName;
 
     /**
      * Constructs a {@code Name}.
      *
      * @param name A valid name.
+     * @throws IllegalArgumentException if the name contains illegal values
      */
-    public Name(String name) {
+    public Name(String name) throws IllegalArgumentException {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;

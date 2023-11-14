@@ -21,7 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeavesBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.leave.Leave;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -85,7 +87,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -152,9 +154,94 @@ public class AddCommandTest {
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public ObservableList<Leave> getFilteredLeaveList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Replaces leave book data with the data in {@code leavesBook}.
+         *
+         * @param leave
+         */
+        @Override
+        public void deleteLeave(Leave leave) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLeavesBook(ReadOnlyLeavesBook leavesBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if a leave with the same identity as {@code leave} exists in the leave book.
+         *
+         * @param leave
+         */
+        @Override
+        public boolean hasLeave(Leave leave) {
+            return false;
+        }
+
+        /**
+         * Adds the given leave.
+         * {@code leave} must not already exist in the leave book.
+         *
+         * @param leave
+         */
+        @Override
+        public void addLeave(Leave leave) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Replaces the given leave {@code target} with {@code editedPerson}.
+         * {@code target} must exist in the leave book.
+         * The leave identity of {@code editedLeave} must not be the same as another existing leave in the leave book.
+         *
+         * @param target
+         * @param editedLeave
+         */
+        @Override
+        public void setLeave(Leave target, Leave editedLeave) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        /**
+         * Returns the user prefs' address book file path.
+         */
+        @Override
+        public Path getLeavesBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Sets the user prefs' address book file path.
+         *
+         * @param leavesBookFilePath
+         */
+        @Override
+        public void setLeavesBookFilePath(Path leavesBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the LeavesBook
+         */
+        @Override
+        public ReadOnlyLeavesBook getLeavesBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredLeaveList(Predicate<Leave> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
