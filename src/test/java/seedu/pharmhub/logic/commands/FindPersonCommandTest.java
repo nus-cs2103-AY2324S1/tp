@@ -29,7 +29,6 @@ import seedu.pharmhub.model.person.Email;
 import seedu.pharmhub.model.person.NameContainsKeywordsPredicate;
 import seedu.pharmhub.model.person.Person;
 import seedu.pharmhub.model.person.Phone;
-import seedu.pharmhub.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -88,21 +87,14 @@ public class FindPersonCommandTest {
     public void execute_multipleKeywordAttributes_singlePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         List<String> nameKeywords = prepareNameKeywords("Alice Benson");
-        Set<Tag> tagsToFind = new HashSet<>(
-                Arrays.asList(
-                        new Tag("friends")
-                ));
+
         Set<Allergy> allergiesToFind = new HashSet<>(
                 Arrays.asList(
                         new Allergy(new Medicine("Penicillin"))
                 ));
 
-        FindPersonCommand command = new FindPersonCommand(nameKeywords, null, null, tagsToFind, allergiesToFind);
+        FindPersonCommand command = new FindPersonCommand(nameKeywords, null, null, allergiesToFind);
         expectedModel.updateFilteredPersonList(preparePredicate(nameKeywords));
-        expectedModel.updateFilteredPersonList(person -> person.getTags().stream()
-                .anyMatch(tag -> tagsToFind.stream()
-                        .anyMatch(checkTag -> checkTag.equals(tag)))
-        );
         expectedModel.updateFilteredPersonList(person ->
                 person.getAllergies().stream()
                         .anyMatch(allergy -> allergiesToFind.stream()
@@ -119,7 +111,7 @@ public class FindPersonCommandTest {
         List<String> nameKeywords = null;
         Phone phoneToFind = new Phone("95352563");
         Email emailToFind = new Email("heinz@example.com");
-        FindPersonCommand command = new FindPersonCommand(nameKeywords, phoneToFind, emailToFind, null, null);
+        FindPersonCommand command = new FindPersonCommand(nameKeywords, phoneToFind, emailToFind, null);
         expectedModel.updateFilteredPersonList(preparePredicate(nameKeywords));
         expectedModel.updateFilteredPersonList(person -> person.getPhone().equals(phoneToFind));
         expectedModel.updateFilteredPersonList(person -> person.getEmail().equals(emailToFind));
@@ -141,19 +133,15 @@ public class FindPersonCommandTest {
     public void toStringMethodMultipleAttributes() {
         List<String> nameKeywords = prepareNameKeywords("keyword");
         Email email = new Email("test@gmail.com");
-        Set<Tag> tags = new HashSet<>(
-                Arrays.asList(
-                        new Tag("friends")
-                ));
         Set<Allergy> allergies = new HashSet<>(
                 Arrays.asList(
                         new Allergy(new Medicine("Penicillin"))
                 ));
 
-        FindPersonCommand findCommand = new FindPersonCommand(nameKeywords, null, email, tags, allergies);
+        FindPersonCommand findCommand = new FindPersonCommand(nameKeywords, null, email, allergies);
         String expected =
                 FindPersonCommand.class.getCanonicalName() + "{nameKeywords=" + nameKeywords + ", email=" + email
-                        + ", tags=" + tags + ", allergies=" + allergies + "}";
+                        + ", allergies=" + allergies + "}";
         assertEquals(expected, findCommand.toString());
     }
 

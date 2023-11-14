@@ -14,7 +14,6 @@ import seedu.pharmhub.model.person.Email;
 import seedu.pharmhub.model.person.NameContainsKeywordsPredicate;
 import seedu.pharmhub.model.person.Person;
 import seedu.pharmhub.model.person.Phone;
-import seedu.pharmhub.model.tag.Tag;
 
 /**
  * Finds and lists all persons in PharmHub whose name contains any of the argument keywords.
@@ -26,7 +25,8 @@ public class FindPersonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: findp [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [no/ALLERGY]\n"
+            + "Parameters: findp [n/KEYWORD [MORE_KEYWORDS]…] [p/PHONE_NUMBER] [e/EMAIL] "
+            + "[no/KEYWORD [MORE_KEYWORDS]…]\n"
             + "At least one of the parameters must be specified.\n"
             + "Example: " + COMMAND_WORD + " n/alex Bernice Charlotte p/123456 no/Paracetamol Penicillin";
 
@@ -35,7 +35,6 @@ public class FindPersonCommand extends Command {
     private final Predicate<Person> nameContainsKeywordsPredicate;
     private final Phone phoneToFind;
     private final Email emailToFind;
-    private final Set<Tag> tagsToFind;
     private final Set<Allergy> allergiesToFind;
 
     /**
@@ -43,11 +42,10 @@ public class FindPersonCommand extends Command {
      * @param nameKeywords The name keywords of the person.
      * @param phoneToFind The phone to find.
      * @param emailToFind The email to find.
-     * @param tagsToFind The tags to find.
      * @param allergiesToFind The allergies to find.
      */
     public FindPersonCommand(List<String> nameKeywords,
-                             Phone phoneToFind, Email emailToFind, Set<Tag> tagsToFind, Set<Allergy> allergiesToFind) {
+                             Phone phoneToFind, Email emailToFind, Set<Allergy> allergiesToFind) {
         this.nameKeywords = nameKeywords;
         this.nameContainsKeywordsPredicate =
                 nameKeywords == null
@@ -56,14 +54,13 @@ public class FindPersonCommand extends Command {
 
         this.phoneToFind = phoneToFind;
         this.emailToFind = emailToFind;
-        this.tagsToFind = tagsToFind;
         this.allergiesToFind = allergiesToFind;
     }
 
     public FindPersonCommand(
             List<String> nameKeywords
     ) {
-        this(nameKeywords, null, null, null, null);
+        this(nameKeywords, null, null, null);
     }
 
     @Override
@@ -76,11 +73,6 @@ public class FindPersonCommand extends Command {
         Predicate<Person> emailMatches = person -> emailToFind == null
                 || person.getEmail().equals(emailToFind);
 
-        Predicate<Person> tagMatches = person -> tagsToFind == null
-                || person.getTags().stream()
-                .anyMatch(tag -> tagsToFind.stream()
-                        .anyMatch(checkTag -> checkTag.equals(tag)));
-
         Predicate<Person> allergyMatches = person -> allergiesToFind == null
                 || person.getAllergies().stream()
                 .anyMatch(allergy -> allergiesToFind.stream()
@@ -90,7 +82,6 @@ public class FindPersonCommand extends Command {
                 nameContainsKeywordsPredicate
                         .and(phoneMatches)
                         .and(emailMatches)
-                        .and(tagMatches)
                         .and(allergyMatches);
 
         model.updateFilteredPersonList(combined);
@@ -116,8 +107,6 @@ public class FindPersonCommand extends Command {
                 || phoneToFind.equals(otherFindCommand.phoneToFind))
                 && ((emailToFind == null && otherFindCommand.emailToFind == null)
                 || emailToFind.equals(otherFindCommand.emailToFind))
-                && ((tagsToFind == null && otherFindCommand.tagsToFind == null)
-                || tagsToFind.equals(otherFindCommand.tagsToFind))
                 && ((allergiesToFind == null && otherFindCommand.allergiesToFind == null)
                 || allergiesToFind.equals(otherFindCommand.allergiesToFind));
     }
@@ -135,9 +124,6 @@ public class FindPersonCommand extends Command {
         }
         if (emailToFind != null) {
             toStringBuilder.add("email", emailToFind);
-        }
-        if (tagsToFind != null) {
-            toStringBuilder.add("tags", tagsToFind);
         }
         if (allergiesToFind != null) {
             toStringBuilder.add("allergies", allergiesToFind);
