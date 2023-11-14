@@ -804,6 +804,7 @@ In enhancing the functionality of our flashcard system, we considered how users 
    * The pie chart will offer a clearer, more immediate visual representation of the user's success rate, making it easier to grasp their learning progress at a glance.
 
 **Sample Output:**
+
 |Before the update | ![img.png](images/Stats.png) |
 |:-----------------|-------------------:|
 |**After the update**| ![img.png](images/StatsChart.png) |
@@ -826,9 +827,11 @@ For advanced users who manually edit the data, they may accidentally introduce i
 ### Enhancement 6: Renaming `reveal` command to reduce ambiguity
 
 **Feature Flaw**
+<br>
 Currently, the `reveal` command is used to reveal or hide the translation of the flash card. However, it may be ambiguous to users as they may think that the command is used to reveal the word itself.
 
 **Proposed Enhancement**
+<br>
 Renaming the `reveal` command to `flip` to reduce ambiguity.
 
 
