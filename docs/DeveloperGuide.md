@@ -464,3 +464,64 @@ testers are expected to do more *exploratory* testing.
 
    1. Delete `addressbook.json` and `courses.json` files.<br>
       Expected: New json files are created with sample data.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+Overall, we are satisfied with our work in the team project and believe that we have put in a commensurate 
+amount of effort to 5 individual projects.
+
+The following are some of our achievements:
+
+1. Successfully adding and replacing simple fields (e.g. Telegram)
+
+Difficulty: **Easy**
+
+We started with these tasks to familiarise ourselves with the codebase and workflow.
+Overall, it was not difficult to add or remove simple fields, but there was some effort 
+in finding all instances of the field and updating them accordingly.
+
+2. Successfully adding the FreeTime field and corresponding findft command
+
+Difficulty: **Moderate**
+
+The representation of TAs' availability went through several iterations, especially
+with regards to how ot save the day of week. We eventually settled on using an array
+in the FreeTime object. The findft command had to be implemented from scratch in 
+finding TAs with the correct availability.
+
+3. Successfully implementing hour tracking features
+
+Difficulty: **Moderate**
+
+Though the Hour field is just a simple field, the hour command required us to work
+with the FilteredPersonList to update the hours of all TAs in the list. 
+
+4. Successfully representing courses in our app
+
+Difficulty: **Hard**
+
+This was the most challenging task as we had to come up with new architecture to
+model a Course with its corresponding details and Lessons. It was also challenging
+to navigate the storage system to create a `courses.json` file which advanced users
+could edit to add their own courses. While AB3 deals with only one entity type, 
+TAManager deals with two types which were also linked to each other.
+
+5. Successfully implementing default course features
+
+Difficulty: **Moderate**
+
+The default course feature required us to dive into the architecture of UserPrefs
+and the startup logic of the app. We had to ensure that the default course was
+saved and loaded correctly, and that the list of TAs was filtered correctly.
+
+6. Ensuring consistency between our product and the UG/DG
+
+Difficulty: **Easy**
+
+We went through many iterations of the UG and DG based on our own testing and 
+feedback from others. We wanted to make sure that the information they contained 
+are accurate and consistent with our product. Though it was not difficult, 
+it was a time-consuming process.
+    
+    
