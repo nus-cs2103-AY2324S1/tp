@@ -260,7 +260,7 @@ The `delete` command deletes an existing `Person` object from MedBook.
 
 ---
 
-### Searching a Patient
+### Searching for Patients
 
 #### Overview
 
@@ -274,7 +274,7 @@ The `search` command filters the list of patients using one or more keywords.
 - `NameContainsKeywordsPredicate#test(Person)`
 - `PersonListPanel`, `PersonCard`
 
-#### Implementations Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `FindCommandParser` checks for existence of the keyword(s) and creates an array of keywords.
 2. **Create Predicate Object**: A `NameContainsKeywordsPredicate` object is instantiated during `FindCommandParser#parse(String)` and passed over to the `FindCommand`.
@@ -297,7 +297,7 @@ The `pin` command pins a patient to the **Pinned Patient List**
 - `Model#setPerson(Person, Person)`, `AddressBook#setPerson(Person, Person)`, `UniquePersonList#setPerson(Person, Person)`
 - `PinnedPersonListPanel`, `PersonCard`
 
-#### Implementations Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `PinCommandParser` checks for the validity of the `Person` index.
 2. **Create Index Object**: An `Index` object of the `Person` is instantiated during `PinCommandParser#parse(String)` and passed over to the `PinCommand`.
@@ -320,7 +320,7 @@ The `unpin` command unpins a patient from the **Pinned Patient List**
 - `Model#setPerson(Person, Person)`, `AddressBook#setPerson(Person, Person)`, `UniquePersonList#setPerson(Person, Person)`
 - `PinnedPersonListPanel`, `PersonCard`
 
-#### Implementations Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `UnpinCommandParser` checks for the validity of the pinned `Person` index.
 2. **Create Index Object**: An `Index` object is instantiated during `UnpinCommandParser#parse(String)` and passed over to the `UnpinCommand`.
@@ -454,7 +454,7 @@ The `deleterecord` command deletes an existing `Record` object from MedBook.
 
 The `view` command displays the list of records of the patient being viewed.
 
-#### Related class and methods
+#### Related Classes and Methods
 
 - `ViewCommandParser#parse(String)`
 - `ViewCommand#execute(Model)`
@@ -472,7 +472,7 @@ The `view` command displays the list of records of the patient being viewed.
 
 ---
 
-### Searching a Record
+### Searching for Records
 
 #### Overview
 
@@ -486,7 +486,7 @@ The `searchrecord` command filters the list of records of the patient being view
 - `RecordContainsKeywordsPredicate#test(Record)`
 - `RecordListPanel`, `RecordCard`
 
-#### Implementations Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `FindRecordCommandParser` checks for existence of the keyword(s) and creates an array of keywords.
 2. **Create Predicate Object**: A `RecordContainsKeywordsPredicate` object is instantiated during `FindRecordCommandParser#parse(String)` and passed over to the `FindRecordCommand`.
@@ -982,11 +982,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Preconditions**: There is at least one record entry in the patient
 - **Main Success Scenario (MSS)**:
 
-1.  User views a patient’s medical records (UC10).
-2.  User requests to attach a file to a record of a patient.
-3.  User selects a file.
-4.  MedBook saves the file to the medical record.<br>
-    Use case ends.
+  1.  User views a patient’s medical records (UC10).
+  2.  User requests to attach a file to a record of a patient.
+  3.  User selects a file.
+  4.  MedBook saves the file to the medical record.<br>
+      Use case ends.
 
 - **Extension**:
 - 3a. User does not choose a file.
