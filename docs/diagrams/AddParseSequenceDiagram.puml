@@ -16,14 +16,14 @@ AddCommandParser -> ParserUtil : parseModuleCode("CS2040S")
 activate ParserUtil
 ParserUtil --> AddCommandParser : moduleCode:ModuleCode
 
-AddCommandParser -> ParserUtil : parseModuleCode("1")
-ParserUtil --> AddCommandParser : moduleCode:ModuleCode
+AddCommandParser -> ParserUtil : parseYear("1")
+ParserUtil --> AddCommandParser : y:Year
 
-AddCommandParser -> ParserUtil : parseModuleCode("1")
-ParserUtil --> AddCommandParser : moduleCode:ModuleCode
+AddCommandParser -> ParserUtil : parseSemester("1")
+ParserUtil --> AddCommandParser : s:Semester
 
-AddCommandParser -> ParserUtil : parseModuleCode("A")
-ParserUtil --> AddCommandParser : moduleCode:ModuleCode
+AddCommandParser -> ParserUtil : parseGrade("A")
+ParserUtil --> AddCommandParser : g:Grade
 
 deactivate ParserUtil
 

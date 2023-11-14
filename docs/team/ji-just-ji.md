@@ -20,6 +20,7 @@ Given below are my contributions to the project.
   * Enhanced `UniquePersonList` to `UniqueModuleList` to accommodate modules instead of person.
   * Enhanced `Person` object to `Module` object to accommodate for the purpose of the software.
   * Upgraded Json files to accomodate for `Module` objects 
+  * Created tests and `TypicalModules` and `ModuleBuilder` as backbone for testing commands.
 
 * **Documentation**:
   * User Guide:
@@ -30,9 +31,10 @@ Given below are my contributions to the project.
     * `calculateCap` Command: elaboration and cleanup
     * `calculateMCs` Command: elaboration and cleanup
   * Developer Guide:
-    * `Storage` section of Implementation and associated diagrams.
+    * `Module Storage` section of Implementation and overall associated diagrams.
     * `add` command section and associated diagrams.
     * Added use cases UC06 and UC07
+    * Contributed to creation of user stories in the ideation and the development stage.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): 4
