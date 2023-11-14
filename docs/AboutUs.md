@@ -5,55 +5,56 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We currently do not offer any means to contacting us, thank you for your understanding.
 
-## Project team
+## Team CS2103T-T11-2
 
-### John Doe
+### Jason Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jasonlcy-temp.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/JasonLCY-Temp)]
+[[portfolio](team/jasonlcy-temp.md)]
 
-* Role: Project Advisor
+* Role: Scheduling and tracking, CI Pipeline manager
+* Responsibilities: In charge of  `Interview`
 
-### Jane Doe
+### Tan Jing Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jingjie88.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jingjie88)]
+[[portfolio](team/jingjie88.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Improve `add`, `edit`, `delete` features
 
-### Jean Doe
+### Jony
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jonyxzx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jonyxzx)]
+[[portfolio](team/jonyxzx.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Improve find feature
+
+### Tan Kerway
+
+<img src="images/kiwibang.png" width="200px">
+
+[[github](http://github.com/kiwibang)]
+[[portfolio](team/kiwibang.md)]
+
+* Role: Developer
+* Responsibilities: Time man
+
+### Chen Xin-An
+
+<img src="images/chen1x.png" width="200px">
+
+[[github](http://github.com/Chen1x)]
+[[portfolio](team/chen1x.md)]
+
+* Role: Developer
+* Responsibilities: User Interface

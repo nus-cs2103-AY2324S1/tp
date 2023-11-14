@@ -9,14 +9,27 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddInterviewCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteInterviewCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditInterviewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindInterviewCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFreeTimeCommand;
+import seedu.address.logic.commands.ListInterviewCommand;
+import seedu.address.logic.commands.ListInterviewsDoneCommand;
+import seedu.address.logic.commands.ListInterviewsNotDoneCommand;
+import seedu.address.logic.commands.ListInterviewsTodayCommand;
+import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.RateCommand;
+import seedu.address.logic.commands.SortRateCommand;
+import seedu.address.logic.commands.SortTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -37,6 +50,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
+    @SuppressWarnings("checkstyle:Regexp")
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -68,6 +82,9 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindInterviewCommand.COMMAND_WORD:
+            return new FindInterviewCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -76,6 +93,42 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddInterviewCommand.COMMAND_WORD:
+            return new AddInterviewCommandParser().parse(arguments);
+
+        case DeleteInterviewCommand.COMMAND_WORD:
+            return new DeleteInterviewCommandParser().parse(arguments);
+
+        case RateCommand.COMMAND_WORD:
+            return new RateCommandParser().parse(arguments);
+
+        case ListInterviewCommand.COMMAND_WORD:
+            return new ListInterviewCommand();
+
+        case ListInterviewsTodayCommand.COMMAND_WORD:
+            return new ListInterviewsTodayCommand();
+
+        case ListFreeTimeCommand.COMMAND_WORD:
+            return new ListFreeTimeCommandParser().parse(arguments);
+
+        case EditInterviewCommand.COMMAND_WORD:
+            return new EditInterviewCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case SortRateCommand.COMMAND_WORD:
+            return new SortRateCommand();
+
+        case SortTimeCommand.COMMAND_WORD:
+            return new SortTimeCommand();
+
+        case ListInterviewsDoneCommand.COMMAND_WORD:
+            return new ListInterviewsDoneCommand();
+
+        case ListInterviewsNotDoneCommand.COMMAND_WORD:
+            return new ListInterviewsNotDoneCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

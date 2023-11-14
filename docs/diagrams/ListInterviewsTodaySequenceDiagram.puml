@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "lit:ListInterviewsTodayCommand" as ListInterviewsTodayCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list-i-today")
+activate LogicManager
+
+LogicManager --> AddressBookParser : parseCommand("list-i-today")
+activate AddressBookParser
+
+create ListInterviewsTodayCommand
+AddressBookParser --> ListInterviewsTodayCommand
+activate ListInterviewsTodayCommand
+
+ListInterviewsTodayCommand --> AddressBookParser
+deactivate ListInterviewsTodayCommand
+
+AddressBookParser --> LogicManager : lit
+deactivate AddressBookParser
+
+LogicManager --> ListInterviewsTodayCommand : execute(model)
+activate ListInterviewsTodayCommand
+
+
+ListInterviewsTodayCommand --> Model : updateFilteredInterviewList(predicate)
+activate Model
+
+Model --> ListInterviewsTodayCommand
+deactivate Model
+
+create CommandResult
+ListInterviewsTodayCommand -> CommandResult
+activate CommandResult
+
+CommandResult -> ListInterviewsTodayCommand
+deactivate CommandResult
+
+ListInterviewsTodayCommand --> LogicManager : result
+deactivate ListInterviewsTodayCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

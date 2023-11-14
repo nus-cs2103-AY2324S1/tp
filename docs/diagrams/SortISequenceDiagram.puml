@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "src:SortRateCommand" as SortRateCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniqueInterviewList" as UniqueInterviewList MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort-rate")
+activate LogicManager
+
+LogicManager --> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser
+
+create SortRateCommand
+AddressBookParser --> SortRateCommand
+activate SortRateCommand
+
+SortRateCommand --> AddressBookParser
+deactivate SortRateCommand
+
+AddressBookParser --> LogicManager : Command
+deactivate AddressBookParser
+
+LogicManager --> SortRateCommand : execute(model)
+activate SortRateCommand
+
+SortRateCommand --> Model : sortInterviewList(comparator)
+activate Model
+
+Model --> AddressBook : sortInterview(comparator)
+activate AddressBook
+
+AddressBook --> UniqueInterviewList : sort(comparator)
+activate UniqueInterviewList
+
+UniqueInterviewList --> AddressBook
+deactivate UniqueInterviewList
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> SortRateCommand
+deactivate Model
+
+SortRateCommand --> LogicManager
+deactivate SortRateCommand
+
+[<--LogicManager : CommandResult
+destroy SortRateCommand
+deactivate LogicManager
+@enduml

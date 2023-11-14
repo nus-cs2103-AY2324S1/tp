@@ -1,0 +1,24 @@
+@startuml
+skinparam activityBackgroundColor LightYellow
+skinparam activityBorderColor Blue
+skinparam activityArrowColor Black
+skinparam activityArrowFontSize 10
+skinparam activityFontSize 12
+
+start
+
+:User uses the FindApplicant command;
+
+if () then ([command format is invalid])
+    :Show invalid command
+    error message;
+
+else ([else])
+    :Show filtered applicant
+    list and number of
+    applicants found;
+endif
+
+stop
+
+@enduml
