@@ -358,7 +358,6 @@ Restrictions:
 Examples:
 * `elist` followed by `edelete 2` deletes the 2nd event in the event list.
 * `efind n/Beach cleaning` followed by `edelete 1` deletes the 1st event in the results of the `efind` command
-* `efind Beach cleaning` followed by `edelete 1` deletes the 1st event in the results of the `efind` command (tentative feature)
 
 #### Edit the details of an event: `eedit`
 
