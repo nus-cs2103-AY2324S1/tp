@@ -32,7 +32,7 @@ Given below are my contributions to the project:
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=xenosf&breakdown=true)
 * **Documentation**:
     * User Guide:
-        * Added initial documentation for [sorting command](../UserGuide.md#sort-contacts-list-sort-by-order).
+        * Added initial documentation for [sorting command](../UserGuide.md#sort-contacts-list-sort-by-field-name-order-ascdesc).
         * Wrote [Getting Started section](../UserGuide.md#getting-started).
         * Added documentation for previously undocumented commands: `list`, `clear`, `help`, `exit`
         * Cosmetic changes to introduction section and overall formatting
@@ -44,10 +44,10 @@ Given below are my contributions to the project:
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [PR #93](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/93), [PR #101](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/101), [PR #255](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/255), [PR #256](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/256)
 * **Contributions to team-based tasks**:
-    * Wrote summary section of [NetworkBook README](../../README.md)
+    * Wrote summary section of [NetworkBook README](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/README.md)
     * Updated [landing page](../index.md)
     * Took screenshots for the [User Guide](../UserGuide.md)
-    * Smoke test on MacOS
-    * Review code quality
+    * Smoke tested on MacOS
+    * Reviewed code quality
 * **Contributions outside the project**:
     * Found and reported 13 bugs in another team's project ([Bug reports](https://github.com/xenosf/ped/issues))
