@@ -577,9 +577,9 @@ Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and [email address](#glossary) of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
 
-The following image shows a successful execution of the `edit A0249112A n/Bob` command.
+The following image shows a successful execution of the `edit` command.
 
-<img src="images/edit-success.png" alt="result for `edit A0249112A n/Bob" width="700" /> <br>
+<img src="images/edit-success.png" alt="result for `edit A0245234A n/Bob" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
