@@ -89,6 +89,7 @@ supervisors and subordinates.
 3. Both employees that are either `manager` or `subordinate` can have multiple `manager` in charge of them.
 4. An employee could have no designated "manager" responsible for overseeing them.
 5. A `manager` employee could not edit their `role` and `name` attribute when he or she is in charge of any subordinates.
+6. Cyclical manager-subordinate relationship between `employee` objects who are `manager` is allowed.
 
 ### Usage Instructions
 
@@ -104,11 +105,12 @@ When enrolling a new employee in ManageHR, you can also establish manager-subord
 #### Editing an Existing Employee with Manager-Subordinate Relationships
 When editing an existing employee in ManageHR, you can also establish or modify manager-subordinate relationships. Follow these steps:
 1. Include `r/ROLE` into `edit` command to change the current `role` of the employee.
-
     - The employee can only change his or her `role` from `manager` to `subordinate` only if he or she has no employees under his or her supervision.
     - The name of the employee can only be edited if he or she is a `manager` with no employees under his or her supervision.
 2. Include `m/MANAGER_NAME…` into the `edit` command. This will place the employee to be under that `manager`.
     - The `MANAGER_NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
+3. `Employee` who are `manager` can edit their role to be `manager` again without violating any of the Manaer-Subordinate constraint
+since their hierarchy level still remains constant.
 
 #### Deleting an Existing Employee with Manager-Subordinate Relationships
 When deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
