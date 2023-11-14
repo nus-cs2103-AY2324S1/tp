@@ -717,7 +717,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a musician with only compulsory fields
 
    1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`  
-        **Expected:** New Musician is added to the Musician List with the details
+        **Expected:** New Musician is added to the Musician List with the details.
 
 2. Adding a musician with missing fields
     1. Test case: `add n/Heon Land e/Heonland@music.com`  
