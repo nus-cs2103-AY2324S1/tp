@@ -49,10 +49,10 @@ Given below are my contributions to the project.
     * Added the ***If you're new*** sections and other tips which to help less technical readers (Pull request [\#194](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/194), [\#207](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/207), [\#218](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/218))
     * Added ***Glossary*** section to define technical terms used in the UG [\#220](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/220) 
   * Developer Guide:
-    * Added user stories (Pull request [\#16](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/16)
+    * Added user stories (Pull request [\#16](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/16))
     * Added uses cases (Pull request [\#22](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/22), [\#240](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/240))  
     * Added implementation details of the `interaction` feature (Pull request [\#78](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/78))
-    * Added implementation feature of the `edit single field` feature (Pull request [\#240](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/240)
+    * Added implementation feature of the `edit single field` feature (Pull request [\#240](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/240))
     * Tweaked Model diagram to be less complex and more comprehensible (Pull request [\#221](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/221))
 
 * **Community**:
