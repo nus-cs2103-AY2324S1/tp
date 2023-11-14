@@ -174,15 +174,6 @@ When the user executes the `interaction` command, an `Interaction` is created an
 
 Interactions play a key role in the reminder feature, recall that a follow-up is made X weeks after the last interaction. The `Interaction` class has a `getFollowUpDate()` method that is used to calculate the date of the next follow up for the `Person`. It does this by getting the latest interaction date and adding the follow up period of the `Person` to it.
 
-```    
-public Optional<LocalDate> getFollowUpDate() {
-    ...
-    LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate();
-    int weeksToAdd = lead.getFollowUpPeriod();
-    return Optional.of(latestInteractionDate.plusWeeks(weeksToAdd));
-}
-```
-
 ### Dashboard Feature
 
 Dashboard shows the statistics of the current address book as specified in the user stories or other agreed upon metrics. 
