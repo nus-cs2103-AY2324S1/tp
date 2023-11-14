@@ -128,7 +128,7 @@ The `Model` component,
 <div markdown="span" class="alert alert-info">:information_source: **Note:** A simpler model of the Person class is given below. 
 Firstly the Addressbook a list of all the `Person` objects in the `AddressBook`. It also has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="700" />
 
 </div>
 
