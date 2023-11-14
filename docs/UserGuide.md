@@ -495,7 +495,7 @@ Examples:
 | `This person already exists in NUSCoursemates`   | You are editing a student to the same name as an existing student (case-sensitive). | Ensure that you do not enter a student with the same name.                                                                                |
 | `Invalid command format! `                       | Some of the essential [parameters](#glossary) such as `INDEX` could be missing.     | Follow the Command Format as stated above.                                                                                                |
 | `Unknown command `                               | The `edit` command may be spelled incorrectly or not entirely in lowercase.         | Verify that you've spelled the `edit` command correctly. It should be in lowercase.                                                       |
-| `The person index provided is invalid`           | You have entered an invalid index.                                                  | Ensure that the index entered is within the total number of students in NUSCoursemates                                                    |
+| `The person index provided is invalid`           | You have entered an invalid index.                                                  | Ensure that the index entered is within the total number of students in NUSCoursemates.                                                   |
 | `At least one field to edit must be provided. `  | You need to input at least one field.                                               | Include at least one of the optional field.                                                                                               |
 | `Person XYZ doesn't have Course XYZ!`            | You are trying to edit a course that the person does not have.                      | Edit another course that the person has.                                                                                                  |
 | Errors regarding wrong [field](#glossary) inputs | Invalid inputs may be entered.                                                      | Cross-reference the constraints associated with each [field](#glossary) using the [Input Table](#input-table) for additional information. |
@@ -529,11 +529,11 @@ Examples:
 
 **Here's what to do when you encounter errors:**
 
-| Errors Encountered                     | Reason                                                                        | Solution                                                                               |
-|----------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| `The person index provided is invalid` | You have entered an invalid index.                                            | Ensure that the index entered is within the total number of students in NUSCoursemates |
-| `Invalid command format! `             | You might have left the index input [field](#glossary) empty.                 | Ensure that you have entered an index input after `delete`.                            |
-| `Unknown command `                     | The `delete` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `delete` command correctly. It should be in lowercase.  |
+| Errors Encountered                     | Reason                                                                        | Solution                                                                                |
+|----------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `The person index provided is invalid` | You have entered an invalid index.                                            | Ensure that the index entered is within the total number of students in NUSCoursemates. |
+| `Invalid command format! `             | You might have left the index input [field](#glossary) empty.                 | Ensure that you have entered an index input after `delete`.                             |
+| `Unknown command `                     | The `delete` command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the `delete` command correctly. It should be in lowercase.   |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -660,15 +660,15 @@ Examples:
 
 Case-sensitivity is considered when sorting similar names. This table shows how similar names of different cases are sorted:
 
-| Sorted Order |   Name    | Justification                                                                                |
-|:------------:|:---------:|----------------------------------------------------------------------------------------------|
-|   1 (Top)    |   john    | Lowercase letters come before uppercase letters. <br/> Therefore, 'john' precedes 'JOHN'     |
-|      2       |   JOHN    | Uppercase letters come after lowercase letters                                               |
-|      3       |  JOHN 1   | 'JOHN 1' is longer, so it comes after its prefix 'JOHN' (case sensitivity is not considered) |
-|      4       |  JOhN 2   | Numbers are sorted in order, so '2' comes after '1'                                          |
-|      5       |  JOHN 2   | The third character, 'H', is an uppercase letter that comes after 'h' in 'JOhN 2'            |
-|      6       | john cena | The letters in the alphabet come after numbers                                               |
-|  7 (Bottom)  |   join    | As 'i' comes after 'h', 'join' comes after all names with 'h' as the third character         |
+| Sorted Order |   Name    | Justification                                                                                 |
+|:------------:|:---------:|-----------------------------------------------------------------------------------------------|
+|   1 (Top)    |   john    | Lowercase letters come before uppercase letters. <br/> Therefore, 'john' precedes 'JOHN'.     |
+|      2       |   JOHN    | Uppercase letters come after lowercase letters.                                               |
+|      3       |  JOHN 1   | 'JOHN 1' is longer, so it comes after its prefix 'JOHN' (case sensitivity is not considered). |
+|      4       |  JOhN 2   | Numbers are sorted in order, so '2' comes after '1'.                                          |
+|      5       |  JOHN 2   | The third character, 'H', is an uppercase letter that comes after 'h' in 'JOhN 2'.            |
+|      6       | john cena | The letters in the alphabet come after numbers.                                               |
+|  7 (Bottom)  |   join    | As 'i' comes after 'h', 'join' comes after all names with 'h' as the third character.         |
 
 **Format:** `sort name-descending` 
 * Sorts students by their names in reverse alphabetical order. 
@@ -948,7 +948,7 @@ Click on '**Ctrl**' + '**Alt**' + '**T**' keys simultaneously
 
 | Term                      | Description                                                                                                                                                                                                                                                                                            |
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Alphanumeric              | **Alphanumeric:** Consists of letters and/or numerals                                                                                                                                                                                                                                                  |
+| Alphanumeric              | **Alphanumeric:** Consists of letters and/or numerals.                                                                                                                                                                                                                                                 |
 | CLI                       | **Command Line Interface (CLI):** A text-based interface that allows users to interact with a computer or software by entering text commands. It's often preferred by power users and developers for its efficiency and scriptability.                                                                 |
 | Field                     | **Field:** In the context of data, a field refers to a specific piece of information within a record or data structure. Fields are used to organise and store data in a structured manner, and they are often associated with a particular type or attribute.                                          |
 | GUI                       | **Graphical User Interface (GUI):** A user interface that utilises graphical elements such as icons, buttons, windows, and menus to allow users to interact with software or applications. GUIs are known for their visual appeal and user-friendliness.                                               |
@@ -958,7 +958,7 @@ Click on '**Ctrl**' + '**Alt**' + '**T**' keys simultaneously
 | MAX_INT                   | **Integer.MAX_VALUE (MAX_INT):** Represents the maximum positive integer value that can be represented in Java (i.e., 2147483647).                                                                                                                                                                     |
 | Parameter                 | **Parameter:** In the context of software, a parameter is a variable or value that is passed into a function, method, or command. Parameters are used to customise the behavior of the function or command.                                                                                            |
 | Prefix                    | **Prefix:** The initial letter followed by a slash ("/"), indicating specific operations like "n/" for name, "p/" for phone number, "e/" for email, etc.                                                                                                                                               |
-| Unsigned Positive Integer | **Unsigned Positive Integer:** An integer without the positive or negative sign. e.g. 1, 2, 3, 4                                                                                                                                                                                                       |
+| Unsigned Positive Integer | **Unsigned Positive Integer:** An integer without the positive or negative sign. e.g. 1, 2, 3, 4.                                                                                                                                                                                                      |
 
 
 ### Email Format Requirement
