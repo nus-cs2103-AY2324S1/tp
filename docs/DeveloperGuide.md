@@ -54,7 +54,7 @@ title: Developer Guide
    6. [D.6. Improve Keyboard Functionality](#d6-improve-keyboard-functionality)
    7. [D.7. Implement an Integrated Dashboard](#d7-implement-an-integrated-dashboard)
 
----
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -77,7 +77,7 @@ The `.puml` files used to create diagrams in this document can be found in the [
 
 ### Architecture
 
-<img src="images/developer-guide/ArchitectureDiagram.png" width="280" />
+<img src="images/developer-guide/ArchitectureDiagram.png" style="display: block; margin: auto;" width="300" />
 
 The architecture diagram above explains the high-level design of the App.
 
@@ -113,7 +113,7 @@ For example, the `Logic` component's API is defined in `Logic.java`, and its fun
 
 Other components interact with a given component (e.g. `Logic`) by calling methods defined in the corresponding API interface (e.g. `Logic.java`) instead of calling methods directly on the implementation class (e.g. `LogicManager.java`). This is to ensure that the caller does not depend on the implementation details of the component. This is illustrated in the class diagram below:
 
-<img src="images/developer-guide/ComponentManagers.png" width="350" />
+<img src="images/developer-guide/ComponentManagers.png" style="display: block; margin: auto;" width="300" />
 
 ### UI Component
 
@@ -139,7 +139,7 @@ The UI component,
 
 The following is a class diagram of the `UI` component:
 
-<img src="images/developer-guide/UiClassDiagram.png" width="900" />
+<img src="images/developer-guide/UiClassDiagram.png" style="display: block; margin: auto;" width="900" />
 
 The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`. These parts are always
 being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only visible to the user
@@ -162,7 +162,7 @@ The following is a partial class diagram of the `Logic` component:
 The following depicts the sequence of interactions within the `Logic` component taking the `execute("delete 1")` API
 call as an example:
 
-<img src="images/developer-guide/LogicSequenceDiagram.png" width="900"/>
+<img src="images/developer-guide/LogicSequenceDiagram.png" style="display: block; margin: auto;" width="700"/>
 
 The Logic component,
 
@@ -177,7 +177,7 @@ The Logic component,
 The following are other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user
 command:
 
-<img src="images/developer-guide/ParserClasses.png" width="600"/>
+<img src="images/developer-guide/ParserClasses.png" style="display: block; margin: auto;" width="600"/>
 
 For more details about command-specific parsing and execution, refer to "[Implementation](#implementation)".
 
@@ -200,7 +200,7 @@ The `Model` component,
 
 The following is a class diagram of the `Model` component:
 
-<img src="images/developer-guide/ModelClassDiagram.png" width="450" />
+<img src="images/developer-guide/ModelClassDiagram.png" style="display: block; margin: auto;" width="450" />
 
 
 ### Storage Component
@@ -220,13 +220,13 @@ The `Storage` component,
 
 The following is a class diagram of the `Storage` component:
 
-<img src="images/developer-guide/StorageClassDiagram.png" width="600"/>
+<img src="images/developer-guide/StorageClassDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 ### Common Classes
 
 Classes used by multiple components are in the `seedu.applicationbook.commons` package.
 
----
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -243,9 +243,9 @@ The `add` command allows the user to add job applications with various attribute
 
 The following sequence diagrams illustrate the process of parsing and execution for the `add` command:
 
-<img src="images/developer-guide/AddCommandParserSequenceDiagram.png" width="600" />
+<img src="images/developer-guide/AddCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600" />
 <br>
-<img src="images/developer-guide/AddCommandSequenceDiagram.png" width="400" />
+<img src="images/developer-guide/AddCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600" />
 
 `AddCommandParser` takes in a user input, checking for necessary parameters and their validity. A `Job` object is
 instantiated during `AddCommandParser::parse` and returned to the `AddCommand`. `AddCommand::execute` adds the new job
@@ -277,9 +277,9 @@ the job's attributes.
 
 The following sequence diagrams illustrate the process of parsing and execution for the `edit` command:
 
-<img src="images/developer-guide/EditCommandParserSequenceDiagram.png" width="600"/>
+<img src="images/developer-guide/EditCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 <br>
-<img src="images/developer-guide/EditCommandSequenceDiagram.png" width="400"/>
+<img src="images/developer-guide/EditCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 The `EditCommandParser` class parses the user input and creates an `EditCommand` object with the specified index and an
 `EditJobDescriptor` containing the new field values.
@@ -313,9 +313,9 @@ arguments for the command from the user input.
 
 The following sequence diagrams illustrate the process of executing a valid `delete` command:
 
-<img src="images/developer-guide/DeleteCommandParserSequenceDiagram.png" width="400"/>
+<img src="images/developer-guide/DeleteCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 <br>
-<img src="images/developer-guide/DeleteCommandSequenceDiagram.png" width="400"/>
+<img src="images/developer-guide/DeleteCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 The `DeleteCommandParser` class parses the user input and creates a `DeleteCommand` object with the specified index.
 If the user input does not conform to the expected format (e.g. the index is out of bounds), a `ParseException` is
@@ -345,7 +345,7 @@ The list command allows the user to view the list of all job applications.
 
 The following sequence diagram illustrates the process of execution for the command:
 
-<img src="images/developer-guide/ListCommandSequenceDiagram.png" />
+<img src="images/developer-guide/ListCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600" />
 
 The `ListCommand` class implements this command. It sets the predicate for the `filteredList` of `Model` to
 `PREDICATE_SHOW_ALL_JOBS` which evaluates any `Job` to true.
@@ -372,9 +372,9 @@ The `SortCommand` class implements this command. It accepts a `FieldComparator` 
 
 The following sequence diagrams illustrate the process of parsing and execution for the command:
 
-<img src="images/developer-guide/SortCommandParserSequenceDiagram.png" width="600"/>
+<img src="images/developer-guide/SortCommandParserSequenceDiagram.png"style="display: block; margin: auto;" width="600"/>
 <br>
-<img src="images/developer-guide/SortCommandSequenceDiagram.png" width="400"/>
+<img src="images/developer-guide/SortCommandSequenceDiagram.png" style="display: block; margin: auto;" width="400"/>
 
 
 
@@ -418,9 +418,9 @@ The find command allows the user to get a filtered list of job applications.
 
 The following sequence diagrams illustrate the process of parsing and invocation for the command:
 
-<img src="images/developer-guide/FindCommandParserSequenceDiagram.png" width="700"/>
+<img src="images/developer-guide/FindCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 <br>
-<img src="images/developer-guide/FindCommandSequenceDiagram.png" width="400"/>
+<img src="images/developer-guide/FindCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 The `FindCommand` class implements this command. Its constructor accepts a `CombinedPredicate` which will be set as the
 predicate when `Model::updateFilteredJobList` is called.
@@ -468,7 +468,7 @@ An `Interview` consists of:
 
 The following class diagram illustrates the structure of an `Interview`:
 
-<img src="images/developer-guide/InterviewClassDiagram.png" width="800"/>
+<img src="images/developer-guide/InterviewClassDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 #### Interview Commands
 The Interview commands are implemented with `InterviewCommand` and `InterviewCommandParser`.
@@ -490,16 +490,16 @@ There are 3 sub-commands to access and modify an `Interview`:
 The following class diagram illustrates the structure of an `InterviewCommand` and the sub-commands it is associated
 with:
 
-<img src="images/developer-guide/InterviewCommandClassDiagram.png" width="800"/>
+<img src="images/developer-guide/InterviewCommandClassDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 #### Interview Add Command
 The adding of an interview to a `Job` is implemented with `InterviewAddCommand` and `InterviewAddCommandParser`.
 
 The following sequence diagrams illustrate the process of parsing and execution for the `interview add` command:
 
-<img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" width="700" />
+<img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600" />
 <br>
-<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" width="500" />
+<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600" />
 
 When the `InterviewAddCommandParser::parse` is invoked by `InterviewCommandParser`, the `ArgumentTokenizer` class parses
 the arguments to determine the index of the `Job`, `interviewType`, `interviewDateTime` and `interviewAddress`. 
@@ -516,9 +516,9 @@ Deleting of an interview from a specified `Job` is implemented with `InterviewDe
 `InterviewDeleteCommandParser`.
 
 The following sequence diagrams illustrate the process of parsing and invocation for the command:
-<img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" width="700"/>
+<img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 <br>
-<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" width="500"/>
+<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" style="display: block; margin: auto;" width="600"/>
 
 When the `InterviewDeleteCommandParser::parse` is invoked by `InterviewCommandParser`, the `ArgumentTokenizer` class
 parses the arguments to determine the index of the `Interview` to be deleted and the index of the `Job` it 
@@ -561,7 +561,8 @@ During execution of `InterviewEditCommand`, the `interviewToBeEdited` and `edite
       take more time. Additionally, there are currently minimal commands to manage the interviews and adding an extra 
       layer may add unnecessary complication to the codebase.
 
----
+<div style="page-break-after: always;"></div>
+
 ## **Other Relevant Documentation**
 
 * [Documentation guide](Documentation.md)
@@ -569,6 +570,7 @@ During execution of `InterviewEditCommand`, the `interviewToBeEdited` and `edite
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
 ---
 
 ## **Appendix A: Requirements**
@@ -915,7 +917,7 @@ otherwise.
 * **Fields**: The attributes of a job application, namely company, role, status, deadline, job type, industry, and
   interview details.
 
----
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: Instructions for Manual Testing**
 
@@ -1135,7 +1137,7 @@ Given below are instructions to test the app manually.
 
        Expected: The help window opens.
 
----
+<div style="page-break-after: always;"></div>
 
 ## **Appendix C: Effort**
 
@@ -1146,9 +1148,7 @@ JavaFX is a GUI library that was briefly taught as part of our individual projec
 * **Learning how to use CSS:** We wanted to use CSS to customize the look and feel of the GUI. However, we had no prior experience with CSS and had to spend a significant amount of time learning how to use CSS to customize the GUI. We also had to learn how to use CSS with JavaFX as there were some differences between using CSS with JavaFX and using CSS with HTML.
 * **Overall Steep Learning Curve:** There are many intricacies within JavaFX that were not extensively covered in the tutorials provided. We had to do a lot of research to figure out how to implement JavaFX features. For example, we had to modify the `CommandResult` class to support updating the `JobDetailsPanel` whenever an interview is added, edited or deleted. 
 
-
-
----
+<div style="page-break-after: always;"></div>
 
 ## **Appendix D: Planned Enhancements**
 
