@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
 | `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
 | `***`    | Intermediate user | Handle departments                                   | Easily keep track of organizational structure                  |
-| ***`     | Intermediate user | Handle additional benefits like leave and salary     | Easily keep track of organizational incentive programs.        |
+| `**`     | Intermediate user | Handle additional benefits like leave and salary     | Easily keep track of organizational incentive programs.        |
 
 
 ### Use cases
