@@ -291,11 +291,11 @@ The following sequence diagram shows how the add patient works:
 ### Delete Patient/Doctor Feature
 
 This feature allows users to delete the desired patient or doctor based on the
-nric provided.
+NRIC provided.
 
 #### Implementation
 
-Implementation of the delete feature is similar to the original delete command, except that it is done with Ic instead
+Implementation of the delete feature is similar to the original delete command, except that it is done with nric instead
 of Index.
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
@@ -306,13 +306,15 @@ address book state.
 Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already
 done.
 
-Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for
+Step 3. The user types `delete` as the command, with the appropriate NRIC of the patient/doctor to be deleted, for
 example `delete S9567312G`.
 
 Step 4. The `deleteCommandParser` parses the delete command and creates a `deleteCommand` with the target Ic.
 
 Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the
 deleted Doctor/Patient.
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 ### Create New Appointment Feature
 
