@@ -19,7 +19,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Adding a contact: `add contact`](#adding-a-contact-add-contact)
   * [Deleting a contact: `delete contact`](#deleting-a-contact-delete-contact)
   * [Finding a contact: `find`](#finding-a-contact-find)
-  * [Adding a tag: `add tag`](#adding-a-tag-add-tag)
+  * [Adding tags: `add tag`](#adding-tags-add-tag)
   * [Deleting tags: `delete tag`](#deleting-tags-delete-tag)
   * [Adding a note to a contact: `add note`](#adding-a-note-to-a-contact-add-note)
   * [Deleting a note: `delete note`](#deleting-a-note-delete-note)
@@ -45,7 +45,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 3. Copy the file to the folder you want to use as the [home directory](#home-directory) for your KeepInTouch app.
 
-4. Open a command terminal, `cd` into the [home directory](#home-directory)(the folder where you put the jar file), and use the `java -jar keepintouch.jar` command to run the application. (A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
+4. Open a command terminal, `cd` into the [home directory](#home-directory), and use the `java -jar keepintouch.jar` command to run the application. (A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
 ![GUI example](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will show the list of all available commands.<br>
@@ -188,7 +188,7 @@ Examples:
 Successful output:
 ![find success output](images/success-outputs/find-output.png)
 
-### Adding a [tag](#tag): `add tag`
+### Adding [tags](#tag): `add tag`
 
 Adds one or more tags to a contact. Contact list will go back to showing all contacts upon successful addition.
 
@@ -207,7 +207,7 @@ Successful output:
 Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 
-### Deleting a [tag](#tag): `delete tag`
+### Deleting [tags](#tag): `delete tag`
 
 Deletes one or more tags to a contact. Contact list will go back to showing all contacts upon successful deletion.
 
