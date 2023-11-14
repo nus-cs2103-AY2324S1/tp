@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,51 +11,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wee Hung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weeehung.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://github.com/WeeeHung)]
+[[github](https://github.com/WeeeHung)]
+[[portfolio](team/weeehung.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
 
-### Jane Doe
+### Zhang Yiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nubnubyas.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nubnubyas)]
+[[portfolio](team/nubnubyas.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Janssen Lau
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kanna-1.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/kanna-1)] [[portfolio](team/kanna-1.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation + Code Quality
 
-### Jean Doe
+### Huang Yi Chee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hyc17003.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hyc17003)]
+[[portfolio](team/hyc17003.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wang Zhi, Wren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wzwren.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/wzwren)]
+[[portfolio](team/wzwren.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and Tracking

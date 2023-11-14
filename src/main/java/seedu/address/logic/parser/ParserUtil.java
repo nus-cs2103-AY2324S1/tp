@@ -4,16 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.enums.InputSource;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -51,6 +56,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String id} into a {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static Id parseId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
+        }
+        return new Id(trimmedId);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -63,6 +83,22 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String email} into a {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(trimmedEmail);
     }
 
     /**
@@ -81,44 +117,61 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String appointment} into an {@code Appointment}, if it exists.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code appointment} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Appointment parseAppointmentIfExists(Optional<String> appointment) throws ParseException {
+        if (appointment.isEmpty()) {
+            return null;
         }
-        return new Email(trimmedEmail);
+        return parseAppointment(appointment.get());
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String appointment} into an {@code Appointment}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code appointment} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (!Appointment.isValidAppointmentDelimit(trimmedAppointment, InputSource.USER_INPUT)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        try {
+            return Appointment.of(trimmedAppointment, InputSource.USER_INPUT);
+        } catch (BadAppointmentFormatException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String medHistory} into a {@code MedicalHistory}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code medHistory} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static MedicalHistory parseMedical(String medHistory) throws ParseException {
+        requireNonNull(medHistory);
+        String trimmedHistory = medHistory.trim();
+        if (!MedicalHistory.isValidMedicalHistory(trimmedHistory)) {
+            throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new MedicalHistory(trimmedHistory);
+    }
+
+    /**
+     * Parses {@code Collection<String> medHistories} into {@code Set<MedicalHistory>}.
+     */
+    public static Set<MedicalHistory> parseMedicals(Collection<String> medHistories) throws ParseException {
+        requireNonNull(medHistories);
+        final Set<MedicalHistory> historiesSet = new HashSet<>();
+        for (String historyName : medHistories) {
+            historiesSet.add(parseMedical(historyName));
+        }
+        return historiesSet;
     }
 }

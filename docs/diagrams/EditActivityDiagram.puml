@@ -1,0 +1,41 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:Enter edit command;
+:Parse arguments;
+
+if () then ([arguments valid])
+
+:Execute edit command;
+:Find Patient data;
+
+if () then ([patient data found?])
+
+:Create edited person with edit descriptor;
+:Execute edit operation in model;
+:Update filtered person list in model;
+:Return success message (MESSAGE_EDIT_PATIENT_SUCCESS);
+else ([no])
+
+:Notify user of failure;
+endif
+
+else ([no])
+
+:Notify user of failure;
+
+endif
+
+stop
+
+
+@enduml
+
+
+
+
+
+

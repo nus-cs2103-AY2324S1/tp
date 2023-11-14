@@ -1,0 +1,32 @@
+@startuml Delete Patient Data
+start
+
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+:Enter delete command;
+:Parse arguments;
+
+if () then ([arguments valid])
+
+:Execute delete command;
+:Find Patient data;
+
+if () then ([patient data found?])
+
+:Delete data;
+:Notify user of success;
+else ([no])
+
+:Notify user of failure;
+endif
+
+else ([no])
+
+:Notify user of failure;
+
+endif
+
+stop
+@enduml

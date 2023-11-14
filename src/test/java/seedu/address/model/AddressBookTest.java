@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -32,6 +31,13 @@ public class AddressBookTest {
     }
 
     @Test
+    public void constructor_withValidReadOnlyAddressBook() {
+        AddressBook newData = getTypicalAddressBook();
+        AddressBook newLogBook = new AddressBook(newData);
+        assertEquals(newData, newLogBook);
+    }
+
+    @Test
     public void resetData_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
     }
@@ -46,8 +52,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -73,14 +78,57 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void setPersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setPersons(null));
+    }
+
+    @Test
+    public void setPersons_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void addPersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addPerson(null));
+    }
+
+    @Test
+    public void addPersons_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        assertThrows(DuplicatePersonException.class, () -> addressBook.addPerson(newData.getPersonList().get(0)));
+    }
+
+    @Test
+    public void removePersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.removePerson(null));
+    }
+
+    @Test
+    public void removePersons_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        addressBook.removePerson(newData.getPersonList().get(0));
+        assertFalse(addressBook.equals(newData));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        assertEquals(newData.hashCode(), addressBook.hashCode());
     }
 
     @Test

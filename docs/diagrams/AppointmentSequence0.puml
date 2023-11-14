@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":PersonListPanel" as panel UI_COLOR
+Participant ":PersonCard" as personCardA UI_COLOR
+Participant "Model" as personA MODEL_COLOR
+
+[-> panel : updateItem(Alice, false)
+
+Create personCardA
+panel -> personCardA : new PersonCard(Alice)
+
+personCardA -> personA : Alice.getName()
+personA -> personCardA : Alice:Name
+
+personCardA -> personA : Alice.getPhone()
+personA -> personCardA : 1234:Phone
+
+alt Alice has appointment
+    personCardA -> personA : Alice.getAppointment()
+    personA -> personCardA : apptX
+    personCardA -> personA : apptX.toString()
+    personA -> personCardA
+    personCardA -> panel : PersonCard object
+    <- panel : end update
+else Alice does not have appointment
+    personCardA -> personA : Alice.getAppointment()
+    personA -> personCardA : //null//
+    personCardA -> panel : //null//.toString() throws NullPointerException
+    <- panel : NullPointerException
+end
+@enduml

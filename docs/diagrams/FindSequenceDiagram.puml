@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+title Find Sequence Diagram
+
+participant "addressBookParser:AddressBookParser" as Parser LOGIC_COLOR
+participant ":FindCommandParser" as FindParser LOGIC_COLOR
+participant ":FindCommand" as Command LOGIC_COLOR
+participant ":Model" as Model MODEL_COLOR
+
+[-> Parser: parseCommand("find n/Alex")
+Create FindParser
+Parser -> FindParser: parse(args)
+FindParser -> Model: get empty CompositePredicate
+Model -> FindParser: pred: CompositePredicate
+loop query has unparsed fields
+FindParser -> Model: pred.add(parsedPredicateValue)
+end
+Create Command
+FindParser -> Command: new FindCommand(pred)
+FindParser -[hidden]> Command
+destroy FindParser
+|||
+Command -> Parser
+<- Parser
+|||
+[-> Command: execute(model)
+Command -> Model: updateFilteredPersonList(pred)
+Command -> Model: updateFoundPersonList(pred)
+<- Command : Successful command execution
+<[hidden]- Command : Successful command execution
+destroy Command
+@enduml
