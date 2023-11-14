@@ -20,6 +20,8 @@ Given below are my contributions to the project.
   * Enhanced `UniquePersonList` to `UniqueModuleList` to accommodate modules instead of person.
   * Enhanced `Person` object to `Module` object to accommodate for the purpose of the software.
   * Upgraded Json files to accomodate for `Module` objects 
+  * Created tests and `TypicalModules` and `ModuleBuilder` as backbone for testing commands.
+
 
 * **Documentation**:
   * User Guide:
