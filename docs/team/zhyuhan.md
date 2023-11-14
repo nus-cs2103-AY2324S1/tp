@@ -23,6 +23,7 @@ These are my contributions:
   - Managed releases `v1.2.1` - `v1.3` (2 releases) on GitHub
 - **Documentation**:
   - User Guide:
+    - Catalogued known issues.
   - Developer Guide:
     - Added implementation details of the dashboard view and `view` command.
 - **Community**:
