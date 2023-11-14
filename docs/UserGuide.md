@@ -14,6 +14,8 @@ Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate d
 
 This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 <!-- TOC -->
@@ -58,6 +60,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
     * [Parameter](#parameter)
 <!-- TOC -->
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 TuitionConnect is a **desktop app** built for tutors and tutoring businesses to simplify the process of 
@@ -78,6 +81,8 @@ paired up with simple and beginner-friendly features, anyone can learn how to us
 :bulb: **Make the Switch Today!**
 Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** now!
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ## Using this guide
 If you're feeling a bit lost, worry not!
 This user guide is to assist you seamlessly incorporate this application into your private tutoring business operations.
@@ -96,9 +101,12 @@ the in-depth explanation for each command's format and use cases.
 At last, we have also included a [Command Summary](#command-summary) section for when you become proficient at using
 TuitionConnect to refer quickly to any commands that you may need!
 
-Still unsure about the more technical terms used in this guide? Fret not, as we also provide a [glossary](#glossary)
+Still unsure about the more technical terms used in this guide? Fret not, refer to the [glossary](#glossary)
 to better understand all the technical jargons!
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
+<div style="page-break-after: always;"></div>
 
 ## Symbols and Syntax
 
@@ -112,10 +120,15 @@ Throughout this User Guide, you might run into the following symbols and syntax.
 | `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
 | [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ## Layout
 The image below describes TuitionConnect's layout with some description for each component.
 ![Layout](images/Layout.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -127,6 +140,7 @@ The image below describes TuitionConnect's layout with some description for each
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TuitionConnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. The left list contains information about your tutees. The right list displays your teaching schedule for the next 7 days. Note how the app contains some sample data.<br>
+   <br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -139,6 +153,8 @@ The image below describes TuitionConnect's layout with some description for each
    * `delete 3` : Deletes the 3rd tutee shown in the current list.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+   [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ## Command Format
 
@@ -153,6 +169,8 @@ The image below describes TuitionConnect's layout with some description for each
 
 * Extraneous parameters added after commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
   e.g. if the command typed is `undo 123`, it will be interpreted as `undo`.
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ## Parameters Requirement
 Here are the [parameter](#glossary) requirements of commonly used parameters by [commands](#glossary) in the [**Features**](#features) section below.
@@ -174,6 +192,10 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 <br>
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 ### Viewing help : `help`
@@ -185,6 +207,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Sample Execution**: `help`
 
 ![Help after](images/HelpAfter.png)
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Adding a tutee : `add`
 
@@ -207,6 +231,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Sample Execution**: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
 
 ![Add after](images/Add%20after.png)
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Listing tutees : `list`
 
@@ -236,6 +262,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![list by day command](images/ListByDayCommand.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ### Finding a tutee : `find`
 
 **Description** : Find tutees quickly in your current list.
@@ -264,6 +292,7 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![findAfter](images/findAfter.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Editing a tutee : `edit`
 
@@ -290,6 +319,7 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![editAfter](images/editAfter.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Deleting a tutee: `delete`
 
@@ -309,6 +339,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![deleteAfter](images/deleteAfter.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ### Clearing all entries : `clear`
 
 **Description**: Clears all entries from your list to start from scratch.
@@ -321,6 +353,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Sample Execution**:  `clear`
 
 ![ClearCommand.png](images/ClearCommand.png)
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Marking a tutee as paid : `paid`
 
@@ -342,6 +376,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![paidexample](images/paidexample.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ### Marking a tutee as unpaid : `unpaid`
 
 **Description**: Mark a specific tutee as not paid in your list.
@@ -360,6 +396,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![unpaidexample](images/unpaidexample.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ### Mark all tutee as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in your current displayed list as not paid.
@@ -369,6 +407,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Sample Execution**:  `unpaidAll`
 
 ![unpaidAllexample](images/unpaidAllexample.png)
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Finding Free Time : `freeTime`
 
@@ -386,6 +426,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![freeTime after](images/freeTime%20after.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ### Undo previous command : `undo`
 
 **Description**: Undo the most recent command if you made a mistake.
@@ -393,9 +435,6 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Format**: `undo`
 
 :information_source: You can only undo `add`,`clear`,`delete`,`edit`,`redo`,`paid`,`unpaid` and `unpaidAll` commands.
-
-**Examples**:
-* `undo`
 
 **Sample Execution**:  `clear` followed by `undo`
 1. `clear` deletes all tutee in the tutee list
@@ -406,11 +445,15 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![undoCommand](images/undoCommand.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
 ### Redo previous undone command : `redo`
 
 **Description**: Redo the most recent command that was undone if you changed your mind.
 
 **Format**: `redo`
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Calculating monthly revenue: `rev`
 
@@ -424,6 +467,7 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ![Revenue Command Success](images/RevenueCommandSuccess.png)
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ### Exiting the program : `exit`
 
@@ -433,12 +477,9 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 :information_source: The application window closes automatically after you type the command `exit`
 
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
-
-
-
-
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -446,6 +487,13 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Q**: How do I transfer my existing data to another machine?<br>
 **A**: Overwrite the empty `tuitionconnect.json` file in the machine by deleting it and replacing it with the `tuitionconnect.json` that contains the data
 
+**Q**: Where is my data stored?<br>
+**A**: Your data is stored locally in a file named `tuitionconnect.json` 
+
+**Q**: Is there any way I can give feedback if I face any issues?<br>
+**A**: You can submit your issues [here](https://github.com/AY2324S1-CS2103T-F10-4/tp/issues)
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -475,6 +523,8 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 | **redo**        | `redo`                                                                                                                                                                                                                                 |
 | **rev**         | `rev`                                                                                                                                                                                                                                  |
 | **exit**        | `exit`                                                                                                                                                                                                                                 |
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ## Glossary
 
