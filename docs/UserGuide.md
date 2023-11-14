@@ -554,7 +554,7 @@ This person will be removed from your contact list immediately. This action is i
 
 #### 1.6. Deleting all person entries: `deleteAllPerson`
 
-You can delete all persons in your contact list, so that you can restart easily with a clean slate and an empty contact list.
+You can remove all persons in your contact list, so that you can restart easily with a clean slate and an empty contact list.
 
 <h4>Format:</h4>
 
@@ -667,7 +667,7 @@ lt
 
 #### 2.3. Editing a task: `editTask`
 
-You can edit a task in your task list, so that you can ensure task details are up-to-date with the latest information.
+You can change the details of an existing task in your task list, so that you can ensure your task details are up-to-date with the latest information.
 
 <h4>Format:</h4>
 
