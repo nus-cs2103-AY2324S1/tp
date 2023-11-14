@@ -5,7 +5,7 @@ title: Lam Jin Heng Braydon's Project Portfolio Page
 
 ### Project: TuitionConnect
 
-to be added soon
+TuitionConnect is a desktop app built for tutors and tutoring businesses to simplify the process of administration and finance management, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 Given below are my contributions to the project.
 
@@ -28,7 +28,7 @@ Given below are my contributions to the project.
   *  What it does: Sorts a private tutor's lessons according the day and time so in an `ObservableList`.
   *  Justification: This feature allows private tutors to easily glance their schedule for the week.
   *  Highlights: This features requires a `Lesson` Class that encapsulates the `Day`, `Begin` and `End` fields in an `add` command. `Lesson` objects are than sorted using a `LessonComparator`
-
+  
 * **Code contributed**:
     * [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lambraydon&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&zFR=false&tabType=authorship&tabAuthor=lambraydon&tabRepo=AY2324S1-CS2103T-F10-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
