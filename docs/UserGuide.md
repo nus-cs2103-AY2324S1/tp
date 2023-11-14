@@ -872,11 +872,11 @@ Adds a note with the content you wish to add and the tag you wish your note to h
 **Format:** `note add [content] [tag]`
 
 
-<box type="info" icon=":information_source">
-    Tag must only be a single word with no whitespaces and only contain alphabets and numbers. You can only add 1 tag
-    for your note with this command. 
-    If you wish to have more tags for your note, you can do so with the command <code>note tag</code>.
-    You cannot have two notes of the same content.
+<box type="info" icon=":information_source:">
+Tag must only be a single word with no whitespaces and only contain alphabets and numbers. You can only add 1 tag
+for your note with this command. 
+If you wish to have more tags for your note, you can do so with the command <code>note tag</code>.
+You cannot have two notes of the same content.
 </box>
 
 **Example:** `note add [You can do this!] [motivation]`
