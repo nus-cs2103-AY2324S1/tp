@@ -177,6 +177,7 @@ The `Storage` component,
   * user preference data
 * inherits from `AddressBookStorage`, `EventsBookStorage`, `FinanceBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* Both `EventsBook` and `FinanceBook` might contain Persons from the `AddressBook` (only upon creation)
 
 ### Common classes
 
