@@ -36,8 +36,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Enhanced the GUI (Implement coloured tags for paid indicator, tags for subject, rounded corners for result display and search bar) (Pull requests
 [\#118](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/118)
-[\#124](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/124),
-
+[\#124](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/124))
   * Wrote additional tests for lesson class and RevenueCommand related features (Pull requests
 [\#112](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/112)
 [\#222](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/222))
