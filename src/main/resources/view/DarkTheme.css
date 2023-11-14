@@ -2,11 +2,32 @@
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
 }
+.scroll-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    background-color: #383838; /* Used in the default.html file */
+}
+
+.accordion {
+    -fx-background-color: #383838;
+}
+.titled-pane > .title
+{
+    -fx-font-size: 20px;
+    -fx-font-weight: bolder;
+}
+.titled-pane > *.content
+{
+    -fx-background-color: #383838;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #383838;
+}
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 

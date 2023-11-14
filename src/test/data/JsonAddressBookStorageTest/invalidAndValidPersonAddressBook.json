@@ -1,13 +1,33 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+  "companies": [
+    {
+      "name": "Company1",
+      "industry": "",
+      "location": "Blk 345, Yio Chu Kang Ave",
+      "description": "Leading tech company",
+      "website": "",
+      "email": "company1@gmail.com",
+      "phone": "64232346",
+      "address": "Blk 456, Ang Mo Kio Ave 10, #-09-123",
+      "industry" : "Customer Service",
+      "note": "",
+      "personList": [
+        {
+          "name": "Hans Muster",
+          "phone": "invalid phone number",
+          "email": "invalidemail!3e",
+          "address": "4th street"
+        },
+        {
+          "name": "Benson Meier",
+          "phone": "98765432",
+          "email": "johnd@example.com",
+          "address": "311, Clementi Ave 2, #02-25",
+          "note": "",
+          "tags": ["owesMoney", "friends"],
+          "priority": "2"
+        }
+      ]
+    }
+  ]
 }

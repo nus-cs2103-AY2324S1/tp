@@ -1,8 +1,24 @@
 {
-  "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+  "companies": [
+    {
+      "name": "Company1",
+      "industry": "",
+      "location": "Blk 345, Yio Chu Kang Ave",
+      "description": "Leading tech company",
+      "website": "",
+      "email": "company1@gmail.com",
+      "phone": "64232346",
+      "address": "Blk 456, Ang Mo Kio Ave 10, #-09-123",
+      "industry" : "Customer Service",
+      "note": "",
+      "personList": [
+        {
+          "name": "Hans Muster",
+          "phone": "invalid phone number",
+          "email": "invalidemail!3e",
+          "address": "4th street"
+        }
+      ]
+    }
+  ]
 }
