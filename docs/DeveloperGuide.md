@@ -536,8 +536,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user with many internship tasks        | find my internship application information based on certain keywords only                                                                               | find an internship role and view its associated details and tasks without needing to scroll through the whole list of internships |
 | `*`      | user with many internship applications | view overall statistics for my past applications such as at which stage do I get rejected or accepted                                                   | understand which stage I need to improve on and which stage I'm stronger in                                                       |
 
+--------------------------------------------------------------------------------------------------------------------
 
-### Use cases
+## **Appendix C: Use cases**
 
 For all use cases below, we assume the following unless specified otherwise
 
@@ -786,7 +787,9 @@ Such associated pairs of use cases are listed in the table below.
       <br/>
       Use case resumes from step 2.
 
-### Non-Functional Requirements
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix D: Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 500 assignments or internship details without a noticeable sluggishness in performance for typical usage.
@@ -797,14 +800,9 @@ should be able to accomplish most of the tasks faster using commands than using 
 6. The software should work without requiring an installer.
 7. The GUI should work well for standard resolutions.
 
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix E: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
