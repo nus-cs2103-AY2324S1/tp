@@ -87,6 +87,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
 - <a href="javascript: void(0)">Text in blue</a> are links which you can click on to jump to the relevant section.
 - `Text with background` are commands or file names which are used for CoordiMate.
+- <kbd>Text in buttons</kbd> are keys that you press on your keyboard.
 
 ---
 
@@ -133,7 +134,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
 4. Open a command terminal.
 
-5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press <kbd>Enter</kbd>: <br><br>
+5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press <kbd>Enter</kbd> : <br><br>
     ```
     cd Downloads
     ```
@@ -142,7 +143,7 @@ Throughout this guide, you will see different text styles that are used to highl
     java -jar CoordiMate.jar
     ```
     After a few seconds, a GUI should appear, showing some sample data, as in the screenshot below. <br><br>
-    ![Ui](images/Ui.png)
+    ![Ui](images/Ui.png)<br><br>
 
 7. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window.
 
@@ -352,7 +353,7 @@ ap
 ---------------|---------------
 `Invalid command format! …` | Ensure that the name, phone number, email address and address are specified.
 `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Ensure that the name specified is not blank and contain only alphanumeric characters.
-`Phone numbers should only contain numbers, and it should be at least 3 digits long` | Ensure that the phone number specified is not blank, contain only numbers and at least 3 digits long. 
+`Phone numbers should only contain numbers, and it should be at least 3 digits long` | Ensure that the phone number specified is not blank, contain only numbers and at least 3 digits long.
 `Addresses can take any values, and it should not be blank` | Ensure that the address specified is not blank.
 `Emails should be of the format local-part@domain and adhere to the following constraints: …` | Ensure that the email specified is not blank and adheres to the constraints specified.
 `This person already exists in the address book.` | Ensure that the new name specified does not match an existing person.
