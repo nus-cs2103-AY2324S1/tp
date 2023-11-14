@@ -45,6 +45,8 @@ organization**,
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+
 ## **Glossary**
 
 | Term                         | Definition                                                                                                                             |
@@ -128,6 +130,8 @@ Here's the detailed breakdown of the LoveBook screen: <br>
 - **Date List Panel** - This is where the list of dates are displayed. The list is scrollable, and you can scroll up and
   down to view the entire list.
 
+<div style="page-break-after: always;"></div>
+
 ### **LoveBook Tutorial: Getting started**
 
 Now that you are familiar with the layout of LoveBook, we recommend you try the following steps to develop a feel for
@@ -145,11 +149,11 @@ In the command box, enter `add name/John Doe age/21 gender/M height/123 income/3
 the `enter` key.
 This will add John to LoveBook. <br>
 
-![addCommandExample](images/user-commands/addCommandExample.png) <br>
+<img src="images/user-commands/addCommandExample.png" height="250" width="600"/> <br>
 
 Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now: <br>
 
-![addCommandExample2](images/user-commands/addCommandExample2.png) <br>
+<img src="images/user-commands/addCommandExample2.png" height="250" width="600"/>
 
 <div style="page-break-after: always;"></div>
 
