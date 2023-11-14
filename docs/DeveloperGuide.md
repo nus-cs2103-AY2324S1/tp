@@ -37,23 +37,23 @@ This Developer Guide will help you get familiar with the architecture of CoordiM
 
 <div style="page-break-after: always;"></div>
 
-## **Acknowledgements**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Acknowledgements**
 
 * CoordiMate is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org).
 * CoordiMate makes use of the following open source libraries:
-  * [JavaFX](https://openjfx.io/) for the Graphical User Interface (GUI).
+  * [JavaFX](https://openjfx.io/) for the [Graphical User Interface (GUI)](#glossary).
   * [JUnit 5](https://junit.org/junit5/) for unit testing.
-  * [Jackson](https://github.com/FasterXML/jackson) for parsing JavaScript Object Notation (JSON) files.
+  * [Jackson](https://github.com/FasterXML/jackson) for parsing [JavaScript Object Notation (JSON)](#glossary) files.
 
 ---
 
 <div style="page-break-after: always;"></div>
 
-## **Setting up, getting started**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -61,9 +61,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div style="page-break-after: always;"></div>
 
-## **Design**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Design**
 
 {% include admonition.html type="note" title="Note" body="
 
@@ -72,9 +72,9 @@ Refer to the <a href='https://se-education.org/guides/tutorials/plantUml.html'><
 
 " %}
 
-### Architecture
-
 [Back to Table of Contents](#table-of-contents)
+
+### Architecture
 
 <img src="assets/svg/dg/ArchitectureDiagram.svg" width="280" />
 
@@ -106,10 +106,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its [API](#glossary) in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding [API](#glossary) `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its [API](#glossary) in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="assets/svg/dg/ComponentManagers.svg" width="300" />
 
@@ -117,15 +117,15 @@ The sections below give more details of each component.
 
 <div style="page-break-after: always;"></div>
 
-### UI component
-
 [Back to Table of Contents](#table-of-contents)
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+### UI component
+
+The [API](#glossary) of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](assets/svg/dg/UiClassDiagram.svg)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible [GUI](#glossary).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -138,17 +138,17 @@ The `UI` component,
 
 <div style="page-break-after: always;"></div>
 
-### Logic component
-
 [Back to Table of Contents](#table-of-contents)
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+### Logic component
+
+[API](#glossary) : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="assets/svg/dg/LogicClassDiagram.svg" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteTask 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteTask 1")` [API](#glossary) call as an example.
 
 ![Interactions Inside the Logic Component for the `deleteTask 1` Command](assets/svg/dg/DeleteTaskSequenceDiagram.svg)
 
@@ -181,11 +181,11 @@ How the parsing works:
 
 <div style="page-break-after: always;"></div>
 
-### Model component
-
 [Back to Table of Contents](#table-of-contents)
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+### Model component
+
+[API](#glossary) : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="assets/svg/dg/ModelClassDiagram.svg" width="450" />
 
@@ -203,30 +203,31 @@ The `Model` component,
 
 An alternative (arguably, a more OOP) model is given below. It has a <code>Tag</code> list in the <code>AddressBook</code>, which <code>Person</code> references. This allows <code>AddressBook</code> to only require one <code>Tag</code> object per unique tag, instead of each <code>Person</code> needing their own <code>Tag</code> objects. <br><br>
 
-<img src='assets/svg/dg/BetterModelClassDiagram.svg' width='450' />
+<img src='assets/svg/dg/BetterModelClassDiagram.svg' width='450' /> <br><br>
 
+Without loss of generality, this model can be extended to <code>Task</code> entities. In that context, the <code>UniquePersonList</code> would be replaced by a <code>UniqueTaskList</code>, and each <code>Person</code> entity would become a <code>Task</code> entity. Each <code>Task</code> will reference: <code>Title</code>, <code>Note</code>, and <code>Tag</code> objects.
 " %}
 
 <div style="page-break-after: always;"></div>
 
-### Storage component
-
 [Back to Table of Contents](#table-of-contents)
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+### Storage component
+
+[API](#glossary) : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="assets/svg/dg/StorageClassDiagram.svg" width="550" />
 
 The `Storage` component,
-* can save both CoordiMate's data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both CoordiMate's data and user preference data in [JSON](#glossary) format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 <div style="page-break-after: always;"></div>
 
-### Common classes
-
 [Back to Table of Contents](#table-of-contents)
+
+### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -234,15 +235,15 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ---
 
-## **Implementation**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Tag(s) To Person feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Add Tag(s) To Person feature
 
 #### Implementation
 
@@ -279,9 +280,9 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
-### List Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### List Task feature
 
 #### Implementation
 
@@ -311,9 +312,9 @@ The lifeline for <code>ListTaskCommand</code> should end at the destroy marker (
 
 <div style="page-break-after: always;"></div>
 
-### Edit Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Edit Task feature
 
 #### Implementation
 
@@ -352,9 +353,9 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
-### Find Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Find Task feature
 
 #### Implementation
 
@@ -401,9 +402,9 @@ These two predicates are used to filter the list of tasks in the `Model` compone
 
 <div style="page-break-after: always;"></div>
 
-### Mark Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Mark Task feature
 
 #### Implementation
 
@@ -461,9 +462,9 @@ Any string can be passed as a status, potentially resulting in invalid or unexpe
 
 <div style="page-break-after: always;"></div>
 
-### Delete Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Delete Task feature
 
 #### Implementation
 
@@ -501,9 +502,9 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
-## **Documentation, Logging, Testing, Configuration, Dev-Ops**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -515,30 +516,28 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ## **Appendix: Requirements**
 
-[Back to Table of Contents](#table-of-contents)
-
 ### Product scope
-
-[Back to Table of Contents](#table-of-contents)
 
 **Target user profile**:
 
 * Has a need to manage various contacts and tasks for event-planning
 * Prefers desktop apps over other types
-* Is comfortable with CLI apps
+* Is comfortable with [CLI](#glossary) apps
 * Is able to type fast
 
 **Value proposition**:
 
-CoordiMate helps event planners to easily keep track of contact details as well as the tasks to be done for various events, in a more efficient way compared to a typical mouse/GUI driven app.
+CoordiMate helps event planners to easily keep track of contact details as well as the tasks to be done for various events, in a more efficient way compared to a typical mouse/[GUI](#glossary) driven app.
 
 <div style="page-break-after: always;"></div>
 
-### User stories
-
 [Back to Table of Contents](#table-of-contents)
+
+### User stories
 
 Priorities:
 
@@ -549,7 +548,7 @@ Priorities:
 | Priority | As a …​ | I want to …​ | So that I can …​ |
 | -------- | -------| ----------- | --------------- |
 | `* * *` | new user | see help instructions | refer to documentation to understand the existing features effectively |
-| `* * *` | event planner | view both lists on the same screen | compare the task list and contact list while using the GUI |
+| `* * *` | event planner | view both lists on the same screen | compare the task list and contact list while using the [GUI](#glossary) |
 | `* * *` | event planner | add a new person's details | remember details of new people I meet |
 | `* * *` | event planner | list each person's details | view all my contacts' details at a quick glance |
 | `* * *` | event planner | edit a person's details | update details of persons that are outdated with new information |
@@ -573,17 +572,15 @@ Priorities:
 | `* *` | event planner | delete all done tasks | ensure that my task list is not cluttered with completed tasks |
 | `* *` | event planner | list all the tags I have used | avoid creating duplicate categories |
 | `* *` | event planner | find a person and tasks by tag | quickly see the persons and tasks in a category |
-| `* *` | event planner | add tag(s) to a person | add tag(s) to the existing list of tags of the indexed person |
-| `* *` | event planner | add tag(s) to a task | add tag(s) to the existing list of tags of the indexed task |
 | `* *` | event planner | delete tag(s) from a person | remove unwanted or outdated tag(s) |
 | `* *` | event planner | delete tag(s) from a task | remove unwanted or outdated tag(s) |
 {: .user-story-table}
 
 <div style="page-break-after: always;"></div>
 
-### Use cases
-
 [Back to Table of Contents](#table-of-contents)
+
+### Use cases
 
 For all use cases below, the **System** is `CoordiMate` and the **Actor** is the `user`, unless specified otherwise.
 
@@ -591,7 +588,7 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **Use case: UC01 - Add a person to the contact list**
 
-**MSS**
+**[Main Success Scenario (MSS)](#glossary)**
 
 1. User requests to add a new person's particulars.
 2. CoordiMate adds the person with the specified particulars.
@@ -639,6 +636,12 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 * 3a. The given index is invalid.
 
   * 3a1. CoordiMate shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The given particulars are invalid.
+
+  * 3b1. CoordiMate shows an error message.
 
       Use case resumes from step 3.
 
@@ -697,14 +700,6 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The contact list is empty.
-
-  * 1a1. CoordiMate informs the user that there are no contacts to be deleted.
-
-      Use case ends.
-
 ---
 
 **Use case: UC07 - Add tag to a person in the contact list**
@@ -715,6 +710,7 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 2. CoordiMate shows a list of persons.
 3. User requests to add tag(s) to a specific person in the list by index.
 4. CoordiMate edits the person to include the specified tag(s).
+5. CoordiMate informs the user of the added tag(s).
 
    Use case ends.
 
@@ -734,7 +730,14 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
   * 3b1. CoordiMate shows an error message and prompts the user to enter valid tag(s).
 
-    Use case resumes from step 3.
+      Use case resumes from step 3.
+
+* 3c. Some given tag(s) already exist in the person.
+
+  * 3c1. CoordiMate only adds the tag(s) that do not exist.
+  * 3c2. CoordiMate informs the user of the addedtag(s), as well as the tag(s) that already exist.
+
+      Use case resumes from step 3.
 
 ---
 
@@ -742,14 +745,14 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **MSS**
 
-1. User requests to add a task with a title and note.
+1. User requests to add a task.
 2. CoordiMate adds the task.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No task title or note was provided.
+* 1a. The provided details are invalid.
 
   * 1a1. CoordiMate shows an error message.
 
@@ -787,7 +790,13 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 * 3a. The given index is invalid.
 
-  * 3a1. CoordiMate shows an error message and prompts the user to enter a valid index.
+  * 3a1. CoordiMate shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The given details are invalid.
+
+  * 3b1. CoordiMate shows an error message.
 
       Use case resumes from step 3.
 
@@ -845,14 +854,6 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 2. CoordiMate clears entire task list.
 
    Use case ends.
-
-**Extensions**
-
-* 1a. The task list is empty.
-
-  * 1a1. CoordiMate informs the user that there are no tasks to be deleted.
-
-      Use case ends.
 
 ---
 
@@ -940,8 +941,8 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **MSS**
 
-1. User requests to clear all done tasks in task list.
-2. CoordiMate clears all tasks whose status is done.
+1. User requests to delete all done tasks in task list.
+2. CoordiMate deletes all tasks whose status is done.
 
    Use case ends.
 
@@ -963,6 +964,7 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 2. CoordiMate shows a list of tasks.
 3. User requests to add tag(s) to a specific task in the list by index.
 4. CoordiMate edits the task to include the specified tag(s).
+5. CoordiMate informs the user of the added tag(s).
 
    Use case ends.
 
@@ -981,6 +983,13 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 * 3b. The given tag(s) are invalid.
 
   * 3b1. CoordiMate shows an error message and prompts the user to enter valid tag(s).
+
+      Use case resumes from step 3.
+
+* 3c. Some given tag(s) already exist in the person.
+
+  * 3c1. CoordiMate only adds the tag(s) that do not exist.
+  * 3c2. CoordiMate informs the user of the addedtag(s), as well as the tag(s) that already exist.
 
       Use case resumes from step 3.
 
@@ -1073,6 +1082,10 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **Extensions**
 
+* 2a. The task list is empty.
+
+      Use case ends.
+
 * 3a. Some given tag(s) do not exist in the person.
 
    * 3a1. CoordiMate only deletes the tag(s) that exist.
@@ -1101,6 +1114,10 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
    Use case ends.
 
 **Extensions**
+
+* 2a. The task list is empty.
+
+      Use case ends.
 
 * 3a. Some given tag(s) do not exist in the task.
 
@@ -1208,24 +1225,24 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 <div style="page-break-after: always;"></div>
 
-### Non-Functional Requirements
-
 [Back to Table of Contents](#table-of-contents)
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+### Non-Functional Requirements
+
+1. Should work on any [mainstream OS](#glossary) as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons and tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Application should be designed for a single user.
 5. Data should be stored locally in a human-readable and editable text file.
 6. Data should persist across usage sessions.
 7. Application should not require internet connection to run.
-8. GUI should work well for standard screen resolutions of 1920x1080 and higher, and for screen scales of 100% and 125%.
-9. GUI should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
+8. [GUI](#glossary) should work well for standard screen resolutions of 1920x1080 and higher, and for screen scales of 100% and 125%.
+9. [GUI](#glossary) should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
 10. Application should be packaged and delivered to user in a single JAR file under 100MB.
 
-### Glossary
-
 [Back to Table of Contents](#table-of-contents)
+
+### Glossary
 
 * **API**: Application Programming Interface, a set of predefined functions that a software program can use to interact with another software program.
 * **CLI**: Command Line Interface, a way of interacting with a computer program by typing commands and receiving text responses.
@@ -1239,9 +1256,9 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 ---
 
-## **Appendix: Instructions for manual testing**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1252,7 +1269,7 @@ To reset to the sample data, delete the `data` folder in the same directory as t
 {% include admonition.html type="note" title="Note" body="
 
 These instructions only provide a starting point for testers to work on;
-testers are expected to do more <i>exploratory testing</i>.
+testers are expected to do more <a href='#glossary'>exploratory testing</a>.
 
 " %}
 
@@ -1265,7 +1282,7 @@ testers are expected to do more <i>exploratory testing</i>.
    2. Open a terminal and navigate to the folder you downloaded the JAR file to.
 
    3. Run the command `java -jar CoordiMate.jar`.<br>
-      Expected: The app launches with a GUI window and has a set of sample contacts and tasks.<br>
+      Expected: The app launches with a [GUI](#glossary) window and has a set of sample contacts and tasks.<br>
 
 
 2. Saving window preferences
@@ -1456,11 +1473,11 @@ testers are expected to do more <i>exploratory testing</i>.
 
 <div style="page-break-after: always;"></div>
 
-## **Appendix: Planned Enhancements**
-
 [Back to Table of Contents](#table-of-contents)
 
-### 1. Character limits for person fields and tasks
+## **Appendix: Planned Enhancements**
+
+### Character limits for person fields and tasks
 
 - **Enhancement**: Implement character limits for various fields associated with persons and tasks to ensure data consistency and integrity.
 - **Reason**: To maintain a structured format for data entry and prevent excessively long inputs that could affect the display and usability of the system.
@@ -1476,7 +1493,7 @@ testers are expected to do more <i>exploratory testing</i>.
   - For `Person/Task` tags:
     - **Tag**: Maximum of 30 characters to keep tags succinct and meaningful.
 
-### 2. Command-specific error messages
+### Command-specific error messages
 
 - **Enhancement**: Error messages will pinpoint the specific part of the command that has triggered the error.
 - **Reason**: Users will be able to identify and correct the exact issue with their command input without having to guess which part was incorrect.
@@ -1484,54 +1501,123 @@ testers are expected to do more <i>exploratory testing</i>.
     - For an invalid command due to an excessively long or short user input, a possible error message would be "Invalid addPerson command: person's name exceeded 100 characters."
     - For tag-related commands, specifying error messages such as changing "Tag names should be alphanumeric" to "Tag names should be ONLY alphanumeric" for better clarity.
 
-### 3. Stricter validity checks for email addresses
+### Stricter validity checks for email addresses
 
 - **Enhancement**: Revise the regex used for validating email addresses to ensure the domain name is present and correctly formatted.
 - **Reason**: To prevent the acceptance of invalid email addresses that lack a top-level domain e.g. `.com`, which are not very usable for actual communication.
 - **Example**:
   - The current regex might validate `johndoe@example`, which is incorrect as it lacks a domain name. The enhanced regex would correctly invalidate this and require a proper top-level domain, like `johndoe@example.com`.
 
-### 4. Accommodating Special Characters in Person Names
+### Accommodating Special Characters in Person Names
 
 - **Enhancement**: Update the name input validation to allow some special characters that are part of valid names in various cultures, including diacritics and other linguistic markers.
 - **Reason**: To ensure the software is inclusive and capable of accurately recording names from a diverse range of ethnic backgrounds.
 - **Example**:
   - Under the current system, a name like "Séamus O'Connor" or "Anand Sai-Krishna" might be rejected due to special characters. The enhancement would allow these names to be entered and stored correctly.
 
-### 5. Enhanced UI indicators for empty person/tasks lists
+### Enhanced UI indicators for empty person/tasks lists
 
 - **Enhancement**: Implement clear and prominent UI indicators when task or person lists are empty, particularly after performing actions such as marking tasks complete.
 - **Reason**: To provide immediate and unmistakable visual feedback to users when there are no items to display, enhancing the user experience by avoiding potential confusion or the impression that the list may not have loaded properly.
 - **Example**:
   - After a user completes the last remaining task with `markTask` and no incomplete tasks are left, instead of the minimalistic message "0 tasks listed!", the UI could display a more noticeable and friendly graphic or message such as "All tasks complete!" within the task list itself. This visual cue would be both informative and encouraging to the user.
 
-### 6. Preventing list jump on selection
+### Preventing list jump on selection
 
 - **Enhancement**: Modify the UI behavior to maintain the current scroll position when selecting an item at the bottom of a list.
 - **Reason**: To improve the usability of the application, especially when dealing with long lists, by preventing the list from jumping back to the top after selection.
 - **Example**:
   - Currently, when a user selects an item at the bottom of a long list, the list resets to the top position. This enhancement will keep the list at the current scroll position, making it easier to manage and navigate long lists.
 
-### 7. Error messages for invalid JSON file format
+### Error messages for invalid JSON file format
 
-- **Enhancement**: Error messages will be provided to pinpoint the specific part of the JSON file that does not follow the required format.
-- **Reason**: To improve the usability of the application, especially when users use the JSON file to import large amounts of data, users will be able to identify and correct the exact issue with their JSON data file without having to guess which part was incorrect.
+- **Enhancement**: Error messages will be provided to pinpoint the specific part of the [JSON](#glossary) file that does not follow the required format.
+- **Reason**: To improve the usability of the application, especially when users use the [JSON](#glossary) file to import large amounts of data, users will be able to identify and correct the exact issue with their [JSON](#glossary) data file without having to guess which part was incorrect.
 - **Example**:
-  - Currently, when a user imports an invalid JSON data file, CoordiMate will discard all data and start with an empty data file at the next run. This enhancement will be able to retain the information the user imported and allow the user to correct the format of the JSON file effectively.
+  - Currently, when a user imports an invalid [JSON](#glossary) data file, CoordiMate will show an empty contact list and task list. This enhancement will show an error message to inform the user exactly which part of the [JSON](#glossary) file is invalid, so that the user can correct the [JSON](#glossary) file and import it again.
 
-### 8. Standardise all command behaviours
+### Standardise all command behaviours
 
-- **Enhancement**: Modify the behavior of deleteAllDone to be similar with the other delete commands.
+- **Enhancement**: Modify the behavior of `deleteAllDone` to be similar with the other delete commands.
 - **Reason**: To reduce the confusion of the user when using the application and standardise all delete behaviours in the application.
 - **Example**:
-  - Currently, when a user uses the `deleteAllDone` command, the task list resets to show all tasks after deletion. However, when a user uses the other `delete..` commands, the task list does not reset the list after deletion.
+  - Currently, when a user uses the `deleteAllDone` command, the task list resets to show all tasks after deletion. However, when a user uses the other `delete…` commands, the task list does not reset the list after deletion.
   - This enhancement will keep allow the `deleteAllDone` command to not reset the task list after deletion so that users will not get confused of the state of the task list.
 
----
-<div style="page-break-after: always;"></div>
+### Enhance error messages about leading whitespaces
 
-## **Appendix: Effort**
+- **Enhancement**: Modify the error messages for fields with leading whitespaces to be more accurate.
+- **Reason**: To reduce the confusion of the user when the error message differs from what is documented in the user guide and the behaviour of the application.
+- **Example**:
+  - Currently, the error message for `addTask` states that the task title and note cannot start with a whitespace. However, when the user tries to add a task with a title and note that starts with a whitespace, the task is added successfully as the starting whitespace is automatically trimmed.
+  - This enhancement will update the error message to state that leading and trailing whitespaces are automatically trimmed.
+
+### Enable Partial Matching in Filtering Features
+
+- **Enhancement**: Refine our commands that help users filter the task list and person list to support partial matching.
+- **Reason**: To allow users to easily locate their contact or task without necessity of inputting the complete information, thereby minimizing limitations and optimizing user experience, especially users with long contact and task list.
+- **Example**:
+  - Currently, all of the `find…` commands exclusively display results that precisely match at least one `KEYWORD` in the fields. It overlooks items that partially match the criteria.
+  - This enhancement aims to broaden the scope by including partial matches in the search results, providing users a more easier approach to locate their required information, especially users with a reasonably long list of persons or tasks. Users do not need to give the exact keyword for the find command to match in order to view the person or task.
+
+---
+
+<div style="page-break-after: always;"></div>
 
 [Back to Table of Contents](#table-of-contents)
 
-TODO
+## **Appendix: Effort**
+
+### Feature-rich Selection of Commands
+
+The process of building CoordiMate's command suite began with a structured approach, where we drafted user stories to encapsulate the frequent challenges faced by SoC event planners. This groundwork helped us identify and develop the commands that were critical to the application, particularly the Create, Read, Update, Delete (CRUD) operations for persons and tasks. Our aim was to ensure these core commands were not only functional but also intuitive for users.
+
+Following the first iteration, we presented CoordiMate in a live demo to collect firsthand feedback from our peers. This step was crucial; it enabled us to understand how the app was being received by potential users and which additional features would enhance its value. We used this feedback to inform our development priorities, focusing on the user stories that had the most significant impact on the user experience for subsequent updates.
+
+In the second iteration of development, we honed in on features that were highly requested during peer reviews, such as the ability to filter tasks and contacts by tags and to check the status of tasks as done. These particular commands addressed key concerns from our peers about the ease of organising and tracking progress within the app. By aligning our development efforts with these specific user needs, we expanded from the initial **8** commands in AB3 to a robust suite of **27**, ensuring that each new feature was both meaningful and in direct response to our users' needs.
+
+### Creation of Multiple Classes
+
+In order for CoordiMate to track tasks, we had to create new classes that encapsulated the various elements of a task, such as the title, note and status. This was done to ensure that tasks can also be modelled in an object-oriented manner, just like the existing `Person` class.
+
+Furthermore, these classes needed to be integrated into the existing codebase. For example, we implemented the relevant `Predicate<Task>` classes to support the new `findTask`, `findTag` and `findAllTag` commands. We also created a `UniqueTaskList` class to store the list of tasks and to handle various operations, such as adding, deleting and modifying tasks in the list. This class was essential for the [GUI](#glossary) to display information about the tasks in the task list.
+
+Lastly, to ensure that the tasks are saved and loaded correctly, the Storage class had to be modified to support the new `Task` class. This required the team to design how these tasks were to be stored in the data file, and the creation of the necessary helper classes to parse the tasks into [JSON](#glossary) strings and vice versa.
+
+### User Centric
+
+In designing CoordiMate, our focus was on ensuring a seamless and user-friendly experience for SoC event planners. We recognized the value of our users' time and effort during event planning. To streamline interactions, we implemented command aliases, offering shorthand alternatives that reduce the need for extensive typing (i.e. from `listPerson` to `lp`). This enhancement simplifies command input, making the application more efficient and user-friendly.
+
+CoordiMate is all about putting users in control with a clear and efficient way to manage their event details. We have made it easy for users to update contacts and tasks directly from what they see on the screen. All changes requested by commands are done using the index of persons and tasks in the displayed list, making it straightforward for users to interact with the graphical interface. To make life simpler, we have also added a variety of `find` commands so users can filter their lists by keywords, tags, or task status. This means even if there's a lot of info in the app, users can quickly focus on what they need to view or update. With these deliberate design considerations, users can easily view the index of specific persons or tasks and make updates precisely, without getting lost in a sea of information.
+
+To guide users effectively, we crafted error messages that are not only informative but also pinpoint the specific areas where errors occurred in command inputs. This user-centric approach facilitates quick identification and resolution of issues, ensuring a smoother interaction with the application. Example of valid commands are also given to aid users in better understanding our error messages and assists users in rectifying errors efficiently. If more help is needed, we also went beyond from the given `help` command of AB3 by improving the help window that redirects the user to directly open our user guide on their preferred browser with ease. By prioritizing user-centric design principles, CoordiMate aims to elevate the event planning experience, making it both intuitive and efficient for SoC Computing Club event planners.
+
+### Improved UI
+
+The original AB3 program only displayed the list of persons which is not very useful for a contact and task management application. To make our app effective, we created additional panels for tasks, besides the original
+panel for persons. This allows the user to view all the tasks and persons at a glance. Event planners can also easily track the status of their tasks through the status symbol we use to mark tasks as completed or not completed.
+
+To customise the application and set it apart from the original implementation of AB3, we also included our own enhance unique features. First and foremost, we have our own icon for the application that can be seen when opening
+the application or any of the documents such as User Guide or Developer Guide. Next, we also included the feature to be able to drag the dividers across the screen. We understand that our output messages can be long at
+times, especially for commands such as `listTag`. Hence, we wanted to give the user the ability to adjust the size of the output box according to their preference and the specific command they are using. For users who want to focus
+more on their tasks at hand, they can drag the divider between the contact list and task list so that their screen can show more of the task list. This is also useful for users who have a smaller screen size and would like to view more of the application at once.
+
+### Extensive Testing
+
+Our team placed a strong emphasis on testing to ensure that the application is robust and reliable.
+
+We conducted extensive unit testing for new features, recommending at least a **75%** coverage for new code. This was done to ensure that the new code is thoroughly tested and that the new features are working as intended. Only UI changes were left untested, as we felt that it was too time-consuming and difficult to automate UI tests.
+
+We managed to maintain **~83%** code coverage in CoordiMate, up from the original **75%** of AB3. In total, we have increased the **267** test cases in AB3 to **547** test cases in CoordiMate.
+
+### Software Engineering Practices
+
+Our team went beyond the recommended guidelines in the course and adopted various rigorous software engineering practices in our development workflow to ensure that our codebase is well-written and maintainable.
+
+For `git` commits, we went beyond the course's recommended `git` guidelines and followed the more elaborate [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format. Although this took more time and effort, it allowed us to write more descriptive commit messages that are easier to understand and follow.
+
+For pull requests, we made the effort to enforce that each pull request is approved by at least **two** other team members before merging. We believe that this practice allows us to catch more bugs and gain more perspectives on code changes before they are merged. This ensures that merged changes are of high quality, and that more team members are aware of the changes made to the codebase.
+
+For pull requests, we also standardised a [pull request template](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/17) to be filled by the pull request author. Having such a template ensures that pull requests descriptions are more descriptive and informative, allowing reviewers to better understand the changes made. We also included a checklist to remind the pull request author to test their code and maintain code coverage above 75% for new code.
+
+We also experimented with different `git` workflows to maximise our productivity. For new features done by individual team members, we maintained the recommended forking workflow. However, for changes that required multiple team members to work on, we adopted the feature workflow to allow concurrent work on the same branch and synchronise changes more easily. Some examples are UG and DG changes, which we believed was beneficial for us to visualise each other's changes while working on the same branch ([PR #160](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/160), [PR #163](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/163), and many more).
