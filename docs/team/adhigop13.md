@@ -2,11 +2,12 @@
   layout: default.md
   title: "Adhitya's Project Portfolio Page"
 ---
+# Adhitya's Project Portfolio Page
 
 ### Project: LinkTree
 
 LinkTree is the top contact solution for software professionals. 
-Using our unique tag-based system, access contacts by roles and responsibilities instantly. 
+Using our unique tag-based system, access contacts by roles and responsibilities instantly.
 With LinkTree, swiftly connect with the right stakeholders, ensuring smooth project execution and superior collaboration.
 
 Given below are my contributions to the project.
@@ -55,4 +56,5 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Used the IntelliJ tool to generate JavaDocs for selected elements.
+  * Used PlantUML tool to design our sequence and activity diagrams in the developer guide.
 
