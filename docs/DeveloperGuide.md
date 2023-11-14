@@ -718,7 +718,7 @@ Use case ends.
 
       Use case ends.
 
-**Use case: UC9 - Find Appointment**
+**Use case: UC10 - Delete Appointment**
 
 **MSS**
 
