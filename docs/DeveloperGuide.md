@@ -417,16 +417,23 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file or run `java -jar connectify.jar`
+   
+      Expected: Shows the GUI with a set of sample clients.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.
+   
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Saving client data
+
+   1. Run a simple command like `list` or a `create` command. All client data should be automatically saved.
+   
+   2. Close the app, and re-launch. All client data from the previous session should be retained.
 
 ### Deleting a person
 
@@ -434,21 +441,51 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`
+   
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`
+   
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
+   
+      Expected: Error details shown in the status message.
 
-1. _{ more test cases …​ }_
+### Creating a person
 
+1. Create a person using the `create` command.
+
+    1. Test case:
+       ```text
+       create n/Bernice Yu p/99272758 e/berniceyu@example.com 
+       a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues 
+       t/friends tg/@yuyubern pf/Graphic Designer i/60000
+       ```
+       Expected: The new client should be created in your client list.
+   
+   2. Test case;
+       ```text
+       create n/Bernice Yu e/berniceyu@example.com 
+       a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues 
+       t/friends tg/@yuyubern pf/Graphic Designer i/60000
+      ```
+      Expected: Client should not be created. Error details shown in the output window. Compulsory fields like `phone` should be specified.
+
+   3. Test case;
+       ```text
+       create n/Bernice Yu p/99272758 e/berniceyu@example.com 
+       a/Blk 30 Lorong 3 Serangoon Gardens, #07-18
+      ```
+      Expected: The new client should be created in your client list. Client should be able to be created even if optional fields are not specified.
+   
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   - The app should start up as usual, with a new set of sample data.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+   - The app should start with an empty client list. Remove the corrupted `addressbook.json` data file, and the app will automatically generate a new sample client list on the next start-up.
