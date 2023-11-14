@@ -169,7 +169,7 @@ Command: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​ 
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
 
 * **Possible Failing Condition:**
-  1. When the musician already exists in storage (same name), or has duplicate information (phone or email) with another musician who already exists in storage.a
+  1. When the musician already exists in storage (same name), or has duplicate information (phone or email) with another musician who already exists in storage.
 
 #### Implementation
 Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any musician with the same name, phone, or email. This is achieved through the use of `Model::hasMusician` and `Model::hasDuplicateInfo` method.
@@ -423,6 +423,7 @@ It is important to maintain the unique constraint of name of bands at all times.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Appendix 1: Requirements**
 
@@ -567,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC07 - Create a band**
+**Use case: UC05 - Create a band**
 
 **MSS**
 
@@ -592,7 +593,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
   
 
-**Use case: UC08 - Add musicians to a band**
+**Use case: UC06 - Add musicians to a band**
 
 **MSS**
 
@@ -617,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC09 - Delete band**
+**Use case: UC07 - Delete band**
 
 **MSS**
 
@@ -636,7 +637,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC10 - View all musicians inside a band**
+**Use case: UC08 - View all musicians inside a band**
 
 **MSS**
 
@@ -655,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC11 - Remove a musician from a band**
+**Use case: UC09 - Remove a musician from a band**
 
 **MSS**
 
