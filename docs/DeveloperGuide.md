@@ -1821,3 +1821,4 @@ However, our implementation only updates this displayed list if the user execute
 The same occurrence also happens when the event list panel is currently displaying the events joined by a particular volunteer (used `vliste` command), and an `eremovev` command is executed to remove this volunteer from the event.
 We plan to correct this behaviour as it might cause confusion to our users.
 
+<div style="page-break-after: always;"></div>
