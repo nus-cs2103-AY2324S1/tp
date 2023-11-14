@@ -1,18 +1,62 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Id;
+import seedu.address.model.contact.Organization;
+import seedu.address.model.contact.Type;
+import seedu.address.model.jobapplication.JobApplication;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = contact -> true;
+    Predicate<Contact> PREDICATE_SHOW_ONLY_ORGANIZATIONS = contact -> contact.getType() == Type.ORGANIZATION;
+    Predicate<Contact> PREDICATE_SHOW_ONLY_RECRUITERS = contact -> contact.getType() == Type.RECRUITER;
+    Predicate<Contact> PREDICATE_SHOW_NOT_APPLIED_ORGANIZATIONS =
+            contact -> contact.getType() == Type.ORGANIZATION
+                    && ((Organization) contact).getJobApplications().length == 0;
+
+    Comparator<Contact> COMPARATOR_ADDRESS = Comparator.comparing(contact ->
+                    contact.getAddress().map(address -> address.value).orElse(null),
+            Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_ADDRESS_NULLS_FIRST = Comparator.comparing(contact ->
+                    contact.getAddress().map(address -> address.value).orElse(null),
+            Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_ADDRESS_REVERSED = COMPARATOR_ADDRESS_NULLS_FIRST.reversed();
+    Comparator<Contact> COMPARATOR_EMAIL = Comparator.comparing(contact ->
+                    contact.getEmail().map(email -> email.value).orElse(null),
+            Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_EMAIL_NULLS_FIRST = Comparator.comparing(contact ->
+                    contact.getEmail().map(email -> email.value).orElse(null),
+            Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_EMAIL_REVERSED = COMPARATOR_EMAIL_NULLS_FIRST.reversed();
+    Comparator<Contact> COMPARATOR_ID = Comparator.comparing(contact ->
+            contact.getId().value, String.CASE_INSENSITIVE_ORDER);
+    Comparator<Contact> COMPARATOR_NAME = Comparator.comparing(contact ->
+                    contact.getName().fullName, String.CASE_INSENSITIVE_ORDER);
+    Comparator<Contact> COMPARATOR_PHONE = Comparator.comparing(contact ->
+                    contact.getPhone().map(phone -> phone.value).orElse(null),
+            Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_PHONE_NULLS_FIRST = Comparator.comparing(contact ->
+                    contact.getPhone().map(phone -> phone.value).orElse(null),
+            Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_PHONE_REVERSED = COMPARATOR_PHONE_NULLS_FIRST.reversed();
+    Comparator<Contact> COMPARATOR_URL = Comparator.comparing(contact ->
+                    contact.getUrl().map(url -> url.value).orElse(null),
+            Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_URL_NULLS_FIRST = Comparator.comparing(contact ->
+                    contact.getUrl().map(url -> url.value).orElse(null),
+            Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER));
+    Comparator<Contact> COMPARATOR_URL_REVERSED = COMPARATOR_URL_NULLS_FIRST.reversed();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +97,75 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasContact(Contact contact);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given contact.
+     * The contact must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteContact(Contact target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given contact.
+     * {@code contact} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addContact(Contact contact);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given contact {@code target} with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another existing one in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void setContact(Contact target, Contact editedContact);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Adds the given application.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void addApplication(JobApplication application);
+
+    /**
+     * Gives a contact which matches the given id.
+     * Gives null if no such contact is found.
+     * Given id must not be null.
+     */
+    Contact getContactById(Id id);
+
+    /**
+     * Guarantees a contact given an id or index.
+     *
+     * @throws IllegalValueException if both are given or not given, or if model cannot access the contact.
+     */
+    Contact getContactByIdXorIndex(Id id, Index index) throws IllegalValueException;
+
+    /**
+     * Replaces the old {@code JobApplication} with the new {@code JobApplication}.
+     */
+    void replaceApplication(JobApplication oldApplication, JobApplication newApplication) throws IllegalValueException;
+
+    /**
+     * Removes the application from the list.
+     */
+    void deleteApplication(JobApplication application) throws IllegalValueException;
+
+
+    /** Returns an unmodifiable view of the displayed contact list. */
+    ObservableList<Contact> getDisplayedContactList();
+
+    /**
+     * Updates the filtered contact list to filter by the given {@code predicate}. May not be null.
+     */
+    void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /**
+     * Updates the sorted contact list to sort by the given {@code comparator}. May be null to disable sorting.
+     */
+    void updateSortedContactList(Comparator<Contact> comparator);
+
+
+    /** Returns an unmodifiable view of the displayed application list. */
+    ObservableList<JobApplication> getDisplayedApplicationList();
+
+    void updateSortedApplicationList(Comparator<JobApplication> comparator);
 }

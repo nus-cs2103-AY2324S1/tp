@@ -1,49 +1,85 @@
 package seedu.address.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Id;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Organization;
+import seedu.address.model.contact.Phone;
+import seedu.address.model.contact.Recruiter;
+import seedu.address.model.contact.Url;
+import seedu.address.model.jobapplication.ApplicationStage;
+import seedu.address.model.jobapplication.Deadline;
+import seedu.address.model.jobapplication.JobApplication;
+import seedu.address.model.jobapplication.JobStatus;
+import seedu.address.model.jobapplication.JobTitle;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+    public static Contact[] getSampleContacts() {
+        Organization alexYeohInc = new Organization(
+                new Name("Alex Yeoh Inc"),
+                new Id("alex_yeoh_inc"), new Phone("87438807"),
+                new Email("contact@alexyeoh.example.com"), new Url("alexyeoh.example.com"),
+                null, getTagSet("parttime")
+        );
+
+        Organization google = new Organization(
+                new Name("Google"), new Id("google"), new Phone("65218000"), null,
+                new Url("careers.google.com"),
+                new Address("70 Pasir Panjang Road, #03-71, "
+                        + "Mapletree Business City, "
+                        + "Singapore 117371"),
+                getTagSet("bigtech", "internship", "competitive")
+        );
+
+        Organization jobSeekerPlus = new Organization(
+                new Name("Job Seeker Plus"), new Id("job_seeker_plus"), new Phone("93210283"),
+                new Email("jobseekerplus@example.com"), null,
+                new Address("Blk 16 Real Street 128, #08-04"),
+                getTagSet("startup", "internship")
+        );
+
+        alexYeohInc.addJobApplication(new JobApplication(alexYeohInc, new JobTitle("AI Engineer"),
+                null, new Deadline(LocalDate.now().plusDays(42)),
+                JobStatus.PENDING, ApplicationStage.RESUME));
+        alexYeohInc.addJobApplication(new JobApplication(alexYeohInc, new JobTitle("Marketing Advisor"),
+                null, new Deadline(LocalDate.now().minusDays(3)),
+                JobStatus.TURNED_DOWN, ApplicationStage.ONLINE_ASSESSMENT));
+        google.addJobApplication(new JobApplication(google, new JobTitle("Full-Stack Developer"),
+                null, new Deadline(LocalDate.now().plusDays(5)),
+                JobStatus.PENDING, ApplicationStage.INTERVIEW));
+        jobSeekerPlus.addJobApplication(new JobApplication(jobSeekerPlus, new JobTitle("Job Seeking Pro"),
+                null, new Deadline(LocalDate.now().minusDays(17)),
+                JobStatus.REJECTED, ApplicationStage.RESUME));
+
+        return new Contact[] {
+            alexYeohInc, google, jobSeekerPlus,
+            new Recruiter(new Name("David Li"), new Id("david_li"), new Phone("91031282"),
+                    new Email("davidli@alexyeoh.example.com"), null,
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    getTagSet("direct", "network"), alexYeohInc),
+            new Recruiter(new Name("Roy Balakrishnan"), new Id("roy_balakrishnan"), new Phone("92624417"),
+                    new Email("royb@example.com"), new Url("www.nus.edu.sg"),
+                    null, getTagSet("friendly"), null)
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Contact sampleContact : getSampleContacts()) {
+            sampleAb.addContact(sampleContact);
         }
         return sampleAb;
     }

@@ -65,4 +65,99 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Formats the given values with the format string, but return null if any of the given values are null or empty.
+     *
+     * @param format The format string to use.
+     * @param values The values to insert into the format string.
+     * @return The formatted string, or null if any of the values are null.
+     */
+    public static String formatWithNullFallback(String format, Object... values) {
+        if (format == null) {
+            return null;
+        }
+
+        for (Object v : values) {
+            if (v == null || v.toString().isBlank()) {
+                return null;
+            }
+        }
+
+        return String.format(format, values);
+    }
+
+    /**
+     * Returns true if the <code>inputString</code> is a fuzzy match of the <code>targetString</code>,
+     * false otherwise.
+     *
+     * <p>
+     * A fuzzy search is an approximate search algorithm. This implementation computes a fuzzy match by determining
+     * if there exists a <i>subsequence match</i> in linear time.
+     * </p>
+     *
+     * <p>
+     * As an example, <code>"abc"</code> is considered to be a fuzzy match of <code>"aa1b2ccc"</code>, since one may
+     * construct the subsequence <code>"abc"</code> by removing extra characters <code>"a1"</code>, <code>"2cc"</code>
+     * from <code>aa1b2ccc</code>.
+     * </p>
+     *
+     * @param inputString The partial fuzzy input string.
+     * @param targetString The target string to check if the input fuzzily matches with.
+     * @return true if the input fuzzy-matches (is fuzzily contained in) the target, false otherwise.
+     */
+    public static boolean isFuzzyMatch(String inputString, String targetString) {
+        if (inputString == null || targetString == null) {
+            return inputString == null && targetString == null; // both null => true, otherwise false
+        }
+
+        int inputI = 0;
+        int targetI = 0;
+
+        while (inputI < inputString.length() && targetI < targetString.length()) {
+            char c = inputString.charAt(inputI);
+            char t = targetString.charAt(targetI);
+
+            if (c == t) {
+                inputI++;
+            }
+            targetI++;
+        }
+
+        return inputI >= inputString.length();
+    }
+
+    /**
+     * Returns a score representing how close it is to matching characters at the beginning of the target.
+     * The higher the value, the better it is. A failed match will have {@code -targetString.length()}, while
+     * a complete match will have {@code inputString.length()}.
+     * </p>
+     */
+    public static int getFuzzyMatchScore(String inputString, String targetString) {
+        if (inputString == null || targetString == null) {
+            return 0;
+        }
+
+        int inputI = 0;
+        int targetI = 0;
+
+        int errorCount = 0;
+
+        while (inputI < inputString.length() && targetI < targetString.length()) {
+            char c = inputString.charAt(inputI);
+            char t = targetString.charAt(targetI);
+
+            if (c == t) {
+                errorCount += targetI - inputI - errorCount;
+                inputI++;
+            }
+            targetI++;
+        }
+
+        if (inputI < inputString.length()) {
+            return -targetString.length();
+        }
+
+        return inputI - errorCount;
+    }
 }

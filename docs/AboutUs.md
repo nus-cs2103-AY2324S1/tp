@@ -5,55 +5,50 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Wern
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wxwern.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://wern.cc/)]
+[[github](https://github.com/wxwern)]
+[[portfolio](team/wxwern.md)]
 
-* Role: Project Advisor
+* Role: Member
 
-### Jane Doe
+### Chun Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cj-lee01.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/CJ-Lee01)]
+[[portfolio](team/cj-lee01.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Member
 
-### Johnny Doe
+### Bryan Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mcnabry.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/mcnabry)]
+[[portfolio](team/mcnabry.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Member
 
-### Jean Doe
+### Shi Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanshiyu1999.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/tanshiyu1999)] [[portfolio](team/tanshiyu1999.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Member
 
-### James Doe
+### Juanpa Abola
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wamps-jp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/wamps-jp)] [[portfolio](team/wamps-jp.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Member
+
+

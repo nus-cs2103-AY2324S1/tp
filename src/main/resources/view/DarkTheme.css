@@ -149,7 +149,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -328,6 +328,25 @@
     -fx-text-fill: white;
 }
 
+.autocomplete-box.primary {
+    -fx-background-color: #ffffff22;
+}
+
+.autocomplete-box .completion-prefix {
+    -fx-font-size: 12pt;
+    -fx-text-fill: #ffffff88;
+}
+
+.autocomplete-box .completion-data {
+    -fx-font-size: 12pt;
+    -fx-text-fill: #ffffffff;
+}
+
+.autocomplete-box .completion-hint {
+    -fx-font-size: 7pt;
+    -fx-text-fill: #ffffff88;
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
@@ -335,6 +354,12 @@
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
+}
+
+.label#id {
+    -fx-text-fill: #d0d0d088;
+    -fx-font-size: 10px;
+    -fx-font-style: italic;
 }
 
 #tags {
@@ -349,4 +374,8 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#tags .label#type {
+    -fx-background-color: #3f917e;
 }

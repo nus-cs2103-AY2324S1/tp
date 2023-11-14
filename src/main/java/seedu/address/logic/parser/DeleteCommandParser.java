@@ -1,10 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_APPLICATION;
+import static seedu.address.logic.parser.CliSyntax.FLAG_RECURSIVE;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteApplicationCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.contact.Id;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -17,13 +21,51 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
-        } catch (ParseException pe) {
+        ArgumentMultimap argumentMultimap =
+                ArgumentTokenizer.tokenize(args,
+                        DeleteCommand.AUTOCOMPLETE_SUPPLIER.getAllPossibleFlags().toArray(Flag[]::new));
+
+        boolean hasApplicationFlag = argumentMultimap.getValue(FLAG_APPLICATION).isPresent();
+        boolean hasContactIdOrIndex = !argumentMultimap.getPreamble().isEmpty();
+        boolean isRecursive = argumentMultimap.getValue(FLAG_RECURSIVE).isPresent();
+
+        if (hasApplicationFlag && hasContactIdOrIndex) {
+            // example: delete 1 --application 1
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        if (hasApplicationFlag) {
+            return handleDeleteApplication(argumentMultimap);
+        }
+
+        if (!hasContactIdOrIndex) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        Object indexXorId = ParserUtil.parseIndexXorId(argumentMultimap.getPreamble());
+
+        if (indexXorId instanceof Index) {
+            return DeleteCommand.selectIndex((Index) indexXorId, isRecursive);
+        }
+
+        if (indexXorId instanceof Id) {
+            return DeleteCommand.selectId((Id) indexXorId, isRecursive);
+        }
+
+        assert false : "If indexXorId is neither Index nor Id, then ParserUtil should've thrown ParseException!";
+        throw new IllegalStateException();
+    }
+
+    private static DeleteCommand handleDeleteApplication(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(FLAG_APPLICATION).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(FLAG_APPLICATION).get());
+
+        return new DeleteApplicationCommand(index);
     }
 
 }

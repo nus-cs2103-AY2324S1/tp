@@ -1,7 +1,10 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Id;
 
 /**
  * Unmodifiable view of an address book
@@ -9,9 +12,24 @@ import seedu.address.model.person.Person;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the contacts list.
+     * This list will not contain any duplicate contacts.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Contact> getContactList();
+
+    /**
+     * Gives a contact which id matches the given id.
+     * Gives null if a contact with such id does not exist.
+     * Given id must not be null.
+     */
+    default Contact getContactById(Id id) {
+        requireNonNull(id);
+        for (Contact c: getContactList()) {
+            if (id.equals(c.getId())) {
+                return c;
+            }
+        }
+        return null;
+    }
 
 }

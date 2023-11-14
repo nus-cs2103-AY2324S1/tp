@@ -1,4 +1,4 @@
-title: "AB-3"
+title: "Jobby"
 theme: minima
 
 header_pages:
@@ -8,7 +8,10 @@ header_pages:
 
 markdown: kramdown
 
-repository: "se-edu/addressbook-level3"
+kramdown:
+  toc_levels: "2,3,4"
+
+repository: "ay2324s1-cs2103t-w08-3/tp"
 github_icon: "images/github-icon.png"
 
 plugins:

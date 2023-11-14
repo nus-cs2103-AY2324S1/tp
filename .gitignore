@@ -1,6 +1,7 @@
 # Gradle build files
 /.gradle/
 /build/
+/bin/
 src/main/resources/docs/
 
 # IDEA files
@@ -15,9 +16,16 @@ src/main/resources/docs/
 /*.log.*
 hs_err_pid[0-9]*.log
 
+# IDE config files
+.project
+.classpath
+.settings/
+
 # Test sandbox files
 src/test/data/sandbox/
 
-# MacOS custom attributes files created by Finder
+# Attribute files created by Finder and File Explorer
 .DS_Store
+Desktop.ini
+
 docs/_site/

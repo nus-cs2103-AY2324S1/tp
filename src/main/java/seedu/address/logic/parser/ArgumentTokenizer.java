@@ -1,148 +1,168 @@
 package seedu.address.logic.parser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
- *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
- * 1. An argument's value can be an empty string e.g. the value of {@code k/} in the above example.<br>
- * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
- * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
- *    in the above example.<br>
+ * Tokenizes arguments string of the form: {@code preamble <flag> value <flag> value ...}<br>
+ *     e.g. {@code some preamble text -t 11.00 -t 12.00 -k -m July} where flags are {@code -t -k -m}.<br>
+ *
+ * <ol>
+ *     <li>
+ *         An argument's (flag's) value can be an empty string, e.g., the value of {@code -k}
+ *         in the above example.
+ *     </li>
+ *     <li>
+ *         Leading and trailing whitespaces of an argument value will be discarded.
+ *     </li>
+ *     <li>
+ *         Flags must be surrounded by whitespace on both sides to be tokenized as flags.
+ *     </li>
+ *     <li>
+ *         An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
+ *         in the above example.
+ *     </li>
+ * </ol>
  */
 public class ArgumentTokenizer {
 
     /**
-     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
-     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps flag to their
+     * respective argument values. Only the given flags will be tokenized and added to the multimap, while
+     * extraneous flags found that match the expected syntax (see: {@link Flag#isFlagSyntax}}
+     * will throw an exception.
      *
-     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixes   Prefixes to tokenize the arguments string with
-     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     * <p>
+     * Unlike {@link #autoTokenize(String, Flag...)}, this <b>will throw an error</b> when unspecified flags
+     * are found. This means you must provide all the necessary flags you intend to use via the {@code flags}
+     * parameter.
+     * </p>
+     *
+     * <p>
+     * Calling this method is equivalent to using the results from
+     * {@link ArgumentTokenizer#autoTokenize(String, Flag...)} and verifying there exists no extraneous flags with
+     * {@link ArgumentMultimap#verifyNoExtraneousFlagsOnTopOf(Flag...)}.
+     * </p>
+     *
+     * @param argsString Arguments string of the form: {@code preamble <flag> value <flag> value ...}.
+     * @param flags      Flags to tokenize the arguments string with.
+     * @return ArgumentMultimap object that maps flag to their arguments.
+     * @throws ParseException if there are extraneous flags detected on top of the provided flags.
+     *
+     * @see #autoTokenize(String, Flag...)
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
-        List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
-        return extractArguments(argsString, positions);
+    public static ArgumentMultimap tokenize(String argsString, Flag... flags) throws ParseException {
+        ArgumentMultimap multimap = autoTokenize(argsString, flags);
+        multimap.verifyNoExtraneousFlagsOnTopOf(flags);
+        return multimap;
     }
 
     /**
-     * Finds all zero-based prefix positions in the given arguments string.
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps flag to their
+     * respective argument. All flags provided via the {@code flags} parameter, and all unknown flags
+     * successfully obtained via {@link Flag#parse}, will in both cases be added to the multimap.
      *
-     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixes   Prefixes to find in the arguments string
-     * @return           List of zero-based prefix positions in the given arguments string
+     * <p>
+     * Unlike {@link #tokenize(String, Flag...)}, this will not throw an error when unspecified flags are
+     * found. In other words, an unknown flag not present in {@code mainFlags} is always accepted.
+     * </p>
+     *
+     * @param argsString Arguments string of the form: {@code preamble <flag> value <flag> value ...}.
+     * @param mainFlags  Optional set of primary flags to prioritize tokenizing the arguments string with.
+     * @return ArgumentMultimap object that maps flag to their arguments.
+     *
+     * @see #tokenize(String, Flag...)
      */
-    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
-        return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
-                .collect(Collectors.toList());
+    public static ArgumentMultimap autoTokenize(String argsString, Flag... mainFlags) {
+        String[] words = splitByWords(argsString);
+        return extractArguments(words, mainFlags);
     }
 
     /**
-     * {@see findAllPrefixPositions}
+     * Splits an arguments string into individual words, separated by space.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <flag> value <flag> value ...}.
+     * @return The terms formed after splitting the arguments string by the space character.
      */
-    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
-        List<PrefixPosition> positions = new ArrayList<>();
+    private static String[] splitByWords(String argsString) {
+        return argsString.split(" ");
+    }
 
-        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
-        while (prefixPosition != -1) {
-            PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
-            positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+    /**
+     * Locates all the locations in the words list that represent flags.
+     *
+     * @param wordsArray An array of words.
+     * @param targetedFlags An array of flags should be checked explicitly.
+     * @return The list of indices where a flag can be found.
+     */
+    private static List<Integer> findFlagIndices(String[] wordsArray, Flag[] targetedFlags) {
+
+        List<Integer> flagIndices = new ArrayList<>();
+        for (int i = 0; i < wordsArray.length; i++) {
+            String word = wordsArray[i];
+
+            if (Flag.isFlagSyntax(word) || Flag.findMatch(word, targetedFlags).isPresent()) {
+                flagIndices.add(i);
+            }
         }
 
-        return positions;
+        return flagIndices;
     }
 
     /**
-     * Returns the index of the first occurrence of {@code prefix} in
-     * {@code argsString} starting from index {@code fromIndex}. An occurrence
-     * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
-     * such occurrence can be found.
-     *
-     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
-     * {@code fromIndex} = 0, this method returns -1 as there are no valid
-     * occurrences of "p/" with whitespace before it. However, if
-     * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
-     * {@code fromIndex} = 0, this method returns 5.
-     */
-    private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
-        int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
-        return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
-    }
-
-    /**
-     * Extracts prefixes and their argument values, and returns an {@code ArgumentMultimap} object that maps the
-     * extracted prefixes to their respective arguments. Prefixes are extracted based on their zero-based positions in
+     * Extracts flag and their argument values, and returns an {@code ArgumentMultimap} object that maps the
+     * extracted flag to their respective arguments. Flags are extracted based on their zero-based positions in
      * {@code argsString}.
      *
-     * @param argsString      Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
-     * @return                ArgumentMultimap object that maps prefixes to their arguments
+     * @param words           An array of words derived from the arguments string.
+     * @param targetedFlags   An array of flags should be checked explicitly.
+     * @return                ArgumentMultimap object that maps flags to their arguments.
      */
-    private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
+    private static ArgumentMultimap extractArguments(String[] words, Flag[] targetedFlags) {
 
-        // Sort by start position
-        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+        List<String> wordsList = List.of(words);
 
-        // Insert a PrefixPosition to represent the preamble
-        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
-        prefixPositions.add(0, preambleMarker);
+        // Define an "end of range" to be the end of a value or preamble.
+        // We prepare a list that marks the end of ranges via *exclusive* indices (i.e., end index + 1).
+        // In other words, if the list has [3, 5], it means there are two ranges [0,3) and [3,5).
+        List<Integer> endOfRangeIndices = new ArrayList<>();
 
-        // Add a dummy PrefixPosition to represent the end of the string
-        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
-        prefixPositions.add(endPositionMarker);
+        endOfRangeIndices.addAll(findFlagIndices(words, targetedFlags));
+        endOfRangeIndices.add(words.length);
 
-        // Map prefixes to their argument values (if any)
+        // Search through the ranges and map flag to their argument values (if any)
         ArgumentMultimap argMultimap = new ArgumentMultimap();
-        for (int i = 0; i < prefixPositions.size() - 1; i++) {
-            // Extract and store prefixes and their arguments
-            Prefix argPrefix = prefixPositions.get(i).getPrefix();
-            String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
-            argMultimap.put(argPrefix, argValue);
+        for (int i = 0; i < endOfRangeIndices.size(); i++) {
+
+            // Note that the bounds are [start, end), i.e., start <= x < end.
+            int start = i == 0 ? 0 : endOfRangeIndices.get(i - 1);
+            int end = endOfRangeIndices.get(i);
+
+            if (start >= end) {
+                continue;
+            }
+
+            // Case 1: Preamble (if we reach here in the first loop iteration).
+            if (i == 0) {
+                String preamble = String.join(" ", wordsList.subList(start, end)).trim();
+                argMultimap.putPreamble(preamble);
+                continue;
+            }
+
+            // Case 2: Flag + Possible Argument Value (if we reach here in 2nd+ loop iterations).
+            String flagString = words[start];
+            String valueString = String.join(" ", wordsList.subList(start + 1, end)).trim();
+
+            Flag flag = Flag.findMatch(flagString, targetedFlags)
+                    .or(() -> Flag.parseOptional(flagString))
+                    .orElseThrow(); // We should never get here since the flags are validated in findFlagIndices.
+
+            argMultimap.put(flag, valueString);
         }
 
         return argMultimap;
-    }
-
-    /**
-     * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
-     * The end position of the value is determined by {@code nextPrefixPosition}.
-     */
-    private static String extractArgumentValue(String argsString,
-                                        PrefixPosition currentPrefixPosition,
-                                        PrefixPosition nextPrefixPosition) {
-        Prefix prefix = currentPrefixPosition.getPrefix();
-
-        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
-        String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
-
-        return value.trim();
-    }
-
-    /**
-     * Represents a prefix's position in an arguments string.
-     */
-    private static class PrefixPosition {
-        private int startPosition;
-        private final Prefix prefix;
-
-        PrefixPosition(Prefix prefix, int startPosition) {
-            this.prefix = prefix;
-            this.startPosition = startPosition;
-        }
-
-        int getStartPosition() {
-            return startPosition;
-        }
-
-        Prefix getPrefix() {
-            return prefix;
-        }
     }
 
 }
