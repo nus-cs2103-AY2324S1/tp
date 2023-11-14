@@ -322,7 +322,7 @@ Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object
 
 The following activity diagram summarize what happens when a user attempts to execute the `create` command.
 
-<puml src="diagrams/CreateTagActivityDiagram.puml" />
+<puml src="diagrams/CreateTagActivityDiagram.puml" alt="CreateTagActivityDiagram"/></puml>
 
 ### Search feature
 
