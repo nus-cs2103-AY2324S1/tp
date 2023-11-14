@@ -34,7 +34,7 @@ Given below are my contributions to the project.
     the level of specificity the wish to achieve. 
 
   * **Credit**: Slightly referenced AB3's `find` and `edit` feature's design as well as to Kenvyn Kwek's prior implementation of feature.
-* **Refactor**: Refactored all instances of `AddressBook3` to `manageHr`
+* **Refactor**: Refactored all instances of `AddressBook3` to `manageHr` in the Tests
   * **What it does**: No changes to features.
   * **Justification**: It is pivotal to do so as failing so could make future implementations more difficult to understand. 
   * **Highlights**: Refactor implementation was hard due to the many dependencies that exists between each class.
