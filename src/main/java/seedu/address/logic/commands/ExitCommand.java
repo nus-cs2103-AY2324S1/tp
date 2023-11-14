@@ -4,6 +4,7 @@ import seedu.address.model.Model;
 
 /**
  * Terminates the program.
+ * Extends the abstract class {@link Command}.
  */
 public class ExitCommand extends Command {
 

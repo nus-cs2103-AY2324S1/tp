@@ -19,7 +19,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Doctor;
 
 /**
- * Adds a Doctor to the address book.
+ * Adds a Doctor to the MediLink Contacts address book.
+ * Extends the abstract class {@link Command}.
  */
 public class AddDoctorCommand extends Command {
 
@@ -49,7 +50,7 @@ public class AddDoctorCommand extends Command {
     private final Doctor toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Doctor}
+     * Creates an AddDoctorCommand to add the specified {@code Doctor}
      */
     public AddDoctorCommand(Doctor doctor) {
         requireNonNull(doctor);

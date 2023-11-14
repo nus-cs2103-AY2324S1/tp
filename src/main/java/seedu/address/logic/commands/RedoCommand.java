@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Represents a command for undoing the previous command in the application.
+ * Represents a command for redoing the previous command in the application.
  * Extends the abstract class {@link Command}.
  */
 public class RedoCommand extends Command {

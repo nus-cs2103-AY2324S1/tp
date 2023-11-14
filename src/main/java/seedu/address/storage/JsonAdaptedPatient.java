@@ -23,18 +23,17 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Patient}.
+ * Json-friendly version of {@link Patient}.
  */
 public class JsonAdaptedPatient extends JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
-
     private final String emergencyContact;
     private final String condition;
     private final String bloodType;
 
     /**
-     * Constructs a {@code JsonAdaptedPatient} with the given person details.
+     * Constructs a {@code JsonAdaptedPatient} with the given patient details.
      */
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -51,7 +50,7 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Patient} into this class for Jackson use.
+     * Converts a given {@code Patient} into this class for Json use.
      */
     public JsonAdaptedPatient(Patient source) {
         super(source);
@@ -61,9 +60,9 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted patient object into the model's {@code Patient} object.
+     * Converts this Json-friendly adapted patient object into the model's {@code Patient} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
         final Name modelName = checkName();
@@ -88,7 +87,7 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
     }
 
     /**
-     * Checks the emergency contact given by storage.
+     * Checks and validates the emergency contact given by storage.
      *
      * @return a valid Phone object.
      * @throws IllegalValueException if emergency contact is not valid.
@@ -104,7 +103,7 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
     }
 
     /**
-     * Checks the condition given by storage.
+     * Checks and validates the condition given by storage.
      *
      * @return a valid Condition object.
      * @throws IllegalValueException if condition is not valid.
@@ -121,7 +120,7 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
     }
 
     /**
-     * Checks the bloodType given by storage.
+     * Checks and validates the bloodType given by storage.
      *
      * @return a valid bloodType object.
      * @throws IllegalValueException if bloodType is not valid.

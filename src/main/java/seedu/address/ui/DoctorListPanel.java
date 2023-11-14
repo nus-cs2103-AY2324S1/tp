@@ -21,7 +21,7 @@ public class DoctorListPanel extends UiPart<Region> {
     private ListView<Doctor> doctorListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code DoctorListPanel} with the given {@code ObservableList}.
      */
     public DoctorListPanel(ObservableList<Doctor> doctorList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class DoctorListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Doctor} using a {@code DoctorCard}.
      */
     class DoctorListViewCell extends ListCell<Doctor> {
         @Override

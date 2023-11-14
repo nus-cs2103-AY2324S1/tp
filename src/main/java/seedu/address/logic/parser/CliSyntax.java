@@ -18,17 +18,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
 
 
-    //specific to patient
+    //specific to Patient
     public static final Prefix PREFIX_BLOODTYPE = new Prefix("b/");
     public static final Prefix PREFIX_CONDITION = new Prefix("c/");
     public static final Prefix PREFIX_EMERGENCY_CONTACT = new Prefix("ec/");
     public static final Prefix PREFIX_DOCTOR = new Prefix("d/");
-
-
-    //specific to doctor
-    public static final Prefix PREFIX_PATIENTS = new Prefix("pts/");
-
-    //specific to appointment
+    //specific to Appointment
     public static final Prefix PREFIX_PATIENT_IC = new Prefix("pic/");
     public static final Prefix PREFIX_DOCTOR_IC = new Prefix("dic/");
     public static final Prefix PREFIX_APPOINTMENT_TIME = new Prefix("time/");

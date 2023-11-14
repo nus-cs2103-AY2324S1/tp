@@ -22,14 +22,14 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Jackson-friendly version of {@link Doctor}.
+ * Json-friendly version of {@link Doctor}.
  */
 public class JsonAdaptedDoctor extends JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Doctor's %s field is missing!";
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedDoctor} with the given doctor details.
      */
     @JsonCreator
     public JsonAdaptedDoctor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -41,16 +41,16 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Doctor} into this class for Jackson use.
+     * Converts a given {@code Doctor} into this class for Json use.
      */
     public JsonAdaptedDoctor(Doctor source) {
         super(source);
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Json-friendly adapted doctor object into the model's {@code Doctor} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted doctor.
      */
     public Doctor toModelType() throws IllegalValueException {
         final Name modelName = checkName();

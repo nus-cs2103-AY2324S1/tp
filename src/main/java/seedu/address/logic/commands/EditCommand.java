@@ -46,6 +46,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
+ * Extends the abstract class {@link Command}.
  */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
@@ -81,7 +82,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param nric                 of the person in the filtered person list to edit
+     * @param nric of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Ic nric, EditPersonDescriptor editPersonDescriptor) {
@@ -109,6 +110,13 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
+    /**
+     * Retrieves the person to be edited based on the given IC and the current model.
+     *
+     * @param model The model containing the address book.
+     * @return The person to be edited.
+     * @throws CommandException If the person with the specified IC cannot be found in the address book.
+     */
     private Person getPersonToEdit(Model model) throws CommandException {
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.addAll(model.getFilteredDoctorList());
@@ -126,6 +134,15 @@ public class EditCommand extends Command {
         return personToEdit;
     }
 
+    /**
+     * Retrieves the edited person based on the person to be edited and the current model.
+     *
+     * @param model         The model containing the address book.
+     * @param personToEdit  The person to be edited.
+     * @return The edited person.
+     * @throws CommandException If there is an issue creating the edited person or if the
+     *      edited person would be a duplicate.
+     */
     private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
         Person editedPerson;
         if (personToEdit instanceof Patient) {
@@ -144,6 +161,12 @@ public class EditCommand extends Command {
         }
         return editedPerson;
     }
+
+    /**
+     * Validates the patient-specific fields in the EditPersonDescriptor.
+     *
+     * @throws CommandException If there are invalid patient-specific fields.
+     */
     private void validatePatient() throws CommandException {
         if (editPersonDescriptor.getTags().isPresent()
                 && !editPersonDescriptor.isValidPatientTagList(editPersonDescriptor.getTags().get())) {
@@ -151,6 +174,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PATIENT_TAGS);
         }
     }
+
+    /**
+     * Validates the doctor-specific fields in the EditPersonDescriptor.
+     *
+     * @throws CommandException If there are invalid doctor-specific fields.
+     */
     private void validateDoctor() throws CommandException {
         if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()
                 || editPersonDescriptor.getEmergencyContact().isPresent()) {
@@ -165,8 +194,12 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a new {@code Doctor} object with the details of {@code personToEdit}
+     * edited with the information provided in {@code editPersonDescriptor}.
+     *
+     * @param personToEdit The original {@code Doctor} object to be edited.
+     * @param editPersonDescriptor The descriptor containing the details to edit the person with.
+     * @return A new {@code Doctor} object with the edited details.
      */
     private static Doctor createEditedDoctor(Doctor personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
@@ -187,8 +220,14 @@ public class EditCommand extends Command {
         return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
                 updatedGender, updatedIc, updatedAppointments, updatedTags);
     }
-
-
+    /**
+     * Creates and returns a new {@code Patient} object with the details of {@code personToEdit}
+     * edited with the information provided in {@code editPersonDescriptor}.
+     *
+     * @param personToEdit The original {@code Patient} object to be edited.
+     * @param editPersonDescriptor The descriptor containing the details to edit the person with.
+     * @return A new {@code Patient} object with the edited details.
+     */
     private static Patient createEditedPatient(Patient personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
         requireNonNull(editPersonDescriptor);

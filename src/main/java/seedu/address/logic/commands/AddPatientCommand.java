@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Patient;
 
 /**
- * Adds a person to the address book.
+ * Adds a Patient to the MediLink Contacts address book.
  */
 public class AddPatientCommand extends Command {
 
@@ -51,7 +51,6 @@ public class AddPatientCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
     private final Patient toAdd;
 
     /**

@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Patient;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Patient}.
  */
 public class PatientCard extends UiPart<Region> {
 
@@ -54,7 +54,7 @@ public class PatientCard extends UiPart<Region> {
     private Label bloodType;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PatientCard} with the given {@code Patient} and index to display.
      */
     public PatientCard(Patient person, int displayedIndex) {
         super(FXML);

@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Checks if an {@code appointment} has a patient or doctor, matching
+ * Checks if an {@code Appointment} has a patient or doctor, matching
  * the query Ic {@code keywords}.
  */
 public class AppointmentIcPredicate implements Predicate<Appointment> {

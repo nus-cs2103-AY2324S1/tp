@@ -19,7 +19,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
  */
 public class UniquePatientList extends UniqueObjectList<Patient> {
 
@@ -27,13 +26,16 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
     protected final ObservableList<Patient> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Replaces the current list of patients with a new list provided in the {@code replacement} parameter.
+     */
     public void setPersons(UniquePatientList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Returns true if the list contains an equivalent Patient as the given argument.
+     * Returns true if the list contains an equivalent patient as the given argument.
      */
     @Override
     public boolean contains(Patient toCheck) {
@@ -41,7 +43,7 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
     /**
-     * Returns true if the list contains an equivalent ic as the given argument.
+     * Returns true if the list contains an equivalent nric as the given argument.
      */
     public boolean containsIc(Ic nric) {
         requireNonNull(nric);
@@ -49,8 +51,8 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
     }
 
     /**
-     * Adds a Patient to the list.
-     * The Patient must not already exist in the list.
+     * Adds a patient to the list.
+     * The patient must not already exist in the list.
      */
     @Override
     public void add(Patient toAdd) {
@@ -62,9 +64,9 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
     }
 
     /**
-     * Replaces the Patient {@code target} in the list with {@code editedPatient}.
+     * Replaces the patient {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the list.
-     * The Patient identity of {@code editedPatient} must not be the same as another existing Patient in the list.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the list.
      */
     @Override
     public void setObject(Patient target, Patient editedPatient) {
@@ -83,8 +85,8 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
     }
 
     /**
-     * Removes the equivalent Patient from the list.
-     * The Patient must exist in the list.
+     * Removes the equivalent patient from the list.
+     * The patient must exist in the list.
      */
     @Override
     public void remove(Patient toRemove) {
@@ -95,8 +97,8 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
     }
 
     /**
-     * Replaces the contents of this list with {@code Patients}.
-     * {@code Patients} must not contain duplicate Patients.
+     * Replaces the contents of this list with {@code patients}.
+     * {@code patients} must not contain duplicate patients.
      */
     @Override
     public void setObjects(List<Patient> patients) {

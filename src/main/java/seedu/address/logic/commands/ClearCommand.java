@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 
 /**
  * Clears the address book.
+ * Extends the abstract class {@link Command}.
  */
 public class ClearCommand extends Command {
 
