@@ -105,7 +105,9 @@ Here's a quick guide to help you understand what they mean.
 1. Ensure that you have Java `11` or above installed in your Computer.
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
 3. Double-click the file to start the app. The window that appears will be similar to the one below. <br>
-    ![startScreen](images/emptyLoveBook.png) <br>
+    <br>
+   ![startScreen](images/emptyLoveBook.png) 
+    <br>
 4. Follow the tutorial below to get started.
 
 ### **Navigating the GUI**
@@ -483,7 +485,7 @@ Format: `sort METRIC/ORDER`
 
 <box type="important">
 
-* When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
+When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
 an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
 sorting order by value is preserved.
              
@@ -579,8 +581,9 @@ Outputs a random date from the LoveBook.
 Format: `blindDate` <br>
 
 <img src="images/user-commands/blindDateCommandExample1.png" alt="blindDate" height="350" width="600"/>
+<br> <br>
+<img src="images/user-commands/blindDateCommandExample2.png" alt="blindDate" height="300" width="600"/>
 <br>
-<img src="images/user-commands/blindDateCommandExample2.png" alt="blindDate" height="300"/>
 
 Expected Output: `Here's a blind date for you!`
 
