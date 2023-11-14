@@ -28,9 +28,6 @@ Given below are my contributions to the project.
 * **Code contributed**:
   * https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=heran9&breakdown=true
 
-* **Project management**:
-  * to be added soon
-
 * **Enhancements to existing features**:
   * Enhancements to the list command. Add the ability to list all unpaid students.
   * What it does: Allow the user check all unpaid students in a list.
@@ -40,12 +37,10 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `paid`, `unpaid`, `unpaidAll`, `list unpaid`
-    * Determine the overall format and structure of UG.
+    * Help to determine the overall format and structure of UG.
   * Developer Guide:
-    * Added implementation details of the `paid` feature.
+    * Added implementation details of the `paid`, `unpaid`, `list unpaid` features.
+    * Added Activity Diagrams for `paid` and `unpaidAll` features.
 
-* **Community**:
-  * to be added soon
-
-* **Tools**:
-  * to be added soon
+* **Review/Mentoring contributions**:
+  * Reviewed and offered suggestions for team member's pull requests.
