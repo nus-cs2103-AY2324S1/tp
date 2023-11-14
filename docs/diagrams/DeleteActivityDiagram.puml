@@ -4,21 +4,21 @@ start
 :Enter delete command;
 :Parse arguments;
 
-if (arguments valid?) then (yes)
+if () then ([arguments valid])
 
 :Execute delete command;
 :Find Patient data;
 
-if (Patient data found?) then (yes)
+if () then ([patient data found?])
 
 :Delete data;
 :Notify user of success;
-else (no)
+else ([no])
 
 :Notify user of failure;
 endif
 
-else (no)
+else ([no])
 
 :Notify user of failure;
 
