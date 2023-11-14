@@ -173,8 +173,8 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
 
     /**
      * Faciliates comparison when testing.
-     * @param o
-     * @return
+     * @param o the other object to compare with
+     * @return boolean indicating whether two objects are equal
      */
     @Override
     public boolean equals(Object o) {

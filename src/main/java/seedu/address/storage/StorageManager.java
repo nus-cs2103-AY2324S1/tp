@@ -36,7 +36,6 @@ public class StorageManager implements Storage {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.scheduleListStorage = scheduleListStorage;
-        //todo, improve code quality after this friday's release as this is not considered feature enhancement
     }
 
     // ================ UserPrefs methods ==============================
