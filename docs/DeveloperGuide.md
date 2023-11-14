@@ -413,7 +413,7 @@ The `EditCommand` is implemented as follows:
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/EditActivityDiagram.puml" width="250" />
+<puml src="diagrams/EditActivityDiagram.puml" width="650" />
 
 #### Rationale
 
