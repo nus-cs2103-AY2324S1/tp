@@ -223,6 +223,19 @@ The `FindCommand` extends the `Command` class. It allows the user to find for tu
 subject using their prefixes. Both parameters are optional, but at least one of them must be specified for the `find`
 command to work properly.
 
+`NameContainsKeywordsPredicate` is a class which takes a list of strings as input, and is used to test whether the input
+matches any of the names inside the tutee list.
+
+`SubjectContainsKeywordsPredicate` is a class which takes a list of string as input, and is used to test whether the input
+matches any of the subjects inside the tutee list.
+
+As for `NameSubjectPredicate`, it takes in two parameters `NameContainsKeywordsPredicate` and 
+`SubjectContainsKeywordsPredicate` as to accommodate for both input of fields n/ and sb/.
+
+However, since the method `updateFilteredPersonList` can only take one parameter, the merging of both 
+`NameContainsKeywordsPredicate` and `SubjectContainsKeywordsPredicate` into `NameSubjectPredicate` is the implementation
+we decided to go with.
+
 `FindCommand` takes in the following fields:
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Subject (Optional field)**: String without restriction in characters.
@@ -1012,7 +1025,7 @@ Idea: Add a scheduling mechanism within the command execution to mark individual
 
 Reason: To create a more sophisticated find feature for the best results. This enhancement allows users to get more specific results tailored to their criteria.
 
-Idea: Modify the NameContainsKeywordPredicate and SubjectContainsKeywordPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
+Idea: Modify the NameContainsKeywordsPredicate and SubjectContainsKeywordsPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
 
 ### Maximum PayRate
 
