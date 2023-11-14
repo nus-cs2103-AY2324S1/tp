@@ -291,11 +291,11 @@ The following sequence diagram shows how the add patient works:
 ### Delete Patient/Doctor Feature
 
 This feature allows users to delete the desired patient or doctor based on the
-nric provided.
+NRIC provided.
 
 #### Implementation
 
-Implementation of the delete feature is similar to the original delete command, except that it is done with Ic instead
+Implementation of the delete feature is similar to the original delete command, except that it is done with nric instead
 of Index.
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
@@ -306,13 +306,15 @@ address book state.
 Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already
 done.
 
-Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for
+Step 3. The user types `delete` as the command, with the appropriate NRIC of the patient/doctor to be deleted, for
 example `delete S9567312G`.
 
 Step 4. The `deleteCommandParser` parses the delete command and creates a `deleteCommand` with the target Ic.
 
 Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the
 deleted Doctor/Patient.
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 ### Create New Appointment Feature
 
@@ -693,6 +695,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC9 - Find Appointment**
+
+**MSS**
+
+1. User inputs a query of the Ic of the Patient/Doctor whose appointment is required.
+2. Medilink Contacts lists all appointments with the involved Patient/Doctor.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Appointment does not involve query Patient.
+
+    * 2a1. Medilink Contacts shows error message.
+
+      Use case ends.
+
+* 2b. Appointment does not involve query Doctor.
+
+    * 2b1. Medilink Contacts shows error message.
+
+      Use case ends.
+
+**Use case: UC10 - Delete Appointment**
+
+**MSS**
+
+1. User inputs the index of appointment to be deleted.
+2. Medilink Contacts located the appointment by index.
+3. Medilink Contacts deletes the appointment.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Appointment index does not exist.
+
+    * 2a1. Medilink Contacts shows error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -748,6 +791,8 @@ MediLink Contacts adapted from the AB3 to use the Patient and Doctor classes to 
 
 Some changes were also made to such that the two classes have their own attributes on top of the original Person attributes and inherit from the common class Person. There are now 2 instead of just 1 entity that has to be handled. This translates to more Parsers, attribute classes and input validations to support these two classes.
 
+We also decided that Patient and Doctor tags should provide meaning in the context of our app and thus, we decided to create restrictions. The biggest challenge here was the parsing of the tags as it had to be changed throughout multiple commands and in the EditCommand, the initial parsing does not check if the person is a Patient or Doctor, which meant we had to carefully check later on that valid tags were indeed edited.
+
 Additionally, we moved away from using Index for most of our operations. Instead, we perform all operations using the NRIC. This also means more changes to the existing command such as Edit/Find/Delete commands.
 
 ### Appointment class
@@ -755,8 +800,12 @@ This is a newly created class that represents a relationship between the Doctor 
 
 Storing the appointment was a challenge too. We store each appointment in the involved doctor and patient such that we can search for their appointments more easily as well as a separate list in the model, that has all the appointments. We had to create new JsonAdaptedAppointment class for this purpose.
 
+### UniqueObjectList class
+To further enhance our application, we created an abstract UniqueObjectList class that can store any object in the required format for use in the addressbook. Using this class, we instantiated UniquePatientList, UniqueObjectList and UniqueAppointmentList. This also allows for future improvements as any new object list to be store can be simply instantiated as a child of UniqueObjectList.
+
 ### Undo and Redo
-As we wanted to allow our users to revert back some mistakes, we implemented the undo and redo functions, which are fairly new compared to the existing functions that are mainly CRUD related. These changes had to be tied to each individual commands as we had to store the different states of the system before and after each operation is performed. Hence, the code changes were across many files and had to be linked well for it to work.
+As we wanted to allow our users to revert back some mistakes, we implemented the undo and redo functions, which are fairly new compared to the existing functions that are mainly CRUD related. These changes had to be tied to each individual commands as we had to store the different states of the system before and after each operation is performed. Hence, the code changes were across many files and had to be linked well for it to work. Additionally, we faced a challenge coming up with the best possible implementation, as there were multiple ways for us to revert the data files. We eventually decided on 
+storing an ArrayList of AddressBooks and faced a challenge figuring out how to update the UI, which we eventually managed to resolve through extensive searching and fixing.
 
 ## **Appendix: Instructions for manual testing**
 

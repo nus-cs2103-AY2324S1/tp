@@ -1,4 +1,4 @@
-git---
+---
 layout: page
 title: Faiz's Project Portfolio Page
 ---
@@ -26,6 +26,9 @@ Given below are my contributions to the project.
 * **New Feature**: Updated part of the sample data to include the new features
 * **Code Quality**: Removed Unnecessary Code and Classes to prevent confusion
   * Removed AddCommandClass and made adjustments to code to accomodate changes
+
+* **Testing**: Created JUnit Test Classes
+  * Created Testcases for Doctor and related Classes (e.g AddDoctorCommand, AddDoctorCommandParser)
 
 * **Project management**:
   * Managed milestones and issues
