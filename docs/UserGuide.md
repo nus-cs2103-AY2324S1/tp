@@ -98,8 +98,8 @@ To set up manager-subordinate relationships, follow these steps:
 
 When enrolling a new employee in ManageHR, you can also establish manager-subordinate relationships. Follow these steps:
 1. Include `r/ROLE` into `add` command, where `ROLE` could either be `manager` or `subordinate`. This is a compulsory field where each employee must either be `manager` or `subordinate`.
-2. Include `m/MANAGER NAME…` into `add` command. This is an optional field. Note that you can have multiple managers in charge of this employee or none at all.
-3.  `m/MANAGER NAME…` represents the managers who are currently in charge of the said employee.
+2. Include `m/MANAGER_NAME…` into `add` command. This is an optional field. Note that you can have multiple managers in charge of this employee or none at all.
+3.  `m/MANAGER_NAME…` represents the managers who are currently in charge of the said employee.
 
 #### Editing an Existing Employee with Manager-Subordinate Relationships
 When editing an existing employee in ManageHR, you can also establish or modify manager-subordinate relationships. Follow these steps:
@@ -107,8 +107,8 @@ When editing an existing employee in ManageHR, you can also establish or modify 
 
     - The employee can only change his or her `role` from `manager` to `subordinate` only if he or she has no employees under his or her supervision.
     - The name of the employee can only be edited if he or she is a `manager` with no employees under his or her supervision.
-2. Include `m/MANAGER NAME…` into the `edit` command. This will place the employee to be under that `manager`.
-    - The `MANAGER NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
+2. Include `m/MANAGER_NAME…` into the `edit` command. This will place the employee to be under that `manager`.
+    - The `MANAGER_NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
 
 #### Deleting an Existing Employee with Manager-Subordinate Relationships
 When deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
@@ -181,7 +181,7 @@ Expected outputs:
 
 Adds an employee to ManageHR’s entries.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER_NAME]…`
 - Adds an employee with the above fields.
 - Name, Phone Number, Email, Address, Salary, Leave and Role fields must be provided.
 - Department and Manager fields are optional, and can contain more than one.
@@ -230,7 +230,7 @@ Format: `list`
 
 Edits an existing employee in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME]… [d/DEPARTMENT]…​`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list.
 * At least one of the optional fields must be provided.
@@ -397,11 +397,11 @@ Now, your data should be successfully transferred to the new computer.
 
 | Action         | Format, Examples                                                                                                                                                                                                                                |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER_NAME]…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
 | **Clear**      | `clear`                                                                                                                                                                                                                                         |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
 | **Department** | `department t/(add/delete) n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                       |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
 | **Exit**       | `exit`                                                                                                                                                                                                                                          |
 | **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                          |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                      |
