@@ -262,7 +262,7 @@ The below diagram gives a high-level overview on how the `SeplendidParser` parse
 
 ### 5.2 List Feature
 
-#### Overview \
+#### Overview
 <br>
 The `list` command generates a list of SEPlendid data. The data can be in the for of a `localcourse`, `partnercourse`, 
 `university`, `mapping`, or `note`. This allows the viewing of all the data type that is listed.
@@ -401,7 +401,7 @@ Each data type has different attributes that can be used for updating.
 ### 5.6 Search Feature
 
 #### Overview
-<br>
+
 The `search` command allows users find specific courses or universities they are interested in. This allows for faster
 querying of courses, universities and notes.
 
@@ -1286,21 +1286,17 @@ Expected Output: No result.
 
 Expected Output in the Command Output Box: Partner course searched message.
 
-    1. Prerequisites: List all mappings using the `mapping list` command. Multiple mappings in the list.
+1. Prerequisites: List all mappings using the `mapping list` command. Multiple mappings in the list.
 <box type="info" seamless>
 
-    1. Ensure your scroll to the bottom.
+1. Ensure your scroll to the bottom.
 **Note:** The query cannot start with a number. It must start with an alphabet.
 
-    1. Test case: `mapping add [IS4231] [Lund University] [INFC40] [Sem 1 only.]`<br>
-       Expected: A new mapping is added, and will appear at the bottom of the list.
 </box> 
 
-    1. Test case: `mapping delete [IS4231] [Lund University] [INFC40] [Sem 1 only.]`<br>
-       Expected: The mapping is deleted, and disappears from the list.
 #### Sort partner courses by attributes
 
-    1. Other incorrect delete commands to try: `mapping ad`, `mapping add []`, `...` <br>
+1. Other incorrect delete commands to try: `mapping ad`, `mapping add []`, `...` <br>
        Expected: An error message will appear.
 Prerequisite:
 - There is at least 1 partner course stored in SEPlendid.
