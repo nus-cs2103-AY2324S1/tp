@@ -49,7 +49,7 @@ Given below are my contributions to the project.
 [\#194](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/194),
 [\#233](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/233))
     * Updated GUI pictures
-    * Added implementation details and sequence diagrams of the `add` and `rev` feature. (Pull requests
+    * Added implementation details and sequence diagrams of the `add` and `rev` features (Pull requests
 [\#189](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/189),
 [\#194](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/194))
 
