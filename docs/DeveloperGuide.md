@@ -998,7 +998,7 @@ testers are expected to do more *exploratory* testing.
    
        Expected: No person is shown. An error message is displayed due to an invalid index being used.
 
-    1. Other incorrect view commands to try: `viewp` || `viewp x` (where x is larger than the list size)
+    1. Other incorrect view commands to try: `viewp`, `viewp x` (where x is larger than the list size)
    
        Expected: No person is shown. An error message id displayed due to an invalid index being used.
 
@@ -1203,11 +1203,11 @@ testers are expected to do more *exploratory* testing.
    
       Expected: Order is added. Details of the order shown in the Information display.
    
-   6. Test case: `addo 1 o/1234` || `addo 1 m/pan`
+   6. Test case: `addo 1 o/1234`, `addo 1 m/pan`
    
       Expected: No Order is added due to missing details. An error is displayed due to an invalid format being used.
 
-   7. Test case: `addo m/` || `addo`
+   7. Test case: `addo m/`, `addo`
    
       Expected: Similar to previous.
 
