@@ -47,7 +47,7 @@ And here's the best part – while it's perfect for members of SoC Computing Clu
 
 Don't let the stress of contact and task management hinder your creativity.
 
-Let **CoordiMate** take care of the details, while you craft extraordinary events with confidence.
+Let CoordiMate take care of the details, while you craft extraordinary events with confidence.
 
 ## Using This Guide
 
@@ -145,13 +145,13 @@ Throughout this guide, you will see different text styles that are used to highl
     After a few seconds, a GUI should appear, showing some sample data, as in the screenshot below. <br><br>
     ![Ui](images/Ui.png)<br><br>
 
-7. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window.
+7. Type the command in the [command line](#understanding-our-gui) and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window.
 
    Some example commands you can try:
 
    - `listPerson` : Lists all persons.
 
-   - `addPerson n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a new contact named `John Doe` with the specified details.
+   - `addPerson n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a new person named `John Doe` with the specified details.
 
    - `deletePerson 3` : Deletes the 3rd person shown in the current contact list.
 
@@ -209,7 +209,7 @@ The commands are split into 4 main sections:
 
   <li>
     <p>
-      Fields can be in any order.<br>
+      All fields except <code>INDEX</code> can be in any order.<br>
       e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.
     </p>
   </li>
@@ -275,7 +275,7 @@ you can simply type:
   <pre class="highlight"><code><b>lp</b></code></pre>
 </div>
 
-Both commands will show a full list of all the contacts in your contact list.<br>
+Both commands will show a full list of all the persons in your contact list.<br>
 
 A summary of valid aliases is shown in the [Command Summary](#command-summary) section below.
 
@@ -298,7 +298,7 @@ A summary of valid aliases is shown in the [Command Summary](#command-summary) s
 
 {% include admonition.html type="note" title="Note" body="
 
-Here's a handy trick – you can easily resize sections like Command Result, Contact List, and Task List. Just give the sides a drag in or out to customize the view according to your preference.
+Here's a handy trick – you can easily resize sections like Command Result, Contact List, and Task List. Just drag the dividers to customize the view according to your preferences.
 
 " %}
 
@@ -1287,7 +1287,7 @@ To reset the persons and tasks view, simply run the <a href='#42-listing-all-per
 
 #### 3.6. Deleting tag(s) from a person: `deleteTagPerson`
 
-You can delete tag(s) from a person in your contacts list, so that you can remove unwanted or irrelevant tags.
+You can delete tag(s) from a person in your contact list, so that you can remove unwanted or irrelevant tags.
 
 <h4>Format:</h4>
 
@@ -1550,16 +1550,20 @@ Example: After `listAll` command, users can scroll the contact list and task lis
 
 For more information on CoordiMate's GUI, read more about it [here](#understanding-our-gui).
 
-### Integer
+### Index
 
-A whole number without fractions or decimals, commonly used in CoordiMate to indicate the position of an item in a list.
-
-The valid range for accepted integers is 1, 2, 3, … , 2147483647.
+The position of an item in a list, starting from 1. The index must be a positive integer.
 
 Example: If you have a list with the letters ("a", "b", "c") in order,
-  - 1 refers to “a”
-  - 2 refers to “b”
-  - 3 refers to “c”
+  - Index 1 refers to “a”
+  - Index 2 refers to “b”
+  - Index 3 refers to “c”
+
+### Integer
+
+A whole number without fractions or decimals. The valid range of integers is a whole number between -2147483648 and 2147483647, both inclusive.
+
+Example: -1, 0, 1, 2, 3, 2147483647 are all valid integers.
 
 <br><br>
 
