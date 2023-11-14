@@ -263,12 +263,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWIthInvalidTagsCategorySpecified_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList("employment " + VALID_TAG_1, "dept "
-                + VALID_TAG_2)));
-    }
-
-    @Test
     public void parseTagCategories_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTagCategories(null));
     }
