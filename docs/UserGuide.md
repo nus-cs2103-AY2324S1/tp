@@ -781,16 +781,18 @@ Example:
 
 Screenshots:
 
-<pic src="images/screenshots/addAppointment.png" width="300">
+<pic src="images/screenshots/addAppointment.png" height="300">
 Command
 </pic>
-<pic src="images/screenshots/viewAppointment.png" width="300">
+<pic src="images/screenshots/viewAppointment.png" width="350">
 Output
 </pic>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting an appointment: `deleteappointment`
 
