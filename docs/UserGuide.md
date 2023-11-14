@@ -1104,11 +1104,11 @@ Format: `help`
 
 **Tip:** The `Help window` can also be accessed by clicking `Help > Help F1` in the menu bar, located at the top of the window.
 
-<img src="images/helptip.png">
-
 Additionally, pressing the `F1` key also opens the `Help Window`.
 
 </box>
+
+<img src="images/helptip.png">
 
 **Note regarding `help` command:**
 
