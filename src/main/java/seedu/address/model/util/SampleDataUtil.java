@@ -171,6 +171,102 @@ public class SampleDataUtil {
                     new PolicyDate("20-12-2022"),
                     new PolicyDate("20-12-2023")
                 )
+            ),
+            new Person(
+                new Name("Noor Muhammad"),
+                new Phone("93210283"),
+                new Email("noormuhammad@yahoo.com"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                getTagSet("friends"),
+                new Nric("743G"),
+                new LicencePlate("SLA2958R"),
+                EMPTY_REMARK,
+                new Policy(
+                    new Company("NTUC Income"),
+                    new PolicyNumber("NI56978"),
+                    new PolicyDate("20-12-2022"),
+                    new PolicyDate("20-12-2023")
+                )
+            ),
+            new Person(
+                new Name("Ella Lim"),
+                new Phone("96535879"),
+                new Email("ella.l@gmail.com"),
+                new Address("Blk 101 Bukit Panjang Road, #06-18"),
+                getTagSet("friends", "dancing"),
+                new Nric("901X"),
+                new LicencePlate("SGP9012Y"),
+                new Remark("Sometimes comes to office"),
+                new Policy(
+                    new Company("AXA Insurance"),
+                    new PolicyNumber("AI485967"),
+                    new PolicyDate("11-10-2023"),
+                    new PolicyDate("11-10-2024")
+                )
+            ),
+            new Person(
+                new Name("Zack Lim"),
+                new Phone("83246842"),
+                new Email("zack.l@yahoo.com"),
+                new Address("Blk 101 Sengkang East Ave, #09-11"),
+                getTagSet("friends", "gaming"),
+                new Nric("901Z"),
+                new LicencePlate("SGP9012P"),
+                EMPTY_REMARK,
+                new Policy(
+                    new Company("DirectAsia Insurance"),
+                    new PolicyNumber("DI486096"),
+                    new PolicyDate("30-01-2023"),
+                    new PolicyDate("30-01-2024")
+                )
+            ),
+            new Person(
+                new Name("Nora Tan"),
+                new Phone("83565945"),
+                new Email("nora.t@outlook.com"),
+                new Address("Blk 303 Tampines St 32, #15-14"),
+                getTagSet("friends", "cooking"),
+                new Nric("678P"),
+                new LicencePlate("SGP6789A"),
+                new Remark("Always goes for cooking class"),
+                new Policy(
+                    new Company("NTUC Income"),
+                    new PolicyNumber("NI846794"),
+                    new PolicyDate("14-06-2023"),
+                    new PolicyDate("14-06-2024")
+                )
+            ),
+            new Person(
+                new Name("Ananya Sharma"),
+                new Phone("96586435"),
+                new Email("ananya.s@gmail.com"),
+                new Address("Blk 505 Clementi Ave 1, #12-09"),
+                getTagSet("friends", "yoga"),
+                new Nric("567D"),
+                new LicencePlate("SGP5678E"),
+                EMPTY_REMARK,
+                new Policy(
+                    new Company("NTUC Income"),
+                    new PolicyNumber("NI586978"),
+                    new PolicyDate("12-09-2023"),
+                    new PolicyDate("12-09-2024")
+                )
+            ),
+            new Person(
+                new Name("Vikram Singh"),
+                new Phone("96326975"),
+                new Email("vikram.s@outlook.com"),
+                new Address("Blk 101 Little India Road, #09-15"),
+                getTagSet("friends", "cricket"),
+                new Nric("678G"),
+                new LicencePlate("SGP6789H"),
+                new Remark("Likes to hang out"),
+                new Policy(
+                    new Company("AXA Insurance"),
+                    new PolicyNumber("AI569574"),
+                    new PolicyDate("29-04-2023"),
+                    new PolicyDate("29-04-2024")
+                )
             )
         };
     }
