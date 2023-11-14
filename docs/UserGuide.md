@@ -562,7 +562,7 @@ For example, we want to remove John Doe from band TheoryX.
   ![findb_after.png](images%2Fband-features%2Ffindb.png)
 
 
-* After: Remove John Doe at position 1 with `removem m/1 b/1`. You will see a message indicating successful removal of the musician from the band like below:
+* After: Remove John Doe at position 1 with `removem b/1 m/1`. You will see a message indicating successful removal of the musician from the band like below:
   ![removem_after.png](images%2Fband-features%2Fremovem_after.png)
 
 **Upon failure:**
