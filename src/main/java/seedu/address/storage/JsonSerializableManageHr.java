@@ -66,8 +66,9 @@ class JsonSerializableManageHr {
             if (manageHR.hasEmployee(employee)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
-            manageHR.addEmployee(employee);
+            manageHR.addEmployeeFromStorageWithoutConstraints(employee);
         }
+        manageHR.enforceConstraints();
         return manageHR;
     }
 

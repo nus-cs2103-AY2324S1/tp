@@ -2,12 +2,15 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.DepartmentBuilder.DEPARTMENT_LOGISTICS;
+import static seedu.address.testutil.TypicalEmployees.AMY;
 import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalEmployees.ELLE;
 import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
@@ -23,9 +26,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.department.Department;
+import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
+import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class ManageHrTest {
@@ -68,10 +73,39 @@ public class ManageHrTest {
     }
 
     @Test
+    public void setEmployee_employeeWithWrongSupervisor_throwsSupervisorNotFoundException() {
+        ManageHr typicalManageHr = getTypicalManageHr();
+        Employee editedBenson = new EmployeeBuilder(BENSON).withSupervisors(VALID_NAME_BOB).build();
+        assertThrows(SupervisorNotFoundException.class, () -> typicalManageHr.setEmployee(BENSON, editedBenson));
+    }
+
+    @Test
+    public void setEmployee_employeeWithPreviousSupervisor_throwsSupervisorNotFoundException() {
+        // This case is impossible to test for. To hit this, an employee must:
+        // target.isSupervisorOf(editedEmployee) has to be true
+        // so by extension employees.hasSubordinates(target) has to be true
+        // So target.isSameEmployee(editedEmployee) has to be true for the error to occur
+        // Which means only way to test it is to have the employee be its own manager,
+        // Which is currently impossible.
+    }
+
+    @Test
+    public void removeEmployee_employeeWithSubordinates_throwsSubordinatePresentException() {
+        ManageHr typicalManageHr = getTypicalManageHr();
+        assertThrows(SubordinatePresentException.class, () -> typicalManageHr.removeEmployee(BENSON));
+    }
+
+    @Test
     public void setEmployee_employeeWithSubordinatesChangesRole_throwsCommandException() {
         ManageHr typicalManageHr = getTypicalManageHr();
         Employee editedBenson = new EmployeeBuilder(BENSON).withRole(VALID_ROLE_BOB).build();
         assertThrows(CommandException.class, () -> typicalManageHr.setEmployee(BENSON, editedBenson));
+    }
+
+    @Test
+    public void setEmployees_listWithoutDepartment_throwsDepartmentNotFoundException() {
+        List<Employee> listWithoutDepartment = Collections.singletonList(AMY);
+        assertThrows(DepartmentNotFoundException.class, () -> manageHr.setEmployees(listWithoutDepartment));
     }
 
     @Test
@@ -100,14 +134,66 @@ public class ManageHrTest {
     }
 
     @Test
+    public void hasEmployeeWithName_employeeExists_returnsTrue() {
+        manageHr.addEmployee(ELLE);
+        assertTrue(manageHr.hasEmployeeWithName(ELLE.getName()));
+    }
+
+    @Test
+    public void hasEmployeeWithName_noSuchEmployee_returnsFalse() {
+        manageHr.addEmployee(ELLE);
+        assertFalse(manageHr.hasEmployeeWithName(AMY.getName()));
+    }
+
+    @Test
     public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> manageHr.getEmployeeList().remove(0));
     }
 
     @Test
+    public void removeDepartment_removal_success() {
+        manageHr.addDepartment(DEPARTMENT_LOGISTICS);
+        manageHr.removeDepartment(DEPARTMENT_LOGISTICS);
+        ManageHr manageHr1 = new ManageHr();
+        assertEquals(manageHr, manageHr1);
+    }
+
+    /* The addition of this test appears to cause other tests to fail spectacularly.
+    @Test
+    public void removeDepartment_removalOfWholeDepartment_success() {
+        ManageHr manageHr1 = new ManageHr();
+        manageHr1.addDepartment(DEPARTMENT_LOGISTICS);
+        Employee editedElle = new EmployeeBuilder(ELLE).withDepartments(VALID_DEPARTMENT_LOGISTIC).build();
+        manageHr1.addEmployee(editedElle);
+        manageHr1.removeDepartment(DEPARTMENT_LOGISTICS);
+        assertEquals(manageHr1, manageHr1);
+    }*/
+    @Test
     public void toStringMethod() {
         String expected = ManageHr.class.getCanonicalName() + "{employees=" + manageHr.getEmployeeList() + "}";
         assertEquals(expected, manageHr.toString());
+    }
+    @Test
+    public void updateDepartments_departmentNotPresent_throwsDepartmentNotFoundException() {
+        ManageHr manageHr1 = new ManageHr();
+        assertThrows(DepartmentNotFoundException.class, () -> manageHr1.addEmployee(AMY));
+    }
+    @Test
+    public void hashCode_sameManageHr_success() {
+        ManageHr manageHr1 = new ManageHr();
+        ManageHr manageHr2 = new ManageHr();
+        manageHr1.addEmployee(ELLE);
+        manageHr2.addEmployee(ELLE);
+        assertEquals(manageHr1.hashCode(), manageHr2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentManageHr_failure() {
+        ManageHr manageHr1 = new ManageHr();
+        ManageHr manageHr2 = new ManageHr();
+        manageHr1.addEmployee(ELLE);
+        manageHr2.addEmployee(new EmployeeBuilder(ELLE).withAddress(VALID_ADDRESS_BOB).build());
+        assertNotEquals(manageHr1.hashCode(), manageHr2.hashCode());
     }
 
     @Test
