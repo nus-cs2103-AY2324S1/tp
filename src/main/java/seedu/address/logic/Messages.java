@@ -45,6 +45,28 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+
+        if (person.getLead() != null) {
+            builder.append("; Lead: ")
+                    .append(person.getLead());
+        }
+        if (person.getTelegram() != null) {
+            builder.append("; Telegram: ")
+                    .append(person.getTelegram());
+        }
+        if (person.getProfession() != null) {
+            builder.append("; Profession: ")
+                    .append(person.getProfession());
+        }
+        if (person.getIncome() != null) {
+            builder.append("; Income: ")
+                    .append(person.getIncome());
+        }
+        if (person.getDetails() != null) {
+            builder.append("; Details: ")
+                    .append(person.getDetails());
+        }
+
         return builder.toString();
     }
 
