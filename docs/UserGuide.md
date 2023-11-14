@@ -567,7 +567,12 @@ The Student Number entered __without__ the `s/` prefix refers to the **existing*
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The `NEW_STUDENT_NUMBER` must be valid and does not belong to any existing student in **Class Manager 2023**.
-* Tags of a student can only be edited using the `tag` command.
+
+<box type="tip" seamless>
+
+**Tip:** Tags of a student can only be edited using the `tag` command.
+
+</box>
 
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and [email address](#glossary) of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
