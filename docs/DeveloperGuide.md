@@ -452,3 +452,20 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+
+Due to time and resource constraints, we were unable to implement all the features we wanted to. This section will describe some of the more essential features that could be implemented in the future.
+
+1. Follow-up reminders are currently implemented as a one-time event. If a follow-up for a client has been missed, it will not be added to the dashboard again. We plan to implement recurring reminders that will be added to the dashboard again if they have been missed.
+2. Currently, the content in the dashboard is only updated when the user switches to the dashboard view. In the future, we will be implementing a mechanism to track changes to the client data, and trigger the dashboard to update accordingly. This will allow the dashboard to be updated in real-time.
+3. All user data is currently stored in a fixed location `data/addressbook.json`. We plan to implement a feature that allows the user to specify a custom location to store their data.
+4. Currently, the user can only edit one client at a time. We plan to implement batch editing so that the user can edit common fields across multiple clients at once. The command syntax will be similar to the current `edit` command, but allowing multiple indices to be specified, e.g. `edit 1 2 3 l/HOT`.
+5. There is currently no way to import or export client data. In the future, we will support importing and exporting their data in various formats, such as CSV.
+6. The client list currently only has one fixed order. We plan to implement a feature that allows the user to sort the client list by different fields, such as name, lead category, etc. The command will be in the form of `sort FIELD [ASC|DESC]`.
+7. The `clear` command does not have any confirmation. We plan to implement a confirmation dialog to prevent accidental deletion of data.
+8. Our app works best at a medium to large window size. Resizing the window to a smaller size will cause the UI to break. We plan to implement a responsive UI that will work well at any window size.
+9. The app currently shows the dashboard view on launch. New users may not be familiar with how to switch to the client view. We plan to implement a welcome screen that will guide new users on how to use the app.
+10. Currently, the app only supports one instance at a time. Making changes to the data from another instance of the app will not be reflected in real-time. We plan to implement a feature that allows multiple instances of the app to run concurrently.
