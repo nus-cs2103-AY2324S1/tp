@@ -14,10 +14,10 @@ Given below are my contributions to the project.
     * Justification: The implementation of 'start' and 'end' review session capabilities allows users to actively review words, thereby enhancing their memory retention.
     * Highlights: This upgrade impacts both current and future commands, demanding an in-depth analysis of design options. Integrating the Singleton pattern posed challenges, necessitating complex adjustments to existing commands.
 
-  * Added the ability to reveal the translation of the particular flash card
-      * What it does: It shows/hides the translation of the particular flash card.
-      * Justification: The implementation of 'reveal' allows users to test their grasp of words, hence enhancing their memory retention.
-    
+* **New Feature**: Added the ability to reveal the translation of the particular flash card
+    * What it does: It shows/hides the translation of the particular flash card.
+    * Justification: The implementation of 'reveal' allows users to test their grasp of words, hence enhancing their memory retention.
+    * Highlights: Unlike other commands, `reveal` command has default value when the parameter is omitted. In addition, in order to achieve the same effect of pressing buttons, it requires seamless coordination between command and UI.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=wangcheng0116&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos#/)
 
 * **Documentation**:
