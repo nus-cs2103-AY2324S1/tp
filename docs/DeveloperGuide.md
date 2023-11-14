@@ -782,7 +782,13 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 * 3a. The given index is invalid.
 
-  * 3a1. CoordiMate shows an error message and prompts the user to enter a valid index.
+  * 3a1. CoordiMate shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The given details are invalid.
+
+  * 3b1. CoordiMate shows an error message.
 
       Use case resumes from step 3.
 
@@ -927,8 +933,8 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **MSS**
 
-1. User requests to clear all done tasks in task list.
-2. CoordiMate clears all tasks whose status is done.
+1. User requests to delete all done tasks in task list.
+2. CoordiMate deletes all tasks whose status is done.
 
    Use case ends.
 
