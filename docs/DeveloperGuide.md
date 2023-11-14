@@ -358,9 +358,9 @@ The following activity diagram shows summarizes what happens when a user attempt
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
 
-## Delete feature
+### Delete feature
 
-### Implementation
+#### Implementation
 
 The delete feature is implemented using the `DeleteCommand` class. It extends `Command` and overrides the `execute()` method to
 filter users by the specified parameters.
@@ -1010,7 +1010,7 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-## Adding a person while all persons are being shown 
+### Adding a person while all persons are being shown 
 
 1. Adding a person while all persons are being shown  
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
