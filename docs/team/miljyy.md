@@ -5,7 +5,7 @@ title: Jin Yin's Project Portfolio Page
 
 ### Project: HouR
 
-HouR is a desktop HR management application used for managing and organising personnel data. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 8 kLoC.
+HouR is a desktop HR management application used for managing and organising personnel data. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
