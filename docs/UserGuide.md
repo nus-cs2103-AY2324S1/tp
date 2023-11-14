@@ -5,7 +5,9 @@ title: User Guide
 
 # Welcome to Connectify!
 
-![Ui](images/Ui.png)
+<p align="center">
+   <img src="images/Ui.png" alt="Connectify UI" width="650">
+</p>
 
 Connectify is a **desktop app for managing clients, optimized for use via a [Command Line Interface (CLI)](#glossary)**. Connectify helps salespersons manage their clients information records and data, boosting their efficiency in building customer relationships! If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
 
@@ -160,7 +162,7 @@ This is Connectify's dashboard view. By default, this view is shown on start-up.
 
  <figure id="dashboard-information">
    <p align="center">
-      <img src="images/UiBottomHalf.png" alt="Connectify's Analytics (left) and Upcoming Follow-ups (right)" width="500">
+      <img src="images/UiBottomHalf.png" alt="Connectify's Analytics (left) and Upcoming Follow-ups (right)" width="400">
    </p>
     <figcaption align="center">
         <em>Connectify's Analytics (left) and Upcoming Follow-ups (right)</em>
