@@ -304,7 +304,7 @@ Finds persons whose names, phone numbers, emails, tags, and allergies match the 
 
 Format: `findp [n/KEYWORD [MORE_KEYWORDS]…] [p/PHONE_NUMBER] [e/EMAIL] [no/KEYWORD [MORE_KEYWORDS]…]`
 
-* The search for name and allergies are case-insensitive. e.g `hans` will match `Hans`
+* The search for name and allergies are case-insensitive. e.g `hans` will match `Hans`, `paracetamol` will match `Paracetamol`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
