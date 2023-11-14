@@ -753,10 +753,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System displays the monthly revenue figure.
 
    Use case ends.
-
-*{More to be added}*
-<br>
-<br>
+   <br>
+   <br>
 
 ### Non-Functional Requirements
 
