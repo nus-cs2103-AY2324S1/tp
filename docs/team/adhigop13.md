@@ -16,10 +16,10 @@ Given below are my contributions to the project.
 
 - **New Feature**: Create a new team
   * Implemented an AddTeamCommand class which creates a new team.
-  * This command takes 2 parameters - A teamname, and a teamleader name. It then creates a new team subject to certain constraints that are detailed [here](http://127.0.0.1:8080/DeveloperGuide.html#create-a-new-team)
+  * This command takes 2 parameters - A teamname, and a teamleader name. It then creates a new team subject to certain constraints that are detailed [here](https://ay2324s1-cs2103t-w11-4.github.io/tp/DeveloperGuide.html#create-a-new-team)
 - **New Feature**: Add a developer to a team
   * Implemented an AddDevToTeam Command which allows users to add the developers to a team after it has been created.
-  * This command takes 2 parameters - A teamname, and a developer name. It adds the given developer to the team(again subject to constraints). These constraints are detailed [here](http://127.0.0.1:8080/DeveloperGuide.html#add-developers-to-an-existing-team)
+  * This command takes 2 parameters - A teamname, and a developer name. It adds the given developer to the team(again subject to constraints). These constraints are detailed [here](https://ay2324s1-cs2103t-w11-4.github.io/tp/DeveloperGuide.html#add-developers-to-an-existing-team)
 
 * **Enhancements to existing features**:
   * Made changes to the Model and ModelManager classes to add support for team creation.
