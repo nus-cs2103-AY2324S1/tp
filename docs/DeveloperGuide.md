@@ -66,8 +66,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is adapted from **[AddressBook 3(AB3)](https://github.com/se-edu/addressbook-level3)**
-* Undo and Redo features are adapted from proposed implementations from **[AddressBook 3(AB3)](https://github.com/se-edu/addressbook-level3)**
+* This project is adapted from **[AddressBook 3(AB3)](https://github.com/nus-cs2103-AY2324S1/tp)**
+* Undo and Redo features are adapted from proposed implementations from **[AddressBook 3(AB3)](https://github.com/nus-cs2103-AY2324S1/tp)**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -558,19 +558,20 @@ The following sequence diagram shows how unpaidAll command works:
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​ | I want to …​                                            | So that I can…​                                               |
-|----------|---------|---------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | tutor   | view a list of all tutees                               | see whoever are my tutees that I teach                                 |
-| `* * *`  | tutor   | view the specific details of a single tutee             | see the different informations tailored to the tutee                   |
-| `* * *`  | tutor   | add a new tutee                                         | keep track of my tutees that I teach                                   |
-| `* * *`  | tutor   | find a tutee                                            | search for a specific tutee that I teach                               |
-| `* * *`  | tutor   | edit their details                                      | account for changes in their information e.g. change in address        |
-| `* *`    | tutor   | remove tutees from the list                             | keep track of tutees that I have stopped teaching                      |
-| `* *`    | tutor   | mark students that have already paid                    | keep track of students' payment statuses                               |
-| `* *`    | tutor   | check all students who haven't paid                     | easily remind students who haven't paid                                |
-| `* *`    | tutor   | undo and redo commands I made in the application        | easily revert any mistakes                                             |
-| `* *`    | tutor   | calculate my total monthly revenue                      | better financially plan for my tutoring business                       |
-| `* *`    | tutor   | view a list tutees whose lessons fall on a specific day | be reminded if I have any classes on that particular day               |
+| Priority | As a …​ | I want to …​                                            | So that I can…​                                                 |
+|----------|---------|---------------------------------------------------------|-----------------------------------------------------------------|
+| `* * *`  | tutor   | view a list of all tutees                               | see whoever are my tutees that I teach                          |
+| `* * *`  | tutor   | view the specific details of a single tutee             | see the different informations tailored to the tutee            |
+| `* * *`  | tutor   | add a new tutee                                         | keep track of my tutees that I teach                            |
+| `* * *`  | tutor   | find a tutee                                            | search for a specific tutee that I teach                        |
+| `* * *`  | tutor   | edit their details                                      | account for changes in their information e.g. change in address |
+| `* *`    | tutor   | remove tutees from the list                             | keep track of tutees that I have stopped teaching               |
+| `* *`    | tutor   | mark students that have already paid                    | keep track of students' payment statuses                        |
+| `* *`    | tutor   | check all students who haven't paid                     | easily remind students who haven't paid                         |
+| `* *`    | tutor   | undo and redo commands I made in the application        | easily revert any mistakes                                      |
+| `* *`    | tutor   | calculate my total monthly revenue                      | better financially plan for my tutoring business                |
+| `* *`    | tutor   | view a list tutees whose lessons fall on a specific day | be reminded if I have any classes on that particular day        |
+| `* *`    | tutor   | find timeslots when I am free                           | prevent schedle clashes when I add or edit a tutee's schedule   |
 
 
 ### Use cases
@@ -1124,13 +1125,13 @@ Idea: Add a scheduling mechanism within the command execution to mark individual
 
 Reason: To create a more sophisticated find feature for the best results. This enhancement allows users to get more specific results tailored to their criteria.
 
-Idea: Modify the NameContainsKeywordsPredicate and SubjectContainsKeywordsPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
+Idea: Modify the `NameContainsKeywordsPredicate` and `SubjectContainsKeywordsPredicate` to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
 
 ### Maximum PayRate
 
-Reason: PayRate that are extremely high may not be displayed properly by GUI and are unlikely to be realistic PayRates per hour anyway.
+Reason: `PayRate` that are extremely high may not be displayed properly by GUI and are unlikely to be realistic PayRates per hour anyway.
 
-Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
+Idea: Modify the VALIDATION_REGEX of `PayRate` such that it only accepts values up to 9999.99.
 
 ### Prevent Commands meant to Modify Tutee Data from Not Changing the Data
 
@@ -1159,3 +1160,13 @@ pre-edited tutee as a schedule clash.
 
 Idea: Have an additional check with the index. If the edited person has the same index as the pre-edited person, then the
 system should allow the edit to happen.
+
+### Put more restrictions in phone number and email
+Reason: Users might be able to put in an infinitely-long phone number and email which may cut off the UI
+
+Idea: Add the restriction in the parsers.
+
+### UI Enhancements when minimizing the window size
+Reason: When the window is minimized, both the schedule list panel and the tutee list panel might be cut off.
+
+Idea: Set a minimum width for the Main Window to ensure the UI is not cut off.
