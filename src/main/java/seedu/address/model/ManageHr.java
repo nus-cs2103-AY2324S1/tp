@@ -152,6 +152,28 @@ public class ManageHr implements ReadOnlyManageHr {
     }
 
     /**
+     * Adds an employee to the internal list without applying constraints.
+     * This method is intended for use when adding an employee retrieved from storage,
+     * where constraints related to the supervisor-subordinate relationship are not enforced.
+     *
+     * @param employee The employee to be added. Must not be {@code null}.
+     */
+    public void addEmployeeFromStorageWithoutConstraints(Employee employee) {
+        requireNonNull(employee);
+        updateDepartments(employee);
+        employees.addWithoutConstraints(employee);
+    }
+
+    /**
+     * Enforces constraints on the internal list of employees.
+     * This method ensures that constraints related to the supervisor-subordinate relationship
+     * are applied to the internal list of employees.
+     */
+    public void enforceConstraints() {
+        employees.enforceConstraints();
+    }
+
+    /**
      * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
      * {@code target} must exist in the ManageHR.
      * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.

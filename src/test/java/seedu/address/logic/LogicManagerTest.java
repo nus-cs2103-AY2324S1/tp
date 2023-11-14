@@ -16,16 +16,19 @@ import static seedu.address.testutil.TypicalEmployees.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ManageHr;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyManageHr;
@@ -88,6 +91,25 @@ public class LogicManagerTest {
     @Test
     public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEmployeeList().remove(0));
+    }
+
+    @Test
+    public void getManageHr_blankManageHr_equals() {
+        ReadOnlyManageHr readOnlyManageHr = new ManageHr();
+        assertEquals(readOnlyManageHr, model.getManageHr());
+    }
+    @Test
+    public void getManageHrFilePath_forcedPath_equals() {
+        Path prefPath = Paths.get("data/managehr.json");
+        assertEquals(logic.getManageHrFilePath(), prefPath);
+    }
+
+    @Test
+    public void getGuiSettings_defaultSettings_equals() {
+        GuiSettings defaultGuiSettings = new GuiSettings();
+        assertEquals(logic.getGuiSettings(), defaultGuiSettings);
+        logic.setGuiSettings(defaultGuiSettings);
+        assertEquals(logic.getGuiSettings(), defaultGuiSettings);
     }
 
     /**

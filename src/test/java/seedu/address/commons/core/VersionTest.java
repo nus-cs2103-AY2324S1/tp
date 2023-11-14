@@ -1,12 +1,35 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class VersionTest {
+    @Test
+    public void compareTo_sameVersion_equalsOne() {
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        Version versionOneOneOneEarly = new Version(1, 0, 0, true);
+        assertEquals(versionOneOneOne.compareTo(versionOneOneOneEarly), 1);
+    }
+    @Test
+    public void equals_sameObject_success() {
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        assertTrue(versionOneOneOne.equals(versionOneOneOne));
+    }
+    @Test
+    public void equals_nullInput_failure() {
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        assertFalse(versionOneOneOne.equals(null));
+    }
+    @Test
+    public void equals_similarObjects_success() {
+        Version versionOneOneOne = new Version(1, 0, 0, false);
+        Version versionOneOneOneBeta = new Version(1, 0, 0, false);
+        assertTrue(versionOneOneOne.equals(versionOneOneOneBeta));
+    }
 
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {

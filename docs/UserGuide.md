@@ -41,6 +41,13 @@ Table of Contents
 
 6. Refer to the [Features](#features) below for details of each command.
 
+<div markdown="block" class="alert alert-info">
+
+**:memo: Sample data provided**<br>
+
+A reference for the sample data provided by default is available [here](SampleInputs.md).
+
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -91,8 +98,8 @@ To set up manager-subordinate relationships, follow these steps:
 
 When enrolling a new employee in ManageHR, you can also establish manager-subordinate relationships. Follow these steps:
 1. Include `r/ROLE` into `add` command, where `ROLE` could either be `manager` or `subordinate`. This is a compulsory field where each employee must either be `manager` or `subordinate`.
-2. Include `m/MANAGER NAME…` into `add` command. This is an optional field. Note that you can have multiple managers in charge of this employee or none at all.
-3.  `m/MANAGER NAME…` represents the managers who are currently in charge of the said employee.
+2. Include `m/MANAGER_NAME…` into `add` command. This is an optional field. Note that you can have multiple managers in charge of this employee or none at all.
+3.  `m/MANAGER_NAME…` represents the managers who are currently in charge of the said employee.
 
 #### Editing an Existing Employee with Manager-Subordinate Relationships
 When editing an existing employee in ManageHR, you can also establish or modify manager-subordinate relationships. Follow these steps:
@@ -100,13 +107,47 @@ When editing an existing employee in ManageHR, you can also establish or modify 
 
     - The employee can only change his or her `role` from `manager` to `subordinate` only if he or she has no employees under his or her supervision.
     - The name of the employee can only be edited if he or she is a `manager` with no employees under his or her supervision.
-2. Include `m/MANAGER NAME…` into the `edit` command. This will place the employee to be under that `manager`.
-    - The `MANAGER NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
+2. Include `m/MANAGER_NAME…` into the `edit` command. This will place the employee to be under that `manager`.
+    - The `MANAGER_NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
 
 #### Deleting an Existing Employee with Manager-Subordinate Relationships
 When deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
 1. The employee to be deleted must not be in charge of any employees.
     - If the employee to be deleted has employees under him, all the employees under said employee must be reassigned.
+
+## Feature 2: Department-Employee Relationships
+
+### Overview
+
+Our application also includes a department-employee feature that enables users to group employees within
+organization. This feature is designed to help users keep track of large clustering of employees.
+
+### Constraints
+
+1. A department can be empty, or contain single/multiple employees
+2. An employee can be assigned to multiple departments
+3. If an employee is in a department, a department will contain the employee
+4. When an employee is removed from the system, all departments containing the employees will remove the employee from
+   the system
+5. When a department is removed from the system, all employees that were in that department will have that department
+   property removed from them
+
+
+### Usage Instructions
+
+To use this function relationships, follow these steps:
+
+#### Creating a department
+
+Use the `department` command to add a department into the system. The department name must not already exist
+
+#### Adding/Removing a employee from a department
+
+Use the `add` or `edit` command with the department tag `d/` to include/remove an employee from a department
+
+### Deleting a department
+
+Use the `department` command to remove a department from the system. The department name must exist in the system
 
 ### Viewing help : `help`
 
@@ -140,7 +181,7 @@ Expected outputs:
 
 Adds an employee to ManageHR’s entries.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER_NAME]…`
 - Adds an employee with the above fields.
 - Name, Phone Number, Email, Address, Salary, Leave and Role fields must be provided.
 - Department and Manager fields are optional, and can contain more than one.
@@ -151,17 +192,17 @@ Examples:
 
 Acceptable values for each parameter:
 
-| Parameters     | Accepted input                                             |
-|----------------|------------------------------------------------------------|
-| `NAME`         | Alphabets and Numbers                                      |
-| `PHONE_NUMBER` | At least 3 digits                                          |                                                  |
-| `EMAIL`        | Email with the pattern x@x.com where ‘x’ are alphanumerics |
-| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -               |
-| `SALARY`       | Numerals                                                   |
-| `LEAVE`        | Numerals                                                   |
-| `ROLE`         | `manager` or `subordinate` (Case-insensitive)              |
-| `DEPARTMENT`   | Optional. Alphabets and ascii characters i.e. &, -         |
-| `MANAGER_NAME` | Optional. Name of an existing manager in ManageHR.         |
+| Parameters     | Accepted input                                         |
+|----------------|--------------------------------------------------------|
+| `NAME`         | Alphabets and Numbers                                  |
+| `PHONE_NUMBER` | At least 3 digits                                      |                                                  |
+| `EMAIL`        | Email with the pattern x@x where ‘x’ are alphanumerics |
+| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -           |
+| `SALARY`       | Numerals                                               |
+| `LEAVE`        | Numerals                                               |
+| `ROLE`         | `manager` or `subordinate` (Case-insensitive)          |
+| `DEPARTMENT`   | Optional. Alphabets and ascii characters i.e. &, -     |
+| `MANAGER_NAME` | Optional. Name of an existing manager in ManageHR.     |
 
 Expected outputs:
 
@@ -189,7 +230,7 @@ Format: `list`
 
 Edits an existing employee in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME]… [d/DEPARTMENT]…​`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list.
 * At least one of the optional fields must be provided.
@@ -223,31 +264,35 @@ Examples:
 
 Filters employees by prefix parameters.
 
-Format: `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]`
+Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME] [d/DEPARTMENT]`
 
 * The filter is case-sensitive. e.g. `R&D` will not match `r&d`
 * At least one of the optional fields must be provided.
+* Able to filter by multiple prefixes
 
 Examples:
-* `filter d/R&D` returns employees with the `R&D` department
+* `filter d/investment` returns employees with the `investment` department
 * `filter s/4000` returns employees with salary equal to or less than 4000
+* `filter l/14 r/manager` returns employees with 14 days of leave and the manager role
 
-| Parameters | Accepted input | Remarks                                                                         |
-| --- |-------------------------------------|---------------------------------------------------------------------------------|
-| `NAME` | Alphabets                           | Full name is needed (case-sensitive)                                            |
-| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics ||
-| `ADDRESS` | Alphanumerics and ascii characters i.e. #, - ||
-| `SALARY` | Numerals                            | Returns employees with salary less than or equals to the given salary parameter |
-| `LEAVE` | Numerals                            ||
-| `ROLE` | `manager` or `subordinate` (Case-insensitive) | `m/MANAGER` shows subordinates of `MANAGER`                                     |
-| `DEPARTMENT` | Alphabets and ascii characters i.e. &, - | Able to filter by multiple `d/` parameters                                      |
+| Parameters     | Accepted input                                         | Remarks                                                                              |
+|----------------|--------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `NAME`         | Alphabets and Numbers                                  | Full name is needed (case-sensitive)                                                 |
+| `PHONE_NUMBER` | At least 3 digits                                      | Exact phone number is needed                                                         |
+| `EMAIL`        | Email with the pattern x@x where ‘x’ are alphanumerics | Exact email is needed (case-sensitive)                                               |
+| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -           | Exact address is needed (case-sensitive)                                             |
+| `SALARY`       | Numerals                                               | Returns employees with salary __less than or equal__ to the given `SALARY` parameter |
+| `LEAVE`        | Numerals                                               | Returns employees with leave __equal__ to the given `LEAVE` parameter                |
+| `ROLE`         | `manager` or `subordinate` (case-insensitive)          | Returns employees with either the `manager` role or the `subordinate` role           |
+| `MANAGER_NAME` | Alphabets and Numbers                                  | Returns subordinates of given `MANAGER_NAME` parameter                               |
+| `DEPARTMENT`   | Alphabets and ascii characters i.e. &, -               | Returns employees with the given `DEPARTMENT` parameter                              |
 
 Expected outputs:
 
-| Outcome | Output                            |
-| --- |-----------------------------------|
-| **Success** | X employees listed!    |
-| **Fail** | Invalid command format!| 
+| Outcome     | Output                  |
+|-------------|-------------------------|
+| **Success** | X employees listed!     |
+| **Fail**    | Invalid command format! |
 
 ![filterCommandExample](images/filterCommandExample.png)
 
@@ -268,15 +313,41 @@ Examples:
 | Outcome                          | Output                                                    |
 |----------------------------------|-----------------------------------------------------------|
 | **Success**                      | Deleted Employee: \<Employee name>; \<Additional Details> |
-| **Failure, incomplete command**  | Invalid command format!                                   | 
-| **Failure, invalid index**       | The employee index provided is invalid.                   | 
+| **Failure, incomplete command**  | Invalid command format!                                   |
+| **Failure, invalid index**       | The employee index provided is invalid.                   |
 
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
 
-### Filtering Employees : `filter`
-Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
+### Adding/Deleting a department : `department`
+
+Creates/Delete a specified department to/from the address book.
+
+Format: `department [t/TYPE] [n/NAME]`
+
+* Creates a department of name `NAME` iff `TYPE` is "add" and the department name do not exist currently.
+* Deletes the department of name `NAME` iff `TYPE` is "delete" and the department exist currently.
+* Name is case-sensitive, and will only match the exact department name
+* List of departments and its employees related to it can be found in the side navigation bar
+* Add/Remove an employee into/from a department using the add or edit command
+
+Examples:
+* `department t/add n/trial` adds a department of name trial into the app
+* `department t/delete n/trial` deletes the department name of trial from the app
+
+Succeed:
+* You’ll see a reply "New department added: <Department Name>" if type is add
+* You'll see a reply "Department deleted: <Department Name" if type is delete
+
+Fail:
+* If the department to be added already exist, a warning will be displayed.
+  “This department already exist in ManageHR.”
+* If the department to be deleted does not exist, a warning will be displayed.
+  “This department does not exist in ManageHR.”
+
+Constraints:
+* [Department-Employee relationship](#creating-a-department)
 
 ### Exiting the program : `exit`
 
@@ -326,11 +397,11 @@ Now, your data should be successfully transferred to the new computer.
 
 | Action         | Format, Examples                                                                                                                                                                                                                                |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER_NAME]…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
 | **Clear**      | `clear`                                                                                                                                                                                                                                         |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
 | **Department** | `department t/(add/delete) n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                       |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER_NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
 | **Exit**       | `exit`                                                                                                                                                                                                                                          |
 | **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                          |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                      |
