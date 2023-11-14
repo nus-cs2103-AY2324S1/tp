@@ -1,19 +1,18 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -35,6 +34,16 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * Returns the user prefs' filter settings.
+     */
+    FilterSettings getFilterSettings();
+
+    /**
+     * Sets the user prefs' filter settings.
+     */
+    void setFilterSettings(FilterSettings filterSettings);
+
+    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
@@ -51,6 +60,42 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the AddressBookManager */
+    ReadOnlyAddressBookManager getAddressBookManager();
+
+    /**
+     * Adds the given address book.
+     * {@code addressBook} must not already exist in the address book manager.
+     */
+    void addAddressBook(ReadOnlyAddressBook addressBook);
+
+    /**
+     * Deletes the given address book.
+     * {@code addressBook} must exist in the address book manager.
+     */
+    void deleteAddressBook(String courseCode);
+
+    /**
+     * Sets the active address book.
+     * {@code courseCode} address book must exist in the address book manager.
+     */
+    void setActiveAddressBook(String courseCode);
+
+    /**
+     * Returns true if an address book with the given {@code courseCode} exists.
+     */
+    boolean hasAddressBook(String courseCode);
+
+    /**
+     * Returns a view of the address book list.
+     */
+    ObservableList<String> getCourseList();
+
+    /**
+     * Returns a observable string value of the active course code.
+     */
+    ObservableStringValue getObservableCourseCode();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -76,12 +121,26 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /** Returns an unmodifiable view of the unfiltered person list */
+    ObservableList<Person> getUnfilteredPersonList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Adds the given predicate to filter list.
+     * {@code predicate} must not already exist in the address book.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void addFilter(SerializablePredicate predicate);
+
+    /**
+     * Deletes the given predicate.
+     * The predicate must exist in the filter list.
+     */
+    void deleteFilter(SerializablePredicate predicate);
+
+    /**
+     * Clears all filters.
+     */
+    void clearFilters();
 }

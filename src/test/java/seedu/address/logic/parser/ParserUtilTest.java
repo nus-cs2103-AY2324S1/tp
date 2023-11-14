@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.lang.Integer.parseInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -13,26 +14,36 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.ParserUtil.CourseOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_ID = "E12345678";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_COURSE_OPERATION = "update";
+    private static final String INVALID_WEEK = "25";
+    private static final String INVALID_WEEK_UNPARSEABLE = ":";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_ID = "A1234567H";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_CREATE_OPERATION = "create";
+    private static final String VALID_DELETE_OPERATION = "delete";
+    private static final String VALID_SWITCH_OPERATION = "switch";
+    private static final String VALID_EDIT_OPERATION = "edit";
+    private static final String VALID_WEEK = "2";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -103,29 +114,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    }
-
-    @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
@@ -146,6 +134,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseId((String) null));
+    }
+
+    @Test
+    public void parseId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithoutWhitespace_returnsId() throws Exception {
+        ID expectedId = new ID(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseId(VALID_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithWhitespace_returnsTrimmedId() throws Exception {
+        String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
+        ID expectedId = new ID(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseId(idWithWhitespace));
     }
 
     @Test
@@ -172,6 +183,30 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseWeek_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseWeek(null));
+    }
+
+    @Test
+    public void parseWeek_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(INVALID_WEEK));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(INVALID_WEEK_UNPARSEABLE));
+    }
+
+    @Test
+    public void parseWeek_validValueWithoutWhitespace_returnsWeek() throws Exception {
+        Week expectedWeek = new Week(parseInt(VALID_WEEK));
+        assertEquals(expectedWeek, ParserUtil.parseWeek(VALID_WEEK));
+    }
+
+    @Test
+    public void parseWeek_validValueWithWhitespace_returnsTrimmedWeek() throws Exception {
+        String weekWithWhitespace = WHITESPACE + VALID_WEEK + WHITESPACE;
+        Week expectedWeek = new Week(parseInt(VALID_WEEK));
+        assertEquals(expectedWeek, ParserUtil.parseWeek(weekWithWhitespace));
+    }
+
+    @Test
     public void parseTags_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
     }
@@ -193,4 +228,39 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseCourseOperation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourseOperation((String) null));
+    }
+
+    @Test
+    public void parseCourseOperation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourseOperation(INVALID_COURSE_OPERATION));
+    }
+
+
+    @Test
+    public void parseCourseOperation_validValueWithputWhiteSpace_returnsCourseOperation() throws Exception {
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseCourseOperation(VALID_CREATE_OPERATION));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseCourseOperation(VALID_DELETE_OPERATION));
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseCourseOperation(VALID_SWITCH_OPERATION));
+        assertEquals(CourseOperation.EDIT, ParserUtil.parseCourseOperation(VALID_EDIT_OPERATION));
+    }
+
+    @Test
+    public void parseCourseOperation_validValueWithWhiteSpace_returnsCourseOperation() throws Exception {
+        String createOperationWithWhitespace = WHITESPACE + VALID_CREATE_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseCourseOperation(createOperationWithWhitespace));
+
+        String deleteOperationWithWhitespace = WHITESPACE + VALID_DELETE_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseCourseOperation(deleteOperationWithWhitespace));
+
+        String switchOperationWithWhitespace = WHITESPACE + VALID_SWITCH_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseCourseOperation(switchOperationWithWhitespace));
+
+        String editOperationWithWhitespace = WHITESPACE + VALID_EDIT_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.EDIT, ParserUtil.parseCourseOperation(editOperationWithWhitespace));
+    }
 }
+

@@ -10,19 +10,22 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyAddressBookManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.SerializablePredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -109,6 +112,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public FilterSettings getFilterSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setFilterSettings(FilterSettings filterSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -149,12 +162,62 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void addFilter(SerializablePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteFilter(SerializablePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBookManager getAddressBookManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAddressBook(String courseCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setActiveAddressBook(String courseCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAddressBook(String courseCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<String> getCourseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableStringValue getObservableCourseCode() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -197,7 +260,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return new AddressBook("Test Course Code");
         }
     }
 

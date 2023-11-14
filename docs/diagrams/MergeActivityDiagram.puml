@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes MergeCommand;
+if () then ([Valid input])
+  :Create new student with name, email, phone number
+  and tutorial group id of primary student;
+  :Merge tags;
+  :Get attendance record for secondary student;
+  :Merge attendance records;
+  :Update GUI to display merged student;
+else ([Else])
+  :Show invalid Command message;
+endif
+stop
+@enduml

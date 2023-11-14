@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters mark attendance command;
+:Parse user input;
+if () then ([Valid input])
+  :Create MarkAttendanceCommand object;
+  if () then ([Attendance for the week exists])
+    :Update existing attendance record;
+  else ([Else])
+    :Add new attendance record;
+  endif
+else ([Else])
+  :Show error message;
+endif
+stop
+@enduml

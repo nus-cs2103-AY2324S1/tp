@@ -3,26 +3,37 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final String MESSAGE_CONSTRAINTS = "Tutorial Group IDs should be alphanumeric";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String tagName;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagName A valid tagName.
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+    }
+
+    @JsonCreator
+    public static Tag create(@JsonProperty("tagName") String tag) {
+        return new Tag(tag);
+    }
+
+    public String getTagName() {
+        return this.tagName;
     }
 
     /**
@@ -58,5 +69,4 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
 }

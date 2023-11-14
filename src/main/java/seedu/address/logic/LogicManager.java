@@ -5,11 +5,14 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CourseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -48,10 +51,15 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+
+        if (!(command instanceof CourseCommand) && model.getObservableCourseCode().get() == null) {
+            throw new CommandException("Please create an addressbook using the create command first");
+        }
+
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAddressBooks(model.getAddressBookManager());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -64,6 +72,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
+    }
+
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return model.getUnfilteredPersonList();
     }
 
     @Override
@@ -84,5 +97,30 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public FilterSettings getFilterSettings() {
+        return model.getFilterSettings();
+    }
+
+    @Override
+    public void setFilterSettings(FilterSettings filterSettings) {
+        model.setFilterSettings(filterSettings);
+    }
+
+    @Override
+    public ObservableList<String> getCourseList() {
+        return model.getCourseList();
+    }
+
+    @Override
+    public ObservableStringValue getObservableCourseCode() {
+        return model.getObservableCourseCode();
+    }
+
+    @Override
+    public void setActiveAddressBook(String courseCode) {
+        model.setActiveAddressBook(courseCode);
     }
 }

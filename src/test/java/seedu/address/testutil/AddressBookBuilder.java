@@ -12,8 +12,8 @@ public class AddressBookBuilder {
 
     private AddressBook addressBook;
 
-    public AddressBookBuilder() {
-        addressBook = new AddressBook();
+    public AddressBookBuilder(String courseCode) {
+        addressBook = new AddressBook(courseCode);
     }
 
     public AddressBookBuilder(AddressBook addressBook) {

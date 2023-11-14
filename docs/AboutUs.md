@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Anthony Tamzil
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/anthonytamzil.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/anthonytamzil)]
+[[portfolio](team/anthonytamzil.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+### Fu Yiqiao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fuyiqiao.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/fuyiqiao)]
+[[portfolio](team/fuyiqiao.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation
 
-### James Doe
+### Elgin Tan Zhi Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/elgintzm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ElginTZM)]
+[[portfolio](team/elgintzm.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
+
+### Tan Liyan
+
+<img src="images/spatuly.png" width="200px">
+
+[[github](http://github.com/spatuly)]
+[[portfolio](team/spatuly.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
+### Quek Zong Jin
+
+<img src="images/zjinnnn.png" width="200px">
+
+[[github](http://github.com/Zjinnnn)]
+[[portfolio](team/zjinnnn.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and Deadlines

@@ -14,4 +14,9 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the course code of the address book.
+     */
+    String getCourseCode();
+
 }
