@@ -25,7 +25,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/shuyangk.md)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: Documentation, Deliverables, Testing
 
 ### Tan Yiming
 
