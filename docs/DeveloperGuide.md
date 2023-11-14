@@ -30,6 +30,7 @@ title: Developer Guide
 1. [Appendix: Instruction for Manual Testing](#appendix-instructions-for-manual-testing)
 1. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 1. [Appendix: Effort](#appendix-effort)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -956,6 +957,7 @@ testers are expected to do more *exploratory* testing.
 4. Adding a Person with an allergy which is not yet in the Medicine list
    1. Prerequisites: A persons list without the person with name "John Doe". A medicine list without the medicine "Aspirin". You can run the command `clear` to clear all entries in PharmHub. 
    1. Test case: `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 no/Aspirin`
+      
       Expected: An error message is displayed due to the presence of an allergy which is not in the medicine list. The person isn’t added as the allergy must be in the medicine list.
 
 ### Deleting a person
@@ -965,10 +967,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `listp` command. Multiple persons in the list.
 
     1. Test case: `deletep 1`<br>
-       Expected: First person is deleted from the list. Details of the deleted person shown in result display box
+       Expected: First person is deleted from the list. Details of the deleted person shown in result display box.
 
     1. Test case: `deletep 0`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+       Expected: No person is deleted. Error details shown in the result display box.
 
     1. Other incorrect delete commands to try: `deletep`, `deletep x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -980,7 +982,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First person is shown in the details panel. Details of the person shown in the result display box.
 
     1. Test case: `viewp 0`<br>
-       Expected: No person is shown. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is shown. Error details shown in the result display box.
 
     1. Other incorrect view commands to try: `viewp`, `viewp x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1009,7 +1011,6 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message is displayed due to the absence of any field. No person is shown.
     1. Test case: `findp n/`
        Expected: An error message is displayed due to the absence of the name. No person is shown.
-2. _{ more test cases …​ }_
 
 ### Listing all medicines
 
@@ -1192,7 +1193,7 @@ testers are expected to do more *exploratory* testing.
    
     1. Test case: `editp 0 n/John Doe p/98765432`<br>
        
-       Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is edited. Error details shown in the result display box.
 
     1. Other incorrect edit commands to try: `editp`, `editp x`, `...` (where x is larger than the list size)<br>
        
