@@ -12,7 +12,7 @@ class Model <<interface>> {
 }
 
 class ReadOnlyAddressBook <<interface>> {
-    + getPatientList() : ObservableList<Appointment>
+    + getAppointmentList() : ObservableList<Appointment>
 }
 
 abstract class "{abstract}\nCommand" {
