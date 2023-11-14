@@ -557,7 +557,7 @@ Example
        <img src="images/ExampleEditBefore.png" alt="Clients before editing" width="500">
    </p>
     <figcaption align="center">
-        <em>Initial state of 4 contacts.</em>
+        <em>Initial state.</em>
     </figcaption>
 </figure>
 
