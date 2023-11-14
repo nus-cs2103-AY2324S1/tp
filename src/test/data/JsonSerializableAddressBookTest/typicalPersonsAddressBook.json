@@ -2,45 +2,52 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "roles" : [ "Student" ],
+    "contacts" : [ "alice@example.com" ],
+    "courses" : [ "CS2103T" ],
+    "tutorials" : [ "CS2103T/F08" ],
+    "favourite" : false
   }, {
     "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "roles" : [ "TA" ],
+    "contacts" : [ "johnd@example.com" ],
+    "courses" : [ "CS2100", "CS2103T" ],
+    "tutorials" : [ "CS2100/T32", "CS2103T/F08" ],
+    "favourite" : false
   }, {
     "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
+    "roles" : [ "Professor" ],
+    "contacts" : [ "profcarl@example.com" ],
+    "courses" : [ ],
+    "tutorials" : [ ],
+    "favourite" : false
   }, {
     "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
+    "roles" : [ "Student" ],
+    "contacts" : [ "cornelia@example.com" ],
+    "courses" : [ ],
+    "tutorials" : [ ],
+    "favourite" : true
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
+    "roles" : [ "TA", "Student" ],
+    "contacts" : [ "werner@example.com", "@werner1234" ],
+    "courses" : [ ],
+    "tutorials" : [ ],
+    "favourite" : false
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
+    "roles" : [ "Student" ],
+    "contacts" : [ "lydia@example.com" ],
+    "courses" : [ "CS2100" ],
+    "tutorials" : [ ],
+    "favourite" : false
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
+    "roles" : [ "Professor" ],
+    "contacts" : [ "anna@example.com" ],
+    "courses" : [ "CS2109S", "CS2106", "CS2103T" ],
+    "tutorials" : [ ],
+    "favourite" : false
   } ]
 }

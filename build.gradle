@@ -41,6 +41,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+    testImplementation 'junit:junit:4.13.1'
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
@@ -65,8 +66,12 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
+run {
+    enableAssertions = true
+}
+
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'NUSearch.jar'
 }
 
 defaultTasks 'clean', 'test'

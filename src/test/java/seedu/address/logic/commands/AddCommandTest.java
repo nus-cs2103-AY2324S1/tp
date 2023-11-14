@@ -26,7 +26,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -144,6 +143,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void favouritePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unfavouritePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,5 +209,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

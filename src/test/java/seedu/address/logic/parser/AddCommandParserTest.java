@@ -1,196 +1,217 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_CHARLIE_PHONE;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_CHARLIE_TELE;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_MULTIPLE;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_MULTIPLE;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_TUTORIAL_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_TUTORIAL_DESC_MULTIPLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADD_COMMAND_MISSING_PREFIX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC_PREAMBLE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC_PREFIX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC_SYMBOL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DANNY;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_MULTIPLE;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_STUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_TA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_4;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CONTACT_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CONTACT_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_STUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_CONTACT_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_4;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CHARLIE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Contact;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Role;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        // All fields present
+        Person personWithAllFields = new PersonBuilder(CHARLIE)
+                .withRoles(VALID_ROLE_STUDENT)
+                .withContacts(VALID_TELE_CONTACT_CHARLIE)
+                .withCourses(VALID_COURSE_1)
                 .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+        String userInput4 = NAME_DESC_CHARLIE + ROLE_DESC_STUDENT + CONTACT_DESC_CHARLIE_TELE + COURSE_DESC_1;
+        assertParseSuccess(parser, userInput4, new AddCommand(personWithAllFields));
     }
 
-    @Test
-    public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
-
-        // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-
-        // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-
-        // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-
-        // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-
-        // multiple fields repeated
-        assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
-
-        // invalid value followed by valid value
-
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-
-        // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-
-        // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-
-        // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-
-        // valid value followed by invalid value
-
-        // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-
-        // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-
-        // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-
-        // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-    }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+
+        // Only name is provided
+        Person personWithName = new PersonBuilder().withName(VALID_NAME_CHARLIE).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE, new AddCommand(personWithName));
+
+        // Name and one role
+        Person personWithOneRole = new PersonBuilder().withName(VALID_NAME_CHARLIE).withRoles(VALID_ROLE_TA).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + ROLE_DESC_TA,
+                new AddCommand(personWithOneRole));
+
+        // Name and one contact
+        Person personWithOneContact = new PersonBuilder(CHARLIE).withContacts(VALID_PHONE_CONTACT_CHARLIE).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + CONTACT_DESC_CHARLIE_PHONE,
+                new AddCommand(personWithOneContact));
+
+        // Name and a course without tutorial
+        Person personWithOneCourse = new PersonBuilder(CHARLIE).withCourses(VALID_COURSE_1).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + COURSE_DESC_1,
+                new AddCommand(personWithOneCourse));
+
+        // Name and a course with tutorial
+        Person personWithCourseAndTutorial = new PersonBuilder(CHARLIE)
+                .withCoursesAndTutorials(VALID_TUTORIAL_1)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + COURSE_TUTORIAL_DESC_1,
+                new AddCommand(personWithCourseAndTutorial));
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+    public void parse_optionalFieldsWithMultiplesInput_success() {
 
-        // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // Name and multiple roles
+        Person personWithManyRoles = new PersonBuilder().withName(VALID_NAME_CHARLIE)
+                .withRoles(VALID_ROLE_STUDENT, VALID_ROLE_TA).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + ROLE_DESC_MULTIPLE,
+                new AddCommand(personWithManyRoles));
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // Name and many contacts
+        Person personWithManyContacts = new PersonBuilder(CHARLIE).withContacts(VALID_PHONE_CONTACT_CHARLIE,
+                VALID_EMAIL_CONTACT_CHARLIE, VALID_TELE_CONTACT_CHARLIE).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + CONTACT_DESC_MULTIPLE,
+                new AddCommand(personWithManyContacts));
 
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // Name and many roles and many contacts
+        Person manyRolesAndManyContacts = new PersonBuilder(CHARLIE)
+                .withRoles(VALID_ROLE_TA, VALID_ROLE_STUDENT)
+                .withContacts(VALID_EMAIL_CONTACT_CHARLIE, VALID_PHONE_CONTACT_CHARLIE, VALID_TELE_CONTACT_CHARLIE)
+                .build();
+        String userInput2 = NAME_DESC_CHARLIE + ROLE_DESC_MULTIPLE + CONTACT_DESC_MULTIPLE;
+        assertParseSuccess(parser, userInput2, new AddCommand(manyRolesAndManyContacts));
 
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        // Name and many courses without tutorial class
+        Person personWithManyCourses = new PersonBuilder(CHARLIE)
+                .withCourses(VALID_COURSE_1, VALID_COURSE_2, VALID_COURSE_3, VALID_COURSE_4).build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + COURSE_DESC_MULTIPLE,
+                new AddCommand(personWithManyCourses));
 
-        // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        // Name, many roles, many contacts and many courses without tutorial class
+        Person manyRolesContactsCourses = new PersonBuilder(CHARLIE)
+                .withRoles(VALID_ROLE_TA, VALID_ROLE_STUDENT)
+                .withContacts(VALID_PHONE_CONTACT_CHARLIE, VALID_EMAIL_CONTACT_CHARLIE, VALID_TELE_CONTACT_CHARLIE)
+                .withCourses(VALID_COURSE_1, VALID_COURSE_2, VALID_COURSE_3, VALID_COURSE_4)
+                .build();
+        String userInput3 = NAME_DESC_CHARLIE + ROLE_DESC_MULTIPLE + CONTACT_DESC_MULTIPLE + COURSE_DESC_MULTIPLE;
+        assertParseSuccess(parser, userInput3, new AddCommand(manyRolesContactsCourses));
+
+        // Name and many courses with tutorial class
+        Person personWithManyCoursesAndTut = new PersonBuilder(CHARLIE)
+                .withCoursesAndTutorials(VALID_TUTORIAL_1, VALID_TUTORIAL_2, VALID_TUTORIAL_3, VALID_TUTORIAL_4)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_CHARLIE + COURSE_TUTORIAL_DESC_MULTIPLE,
+                new AddCommand(personWithManyCoursesAndTut));
+
+        // Name, many roles, many contacts and many courses without tutorial class
+        Person manyRolesContactsCoursesWithTut = new PersonBuilder(CHARLIE)
+                .withRoles(VALID_ROLE_TA, VALID_ROLE_STUDENT)
+                .withContacts(VALID_PHONE_CONTACT_CHARLIE, VALID_EMAIL_CONTACT_CHARLIE, VALID_TELE_CONTACT_CHARLIE)
+                .withCoursesAndTutorials(VALID_TUTORIAL_1, VALID_TUTORIAL_2, VALID_TUTORIAL_3, VALID_TUTORIAL_4)
+                .build();
+        String userInput4 = NAME_DESC_CHARLIE + ROLE_DESC_MULTIPLE + CONTACT_DESC_MULTIPLE
+                + COURSE_TUTORIAL_DESC_MULTIPLE;
+        assertParseSuccess(parser, userInput4, new AddCommand(manyRolesContactsCoursesWithTut));
+    }
+
+    @Test
+    public void parse_addPersonWithRepeatedPrefix_failure() {
+
+        String validPersonStringWithCourse = NAME_DESC_CHARLIE + ROLE_DESC_TA
+                + CONTACT_DESC_CHARLIE_TELE + COURSE_DESC_1;
+
+        //Adding a person that has multiple names
+        assertParseFailure(parser, NAME_DESC_DANNY + validPersonStringWithCourse,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // Adding a person using more than one role prefix
+        assertParseFailure(parser, ROLE_DESC_STUDENT + validPersonStringWithCourse,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
+
+        // Adding a person using more than one contact prefix
+        assertParseFailure(parser, CONTACT_DESC_CHARLIE_PHONE + validPersonStringWithCourse,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CONTACT));
+
+        // Adding a person using more than one course prefix
+        assertParseFailure(parser, COURSE_DESC_2 + validPersonStringWithCourse,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COURSE));
     }
 
     @Test
     public void parse_invalidValue_failure() {
+
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC_SYMBOL, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+        // invalid role
+        assertParseFailure(parser, NAME_DESC_CHARLIE + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS);
 
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        // invalid contact
+        assertParseFailure(parser, NAME_DESC_CHARLIE + INVALID_CONTACT_DESC, Contact.MESSAGE_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+        // invalid course
+        assertParseFailure(parser, NAME_DESC_CHARLIE + INVALID_COURSE_DESC, Course.MESSAGE_CONSTRAINTS);
+    }
 
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        // Non-empty preamble
+        String nonEmptyPreamble = INVALID_NAME_DESC_PREAMBLE;
+        assertThrows(ParseException.class, () -> parser.parse(nonEmptyPreamble));
+    }
 
-        // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+    @Test
+    public void parse_missingPrefixes_throwsParseException() {
+        // Missing all required prefixes
+        String missingPrefixes = INVALID_NAME_DESC_PREFIX;
+        assertThrows(ParseException.class, () -> parser.parse(missingPrefixes));
 
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        // Missing some required prefixes
+        String missingSomePrefixes = INVALID_ADD_COMMAND_MISSING_PREFIX;
+        assertThrows(ParseException.class, () -> parser.parse(missingSomePrefixes));
     }
 }

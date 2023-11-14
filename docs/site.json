@@ -1,0 +1,31 @@
+{
+  "baseUrl": "/tp",
+  "titlePrefix": "NUSearch",
+  "titleSuffix": "AddressBook Level-3",
+  "faviconPath": "images/SeEduLogo.png",
+  "style": {
+    "codeTheme": "light"
+  },
+  "ignore": [
+    "_markbind/layouts/*",
+    "_markbind/logs/*",
+    "_site/*",
+    "site.json",
+    "*.md",
+    "*.njk",
+    ".git/*",
+    "node_modules/*"
+  ],
+  "pagesExclude": ["node_modules/*"],
+  "pages": [
+    {
+      "glob": ["**/index.md", "**/*.md"]
+    }
+  ],
+  "deploy": {
+    "message": "Site Update.",
+    "repo": "https://github.com/AY2324S1-CS2103T-F08-0/tp.git",
+    "branch": "gh-pages"
+  },
+  "timeZone": "Asia/Singapore"
+}

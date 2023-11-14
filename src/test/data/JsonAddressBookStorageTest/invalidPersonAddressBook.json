@@ -1,8 +1,10 @@
 {
   "persons": [ {
     "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "roles" : [ "Invalid role" ],
+    "contacts" : [ "hans@example.com" ],
+    "courses" : [ "CS2103T" ],
+    "tutorials" : [ "CS2103T/ Invalid tutorial" ],
+    "favourite" : false
   } ]
 }

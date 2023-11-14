@@ -350,3 +350,22 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#tags .fav-label {
+    -fx-background-color: #f6Af2b;
+}
+
+#tags .stu-label {
+    -fx-background-color: #aaf4e0;
+    -fx-text-fill: #000000;
+}
+
+#tags .ta-label {
+    -fx-background-color: #bfb4f7;
+    -fx-text-fill: #000000;
+}
+
+#tags .prof-label {
+    -fx-background-color: #ff9595;
+    -fx-text-fill: #000000;
+}

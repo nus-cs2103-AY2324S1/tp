@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -17,8 +17,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+//import seedu.address.model.person.Contact;
+import seedu.address.model.person.Course;
+//import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+//import seedu.address.model.person.Role;
+import seedu.address.model.person.Tutorial;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -28,31 +33,102 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NAME_CHARLIE = "Charlie";
+    public static final String VALID_NAME_DANNY = "Danny";
+    public static final String VALID_ROLE_STUDENT = "Student";
+    public static final String VALID_ROLE_TA = "TA";
+    public static final String VALID_ROLE_PROFESSOR = "Professor";
+    public static final String VALID_CONTACT_AMY = "amy@example.com";
+    public static final String VALID_CONTACT_BOB = "bob@example.com";
+    public static final String VALID_PHONE_CONTACT_CHARLIE = "91234567";
+    public static final String VALID_EMAIL_CONTACT_CHARLIE = "charlie@example.com";
+    public static final String VALID_TELE_CONTACT_CHARLIE = "@charlieee";
+    public static final Course VALID_COURSE_1 = new Course("CS2103T");
+    public static final Course VALID_COURSE_2 = new Course("CS2100");
+    public static final Course VALID_COURSE_3 = new Course("CS2109S");
+    public static final Course VALID_COURSE_4 = new Course("CS2106");
+    public static final Tutorial VALID_TUTORIAL_1 = new Tutorial(VALID_COURSE_1,
+            VALID_COURSE_1.courseName + "/F08");
+    public static final Tutorial VALID_TUTORIAL_2 = new Tutorial(VALID_COURSE_2,
+            VALID_COURSE_2.courseName + "/T32");
+    public static final Tutorial VALID_TUTORIAL_3 = new Tutorial(VALID_COURSE_3,
+            VALID_COURSE_3.courseName + "/T31");
+    public static final Tutorial VALID_TUTORIAL_4 = new Tutorial(VALID_COURSE_4,
+            VALID_COURSE_4.courseName + "/T04");
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ROLE_TO_STRING_EMPTY = "Role: ";
+    public static final String ROLE_TO_STRING_STUDENT = ROLE_TO_STRING_EMPTY + VALID_ROLE_STUDENT;
+    public static final String ROLE_TO_STRING_MULTIPLE = ROLE_TO_STRING_EMPTY
+            + VALID_ROLE_STUDENT + ", "
+            + VALID_ROLE_TA + ", "
+            + VALID_ROLE_PROFESSOR;
+    public static final String COURSE_TO_STRING_EMPTY = "Courses: ";
+    public static final String COURSE_TO_STRING_VALID_COURSE_1 = COURSE_TO_STRING_EMPTY + VALID_COURSE_1.toString();
+    public static final String COURSE_TO_STRING_MULTIPLE = COURSE_TO_STRING_EMPTY
+            + VALID_COURSE_1.toString() + ", "
+            + VALID_COURSE_2.toString() + ", "
+            + VALID_COURSE_3.toString();
+    public static final String CONTACT_TO_STRING_EMPTY = "Contact: ";
+    public static final String CONTACT_TO_STRING_VALID_CONTACT_AMY = CONTACT_TO_STRING_EMPTY
+            + "[" + VALID_CONTACT_AMY + "]";
+    public static final String CONTACT_TO_STRING_MULTIPLE = CONTACT_TO_STRING_EMPTY
+            + "[" + VALID_EMAIL_CONTACT_CHARLIE + "]" + ", "
+            + "[" + VALID_TELE_CONTACT_CHARLIE + "]" + ", "
+            + "[" + VALID_PHONE_CONTACT_CHARLIE + "]";
+    public static final String TUTORIAL_TO_STRING_EMPTY = "Tutorials: ";
+    public static final String TUTORIAL_TO_STRING_VALID_TUTORIAL_1 = TUTORIAL_TO_STRING_EMPTY
+            + VALID_TUTORIAL_1.toString();
+    public static final String TUTORIAL_TO_STRING_MULTIPLE = TUTORIAL_TO_STRING_EMPTY
+            + VALID_TUTORIAL_1.toString() + ", "
+            + VALID_TUTORIAL_2.toString() + ", "
+            + VALID_TUTORIAL_3.toString();
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
+    public static final String NAME_DESC_CHARLIE = " " + PREFIX_NAME + " " + VALID_NAME_CHARLIE;
+    public static final String NAME_DESC_DANNY = " " + PREFIX_NAME + " " + VALID_NAME_DANNY;
+    public static final String ROLE_DESC_STUDENT = " " + PREFIX_ROLE + " " + VALID_ROLE_STUDENT;
+    public static final String ROLE_DESC_TA = " " + PREFIX_ROLE + " " + VALID_ROLE_TA;
+    public static final String ROLE_DESC_PROFESSOR = " " + PREFIX_ROLE + " " + VALID_ROLE_PROFESSOR;
+    public static final String ROLE_DESC_MULTIPLE = " " + PREFIX_ROLE + " " + VALID_ROLE_STUDENT + ", "
+            + VALID_ROLE_TA;
+    public static final String CONTACT_DESC_AMY = " " + PREFIX_CONTACT + " " + VALID_CONTACT_AMY;
+    public static final String CONTACT_DESC_BOB = " " + PREFIX_CONTACT + " " + VALID_CONTACT_BOB;
+    public static final String CONTACT_DESC_CHARLIE_PHONE = " " + PREFIX_CONTACT + " " + VALID_PHONE_CONTACT_CHARLIE;
+    public static final String CONTACT_DESC_CHARLIE_EMAIL = " " + PREFIX_CONTACT + " " + VALID_EMAIL_CONTACT_CHARLIE;
+    public static final String CONTACT_DESC_CHARLIE_TELE = " " + PREFIX_CONTACT + " " + VALID_TELE_CONTACT_CHARLIE;
+    public static final String CONTACT_DESC_MULTIPLE = " " + PREFIX_CONTACT + " " + VALID_PHONE_CONTACT_CHARLIE
+            + ", " + VALID_EMAIL_CONTACT_CHARLIE + ", " + VALID_TELE_CONTACT_CHARLIE;
+
+    // COURSE_DESC is used only when a Course is added without a Tutorial
+    public static final String COURSE_DESC_1 = " " + PREFIX_COURSE + " " + VALID_COURSE_1;
+    public static final String COURSE_DESC_2 = " " + PREFIX_COURSE + " " + VALID_COURSE_2;
+    public static final String COURSE_DESC_3 = " " + PREFIX_COURSE + " " + VALID_COURSE_3;
+    public static final String COURSE_DESC_4 = " " + PREFIX_COURSE + " " + VALID_COURSE_4;
+    public static final String COURSE_DESC_MULTIPLE = " " + PREFIX_COURSE + " " + VALID_COURSE_1 + ", " + VALID_COURSE_2
+            + ", " + VALID_COURSE_3 + ", " + VALID_COURSE_4;
+
+    // when using COURSE_TUTORIAL_DESC, COURSE_DESC should not be used
+    public static final String COURSE_TUTORIAL_DESC_1 = " " + PREFIX_COURSE + " " + VALID_TUTORIAL_1;
+    public static final String COURSE_TUTORIAL_DESC_2 = " " + PREFIX_COURSE + " " + VALID_TUTORIAL_2;
+    public static final String COURSE_TUTORIAL_DESC_3 = " " + PREFIX_COURSE + " " + VALID_TUTORIAL_3;
+    public static final String COURSE_TUTORIAL_DESC_4 = " " + PREFIX_COURSE + " " + VALID_TUTORIAL_4;
+    public static final String COURSE_TUTORIAL_DESC_MULTIPLE = " " + PREFIX_COURSE + " " + VALID_TUTORIAL_1
+            + ", " + VALID_TUTORIAL_2 + ", " + VALID_TUTORIAL_3 + ", " + VALID_TUTORIAL_4;
+
+    public static final String INVALID_NAME_DESC_SYMBOL = " " + PREFIX_NAME + " "
+            + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC_PREAMBLE = PREFIX_NAME + " "
+            + "James"; // non-empty preamble
+    public static final String INVALID_NAME_DESC_PREFIX = "James"; // missing prefix
+    public static final String INVALID_ADD_COMMAND_MISSING_PREFIX = INVALID_NAME_DESC_PREFIX + ROLE_DESC_STUDENT;
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + " "
+            + "Teacher"; // Teacher is not a supported role
+    public static final String INVALID_CONTACT_DESC = " " + PREFIX_CONTACT + " "; // empty contact
+    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE
+            + "  "; // empty string not allowed for courses
+    public static final String INVALID_TUTORIAL_DESC = " " + PREFIX_TUTORIAL
+            + "/F08"; // a Course is required for a tutorial
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -62,11 +138,12 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withRoles(VALID_ROLE_STUDENT).withContacts(VALID_CONTACT_AMY)
+                .withCourses(VALID_COURSE_1.toString()).withFavourite(false).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withRoles(VALID_ROLE_TA).withContacts(VALID_CONTACT_BOB)
+                .withCourses(VALID_COURSE_2.courseName, VALID_COURSE_3.courseName)
+                .withFavourite(false).build();
     }
 
     /**
@@ -75,11 +152,32 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+
+    }
+
+    /**
+     * Executes the given {@code command} with a dummy model and confirms that
+     * the resulting {@link CommandResult} contains the expected feedback to the user.
+     *
+     * @param command              The command to be executed.
+     * @param dummyModel           A dummy model to execute the command with.
+     * @param expectedCommandResult The expected feedback to be returned by the command.
+     *
+     * @throws AssertionError if the execution of the command fails or if the actual
+     *                      feedback from the command does not match the expected feedback.
+     */
+    public static void assertCommandSuccess(Command command, Model dummyModel, String expectedCommandResult) {
+        try {
+            CommandResult result = command.execute(dummyModel);
+            assertEquals(expectedCommandResult, result.getFeedbackToUser());
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
@@ -90,7 +188,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }

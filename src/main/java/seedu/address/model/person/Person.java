@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -18,47 +17,68 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
+    private final Set<Contact> contacts = new HashSet<>();
+    private final Set<Course> courses = new HashSet<>();
+    private final Set<Tutorial> tutorials = new HashSet<>();
+    private final Favourite favourite;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Set<Role> roles, Set<Contact> contacts, Set<Course> courses, Set<Tutorial> tutorials,
+                  Favourite favourite) {
+        requireAllNonNull(name, roles, contacts, courses, tutorials);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.roles.addAll(roles);
+        this.contacts.addAll(contacts);
+        this.courses.addAll(courses);
+        this.tutorials.addAll(tutorials);
+        this.favourite = favourite;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    /**
+     * Returns an immutable roles set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
     }
 
-    public Email getEmail() {
-        return email;
+    public Set<Contact> getContacts() {
+        return Collections.unmodifiableSet(contacts);
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<Course> getCourses() {
+        return Collections.unmodifiableSet(courses);
+    }
+
+    public Set<Tutorial> getTutorials() {
+        return Collections.unmodifiableSet(tutorials);
+    }
+
+    public Favourite getFavourite() {
+        return favourite;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Favourites the person.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public void setFavourite() {
+        favourite.setFavourite();
+    }
+
+    /**
+     * Unfavourites the person.
+     */
+    public void setUnfavourite() {
+        favourite.setUnfavourite();
     }
 
     /**
@@ -91,26 +111,26 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && roles.equals(otherPerson.roles)
+                && contacts.equals(otherPerson.contacts)
+                && courses.equals(otherPerson.courses)
+                && tutorials.equals(otherPerson.tutorials);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, roles, contacts, courses, tutorials);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("roles", roles)
+                .add("contacts", contacts)
+                .add("courses", courses)
+                .add("tutorials", tutorials)
                 .toString();
     }
 

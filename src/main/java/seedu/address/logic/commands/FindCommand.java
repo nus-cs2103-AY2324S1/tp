@@ -13,8 +13,14 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    /**
+     * Keyword to trigger the search command.
+     */
+    public static final String COMMAND_WORD = "search";
 
+    /**
+     * Usage instructions for the 'search' command.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
@@ -22,10 +28,21 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Constructs a FindCommand with a specific keyword predicate.
+     *
+     * @param predicate The predicate used to search for matching names.
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the FindCommand to find and list persons whose names contain the specified keywords.
+     *
+     * @param model The model that this command should operate on.
+     * @return The CommandResult containing a summary of the list of found persons.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -34,6 +51,12 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Checks equality of the FindCommand with another object.
+     *
+     * @param other The object to compare for equality.
+     * @return True if the objects are equal, otherwise returns false.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -49,6 +72,11 @@ public class FindCommand extends Command {
         return predicate.equals(otherFindCommand.predicate);
     }
 
+    /**
+     * Returns a string representation of the FindCommand.
+     *
+     * @return A string representing the FindCommand.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
