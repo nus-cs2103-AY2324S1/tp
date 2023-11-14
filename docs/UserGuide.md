@@ -149,6 +149,8 @@ Let's imagine you've added a couple of dates to the LoveBook already. It should 
 
 ![addCommandExample2](images/user-commands/addCommandExample2.png) <br>
 
+<div style="page-break-after: always;"></div>
+
 #### 2. Starring a date
 
 With so many dates you might want to start keeping tabs on dates that are perhaps more exceptional. Fret not, star dates
@@ -158,6 +160,8 @@ Enter `star 2`.
 This will star John. <br>
 
 ![starCommandExample](images/user-commands/starCommandExample.png) <br>
+
+<div style="page-break-after: always;"></div>
 
 #### 3. Filtering dates
 
@@ -169,6 +173,8 @@ This will filter for John. <br>
 
 ![filterCommandExample](images/user-commands/filterCommandExample.png) <br>
 
+<div style="page-break-after: always;"></div>
+
 #### 4. Set Preferences
 
 Well, maybe you are indecisive as a serial dater, and you want a third party opinion. Fret not, simply begin by keying
@@ -179,12 +185,16 @@ This will set your preferences like so: <br>
 
 ![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png) <br>
 
+<div style="page-break-after: always;"></div>
+
 #### 5. Best Match
 
 And here it is, to get the match of your dreams, simply use the bestMatch command:
 Enter `bestMatch` <br>
 
 ![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png) <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Congrats! You have completed the tutorial!
 
@@ -338,8 +348,7 @@ Clears all dates in the LoveBook.
 
 <box type="important">
 
-* This command is irreversible.
-* All data will be lost. Please use this command with caution.
+This command is irreversible. All data will be lost. Please use this command with caution.
 
 </box>
 
@@ -569,9 +578,9 @@ Outputs a random date from the LoveBook.
 
 Format: `blindDate` <br>
 
-![blindDateCommandExample-1](images/user-commands/blindDateCommandExample1.png) <br>
-
-![blindDateCommandExample-2](images/user-commands/blindDateCommandExample2.png) <br>
+<img src="images/user-commands/blindDateCommandExample1.png" alt="blindDate" height="350" width="600"/>
+<br>
+<img src="images/user-commands/blindDateCommandExample2.png" alt="blindDate" height="300"/>
 
 Expected Output: `Here's a blind date for you!`
 
@@ -588,10 +597,6 @@ Exits the program.
 Format: `exit`
 
 Expected output: `Exiting LoveBook...`
-
-[Scroll back to *Table of Contents*](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 #### **Getting help: `help`**
 
@@ -666,6 +671,5 @@ Commands are sorted by alphabetical order.
 | [Unstarring a date](#unstarring-a-date-unstar)                                     | `unstar INDEX`                                                                                           | `unstar 1`                                                             |
 
 [Scroll back to *Table of Contents*](#table-of-contents)
-<div style="page-break-after: always;"></div>
 
 ---
