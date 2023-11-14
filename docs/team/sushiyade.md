@@ -10,7 +10,6 @@ optimised app designed for freelancers**.
 It's a one-stop solution for freelancers, helping them manage multiple clients, track project statuses,
 and stay on top of their financial reports.
 
-
 Given below are my contributions to the project.
 
 * **New Feature**: Events
@@ -38,12 +37,6 @@ Given below are my contributions to the project.
     view the information in a more concise manner.
   * Highlights: Only details which exist are shown in the card.
 
-* **New Feature**: Add Contact Parser
-  * What it does: Allows users to add contacts to the application, with additional and optional information such as 
-  address and Telegram handle.
-  * Justification: We felt that the fields which were optional were widely used in the freelancing
-  space, but were not exactly necessary. Hence, we included them but made them optional.
-  * Highlights: optionality of certain fields.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=sushiyade&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
@@ -51,7 +44,12 @@ Given below are my contributions to the project.
   * To be added
 
 * **Enhancements to existing features**:
-  * To be added
+* **Updated**: Add Contact Parser
+  * What it does: Allows users to add contacts to the application, with additional and optional information such as
+    address and Telegram handle.
+  * Justification: We felt that the fields which were optional were widely used in the freelancing
+    space, but were not exactly necessary. Hence, we included them but made them optional.
+  * Highlights: optionality of certain fields.
 
 * **Documentation**:
   * User Guide:
@@ -77,12 +75,18 @@ Given below are my contributions to the project.
       * `filter-t`
       * `list`
       * `list-all`
+    * Added Documentation for planned enhancements
+      * `Duplicate contact names`
+      * `Duplicate phone numbers`
 
 * **Community**:
+  * Reported bugs and suggestions for other teams in the class
+  * Reviewed non-trivial number of PRs
   * I collaborated closely with Daniel Loh (dloh2236) to build the base Logic and Model for the Events section in our application.
   Throughout our work, we frequently supported each other and had good communication which resulted in an efficient workflow,
   allowing us to implement commands and refine the UI in timely fashion. Additionally, I assisted Daniel by creating test cases, 
   and he aided me in resolving certain merge conflicts.
+
 
 * **Tools**:
   * IntelliJ
