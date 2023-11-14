@@ -154,7 +154,7 @@ Parser classes are responsible for parsing the user input and creating the corre
 
 `AddressBookParser` is responsible for parsing the user input for finding the corresponding parser and returning the corresponding command object. 
 
-`LogicManager` will perform the actual execution of the command, and update the UI and Storage.
+`LogicManager` will perform the actual execution of the command, and update the user interface and data storage.
 
 Here's a (partial) class diagram of the `Logic` component:
 <p style="text-align: center;">
