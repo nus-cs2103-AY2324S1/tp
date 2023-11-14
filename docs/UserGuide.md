@@ -170,14 +170,14 @@ Not to worry, here are some steps you can take to fix this:
     ![UiBreakdown](images/uibreak.png)
 
    | Colour                                                   | Component                   | Description                                                                                                                                      |
-   | ---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+   |----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
    | <img src="images/red_1.png" width="10px" height="10px">  | Menu Bar                    | Provides buttons for exiting, opening Help window, and opening Events window.                                                                    |
    | <img src="images/orange.png" width="10px" height="10px"> | Command Box                 | Allows you to enter a command.                                                                                                                   |
    | <img src="images/yellow.png" width="10px" height="10px"> | Result Display              | Displays the result of the command execution.                                                                                                    |
    | <img src="images/green.png" width="10px" height="10px">  | Applicant List Panel        | Displays a list of all applicants in JABPro.                                                                                                     |
-   | <img src="images/blue.png" width="10px" height="10px">   | Applicant Card              | Displays certain details of an applicant for quick view, such as name, address, phone, email, tags, LinkedIn/GitHub username.                    |
-   | <img src="images/purple.png" width="10px" height="10px"> | Applicant Information Panel | Displays a detailed view of an applicant, providing information of status and remarks, in addition to the basic information about the applicant. |
-   | <img src="images/brown.png" width="10px" height="10px">  | Summary Statistics Panel    | Displays summary statistics for a particular applicant pertaining to a specific tag.                                                             |
+   | <img src="images/brown.png" width="10px" height="10px">  | Applicant Card              | Displays certain details of an applicant for quick view, such as name, address, phone, email, tags, LinkedIn/GitHub username.                    |
+   | <img src="images/blue.png" width="10px" height="10px">   | Applicant Information Panel | Displays a detailed view of an applicant, providing information of status and remarks, in addition to the basic information about the applicant. |
+   | <img src="images/purple.png" width="10px" height="10px"> | Summary Statistics Panel    | Displays summary statistics for a particular applicant pertaining to a specific tag.                                                             |
 
     In addition, there are windows such as:
    * Help Window [accessed by the `help` command, or through Menu Bar].
