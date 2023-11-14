@@ -307,7 +307,7 @@ Upon start up of BayMeds or after every command, BayMeds will check through the 
 
 Design considerations:
 
-We intentionaally chose to store completed prescriptions in its own `completedPrescriptionList.json` file, away from the original `prescriptionList.json`. By separating them into two different storages, we help to enhance security of the data as if users were to accidentally manually delete one of the files, the other would still be in tact, and the user would not lose their data in its entirety.
+We intentionally chose to store completed prescriptions in its own `completedPrescriptionList.json` file, away from the original `prescriptionList.json`. By separating them into two different storages, we help to enhance security of the data as if users were to accidentally manually delete one of the files, the other would still be in tact, and the user would not lose their data in its entirety.
 
 ### Check prescription interaction feature
 
@@ -573,8 +573,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 prescriptions without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. A user should be able to export and use the stored prescriptions data elsewehere.
+5. Should be able to display the application correctly regardless of the screen size.
+6. Should have a user friendly and intuitive interface.
 
 ### Glossary
 
@@ -650,7 +651,7 @@ Given below are known issues and planned enhancements in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort **
+## **Appendix: Effort**
 
 Given below documents the tremendous efforts put in by each and every member of the BayMeds team.
 
