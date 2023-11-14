@@ -45,13 +45,13 @@ Additionally, if you are a new user, this user guide provides a [getting started
 
 NetworkBook 1.3 includes several new features and improvements for ease of use.
 
-* [Filter](#ucategory-3---findview-contactsu) command for more control with finding contacts
-* [Edit](#ucategory-2---edit-contact-detailsu) command to edit contacts' details
-* [Open links and emails](#ucategory-5---open-other-appsu) via NetworkBook connecting to other apps
-* [Undo/redo](#ucategory-4---undoredou) commands to revert mistakes unintentional/temporary command calls
-* [Keyboard shortcuts](#ucategory-6---keyboard-shortcutsu) added for easy access to common commands
-* [User interface](#ucategory-7---mouse-interactionu) is now refined to be more clean and usable
-* Error messages are now more specific to give more helpful information
+* [Additional find/view commands](#ucategory-3---findview-contactsu) (e.g. `sort` and `filter`) have been introduced to let you have more control over managing displayed contacts.
+* [Edit](#ucategory-2---edit-contact-detailsu) command has been introduced to allow you to edit contacts' details.
+* [Open links and emails](#ucategory-5---open-other-appsu) via our newly-introduced commands that involve NetworkBook connecting to other apps.
+* [Undo/redo](#ucategory-4---undoredou) commands have been added to help you revert mistaken/temporary command calls.
+* [Keyboard shortcuts](#ucategory-6---keyboard-shortcutsu) have been introduced for you to easily access common commands.
+* [User interface](#ucategory-7---mouse-interactionu) has now been refined to be more clean and usable.
+* Error messages are now more specific to give more helpful information.
 
 <!-- @@author xenosf -->
 
@@ -95,7 +95,7 @@ Some fields are **single-valued fields**, meaning that each contact has **only 1
 
 | Single-valued fields | Prefix    | Format                                                                              | Remarks                                                  |
 | -------------------- | --------- |-------------------------------------------------------------------------------------| -------------------------------------------------------- |
-| name                 | /name     | Any non-empty value comprising alphanumeric characters (and spaces, if any)         | Is case-sensitive                                       |
+| name                 | /name     | Any non-empty value comprising alphanumeric characters (and spaces, if any)         | Is case-sensitive. Moreover, if a contact's name contains non-alphanumeric characters (e.g. `/`), you may omit these characters in the stored name. |
 | priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet                           | Not case-sensitive                                       |
 | graduation semester  | /grad     | `AYxxxx-Sy`<br/><br/>e.g., `AY2223-S1` for Academic Year 20`22`/20`23` Semester `1` | `xxxx` is the 4-digit representation of 2 **consecutive** calendar years.<br/>Academic year must be between AY1970/1971 to AY2069/2070 (inclusive). <br/>`y` is either `1` for Semester 1, or `2` for Semester 2. |
 
