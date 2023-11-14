@@ -12,24 +12,24 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=shyanyong&breakdown=true)
 
 * **Enhancements implemented**:
-  * Implemented listToday Feature (Pull request [\#54]())
-  * Implemented edit Feature (Pull request [\#80]())
-  * Implemented Basic Reminder Feature (Pull request [\#112]())
-  * Implemented Daily Auto Reset Feature (Pull request [\#163]())
-  * Updated code to ensure dates are parsed correctly (Pull request [\#213]())
-  * Updated code to ensure values inputted by users would not cause errors (Pull request [\#127]() [\#212]())
+  * Implemented listToday Feature (Pull request [\#54](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/54))
+  * Implemented edit Feature (Pull request [\#80](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/80))
+  * Implemented Basic Reminder Feature (Pull request [\#112](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/112))
+  * Implemented Daily Auto Reset Feature (Pull request [\#163](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/163))
+  * Updated code to ensure dates are parsed correctly (Pull request [\#213](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/213))
+  * Updated code to ensure values inputted by users would not cause errors (Pull request [\#127](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/127) [\#212](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/212))
 
 * **Documentation**:
   * User Guide:
-    * Include and modify listToday command (Pull request [\#40]())
-    * Include and modify edit Command (Pull request [\#144]())
-    * Include and modify reminder Command (Pull request [\#144]())
+    * Include and modify listToday command (Pull request [\#40](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/40))
+    * Include and modify edit Command (Pull request [\#144](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/144))
+    * Include and modify reminder Command (Pull request [\#144](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/144))
   * Developer Guide:
-    * Add in the implementation of Edit command (Pull request [\#124]())
+    * Add in the implementation of Edit command (Pull request [\#124](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/124))
 
 * **Team-based tasks**:
   * Minor admin matter such as issue tracking
-  * Added class diagram and details for edit (Pull requests [\#124]())
+  * Added class diagram and details for edit (Pull requests [\#124](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/124))
 
 * **Review and mentoring**:
   * Helped with implementation of valid dates.
