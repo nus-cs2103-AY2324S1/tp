@@ -45,7 +45,7 @@ Additionally, if you are a new user, this user guide provides a [getting started
 
 NetworkBook 1.3 includes several new features and improvements for ease of use.
 
-* [Filter](#filter-contacts-list-filter-by-field-with-term) command for more control with finding contacts
+* [Filter](#ucategory-3---findview-contactsu) command for more control with finding contacts
 * [Edit](#ucategory-2---edit-contact-detailsu) command to edit contacts' details
 * [Open links and emails](#ucategory-5---open-other-appsu) via NetworkBook connecting to other apps
 * [Undo/redo](#ucategory-4---undoredou) commands to revert mistakes unintentional/temporary command calls
