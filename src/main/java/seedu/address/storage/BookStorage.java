@@ -42,15 +42,4 @@ public interface BookStorage extends AddressBookStorage, UserPrefsStorage, Event
     @Override
     void saveEventsBook(ReadOnlyEventsBook eventsBook) throws IOException;
 
-    /*
-    @Override
-    Path getFinancesBookFilePath();
-
-    @Override
-    Optional<ReadOnlyFinancesBook> readFinancesBook() throws DataLoadingException;
-
-    @Override
-    void saveFinancesBook(ReadOnlyFinancesBook financesBook) throws IOException;
-    */
-
 }
