@@ -8,7 +8,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTeamBook;
+import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * API of the Logic component
@@ -29,14 +32,26 @@ public interface Logic {
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
+    /**
+     * Returns the TeamBook.
+     *
+     * @see seedu.address.model.Model#getAddressBook()
+     */
+    ReadOnlyTeamBook getTeamBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of teams */
+    ObservableList<Team> getFilteredTeamList();
 
     /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+    /**
+     * Returns the user prefs' team book file path.
+     */
+    Path getTeamBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -47,4 +62,6 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    Person getPersonByIdentityCode(IdentityCode id);
 }

@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +97,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String remark} into an {@code remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +136,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parse team name string.
+     *
+     * @param name the name
+     * @return the string
+     * @throws ParseException the parse exception
+     */
+    public static String parseTeamName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
+    /**
+     * Parses a {@code String teamLeader} into an {@code TeamLeader}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code TeamLeader} is invalid.
+     */
+    public static Name parseTeamLeader(String teamLeader) throws ParseException {
+        requireNonNull(teamLeader);
+        String trimmedTeamLeader = teamLeader.trim();
+        Name teamLeaderName = parseName(trimmedTeamLeader);
+        return teamLeaderName;
     }
 }

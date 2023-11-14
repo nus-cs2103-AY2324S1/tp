@@ -1,0 +1,14 @@
+{
+  "teams": [
+    {
+      "leaderIdentityCode": "1",
+      "developerIdentityCodes": ["2", "3", "4"],
+      "teamName": "TEAM1"
+    },
+    {
+      "leaderIdentityCode": "2",
+      "developerIdentityCodes": ["3"],
+      "teamName": "TEAM2"
+    }
+  ]
+}

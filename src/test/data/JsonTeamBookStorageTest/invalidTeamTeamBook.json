@@ -1,0 +1,6 @@
+{
+  "teams": [
+    { "leaderIdentityCode": "", "developerIdentityCodes": ["7", "8"], "teamName": "Team Delta" },
+    { "leaderIdentityCode": "4", "developerIdentityCodes": ["9", "10"], "teamName": "Team Epsilon" }
+  ]
+}

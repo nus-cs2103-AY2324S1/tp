@@ -41,6 +41,8 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:24.0.0'
+    implementation 'org.jetbrains:annotations:24.0.0'
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
@@ -63,10 +65,17 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+//    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+//    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'linktree.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

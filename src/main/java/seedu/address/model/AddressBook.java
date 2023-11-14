@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -24,6 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
+
+
     {
         persons = new UniquePersonList();
     }
@@ -53,7 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -67,6 +70,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    /**
+     * Checks if the addressbook contains the given person based on their name.
+     *
+     * @param name the name
+     * @return the boolean
+     */
+    public boolean containsPerson(Name name) {
+        requireNonNull(name);
+        return persons.containsName(name);
+    }
+    public Person getPersonByName(Name name) {
+        return persons.getPerson(name);
+    }
+
+    public Person getPersonByIdentityCode(IdentityCode identityCode) {
+        return persons.getPerson(identityCode);
+    }
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -82,7 +102,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -93,6 +112,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+
+
+    //// teams-level operations----------------------------------------------------------------------------------------
+
 
     //// util methods
 

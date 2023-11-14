@@ -4,16 +4,21 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,6 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String SHOWING_HELP_MESSAGE = HelpCommand.SHOWING_HELP_MESSAGE;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -32,23 +38,57 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    private TeamListPanel teamListPanel;
+    @FXML
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
     private StackPane personListPanelPlaceholder;
-
+    @FXML
+    private StackPane teamListPanelPlaceholder;
+    @FXML
+    private StackPane D_personListPanelPlaceholder;
+    @FXML
+    private StackPane D_teamListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private VBox singleListContainer;
+    @FXML
+    private VBox personList;
+    @FXML
+    private VBox teamList;
+    @FXML
+    private HBox dualListContainer;
+    @FXML
+    private VBox D_personList;
+    @FXML
+    private VBox D_teamList;
+
+    @FXML
+    private StackPane tree;
+
+    @FXML
+    private StackPane personStats;
+
+    @FXML
+    private StackPane teamStats;
+
+    private boolean isListingPerson;
+
+    private boolean isListingTeam;
+
+    private boolean isShowingTree;
+
+    private double originalResultDisplayHeight;
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -58,6 +98,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Set dependencies
         this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("LinkTree App");
         this.logic = logic;
 
         // Configure the UI
@@ -107,11 +148,40 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Resize the ResultDisplay to a larger size.
      */
+    private void expandResultDisplay() {
+        resultDisplayPlaceholder.setPrefHeight(400);
+    }
+
+    /**
+     * Resize the ResultDisplay back to default size.
+     */
+    private void revertResultDisplay() {
+        resultDisplayPlaceholder.setPrefHeight(originalResultDisplayHeight);
+    }
+
+
+    /**
+     * Fills up all the placeholders of this window.
+     *
+     * @param whatToFill String that indicates what to fill in the inner parts
+     */
+    void fillInnerParts(String whatToFill) {
+        if (whatToFill.equals("persons")) {
+            fillPersonList();
+        } else if (whatToFill.equals("teams")) {
+            fillTeamList();
+        } else if (whatToFill.equals("both")) {
+            fillBothList();
+        }
+        switchToListPanel(whatToFill);
+    }
+
+
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        fillBothList();
+        switchToListPanel("both");
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +191,118 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        setStatistics();
+
+        originalResultDisplayHeight = resultDisplayPlaceholder.getPrefHeight();
+    }
+
+    /**
+     * set the label and values for the statistic area.
+     */
+    private void setStatistics() {
+        Label personLabel = new Label("   Total number of developers: "
+                + logic.getFilteredPersonList().size());
+        personLabel.setStyle("-fx-text-fill: #ecbdbd;");
+        personStats.getChildren().add(personLabel);
+        StackPane.setAlignment(personLabel, Pos.CENTER_LEFT);
+
+        Label teamLabel = new Label("   Total number of teams: "
+                + logic.getFilteredTeamList().size());
+        teamLabel.setStyle("-fx-text-fill: #ecbdbd;");
+        teamStats.getChildren().add(teamLabel);
+        StackPane.setAlignment(teamLabel, Pos.CENTER_LEFT);
+    }
+
+    /**
+     * Fills the Person list.
+     */
+    private void fillPersonList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Fills the teams list.
+     */
+    private void fillTeamList() {
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList(), logic.getFilteredPersonList());
+        teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
+    }
+
+    /**
+     * Fills both the person and the teams list.
+     */
+    private void fillBothList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        D_personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList(), logic.getFilteredPersonList());
+        D_teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
+    }
+
+    /**
+     * Method to switch between panels.
+     *
+     * @param panelType String indicating which panel to display
+     */
+    public void switchToListPanel(String panelType) {
+        if ("persons".equals(panelType)) {
+            showPersonList();
+        } else if ("teams".equals(panelType)) {
+            showTeamList();
+        } else if ("both".equals(panelType)) {
+            showBothList();
+        }
+    }
+
+    /**
+     * Set visibility of Vbox: personList -> visible, teamList -> not visible
+     */
+    public void showPersonList() {
+        singleListContainer.getChildren().setAll(personList);
+        singleListContainer.setVisible(true);
+        tree.setVisible(false);
+        dualListContainer.setVisible(false);
+        personList.setVisible(true);
+        teamList.setVisible(false);
+        personListPanelPlaceholder.setVisible(true);
+        teamListPanelPlaceholder.setVisible(false);
+
+        isListingPerson = true;
+        isListingTeam = false;
+        isShowingTree = false;
+    }
+
+    /**
+     * Set visibility of Vbox: personList -> not visible, teamList -> visible
+     */
+    public void showTeamList() {
+        singleListContainer.getChildren().setAll(teamList);
+        singleListContainer.setVisible(true);
+        tree.setVisible(false);
+        dualListContainer.setVisible(false);
+        personList.setVisible(false);
+        teamList.setVisible(true);
+        personListPanelPlaceholder.setVisible(false);
+        teamListPanelPlaceholder.setVisible(true);
+
+        isListingTeam = true;
+        isListingPerson = false;
+        isShowingTree = false;
+    }
+
+    /**
+     * Set visibility of Vbox: personList -> not visible, teamList -> visible
+     */
+    public void showBothList() {
+        dualListContainer.getChildren().setAll(D_personList, D_teamList);
+        tree.setVisible(false);
+        singleListContainer.setVisible(false);
+        dualListContainer.setVisible(true);
+
+        this.isListingPerson = false;
+        this.isListingTeam = false;
+        this.isShowingTree = false;
     }
 
     /**
@@ -145,8 +327,51 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+
+        resultDisplay.setFeedbackToUser(SHOWING_HELP_MESSAGE);
+
+        expandResultDisplay();
     }
 
+    /**
+     * Fill the panel with list of person.
+     */
+    @FXML
+    public void handleListPerson() {
+        if (isListingPerson) {
+            fillInnerParts("both");
+        } else {
+            fillInnerParts("persons");
+        }
+    }
+
+    /**
+     * Fill the panel with list of teams instead of person.
+     */
+    @FXML
+    public void handleListTeam() {
+        if (isListingTeam) {
+            fillInnerParts("both");
+        } else {
+            fillInnerParts("teams");
+        }
+    }
+
+    /**
+     * Fill the panel with list of person.
+     */
+    @FXML
+    public void handleFindPerson() {
+        fillInnerParts("persons");
+    }
+
+    /**
+     * Fill the panel with list of teams instead of person.
+     */
+    @FXML
+    public void handleFindTeam() {
+        fillInnerParts("teams");
+    }
     void show() {
         primaryStage.show();
     }
@@ -163,8 +388,77 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleTree() {
+        if (isShowingTree) {
+            hideTree();
+        } else {
+            showTree();
+        }
+    }
+
+    /**
+     * Refresh the card container to show any changes.
+     */
+    public void refreshCardContainer() {
+        if (!isListingPerson && !isListingTeam && !isShowingTree) {
+            fillInnerParts("both");
+        } else if (isListingTeam) {
+            fillInnerParts("teams");
+        }
+    }
+
+    /**
+     * Refresh the statistics to show any changes.
+     */
+    public void refreshStatistics() {
+        teamStats.getChildren().clear();
+        personStats.getChildren().clear();
+        setStatistics();
+    }
+
+    /**
+     * @return the current personList Panel
+     */
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * @return the current teamList Panel
+     */
+    public TeamListPanel getTeamListPanel() {
+        return teamListPanel;
+    }
+
+    /**
+     * To toggle the tree to be shown.
+     * Called when a single 'tree' command is received.
+     */
+    public void showTree() {
+        singleListContainer.setVisible(false);
+        dualListContainer.setVisible(false);
+
+        //todo: maybe add functions to define project name
+        String projectName = "LinkTree";
+
+        LinkTreeDisplay linkTreeDisplay = new LinkTreeDisplay(logic, projectName);
+        tree.getChildren().add(linkTreeDisplay.getRoot());
+        tree.setVisible(true);
+
+        this.isShowingTree = true;
+        this.isListingPerson = false;
+        this.isListingTeam = false;
+    }
+
+    /**
+     * To toggle the tree to be hidden.
+     * By right only the second 'tree' command will call this function.
+     */
+    public void hideTree() {
+        tree.getChildren().clear();
+        tree.setVisible(false);
+        fillInnerParts("both");
     }
 
     /**
@@ -180,11 +474,39 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            } else {
+                revertResultDisplay();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            if (commandResult.isListTeam()) {
+                handleListTeam();
+            }
+
+            if (commandResult.isListPerson()) {
+                handleListPerson();
+            }
+
+            if (commandResult.isShowTree()) {
+                handleTree();
+            }
+
+            if (commandResult.isFindPerson()) {
+                handleFindPerson();
+            }
+
+            if (commandResult.isFindTeam()) {
+                handleFindTeam();
+            }
+
+            if (commandResult.isAddingOrDeleting()) {
+                refreshStatistics();
+            }
+
+            refreshCardContainer();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

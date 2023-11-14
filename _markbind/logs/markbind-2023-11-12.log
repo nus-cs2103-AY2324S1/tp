@@ -1,0 +1,19 @@
+2023-11-11T16:16:35.375Z - error: No config file found in parent directories of C:\Users\adhig\Documents\tp
+2023-11-11T16:16:35.382Z - error: uncaughtException: The "path" argument must be of type string. Received undefined date=Sun Nov 12 2023 00:16:35 GMT+0800 (Singapore Standard Time), pid=7472, uid=null, gid=null, cwd=C:\Users\adhig\Documents\tp, execPath=C:\Program Files\nodejs\node.exe, version=v18.18.0, argv=[C:\Program Files\nodejs\node.exe, C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\index.js, build], rss=104013824, heapTotal=68739072, heapUsed=40655584, external=1219778, arrayBuffers=286455, loadavg=[0, 0, 0], uptime=954644.062
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:405:5)
+    at validateString (node:internal/validators:162:11)
+    at Object.join (node:path:429:7)
+    at build (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\src\cmd\build.js:23:34)
+    at Command.<anonymous> (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\index.js:72:5)
+    at Command.listener [as _actionHandler] (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:488:17)
+    at C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1227:65
+    at Command._chainOrCall (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1144:12)
+    at Command._parseCommand (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1227:27)
+    at Command._dispatchSubcommand (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1050:25)
+    at Command._parseCommand (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1193:19)
+    at Command.parse (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:897:10)
+    at Object.<anonymous> (C:\Users\adhig\AppData\Roaming\npm\node_modules\markbind-cli\index.js:86:9)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
