@@ -36,7 +36,7 @@ public class GatherCommandParser implements Parser<GatherCommand> {
         if (argMultimap.getValue(PREFIX_FINANCIAL_PLAN).isPresent()) {
             return createGatherByFinancialPlan(trimmedArgs);
         }
-        
+
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             return createGatherByTag(trimmedArgs);
         }
