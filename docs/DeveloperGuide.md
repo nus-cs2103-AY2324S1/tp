@@ -323,11 +323,11 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+Copy the current ManageHR json file into a backup, with the appropriate name.
+Load a new sample copy of ManageHR's data file.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -370,8 +370,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `***`    | Beginner user     | There is a ‘help’ command to list functions/features | Know how to use the app                                        |
 | `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
 | `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
+| `***`    | Intermediate user | Handle departments                                   | Easily keep track of organizational structure                  |
+| ***`     | Intermediate user | Handle additional benefits like leave and salary     | Easily keep track of organizational incentive programs.        |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -537,7 +538,14 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Help function
+1. Calling help
+   1. With ManageHR open, type `help` into the command line.
+        Expected: A help window containing a link to the user guide, and a copy button shows.
+
+2. Calling help with a custom command.
+   1. With ManageHR open, type `help add` into the command line.
+        Expected: A help window containing syntax, as well as an example should be visible to the user. The UI should be scaled such that everything can be seen. The copy button now takes on the command example.
 
 ### Deleting an employee
 
@@ -582,6 +590,5 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Modify `ManageHr.json` illegally. This is by adding illegal json tags, or destruction of the json structure.
+   2. ManageHR will sense an issue, and replace the working file with the sample dataset.
