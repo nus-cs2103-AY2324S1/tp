@@ -750,6 +750,8 @@ MediLink Contacts adapted from the AB3 to use the Patient and Doctor classes to 
 
 Some changes were also made to such that the two classes have their own attributes on top of the original Person attributes and inherit from the common class Person. There are now 2 instead of just 1 entity that has to be handled. This translates to more Parsers, attribute classes and input validations to support these two classes.
 
+We also decided that Patient and Doctor tags should provide meaning in the context of our app and thus, we decided to create restrictions. The biggest challenge here was the parsing of the tags as it had to be changed throughout multiple commands and in the EditCommand, the initial parsing does not check if the person is a Patient or Doctor, which meant we had to carefully check later on that valid tags were indeed edited.
+
 Additionally, we moved away from using Index for most of our operations. Instead, we perform all operations using the NRIC. This also means more changes to the existing command such as Edit/Find/Delete commands.
 
 ### Appointment class
@@ -758,7 +760,8 @@ This is a newly created class that represents a relationship between the Doctor 
 Storing the appointment was a challenge too. We store each appointment in the involved doctor and patient such that we can search for their appointments more easily as well as a separate list in the model, that has all the appointments. We had to create new JsonAdaptedAppointment class for this purpose.
 
 ### Undo and Redo
-As we wanted to allow our users to revert back some mistakes, we implemented the undo and redo functions, which are fairly new compared to the existing functions that are mainly CRUD related. These changes had to be tied to each individual commands as we had to store the different states of the system before and after each operation is performed. Hence, the code changes were across many files and had to be linked well for it to work.
+As we wanted to allow our users to revert back some mistakes, we implemented the undo and redo functions, which are fairly new compared to the existing functions that are mainly CRUD related. These changes had to be tied to each individual commands as we had to store the different states of the system before and after each operation is performed. Hence, the code changes were across many files and had to be linked well for it to work. Additionally, we faced a challenge coming up with the best possible implementation, as there were multiple ways for us to revert the data files. We eventually decided on 
+storing an ArrayList of AddressBooks and faced a challenge figuring out how to update the UI, which we eventually managed to resolve through extensive searching and fixing.
 
 ## **Appendix: Instructions for manual testing**
 
