@@ -1249,7 +1249,7 @@ To reset to the sample data, delete the `data` folder in the same directory as t
 {% include admonition.html type="note" title="Note" body="
 
 These instructions only provide a starting point for testers to work on;
-testers are expected to do more [exploratory testing](#glossary).
+testers are expected to do more <a href='#glossary'>exploratory testing</a>.
 
 " %}
 
