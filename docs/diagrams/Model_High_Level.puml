@@ -34,14 +34,15 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "3" UniqueList
+
+
+
 UniqueList --> "~* all" Assignment
 UniqueList --> "~* all" InternshipRole
 UniqueList --> "~* all" InternshipTask
 
-Assignment -[hidden]up--> I
+
 UniqueList -[hidden]right-> I
 
 
-
-ModelManager --> "~* filtered" Assignment
 @enduml
