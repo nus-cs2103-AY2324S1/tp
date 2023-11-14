@@ -21,7 +21,6 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
 <!-- TOC -->
 * [Welcome to TuitionConnect's User Guide!](#welcome-to-tuitionconnects-user-guide)
   * [Table of Contents](#table-of-contents)
-  * [<div style="page-break-after: always;"></div>](#div-stylepage-break-after-alwaysdiv)
   * [Introduction](#introduction)
   * [Using this guide](#using-this-guide)
   * [Symbols and Syntax](#symbols-and-syntax)
@@ -45,7 +44,6 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
     * [Redo previous undone command : `redo`](#redo-previous-undone-command--redo)
     * [Calculating monthly revenue: `rev`](#calculating-monthly-revenue-rev)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
-  * [<div style="page-break-after: always;"></div>](#div-stylepage-break-after-alwaysdiv-1)
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
