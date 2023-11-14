@@ -43,7 +43,7 @@ Given below are my contributions to the project.
   * Primary manager of the team repo. Set up the repo for use for the entire team, including the configuring and launch of the website.
   * Setting up other tools, see [tools](#Tools) section below.
   * Maintenance of the group GitHub issue tracker, ensuring milestones are properly tagged and closed.
-  
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#136](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/136), [\#12](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/12#issuecomment-1747115616), [\#45](https://github.com/AY2324S1-CS2103-T16-1/tp/issues/45#issuecomment-1770368541)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2324S1/forum/issues/36), [2](https://github.com/nus-cs2103-AY2324S1/forum/issues/148), [3](https://github.com/nus-cs2103-AY2324S1/forum/issues/200), [4](https://github.com/nus-cs2103-AY2324S1/forum/issues/183))
