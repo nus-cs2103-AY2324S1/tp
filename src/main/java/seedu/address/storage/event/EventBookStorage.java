@@ -5,11 +5,10 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link seedu.address.model.EventBook}.
  */
 public interface EventBookStorage {
 
@@ -19,7 +18,7 @@ public interface EventBookStorage {
     Path getEventBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns EventBook data as a {@link ReadOnlyEventBook}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
@@ -32,7 +31,7 @@ public interface EventBookStorage {
     Optional<ReadOnlyEventBook> readEventBook(Path filePath) throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     * Saves the given {@link ReadOnlyEventBook} to the storage.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveEventBook(ReadOnlyEventBook eventBook) throws IOException;
