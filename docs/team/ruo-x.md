@@ -57,4 +57,4 @@ To further improve on user experience, I have added the ability to close this po
     * Reported bugs for other teams (examples: [#1](https://github.com/ruo-x/ped/issues/1), [#4](https://github.com/ruo-x/ped/issues/4), [#5](https://github.com/ruo-x/ped/issues/5))
 
 <!-- force a page break -->
-<div style="page-break-before:always"></div> 
+<div style="page-break-before:always"></div>
