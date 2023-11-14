@@ -184,7 +184,7 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. The `[KEYWORDS]` parameter can only be used after `list students`. When used for 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. Specifying the `[KEYWORDS]` parameter without specifying the `[LIST]` parameter is not allowed. When used for 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -210,6 +210,8 @@ Showing list STUDENT
 
 #### For Schedule:
 
+
+
 Example usages:
 * `list` and `list schedule` displays the 📅 ___SCHEDULE list___ with all the lessons with their names in time order.
 
@@ -220,6 +222,11 @@ Showing list SCHEDULE
 ```
 ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
 
+<box type="info" seamless>
+
+**Note:** `list schedule subjects` will display the 📅 ___SCHEDULE list___ with all the lessons with their names in time order. `subjects` will be ignored.
+
+</box>
 
 #### For Task:
 
