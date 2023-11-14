@@ -193,6 +193,10 @@ Student Number refers to the unique matriculation number of a NUS student. **Cla
     - `A0123456X`
     - `A32g (Stored as A32G)`
 
+## Name
+
+Name can be any alphanumeric string, and must not contain any symbols.
+
 ## Data visualisation
 
 Data visualisation of student's Class Information is automatically generated in the Data Visualisation section of the GUI (within the card of a student in the Student List section).
