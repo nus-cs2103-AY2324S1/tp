@@ -9,10 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.band.BandName;
+import seedu.address.model.musician.Email;
+import seedu.address.model.musician.Name;
+import seedu.address.model.musician.Phone;
+import seedu.address.model.tag.Genre;
+import seedu.address.model.tag.Instrument;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +27,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -51,6 +54,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String name} into a {@code BandName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static BandName parseBandName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!BandName.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new BandName(trimmedName);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -63,21 +81,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**
@@ -120,5 +123,59 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String instrument} into a {@code Instrument}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code instrument} is invalid.
+     */
+    public static Instrument parseInstrument(String instrument) throws ParseException {
+        requireNonNull(instrument);
+        String trimmedInstrument = instrument.trim();
+        if (!Instrument.isValidInstrumentName(trimmedInstrument)) {
+            throw new ParseException(Instrument.MESSAGE_CONSTRAINTS);
+        }
+        return new Instrument(trimmedInstrument);
+    }
+
+    /**
+     * Parses {@code Collection<String> instruments} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseInstruments(Collection<String> instruments) throws ParseException {
+        requireNonNull(instruments);
+        final Set<Tag> instrumentSet = new HashSet<>();
+        for (String instrumentName : instruments) {
+            instrumentSet.add(parseInstrument(instrumentName));
+        }
+        return instrumentSet;
+    }
+
+    /**
+     * Parses a {@code String genre} into a {@code Genre}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code genre} is invalid.
+     */
+    public static Genre parseGenre(String genre) throws ParseException {
+        requireNonNull(genre);
+        String trimmedGenre = genre.trim();
+        if (!Genre.isValidGenreName(trimmedGenre)) {
+            throw new ParseException(Genre.MESSAGE_CONSTRAINTS);
+        }
+        return new Genre(trimmedGenre);
+    }
+
+    /**
+     * Parses {@code Collection<String> genres} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseGenres(Collection<String> genres) throws ParseException {
+        requireNonNull(genres);
+        final Set<Tag> genreSet = new HashSet<>();
+        for (String genreName : genres) {
+            genreSet.add(parseGenre(genreName));
+        }
+        return genreSet;
     }
 }

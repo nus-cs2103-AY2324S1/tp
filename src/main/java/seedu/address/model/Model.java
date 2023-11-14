@@ -5,14 +5,16 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.band.Band;
+import seedu.address.model.musician.Musician;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Musician> PREDICATE_SHOW_ALL_MUSICIANS = unused -> true;
+    Predicate<Band> PREDICATE_SHOW_ALL_BANDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +55,93 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a musician with the same identity as {@code musician} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasMusician(Musician musician);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if a musician with the same phone or email as {@code musician} exists in the address book.
      */
-    void deletePerson(Person target);
+    boolean hasDuplicateInfo(Musician toExclude, Musician musician);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Deletes the given musician.
+     * The musician must exist in the address book.
      */
-    void addPerson(Person person);
+    void deleteMusician(Musician target);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Adds the given musician.
+     * {@code musician} must not already exist in the address book.
+     */
+    void addMusician(Musician musician);
+
+    /**
+     * Replaces the given musician {@code target} with {@code editedMusician}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The musician identity of {@code editedMusician} must not be the same as another existing musician
+     * in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setMusician(Musician target, Musician editedMusician);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered musician list */
+    ObservableList<Musician> getFilteredMusicianList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered musician list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredMusicianList(Predicate<Musician> predicate);
+
+    /** Returns an unmodifiable view of the filtered band list */
+    ObservableList<Band> getFilteredBandList();
+
+    void updateFilteredBandList(Predicate<Band> predicate);
+
+    /**
+     * Updates the filter of the filtered band list to filter by the given {@code predicate}.
+     * Updates the musician list to reflect the members of the filtered band.
+     * An abstraction for FindBandCommand which requires updating both panels simultaneously.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBandMusicianList(Predicate<Band> predicate);
+
+    /**
+     * Returns true if a band with the same identity as {@code band} exists in the address book.
+     */
+    boolean hasBand(Band band);
+
+    /**
+     * Adds the given band.
+     * {@code band} must not already exist in the address book.
+     */
+    void addBand(Band band);
+
+    /**
+     * Deletes the given band.
+     * The band must exist in the address book.
+     */
+    void deleteBand(Band bandToDelete);
+
+    /**
+     * Replaces the given band {@code target} with {@code editedBand}.
+     * {@code target} must exist in the address book.
+     * The band identity of {@code editedBand} must not be the same as another existing band
+     * in the address book.
+     */
+    void setBand(Band target, Band editedBand);
+
+    /**
+     * Returns true if a band already contains the musician.
+     * {@code musician} must not already exist in the band.
+     */
+    boolean hasMusicianInBand(int addInto, int toAdd);
+
+    /**
+     * Adds the given musician into the band.
+     * {@code musician} must not already exist in the band.
+     */
+    void addMusicianToBand(int addInto, int toAdd);
+
+    void removeMusicianFromBand(int bandIndex, int musicianIndex);
 }

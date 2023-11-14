@@ -123,11 +123,51 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for hasSameWordsInSameSequenceIgnoreCase --------------------------------------
+
+    /*
+     * Equivalence Partitions for a phrase: null, empty string, valid string
+     */
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*
-     * Equivalence Partitions: null, valid throwable object
+     * Invalid equivalence partitions for a phrase: null (same for both phrase1 and phrase2)
+     * The test case below test the invalid input.
      */
+    @Test
+    public void hasSameWordsInSameSequenceIgnoreCase_nullPhrase_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.hasSameWordsInSameSequenceIgnoreCase(null, "abc"));
+        assertThrows(NullPointerException.class, () -> StringUtil.hasSameWordsInSameSequenceIgnoreCase("abc", null));
+    }
+
+    /*
+     * Valid equivalence partitions for a phrase:
+     *   - empty string
+     *   - one word
+     *   - one word with leading/trailing spaces
+     *   - multiple words separated by spaces
+     *   - multiple words separated by extra spaces
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+    @Test
+    public void hasSameWordsInSameSequenceIgnoreCase_validInputs_correctResult() {
+        // empty string
+        assertFalse(StringUtil.hasSameWordsInSameSequenceIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.hasSameWordsInSameSequenceIgnoreCase("  ", "abc")); // Boundary case
+
+        // one word with leading/trailing spaces
+        assertTrue(StringUtil.hasSameWordsInSameSequenceIgnoreCase("abc", "ABC")); // case insensitive
+        assertTrue(StringUtil.hasSameWordsInSameSequenceIgnoreCase("123abc", "123ABC")); // with numbers
+        assertTrue(StringUtil.hasSameWordsInSameSequenceIgnoreCase("   abc", "ABC  ")); // leading and trailing spaces
+        assertFalse(StringUtil.hasSameWordsInSameSequenceIgnoreCase("abc", "ABCD")); // different word
+
+        // multiple words separated by possibly extra spaces
+        assertTrue(StringUtil.hasSameWordsInSameSequenceIgnoreCase("abc def", "ABCDEF")); // remove spaces between words
+        assertTrue(StringUtil.hasSameWordsInSameSequenceIgnoreCase("abc def", "  ABC   DEF  ")); // extra spaces
+        assertFalse(StringUtil.hasSameWordsInSameSequenceIgnoreCase("abc def", "DEF ABC")); // different sequence
+    }
 
     @Test
     public void getDetails_exceptionGiven() {

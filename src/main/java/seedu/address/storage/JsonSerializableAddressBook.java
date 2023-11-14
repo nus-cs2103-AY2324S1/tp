@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.band.Band;
+import seedu.address.model.musician.Musician;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +20,20 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_MUSICIAN = "Persons list contains duplicate musician(s).";
+    public static final String MESSAGE_DUPLICATE_BAND = "Band list contains duplicate band(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedMusician> musicians = new ArrayList<>();
+    private final List<JsonAdaptedBand> bands = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given musicians.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("musicians") List<JsonAdaptedMusician> musicians,
+                                       @JsonProperty("bands") List<JsonAdaptedBand> bands) {
+        this.musicians.addAll(musicians);
+        this.bands.addAll(bands);
     }
 
     /**
@@ -37,7 +42,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        musicians.addAll(source.getMusicianList().stream().map(JsonAdaptedMusician::new).collect(Collectors.toList()));
+        bands.addAll(source.getBandList().stream().map(JsonAdaptedBand::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,13 +53,21 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedMusician jsonAdaptedMusician : musicians) {
+            Musician musician = jsonAdaptedMusician.toModelType();
+            if (addressBook.hasMusician(musician)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MUSICIAN);
             }
-            addressBook.addPerson(person);
+            addressBook.addMusician(musician);
         }
+        for (JsonAdaptedBand jsonAdaptedBand : bands) {
+            Band band = jsonAdaptedBand.toModelType();
+            if (addressBook.hasBand(band)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_BAND);
+            }
+            addressBook.addBand(band);
+        }
+
         return addressBook;
     }
 

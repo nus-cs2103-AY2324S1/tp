@@ -1,0 +1,31 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+skinparam defaultTextAlignment center
+
+start
+:User executes addm command;
+:Parse the input parameters;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([musician/band indices not specified])
+    :Display parse error;
+else ([else])
+    if () then ([multiple band indices/
+ repeated musician index])
+        :Display parse error;
+    else ([else])
+        if () then ([indices out of bounds/
+ musicians already in band])
+            :Display command execution error;
+        else ([else])
+            :Add musicians to the band;
+        endif
+    endif
+endif
+
+stop
+@enduml

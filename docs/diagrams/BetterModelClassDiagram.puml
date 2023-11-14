@@ -4,18 +4,32 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+Class "Name" as n1
+Class "Name" as n2
 
-UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
+AddressBook *-right-> "1" UniqueMusicianList
+AddressBook *-right-> "1" UniqueMusicianTagList
 
-Person -up-> "*" Tag
+AddressBook *--> "1" UniqueBandList
+AddressBook *-left-> "1" UniqueBandGenreList
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+UniqueMusicianTagList -[hidden]down- UniqueMusicianList
+UniqueMusicianTagList -[hidden]down- UniqueMusicianList
+
+UniqueBandGenreList -[hidden]down- UniqueBandList
+UniqueBandGenreList -[hidden]down- UniqueBandList
+
+UniqueMusicianTagList -right-> "*" MusicianTag
+UniqueMusicianList -right-> Musician
+
+UniqueBandGenreList -left-> "*" BandGenre
+UniqueBandList -left-> Band
+
+Musician -up-> "*" MusicianTag
+Band -up-> "*" BandGenre
+
+Musician *--> n1
+Musician *--> Phone
+Musician *--> Email
+Band *--> n2
 @enduml

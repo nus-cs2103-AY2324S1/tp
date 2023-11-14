@@ -18,7 +18,7 @@ public class StringUtil {
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsWordIgnoreCase("ABc def", "AB") == false // not a full word match
      *       </pre>
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
@@ -36,6 +36,27 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code phrase1} and the {@code phrase2} contain the exact same words in the same order.
+     * Ignore case, and leading, trailing, and intermediate whitespaces.
+     *   <br>examples:<pre>
+     *       hasSameWordsInSameSequenceIgnoreCase("ABc def", "abc deF") == true
+     *       hasSameWordsInSameSequenceIgnoreCase("ABc def", "abc    def") == true
+     *       hasSameWordsInSameSequenceIgnoreCase("ABc def", "def Abc") == false // not in the same sequence
+     *       </pre>
+     * @param phrase1 cannot be null
+     * @param phrase2 cannot be null
+     */
+    public static boolean hasSameWordsInSameSequenceIgnoreCase(String phrase1, String phrase2) {
+        requireNonNull(phrase1);
+        requireNonNull(phrase2);
+
+        String processedPhrase1 = phrase1.trim().replaceAll("\\s+", "");
+        String processedPhrase2 = phrase2.trim().replaceAll("\\s+", "");
+
+        return processedPhrase1.equalsIgnoreCase(processedPhrase2);
     }
 
     /**

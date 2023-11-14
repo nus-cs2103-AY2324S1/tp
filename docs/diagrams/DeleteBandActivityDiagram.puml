@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+skinparam defaultTextAlignment center
+
+start
+:User executes deleteb command;
+:Parse the input parameters;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([input is invalid])
+    :Show corresponding error message;
+else ([else])
+    if () then ([invalid index provided])
+        :Error: Invalid Index!;
+
+    else ([else])
+        :Delete Band Successfully;
+    endif
+
+endif
+
+stop
+@enduml

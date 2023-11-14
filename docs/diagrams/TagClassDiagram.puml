@@ -1,0 +1,25 @@
+@startuml
+!include tag_style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor TAG_COLOR_T1
+skinparam classBackgroundColor TAG_COLOR
+
+class Tag
+class Instrument
+class Genre
+
+Tag <|-- Instrument
+Tag <|-- Genre
+
+class Instrument {
+{static} VALID_INSTRUMENTS: HashSet<String>
+{static} isValidInstrumentName(): boolean
+}
+
+class Genre {
+{static} VALID_GENRES: HashSet<String>
+{static} isValidGenreName(): boolean
+}
+
+@enduml
+

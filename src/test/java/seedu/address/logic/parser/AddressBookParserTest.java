@@ -5,29 +5,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MUSICIAN;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.general.ClearCommand;
+import seedu.address.logic.commands.general.ExitCommand;
+import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.ListCommand;
+import seedu.address.logic.commands.musician.AddCommand;
+import seedu.address.logic.commands.musician.DeleteCommand;
+import seedu.address.logic.commands.musician.EditCommand;
+import seedu.address.logic.commands.musician.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditMusicianDescriptorBuilder;
+import seedu.address.testutil.MusicianBuilder;
+import seedu.address.testutil.MusicianUtil;
 
 public class AddressBookParserTest {
 
@@ -35,9 +36,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Musician musician = new MusicianBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(MusicianUtil.getAddCommand(musician));
+        assertEquals(new AddCommand(musician), command);
     }
 
     @Test
@@ -49,17 +50,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_MUSICIAN.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_MUSICIAN), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Musician musician = new MusicianBuilder().build();
+        EditCommand.EditMusicianDescriptor descriptor = new EditMusicianDescriptorBuilder(musician).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_MUSICIAN.getOneBased() + " " + MusicianUtil.getEditMusicianDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_MUSICIAN, descriptor), command);
     }
 
     @Test
@@ -72,8 +73,11 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" n/")));
+        HashSet<Predicate<Musician>> predicates = new HashSet<>(Arrays.asList(
+                new NameContainsKeywordsPredicate(keywords)
+        ));
+        assertEquals(new FindCommand(predicates), command);
     }
 
     @Test
