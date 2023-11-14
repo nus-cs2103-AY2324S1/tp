@@ -689,7 +689,7 @@ Some of our current output messages are not formatted properly. For example, the
 
 | Current Output Message               | After Enhancement         |
 |--------------------------------------|---------------------------|
-| ![img.png](images/FindMessage.png)   | Parameters: <KEYWORDS...>              |
+| ![img.png](images/FindMessage.png)   | `<KEYWORDS...>`              |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
 ### Enhancement 3: Adding frequency of usage tags
@@ -847,7 +847,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Navigate to folder in terminal and input `java -jar flashlingo.jar` <br>
+    2. Navigate to folder in terminal and input `java -jar` command with the jar file name, e.g.`java -jar flashlingo.jar` <br>
        Expected: Shows the GUI with a set of sample contacts. The window size can be adjusted to your liking.
 
 2. Saving window preferences
