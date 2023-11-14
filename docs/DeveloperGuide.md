@@ -293,9 +293,12 @@ Examples:
 * `filter l/14 r/manager` returns employees with 14 days of leave and the manager role
 
 
-The following activity diagram summarizes what happens when a user executes the filter command:
+The following activity diagram summarizes what happens when a user executes the filter command, the Activity Diagrams
+are split into two part to ensure clarity/visibility of the diagrams, however the activities occur simultaneously:
 
-![FilterActivityDiagram](images/FilterActivityDiagram.png)
+![FilterActivityDiagramPart1](images/FilterActivityDiagramPart1.png)
+
+![FilterActivityDiagramPart2](images/FilterActivityDiagramPart2.png)
 
 The following is the filter feature's class diagram, illustrating the interaction between the FilterCommand,
 FilterCommandParser and the ContainsAllPredicate classes.
@@ -329,12 +332,10 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-
 ### \[Proposed\] Data archiving
 
 Copy the current ManageHR json file into a backup, with the appropriate name.
 Load a new sample copy of ManageHR's data file.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -597,3 +598,4 @@ testers are expected to do more *exploratory* testing.
 
    1. Modify `ManageHr.json` illegally. This is by adding illegal json tags, or destruction of the json structure.
    2. ManageHR will sense an issue, and replace the working file with the sample dataset.
+
