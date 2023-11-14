@@ -65,4 +65,13 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns a string with spaces between the elements input array.
+     */
+    public static String concatStringArrayWithSpace(String[] stringArr, int startIndex, int endIndex) {
+        return Arrays.asList(stringArr).subList(startIndex, endIndex + 1).stream()
+                .reduce((a, b) -> a + " " + b)
+                .orElse("");
+    }
 }

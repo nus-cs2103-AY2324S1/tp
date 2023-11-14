@@ -1,0 +1,38 @@
+{
+  "events" : [ {
+    "eventName" : "Meeting with Alice",
+    "timeStart" : "23-09-2023 09:00",
+    "timeEnd" : "23-09-2023 10:00",
+    "location" : "",
+    "clients" : [ ],
+    "eventDescription" : ""
+  }, {
+    "eventName" : "Conference with Bob",
+    "timeStart" : "24-09-2023 14:00",
+    "timeEnd" : "24-09-2023 18:00",
+    "location" : "Conference Room",
+    "clients" : [ ],
+    "eventDescription" : "Discussion"
+  }, {
+    "eventName" : "Team Lunch",
+    "timeStart" : "25-09-2023 12:00",
+    "timeEnd" : "25-09-2023 13:00",
+    "location" : "Conference Room",
+    "clients" : [ ],
+    "eventDescription" : "Discussion"
+  }, {
+    "eventName" : "Project Presentation",
+    "timeStart" : "26-09-2023 15:00",
+    "timeEnd" : "26-09-2023 16:30",
+    "location" : "Conference Room",
+    "clients" : [ ],
+    "eventDescription" : "Discussion"
+  }, {
+    "eventName" : "Meeting",
+    "timeStart" : "01-01-2023 14:00",
+    "timeEnd" : "01-01-2023 15:00",
+    "location" : "Meeting Room",
+    "clients" : [ ],
+    "eventDescription" : "Meeting for discussion"
+  } ]
+}

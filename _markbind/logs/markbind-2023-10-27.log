@@ -1,0 +1,19 @@
+2023-10-27T03:46:14.155Z - error: No config file found in parent directories of /Users/daniel/Desktop/CS2103T/tP
+2023-10-27T03:46:14.156Z - error: uncaughtException: The "path" argument must be of type string. Received undefined date=Fri Oct 27 2023 11:46:14 GMT+0800 (Singapore Standard Time), pid=73523, uid=501, gid=20, cwd=/Users/daniel/Desktop/CS2103T/tP, execPath=/usr/local/bin/node, version=v18.18.0, argv=[/usr/local/bin/node, /usr/local/bin/markbind, serve], rss=116260864, heapTotal=66387968, heapUsed=37340576, external=3068506, arrayBuffers=94850, loadavg=[2.1416015625, 2.84130859375, 3.24365234375], uptime=6293419
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:405:5)
+    at validateString (node:internal/validators:162:11)
+    at Object.join (node:path:1171:7)
+    at serve (/usr/local/lib/node_modules/markbind-cli/src/cmd/serve.js:39:27)
+    at Command.<anonymous> (/usr/local/lib/node_modules/markbind-cli/index.js:61:5)
+    at Command.listener [as _actionHandler] (/usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:488:17)
+    at /usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1227:65
+    at Command._chainOrCall (/usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1144:12)
+    at Command._parseCommand (/usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1227:27)
+    at Command._dispatchSubcommand (/usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1050:25)
+    at Command._parseCommand (/usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1193:19)
+    at Command.parse (/usr/local/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:897:10)
+    at Object.<anonymous> (/usr/local/lib/node_modules/markbind-cli/index.js:86:9)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)

@@ -11,10 +11,13 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class FinanceListPanel
+Class FinanceCard
 Class StatusBarFooter
 Class CommandBox
+Class ContactsTab
+Class FinanceTab
+Class EventsTab
 }
 
 package Model <<Rectangle>> {
@@ -32,29 +35,42 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+
+MainWindow *-down-> "0..1" FinanceListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" ContactsTab
+MainWindow *-down-> "1" FinanceTab
+MainWindow *-down-> "1" EventsTab
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+
+FinanceListPanel -down-> "*" FinanceCard
+
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+FinanceListPanel --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ContactsTab --|> UiPart
+FinanceTab --|> UiPart
+EventsTab --|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+FinanceCard ..> Model
+UiManager -up-> Logic
+MainWindow -up-> Logic
+
+
+FinanceListPanel -[hidden]up- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+StatusBarFooter -[hidden]left- ContactsTab
+ContactsTab -[hidden]up- FinanceTab
+FinanceTab -[hidden]up- EventsTab
 
 MainWindow -[hidden]-|> UiPart
 @enduml

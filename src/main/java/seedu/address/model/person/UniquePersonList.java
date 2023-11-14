@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,6 +97,26 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    public Set<Person> getAllMatchedClients(Set<Person> clients) {
+        Set<Person> matchedClients = new HashSet<>();
+
+        for (Person person : internalList) {
+            if (clients.stream().anyMatch(p -> p.getName().equals(person.getName()))) {
+                matchedClients.add(person);
+            }
+        }
+        return matchedClients;
+    }
+
+    public Person getMatchedClient(Person client) {
+        for (Person person : internalList) {
+            if (client.isSamePerson(person)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     /**

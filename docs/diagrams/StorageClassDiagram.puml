@@ -4,40 +4,70 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
-package Storage as StoragePackage {
+package BookStorage as StoragePackage {
 
 package "UserPrefs Storage" #F4F6F6{
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
+Class "<<interface>>\nBookStorage" as BookStorage
+Class BookStorageManager
 
 package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
-Class JsonAdaptedTag
+}
+
+package "FinanceBook Storage" #F4F6F6{
+Class "<<interface>>\nFinanceBookStorage" as FinanceBookStorage
+Class JsonFinanceBookStorage
+Class JsonSerializableFinanceBook
+Class JsonAdaptedExpense
+Class JsonAdaptedCommission
+Class "{abstract}\nJsonAdaptedFinance" as JsonAdaptedFinance
+}
+
+package "EventsBook Storage" #F4F6F6{
+Class "<<interface>>\nEventsBookStorage" as EventsBookStorage
+Class JsonEventsBookStorage
+Class JsonSerializableEventsBook
+Class JsonAdaptedEvent
 }
 
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+HiddenOutside ..> BookStorage
 
-StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+BookStorageManager .up.|> BookStorage
+BookStorageManager -down-> "1" UserPrefsStorage
+BookStorageManager -down-> "1" AddressBookStorage
+BookStorageManager -down-> "1" FinanceBookStorage
+BookStorageManager -down-> "1" EventsBookStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+BookStorage -down-|> UserPrefsStorage
+BookStorage -down-|> AddressBookStorage
+BookStorage -down-|> FinanceBookStorage
+BookStorage -down-|> EventsBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonEventsBookStorage .up.|> EventsBookStorage
+JsonEventsBookStorage ..> JsonSerializableEventsBook
+JsonSerializableEventsBook --> "*" JsonAdaptedEvent
+JsonAdaptedEvent --> "*" JsonAdaptedPerson
+
+JsonFinanceBookStorage .up.|> FinanceBookStorage
+JsonFinanceBookStorage ..> JsonSerializableFinanceBook
+JsonSerializableFinanceBook --> "*" JsonAdaptedFinance
+JsonAdaptedExpense -up-|> JsonAdaptedFinance
+JsonAdaptedCommission -up-|> JsonAdaptedFinance
+JsonAdaptedFinance --> "1" JsonAdaptedPerson
 
 @enduml

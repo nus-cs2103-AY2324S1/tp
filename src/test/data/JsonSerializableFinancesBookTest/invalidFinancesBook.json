@@ -1,0 +1,23 @@
+{
+  "finances" : [ {
+    "@type" : "Commission",
+    "amount" : "200",
+    "client" : "Bob",
+    "description" : "WOOOO FREE MONEY"
+  }, {
+    "@type" : "Commission",
+    "amount" : "20ertertert...0",
+    "client" : "Alice",
+    "description" : ""
+  }, {
+    "@type" : "Expense",
+    "amount" : "12",
+    "client" : "Mackers",
+    "description" : "fries"
+  }, {
+    "@type" : "Expense",
+    "amount" : "4.50",
+    "client" : "NTUC",
+    "description" : "buy bread"
+  } ]
+}

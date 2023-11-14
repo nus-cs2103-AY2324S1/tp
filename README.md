@@ -1,14 +1,35 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2324S1-CS2103T-W09-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-W09-2/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W09-2/tp/graph/badge.svg?token=SR4362H8Y3)](https://codecov.io/gh/AY2324S1-CS2103T-W09-2/tp)
 
-![Ui](docs/images/Ui.png)
+# FreelanceBuddy
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+
+![Ui.png](docs%2Fimages%2FUi.png)
+
+
+Welcome to the FreelanceBuddy, a powerful 
+and efficient app designed for 
+passionate freelancers like you. It's
+your one-stop solution for managing multiple clients,
+tracking project statuses, and staying on top of your 
+financial reports effortlessly.
+
+## Features
+
+- **Effortless Data Entry**: Input and update client 
+information, project details, and financial data 
+seamlessly using the command line.
+
+- **Client Management**: Manage all your clients in 
+one place, making it easy to access and update their 
+information whenever needed.
+
+- **Project Tracking**: Keep track of project completion 
+statuses, ensuring you're always aware of your ongoing work.
+
+Visit our website for more details! </br>
+(https://ay2324s1-cs2103t-w09-2.github.io/tp/)
+
+This project is based on the AddressBook-Level3 project 
+created by the [SE-EDU initiative](https://se-education.org).
+

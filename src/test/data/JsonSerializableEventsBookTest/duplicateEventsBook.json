@@ -1,0 +1,45 @@
+{
+  "events" : [ {
+    "eventName" : "Meeting with Alice",
+    "timeStart" : "23-09-2023 09:00",
+    "timeEnd" : "23-09-2023 12:00",
+    "location" : "",
+    "clients" : [ ],
+    "eventDescription" : ""
+  }, {
+    "eventName" : "Conference with Bob",
+    "timeStart" : "24-09-2023 14:00",
+    "timeEnd" : "24-09-2023 18:00",
+    "location" : "Conference Room",
+    "clients" : [ ],
+    "eventDescription" : "Discussion"
+  }, {
+    "eventName" : "Conference with Bob",
+    "timeStart" : "24-09-2023 14:00",
+    "timeEnd" : "24-09-2023 18:00",
+    "location" : "Conference Room",
+    "clients" : [ ],
+    "eventDescription" : "Discussion"
+  }, {
+    "eventName" : "Team Lunch",
+    "timeStart" : "25-09-2023 12:00",
+    "timeEnd" : "25-09-2023 13:00",
+    "location" : "Conference Room",
+    "clients" : [ ],
+    "eventDescription" : "Discussion"
+  }, {
+    "eventName" : "Project Presentation",
+    "timeStart" : "26-09-2023 15:00",
+    "timeEnd" : "26-09-2023 16:30",
+    "location" : "Conference Room",
+    "clients" : [ {
+      "name" : "Alex Yeasdfasdfeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "address" : "Blk 30 Geylang Street 29, #06-40",
+      "company" : "Google",
+      "telegramName" : "@AlexYeoh"
+    } ],
+    "eventDescription" : "Discussion"
+  } ]
+}

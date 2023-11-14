@@ -2,13 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -22,19 +19,27 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Address address; // Company Address
+    private final Company company; // Company Name
+    private final TelegramName telegramName;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person}.
+     * @param name A valid name.
+     * @param phone A valid phone number.
+     * @param email A valid email address.
+     * @param address An optional address.
+     * @param company An optional company.
+     * @param telegramName An optional telegram name.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Company company, TelegramName telegramName) {
+        requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.company = company;
+        this.telegramName = telegramName;
     }
 
     public Name getName() {
@@ -53,12 +58,12 @@ public class Person {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Company getCompany() {
+        return company;
+    }
+
+    public TelegramName getTelegramName() {
+        return telegramName;
     }
 
     /**
@@ -94,13 +99,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && company.equals(otherPerson.company)
+                && telegramName.equals(otherPerson.telegramName);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, company, telegramName);
     }
 
     @Override
@@ -110,8 +116,25 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("company", company)
+                .add("telegramName", telegramName)
                 .toString();
+    }
+
+    public static String getAllClientNames(HashSet<Person> clients) {
+        return clients.stream().map(client -> client.getName().toString()).reduce((a, b) -> a + ", " + b).get();
+    }
+
+    /**
+     * Creates and returns a dummy Person object with the specified client name.
+     * This method is useful for generating placeholder data with a given name.
+     *
+     * @param clientName The name of the client for whom the dummy Person object is created.
+     * @return A dummy Person object with the provided client name and default values for other fields.
+     */
+    public static Person makeDummyWithName(String clientName) {
+        return new Person(new Name(clientName), new Phone("00000"), new Email("filler@email.com"),
+                new Address(""), new Company(""), new TelegramName(""));
     }
 
 }

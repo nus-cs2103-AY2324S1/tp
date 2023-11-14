@@ -74,6 +74,8 @@ public class JsonUserPrefsStorageTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
         userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setEventsFilePath(Paths.get("events.json"));
+        userPrefs.setFinanceFilePath(Paths.get("finance.json"));
         return userPrefs;
     }
 

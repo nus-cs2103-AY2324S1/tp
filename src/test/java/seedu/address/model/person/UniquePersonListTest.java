@@ -2,15 +2,17 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +44,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -85,7 +87,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -172,4 +174,30 @@ public class UniquePersonListTest {
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+    @Test
+    public void getMatchedClient_containsClient_success() {
+        uniquePersonList.add(ALICE);
+        Person aliceWithNameOnly = new PersonBuilder().withName("Alice Pauline").build();
+        assertEquals(uniquePersonList.getMatchedClient(aliceWithNameOnly), ALICE);
+    }
+
+    @Test
+    public void getMatchedClient_doesNotContainClient_returnsNull() {
+        uniquePersonList.add(ALICE);
+        Person wrongAlice = new PersonBuilder().withName("Alice").build();
+        assertNull(uniquePersonList.getMatchedClient(wrongAlice));
+    }
+
+    @Test
+    public void iterator() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(AMY);
+        Iterator<Person> iterator = uniquePersonList.iterator();
+        assertEquals(iterator.next(), ALICE);
+        iterator.remove();
+        assertEquals(iterator.next(), AMY);
+        assertFalse(iterator.hasNext());
+    }
+
 }
