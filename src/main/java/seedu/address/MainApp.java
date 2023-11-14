@@ -1,11 +1,18 @@
 package seedu.address;
 
+import static seedu.address.model.util.SampleDataUtil.getSampleLocalCourseCatalogue;
+import static seedu.address.model.util.SampleDataUtil.getSampleMappingCatalogue;
+import static seedu.address.model.util.SampleDataUtil.getSampleNoteCatalogue;
+import static seedu.address.model.util.SampleDataUtil.getSamplePartnerCourseCatalogue;
+import static seedu.address.model.util.SampleDataUtil.getSampleUniversityCatalogue;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -13,38 +20,54 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.logic.SeplendidLogic;
+import seedu.address.logic.SeplendidLogicManager;
+import seedu.address.model.ReadOnlyLocalCourseCatalogue;
+import seedu.address.model.ReadOnlyMappingCatalogue;
+import seedu.address.model.ReadOnlyNoteCatalogue;
+import seedu.address.model.ReadOnlyPartnerCourseCatalogue;
+import seedu.address.model.ReadOnlyUniversityCatalogue;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.SeplendidModel;
+import seedu.address.model.SeplendidModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.seplendidui.Ui;
+import seedu.address.seplendidui.UiManager;
+import seedu.address.storage.JsonLocalCourseCatalogueStorage;
+import seedu.address.storage.JsonMappingCatalogueStorage;
+import seedu.address.storage.JsonNoteCatalogueStorage;
+import seedu.address.storage.JsonPartnerCourseCatalogueStorage;
+import seedu.address.storage.JsonUniversityCatalogueStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.LocalCourseCatalogueStorage;
+import seedu.address.storage.MappingCatalogueStorage;
+import seedu.address.storage.NoteCatalogueStorage;
+import seedu.address.storage.PartnerCourseCatalogueStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.UniversityCatalogueStorage;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
 
 /**
  * Runs the application.
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected Logic logic;
+
+    protected SeplendidLogic seplendidLogic;
+
     protected Storage storage;
-    protected Model model;
+
+    protected SeplendidModel seplendidModel;
     protected Config config;
+
+    protected Font font;
 
     @Override
     public void init() throws Exception {
@@ -57,40 +80,119 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        model = initModelManager(storage, userPrefs);
+        LocalCourseCatalogueStorage localCourseCatalogueStorage =
+                new JsonLocalCourseCatalogueStorage(userPrefs.getLocalCourseCatalogueFilePath());
+        PartnerCourseCatalogueStorage partnerCourseCatalogue =
+                new JsonPartnerCourseCatalogueStorage(userPrefs.getPartnerCourseCatalogueFilePath());
+        UniversityCatalogueStorage universityCatalogueStorage =
+                new JsonUniversityCatalogueStorage(userPrefs.getUniversityCatalogueFilePath());
+        MappingCatalogueStorage mappingCatalogueStorage =
+                new JsonMappingCatalogueStorage(userPrefs.getMappingCatalogueFilePath());
+        NoteCatalogueStorage noteCatalogueStorage =
+                new JsonNoteCatalogueStorage(userPrefs.getNoteCatalogueFilePath());
 
-        logic = new LogicManager(model, storage);
+        storage = new StorageManager(
+                userPrefsStorage,
+                localCourseCatalogueStorage,
+                partnerCourseCatalogue,
+                universityCatalogueStorage,
+                mappingCatalogueStorage,
+                noteCatalogueStorage);
 
-        ui = new UiManager(logic);
+        seplendidModel = initSeplendidModelManager(storage, userPrefs);
+        seplendidLogic = new SeplendidLogicManager(seplendidModel, storage);
+
+        ui = new UiManager(seplendidLogic);
+        seplendidLogic.setUi(ui);
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code SeplendidModelManager} with the data from {@code storage, LocalCourseCatalogue,
+     * PartnerCourseCatalogue, UniversityCatalogue, NoteCatalogue, userPrefs}.
+     * <br>
+     * Sample data will be used instead if {@code storage}'s data is not found,
+     * or an empty dataset will be used instead if errors occur when reading {@code storage}'s data.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+    private SeplendidModelManager initSeplendidModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+        // The below needs to be repeated several times for the different data types
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyLocalCourseCatalogue> localCourseCatalogueOptional;
+        Optional<ReadOnlyPartnerCourseCatalogue> partnerCourseCatalogueOptional;
+        Optional<ReadOnlyUniversityCatalogue> universityCatalogueOptional;
+        Optional<ReadOnlyMappingCatalogue> mappingCatalogueOptional;
+        Optional<ReadOnlyNoteCatalogue> noteCatalogueOptional;
+
+        ReadOnlyPartnerCourseCatalogue initialPartnerCourseCatalogue;
+        ReadOnlyLocalCourseCatalogue initialLocalCourseCatalogue;
+        ReadOnlyUniversityCatalogue initialUniversityCatalogue;
+        ReadOnlyMappingCatalogue initialMappingCatalogue;
+        ReadOnlyNoteCatalogue initialNoteCatalogue;
+
+        logger.info("Using data file : " + storage.getLocalCourseCatalogueFilePath());
+        logger.info("Using data file : " + storage.getPartnerCourseCatalogueFilePath());
+        logger.info("Using data file : " + storage.getUniversityCatalogueFilePath());
+        logger.info("Using data file : " + storage.getMappingCatalogueFilePath());
+        logger.info("Using data file : " + storage.getNoteCatalogueFilePath());
+
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
-        }
+            localCourseCatalogueOptional = storage.readLocalCourseCatalogue();
+            partnerCourseCatalogueOptional = storage.readPartnerCourseCatalogue();
+            universityCatalogueOptional = storage.readUniversityCatalogue();
+            mappingCatalogueOptional = storage.readMappingCatalogue();
+            noteCatalogueOptional = storage.readNoteCatalogue();
 
-        return new ModelManager(initialData, userPrefs);
+            if (localCourseCatalogueOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getLocalCourseCatalogueFilePath()
+                        + " populated with a sample LocalCourseCatalogue.");
+            }
+            initialLocalCourseCatalogue = localCourseCatalogueOptional.orElseGet(
+                    SampleDataUtil::getSampleLocalCourseCatalogue);
+
+            if (partnerCourseCatalogueOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getPartnerCourseCatalogueFilePath()
+                        + " populated with a sample PartnerCourseCatalogue.");
+            }
+            initialPartnerCourseCatalogue = partnerCourseCatalogueOptional.orElseGet(
+                    SampleDataUtil::getSamplePartnerCourseCatalogue);
+
+            if (universityCatalogueOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getUniversityCatalogueFilePath()
+                        + " populated with a sample UniversityCatalogue.");
+            }
+            initialUniversityCatalogue = universityCatalogueOptional.orElseGet(
+                    SampleDataUtil::getSampleUniversityCatalogue);
+
+            if (noteCatalogueOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getNoteCatalogueFilePath()
+                        + " populated with a sample NoteCatalogue.");
+            }
+            initialNoteCatalogue = noteCatalogueOptional.orElseGet(
+                    SampleDataUtil::getSampleNoteCatalogue);
+
+            if (mappingCatalogueOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getMappingCatalogueFilePath()
+                        + " populated with a sample MappingCatalogue.");
+            }
+            initialMappingCatalogue = mappingCatalogueOptional.orElseGet(
+                    SampleDataUtil::getSampleMappingCatalogue);
+        } catch (DataLoadingException e) {
+            // Defensive programming
+            logger.warning("Data file(s) could not be loaded."
+                    + " Will be starting with empty catalogues.");
+            initialLocalCourseCatalogue = getSampleLocalCourseCatalogue();
+            initialPartnerCourseCatalogue = getSamplePartnerCourseCatalogue();
+            initialUniversityCatalogue = getSampleUniversityCatalogue();
+            initialMappingCatalogue = getSampleMappingCatalogue();
+            initialNoteCatalogue = getSampleNoteCatalogue();
+        }
+        return new SeplendidModelManager(
+                userPrefs,
+                initialLocalCourseCatalogue,
+                initialPartnerCourseCatalogue,
+                initialUniversityCatalogue,
+                initialMappingCatalogue,
+                initialNoteCatalogue);
     }
 
     private void initLogging(Config config) {
@@ -117,7 +219,7 @@ public class MainApp extends Application {
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
+            if (configOptional.isEmpty()) {
                 logger.info("Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
@@ -148,7 +250,7 @@ public class MainApp extends Application {
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            if (!prefsOptional.isPresent()) {
+            if (prefsOptional.isEmpty()) {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
@@ -168,6 +270,16 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The overriding start method for MainApp class. the entry point.
+     *
+     * @param primaryStage the primary stage for this application, onto which
+     *                     the application scene can be set.
+     *                     Applications may create other stages, if needed, but they will not be
+     *                     primary stages.
+     */
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
@@ -178,7 +290,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveUserPrefs(seplendidModel.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

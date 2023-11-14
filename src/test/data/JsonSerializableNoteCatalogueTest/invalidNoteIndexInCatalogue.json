@@ -1,0 +1,27 @@
+{
+  "notes": [
+    {
+      "content": "non empty",
+      "tags": [
+        "visa",
+        "deadline"
+      ],
+      "index": -1
+    },
+    {
+      "content": "Housing Options Available: Check Your Email for Details",
+      "tags": [
+        "accommodation"
+      ],
+      "index": 4
+    },
+    {
+      "content": "Language Proficiency Test: Schedule Your Exam by 5 November 2023",
+      "tags": [
+        "test",
+        "language"
+      ],
+      "index": 7
+    }
+  ]
+}

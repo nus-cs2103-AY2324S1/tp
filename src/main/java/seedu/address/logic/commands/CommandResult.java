@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.seplendidui.UiUtil;
 
 /**
  * Represents the result of a command execution.
@@ -13,19 +14,39 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
 
     /**
+     * ListViewModel to display.
+     */
+    private final UiUtil.ListViewModel uiView;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, UiUtil.ListViewModel uiView) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.uiView = uiView;
+    }
+
+    /**
+     * This is the overloaded constructor, which defaults to LOCAL_COURSE_LIST view.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.uiView = UiUtil.ListViewModel.LOCAL_COURSE_LIST;
     }
 
     /**
@@ -33,7 +54,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, UiUtil.ListViewModel.LOCAL_COURSE_LIST);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, UiUtil.ListViewModel uiView) {
+        this(feedbackToUser, false, false, uiView);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +75,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public UiUtil.ListViewModel getUiView() {
+        return uiView;
     }
 
     @Override
@@ -76,6 +109,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("uiView", uiView)
                 .toString();
     }
 

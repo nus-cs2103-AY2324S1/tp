@@ -1,0 +1,24 @@
+{
+  "notes" : [
+    {
+      "content" : "Exchange Application Deadline: 25 September 2023",
+      "tags" : [ ],
+      "index" : 1
+    },
+    {
+      "content" : "SEP Country Choices: Canada, Australia",
+      "tags" : [ "plans" ],
+      "index" : 2
+    },
+    {
+      "content": "Reminder: Submit Health Insurance Form by 10 October 2023",
+      "tags": ["deadline"],
+      "index": 3
+    },
+    {
+      "content": "",
+      "tags": ["event"],
+      "index": 4
+    }
+  ]
+}

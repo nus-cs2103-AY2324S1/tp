@@ -1,34 +1,93 @@
 ---
-layout: page
-title: Developer Guide
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
-* Table of Contents
-{:toc}
+<bottom-head>
+    <link rel="stylesheet" href="stylesheets/userguide.css">
+</bottom-head>
 
---------------------------------------------------------------------------------------------------------------------
+# SEPlendid Developer Guide
 
-## **Acknowledgements**
+## 1. About SEPlendid
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+SEPlendid is a Course Mapping System that allows NUS Computing students to seamlessly plan for their overseas courses,
+for the highly coveted Student Exchange Programmes (SEP). As a student, you can view and find course mappings in order
+to plan for your overseas studies without the hassle of creating complex Excel sheets. Utilise SEPlendid's course
+mapping function in order to quickly find possible mappings for certain courses you want to map. Finally, SEPlendid's
+note-taking system will assist you in organising your important information you will need for planning for your courses.
 
---------------------------------------------------------------------------------------------------------------------
+<br>
 
-## **Setting up, getting started**
+---
+
+## 2. Table of Contents
+<div class= "toc">
+
+1. [About SEPlendid](#1-about-seplendid)
+2. [Table of Contents](#2-table-of-contents)
+3. [Setting up, Getting Started](#3-setting-up-getting-started)
+4. [Design](#4-design)
+   - 4.1 [Architecture](#4-1-architecture)
+   - 4.2 [UI Component](#4-2-ui-component)
+   - 4.3 [SEPlendidLogic Component](#4-3-seplendidlogic-component)
+   - 4.4 [Model Component](#4-4-model-component)
+   - 4.5 [Storage Component](#4-5-storage-component)
+   - 4.6 [Common Classes](#4-6-common-classes)
+5. [Implementation](#5-implementation)
+   - 5.1 [Parser to Handle Commands with Optional Arguments](#5-1-parser-to-handle-commands-with-optional-arguments)
+   - 5.2 [List Feature](#5-2-list-feature)
+   - 5.3 [Add Feature](#5-3-add-feature)
+   - 5.4 [Delete Feature](#5-4-delete-feature)
+   - 5.5 [Update Feature](#5-5-update-feature)
+   - 5.6 [Search Feature](#5-6-search-feature)
+   - 5.7 [Sort Feature](#5-7-sort-feature)
+   - 5.8 [Mapping Feature](#5-8-mapping-feature)
+6. [Other Helpful Guides](#6-other-helpful-guides)
+7. [Requirements](#8-requirements)
+   - 7.1 [Product Scope](#7-1-product-scope)
+   - 7.2 [User Stories](#7-2-user-stories)
+   - 7.3 [Use Cases](#7-3-use-cases)
+   - 7.4 [Non-Functional Requirements](#7-4-non-functional-requirements)
+   - 7.5 [Glossary](#7-5-glossary)
+8. [Instructions for Manual Testing](#8-instructions-for-manual-testing)
+   - 8.1 [Launch and Shutdown](#8-1-launch-and-shutdown)
+   - 8.2 [Local Course](#8-2-local-course)
+   - 8.3 [Partner Course](#8-3-partner-course)
+   - 8.4 [University](#8-4-university)
+   - 8.5 [Mapping](#8-5-mapping)
+   - 8.6 [Note](#8-6-note)
+   - 8.7 [Saving Data](#8-7-saving-data)
+9. [Planned Enhancements](#9-planned-enhancements)
+10. [Effort](#10-effort)
+    - 10.1 [Morphing of AB3 to SEPlendid](#10-1-morphing-of-ab3-to-seplendid)
+    - 10.2 [Redesigning the UI](#10-2-redesigning-the-ui)
+11. [Acknowledgements](#11-acknowledgements)
+
+</div>
+<br>
+
+---
+
+## 3. Setting up, Getting Started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+<br>
 
-## **Design**
+---
 
-<div markdown="span" class="alert alert-primary">
+## 4. Design
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
+This section highlight the design considerations for SEPlendid.
 
-### Architecture
+<br>
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+---
+
+### 4.1 Architecture
+
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -43,205 +102,447 @@ Given below is a quick overview of main components and how they interact with ea
 The bulk of the app's work is done by the following four components:
 
 * [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`SeplendidLogic`**](#logic-component): The command executor.
+* [**`SeplendidModel`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `note delete [1]`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
+  API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `SeplendidLogic` component defines its API in the `SeplendidLogic.java` interface and implements its functionality using the `SeplendidLogicManager.java` class which follows the `SeplendidLogic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
-### UI component
+<br>
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+---
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+### 4.2 UI Component
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+**API** : [`Ui.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ItemListPanel`, `ItemDetailPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/resources/seplendidview/MainWindow.fxml)
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
+* executes user commands using the `SeplendidLogic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* keeps a reference to the `SeplendidLogic` component, because the `UI` relies on the `SeplendidLogic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `LocalCourse`, `PartnerCourse`, `University`, `Mapping`, and `Note` objects residing in the `Model`.
 
-### Logic component
+<br>
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+---
 
-Here's a (partial) class diagram of the `Logic` component:
+### 4.3 SeplendidLogic Component
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+**API** : [`SeplendidLogic.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/logic/SeplendidLogic.java)
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+Here's a (partial) class diagram of the `SeplendidLogic` component:
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+The sequence diagram below illustrates the interactions within the `SeplendidLogic` component, taking `execute("note delete [1]")` API call as an example.
 
-How the `Logic` component works:
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+<box type="info" seamless>
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+**Note:** The lifeline for `NoteDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
 
-<img src="images/ParserClasses.png" width="600"/>
+How the `SeplendidLogic` component works:
+
+1. When `SeplendidLogic` is called upon to execute a command, it is passed to an `SeplendidParser` object which in turn creates a parser that matches the command (e.g., `NoteDeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `NoteDeleteCommand`) which is executed by the `SeplendidLogicManager`.
+1. The command can communicate with the `SeplendidModel` when it is executed (e.g. to delete a note).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `SeplendidLogic`.
+
+Here are the other classes in `SeplendidLogic` (omitted from the class diagram above) that are used for parsing a user command:
+
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `SeplendidParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `LocalCourseAddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `LocalCourseAddCommand`) which the `SeplendidParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `LocalCourseAddCommandParser`, `NoteDeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+<br>
 
-<img src="images/ModelClassDiagram.png" width="450" />
+---
 
+### 4.4 Model Component
 
-The `Model` component,
+**API** : [`SeplendidModel.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/model/SeplendidModel.java)
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+<puml src="diagrams/ModelClassDiagram.puml" width="100%" />
 
 
-### Storage component
+The `SeplendidModel` component,
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+* stores the local course, partner course, university, mapping and note data. `SeplendidModelManager` also serves as
+  the facade class, for other components to access the data. It stores all the data, which the UI can access to
+  display. Commands also take in the `SeplendidModel` object to perform their operations on the data.
+* stores the currently 'searched for' `LocalCourse`, `PartnerCourse`, `University`, `Mapping` objects as separate
+  filtered lists, exposed to outsiders as unmodifiable `ObservableList<LocalCourse>`, `ObservableList<PartnerCourse>`,
+  `ObservableList<University>` and `ObservableList<Mapping>` objects respectively (e.g. the UI can be bound to one of
+  these lists so that the UI automatically updates when the data in the list changes).
+* does not depend on any of the other three components (as the `SeplendidModel` represents data entities of the domain,
+  they should make sense on their own without depending on other components)
+* Local course are represented by `LocalCourse` objects, which are stored in a `UniqueLocalCourseList` object. Each
+  `LocalCourse` has `LocalCode`, `LocalName`, `LocalDescription` and `LocalUnit` objects. `PartnerCourse` follows
+  similarly, and `Mapping` depends on `LocalCode`, `PartnerCode` and `UniversityName` objects (on top of its own
+  `MappingMiscInformation`).
+* Information on `Note` model components are omitted in the above diagram for brevity.
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<br>
+
+---
+
+### 4.5 Storage Component
+
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+
+<puml src="diagrams/StorageClassDiagram.puml" width="100%" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+* can save local course, partner course, university, mapping, note data and user preference data in JSON format, and
+  read them back into corresponding objects.
+* inherits from both `LocalCourseStorage`, `PartnerCourseCatalogueStorage`, `UniversityCatalogueStorage`,
+  `MappingCatalogueStorage`, `NoteCatalogueStorage` and `UserPrefStorage`
+  , which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `SeplendidModel` component (because the `Storage` component's job is to save/retrieve
+  objects that belong to the `SeplendidModel`).
+* `NoteCatalogueStorage` and `UserPrefStorage` are omitted from the above diagram for brevity.
+
+<br>
+
+---
+
+### 4.6 Common Classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<br>
 
-## **Implementation**
+---
+
+## 5. Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+<br>
 
-#### Proposed Implementation
+---
+### 5.1 Parser to Handle Commands with Optional Arguments
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The below diagram gives a high-level overview on how the `SeplendidParser` parses a command from our command set:
+<puml src="diagrams/SeplendidParserActivityDiagram.puml" alt="SeplendidParserActivityDiagram" />
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+<br>
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+---
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+### 5.2 List Feature
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+#### Overview
+<br>
+The `list` command generates a list of SEPlendid data. The data can be in the for of a `localcourse`, `partnercourse`, 
+`university`, `mapping`, or `note`. This allows the viewing of all the data type that is listed.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+The activity diagram is as such:
+<puml src="diagrams/ListActivityDiagram.puml" width="100%" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Here is a sequence diagram for `localcourse list`:
+<puml src="diagrams/ListSequenceDiagram.puml" width="100%" />
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<br>
+<br>
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+#### Feature Details
 
-![UndoRedoState2](images/UndoRedoState2.png)
+1. The user specifies a data object with its required command word.
+2. If invalid command arguments are provided, the user will be prompted to enter the command correctly via an
+   error message.
+3. If all the above steps are completed without exceptions, then the sample data of the specific data type will be
+   displayed.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<br>
+<br>
 
-</div>
+#### Feature Considerations
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Each data type has to be specified to ensure organisation of sample data.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<br>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+---
 
-</div>
+### 5.3 Add Feature
 
-The following sequence diagram shows how the undo operation works:
+**Overview** \
+The `add` command allows for the adding of new courses, universities and notes. This allows the creation of new
+datatypes.
+### 5.3 Add Feature
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+#### Overview
+<br>
+The `add` command allows for the adding of `localcourse`, `partnercourse`, `mapping` and `notes`. This allows the 
+addition of new data into SEPlendid.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The activity diagram is as such:
+<puml src="diagrams/AddActivityDiagram.puml" width="100%" />
 
-</div>
+<br>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+Here is a sequence diagram for `note add`:
+<puml src="diagrams/NoteAddSequenceDiagram.puml" width="100%" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+Here is a sequence diagram for `partnercourse add`:
+<puml src="diagrams/PartnercourseAddSequenceDiagram.puml" width="100%" />
 
-</div>
+<br>
+<br>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+#### Feature Details
 
-![UndoRedoState4](images/UndoRedoState4.png)
+1. The user is required to fill up all the attributes require to add the data object.
+2. If not all the identity attributes are provided, the user will be prompted to enter the command correctly via an
+   error message.
+3. If the attribute is not applicable for `add`, the user will be prompted to enter the attribute correctly via an
+   error message.
+4. If there exist the same identifying attributes, SEPlendid will raise an error message to the user.
+4. If all the above steps are completed without exceptions, then the data object is successfully queried.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+<br>
+<br>
 
-![UndoRedoState5](images/UndoRedoState5.png)
+**Feature Considerations**
 
-The following activity diagram summarizes what happens when a user executes a new command:
+It should be noted that when checking for duplicates in the `UniqueLocalCourseList` and `UniquePartnerCourseList` inside
+`SEPlendidModel`, `localcourse` cannot have the same `localcode` and `partnercourse` cannot have the same `partnercode`
+and `universityname`. This is because courses have unique course codes and is specific to the university, having this
+check would also prevent confusion for users if they have mistakenly added courses that are already in the database.
+Furthermore, this would confuse the user on which is the most accurate information available as well.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<br>
 
-#### Design considerations:
+---
 
-**Aspect: How undo & redo executes:**
+### 5.4 Delete Feature
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+#### Overview
+The `delete` command deletes specified data object in SEPlendid, specified by their unique identity attributes.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+Here is an activity diagram for `delete localcourse`:
+<puml src="diagrams/DeleteActivityDiagram.puml" alt="DeleteActivityDiagram" />
 
-_{more aspects and alternatives to be added}_
+Here is a sequence diagram for `delete`:
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
-### \[Proposed\] Data archiving
+#### Feature Details
+1. The user specifies a data object with its unique identity attribute(s).
+2. If the data object is non-existent, the user will be prompted to enter the identity attributes correctly via an error message.
+3. If not all the identity attributes are provided, the user will be prompted to enter the command correctly via an error message.
+4. If all the above steps complete without any exceptions, then the data object is successfully deleted.
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Feature Considerations
+
+The data object is only deleted when all the specified identity attributes are identical to an existing data object.
+
+<br>
+
+---
+
+### 5.5 Update Feature
+#### Overview
+The `update` command updates specified attribute of a data object with updated value.
+
+Here is an activity diagram for `update localcourse`:
+<puml src="diagrams/UpdateActivityDiagram.puml" alt="UpdateActivityDiagram" />
+
+Here is a sequence diagram for `update`:
+<puml src="diagrams/UpdateSequenceDiagram.puml" alt="UpdateSequenceDiagram" />
+
+#### Feature Details
+1. The user specifies a data object with its unique identity attribute, attribute to be updated, and new value.
+2. If the data object is non-existent, the user will be prompted to enter the identity attributes correctly via an error message.
+3. If not all the identity attributes are provided, the user will be prompted to enter the command correctly via an error message.
+4. If the attribute is not applicable for `update`, the user will be prompted to enter the attribute correctly via an error message.
+5. If the updated data object exists in SEPlendid, an error is raised to inform the user.
+6. If all the above steps complete without any exceptions, then the data object is successfully updated.
+
+#### Feature Considerations
+
+The data object is only updated when all the specified identity attributes are identical to an existing data object.
+Each data type has different attributes that can be used for updating.
+
+<br>
+
+---
+
+### 5.6 Search Feature
+
+#### Overview
+
+The `search` command allows users find specific courses or universities they are interested in. This allows for faster
+querying of courses, universities and notes.
+
+The activity diagram is as such:
+<puml src="diagrams/SearchActivityDiagram.puml" width="100%" />
+
+Here is a sequence diagram for `partnercourse search`:
+<puml src="diagrams/SearchSequenceDiagram.puml" width="100%" />
+
+<br>
+<br>
+
+#### Feature Details
+
+1. The user specifies a data object with its unique identity attribute, attribute that they are querying and the
+   keyword for the query.
+2. If the data object is non-existent, the user will be prompted to enter the identity attributes correctly via an
+   error message.
+3. If not all the identity attributes are provided, the user will be prompted to enter the command correctly via an
+   error message.
+4. If the attribute is not applicable for `search`, the user will be prompted to enter the attribute correctly via an
+   error message.
+5. If all the above steps are completed without exceptions, then the data object is successfully queried.
+
+<br>
+<br>
+
+#### Feature Considerations
+The data object is only searched when all the specified identity attributes are identical to the existing data object.
+Each data type has different attributes that can be used for searching.
+
+<br>
+
+---
+
+### 5.7 Sort Feature
+#### Overview
+The `sort` command sorts specified data objects by specified attributes.
+
+Here is an activity diagram for `sort localcourse`:
+<puml src="diagrams/SortActivityDiagram.puml" alt="SortActivityDiagram" />
+
+Here is an sequence diagram for `sort`:
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+
+#### Feature Details
+1. The user specifies a data object and its attribute to sort.
+2. If the attribute is not applicable for `sort`, the user will be prompted to enter the attribute correctly via an error message.
+3. If all the above steps complete without any exceptions, then the data objects will be sorted by specified attribute.
+
+#### Feature Considerations
+
+Each data type has different attributes that can be used for sorting.
+
+<br>
+
+---
+
+### 5.8 Mapping Feature
+
+The mapping `list/add/delete` mechanism is facilitated by `MappingCatalogue`. It stores `Mapping` objects which
+contain the `LocalCode`, `UniversityName`, `PartnerCode` and `MappingMiscInformation` objects. This means that
+`Mapping` is dependent on `LocalCourse`, `University` and `PartnerCourse` classes (and their respective
+`LocalCourseCatalogue`, `UniversityCatalogue` and `PartnerCourseCatalogue`).
+
+A `UniqueMappingList` is stored internally in `MappingCatalogue`, ensuring that Additionally, it implements the
+following operations (this list is not exhaustive):
+
+* `MappingCatalogue#addMapping(Mapping)`— Adds a mapping to the mapping catalogue, and throws a
+  `DuplicateMappingException` if the mapping already exists based on the primary key (`LocalCode`, `UniversityName`,
+  `PartnerCode`).
+* `MappingCatalogue#removeMapping(Mapping)`— Removes a mapping from the mapping catalogue, and throws a
+  `MappingNotFoundException` if the mapping does not exist.
+* `MappingCatalogue#hasMapping(Mapping)`— Checks whether a mapping exists in the mapping catalogue, to use to
+* prevent duplicate insertion.
+* `MappingCatalogue#hasMappingWithLocalCode(LocalCode)`— Checks whether a mapping with the specified `LocalCode`
+  exists in the mapping catalogue, to use to prevent deleting a `LocalCourse` with such a `LocalCode`.
+* `MappingCatalogue#hasMappingWithPartnerCode(PartnerCode)`— Checks whether a mapping with the specified
+  `PartnerCode` exists in the mapping catalogue, to use to prevent deleting a `PartnerCourse` with such a `PartnerCode`.
+
+These operations are exposed in the `SeplendidModel` interface as `SeplendidModel#addMapping(Mapping)`,
+`SeplendidModel#deleteMapping(Mapping)`, `SeplendidModel#hasMapping(Mapping)`, `SeplendidModel#hasMapping(LocalCode,
+UniversityName, PartnerCode)`,`SeplendidModel#hasMappingWithLocalCode(LocalCode)` and
+`SeplendidModel#hasMappingWithPartnerCode(PartnerCode)` respectively.
+
+When the user launches the application for the first time. All relevant data catalogues: `LocalCourseCatalogue`,
+`PartnerCourseCatalogue`, `UniversityCatalogue`, `MappingCatalogue` are initialized with the initial state, containing
+the seed data for that year's SEP.
+
+Given below is an example usage scenario and how the `addMapping` mechanism works.
+
+<puml src="diagrams/MappingAddSequenceDiagram.puml" alt="MappingAddSequenceDiagram" />
+
+Before a mapping is added, the `MappingAddCommand` object will access the `SeplendidModel` instance to check if the
+respective `LocalCourse`, `PartnerCourse` and `University` exists. If any of them does not exist, the command will
+not execute `SeplendidModel#addMapping`.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, no `CommandResult` will be returned, and hence no update to the UI or
+storage files.
+
+</box>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `MappingAddCommand` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+Similarly, the `MappingDeleteCommand` object will access the `SeplendidModel` instance to check if the mapping
+exists, before deletion. Given below is an example usage scenario and how the `deleteMapping` mechanism works.
+
+<puml src="diagrams/MappingDeleteSequenceDiagram.puml" alt="MappingDeleteSequenceDiagram" />
+
+`MappingDeleteCommand` will call `SeplendidModel#getMessageIfExists` which returns an `Optional<Mapping>`. If it is
+non-empty, the deletion will be performed, otherwise a `CommandException` will be thrown.
+
+#### Design Considerations:
+
+**Aspect: How the dependency of `Mapping` on `LocalCourse`, `PartnerCourse` and `University` should be managed:**
+
+* **Alternative 1 (implemented choice):** Disallow deletion of a `LocalCourse` or `PartnerCourse` if it exists in a
+  mapping.
+    * Note that `Unviersity` entries cannot be deleted as partner universities are fixed for every SEP application
+      window.
+    * Pros: Easy to implement, prevents accidental deletion.
+    * Cons: May have to delete a large number of mappings to remove a course (no force deletion feature).
+
+* **Alternative 2:** Deleting a `LocalCourse` or `PartnerCourse` will delete all its associated mappings.
+    * Pros: Will use fewer actions to delete a course, if there exists mappings it is tied to.
+    * Cons: We must ensure that deletion cascades, in order to maintain data integrity. This can introduce bugs if not
+      done correctly.
 
 
---------------------------------------------------------------------------------------------------------------------
+<br>
 
-## **Documentation, logging, testing, configuration, dev-ops**
+---
+
+## 6. Other Helpful Guides
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -249,129 +550,1127 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+<br>
 
-## **Appendix: Requirements**
+---
 
-### Product scope
+## 7. Requirements
+
+This section highlight the requirements that were considered when creating SEPlendid.
+
+<br>
+
+---
+
+### 7.1 Product Scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+This product is for NUS Computing students who are applying for Student Exchange Programme (SEP), who prefer a
+faster and more versatile tool to access SEP-related information, compared to the current EduRec system. Seniors who
+had underwent the exchange program, or students who learn about courses through their research can also contribute
+course mappings.
+
+The following further describes our target users:
+
+* has a need to view course mappings offered by partner universities
+* is keen to contribute course mappings
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition:** \
+SEPlendid aims to provide an advanced search, allowing users to search for mappings by various attributes such
+as partner universities' course names, and NUS course codes. We aim to also include features such as the ability to
+contribute course mappings, and note-taking.
 
+<br>
 
-### User stories
+---
+
+### 7.2 User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …  | I want to …                                                           | So that I can…                                             |
+|----------|---------|-----------------------------------------------------------------------|------------------------------------------------------------|
+| `* * *`  | student | view the list of local courses offered by NUS                         | plan my study guide to map my local courses for exchange   |
+| `* * *`  | student | view the list of partner courses offered by NUS' partner universities | plan my study guide to map to partner courses for exchange |
+| `* * *`  | student | search a local course                                                 | find the local course I am interested to map               |
+| `* * *`  | student | search a partner course                                               | find the partner course I am interested to map             |
+| `* * *`  | student | search a university                                                   | find the university I am interested to exchange in         |
+| `* * *`  | student | view the list of universities                                         | see what universities I am interested in                   |
+| `* *`    | student | sort the list of local courses by coursename or coursecode            | easily review the local courses                            |
+| `* *`    | student | sort the list of partner courses by coursename or coursecode          | easily review the partner courses                          |
+| `* *`    | student | sort the list of universities alphabetically                          | easily review the universities                             |
+| `* *`    | student | delete a local course                                                 | remove local courses that can no longer be mapped          |
+| `* *`    | junior  | delete a partner course                                               | remove partner courses that can no longer be mapped        |
+| `* * *`  | student | view the list of mappings in SEPlendid                                | consider existing mappings for my exchange study plan      |
+| `* * *`  | student | add a mapping                                                         | to keep track of new mappings I discovered                 |
+| `* *`    | student | delete a mapping                                                      | remove mappings that are obsolete                          |
+| `* *`    | student | search for a mapping based on the code of the local/partner course    | find the universities offering the course based on code    |
+| `* *`    | student | search for a mapping based on the name of the local/partner course    | find the universities offering the course based on name    |
+| `* *`    | student | search for a mapping based on the name of a university                | find the courses mappings offered by a partner university  |
+| `*`      | student | sort the list of mappings based on any attribute                      | easily review the mappings                                 |
+| `* *`    | student | update a local course                                                 | update the mapping list based on new information           |
+| `* * *`  | student | add notes                                                             | take note of the things I want to remember                 |
+| `* *`    | student | view the list of my notes                                             | easily view my notes that I have taken                     |
+| `* *`    | student | delete my notes                                                       | remove my note                                             |
+| `* `     | student | update the list of my notes                                           | edit any mistakes or update new information                |
+| `* `     | student | tag my notes                                                          | to organise my notes                                       |
+| `* `     | student | search for my notes based on the tag                                  | to find my notes based on the tag                          |
+| `* `     | student | clear the tags for my notes                                           | to organise my notes based on tags                         |
 
-*{More to be added}*
+<br>
 
-### Use cases
+---
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+### 7.3 Use Cases
 
-**Use case: Delete a person**
+<box type="info" seamless>
 
-**MSS**
+For all use cases below, the **System** is the `SEPlendid` and the **Actor** is the `user`, unless specified otherwise
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+</box>
+
+#### Local Course
+
+**Use case: List local course**
+
+**MSS:**
+1. User requests to list local courses.
+2. SEPlendid shows all available local courses.
+Use case ends.
+
+**Use case: Add a local course**
+
+**MSS:**
+1. User requests to add a local course.
+2. SEPlendid adds and shows the local course.
+   Use case ends.
+
+**Extension:**
+* 1a. The command format is invalid. 
+  * 1a1. SEPlendid shows an error message. 
+  
+  Use case resumes at step 1.
+* 1b. The local course is already added.
+  * 1b1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+
+**Use case: Delete a local course**
+
+**MSS:**
+1. User requests to delete a local course.
+2. SEPlendid deletes and shows the local course deleted.
+
+Use case ends.
+
+**Extension:**
+* 1a. The command format is invalid. 
+  * 1a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+* 1b. The local course does not exist.
+  * 1b1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+
+**Use case: Sorts local course**
+
+**MSS:**
+1. User requests to sort the list of local courses.
+2. SEPlendid sorts and shows sorted list of all available local courses.
+
+Use case ends.
+
+**Extension:**
+* 1a. The command format is invalid.
+  * 1a1. SEPlendid shows an error message.
+
+  Use case resumes at step 1.
+
+#### Partner course
+**Use case: List partner course**
+
+**MSS:**
+1. User requests to list partner courses.
+2. SEPlendid shows all available partner courses.
+Use case ends.
+
+**Use case: Add a partner course**
+
+**MSS:**
+1. User requests to add a partner course.
+2. SEPlendid adds and shows the partner course.
+Use case ends.
+
+**Extension:**
+* 1a. The command format is invalid. 
+  * 1a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+* 1b. The partner course is already added. 
+  * 1b1. SEPlendid shows an error message.
+    
+  Use case resumes at step 1.
+
+**Use case: Delete a partner course**
+
+**MSS:**
+1. User requests to delete a partner course. 
+2. SEPlendid deletes and shows the partner course deleted.
+
+Use case ends.
+
+**Use case: Sorts partner course**
+
+**MSS:**
+1. User requests to sort the list of partner courses.
+2. SEPlendid sorts and shows sorted list of all available partner courses.
+
+Use case ends.
+
+**Extension:**
+* 1a. The command format is invalid.
+  * 1a1. SEPlendid shows an error message.
+
+  Use case resumes at step 1.
+    
+**Extension:**
+* 1a. The command format is invalid. 
+  * 1a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+* 1b. The partner course does not exist. 
+  * 1b1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+
+**Use case: Sorts partner course**
+
+**MSS:**
+1. User requests to sort the list of partner courses.
+2. SEPlendid sorts and shows sorted list of all available partner courses.
+
+Use case ends.
+
+**Extension:**
+* 1a. The command format is invalid.
+  * 1a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+
+
+#### Mapping
+**Use case: List mappings**
+
+**MSS:**
+1. User requests to list available mappings.
+2. SEPlendid shows all available mappings.
+   Use case ends.
+
+**Extension:**
+* 1a. Afterwards, the user can choose to bring up a detail panel of a mapping.
+    * 1a1. User clicks on a mapping item in the list.
+    * 1a2. SEPlendid shows the corresponding detail panel of the clicked-on mapping.
+      Use case ends.
+
+**Use case: Add mappings**
+
+**MSS:**
+
+1. User requests to add a mapping.
+2. SEPlendid adds and show the mappings.
+
+Use case ends.
+
+**Extension:**
+
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+      Use case resumes at step 1.
+
+* 1b. The mapping is already added.
+    * 1b1. SEPlendid shows an error message.
+      Use case resumes at step 1.
+
+* 1c. A local course or partner course specified by user for the mapping does not exist.
+    * 1c1. SEPlendid informs the user through an error message that the course does not exist.
+      Use case ends resumes at step 1.
+
+**Use case: Delete mappings**
+
+**MSS:**
+
+1. User requests to delete a mapping.
+2. SEPlendid deletes and shows the mappings deleted.
+   Use case ends.
+
+**Extension:**
+
+* 1a. The command format is invalid. 
+  * 1a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+* 1b. The mappings does not exist.
+  * 1b1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+
+**Use case: Sort mappings** \
+**MSS:**
+
+1. User requests to sort the list of mappings based on an attribute.
+2. SEPlendid sorts and shows sorted list of all available mappings, based on specified attribute. \
+   Use case ends.
+
+**Extension:**
+
+* 1a. The mapping command format is invalid.
+    * 1a1. SEPlendid shows an error message, detailing the mapping command set. \
+      Use case resumes at step 1.
+
+* 1b. The mapping attribute specified is invalid.
+    * 1b1. SEPlendid shows an error message, detailing what attributes are available for sorting. \
+      Use case resumes at step 1.
+
+* 2a. Afterwards, the user can choose to bring up a detail panel of a mapping.
+    * 2a1. User clicks on a mapping item in the list.
+    * 2a2. SEPlendid shows the corresponding detail panel of the clicked-on mapping. \
+      Use case ends.
+
+**Use case: Search mappings** \
+**MSS:**
+
+1. User requests to search the list of mappings based on an attribute, and given query.
+2. SEPlendid searches and shows sorted list of all available mappings, each which has a value for the specified
+   attribute that contains the query. \
+   Use case ends.
+
+**Extension:**
+
+* 1a. The mapping command format is invalid.
+    * 1a1. SEPlendid shows an error message, detailing the mapping command set. \
+      Use case resumes at step 1.
+
+* 1b. The mapping attribute specified is invalid.
+    * 1b1. SEPlendid shows an error message, detailing what attributes are available for sorting. \
+      Use case resumes at step 1.
+
+* 1c. The query is empty.
+    * 1c1. SEPlendid shows an error message, detailing that the mapping command format. \
+      Use case resumes at step 1.
+
+* 2a. Afterwards, the user can choose to bring up a detail panel of a mapping.
+    * 2a1. User clicks on a mapping item in the list.
+    * 2a2. SEPlendid shows the corresponding detail panel of the clicked-on mapping. \
+      Use case ends.
+
+
+#### Universities
+
+**Use case: List universities**
+
+**MSS:**
+
+1. User requests to list the universities.
+2. SEPlendid shows all available universities.
+
+Use case ends.
+
+**Use case: Search universities**
+
+**MSS:**
+
+1. User requests to search for a university.
+2. SEPlendid shows the specified university.
+
+Use case ends.
+
+**Use case: Sort universities**
+
+**MSS:**
+1. User requests to sort the list of universities.
+2. SEPlendid shows the universities sorted alphabetically.
+
+Use case ends.
+
+#### Note
+
+**Use case: Add a note**
+
+**MSS:**
+
+1. User requests to add a note.
+2. SEPlendid adds and shows the note.
+
+Use case ends.
+
+**Extension:**
+
+* 1a. The command format is invalid. 
+  * 1a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 1.
+
+**Use case: List notes**
+
+**MSS:**
+
+1. User requests to list notes.
+2. SEPlendid shows all available notes.
+
+Use case ends.
+
+**Use case: Update a note**
+
+**MSS:**
+
+1. User requests to list notes.
+2. SEPlendid shows all available notes.
+3. User requests to update a specific note in the list
+4. SEPlendid updates and shows the note.
+
+Use case ends.
+
+**Extension:**
+
+* 2a. The list is empty. 
+  Use case ends.
+
+* 3a. The command format is invalid. 
+  * 3a1. SEPlendid shows an error message.
+  
+    Use case resumes at step 2. 
+* 3b. The task does not exist. 
+  * 3b1. SEPlendid shows an error message.
+      
+  Use case resumes at step 2.
+
+**Use case: Delete a note**
+
+**MSS:**
+
+1. User requests to list notes.
+2. SEPlendid shows all available notes.
+3. User requests to delete a specific note in the list
+4. SEPlendid deletes the note.
+
+Use case ends.
+
+**Extension:**
+
+* 2a. The list is empty. 
+
+Use case ends.
+* 3a. The command format is invalid. 
+  * 3a1. SEPlendid shows an error message.
+  
+  Use case resumes at step 2. 
+* 3b. The task does not exist. 
+  * 3b1. SEPlendid shows an error message.
+  
+  Use case resumes at step 2.
+
+**Use case: Tag a note**
+
+**MSS:**
+
+1. User requests to list notes.
+2. SEPlendid shows all available notes.
+3. User requests to tag a specific note in the list
+4. SEPlendid tags and shows the note.
+
+Use case ends.
+
+**Extension:**
+
+* 2a. The list is empty. 
 
     Use case ends.
 
-**Extensions**
+* 3a. The command format is invalid. 
+  * 3a1. SEPlendid shows an error message.
 
-* 2a. The list is empty.
+  Use case resumes at step 2.
+* 3b. The task does not exist.
+  * 3b1. SEPlendid shows an error message.
+  
+  Use case resumes at step 2.
 
-  Use case ends.
+Use case: Search a note.
 
-* 3a. The given index is invalid.
+**MSS:**
+1. User requests to list notes.
+2. SEPlendid shows all available notes.
+3. User requests to filter notes based on tag.
+4. SEPlendid updates and shows the filtered notes.
 
-    * 3a1. AddressBook shows an error message.
+Use case ends.
 
-      Use case resumes at step 2.
+Extension:
+2a. The list is empty. Use case ends.
 
-*{More to be added}*
+3a. The command format is invalid.
 
-### Non-Functional Requirements
+3a1. SEPlendid shows an error message.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+Use case resumes at step 2.
 
-*{More to be added}*
+Use case: Clear tag a note.
 
-### Glossary
+**MSS:**
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+1. User requests to list notes.
+2. SEPlendid shows all available notes.
+3. User requests to clear all tags a specific note in the list
+4. SEPlendid clears all the tags and shows the note.
 
---------------------------------------------------------------------------------------------------------------------
+Use case ends.
 
-## **Appendix: Instructions for manual testing**
+Extension:
+
+2a. The list is empty.
+
+Use case ends.
+
+3a. The command format is invalid.
+
+3a1. SEPlendid shows an error message.
+Use case resumes at step 2.
+
+3b. The task does not exist.
+
+3b1. SEPlendid shows an error message.
+Use case resumes at step 2.
+
+<br>
+
+---
+
+### 7.4 Non-Functional Requirements
+
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 course mappings, along with its dependent data such as local courses, without a
+   noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The response to any use action should become visible within 5 seconds.
+5. The user interface should be intuitive enough for users who are not IT-savvy.
+6. The application should be designed to handle a growing database of course mappings and related data.
+
+<br>
+
+---
+
+### 7.5 Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Course Mapping**: A course offered by a partner university, which NUS Computing students going on exchange can
+  take, and is an equivalent course to one offered in NUS.
+* **CLI**: Command-Line Interface is a means of interacting with a computer program b inputting lines of text called
+  command-lines.
+
+<br>
+
+---
+
+## 8. Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
-### Launch and shutdown
+<br>
+
+---
+
+### 8.1 Launch and Shutdown
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample courses. The window size may not be
+       optimum.
+  1. Double-click the jar file <br>
+     Expected: Shows the GUI with a set of sample local course. The window size may not be optimum.
 
-1. Saving window preferences
+<br>
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+---
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### 8.2 Local Course
 
-1. _{ more test cases …​ }_
+#### List all local courses
 
-### Deleting a person
+Prerequisite: 
+- There is at least 1 local course stored in SEPlendid.
 
-1. Deleting a person while all persons are being shown
+`localcourse list`
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+Expected Output: All local courses stored in SEPlendid will be shown in the Item List Box.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+Expected Output in the Command Output Box: Listed all local courses
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+<box type="info" seamless>
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+**Note:** If there is no local course, the item list box will just be an empty box.
 
-1. _{ more test cases …​ }_
+</box> 
 
-### Saving data
+#### Add a local course
+
+`localcourse add [CS1111] [Test module] [4] [test]`
+
+Expected Output: The new local course will be added to the list of local courses.
+
+Expected Output in the Command Output Box: New local course added message.
+
+`localcourse add [test]`
+
+Expected Output in the Command Output Box: Error for invalid command format.
+
+#### Delete a local course
+
+Prerequisite: 
+- A local course with local code of `CS1111` currently exists in the local course list.
+- The local course specified should not be present in any of the current mappings.
+
+`localcourse delete [CS1111]`
+
+Expected Output: The local course will be deleted from the list of local courses.
+
+Expected Output in the Command Output Box: Local course deleted message.
+
+#### Update a local course
+
+Prerequisites: 
+- A local course with local code of `BT1101` currently exists in the local course list.
+
+`localcourse update [BT1101] [unit] [3]`
+
+Expected Output: The specified local course will be updated.
+
+Expected Output in the Command Output Box: Local course updated message.
+
+#### Search a local course by attributes
+
+Prerequisite:
+- There is at least 1 local course that have a localcode that contains the word `cs` stored in SEPlendid.
+
+`localcourse search [localcode] [cs]`
+
+Expected Output: A list of local courses that have a localcode of `cs`.
+
+Expected Output in the Command Output Box: Local course searched message.
+
+Prerequisite:
+- There is no local course that have a localcode that contains the letter `z` stored in SEPlendid.
+
+`localcourse search [localcode] [z]`
+
+Expected Output: No result.
+
+Expected Output in the Command Output Box: Local course searched message.
+
+<box type="info" seamless>
+
+**Note:** The query cannot start with a number. It must start with an alphabet.
+
+</box> 
+
+#### Sort local courses by attributes
+
+Prerequisite:
+- There is at least 1 local course stored in SEPlendid.
+
+`localcourse sort [localname]`
+
+Expected Output: All local courses stored in SEPlendid will be shown in the Item List Box sorted according to the localname in ascending order.
+
+Expected Output in the Command Output Box: Sorted all local courses 
+
+<box type="info" seamless>
+
+**Note:** If there is no local course, the item list box will just be an empty box.
+
+</box> 
+
+<br>
+
+---
+
+### 8.3 Partner Course
+
+#### List all partner courses
+
+Prerequisite: 
+- There is at least 1 partner course stored in SEPlendid.
+
+`partnercourse list`
+
+Expected Output: All partner courses stored in SEPlendid will be shown in the Item List Box.
+
+Expected Output in the Command Output Box: Listed all partner courses
+
+<box type="info" seamless>
+
+**Note:** If there is no partner course, the item list box will just be an empty box.
+
+</box> 
+
+#### Add a partner course
+
+Prerequisite: 
+- The university of the partner course should be added to the university list.
+
+`partnercourse add [The Hong Kong Polytechnic University] [CS1111] [Test module] [4] [test]`
+
+Expected Output: The new partner course will be added to the list of partner courses.
+
+Expected Output in the Command Output Box: New partner course added message.
+
+`partnercourse add [University of] [test]`
+
+Expected Output in the Command Output Box: Error for invalid command format.
+
+#### Delete a partner course
+
+Prerequisite: 
+- A partner course with partner code of `CS1111` and university of `The Hong Kong Polytechnic University` currently exists in the partner course list.
+- The partner course specified should not be present in any of the current mappings.
+
+`partnercourse delete [The Hong Kong Polytechnic University] [CS1111]`
+
+Expected Output: The partner course will be deleted from the list of partner courses.
+
+Expected Output in the Command Output Box: Partner course deleted message.
+
+#### Update a partner course
+
+Prerequisites:
+- A partner course with partner code of `CSE469` and university of `Arizona State University` currently exists in the partner course list.
+
+`partnercourse update [Arizona State University] [CSE469] [unit] [1]`
+
+Expected Output: The specified partner course will be updated.
+
+Expected Output in the Command Output Box: Partner course updated message.
+
+#### Search a partner course by attributes
+
+Prerequisite:
+- There is at least 1 partner course that have a partnercode that contains the word `cs` stored in SEPlendid.
+
+`partnercourse search [partnercode] [cs]`
+
+Expected Output: A list of partner courses that have a partnercode of `cs`.
+
+Expected Output in the Command Output Box: Partner course searched message.
+
+Prerequisite:
+- There is no partner course that have a partnercode that contains the letter `zz` stored in SEPlendid.
+
+`partnercourse search [partnercode] [zz]`
+
+Expected Output: No result.
+
+Expected Output in the Command Output Box: Partner course searched message.
+
+1. Prerequisites: List all mappings using the `mapping list` command. Multiple mappings in the list.
+<box type="info" seamless>
+
+1. Ensure your scroll to the bottom.
+**Note:** The query cannot start with a number. It must start with an alphabet.
+
+</box> 
+
+#### Sort partner courses by attributes
+
+1. Other incorrect delete commands to try: `mapping ad`, `mapping add []`, `...` <br>
+       Expected: An error message will appear.
+Prerequisite:
+- There is at least 1 partner course stored in SEPlendid.
+
+`partnercourse sort [university]`
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+- If any of the `.json` files found under the `data/` directory created is edited to have invalid data. SEPlendid
+  will reset to the default data, which has been programmatically added.
+- Therefore, it is recommended to make a copy and keep a backup of existing data before making any changes to any of
+  the files under `data/*.json`.
+- One corrupted file will lead to a full reset of the application.
+Expected Output: All partner courses stored in SEPlendid will be shown in the Item List Box sorted according to the university in ascending order.
 
-1. _{ more test cases …​ }_
+2. To simulate a missing/corrupted data file, delete the `data/` directory.
+
+- A new director will be created in its place, with the default seed data.
+- To corrupt the data, open any of the `.json` files under `data/` and edit the data in it. For instance, you may
+  change a `localCode` to the empty string `""`. Restart the application, and observe that the data has been reset.
+Expected Output in the Command Output Box: Sorted all partner courses
+
+<box type="info" seamless>
+
+**Note:** If there is no partner course, the item list box will just be an empty box.
+
+</box> 
+
+<br>
+
+---
+
+### 8.4 University
+
+#### List all universities
+
+Prerequisite: 
+- There is at least 1 university stored in SEPlendid.
+
+`university list`
+
+Expected Output: All universities stored in SEPlendid will be shown in the Item List Box.
+
+Expected Output in the Command Output Box: Listed all universities
+
+<box type="info" seamless>
+
+**Note:** If there is no university, the item list box will just be an empty box.
+
+</box> 
+
+#### Search a university by attributes
+
+Prerequisite:
+- There is at least 1 university that have a name that contains the word `hong kong` stored in SEPlendid.
+
+`university search [hong kong]`
+
+Expected Output: A list of universities that have a name that contains `hong kong`.
+
+Expected Output in the Command Output Box: University searched message.
+
+Prerequisite:
+- There is no university that have a name that contains the word `hk` stored in SEPlendid.
+
+`university search [hk]`
+
+Expected Output: No result.
+
+Expected Output in the Command Output Box: University searched message.
+
+#### Sort universities
+
+Prerequisite:
+- There is at least 1 university stored in SEPlendid.
+
+`university sort`
+
+Expected Output: All universities stored in SEPlendid will be shown in the Item List Box sorted according to the name in ascending order.
+
+Expected Output in the Command Output Box: Sorted all universities
+
+<box type="info" seamless>
+
+**Note:** If there is no university, the item list box will just be an empty box.
+
+</box> 
+
+<br>
+
+---
+
+### 8.5 Mapping
+
+#### List all mappings
+
+Prerequisite: 
+- There is at least 1 mapping stored in SEPlendid.
+
+`mapping list`
+
+Expected Output: All mappings stored in SEPlendid will be shown in the Item List Box.
+
+Expected Output in the Command Output Box: Listed all mappings
+
+<box type="info" seamless>
+
+**Note:** If there is no mapping, the item list box will just be an empty box.
+
+</box> 
+
+#### Add a mapping
+
+Prerequisite: 
+- The university of the partner course should be added to the university list.
+- The local course with local code specified should be added to the local course list.
+- The partner course with partner code specified should be added to the partner course list.
+
+`mapping add [CS3230] [Arizona State University] [CSE469] [mapping]`
+
+Expected Output: The new mapping will be added to the list of mappings.
+
+Expected Output in the Command Output Box: New mapping added message.
+
+`mapping add [University of] [test]`
+
+Expected Output in the Command Output Box: Error for invalid command format.
+
+#### Delete a mapping
+
+Prerequisite:
+- A mapping with local code of `CS3244`, partner code of `CSE494` and university of `Arizona State University` currently exists in the mapping list.
+
+`mapping delete [CS3244] [Arizona State University] [CSE494]`
+
+Expected Output: The mapping will be deleted from the list of mappings.
+
+Expected Output in the Command Output Box: Mapping deleted message.
+
+#### Search a mapping by attributes
+
+Prerequisite:
+- There is at least 1 mapping that have a localcode that contains the word `cs3230` stored in SEPlendid.
+
+`mapping search [localcode] [cs3230]`
+
+Expected Output: A list of mappings that have a localcode that contains the word `cs3230`.
+
+Expected Output in the Command Output Box: Mapping searched message.
+
+Prerequisite:
+- There is no mapping that have a localcode that contains the word `z` stored in SEPlendid.
+
+`mapping search [localcode] [z]`
+
+Expected Output: No result.
+
+Expected Output in the Command Output Box: Mapping searched message.
+
+#### Sort mappings by attributes
+
+Prerequisite:
+- There is at least 1 mapping stored in SEPlendid.
+
+`mapping sort [localcode]`
+
+Expected Output: All mappings stored in SEPlendid will be shown in the Item List Box sorted according to the localcode in ascending order.
+
+Expected Output in the Command Output Box: Sorted all mappings
+
+<box type="info" seamless>
+
+**Note:** If there is no mapping, the item list box will just be an empty box.
+
+</box> 
+
+<br>
+
+---
+
+### 8.6 Note
+
+#### List all notes
+
+Prerequisite: There is at least 1 note stored in SEPlendid.
+
+`note list`
+
+Expected Output: All notes stored in SEPlendid will be shown in the Item List Box.
+
+Expected Output in the Command Output Box: Listed all notes
+
+<box type="info" seamless>
+
+**Note:** If there is no note, the item list box will just be an empty box.
+
+</box> 
+
+#### Add a note
+
+`note add [This is the content of the note] [tag]`
+
+Expected Output: The new note will be added to the list of notes.
+
+Expected Output in the Command Output Box: New note added message.
+
+`note add [This note cannot be added] [test_]`
+
+Expected Output in the Command Output Box: Error for invalid command format.
+
+<box type="info" seamless>
+
+**Note:** Note tag should consist of only alphanumeric characters and should not contain any whitespaces.
+
+</box> 
+
+#### Delete a note
+
+Prerequisite:
+- A note with index 1 currently exists in the note list. 
+
+`note delete [1]`
+
+Expected Output: The note will be deleted from the list of notes.
+
+Expected Output in the Command Output Box: Note deleted message.
+
+#### Update a note
+
+Prerequisite:
+- A note with index 1 currently exists in the note list.
+
+`note update [1] [The new content]`
+
+Expected Output: The specified note will be updated.
+
+Expected Output in the Command Output Box: Note updated message.
+
+#### Tag a note
+
+Prerequisite:
+- A note with index 1 currently exists in the note list.
+
+`note tag [1] [newtag]`
+
+Expected Output: The specified note will be updated.
+
+Expected Output in the Command Output Box: Note tagged message.
+
+<box type="info" seamless>
+
+**Note:** Note tag should consist of only alphanumeric characters and should not contain any whitespaces.
+
+</box> 
+
+#### Clear tag a note
+
+Prerequisite:
+- A note with index 1 currently exists in the note list.
+
+`note cleartag [1]`
+
+Expected Output: The specified note will be updated.
+
+Expected Output in the Command Output Box: Note cleartag message.
+
+#### Search a note by tag
+
+Prerequisite:
+- There is at least 1 note that have a tag that contains the word `tag` stored in SEPlendid.
+
+`note search [tag]`
+
+Expected Output: A list of notes that have a tag that contains `tag`.
+
+Expected Output in the Command Output Box: Note searched message.
+
+Prerequisite:
+- There is no note that have a tag that contains the word `test` stored in SEPlendid.
+
+`note search [test]`
+
+Expected Output: No result.
+
+Expected Output in the Command Output Box: Note searched message.
+
+<box type="info" seamless>
+
+**Note:** The query should consist of only alphanumeric characters and should not contain any whitespaces.
+
+</box>
+
+<br>
+
+---
+
+### 8.7 Saving Data
+
+1. Dealing with missing/corrupted data files
+
+- If any of the `.json` files found under the `data/` directory created is edited to have invalid data. SEPlendid
+  will reset to the default data, which has been programmatically added.
+- Therefore, it is recommended to make a copy and keep a backup of existing data before making any changes to any of
+  the files under `data/*.json`.
+- One corrupted file will lead to a full reset of the application.
+
+2. To simulate a missing/corrupted data file, delete the `data/` directory.
+
+- A new director will be created in its place, with the default seed data.
+- To corrupt the data, open any of the `.json` files under `data/` and edit the data in it. For instance, you may
+  change a `localCode` to the empty string `""`. Restart the application, and observe that the data has been reset.
+
+<br>
+
+---
+
+## 9. Planned enhancements
+
+This section describes the planned enhancements for SEPlendid.
+
+- [ ] Add the ability to allow update of mappings, to complement the existing mapping feature. This was not prioritised
+  due to time constraints.
+- [ ] Add memory for resizing of windows. The application should remember the window size from the latest run.
+
+---
+
+## 10. Effort
+
+The implementation of SEPlendid proved to be a challenging endeavor. Below is the highlights of the extensive effort our
+team dedicated to developing SEPlendid, along with a mention of some of the challenges we encountered along the way.
+
+<br>
+
+---
+
+### 10.1 Morphing of AB3 to SEPlendid
+
+
+As mappings was the core feature of SEPlendid, we decided to morph AB3 into SEPlendid. We identified the need for
+several data types, minimally `LocalCourse`, `PartnerCourse`, `University` and `Mapping`. We also identified the
+unique identifiers for each data type, and the relationships between them. For instance, a `Mapping` object has a
+`LocalCode`, `PartnerCode` and `UniversityName` object. `LocalCode` is the unique identifier (or in database terms,
+the primary key) of `LocalCourse`, and {`PartnerCode`, `UniversityName`} is the unique identifier of `PartnerCourse`.
+As the `Mapping` object is dependent on `LocalCourse`, `PartnerCourse` and `University`, we decided to decouple
+these data storages, to avoid data redundancy and inconsistency. Initially, AB3 only offered 1 data storage, which
+is the address book and this led us to refactor a large portion of the codebase to accommodate the new data types.
+A new parser implementation was also required to handle the new command format.
+
+One challenge we encountered was the need to access model for other data, such as `LocalName` of `LocalCourse`,
+which is not part of the unique identifier, for the purpose of searching and sorting. `Mapping` did not consist of a
+`LocalName` object, as it would lead to data redundancy. This challenge was solved with passing only the method
+reference of a model method `getLocalCourseIfExists` to the comparators and predicates used. This follows for
+partner courses.
+
+A large portion of code had to be refactored to morph AB3 to SEPlendid.
+
+<br>
+
+---
+
+### 10.2 Redesigning the UI
+
+In recognising the significance of minimalism for achieving simplicity, we embarked on the task of redesigning the
+original AB3 UI into our custom SEPlendid interface. The endeavor underscored the essential balance between simplicity
+and functionality. The effort invested in the redesigning process was substantial, requiring meticulous design
+considerations. Striving to meet both aesthetic standards and high functionality, we faced a steep learning curve with
+JavaFX. Despite the initial challenges, our team persevered, overcoming obstacles and ultimately producing a UI that not
+only met our design goals but also offered a visually appealing and highly functional experience tailored to the
+requirements of a student exchange program mapping tool.
+
+<br>
+
+---
+
+## 11. Acknowledgements
+
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

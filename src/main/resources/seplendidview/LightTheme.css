@@ -1,0 +1,187 @@
+/* Scrolling */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-overflow: overlay;
+}
+
+.scroll-bar .track {
+    -fx-fill: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #CCDEF0;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.2, 0.0, 0.0);
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 2 8 2 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 2 8 2;
+}
+/**/
+
+/* List Cells */
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0 10 0 10;
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-padding: 0;
+    -fx-background-insets: 5;
+    -fx-background-radius: 15;
+    -fx-border-insets: 5;
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+    -fx-border-color: #808080;
+}
+
+.list-cell:empty {
+    -fx-background: transparent;
+    -fx-border-width: 0;
+}
+
+.list-cell:filled {
+    -fx-background-color: #CCDEF0;
+}
+
+.list-cell:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.2, 0.0, 0.0);
+}
+
+.list-cell:selected {
+    -fx-padding: 0;
+    -fx-border-color: #808080;
+    -fx-border-width: 1;
+    -fx-background-color: #B8D2EB;
+}
+
+.list-cell .label {
+    -fx-text-fill: black;
+}
+/**/
+
+/* Font Sizes */
+.title-font-size {
+    -fx-font-size: 24px;
+}
+
+.big-heading-font-size {
+    -fx-font-size: 20px;
+}
+
+.small-heading-font-size {
+    -fx-font-size: 16px;
+}
+
+.text-font-size {
+    -fx-font-size: 16px;
+}
+/**/
+
+/* Text Flow */
+.text-Flow {
+    -fx-background-color: #CCDEF0;
+}
+/**/
+
+/* Text Area */
+#resultTextArea {
+ -fx-padding: 5;
+}
+.text-area .content {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .corner {
+    -fx-background-color: transparent;
+}
+/**/
+
+/* Enter Button */
+#enterButton {
+    -fx-background-color: #CCDEF0;
+    -fx-background-insets: 0 0 0 15;
+    -fx-border-insets: 0 0 0 15;
+    -fx-border-width: 1;
+}
+
+#enterButton.content {
+    -fx-background-color: transparent;
+}
+
+#enterButton:hover {
+    -fx-background-color: #B8D2EB;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.2, 0.0, 0.0);
+}
+
+/**/
+
+.error {
+    -fx-text-fill: #FF0000 !important; /* The error class should always override the default text-fill style */
+}
+
+.primary-background-color {
+     -fx-background-color: #E0EBF6;
+}
+
+.secondary-background-color {
+    -fx-background-color: white;
+}
+
+.round-border {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+    -fx-border-color: #808080;
+}
+
+.detail-card {
+    -fx-background-color: #CCDEF0;
+    -fx-padding: 0;
+    -fx-background-radius: 15;
+    -fx-background-insets: 5;
+    -fx-border-insets: 5;
+}
+
+/*----- ----- -----  Help Window ----- ----- -----*/
+/* Copy Button */
+#copyButton {
+    -fx-background-color: #CCDEF0;
+    -fx-background-insets: 0 0 0 15;
+    -fx-border-insets: 0 0 0 15;
+    -fx-border-width: 1;
+}
+
+#copyButton.content {
+    -fx-background-color: transparent;
+}
+
+#copyButton:hover {
+    -fx-background-color: #B8D2EB;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.2, 0.0, 0.0);
+}

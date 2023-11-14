@@ -1,0 +1,29 @@
+{
+  "_comment": "LocalCourseCatalogue save file which mirrors TypicalPersons#getTypicalLocalCourseCatalogue()",
+  "localCourses": [
+    {
+      "localCode": "CS2040S",
+      "localName": "Data Structures & Algorithms",
+      "localUnit": 4.0,
+      "localDescription": "This course introduces students to the design and implementation of fundamental data structures and algorithms. The course covers basic data structures (linked lists, stacks, queues, hash tables, binary heaps, trees, and graphs), searching and sorting algorithms, and basic analysis of algorithms."
+    },
+    {
+      "localCode": "MA2001",
+      "localName": "Linear Algebra",
+      "localUnit": 4.0,
+      "localDescription": "This course is a first course in linear algebra. Fundamental concepts of linear algebra will be introduced and investigated in the context of the Euclidean spaces R^n. Proofs of results will be presented in the concrete setting. Students are expected to acquire computational facilities and geometric intuition with regard to vectors and matrices. Some applications will be presented. Major topics: Systems of linear equations, matrices, determinants, Euclidean spaces, linear combinations and linear span, subspaces, linear independence, bases and dimension, rank of a matrix, inner products, eigenvalues and eigenvectors, diagonalization, linear transformations between Euclidean spaces, applications."
+    },
+    {
+      "localCode": "CS3230",
+      "localName": "Design & Analysis of Algorithms",
+      "localUnit": 4.0,
+      "localDescription": "This course introduces different techniques of designing and analysing algorithms. Students will learn about the framework for algorithm analysis, for example, lower bound arguments, average case analysis, and the theory of NP-completeness. In addition, students are exposed to various algorithm design paradigms. The course serves two purposes: to improve the students' ability to design algorithms in different areas, and to prepare students for the study of more advanced algorithms. The course covers lower and upper bounds, recurrences, basic algorithm paradigms (such as prune-and-search, dynamic programming, branch-and-bound, graph traversal, and randomised approaches), amortized analysis, NP-completeness, and some selected advanced topics."
+    },
+    {
+      "localCode": "CS1231S",
+      "localName": "Discrete Structures",
+      "localUnit": 4.0,
+      "localDescription": "This course introduces mathematical tools required in the study of computer science. Topics include: (1) Logic and proof techniques: propositions, conditionals, quantifications. (2) Relations and Functions: Equivalence relations and partitions. Partially ordered sets. Well-Ordering Principle. Function equality. Boolean/identity/inverse functions. Bijection. (3) Mathematical formulation of data models (linear model, trees, graphs). (4) Counting and Combinatoric: Pigeonhole Principle. Inclusion-Exclusion Principle. Number of relations on a set, number of injections from one finite set to another, Diagonalization proof: An infinite countable set has an uncountable power set; Algorithmic proof: An infinite set has a countably infinite subset. Subsets of countable sets are countable."
+    }
+  ]
+}

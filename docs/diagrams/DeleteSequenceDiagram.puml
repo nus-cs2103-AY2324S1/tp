@@ -2,69 +2,75 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":LocalCourseDeleteCommandParser" as LocalCourseDeleteCommandParser LOGIC_COLOR
+participant "d:LocalCourseDeleteCommand" as LocalCourseDeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
-activate LogicManager
+[-> SeplendidLogicManager : execute("localcourse delete [CS2103]")
+activate SeplendidLogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+SeplendidLogicManager -> SeplendidParser : parseCommand("localcourse delete [CS2103]")
+activate SeplendidParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create LocalCourseDeleteCommandParser
+SeplendidParser -> LocalCourseDeleteCommandParser
+activate LocalCourseDeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+LocalCourseDeleteCommandParser --> SeplendidParser
+deactivate LocalCourseDeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+SeplendidParser -> LocalCourseDeleteCommandParser : parse("[CS2103]")
+activate LocalCourseDeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create LocalCourseDeleteCommand
+LocalCourseDeleteCommandParser -> LocalCourseDeleteCommand
+activate LocalCourseDeleteCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+LocalCourseDeleteCommand --> LocalCourseDeleteCommandParser : d
+deactivate LocalCourseDeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+LocalCourseDeleteCommandParser --> SeplendidParser : d
+deactivate LocalCourseDeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+LocalCourseDeleteCommandParser -[hidden]-> SeplendidParser
+destroy LocalCourseDeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+SeplendidLogicManager -> LocalCourseDeleteCommand : execute()
+activate LocalCourseDeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
+LocalCourseDeleteCommand -> SeplendidModel : getLocalCourseIfExists(localCode)
+activate SeplendidModel
 
-Model --> DeleteCommand
-deactivate Model
+SeplendidModel --> LocalCourseDeleteCommand : Optional.of(localCourse)
+deactivate SeplendidModel
+
+LocalCourseDeleteCommand -> SeplendidModel : deleteLocalCourse(localCourse)
+activate SeplendidModel
+
+SeplendidModel --> LocalCourseDeleteCommand
+deactivate SeplendidModel
 
 create CommandResult
-DeleteCommand -> CommandResult
+LocalCourseDeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> LocalCourseDeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+LocalCourseDeleteCommand --> SeplendidLogicManager : result
+deactivate LocalCourseDeleteCommand
 
-[<--LogicManager
-deactivate LogicManager
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
 @enduml

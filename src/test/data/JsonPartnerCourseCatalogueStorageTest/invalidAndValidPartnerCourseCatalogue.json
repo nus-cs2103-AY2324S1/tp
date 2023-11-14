@@ -1,0 +1,14 @@
+{
+  "partnerCourses" : [
+    {
+    "universityName" : "SomeUni",
+    "partnerCode" : "COMP1000",
+    "partnerName" : "Introduction to Programming"
+  },
+    {
+    "universityName" : " ",
+    "partnerCode" : "BAHBAHSHEEP!",
+    "partnerName" : " "
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+<HBox xmlns:fx="http://javafx.com/fxml/1"
+      id="mappingDetailPane"
+      fx:id="mappingDetailPane"
+      xmlns="http://javafx.com/javafx/17"
+      HBox.hgrow="ALWAYS"
+      styleClass="detail-card, round-border">
+    <VBox>
+        <padding>
+            <Insets top="17" right="25" bottom="17" left="25"/>
+        </padding>
+        <Label fx:id="title" styleClass="title-font-size"/>
+        <TextFlow fx:id="universityName" styleClass="big-heading-font-size"/>
+        <Label/>
+        <Label fx:id="localCode" styleClass="big-heading-font-size"/>
+        <TextFlow fx:id="localName" styleClass="text-font-size"/>
+        <Label fx:id="localUnit" styleClass="text-font-size"/>
+        <Label/>
+        <Label fx:id="partnerCode" styleClass="big-heading-font-size"/>
+        <TextFlow fx:id="partnerName" styleClass="text-font-size"/>
+        <Label fx:id="partnerUnit" styleClass="text-font-size"/>
+        <Label/>
+        <TextFlow fx:id="mappingMiscInformation" styleClass="text-font-size"/>
+    </VBox>
+
+</HBox>

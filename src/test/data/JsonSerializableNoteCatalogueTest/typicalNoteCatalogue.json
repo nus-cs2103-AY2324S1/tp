@@ -1,0 +1,39 @@
+{
+  "notes" : [
+    {
+      "content" : "Exchange Application Deadline: 25 September 2023",
+      "tags" : [ ],
+      "index" : 1
+    },
+    {
+      "content" : "SEP Country Choices: Canada, Australia",
+      "tags" : [ "plans" ],
+      "index" : 2
+    },
+    {
+      "content": "Reminder: Submit Health Insurance Form by 10 October 2023",
+      "tags": ["deadline"],
+      "index": 3
+    },
+    {
+      "content": "Orientation Day: 2 November 2023, Main Auditorium",
+      "tags": ["event"],
+      "index": 4
+    },
+    {
+      "content": "Important: Visa Documents Verification on 15 October 2023",
+      "tags": ["visa", "deadline"],
+      "index": 5
+    },
+    {
+      "content": "Housing Options Available: Check Your Email for Details",
+      "tags": ["accommodation"],
+      "index": 6
+    },
+    {
+      "content": "Language Proficiency Test: Schedule Your Exam by 5 November 2023",
+      "tags": ["test", "language"],
+      "index": 7
+    }
+  ]
+}

@@ -1,19 +1,31 @@
 ---
-layout: page
-title: AddressBook Level-3
+layout: default.md
+title: "Home"
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+# SEPlendid
+> Your Ultimate SEP Planning tool
 
-![Ui](images/Ui.png)
+![Ui](images/MappingListUi.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**SEPlendid is a desktop application for researching on your modules mapping, helping you plan for your upcoming 
+Student Exchange Programme (SEP).** While it 
+has a GUI, most of the 
+user 
+interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using SEPlendid, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#2-quick-start).
+* If you are interested about contributing to SEPlendid, the [**Developer Guide**](DeveloperGuide.html) is a good 
+place to start.
 
 
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
+**CI and Codecov status**
+> [![Java CI](https://github.com/AY2324S1-CS2103T-W10-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-W10-2/tp/actions/workflows/gradle.yml)
+[![MarkBind Action](https://github.com/AY2324S1-CS2103T-W10-2/tp/actions/workflows/docs.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-W10-2/tp/actions/workflows/docs.yml)
+[![pages-build-deployment](https://github.com/AY2324S1-CS2103T-W10-2/tp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/AY2324S1-CS2103T-W10-2/tp/actions/workflows/pages/pages-build-deployment)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W10-2/tp/graph/badge.svg?token=6GEPWNR01R)](https://codecov.io/gh/AY2324S1-CS2103T-W10-2/tp)
+
