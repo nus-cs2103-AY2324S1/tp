@@ -5,7 +5,6 @@ import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.pharmhub.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +16,6 @@ import seedu.pharmhub.model.allergy.Allergy;
 import seedu.pharmhub.model.person.Email;
 import seedu.pharmhub.model.person.Name;
 import seedu.pharmhub.model.person.Phone;
-import seedu.pharmhub.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindPersonCommand object
@@ -37,14 +35,13 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_ALLERGY);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_ALLERGY);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ALLERGY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ALLERGY);
 
         Name nameToFind = null;
         List<String> nameKeywords = null;
         Phone phoneToFind = null;
         Email emailToFind = null;
-        Set<Tag> tagsToFind = null;
         Set<Allergy> allergiesToFind = null;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -60,19 +57,13 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             emailToFind = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         }
 
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            String tagArg = argMultimap.getValue(PREFIX_TAG).get();
-            List<String> list = Arrays.asList(tagArg.split("\\s+"));
-            tagsToFind = ParserUtil.parseTags(list);
-        }
-
         if (argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
             String allergyArg = argMultimap.getValue(PREFIX_ALLERGY).get();
             List<String> list = Arrays.asList(allergyArg.split("\\s+"));
             allergiesToFind = ParserUtil.parseAllergies(list);
         }
 
-        if (nameToFind == null && phoneToFind == null && emailToFind == null && tagsToFind == null
+        if (nameToFind == null && phoneToFind == null && emailToFind == null
                 && allergiesToFind == null) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
@@ -80,7 +71,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
 
         return new FindPersonCommand(nameKeywords,
-                phoneToFind, emailToFind, tagsToFind, allergiesToFind
+                phoneToFind, emailToFind, allergiesToFind
         );
     }
 

@@ -32,6 +32,16 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both tags have the same tagName (case-insensitive).
+     * This defines a weaker notion of equality between two tags.
+     */
+    public boolean isSameTag(Tag otherTag) {
+        return otherTag == this // short circuit if same object
+                || otherTag != null // this is first to avoid null pointer error below
+                && otherTag.tagName.equalsIgnoreCase(tagName); // state check
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

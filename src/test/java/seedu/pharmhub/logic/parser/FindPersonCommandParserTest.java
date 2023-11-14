@@ -54,11 +54,6 @@ public class FindPersonCommandParserTest {
         List<String> nameKeywords = List.of("Alice", "Bob");
         Phone phoneToFind = new Phone("123456");
         Email emailToFind = new Email("rachel@example.com");
-        Set<Tag> tagsToFind = new HashSet<>(
-                Arrays.asList(
-                        new Tag("friends"),
-                        new Tag("owesMoney")));
-
         Set<Allergy> allergiesToFind = new HashSet<>(
                 Arrays.asList(
                         new Allergy(new Medicine("Aspirin")),
@@ -69,7 +64,6 @@ public class FindPersonCommandParserTest {
                 new FindPersonCommand(nameKeywords,
                         phoneToFind,
                         emailToFind,
-                        tagsToFind,
                         allergiesToFind);
 
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice Bob"
@@ -99,7 +93,6 @@ public class FindPersonCommandParserTest {
                 new FindPersonCommand(nameKeywords,
                         phoneToFind,
                         emailToFind,
-                        tagsToFind,
                         allergiesToFind);
 
         assertParseSuccess(parser, " " + PREFIX_PHONE + "123456"
