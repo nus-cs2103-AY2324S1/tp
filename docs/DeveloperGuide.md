@@ -2,8 +2,65 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+## Table of Contents
+<!-- TOC -->
+  * [**Acknowledgements**](#acknowledgements)
+  * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+  * [**Implementation**](#implementation)
+    * [Add feature](#add-feature)
+      * [Design considerations:](#design-considerations)
+    * [List feature](#list-feature)
+      * [Design considerations:](#design-considerations-1)
+    * [Find feature](#find-feature)
+      * [Design considerations:](#design-considerations-2)
+    * [Edit feature](#edit-feature)
+      * [Design considerations:](#design-considerations-3)
+    * [Find Free Time feature](#find-free-time-feature)
+      * [Design Considerations](#design-considerations-4)
+    * [Calculate monthly revenue](#calculate-monthly-revenue)
+      * [Design Considerations](#design-considerations-5)
+    * [Undo/redo feature](#undoredo-feature)
+      * [Design considerations:](#design-considerations-6)
+    * [Mark paid/unpaid features](#mark-paidunpaid-features)
+      * [Design considerations:](#design-considerations-7)
+  * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+  * [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [List tutee(s)](#list-tutees)
+    * [Adding a tutee](#adding-a-tutee)
+    * [Deleting a tutee](#deleting-a-tutee)
+    * [Finding a tutee](#finding-a-tutee)
+    * [Editing a tutee](#editing-a-tutee)
+    * [Find free time](#find-free-time)
+    * [Marking a tutee as paid](#marking-a-tutee-as-paid)
+    * [Marking a tutee as not paid](#marking-a-tutee-as-not-paid)
+    * [Listing all unpaid tutees](#listing-all-unpaid-tutees)
+    * [Undo command](#undo-command)
+    * [Redo command](#redo-command)
+    * [Manually editing data file](#manually-editing-data-file)
+  * [**Planned Enhancements**](#planned-enhancements)
+    * [Batch Processing for Paid Command](#batch-processing-for-paid-command)
+    * [Scheduled Unpaid Marking](#scheduled-unpaid-marking)
+    * [Find using multiple keywords](#find-using-multiple-keywords)
+    * [Maximum PayRate](#maximum-payrate)
+    * [Prevent Commands meant to Modify Tutee Data from Not Changing the Data](#prevent-commands-meant-to-modify-tutee-data-from-not-changing-the-data)
+    * [Enable Group Lessons](#enable-group-lessons)
+    * [Enhance Edit Feature](#enhance-edit-feature)
+<!-- TOC -->
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -495,7 +552,6 @@ The following sequence diagram shows how unpaidAll command works:
 
 **Value proposition**: It is tedious for tutors to keep track of multiple students and this is done conventionally through calendar applications. Simplify tutoring business with TuitionConnect. Effortlessly manage students, schedules and progress tracking while ensuring financial organization in an all in one product at a faster rate than non CLI applications.
 
-x
 
 ### User stories
 
