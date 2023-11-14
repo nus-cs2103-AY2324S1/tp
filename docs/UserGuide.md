@@ -439,17 +439,11 @@ specified above.
     List of options:
 
     * `true` - Remove contacts who have finished/haven't started the course as of the current date of your system.
-    * `false` - (default). Include contacts who have finished/haven't started taking the course
-  as of the current date.
+    * `false` - (default). Include all contacts with matching terms in the filtered list regardless of course dates.
 
 <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
 `taken` compares the dates of the course with the current date of
 your system. It does not factor in other fields like graduation year.
-</div>
-
-<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
-When `taken` is set to `false`, all contacts that have matching course names will be included in the filtered list,
-regardless of start and end date.
 </div>
 
 Example usage:
