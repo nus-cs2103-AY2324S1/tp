@@ -19,7 +19,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
  */
 public class UniqueDoctorList extends UniqueObjectList<Doctor> {
 
@@ -27,13 +26,16 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     protected final ObservableList<Doctor> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Replaces the current list of doctors with a new list provided in the {@code replacement} parameter.
+     */
     public void setDoctors(UniqueDoctorList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent doctor as the given argument.
      */
     @Override
     public boolean contains(Doctor toCheck) {
@@ -41,7 +43,7 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
     /**
-     * Returns true if the list contains the same ic as the given argument.
+     * Returns true if the list contains the same Ic as the given argument.
      */
     public boolean containsIc(Ic nric) {
         requireNonNull(nric);
@@ -49,8 +51,8 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Adds a Doctor to the list.
-     * The Doctor must not already exist in the list.
+     * Adds a doctor to the list.
+     * The doctor must not already exist in the list.
      */
     @Override
     public void add(Doctor toAdd) {
@@ -83,8 +85,8 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Removes the equivalent Doctor from the list.
-     * The Doctor must exist in the list.
+     * Removes the equivalent doctor from the list.
+     * The doctor must exist in the list.
      */
     @Override
     public void remove(Doctor toRemove) {
@@ -95,8 +97,8 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Replaces the contents of this list with {@code Doctors}.
-     * {@code Doctors} must not contain duplicate Doctors.
+     * Replaces the contents of this list with {@code doctors}.
+     * {@code doctors} must not contain duplicate doctors.
      */
     @Override
     public void setObjects(List<Doctor> doctors) {
@@ -114,7 +116,7 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Returns true if {@code Doctors} contains only unique Doctors.
+     * Returns true if {@code doctors} contains only unique doctors.
      */
     @Override
     protected boolean objectsAreUnique(List<Doctor> doctors) {

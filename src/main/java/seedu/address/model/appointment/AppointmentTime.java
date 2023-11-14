@@ -24,7 +24,7 @@ public class AppointmentTime implements Comparable<AppointmentTime> {
     /**
      * Constructs a {@code AppointmentTime}.
      *
-     * @param appointmentTime A valid ic.
+     * @param appointmentTime A valid Date and Time.
      */
     public AppointmentTime(String appointmentTime) {
         requireNonNull(appointmentTime);

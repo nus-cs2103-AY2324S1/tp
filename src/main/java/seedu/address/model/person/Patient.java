@@ -13,6 +13,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Represents a Patient in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
+ * Extends abstract class {@code Person}
  */
 public class Patient extends Person {
 
@@ -48,7 +49,7 @@ public class Patient extends Person {
     }
 
     /**
-     * Returns true if person is a doctor.
+     * Returns true if person is a {@code Doctor}.
      */
     @Override
     public boolean isDoctor() {
@@ -56,7 +57,7 @@ public class Patient extends Person {
     }
 
     /**
-     * Returns true if person is a patient.
+     * Returns true if person is a {@code Patient}.
      */
     @Override
     public boolean isPatient() {

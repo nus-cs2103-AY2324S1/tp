@@ -9,7 +9,7 @@ import seedu.address.model.person.Ic;
 /**
  * The {@code Appointment} class represents a scheduled appointment between a doctor and a patient.
  * It includes information about the doctor, patient, and the appointment time.
- * Doctor and patient ic should not be the same.
+ * Doctor and Patient ic should not be the same.
  */
 public class Appointment {
     private Ic doctorIc;
@@ -17,7 +17,7 @@ public class Appointment {
     private AppointmentTime appointmentTime;
 
     /**
-     * Constructs a new appointment with the specified doctor, patient, and appointment time.
+     * Constructs a new {@code Appointment} with the specified doctor ic, patient ic, and {@code appointmentTime}.
      *
      * @param doctorIc        The doctor involved in the appointment.
      * @param patientIc       The patient involved in the appointment.

@@ -17,7 +17,6 @@ import seedu.address.model.person.exceptions.ObjectNotFoundException;
  * A person is considered unique by comparing using {@code Appointment#equals(Appointment)} As such, adding
  * and updating of Appointments uses Appointment#equals(Appointment) for equality
  * to ensure that the person being added or updated is unique in terms of identity in the UniqueAppointmentList.
- *
  * Supports a minimal set of list operations.
  *
  */
@@ -27,6 +26,9 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     protected final ObservableList<Appointment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Replaces the current list of appointments with a new list provided in the {@code replacement} parameter.
+     */
     public void setAppointments(UniqueAppointmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -42,7 +44,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Adds an Appointment to the list.
+     * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */
     @Override
@@ -76,7 +78,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Removes the equivalent Appointment from the list.
+     * Removes the equivalent appointment from the list.
      * The appointment must exist in the list.
      */
     @Override
@@ -88,8 +90,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Replaces the contents of this list with {@code Appointments}.
-     * {@code Appointments} must not contain duplicate Appointments.
+     * Replaces the contents of this list with the provided list of {@code appointments}.
+     * {@code appointments} must not contain duplicate appointments.
      */
     @Override
     public void setObjects(List<Appointment> appointments) {

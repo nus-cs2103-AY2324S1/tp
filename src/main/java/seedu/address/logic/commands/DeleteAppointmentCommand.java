@@ -17,7 +17,8 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an Appointment identified using its displayed index from the address book.
+ * Extends the abstract class {@link Command}.
  */
 public class DeleteAppointmentCommand extends Command {
 
@@ -30,7 +31,6 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
     private static final Logger logger = LogsCenter.getLogger(DeleteAppointmentCommand.class);
-
     private final int targetIndex;
     private Appointment toDelete;
 
@@ -61,6 +61,13 @@ public class DeleteAppointmentCommand extends Command {
         }
     }
 
+    /**
+     * Finds the patient associated with the given {@code Appointment} in the model.
+     *
+     * @param model    The model containing the data.
+     * @param toDelete The Appointment to be deleted.
+     * @return The patient associated with the Appointment or null if not found.
+     */
     private Patient findPatient(Model model, Appointment toDelete) {
         Ic patientIc = toDelete.getPatient();
         List<Patient> patients = model.getFilteredPatientList();
@@ -72,6 +79,13 @@ public class DeleteAppointmentCommand extends Command {
         return null;
     }
 
+    /**
+     * Finds the doctor associated with the given {@code Appointment} in the model.
+     *
+     * @param model    The model containing the data.
+     * @param toDelete The Appointment to be deleted.
+     * @return The doctor associated with the Appointment or null if not found.
+     */
     private Doctor findDoctor(Model model, Appointment toDelete) {
         Ic doctorIc = toDelete.getDoctor();
         List<Doctor> doctors = model.getFilteredDoctorList();

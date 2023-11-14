@@ -7,7 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons and appointments in the address book to the user.
+ * Extends the abstract class {@link Command}.
  */
 public class ListCommand extends Command {
 

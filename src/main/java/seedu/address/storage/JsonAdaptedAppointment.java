@@ -9,7 +9,7 @@ import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Ic;
 
 /**
- * Jackson-friendly version of {@link Appointment}.
+ * Json-friendly version of {@link Appointment}.
  */
 class JsonAdaptedAppointment {
 
@@ -21,7 +21,7 @@ class JsonAdaptedAppointment {
     private final String appointmentTime;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
      */
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("doctorIc") String doctorIc,
@@ -33,7 +33,7 @@ class JsonAdaptedAppointment {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Appointment} into this class for Json use.
      */
     public JsonAdaptedAppointment(Appointment source) {
         doctorIc = source.getDoctor().value;
@@ -41,6 +41,12 @@ class JsonAdaptedAppointment {
         appointmentTime = source.getAppointmentTime().toString();
     }
 
+    /**
+     * Checks and validates the appointment time field for correctness.
+     *
+     * @return A valid {@code AppointmentTime} object representing the appointment time.
+     * @throws IllegalValueException If the appointment time is missing or does not meet the constraints.
+     */
     public AppointmentTime checkAppointmentTime() throws IllegalValueException {
         if (appointmentTime == null) {
             throw new IllegalValueException(
@@ -53,10 +59,10 @@ class JsonAdaptedAppointment {
     }
 
     /**
-     * Checks the ic given by storage.
+     * Checks the {@code ic} given by storage.
      *
-     * @return a valid ic
-     * @throws IllegalValueException if ic is not valid.
+     * @return a valid Ic
+     * @throws IllegalValueException if Ic is not valid.
      */
     private Ic checkIc(String ic) throws IllegalValueException {
         if (ic == null) {
@@ -69,9 +75,9 @@ class JsonAdaptedAppointment {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Json-friendly adapted Appointment object into the model's {@code Appointment} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType() throws IllegalValueException {
         //  doctorIc and patientIc should not be the same.

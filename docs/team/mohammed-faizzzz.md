@@ -24,20 +24,23 @@ Given below are my contributions to the project.
 * **New Feature**: Created a new Class Appointment to represent an Appointment between a pre-existing Doctor and Patient
   * Added `new-appt` command to add new Appointment
 * **New Feature**: Updated part of the sample data to include the new features
+* **Code Quality**: Removed Unnecessary Code and Classes to prevent confusion
+  * Removed AddCommandClass and made adjustments to code to accomodate changes
 
 * **Project management**:
   * Managed milestones and issues
   * Did Peer Reviews on other teammates' Pull Requests
   * Resolved Merge Conflicts where applicable
-
-* **Enhancements to existing features**:
-  * (to be added soon)
+  * Did Code Reviews on documentation and variable naming to ensure uniformity
 
 * **Documentation**:
   * User Guide:
     * Updated existing content to our project
     * Added the section on adding new doctors
     * Added the section on adding new appointments
+    * Added the section on Common Pitfalls
     * Proofread other sections and added the commands/sample commands to a summary table.
+  * Developer Guide:
+    * Added Use Cases 1 and 2
 
 
