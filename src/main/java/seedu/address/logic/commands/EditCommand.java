@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -21,9 +24,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.ScheduleItem;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKinName;
+import seedu.address.model.person.NextOfKinPhone;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -43,6 +50,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NOK_NAME] "
+            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NOK_PHONE] "
+            + "[" + PREFIX_FINANCIAL_PLAN + "FINANCIAL_PLAN]...\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -51,7 +61,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -99,9 +108,15 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        NextOfKinName updatedNokName = editPersonDescriptor.getNextOfKinName().orElse(personToEdit.getNextOfKinName());
+        NextOfKinPhone updatedNokPhone = editPersonDescriptor.getNextOfKinPhone()
+                .orElse(personToEdit.getNextOfKinPhone());
+        Set<FinancialPlan> updatedFinancialPlans = editPersonDescriptor.getFinancialPlans()
+                .orElse(personToEdit.getFinancialPlans());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        ScheduleItem appointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNokName,
+                updatedNokPhone, updatedFinancialPlans, updatedTags, appointment);
     }
 
     @Override
@@ -137,7 +152,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private NextOfKinName nextOfKinName;
+        private NextOfKinPhone nextOfKinPhone;
+        private Set<FinancialPlan> financialPlans;
         private Set<Tag> tags;
+        private ScheduleItem appointment;
 
         public EditPersonDescriptor() {}
 
@@ -150,6 +169,9 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setNextOfKinName(toCopy.nextOfKinName);
+            setNextOfKinPhone(toCopy.nextOfKinPhone);
+            setFinancialPlans(toCopy.financialPlans);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +179,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, nextOfKinName,
+                    nextOfKinPhone, financialPlans, tags);
         }
 
         public void setName(Name name) {
@@ -190,6 +213,47 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+        public void setNextOfKinName(NextOfKinName nokName) {
+            this.nextOfKinName = nokName;
+        }
+
+        public Optional<NextOfKinName> getNextOfKinName() {
+            return Optional.ofNullable(nextOfKinName);
+        }
+
+        public void setNextOfKinPhone(NextOfKinPhone nokPhone) {
+            this.nextOfKinPhone = nokPhone;
+        }
+
+        public Optional<NextOfKinPhone> getNextOfKinPhone() {
+            return Optional.ofNullable(nextOfKinPhone);
+        }
+
+        public void setAppointment(ScheduleItem appointment) {
+            this.appointment = appointment;
+        }
+
+        public Optional<ScheduleItem> getAppointment() {
+            return Optional.ofNullable(appointment);
+        }
+
+        /**
+         * Sets {@code financialPlans} to this object's {@code financialPlans}.
+         * A defensive copy of {@code financialPlans} is used internally.
+         */
+        public void setFinancialPlans(Set<FinancialPlan> financialPlans) {
+            this.financialPlans = (financialPlans != null) ? new HashSet<>(financialPlans) : null;
+        }
+
+        /**
+         * Returns an unmodifiable financial plan set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code financialPlans} is null.
+         */
+        public Optional<Set<FinancialPlan>> getFinancialPlans() {
+            return (financialPlans != null)
+                    ? Optional.of(Collections.unmodifiableSet(financialPlans)) : Optional.empty();
         }
 
         /**
@@ -225,6 +289,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(nextOfKinName, otherEditPersonDescriptor.nextOfKinName)
+                    && Objects.equals(nextOfKinPhone, otherEditPersonDescriptor.nextOfKinPhone)
+                    && Objects.equals(financialPlans, otherEditPersonDescriptor.financialPlans)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -235,6 +302,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("nextOfKinName", nextOfKinName)
+                    .add("nextOfKinPhone", nextOfKinPhone)
+                    .add("financialPlans", financialPlans)
                     .add("tags", tags)
                     .toString();
         }

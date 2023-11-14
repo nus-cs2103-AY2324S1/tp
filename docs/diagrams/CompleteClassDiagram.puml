@@ -1,0 +1,29 @@
+@startuml
+hide empty methods
+hide empty attributes
+hide circle
+skinparam class {
+  BackgroundColor #3333C4
+  FontColor #FFFFFF
+     FontSize 15
+}
+
+abstract class CompleteCommand {}
+
+class CompleteByDate {
+    date : LocalDateTime
+}
+
+class CompleteByIndex {
+    index : Index
+}
+
+abstract class Command {}
+
+CompleteByDate -up-|> CompleteCommand
+CompleteByIndex -up-|> CompleteCommand
+
+CompleteCommand -up-|> Command
+CompleteByDate -[hidden]left-> CompleteByIndex
+
+@enduml

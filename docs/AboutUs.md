@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Aaron Tay Kai Boon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kb-tay.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Kb-tay)]
+[[portfolio](team/kb-tay.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Testing + Debugging
 
-### Jane Doe
+### Nicholas Chia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nikele2001.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nikele2001)]
+[[portfolio](team/nikele2001.md)]
+
+* Role: Developer
+* Responsibilities: Documentation + UI
+
+### Poon Yip Hang, Ryan
+
+<img src="images/sopa301.png" width="200px">
+
+[[github](http://github.com/sopa301)] [[portfolio](team/sopa301.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Issue tracking + Documentation
 
-### Johnny Doe
+### Low Jun Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jylow.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jylow)]
+[[portfolio](team/jylow.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Quality Assurance + Testing
 
-### James Doe
+### Alyssa Png Kai Wen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alyssapng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/AlyssaPng)]
+[[portfolio](team/alyssapng.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI + Documentation

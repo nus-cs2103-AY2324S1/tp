@@ -13,9 +13,12 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,8 +35,13 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ClearWindow clearWindow;
+    private OverrideWindow overrideWindow;
+    private Appointment appointment;
+    private Person personToEdit;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane appointmentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -62,10 +73,9 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
-
         helpWindow = new HelpWindow();
+        clearWindow = new ClearWindow(this::executeCommand);
     }
 
     public Stage getPrimaryStage() {
@@ -113,6 +123,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -147,6 +160,31 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the clear window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleClear() {
+        if (!clearWindow.isShowing()) {
+            clearWindow.show();
+        } else {
+            clearWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the override window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleOverride(Appointment appointment, Person personToEdit) {
+        overrideWindow = new OverrideWindow(this::executeCommand, appointment, personToEdit);
+        if (!overrideWindow.isShowing()) {
+            overrideWindow.show();
+        } else {
+            overrideWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +198,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        clearWindow.hide();
         primaryStage.hide();
     }
 
@@ -175,22 +214,53 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
+            handleCommandResult(commandResult);
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+    /**
+     * Executes the command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#execute(Command)
+     */
+    private CommandResult executeCommand(Command command) throws CommandException {
+        try {
+            CommandResult commandResult = logic.execute(command);
+            handleCommandResult(commandResult);
+            return commandResult;
+        } catch (CommandException e) {
+            logger.info("An error occurred while executing internal command.");
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Logs command result, sends feedback to user and shows windows depending on the command result.
+     *
+     * @param commandResult Command result to handle.
+     */
+    private void handleCommandResult(CommandResult commandResult) {
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+        if (commandResult.isShowHelp()) {
+            handleHelp();
+        }
+        if (commandResult.isExit()) {
+            handleExit();
+        }
+        if (commandResult.isShowClear()) {
+            handleClear();
+        }
+        if (commandResult.isShowOverride()) {
+            this.appointment = commandResult.getAppointment();
+            this.personToEdit = commandResult.getPersonToEdit();
+            handleOverride(appointment, personToEdit);
         }
     }
 }

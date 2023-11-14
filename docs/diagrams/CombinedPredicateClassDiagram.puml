@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "<<interface>>\nPredicate<Person> " as PredicatePerson
+Class "<<interface>>\nPersonContainsKeywordsPredicate" as PersonContainsKeywordsPredicate
+CombinedPredicate .up.|> PredicatePerson
+PersonContainsKeywordsPredicate -up-|> PredicatePerson
+CombinedPredicate---> "*"PersonContainsKeywordsPredicate
+XYZContainsKeywordsPredicate .up.|> PersonContainsKeywordsPredicate
+
+
+FindCommandParser ..> CombinedPredicate : creates >
+FindCommandParser ..> FindCommand : creates >
+FindCommand-->CombinedPredicate
+@enduml

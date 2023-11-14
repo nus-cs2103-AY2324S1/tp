@@ -5,42 +5,69 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "nextOfKinName": "Alice Dad",
+    "nextOfKinPhone": "94351111",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
+    "tags" : [ "friends" ],
+    "appointment" : "No Appointment made!"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "nextOfKinName": "Benson Dad",
+    "nextOfKinPhone": "98761111",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
+    "tags" : [ "owesMoney", "friends" ],
+    "appointment" : "Review insurance, 01-05-2023 18:00"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "nextOfKinName": "Carl Dad",
+    "nextOfKinPhone": "95351111",
+    "financialPlans" : [ ],
+    "tags" : [ ],
+    "appointment" : "Review insurance, 01-05-2023 07:00"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "nextOfKinName": "Daniel Dad",
+    "nextOfKinPhone": "87651111",
+    "tags" : [ "friends" ],
+    "appointment" : "No Appointment made!"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "nextOfKinName": "Elle Dad",
+    "nextOfKinPhone": "94821113",
+    "financialPlans" : ["Sample Financial Plan 2"],
+    "tags" : [ ],
+    "appointment" : "No Appointment made!"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "nextOfKinName": "Fiona Dad",
+    "nextOfKinPhone": "94821111",
+    "financialPlans" : [ ],
+    "tags" : [ ],
+    "appointment" : "No Appointment made!"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "nextOfKinName": "George Dad",
+    "nextOfKinPhone": "94821112",
+    "financialPlans" : ["Sample Financial Plan 1", "Sample Financial Plan 2"],
+    "tags" : [ ],
+    "appointment" : "No Appointment made!"
   } ]
 }

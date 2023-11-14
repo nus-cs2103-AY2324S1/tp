@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
 
 /**
  * The API of the Model component.
@@ -79,9 +83,30 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the appointment list */
+    ObservableList<Appointment> getAppointmentList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sorts the filtered person list to sort by the given {@code comparator}.
+     * @param comparator comparator to be sorted with.
+     */
+    void sortFilteredPersonList(Comparator<Person> comparator);
+
+
+    /**
+     * Gathers the emails of person with the given prompt.
+     * @param prompt The user input for command.
+     * @return The String representation of all the gathered emails.
+     */
+    String gatherEmails(GatherEmailPrompt prompt);
+
+    void clearAppointments(LocalDate date);
+
+    boolean hasAppointmentWithDate(LocalDate date);
 }

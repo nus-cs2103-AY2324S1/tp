@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -18,14 +20,49 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    /** Confirmation for clear command should be requested. */
+    private final boolean showClear;
+    /** Confirmation for overriding command should be requested. */
+    private final boolean showOverride;
+    /** Appointment that will be replaced **/
+    private Appointment appointment = null;
+    /** Person who's appointment will be replaced **/
+    private Person personToEdit = null;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified fields, with showClear set to false.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showClear = false;
+        this.showOverride = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showClear) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showClear = showClear;
+        this.showOverride = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean exit, boolean showOverride,
+                         Person personToEdit, Appointment appointment) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.exit = exit;
+        this.showOverride = showOverride;
+        this.showClear = false;
+        this.showHelp = false;
+        this.personToEdit = requireNonNull(personToEdit);
+        this.appointment = requireNonNull(appointment);
     }
 
     /**
@@ -47,7 +84,12 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
-
+    public boolean isShowClear() {
+        return showClear;
+    }
+    public boolean isShowOverride() {
+        return showOverride;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -62,12 +104,15 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showClear == otherCommandResult.showClear
+                && appointment == otherCommandResult.appointment
+                && personToEdit == otherCommandResult.personToEdit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showClear);
     }
 
     @Override
@@ -76,7 +121,15 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showClear", showClear)
                 .toString();
     }
 
+    public Appointment getAppointment() {
+        return this.appointment;
+    }
+
+    public Person getPersonToEdit() {
+        return this.personToEdit;
+    }
 }

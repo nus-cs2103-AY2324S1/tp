@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -95,6 +97,45 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Gathers emails of persons with {@code prompt} from this {@code persons}.
+     */
+    public String gatherEmails(GatherEmailPrompt prompt) {
+        StringBuilder emails = new StringBuilder();
+
+        for (Person person : internalList) {
+            String email = prompt.gatherEmails(person);
+            if (!email.isEmpty()) {
+                emails.append(email).append("; ");
+            }
+        }
+
+        return emails.toString().trim();
+    }
+
+    /**
+     * Clears all appointments of {@code Person} in {@code persons} that match the given {@code LocalDate date}.
+     */
+    public void clearAppointments(LocalDate date) {
+        for (Person person: internalList) {
+            if (person.isSameAppointmentDate(date)) {
+                setPerson(person, person.clearAppointment());
+            }
+        }
+    }
+
+    /**
+     * Returns if any Person {@code internalList} has an Appointment matching the {@code date}.
+     */
+    public boolean hasAppointmentWithDate(LocalDate date) {
+        for (Person person : internalList) {
+            if (person.isSameAppointmentDate(date)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

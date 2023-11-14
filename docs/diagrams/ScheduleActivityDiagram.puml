@@ -1,0 +1,31 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters a schedule command;
+
+:ScheduleCommandParser parses the user input and checks validity;
+
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+switch ()
+case([the schedule command is valid])
+    : Creates a ScheduleCommand which is executed by Logic Manager;
+      switch()
+      case([person has an appointment])
+      : Prompt user to decide if they wish to override;
+       if () then ([user continues])
+       else ([user cancels])
+       stop;
+       endif;
+      case([else])
+      endswitch
+    : Updates Person in FilterPersonList to have the scheduled appointment;
+case([else])
+    : Throws an error;
+endswitch
+stop
+@enduml

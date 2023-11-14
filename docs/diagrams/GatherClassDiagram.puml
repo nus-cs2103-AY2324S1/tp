@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class GatherCommandParser
+Class GatherCommand
+Class "<<interface>>\nGatherEmailPrompt" as GatherEmailPrompt
+Class GatherEmailByFinancialPlan
+Class GatherEmailByTag
+
+GatherCommandParser .down.> GatherCommand : creates >
+GatherCommandParser .down.> GatherEmailPrompt : creates >
+GatherCommand  -right-> "1" GatherEmailPrompt
+GatherEmailByFinancialPlan .up.|>  GatherEmailPrompt
+GatherEmailByTag .up.|> GatherEmailPrompt
+@enduml

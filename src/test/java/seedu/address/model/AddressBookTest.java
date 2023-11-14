@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -18,8 +20,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByTag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -52,6 +57,36 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void gatherByFinancialPlan_noPersonFound() {
+        addressBook.addPerson(ALICE);
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan("Sample Financial Plan 3");
+        assertEquals(new String(), addressBook.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByFinancialPlan_personFound() {
+        addressBook.addPerson(ELLE);
+        FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
+        String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan(fpDescription);
+        assertEquals(ELLE.getEmail().toString() + ";", addressBook.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByTag_noPersonFound() {
+        addressBook.addPerson(ALICE);
+        GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        assertEquals(new String(), addressBook.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByTag_personFound() {
+        addressBook.addPerson(BOB);
+        GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        assertEquals(BOB.getEmail().toString() + ";", addressBook.gatherEmails(prompt));
     }
 
     @Test

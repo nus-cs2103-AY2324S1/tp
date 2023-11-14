@@ -43,7 +43,15 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Next-of-kin Name: ")
+                .append(person.getNextOfKinName())
+                .append("; Next-of-kin Phone: ")
+                .append(person.getNextOfKinPhone())
+                .append("; Appointment: ")
+                .append(person.getAppointment())
+                .append("; Financial Plans: ");
+        person.getFinancialPlans().forEach(builder::append);
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

@@ -2,19 +2,21 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
+
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
     private final UniquePersonList persons;
 
     /*
@@ -82,7 +84,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -92,6 +93,21 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Gathers the {@code persons} emails with {@code prompt} from this {@code AddressBook}.
+     */
+    public String gatherEmails(GatherEmailPrompt prompt) {
+        return persons.gatherEmails(prompt);
+    };
+
+    public void clearAppointments(LocalDate date) {
+        persons.clearAppointments(date);
+    }
+
+    public boolean hasAppointmentWithDate(LocalDate date) {
+        return persons.hasAppointmentWithDate(date);
     }
 
     //// util methods

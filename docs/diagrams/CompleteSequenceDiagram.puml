@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CompleteCommandParser" as CompleteCommandParser LOGIC_COLOR
+participant "c:CompleteByDate" as CompleteByDate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("complete d/01-01-2023")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("complete d/01-01-2023")")
+activate AddressBookParser
+
+create CompleteCommandParser
+AddressBookParser -> CompleteCommandParser
+activate CompleteCommandParser
+
+CompleteCommandParser --> AddressBookParser
+deactivate CompleteCommandParser
+
+AddressBookParser -> CompleteCommandParser : parse("d/01-01-2023")
+activate CompleteCommandParser
+
+create CompleteByDate
+CompleteCommandParser -> CompleteByDate
+activate CompleteByDate
+
+CompleteByDate --> CompleteCommandParser : c
+deactivate CompleteByDate
+
+CompleteCommandParser --> AddressBookParser : c
+deactivate CompleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CompleteCommandParser -[hidden]-> AddressBookParser
+destroy CompleteCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> CompleteByDate : execute()
+activate CompleteByDate
+
+CompleteByDate -> Model : clear appointments by date
+activate Model
+
+Model --> CompleteByDate
+deactivate Model
+
+create CommandResult
+CompleteByDate -> CommandResult
+activate CommandResult
+
+CommandResult --> CompleteByDate
+deactivate CommandResult
+
+CompleteByDate --> LogicManager : result
+deactivate CompleteByDate
+
+CompleteByDate -[hidden]-> CompleteCommandParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
