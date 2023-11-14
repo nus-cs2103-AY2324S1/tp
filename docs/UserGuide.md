@@ -3,7 +3,34 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Welcome to **EmployeeManager**! Do you need to manage employees? Are you having trouble using spreadsheets? Or does your
+organisation not have a proper employee management system? EmployeeManager is the application for you!
+
+EmployeeManager is a **desktop application** for **Human Resources (HR) staff** to **manage employees in a small or medium-sized enterprise (SME)**.
+
+Here’s an **overview** of EmployeeManager’s features:
+* Consolidate and manage employee details in a single application 
+* Find and sort employees by various attributes
+* Easily increment salary or delete many employees at once
+
+EmployeeManager is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a
+Graphical User Interface (GUI). If you can type fast, EmployeeManager can get your employee management tasks done more
+quickly than traditional GUI apps, so HR staff can be more efficient.
+
+This User Guide aims to help both new and experienced users use EmployeeManager. Learn to leverage the features of 
+EmployeeManager to make managing employees easier!
+
+If you are a **new user**:
+* Get started with EmployeeManager by going through the [Quick start](#quick-start)
+* If you have no prior experience with CLI or require a refresher, refer to this [guide](#how-to-use-command-line-interface)
+
+If you are an **experienced user**:
+* Refer to the [Table of contents](#table-of-contents) to jump to the section that you are looking for
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## Table of contents
 
 * Table of Contents
 {:toc}
@@ -12,32 +39,85 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your computer.
+   1. Open the **terminal** on your computer.
+      * **Windows**: Open Windows Search and search for "terminal".
+      * **Mac**: Open Spotlight Search and search for "terminal".
+      * **Linux**: Press `Ctrl + Alt + T`.
+   1. Type `java --version` into the terminal.
+   1. If you have java installed, it should look similar to this: <br>
+      <img src="images/JavaVersion.png" width="600" />
+   1. Check that your version starts with `11` or higher.
+   1. If you do not have Java `11` or above installed, you can download Java `11` [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `EmployeeManager.jar` from [here](https://github.com/AY2324S1-CS2103T-T14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your EmployeeManager.
+   Files required to run EmployeeManager will be created in the _home folder_.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, type the `cd FOLDER` command, substituting `FOLDER` with the folder path of the folder you put the jar file in.<br>
+   _The `cd` command changes the working directory of the terminal, allowing EmployeeManager to be launched in the next step._
+
+1. Type the `java -jar EmployeeManager.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press _Enter_ to execute it. e.g. typing `help` and pressing _Enter_ will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all employees.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add i/A00001 n/John Doe p/97328601 e/johndoe@example.com d/Marketing r/Manager s/5000` : Adds an employee named `John Doe` to EmployeeManager.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
+   * `delete 2` : Deletes the 2nd contact shown in the current list.
 
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## How to use command line interface
+
+<img src="images/CommandLineGuide.png" width="700" />
+
+1. Click on the command box.
+
+1. Type the command word.
+   * Example: `add` is the command word for adding an employee.
+
+1. Follow the command format of the command and type the prefixes and/or fields required.
+   * Refer to the [Features](#features) for the details on the command format for each command. 
+   * Example: `i/A00001 n/John Doe p/97328601 e/johndoe@example.com d/Marketing r/Manager s/5000`.
+
+1. Press enter to execute the command.
+   * `add i/A00001 n/John Doe p/97328601 e/johndoe@example.com d/Marketing r/Manager s/5000` is executed to add an employee named `John Doe`.
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## Prefix summary
+
+The prefixes are commonly used in commands such as `add`, `edit`, `find`, and `sort`.
+The table below provides a summary on the corresponding prefix for each employee's attribute.
+
+The constraint for the attributes are listed in the table below. The constraint only applies
+to the `add` and `edit` commands where the attribute value must fit the constraint for the command
+to succeed.
+
+| Prefix | Attribute   | Constraint (only applies to `add` & `edit` commands)         |
+|--------|-------------|--------------------------------------------------------------|
+| `d/`   | Department  | Alphanumeric characters and whitespaces only                 |
+| `e/`   | Email       | Valid email address format                                   |
+| `i/`   | Employee ID | Alphanumeric characters only                                 |
+| `n/`   | Name        | Alphanumeric characters and whitespaces only                 |
+| `p/`   | Phone       | Numerical with at least 3 digits                             |
+| `r/`   | Role        | Alphanumeric characters and whitespaces only                 |
+| `s/`   | Salary      | Numerical value up to 2 decimal point, and up to one billion |
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -49,10 +129,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `find [i/ID] [n/NAME] [p/PHONE] [e/EMAIL] [d/DEPARTMENT] [r/ROLE] [s/SALARY_LOWER_BOUND - SALARY_UPPER_BOUND]` can be used as `find n/John Doe` or as `find n/John Doe d/finance`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -62,88 +139,313 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to use the commands and where to look for more detailed help.
+In cases where the help window is already open but minimized, executing the `help` command will not trigger a new window popup.
 
 Format: `help`
 
+![help message](images/helpMessage.png)
+<div style="page-break-after: always;"></div>
 
-### Adding a person: `add`
+### Adding an employee: `add`
 
-Adds a person to the address book.
+Adds an employee to EmployeeManager.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add i/ID n/NAME p/PHONE e/EMAIL d/DEPARTMENT r/ROLE s/SALARY`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* If there already exists an employee with a certain ID in EmployeeManager, adding another employee with the same ID will not be allowed. 
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add i/A00001 n/John Doe p/97328601 e/johndoe@example.com d/Marketing r/Manager s/5000` Adds an employee `John Doe` into the list.
+* Adding John Doe into EmployeeManager followed by executing `add i/A00001 n/Betsy Crowe p/82517642 e/betsycrowe@example.com d/Finance r/Intern s/1200.11` will **not** add Betsy into the list.
 
-### Listing all persons : `list`
+### Listing all employees : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all employees in EmployeeManager.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing an employee : `edit`
 
-Edits an existing person in the address book.
+Edits an existing employee in EmployeeManager.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [i/ID] [n/NAME] [p/PHONE] [e/EMAIL] [d/DEPARTMENT] [r/ROLE] [s/SALARY]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
+* If there already exists an employee with a certain ID in EmployeeManager, editing another employee to the same ID will not be allowed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+
+<div style="page-break-after: always;"></div>
+<br>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+### Finding an employee by multiple attributes: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds the employees that satisfy the find requirements based on multiple attributes.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [i/KEYWORD] [n/KEYWORD [OTHER KEYWORD]] [p/KEYWORD] [e/KEYWORD [OTHER KEYWORD]] [d/KEYWORD [OTHER KEYWORD]] [r/KEYWORD [OTHER KEYWORD]] [s/LOWERBOUND - UPPERBOUND]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Find command must be used with **at least one prefix** and the keyword for the prefix **must not be empty**.
+* Find command for all attributes are **case-insensitive**. 
+* Finds employees whose attributes satisfy all the search parameters.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find i/A00 n/alex p/9001` returns employees whose ID contains `A00`, name matches the word `alex` and phone number contains `9001`.
 
-### Deleting a person : `delete`
+#### Finding an employee by name: `find n/`
 
-Deletes the specified person from the address book.
+Find employees whose name **matches** at least one of the keywords in full.
+
+Format: `find n/KEYWORD [OTHER KEYWORD]`
+
+* The order of the keywords does not matter.
+* Only **full keywords** will be matched.
+* Employees whose name **matches at least one keyword** will be returned.
+
+Examples:
+* `find n/John` return employees with names `john` and `John Doe`.
+* `find n/alex david` returns employees with names `Alex Yeoh`, `David Li`.
+<div style="page-break-after: always;"></div>
+
+#### Finding an employee by department: `find d/`
+
+Find employees whose department **matches** at least one of the keywords in full.
+
+Format: `find d/KEYWORD [OTHER KEYWORD]`
+
+* Works the same as finding an employee by name.
+
+#### Finding an employee by role: `find r/`
+
+Find employees whose role **matches** at least one of the keywords in full.
+
+Format: `find r/KEYWORD [OTHER KEYWORD]`
+
+* Works the same as finding an employee by name.
+
+#### Finding an employee by email: `find e/`
+
+Find employees whose email **contains** at least one of the keywords.
+
+Format: `find e/KEYWORD [OTHER KEYWORD]`
+
+* The order of the keywords does not matter.
+* Email will be matched if it **contains a keyword**.
+* Email **containing at least one keyword** will be returned.
+
+Examples:
+* `find e/alex bernice` returns employees with emails `alexyeoh@example.com`, `bernicetan@example.com`.
+
+#### Finding an employee by ID: `find i/`
+
+Finds employees whose ID **contains** the keyword.
+
+Format: `find i/KEYWORD`
+
+* The command will find employees whose ID contains the keyword.
+
+Examples:
+* `find i/A00` returns employees with IDs `A00`, `A00001` and `a0001`.
+<div style="page-break-after: always;"></div>
+
+#### Finding an employee by phone number: `find p/`
+
+Find employees whose phone number **contains** the keyword.
+
+Format: `find p/KEYWORD`
+
+* Works the same as finding an employee by ID.
+
+#### Finding an employee by salary: `find s/`
+
+Finds employees whose salaries **fall within** the range of LOWERBOUND to UPPERBOUND inclusive of LOWERBOUND and UPPERBOUND.
+
+Format: `find s/LOWERBOUND - UPPERBOUND`
+
+* The LOWERBOUND **cannot be larger than** the UPPERBOUND.
+* There must be a **spacing before and after the dash**
+* LOWERBOUND and UPPERBOUND must be **non-negative integers** and **cannot be larger than 1000000000**.
+
+Examples:
+* `find s/1000 - 5000` returns employees with salaries `1000.00`, `4321.10`, `5000.00`.
+
+
+### Deleting an employee : `delete`
+
+Deletes the specified employee from EmployeeManager.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in EmployeeManager.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+<div style="page-break-after: always;"></div>
 
-### Clearing all entries : `clear`
+### Sorting displayed employees : `sort`
 
-Clears all entries from the address book.
+Sorts the displayed list based on the specified employee's attribute in _ascending_ order.
+EmployeeManager will automatically re-sort the displayed list based on the last specified attribute after any command
+that updates the data. This will ensure that the list remains sorted even after modifications.
+
+Format: `sort [i/] [d/] [e/] [s/] [r/] [n/] [p/]`
+
+* **Exactly one of the prefix must be specified.**
+* The prefix specifies the attribute to be sorted with. Refer to the [Prefix summary](#prefix-summary) for help on the mapping of the attribute and prefix.
+* Attributes are sorted by _lexicographical order_. For example, "Alice" comes before "Bob",
+  and "10" comes before "20". Keep in mind uppercase letters come before lowercase letters. For example, `Z` comes before `a`.
+* Extraneous parameters entered after the prefix will be ignored. 
+  * E.g. `sort s/123` will sort by salary, the value `123` will be ignored. 
+  * E.g. `sort s/p/`, `p/` is treated as a value and not a prefix. Since the value `p/` is ignored, the command will sort by salary.
+
+Examples:
+* `sort i/` sorts the list by **ID**.
+* `sort d/` sorts the list by **department**.
+* `sort e/` sorts the list by **email**.
+* `sort s/` sorts the list by **salary**.
+* `sort r/` sorts the list by **role**.
+* `sort n/` sorts the list by **name**.
+* `sort p/` sorts the list by **phone**.
+<div style="page-break-after: always;"></div>
+
+### Incrementing multiple employees' salaries: `increment`
+
+Increments the salaries of all employees in the displayed list in EmployeeManager by the given increment.
+
+Format: `increment INCREMENT`
+* `INCREMENT` can be positive or negative.
+* `INCREMENT` is invalid if `INCREMENT` causes the salary of any employee in the displayed list to fall below 0 or exceed the maximum salary.
+Should this happen, an error message identifying the first employee whose adjusted salary falls outside the allowed range will be shown.
+* `INCREMENT` can have at most 2 decimals.
+
+Examples:
+* `increment 1000` increments the salaries of all employees in the displayed list by `1000`.
+* `increment -100.65` decrements the salaries of all employees in the displayed list by `100.65`.
+
+### Undoing a modification : `undo`
+
+  Restores EmployeeManager to the state before the last command that made a modification to the data in EmployeeManager.
+  Such commands include `add`, `delete`, `edit`, `clear`, `increment` and `redo`.
+
+  Format: `undo`
+
+  Examples:
+* `clear` followed by `undo` restores EmployeeManager to the state before `clear` was executed.
+* `delete 3` followed by `sort n/` followed by `undo` restores EmployeeManager to the state before `delete 3` was executed.
+<div style="page-break-after: always;"></div>
+
+### Redoing the previous undone command : `redo`
+
+Restores EmployeeManager to the state before the last `undo` as long as no command that made a modification to the data in EmployeeManager was executed since the last `undo`.
+Commands that change the data in EmployeeManager include `add`, `delete`, `edit`, `clear`, `increment` and `undo`.
+
+Format: `redo`
+
+Examples:
+* `clear` followed by `undo`, followed by adding `John` and then `redo` will show `No more commands to redo!`.
+* `delete 3` followed by `undo` followed by `find n/alex`, then `redo` restores EmployeeManager to the state after `delete 3` was executed.
+
+### Importing data : `import`
+
+Imports an EmployeeManager data file into the application.
+
+Format: `import FILE_PATH`
+
+* Please refer to [Specifying data file path](#specifying-data-file-path) for help on usage of `FILE_PATH`.
+* The data file must be of `.json` file type. Otherwise, an error message will be shown.
+* The file path must be valid, and the application must have permission to read from the file.
+* No changes will be made if the data file is invalid or not found.
+
+Examples:
+* `import ./persons.json` imports the `persons.json` data file from the same folder as EmployeeManager.
+<div markdown="span" class="alert alert-danger">:exclamation: **Danger:**
+The import command will **overwrite** existing data in the application. If you wish to keep a copy of the existing
+data, it is recommended to use the `export` command to save a copy of the current data.
+</div>
+<div style="page-break-after: always;"></div>
+
+#### GUI option
+Alternatively, you may use the GUI option to import the data file if you are unfamiliar with file paths.
+1. Click **File > Import** in the top left corner of the application.<br>
+   <img src="images/ug-import-gui.png" width="243" />
+
+
+2. The file explorer will open and prompt you to select the data file.
+Only `.json` files can be selected as that is the expected format of the data file. _The file explorer will look different depending on your operating system._<br>
+   <img src="images/ug-import-explorer.png" width="650" />
+
+
+3. After opening your data file, EmployeeManager will attempt to load the data into the application.
+
+<div style="page-break-after: always;"></div>
+
+### Exporting data : `export`
+
+Exports the data file in EmployeeManager to the specified path.
+
+Format: `export FILE_PATH`
+
+* Please refer to [Specifying data file path](#specifying-data-file-path) for help on usage of `FILE_PATH`.
+* The data file must be of `.json` file type. Otherwise, an error message will be shown.
+* The file path must be valid, and the application must have permission to save to the file path.
+* Depending on your system and user permission, you might not be allowed to save to certain folders such as
+`C:\Windows`. EmployeeManager will show an error message in such scenarios.
+
+Examples:
+* `export ./data.json` will create the data file in the same folder as EmployeeManager.
+
+<div markdown="span" class="alert alert-danger">:exclamation: **Danger:**
+The export command will **overwrite** any file with the same name in the specified location.
+</div>
+
+#### GUI option
+Alternatively, you may use the GUI option to export the data file if you are unfamiliar with file paths.
+1. Click File > Export in the top left corner of the application.<br>
+   <img src="images/ug-export-gui.png" />
+
+
+2. The file explorer will open and prompt you to save the data file. _The file explorer will look
+different depending on your operating system._<br>
+   <img src="images/ug-export-explorer.png" />
+
+
+3. After selecting your save location, EmployeeManager will attempt to save the data into the specified location.
+   * The file explorer will save the file as a `.json` file format.
+   * The data file can be given any _valid name_, e.g. `abc_pte_ltd.json` as shown in the image above.
+   * Valid file name is dependent on the operating system.
+
+### Viewing command history : `history`
+
+Displays up to the last `N` valid user commands that have been executed, starting from the previous command. 
+If the number of valid user commands is less than `N`, it shows all valid user commands that have been executed. 
+Do note that `history` will only show you the executed commands for this session - it resets each time you close and relaunch EmployeeManager.
+
+Format: `history N`
+* N specifies the number of most recent valid commands to be displayed, not inclusive of the current `history` command.
+* N must be a positive integer that is less than or equal to 1000.
+<div style="page-break-after: always;"></div>
+<br>
+
+Examples:
+* `history 5` displays up to the last 5 valid user commands.
+* `history 1` displays the most recent valid user command.
+* `history 10` displays up to the last 10 valid user commands. 
+If fewer than 10 commands have been executed, all available commands are shown.
+
+### Clearing multiple employees' data : `clear`
+
+Clears the current displayed list of entries from EmployeeManager.
 
 Format: `clear`
 
@@ -152,29 +454,53 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+<div style="page-break-after: always;"></div>
+
+### Specifying data file path
+The data file path used in `export` and `import` command must refer to a `.json` file. The extension `.json` is 
+also case-sensitive. Valid file paths also depends on the operating system (OS). Listed below are
+examples of different file path formats and their result.
+
+| Path                   | Description                                                                                                                                                |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `data.json`            | The file `data.json` in the same directory where `EmployeeManager.jar` is located in.                                                                      |
+| `/Documents/data.json` | The slash `/` at the front represent an absolute file path from root of the **current drive**. E.g. It might point to `C:/Documents/data.json` in Windows. |
+| `Documents/data.json`  | With no slash `/` at the front, it is a relative path from the directory where `EmployeeManager.jar` is located in.                                        |
+| `./data.json`          | A dot `.` at the front is also a relative path from the directory where `EmployeeManager.jar` is located in.                                               |
+
+* Valid files names can consist only of the extension without a name e.g. `.json`. On most systems, the file will be 
+treated as a hidden file and only visible by changing settings. It is thus not recommended to export data file without 
+a name.
+
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EmployeeManager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EmployeeManager automatically saves your data as a JSON file `[JAR file location]/data/employeemanager.json`. 
+For advanced users, you have the option to directly modify this data file to update records.
+After editing, simply restart EmployeeManager to view the updated changes.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+<div markdown="span" class="alert alert-danger">:exclamation: **Danger:**
+If your changes to the data file makes its format invalid, EmployeeManager will discard all data and start with an empty data file at the next run. 
+To safeguard against potential data loss, we recommend backing up the original data file before directly editing it. 
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q1**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and replace the default data file it creates with the data file of your previous EmployeeManager.
+
+**Q2**: Are the employees listed in the order of id or name?<br>
+**A**: No, the employees are not listed in any explicit order. Newly added employees will be placed at the end of the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -183,15 +509,35 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action        | Format, Examples                                                                                                                                                                                                                                    |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add i/ID n/NAME p/PHONE e/EMAIL d/DEPARTMENT r/ROLE s/SALARY` <br> e.g.,`add i/A00001 n/John Doe p/97328601 e/johndoe@example.com d/Marketing r/Manager s/5000`                                                                                    |
+| **Clear**     | `clear`                                                                                                                                                                                                                                             |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 2`                                                                                                                                                                                                                 |
+| **Edit**      | `edit INDEX [i/ID] [n/NAME] [p/PHONE] [e/EMAIL] [d/DEPARTMENT] [r/ROLE] [s/SALARY]`<br> e.g., `edit 1 p/91234567 e/johndoe@example.com`, `edit 2 n/Betsy Crower`                                                                                    |
+| **Exit**      | `exit`                                                                                                                                                                                                                                              |
+| **Export**    | `export FILE_PATH`<br> e.g., `export ./data.json`                                                                                                                                                                                                   |
+| **Find**      | `find [i/KEYWORD] [n/KEYWORD [OTHER KEYWORD]] [p/KEYWORD] [e/KEYWORD [OTHER KEYWORD]] [d/KEYWORD [OTHER KEYWORD]] [r/KEYWORD [OTHER KEYWORD]] [s/LOWERBOUND - UPPERBOUND]`<br> e.g., `find n/John`, `find i/A00 p/9001`, `find r/executive manager` |
+| **History**   | `history N`<br> e.g., `history 2`                                                                                                                                                                                                                   |
+| **Increment** | `increment INCREMENT`<br> e.g., `increment 1000`, `increment -100.65`                                                                                                                                                                               |
+| **Import**    | `import FILE_PATH`<br> e.g., `import ./data.json`                                                                                                                                                                                                   |
+| **List**      | `list`                                                                                                                                                                                                                                              |
+| **Redo**      | `redo`                                                                                                                                                                                                                                              |
+| **Sort**      | `sort [i/] [d/] [e/] [s/] [r/] [n/] [p/]`<br> e.g., `sort i/`, `sort n/`, `sort p/`                                                                                                                                                                 |
+| **Undo**      | `undo`                                                                                                                                                                                                                                              |
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary table
+
+| Term                  | Description                                                                                                                                                   |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**               | Stands for Command Line Interface and it is a means of interacting with a computer program by inputting lines of text called command-lines.                   |
+| **GUI**               | Stands for Graphical User Interface and it uses icons, menus and a mouse (to click on the icon or pull down the menus) to manage interaction with the system. |
+| **File Path**         | A file path is the location of a file or folder in a computer's file system. It specifies where a file is located on the computer.                            |
+| **Working Directory** | The working directory is the folder in which the user is currently operating in the command line.                                                             |
