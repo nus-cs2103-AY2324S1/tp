@@ -257,8 +257,6 @@ The `Storage` component,
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Common classes
 
 Classes used by multiple components are in the `seedu.LoveBook.commons` package.
@@ -530,6 +528,8 @@ The _Activity_ Diagram notation of the above steps is shown below.
 The _Sequence_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefSequence.puml" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design Considerations
 
