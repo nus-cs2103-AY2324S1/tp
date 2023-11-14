@@ -55,9 +55,19 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns the Dashboard
+     * Returns the Dashboard.
      */
     Dashboard getDashboard();
+
+    /**
+     * Opens the Dashboard.
+     */
+    void openDashboard();
+
+    /**
+     * Closes the Dashboard.
+     */
+    void closeDashboard();
 
     /**
      * Starts the reminder scheduler

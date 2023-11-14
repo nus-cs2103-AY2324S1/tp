@@ -36,13 +36,34 @@ public class ReminderTest {
             new Person.PersonBuilder(ALICE).withInteractions(VALID_PAST_INTERACTION_LIST).build());
 
     @Test
-    public void isAfterNow() {
-        assertTrue(VALID_FUTURE_REMINDER.isAfterNow());
-        assertTrue(!VALID_PAST_REMINDER.isAfterNow());
+    public void getName() {
+        assertEquals(ALICE.getName(), VALID_FUTURE_REMINDER.getName());
+        assertEquals(ALICE.getName(), VALID_PAST_REMINDER.getName());
+    }
+
+    @Test
+    public void getLead() {
+        assertEquals(ALICE.getLead(), VALID_FUTURE_REMINDER.getLead());
+        assertEquals(ALICE.getLead(), VALID_PAST_REMINDER.getLead());
+    }
+
+    @Test
+    public void getFollowUpDate() {
+        LocalDate futureDate = LocalDate.parse(FUTURE_VALID_DATE).plusWeeks(ALICE.getLead().getFollowUpPeriod());
+        LocalDate pastDate = LocalDate.parse(PAST_VALID_DATE).plusWeeks(ALICE.getLead().getFollowUpPeriod());
+        assertEquals(futureDate, VALID_FUTURE_REMINDER.getFollowUpDate());
+        assertEquals(pastDate, VALID_PAST_REMINDER.getFollowUpDate());
+    }
+
+    @Test
+    public void isAfterYesterday() {
+        assertTrue(VALID_FUTURE_REMINDER.isAfterYesterday());
+        assertTrue(!VALID_PAST_REMINDER.isAfterYesterday());
     }
 
     @Test
     public void compareTo() {
+        assertTrue(VALID_FUTURE_REMINDER.compareTo(VALID_FUTURE_REMINDER.getFollowUpDate()) == 0);
         assertTrue(VALID_FUTURE_REMINDER.compareTo(LocalDate.now()) == 1);
         assertTrue(VALID_PAST_REMINDER.compareTo(LocalDate.now()) == -1);
     }
