@@ -37,7 +37,7 @@ Given below are my contributions to the project.
 * **Community**:
   * PRs reviewed (with non-trivial review comments): to be added soon
   * Contributed to forum discussions to be added soon
-  * Reported bugs and suggestions for other teams in the class during the Pratical Exam Dry Run.
+  * Reported bugs and suggestions for other teams in the class during the Practical Exam Dry Run.
   * Some parts of the history feature I added was adopted by several other classmates to be added soon
 
 * **Tools**:
