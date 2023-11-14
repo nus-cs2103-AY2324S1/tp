@@ -243,7 +243,10 @@ Format: `addcust n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [c/CHARACTERISTIC]…​
 
 * `NAME` can be written with alphabets, numbers and spaces.
 * If `NAME` starts with spaces, the starting spaces will not be registered.
-* Duplicate `CHARACTERISTICS` will be omitted, e.g. entering `c/bright c/BRIGHT` will only record 1 `bright` characteristic.
+* `CHARACTERISTIC` can be written with alphabets, numbers, but not spaces.
+* Duplicate `CHARACTERISTIC` will be omitted, e.g. entering `c/bright c/BRIGHT` will only record 1 `bright` characteristic.
+* To ensure that your customer list remains neat, PropertyMatch will not allow you to add duplicate customers with the same **phone number**.
+* Only the phone number is used to differentiate between customers. i.e. Other parameters can be duplicated for different customers.
 
 </div>
 
@@ -257,15 +260,6 @@ Examples:
 
 * If you encounter an error, ensure that you have typed the command accurately with **all** the compulsory [parameters](#glossary) present. (refer to the example commands above)
 * The characteristics are optional. If it is not set, no characteristic will be recorded for that particular customer.
-</div>
-
-<div markdown="block" class="alert alert-primary">
-
-**:information_source: Note:**<br>
-
-* To ensure that your customer list remains neat, PropertyMatch will not allow you to add duplicate customers with the same **phone number**.
-* Only the phone number is used to differentiate between customers. i.e. Other parameters can be duplicated for different customers.
-
 </div>
 
 You should see the message in the [output box](#2-command-input-and-output-boxes) as below when a customer is successfully added. The new customer will be added to the bottom of your list for easy reference! <br>
@@ -292,7 +286,10 @@ Format: `addprop n/NAME a/ADDRESS p/PHONE_NUMBER pr/PRICE [c/CHARACTERISTIC]…�
 * `NAME` and `ADDRESS` can be any character, except a slash
 * If `NAME` or `ADDRESS`starts with spaces, the starting spaces will not be registered.
 * Additional spaces in `ADDRESS` will be considered as unique properties, e.g. `J'den` and `J' den` will be considered as 2 distinct properties.
-* Duplicate `CHARACTERISTICS` will be omitted, e.g. entering `c/bright c/BRIGHT` will only record 1 `bright` characteristic.
+* `CHARACTERISTIC` can be written with alphabets, numbers, but not spaces.
+* Duplicate `CHARACTERISTIC` will be omitted, e.g. entering `c/bright c/BRIGHT` will only record 1 `bright` characteristic.
+* To ensure that your property list remains neat, PropertyMatch will not allow you to add duplicate properties with the same **address**.
+* Only the address is used to differentiate between properties. i.e. Other parameters can be duplicated for different properties.
 </div>
 
 Examples:
@@ -309,8 +306,6 @@ Examples:
 
 **:information_source: Note:**<br>
 
-* To ensure that your property list remains neat, PropertyMatch will not allow you to add duplicate properties with the same **address**.
-* Only the address is used to differentiate between properties. i.e. Other parameters can be duplicated for different properties.
 
 </div>
 
