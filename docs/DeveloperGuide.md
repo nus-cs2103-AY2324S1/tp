@@ -662,7 +662,7 @@ Another implicit feature is the conversion of every field into an optional field
 
 We also expanded on the existing storage and model infrastructure to allow for the managing, interacting and tracking of the list of completed prescriptions. While we could have simply combined the completed prescription list into the same `json` as prescriptionList, we decided to put in the extra effort to separate them out, as mentioned in the design considerations section of the list completed feature. This involved adding new methods in both `Model` and `Storage` to interact with this completed prescriptions list. Apart from this, we also implemented an entirely new
 
-We also went ahead to revamp the UI of BayMeds. In our attempt to improve the aesthetics and enhance the user interactions and user experience, we created an entirely new UI. This involved
+We also went ahead to revamp the UI of BayMeds. In our attempt to improve the aesthetics and enhance the user interactions and user experience, we created an entirely new UI. Apart from making the `commandResult` box more readable, we also included fields and their identifiers in the `prescriptionCard`, organised in a neat format. Using our knowledge of the importance of colours in visual communication, we added a functionality to allow the UI to switch colours to indicate the consumption status of the prescription, using a more striking colour (red) to indicate that the prescription has yet to be consumed.
 
-
+In line with efforts to enhance the aesthetics of the UI, we also proceeded to enhance the aesthetics of documentation. We adopted a consistent and aesthetic styling through the use of colours and icons, as well as formatting to improve the documentation from the original state to the new and improved BayMeds state.
 
