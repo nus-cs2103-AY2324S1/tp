@@ -26,10 +26,10 @@ title: Developer Guide
     2. [User Stories](#user-stories)
     3. [Use Cases](#use-cases)
     4. [Non-Functional Requirements](#non-functional-requirements)
+    5. [Glossary](#glossary)
 1. [Appendix: Instruction for Manual Testing](#appendix-instructions-for-manual-testing)
 1. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 1. [Appendix: Effort](#appendix-effort)
-1. [Glossary](#glossary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -266,7 +266,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 After adding a person in PharmHub, the user would be able to edit the person using the `editp` command with the following format:
 
-`editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [no/ALLERGY]…​ [ia/]`
+`editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/ALLERGY]…​ [ia/]`
 
 The command edits the person information based on the given fields. At least one field must be updated.
 Existing values will be replaced with the new input values.
@@ -473,7 +473,7 @@ The `redo` command does the opposite — it calls `Model#redo()`, which save
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify data in PharmHub, such as `list`, will not change the `undoHistory` or `redoHistory`
+Step 5. The user then decides to execute the command `listp`. Commands that do not modify data in PharmHub, such as `listp`, will not change the `undoHistory` or `redoHistory`
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -500,7 +500,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Aspect: Effects (Scale) of undo & redo:**
   * **Alternative 1 (current choice):** Only affects data-modifying operations
       * Pros: Simple to implement, provides essential functionality
-      * Cons: Non-data-modifying commands cannot be undone, eg. `list`
+      * Cons: Non-data-modifying commands cannot be undone, eg. `listp`
 
   * **Alternative 2:** Affects all commands
       * Pros: Changes in view can be undone, leading to greater convenience. Easily extensible to undo certain views
@@ -888,6 +888,15 @@ Guarantees: The list of Orders that fulfills the status or medicine or both will
 1. Application should be smaller than 100mb so that application can be run on space constrained systems.
 1. Generated storage file shouldn't take up more than 100mb of storage so that the application can be run on space constrained systems.
 
+### Glossary
+
+#### Application
+* **Patient**: A person who is under the care of a **Pharmacist**.
+* **Pharmacist**: A person who is responsible for dispensing **Medicine** to **Patient**s.
+* **Order**: An order by a **Patient** for one or multiple **Medicine**s from a Pharmacy.
+* **Medicine**: A substance used for medical treatment.
+* **Allergy**: A Medicine that a **Patient** is allergic to.
+
 #### General
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -913,7 +922,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: The application opens. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -937,12 +946,13 @@ testers are expected to do more *exploratory* testing.
     1. `addp n/Jane Doe`
     
        Expected: An error message is displayed due to the absence of the phone number, email, and address. The person isn’t added as these details are mandatory.
-   
+    
 3. Adding a Person with Duplicate Name 
     1. Prerequisites: A person with name "John Doe" already exists in PharmHub. This can be done using the command in 1.i.
     1. Test case: `addp n/John Doe p/9872 e/anotherjohnd@example.com a/Jane street, block 42, #03-02`
     
        Expected: An error message is displayed due to the presence of a person with the same name. The person isn’t added as names must be unique.
+   
 4. Adding a Person with an allergy which is not yet in the Medicine list
    1. Prerequisites: A persons list without the person with name "John Doe". A medicine list without the medicine "Aspirin". You can run the command `clear` to clear all entries in PharmHub. 
    1. Test case: `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 no/Aspirin`
@@ -952,13 +962,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `listp` command. Multiple persons in the list.
 
     1. Test case: `deletep 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First person is deleted from the list. Details of the deleted person shown in result display box
 
     1. Test case: `deletep 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `deletep`, `deletep x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -967,7 +977,7 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person with valid index
     1. Prerequisites: There is at least 1 person in the persons list of PharmHub. This can be done using the command in 1.i. This can be checked using the command: `listp`
     1. Test case: `viewp 1`<br>
-       Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First person is shown in the details panel. Details of the person shown in the result display box.
 
     1. Test case: `viewp 0`<br>
        Expected: No person is shown. Error details shown in the status message. Status bar remains the same.
@@ -979,20 +989,20 @@ testers are expected to do more *exploratory* testing.
 1. Editing a person using valid fields
     1. Test case: `editp 1 n/John Doe p/98765432`
  
-       Expected: First contact is edited. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First person is edited. Details of the edited person shown in the result display box.
 
 ### Finding person(s)
 1. Finding person(s) using valid fields 
     1. Test case: `findp n/John`
-       Expected: First contact is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: The person(s) with the word "John" or "john" in his/her name are listed in the display list panel.
     1. Test case: `findp n/Alex John`
-       Expected: All person(s) with name containing "Alex" or "John" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with name containing "Alex", "alex", "John", or "john" are listed in the display list panel.
     1. Test case: `findp no/Aspirin Paracetamol`
-       Expected: All person(s) with allergy containing "Aspirin" or "Paracetamol" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with allergy containing "Aspirin" or "Paracetamol" are listed in the display list panel.
     1. Test case: `findp p/123456`
-       Expected: All person(s) with phone number equal to "123456" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with phone number exactly equal to "123456" are listed in the display list panel.
     1. Test case: `findp e/john@gmail.com`
-       Expected: All person(s) with email equal to "john@gmail.com" is shown in the details panel. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: All person(s) with email exactly equal to "john@gmail.com" are listed in the display list panel.
 
 2. Finding person(s) using invalid input
     1. Test case: `findp`
@@ -1004,7 +1014,7 @@ testers are expected to do more *exploratory* testing.
 ### Listing all medicines
 
 1. Test case: `listm` <br>
-   Expected: All medicines listed in the display panel. "Listed all medicines" shown in result display box.
+   Expected: All medicines listed in the display list panel. "Listed all medicines" shown in result display box.
 
 ### Finding medicine(s)
 
@@ -1249,10 +1259,3 @@ This required significant effort.
 ### **Achievements**
 Despite the steep learning curve and difficulties, we managed to build a product that we believe will be beneficial to our target audience.  
 It has features that  cater to their needs and solves their pain points.
-
-
-
-## Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others

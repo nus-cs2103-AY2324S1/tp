@@ -304,14 +304,14 @@ Finds persons whose names, phone numbers, emails, tags, and allergies match the 
 
 Format: `findp [n/KEYWORD [MORE_KEYWORDS]…] [p/PHONE_NUMBER] [e/EMAIL] [no/KEYWORD [MORE_KEYWORDS]…]`
 
-* The search for name and allergies are case-insensitive. e.g `hans` will match `Hans`
+* At least one of the parameters must be specified.
+* The search for name and allergies are case-insensitive. e.g `hans` will match `Hans`, `paracetamol` will match `Paracetamol`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * The search for phone number and email are case-sensitive and must be an exact match.
   e.g. `9123456` will not match `91234567` and `johndoe@example` does not match `johndoe@example.com`
-* At least one of the parameters must be specified.
 
 Examples:
 * `findp n/Alex david` returns `Alex Yeoh`, `David Li`<br>
@@ -600,7 +600,7 @@ Jump to [TOC](#table-of-contents-toc)
 | **List People**           | `listp`                                                                                       | `listp`                                                                                                        |
 | **Find Person**           | `findp [n/KEYWORD [MORE_KEYWORDS]…] [p/PHONE_NUMBER] [e/EMAIL] [no/KEYWORD [MORE_KEYWORDS]…]` | `findp n/James Jake`                                                                                           |
 | **View Person**           | `viewp INDEX`                                                                                 | `viewp 1`                                                                                                      |
-| **Edit Person**           | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [no/allergy]…​`          | `editp 2 n/James Lee e/jameslee@example.com`                                                                   |
+| **Edit Person**           | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/allergy]…​`         | `editp 2 n/James Lee e/jameslee@example.com`                                                                   |
 | **Delete Person**         | `deletep INDEX`                                                                               | `deletep 3`                                                                                                    |
 | **Add Order**             | `addo INDEX o/ORDER_NUMBER m/MEDICINE_NAME [m/MEDICINE_NAME]…`                                | `addo 3 o/438756 m/claritin`                                                                                   |
 | **List Orders**           | `listo`                                                                                       | `listo`                                                                                                        |
