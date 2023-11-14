@@ -154,6 +154,8 @@ wishes to filter, based on input.
 
 <img src="images/FilterCommandFindParseCommand.png" width="1200"/>
 
+The full implementation of `FilterCommandParser` can be found in the [Filter Command Implementation.](#filter-contact-list)
+
 <!-- @@author -->
 
 <!-- @@author nknguyenhc -->
