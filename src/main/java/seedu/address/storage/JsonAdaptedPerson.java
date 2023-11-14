@@ -15,6 +15,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredContact;
+import seedu.address.model.person.PreferredMeetingRegion;
+import seedu.address.model.policy.Policy;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +32,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String preferredContact;
+    private final String preferredMeetingRegion;
+    private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +42,21 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("preferredContact") String preferredContact,
+            @JsonProperty("preferredMeetingRegion") String preferredMeetingRegion,
+            @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.preferredContact = preferredContact;
+        this.preferredMeetingRegion = preferredMeetingRegion;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (policies != null) {
+            this.policies.addAll(policies);
         }
     }
 
@@ -57,12 +71,19 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        preferredContact = source.getPreferredContact().value;
+        preferredMeetingRegion = source.getPreferredMeetingRegion().value;
+        policies.addAll(source.getPolicies().stream()
+                .map(JsonAdaptedPolicy::new)
+                .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -103,7 +124,38 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (preferredContact == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PreferredContact.class.getSimpleName()));
+        }
+
+        if (!PreferredContact.isValidPreferredContact(preferredContact)) {
+            throw new IllegalValueException(PreferredContact.MESSAGE_CONSTRAINTS);
+        }
+        final PreferredContact modelPreferredContact = new PreferredContact(preferredContact);
+
+        if (preferredMeetingRegion == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PreferredMeetingRegion.class.getSimpleName()));
+        }
+
+        if (!PreferredMeetingRegion.isValidPreferredMeetingRegion(preferredMeetingRegion)) {
+            throw new IllegalValueException(PreferredMeetingRegion.MESSAGE_CONSTRAINTS);
+        }
+
+        final PreferredMeetingRegion modelPreferredMeetingRegion = new PreferredMeetingRegion(preferredMeetingRegion);
+
+        final List<Policy> personPolicies = new ArrayList<>();
+
+        for (JsonAdaptedPolicy policy : policies) {
+            personPolicies.add(policy.toModelType());
+        }
+
+        final Set<Policy> modelPolicies = new HashSet<>(personPolicies);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPreferredMeetingRegion,
+                modelPreferredContact, modelPolicies);
     }
 
 }

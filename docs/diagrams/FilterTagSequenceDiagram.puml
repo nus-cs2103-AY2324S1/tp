@@ -1,0 +1,60 @@
+@@author LuahJunYang
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "f :FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[->LogicManager : execute(filter t/Friend)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(filter t/Friend)
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser:
+activate FilterCommandParser
+
+FilterCommandParser --> AddressBookParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser : parse(t/Friend)
+activate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser: f
+deactivate FilterCommand
+
+FilterCommandParser --> AddressBookParser: f
+deactivate FilterCommandParser
+'Hidden arrow to position the destroy marker below the activation arrow'
+FilterCommandParser -[hidden]-> AddressBookParser
+destroy FilterCommandParser
+
+AddressBookParser --> LogicManager: f
+deactivate AddressBookParser
+
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+FilterCommand -> Model : updateFilteredPerson(Predicate)
+activate Model
+Model -> Model : getFilteredPersonList()
+Model --> FilterCommand
+deactivate Model
+LogicManager <- FilterCommand: result
+deactivate FilterCommand
+@enduml

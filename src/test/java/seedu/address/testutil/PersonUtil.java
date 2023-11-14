@@ -4,6 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERRED_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERRED_MEETING_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -35,13 +37,15 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+                s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        sb.append(person.getPreferredContact().value + " ");
+        sb.append(PREFIX_PREFERRED_MEETING_REGION + person.getPreferredMeetingRegion().value + " ");
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given
+     * {@code EditPersonDescriptor}'s details.
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
@@ -57,6 +61,10 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getPreferredContact().ifPresent(
+                preferredContact -> sb.append(PREFIX_PREFERRED_CONTACT).append(preferredContact.value).append(" "));
+        descriptor.getPreferredMeetingRegion().ifPresent(preferredMeetingRegion -> sb
+                .append(PREFIX_PREFERRED_MEETING_REGION).append(preferredMeetingRegion.value).append(" "));
         return sb.toString();
     }
 }

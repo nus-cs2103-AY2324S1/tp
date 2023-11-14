@@ -1,16 +1,19 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.storage.PasswordManager;
 
 /**
  * The manager of the UI component.
@@ -25,6 +28,8 @@ public class UiManager implements Ui {
     private Logic logic;
     private MainWindow mainWindow;
 
+    private PasswordManager passwordManager;
+
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
@@ -38,15 +43,43 @@ public class UiManager implements Ui {
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
-
-        try {
-            mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
-
-        } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
-            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+        passwordManager = new PasswordManager();
+        String password = passwordManager.getPassword();
+        if (password.isEmpty()) {
+            try {
+                // Create and show the password dialog
+                mainWindow = new MainWindow(primaryStage, logic);
+                PasswordDialog passwordDialog = new PasswordDialog(passwordManager);
+                passwordDialog.initModality(Modality.APPLICATION_MODAL);
+                passwordDialog.initOwner(primaryStage);
+                Optional<String> result;
+                result = passwordDialog.showAndWait();
+            } catch (Throwable e) {
+                logger.severe(StringUtil.getDetails(e));
+                showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+            }
+        }
+        password = passwordManager.getPassword();
+        if (!password.isEmpty()) {
+            try {
+                // Create and show the password dialog
+                mainWindow = new MainWindow(primaryStage, logic);
+                PasswordDialog passwordDialog = new PasswordDialog(passwordManager);
+                passwordDialog.initModality(Modality.APPLICATION_MODAL);
+                passwordDialog.initOwner(primaryStage);
+                Optional<String> result;
+                result = passwordDialog.showAndWait();
+                if (result.isPresent() && !passwordDialog.isPasswordIncorrect()) {
+                    mainWindow.show();
+                    mainWindow.fillInnerParts();
+                } else {
+                    passwordDialog.resetPasswordIncorrectState();
+                    passwordDialog.showIncorrectPasswordMessage();
+                }
+            } catch (Throwable e) {
+                logger.severe(StringUtil.getDetails(e));
+                showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+            }
         }
     }
 
