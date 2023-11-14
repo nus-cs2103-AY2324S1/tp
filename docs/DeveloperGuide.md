@@ -43,9 +43,9 @@ This Developer Guide will help you get familiar with the architecture of CoordiM
 
 * CoordiMate is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org).
 * CoordiMate makes use of the following open source libraries:
-  * [JavaFX](https://openjfx.io/) for the Graphical User Interface (GUI).
+  * [JavaFX](https://openjfx.io/) for the [Graphical User Interface (GUI)](#glossary).
   * [JUnit 5](https://junit.org/junit5/) for unit testing.
-  * [Jackson](https://github.com/FasterXML/jackson) for parsing JavaScript Object Notation (JSON) files.
+  * [Jackson](https://github.com/FasterXML/jackson) for parsing [JavaScript Object Notation (JSON)](#glossary) files.
 
 ---
 
@@ -106,10 +106,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its [API](#glossary) in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding [API](#glossary) `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its [API](#glossary) in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="assets/svg/dg/ComponentManagers.svg" width="300" />
 
@@ -121,11 +121,11 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The [API](#glossary) of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](assets/svg/dg/UiClassDiagram.svg)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible [GUI](#glossary).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -142,13 +142,13 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[API](#glossary) : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="assets/svg/dg/LogicClassDiagram.svg" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteTask 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteTask 1")` [API](#glossary) call as an example.
 
 ![Interactions Inside the Logic Component for the `deleteTask 1` Command](assets/svg/dg/DeleteTaskSequenceDiagram.svg)
 
@@ -185,7 +185,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+[API](#glossary) : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="assets/svg/dg/ModelClassDiagram.svg" width="450" />
 
@@ -214,12 +214,12 @@ Without loss of generality, this model can be extended to <code>Task</code> enti
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+[API](#glossary) : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="assets/svg/dg/StorageClassDiagram.svg" width="550" />
 
 The `Storage` component,
-* can save both CoordiMate's data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both CoordiMate's data and user preference data in [JSON](#glossary) format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -526,12 +526,12 @@ The sequence diagrams below show the details of the respective reference frames.
 
 * Has a need to manage various contacts and tasks for event-planning
 * Prefers desktop apps over other types
-* Is comfortable with CLI apps
+* Is comfortable with [CLI](#glossary) apps
 * Is able to type fast
 
 **Value proposition**:
 
-CoordiMate helps event planners to easily keep track of contact details as well as the tasks to be done for various events, in a more efficient way compared to a typical mouse/GUI driven app.
+CoordiMate helps event planners to easily keep track of contact details as well as the tasks to be done for various events, in a more efficient way compared to a typical mouse/[GUI](#glossary) driven app.
 
 <div style="page-break-after: always;"></div>
 
@@ -548,7 +548,7 @@ Priorities:
 | Priority | As a …​ | I want to …​ | So that I can …​ |
 | -------- | -------| ----------- | --------------- |
 | `* * *` | new user | see help instructions | refer to documentation to understand the existing features effectively |
-| `* * *` | event planner | view both lists on the same screen | compare the task list and contact list while using the GUI |
+| `* * *` | event planner | view both lists on the same screen | compare the task list and contact list while using the [GUI](#glossary) |
 | `* * *` | event planner | add a new person's details | remember details of new people I meet |
 | `* * *` | event planner | list each person's details | view all my contacts' details at a quick glance |
 | `* * *` | event planner | edit a person's details | update details of persons that are outdated with new information |
@@ -588,7 +588,7 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 **Use case: UC01 - Add a person to the contact list**
 
-**MSS**
+**[Main Success Scenario (MSS)](#glossary)**
 
 1. User requests to add a new person's particulars.
 2. CoordiMate adds the person with the specified particulars.
@@ -1209,15 +1209,15 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should work on any [mainstream OS](#glossary) as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons and tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Application should be designed for a single user.
 5. Data should be stored locally in a human-readable and editable text file.
 6. Data should persist across usage sessions.
 7. Application should not require internet connection to run.
-8. GUI should work well for standard screen resolutions of 1920x1080 and higher, and for screen scales of 100% and 125%.
-9. GUI should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
+8. [GUI](#glossary) should work well for standard screen resolutions of 1920x1080 and higher, and for screen scales of 100% and 125%.
+9. [GUI](#glossary) should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
 10. Application should be packaged and delivered to user in a single JAR file under 100MB.
 
 [Back to Table of Contents](#table-of-contents)
@@ -1249,7 +1249,7 @@ To reset to the sample data, delete the `data` folder in the same directory as t
 {% include admonition.html type="note" title="Note" body="
 
 These instructions only provide a starting point for testers to work on;
-testers are expected to do more <i>exploratory testing</i>.
+testers are expected to do more [exploratory testing](#glossary).
 
 " %}
 
@@ -1262,7 +1262,7 @@ testers are expected to do more <i>exploratory testing</i>.
    2. Open a terminal and navigate to the folder you downloaded the JAR file to.
 
    3. Run the command `java -jar CoordiMate.jar`.<br>
-      Expected: The app launches with a GUI window and has a set of sample contacts and tasks.<br>
+      Expected: The app launches with a [GUI](#glossary) window and has a set of sample contacts and tasks.<br>
 
 
 2. Saving window preferences
@@ -1511,10 +1511,10 @@ testers are expected to do more <i>exploratory testing</i>.
 
 ### Error messages for invalid JSON file format
 
-- **Enhancement**: Error messages will be provided to pinpoint the specific part of the JSON file that does not follow the required format.
-- **Reason**: To improve the usability of the application, especially when users use the JSON file to import large amounts of data, users will be able to identify and correct the exact issue with their JSON data file without having to guess which part was incorrect.
+- **Enhancement**: Error messages will be provided to pinpoint the specific part of the [JSON](#glossary) file that does not follow the required format.
+- **Reason**: To improve the usability of the application, especially when users use the [JSON](#glossary) file to import large amounts of data, users will be able to identify and correct the exact issue with their [JSON](#glossary) data file without having to guess which part was incorrect.
 - **Example**:
-  - Currently, when a user imports an invalid JSON data file, CoordiMate will show an empty contact list and task list. This enhancement will show an error message to inform the user exactly which part of the JSON file is invalid, so that the user can correct the JSON file and import it again.
+  - Currently, when a user imports an invalid [JSON](#glossary) data file, CoordiMate will show an empty contact list and task list. This enhancement will show an error message to inform the user exactly which part of the [JSON](#glossary) file is invalid, so that the user can correct the [JSON](#glossary) file and import it again.
 
 ### Standardise all command behaviours
 
@@ -1560,9 +1560,9 @@ In the second iteration of development, we honed in on features that were highly
 
 In order for CoordiMate to track tasks, we had to create new classes that encapsulated the various elements of a task, such as the title, note and status. This was done to ensure that tasks can also be modelled in an object-oriented manner, just like the existing `Person` class.
 
-Furthermore, these classes needed to be integrated into the existing codebase. For example, we implemented the relevant `Predicate<Task>` classes to support the new `findTask`, `findTag` and `findAllTag` commands. We also created a `UniqueTaskList` class to store the list of tasks and to handle various operations, such as adding, deleting and modifying tasks in the list. This class was essential for the GUI to display information about the tasks in the task list.
+Furthermore, these classes needed to be integrated into the existing codebase. For example, we implemented the relevant `Predicate<Task>` classes to support the new `findTask`, `findTag` and `findAllTag` commands. We also created a `UniqueTaskList` class to store the list of tasks and to handle various operations, such as adding, deleting and modifying tasks in the list. This class was essential for the [GUI](#glossary) to display information about the tasks in the task list.
 
-Lastly, to ensure that the tasks are saved and loaded correctly, the Storage class had to be modified to support the new `Task` class. This required the team to design how these tasks were to be stored in the data file, and the creation of the necessary helper classes to parse the tasks into JSON strings and vice versa.
+Lastly, to ensure that the tasks are saved and loaded correctly, the Storage class had to be modified to support the new `Task` class. This required the team to design how these tasks were to be stored in the data file, and the creation of the necessary helper classes to parse the tasks into [JSON](#glossary) strings and vice versa.
 
 ### User Centric
 
