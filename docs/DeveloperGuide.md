@@ -104,7 +104,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`UI.java`](https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/UI.java)
 
 <p style="text-align: center;">
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
@@ -141,25 +141,27 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 </p>
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
+
 Inside the `Logic` component, there are 4 main components: `LogicManager`, `AddressBookParser`, `Parser` classes and `Command` classes.
 
-The `Command` class will do the actual modification of the data, when executed by the LogicManager, and communicate its execution result via the CommandResult class with the Logic manager. 
+The `Command` class will do the actual modification of the data, when executed by the `LogicManager`, and communicate its execution result via the `CommandResult` class with the `LogicManager`. 
 
 Parser classes are responsible for parsing the user input and creating the corresponding command object. 
 
-AddressBookParser is responsible for parsing the user input for finding the corresponding parser and returning the corresponding command object. 
+`AddressBookParser` is responsible for parsing the user input for finding the corresponding parser and returning the corresponding command object. 
 
-LogicManager will perform the actual execution of the command, and update the ui and storage.
+`LogicManager` will perform the actual execution of the command, and update the UI and Storage.
 
 Here's a (partial) class diagram of the `Logic` component:
 <p style="text-align: center;">
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 </p>
 
-<box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</box>
 
 How the `Logic` component works:
 
@@ -243,7 +245,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Background
 
 TutorMate has 3 main "modes" each to cater to the main features. We refer to them as "states", where we implement it using the `State` enum.
-The different states have their own set of Ui layout and commands, while some commands work for all states but has different behaviours between them.
+The different states have their own set of UI layout and commands, while some commands work for all states but has different behaviours between them.
 The 3 main states are `STUDENT`, `SCHEDULE` and `TASK`.
 * `STUDENT` state handles the student management system feature.
 * `SCHEDULE` state handles lessons and schedules.
@@ -261,8 +263,8 @@ The `ModelManager#getState()` returns the current state of the app, `ModelManage
 States allows the same command word to be mapped to different commands based on the current app state. `AddressBookParser#parseCommand()` handles the parsing of user input into its respective parsers and commands.
 
 For example, the "add" command word is overloaded, where using the `ModelManager#sameState()` method:
-* If its in `STUDENT` state, it returns the `AddPersonCommandParser`, which returns the `AddPersonCommand` command class.
-* If its in `SCHEDULE` state, it returns the `AddLessonCommandParser`, which returns the `AddLessonCommand` command class.
+* If it's in `STUDENT` state, it returns the `AddPersonCommandParser`, which returns the `AddPersonCommand` command class.
+* If it's in `SCHEDULE` state, it returns the `AddLessonCommandParser`, which returns the `AddLessonCommand` command class.
 
 ##### 2. Command Overloading
 
@@ -270,19 +272,19 @@ States allows the same command to have differing behaviours based on the current
 Commands can easily enable this by modifying its `execute` method and implement a switch statement that executes different functions based on the model state.
 
 For example, the "find" command is overloaded, where using the `ModelManager#sameState()` method:
-* If its in `STUDENT` state, it searches through the list of students.
-* If its in `SCHEDULE` state, it searches through the list of lessons.
+* If it's in `STUDENT` state, it searches through the list of students.
+* If it's in `SCHEDULE` state, it searches through the list of lessons.
 
-##### 3. Ui updates
+##### 3. UI updates
 
-When commands change the app state (i.e. model state), using the `ModelManager#setState()` method, it will automatically call the `UiManager` class to make necessary Ui changes.
+When commands change the app state (i.e. model state), using the `ModelManager#setState()` method, it will automatically call the `UiManager` class to make necessary UI changes.
 The `UiManager` class calls the `MainWindow#changeLayout()` method to make necessary changes to the layout based on the new state:
 * If the new state is `STUDENT` state, only show the `PersonList` (list for students) and `studentDetailList`.
 * If the new state is `SCHEDULE` state, only show the `ScheduleList` and `lessonDetailList`.
 * If the new state is `TASK` state, only show the `fullTaskList` and `taskDetailListPanel`.
 
 #### Example execution
-Given below is an example usage scenario of the `addPerson` command changes the model state and Ui layout.
+Given below is an example usage scenario of the `addPerson` command changes the model state and UI layout.
 
 Step 1. The user launches the application for the first time. The initial state of the Model will be set to `SCHEDULE`. The schedule list will be initialized with the initial schedule.
 
@@ -315,14 +317,14 @@ The following sequence diagram shows how the flow of the example execution:
 * **Alternative 1 (current choice):** Implement app state, where commands can check and modify the current app state.
     * Pros: 
       * Commands can be overloaded since they can have different behaviours based on app state, reducing number of commands for user to remember.
-      * Commands do not need to handle changing of Ui layouts (specifying panels it requires), since similar features (e.g. managing students) all require the same panels. The `UiManager` will make required Ui changes based on desired state.
+      * Commands do not need to handle changing of UI layouts (specifying panels it requires), since similar features (e.g. managing students) all require the same panels. The `UiManager` will make required UI changes based on desired state.
     * Cons: Increase complexity of the code.
 
 * **Alternative 2:** Have a collection of related commands that are grouped to work with each main mode.
     * Pros: Easy to implement
     * Cons: 
       * Many commands for user to remember, although they have similar ideas (e.g. `addPerson`, `addLesson` both involving adding a new object, which the user could have used a generic `add` method.)
-      * Commands have to manually call the Ui to specify which Ui panels to show.
+      * Commands have to manually call the UI to specify which UI panels to show.
 
 <div style="page-break-after: always;"></div>
 
@@ -344,7 +346,7 @@ Given a user input that is intended to be parsed into an `EditPersonCommand`, a 
 
 The first stage is to understand that user intends to invoke the `EditPersonCommand` and delegate the parsing to the specialised parser class, `EditPersonCommmandParser`. This step is done by the `AddressBookParser` class, which behaves like a "simple factory" via a giant "switch" statement. We will not discuss it in depth here.
 
-The second stage is to parse each parameter and flags. This work is delegated to the `typeParsingUtil` class, which is a utility class that contains many static methods that are responsible for parsing different types of user input that is reused across different command parsers.
+The second stage is to parse each parameter and flags. This work is delegated to the `TypeParsingUtil` class, which is a utility class that contains many static methods that are responsible for parsing different types of user input that is reused across different command parsers.
 
 Then, the `EditPersonCommandParser` class is responsible for combining the results of the previous stage and constructing the `EditPersonCommand` object.
 
@@ -479,10 +481,10 @@ The show feature is facilitated by `ShowCommand` which extends the abstract `Com
 
 Additionally, the `ModelManager` class implements the following operations for the show command:
 
-`ModelManager#linkUi()` — Links the Ui of TutorMate to the Model to display the Show Panel
-`ModelManager#showPerson()` — Shows the details of the specified person in the Ui.
-`ModelManager#showLesson()` — Shows the details of the specified lesson in the Ui.
-`ModelManager#showTask()` — Shows the details of the specified task in the Ui.
+`ModelManager#linkUi()` — Links the UI of TutorMate to the Model to display the Show Panel
+`ModelManager#showPerson()` — Shows the details of the specified person in the UI.
+`ModelManager#showLesson()` — Shows the details of the specified lesson in the UI.
+`ModelManager#showTask()` — Shows the details of the specified task in the UI.
 
 The Show Command has different behaviours based on the current state in the `Model`:
 - The Show Command will show the Person Details if the current state is `STUDENT`
@@ -495,11 +497,11 @@ Given below is an example usage scenario and how the show feature behaves at eac
 
 Step 1. The user launches the application for the first time. The initial state of the Model will be set to `SCHEDULE`. The schedule list will be initialized with the initial schedule.
 
-Step 2. The user executes `show 5` command to show the details of the 5th lesson in the schedule list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showLesson` method in the ModelManager which displays the `LessonDetailListPanel` in the Ui.
+Step 2. The user executes `show 5` command to show the details of the 5th lesson in the schedule list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showLesson` method in the ModelManager which displays the `LessonDetailListPanel` in the UI.
 
-Step 3. The user wants to display the details of a person and switches to the student list with the `list students` command in the Command Line Interface(CLI) Ui. The current list will display the students and the Model state will change to `STUDENT`.
+Step 3. The user wants to display the details of a person and switches to the student list with the `list students` command in the Command Line Interface(CLI) UI. The current list will display the students and the Model state will change to `STUDENT`.
 
-Step 4. The user executes `show 1` command to show the details of the 1st person in the student list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showPerson` method in the ModelManager which displays the `StudentDetailListPanel` in the Ui.
+Step 4. The user executes `show 1` command to show the details of the 1st person in the student list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showPerson` method in the ModelManager which displays the `StudentDetailListPanel` in the UI.
 
 The following sequence diagram shows how the show operation works for showing a person from the `STUDENT` list:
 
@@ -515,13 +517,13 @@ The following sequence diagram shows how the show operation works for showing a 
 
 #### Design considerations:
 
-**Aspect: How the Show Command calls the Ui to display the Show Details Panel:**
+**Aspect: How the Show Command calls the UI to display the Show Details Panel:**
 
-* **Alternative 1 (current choice):** Link the Model with the Ui to display the Show Details Panel.
+* **Alternative 1 (current choice):** Link the Model with the UI to display the Show Details Panel.
     * Pros: Easy to implement.
-    * Cons: May increase coupling between the Model and Ui
+    * Cons: May increase coupling between the Model and UI
 
-* **Alternative 2:** Pass the Ui call from the Show Command around the currently linked files.
+* **Alternative 2:** Pass the UI call from the Show Command around the currently linked files.
     * Pros: No additional coupling created.
     * Cons: Many files will have to be changed and will increase the complexity of the code.
 
@@ -829,7 +831,7 @@ testers are expected to do more *exploratory* testing.
    2. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutormate.jar` command to run the application.<br>
 
    3. Expected: A GUI similar to the picture below should appear in a few seconds. The app will contain some sample data.<br>
-       ![Ui](images/about.png)
+       ![UI](images/about.png)
 
 * Shutdown
   * Click on the cross at the top of the window.
@@ -878,7 +880,7 @@ testers are expected to do more *exploratory* testing.
     * The response box is to display responses for command execution, to indicate success or errors.
     * The left side has the list panel, which shows different list types (student, schedule, tasks).
     * The right side has the details panel, which shows details of any specific item in the list.
-      ![Ui](images/Ui.png)
+      ![UI](images/UI.png)
 
 ### Viewing ___STUDENTS list___, ___SCHEDULE list___ and  ___TASKS list___
 
