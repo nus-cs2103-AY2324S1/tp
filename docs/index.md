@@ -17,8 +17,8 @@ JobFindr aims to simplify your job application management by targeting the follo
 2. _Efficiency_ in **finding** the specific application with minimal keywords
 3. _Organisation_ in **sorting** the list of applications to not miss out on key opportunities
 
-* If you are interested in using JobFindr, head over to the [_Quick Start_ section of the **User Guide
-  **](UserGuide.html#quick-start).
+* If you are interested in using JobFindr, head over to the [**Quick Start**](UserGuide.html#quick-start) section of
+  the **User Guide**.
 * If you are interested about developing JobFindr, the [**Developer Guide**](DeveloperGuide.html) is a good place to
   start.
 
