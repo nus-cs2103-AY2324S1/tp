@@ -39,11 +39,13 @@ Given below are my contributions to the project.
     * Handled image formatting of the User Guide.
     * Added some FAQ.
   * Developer Guide:
-    * Edited the implementation details in `Class Details` and `Modify Class Details` features.
-    * Added use cases.
-    * Added more manual testing.
+    * Added implementation details of the `lookup` and `theme` command.
+    * Edited the implementation details in `Class Details`.
+    * Added some use cases.
+    * Added some manual testing.
     * Added some NFRs.
-    * Edited all the AB-3 UML diagrams to fit with our implementation.
+    * Added some planned enhancements.
+    * Edited AB-3 UML diagrams to fit with our implementation.
 
 * **Team-based tasks**:
   * Set up the GitHub website.

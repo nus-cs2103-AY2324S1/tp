@@ -127,7 +127,7 @@ Before reading our User Guide, here are some quick tips:
 
 The blurred image below shows an annotated overview of **Class Manager 2023's** GUI:
 
-<img alt="Gui" src="images/GUI-overview-blur.png" width="700"> </br>
+<img alt="Gui" src="images/GUI-overview-blur.png" width="700"> <br>
 
 The **GUI** has 6 notable sections:
 
@@ -202,7 +202,7 @@ Data visualisation of student's Class Information is automatically generated in 
 
 **Class Manager 2023's** data is saved as a [JSON](#glossary) file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br>
 
 The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command.
 
@@ -242,11 +242,11 @@ Examples:
 
 Before `config #t/6 #a/5` is executed:
 
-<img alt="config before" src="images/config-before.png" width="700">
+<img alt="config before" src="images/config-before.png" width="700"> <br>
 
 After `config #t/6 #a/5` is executed successfully and `view s/A0247243A` is executed to view the first student's Class Information:
 
-<img alt="config success" src="images/config-success.png" width="700">
+<img alt="config success" src="images/config-success.png" width="700"> <br>
 
 Possible errors and their corresponding error messages:
 * If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing
@@ -273,7 +273,7 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="700">
+<img alt="help message" src="images/helpMessage.png" width="700"> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -321,11 +321,11 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/load-before.png" width="700"> <br><br>
+<img alt="load before" src="images/load-before.png" width="700"> <br>
 
 After `load f/sample` is executed successfully:
 
-<img alt="load success" src="images/load-outcome.png" width="700"> <br><br>
+<img alt="load success" src="images/load-outcome.png" width="700"> <br>
 
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
@@ -349,7 +349,11 @@ Format: `random NUMBER_OF_STUDENTS`
 
 Example:
 
-* `random 2`
+* `random 1`
+
+The following image shows a successful execution of the `random 1` command.
+
+<img src="images/random-success.png" alt="result for `random 1" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -419,11 +423,13 @@ Toggles between light and dark colour themes.
 
 Format: `theme`
 
-#### Dark theme
-<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
+##### Dark theme
 
-#### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="700" >
+<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br>
+
+##### Light theme
+
+<img alt="theme_light" src="images/theme-light.png" width="700" > <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -446,7 +452,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…�
 
 The following image shows a successful execution of the `add` command.
 
-<img alt="add-student-success" src="images/add-student-success.png" width="700" >
+<img alt="add-student-success" src="images/add-student-success.png" width="700" > <br>
 
 <box type="tip" seamless>
 
@@ -505,7 +511,11 @@ Format: `delete s/STUDENT_NUMBER`
 * The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 
 Example:
-* `delete s/A0249112A`
+* `delete s/A0245234A`
+
+The following image shows a successful execution of the `delete s/A0245234A` command.
+
+<img src="images/delete-success.png" alt="result for `delete s/A0245234A" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -548,6 +558,10 @@ Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and [email address](#glossary) of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
 
+The following image shows a successful execution of the `edit A0249112A n/Bob` command.
+
+<img src="images/edit-success.png" alt="result for `edit A0249112A n/Bob" width="700" /> <br>
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -560,7 +574,7 @@ Format: `list`
 
 The following image shows a successful execution of the `list` command.
 
-<img alt="list-student-success" src="images/list-success.png" width="700" >
+<img alt="list-student-success" src="images/list-success.png" width="700" > <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -592,10 +606,10 @@ Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> <br>
 * `lookup c/T11` returns all students in class number T11<br>
 
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br>
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -629,7 +643,7 @@ Examples:
 
 The following image shows a successful execution of the `tag` command that replaces all the student's tags.
 
-<img src="images/tag-success.png" alt="result for 'tag s/A0247243A t/smart'" width="700" />
+<img src="images/tag-success.png" alt="result for 'tag s/A0247243A t/smart'" width="700" /> <br>
 
 <box type="info" seamless>
 
@@ -670,7 +684,7 @@ Examples:
 
 The following image shows a successful execution of the `present s/A0245234A tut/1` command.
 
-<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" />
+<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" /> <br>
 
 <box type="info" seamless>
 
@@ -751,7 +765,7 @@ Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 Examples:
 * `class-part s/A0245234A tut/1 part/true`
 
-<img alt="class-part-success" src="images/class-part-success.png" width="700" /><br>
+<img alt="class-part-success" src="images/class-part-success.png" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -786,7 +800,7 @@ Example:
 
 * `view s/A0241243A`
 
-<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" />
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" /> <br>
 
 Possible error and their corresponding message:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
@@ -837,7 +851,7 @@ Possible error and their corresponding message:
 | [**Exit Class Manager 2023**](#exit-class-manager-2023-exit)     | `exit`                                           |
 | [**View command history**](#view-command-history-history)        | `history`                                        |
 | [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
-| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
+| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 1` |
 | [**Redo a command**](#redo-a-command-redo)                       | `redo`                                           |
 | [**Undo a command**](#undo-a-command-undo)                       | `undo`                                           |
 | [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |
@@ -847,7 +861,7 @@ Possible error and their corresponding message:
 |----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend`  |
 | [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                    |
-| [**Delete a student**](#delete-a-student-delete)               | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
+| [**Delete a student**](#delete-a-student-delete)               | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0245234A`                                                                                                        |
 | [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                       |
 | [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Doe p/98761234 e/johnd@example.com` |
 | [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                        |

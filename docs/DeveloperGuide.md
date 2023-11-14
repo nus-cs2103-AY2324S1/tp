@@ -838,7 +838,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to select a specific number of students randomly.
+1.  User requests to randomly select a specific number of students.
 2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
@@ -1228,7 +1228,7 @@ Testers are expected to do more *exploratory* testing.
 1. Randomly select a specified number of students from the list of displayed students.
 
    1. Test case: `random 2`<br>
-      Expected: Two students from the list of displayed students are selected randomly. Ensure at least two students are displayed.
+      Expected: Two students from the list of displayed students are randomly selected. Ensure at least two students are displayed.
       <br><br>
 
 ### View a student
@@ -1364,10 +1364,10 @@ Testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` in the future.
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` and `ADD` in the future.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
 3. Clicking on a student in the student list currently highlights the student's card. We plan to remove this interaction as it affects the visibility of the student's contact details and visualised graphs.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc., to allow for better representation of student's efforts in class.
-5. Users currently can only search for basic student information. We plan to allow users to search based on Class Information in the future. For example, users can search for students with average grades or attendance percentage less than a certain value.
-6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
-7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
+5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with average grades or attendance percentage less than a certain value.
+6. The `lookup` command currently does not check for invalid fields. We plan to add field validation to the `lookup` command in the future.
+7. The `comment` command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.

@@ -49,7 +49,7 @@ You can reach us at the email `e0968907@u.nus.edu`
 [[portfolio](team/changruhenryqian.md)]
 
 * Role: Developer
-* Responsibilities: Features, Testing, Documentation
+* Responsibilities: Features, Code Quality, Documentation, Testing
 
 ### Yeo Boh Shin
 
