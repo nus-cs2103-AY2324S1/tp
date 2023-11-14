@@ -407,6 +407,15 @@ Examples:
   For example, if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 </div>
 
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered                               | Reason                                                                       | Solution                                                                                                                                  |
+|--------------------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `This person already exists in NUSCoursemates`   | You are creating a student with the same name (case-sensitive).              | Ensure that you do not enter a student with the same name.                                                                                |
+| `Invalid command format! `                       | Some of the essential [prefixes](#Glossary) such as n/, p/ could be missing. | Follow the [Command Format](#command-format) for the add command.                                                                         |
+| `Unknown command `                               | The "add" command may be spelled incorrectly or not entirely in lowercase.   | Verify that you've spelled the add command correctly. It should be in lowercase.                                                          |
+| Errors regarding wrong [field](#Glossary) inputs | Invalid inputs may be entered.                                               | Cross-reference the constraints associated with each [field](#Glossary) using the [Input Table](#input-table) for additional information. |
+
 [Back to Table of Contents](#table-of-contents)
 
 ### Editing a student : `edit`
@@ -796,6 +805,13 @@ Format: `theme THEME`
 * Eg: `theme dark`, `theme light`.
 * The terms "dark" and "light" are both case-insensitive.
 </div>
+
+**Here's what to do when you encounter errors:**
+
+| Errors Encountered         | Reason                                                                       | Solution                                                                           |
+|----------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `Invalid command format! ` | You may not have entered a valid theme.                                      | Ensure that you enter `dark` or `light` for the themes.                            |
+| `Unknown command `         | The "theme" command may be spelled incorrectly or not entirely in lowercase. | Verify that you've spelled the theme command correctly. It should be in lowercase. |
 
 ### Exiting the program : `exit`
 > "The pain of parting is nothing to the joy of meeting again."
