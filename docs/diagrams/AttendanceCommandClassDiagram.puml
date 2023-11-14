@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+class AttendanceCommand {
+  + execute(model: Model)
+
+}
+
+class Model {
+  + getFilteredPersonList(): List<Person>
+  + setSpecificPersonToDisplay(Person)
+}
+
+class AttendanceCommandParser {
+    +parse(args: String): AttendanceCommand
+}
+
+class Person {
+
+}
+
+
+Parser <|-- AttendanceCommandParser
+Command <|-- AttendanceCommand
+AttendanceCommandParser --> AttendanceCommand
+AttendanceCommand --> Model
+AttendanceCommand --> Person
+
+
+
+
+
+@enduml
