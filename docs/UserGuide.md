@@ -81,6 +81,8 @@ paired up with simple and beginner-friendly features, anyone can learn how to us
 :bulb: **Make the Switch Today!**
 Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** now!
 
+<div style="page-break-after: always;"></div>
+
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
 ## Using this guide
@@ -122,6 +124,8 @@ Throughout this User Guide, you might run into the following symbols and syntax.
 
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
+<div style="page-break-after: always;"></div>
+
 ## Layout
 The image below describes TuitionConnect's layout with some description for each component.
 ![Layout](images/Layout.png)
@@ -156,6 +160,8 @@ The image below describes TuitionConnect's layout with some description for each
 
    [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
+<div style="page-break-after: always;"></div>
+
 ## Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -171,6 +177,8 @@ The image below describes TuitionConnect's layout with some description for each
   e.g. if the command typed is `undo 123`, it will be interpreted as `undo`.
 
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
+
+<div style="page-break-after: always;"></div>
 
 ## Parameters Requirement
 Here are the [parameter](#glossary) requirements of commonly used parameters by [commands](#glossary) in the [**Features**](#features) section below.
