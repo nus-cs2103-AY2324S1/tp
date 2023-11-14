@@ -1169,7 +1169,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Unpinning a Patient
 
-1. Prerequisites: Ensure the **Pinned Patient List** contains the entry you wish to unpin.
+1. Prerequisites: Ensure the pinned patient list contains the entry you wish to unpin.
 2. Test Case: `unpin 1`
 
    - Expected: Patient at index 1 of the **Pinned Patient List** is unpinned and no longer displayed in the **Pinned Patient List**. Details shown in the status message.
