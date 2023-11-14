@@ -1369,3 +1369,4 @@ Testers are expected to do more *exploratory* testing.
 5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
 7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
+8. The name field does not accept special characters such as `\` or `/`. We plan to allow users to add special characters to the name field in the future, so that names such as "Ravi s/o Veegan" will be allowed.
