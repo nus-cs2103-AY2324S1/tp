@@ -5,9 +5,9 @@ title: User Guide
 
 # Welcome to JobFindr!
 
-![JobFindr](images/user-guide/JobFindr.png)
-
 _Find Your Success with JobFindr_
+
+![JobFindr](images/user-guide/JobFindr.png)
 
 <div style="page-break-after: always;">
 
@@ -373,17 +373,16 @@ The following are valid job types:
 
 The following are valid interview types:
 
-| Interview Type | Remarks                 |
-|----------------|-------------------------|
-| `BEHAVIOURAL`  | A behavioural interview |
-| `TECHNICAL`    | A technical interview   |
-| `CASE`         | A case interview        |
-| `GROUP`        | A group interview       |
-| `PHONE`        | A phone interview       |
-| `VIDEO`        | A video interview       |
-| `ONLINE`       | An online interview     |
-| `ONSITE`       | An onsite interview     |
-| `OTHER`        | Other interviews        |
+| Interview Type | Remarks                                                       |
+|----------------|---------------------------------------------------------------|
+| `BEHAVIOURAL`  | An interview that questions about the past experiences        |
+| `TECHNICAL`    | An interview that tests technical knowledge                   |
+| `CASE`         | An interview in which a case study is provided to be analysed |
+| `GROUP`        | An interview with a group of people                           |
+| `VIDEO`        | A video submission interview                                  |
+| `ONLINE`       | An online interview                                           |
+| `ONSITE`       | An onsite interview                                           |
+| `OTHER`        | Other interviews that does not fall into any given categories |
 
 <div style="page-break-after: always;">
 
@@ -465,7 +464,9 @@ This command opens up a separate window, displaying all the available commands o
 ![HelpCommandExample](images/user-guide/HelpCommandEg.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;">
+
+</div>
 
 ### Exiting the programme: `exit`
 
@@ -673,7 +674,6 @@ _Clears all job applications from JobFindr._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -755,7 +755,9 @@ Type `find Project c/Deloitte` and press **Enter**.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;">
+
+</div>
 
 ### Sorting all applications : `sort`
 
@@ -800,6 +802,10 @@ _Sorts the list based on the [prefix](#prefix) provided._
 
 **Step 2:** A sorted list of job applications by `deadline` will be displayed in the Job List Panel. <br>
 ![SortCommandEg4](images/user-guide/SortCommandEg4.png)
+
+<div style="page-break-after: always;">
+
+</div>
 
 ***Common Errors:***
 
@@ -859,6 +865,10 @@ is for **Shopee**.
 
 ![IntAddCommandEg3](images/user-guide/IntAddCommandEg3.png)
 <br>
+
+<div style="page-break-after: always;">
+
+</div>
 
 **Common Errors:**
 
@@ -966,6 +976,10 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 **Step 3:** Look at the Interview Card for the `Case Interview` from `Shopee`, the `date` will be edited.
 <img src="images/user-guide/IntEditCommandEg3.png" style="display: block; margin: auto;" width="500">
 
+<div style="page-break-after: always;">
+
+</div>
+
 **Common Errors:**
 
 * Invalid/Missing index: `interview edit 5 from/1 t/Technical`
@@ -986,7 +1000,6 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -1035,6 +1048,11 @@ On **Windows**:
 1. Delete the applicationbook.json file (stored at [JAR file location]/data/applicationbook.json) from the computer that you wish to use JobFindr on. 
 2. Copy over the applicationbook.json file from the computer which you no longer wish to use JobFindr on. 
 3. Refer to [Quick Start](#quick-start) to start up JobFindr and check whether your applications are properly loaded into the new computer.
+
+### 5. Can I use the application offline?
+
+1. Yes, all features of the application can be used offline except for access to external URLs.
+2. Refer to [Quick Start](#quick-start) to start up JobFindr.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
