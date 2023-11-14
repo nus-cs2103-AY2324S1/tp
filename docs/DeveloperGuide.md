@@ -266,15 +266,21 @@ The following sequence diagram shows how the view operation works:
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram"></puml>
 
+<box type="info" seamless>
+
 **Note:** The lifeline for `ViewCommand` and `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</box>
 User should see the UI as shown below after entering `view 1`  (The command shown in Command Box is re-inputted for the sake of clarity. After entering the command, command should be cleared)
 ![View](images/viewState.png)
 
 Step 3. The user can then read or process the information stored for the viewed person.
 
+<box type="info" seamless>
 
 **Note:** The view command can be most effectively used with `search` and `list`. Since the view index is dependent on the Index on the filtered list shown, the user can view the profile after filtering for specific properties in a person using `search` and sorting them using `list`.
+
+</box>
 
 Alternatives considered
 
@@ -316,7 +322,7 @@ Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object
 
 The following activity diagram summarize what happens when a user attempts to execute the `create` command.
 
-<puml src="diagrams/CreateTagActivityDiagram.puml" />
+<puml src="diagrams/CreateTagActivityDiagram.puml" alt="CreateTagActivityDiagram"/></puml>
 
 ### Search feature
 
@@ -346,8 +352,14 @@ Step 1. The user launches the application.
 Step 2. The user executes `search t/intern` command to filter candidates whose status are offered. 
 
 The following sequence diagram shows how the search operation works:
+<box type="info" seamless>
 
-**Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** 
+* The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* The `parse` method of `FindCommandParsers` also creates objects of the `NameContainsKeywordPredicate`, `StatusContainsKeywordPredicate` and `TagContainsKeywordPredicate` but these
+  were instantiations not included in the sequence diagram below for the sake of brevity. However, do note that the `n`, `s`, `t` arguments in `getPredicatesList(n, s, t)` in the sequence
+  diagram below refer to instances of `NameContainsKeywordPredicate`, `StatusContainstKeywordPredicate` and `TagContainsKeywordPredicate` respectively.
+</box>
 
 <puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" width/>
 
@@ -359,9 +371,11 @@ The following activity diagram shows summarizes what happens when a user attempt
 
 <puml src="diagrams/SearchActivityDiagram.puml" />
 
+<box type="info" seamless>
+
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
-
+</box>
 ## Delete feature
 
 ### Implementation
@@ -398,7 +412,11 @@ Step 2. The user executes `delete st/interviewed t/developer` command to delete 
 
 The following sequence diagram shows how the search operation works:
 
+<box type="info" seamless>
+
 **Note:** The lifeline for `DeleteCommand` and `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
@@ -410,8 +428,11 @@ The following activity diagram shows summarizes what happens when a user attempt
 
 <puml src="diagrams/DeleteActivityDiagram.puml" />
 
+<box type="info" seamless>
+
 **Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
+</box>
 
 ### Set feature
 

@@ -734,7 +734,7 @@ An example of the `create` command being successfully executed:
 
 3. View your newly created tags using the `listT` command.
 
-   ![listT-create](images/listT-create.png)
+   ![listT-create](images/listT-create-success.png)
 
 Failed to create tags? Here are some possible reasons why
 
