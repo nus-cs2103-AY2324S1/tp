@@ -17,6 +17,7 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+
 <!-- * Table of Contents to be removed after PDF conversion -->
 # Table of Contents
 
