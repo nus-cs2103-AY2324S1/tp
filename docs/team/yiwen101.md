@@ -37,6 +37,3 @@ Given below are my contributions to the project.
 * **Review/mentoring contributions**:
   * Actively help with the review of the PR.
 
-* **Contributions beyond the project team**:
-    * to be added soon
-
