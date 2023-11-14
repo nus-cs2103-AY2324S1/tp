@@ -64,6 +64,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#27](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/27),
-    [\#49](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49), [\#61](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/61), [\#75](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/75)
+    [\#49](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49), [\#61](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/61), [\#75](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/75),
+    [\#132](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/132)
   * Reported bugs and suggestions for other teams during PE-D (11 bug reports)
   * Created demo video for TAManager 
