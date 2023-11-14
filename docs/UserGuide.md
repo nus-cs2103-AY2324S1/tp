@@ -457,7 +457,6 @@ Creates and adds a student to **Class Manager 2023**.
 
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
-* **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
 * [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
@@ -491,7 +490,7 @@ Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 * The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
-    * Note that the `COMMENT` string must not include any prefix.
+    * Note that the `COMMENT` string must not include any prefix or ` /` characters (space followed by '/').
     * e.g. `comment s/A0249112A cm/This student is very hardworking. t/Hardworking` is not allowed.
     * This means comments such as "This student is very hardworking. t/Hardworking" is not allowed.
 * `comment` can only be performed after the student is created.
@@ -762,7 +761,7 @@ Record the class participation for an existing student in **Class Manager 2023**
 
 <box type="info" seamless>
 
-**Note:** Currently, we allow an absent student have their class participation recorded as `true`. This will be changed in the future.
+**Note:** Currently, we allow an absent student to have their class participation recorded as `true`. This will be changed in the future.
 
 </box>
 
