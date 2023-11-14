@@ -894,7 +894,7 @@ Given below are the planned enhancements for our project.
 
 3. The current `find` command only allows the user to find musicians by their name, tag, instrument, and genre. We plan to enhance this command to allow the user to find musicians by their email and phone number as well.
 
-4. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
+4. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showm` to make it more intuitive to the user.
 
 5. When adding multiple musicians to a band using the `addm` command, the currently displayed message does not let users know which musician(s) already exist in the band. We plan to edit this message to indicate the name(s) of the musician(s) that are already inside the band.
 
