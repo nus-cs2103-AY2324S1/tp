@@ -5,7 +5,7 @@ title: Jin Hao's Project Portfolio Page
 
 ### Project: ManaGease
 
-ManaGease
+ManaGease - Contact management app to simplify and centralize information for full-time employees. It offers easy access to identity information, attendance status, and payroll status of employees. With all the information, the app can help with leave tracking and auto-generation of payrolls and payslips for employees. This helps to reduce errors and enhance overall operational efficiency, leading to time and cost savings, employee engagement and regulatory compliance, and a smoother workflow for your business.
 
 Given below are my contributions to the project.
 
@@ -18,7 +18,7 @@ Given below are my contributions to the project.
   * What it does: Allow the user to view the employee who is on leave on a specific date
   * Justification: The significance of this feature lies in its ability to enhance the application's tracking ability. It provides users with a quick and efficient way to identify employees on leave on any given date.
 
-* **New Feature**: Added a clock and calendar to UI
+* **Enhancement**: Added a clock and calendar to UI
   * What it does: Allow the user to visualize the number of employees on leave for each day on the calendar.
   * Justification: It provides users with a quick overview of the number of employees on leave. The feature contributes to a more intuitive and user-friendly interface, improving overall application usability.
     
@@ -35,9 +35,12 @@ Given below are my contributions to the project.
     * Added implementation details of the `read`, `viewleave` feature.
     * Update new UI class diagram and description
     * Added use case for `viewleave` feature
+    * Added test cases for `add`, `edit`, viewleave, `addleave`, `deleteleave`, `find` and `read`
+    * Added effort for `Adding calendar and clock component`
       
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): #47
+  * Contributed in team meetings
+  * PRs reviewed (with non-trivial review comments): [#47](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/47)
   * Reported bugs and suggestions for other teams in the class
     
 * **Tools**:
