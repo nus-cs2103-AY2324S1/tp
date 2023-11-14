@@ -189,7 +189,7 @@ Student Number refers to the unique matriculation number of a NUS student. **Cla
 * Student Number must not be blank.
 * The last alphabetical character of Student Number is automatically converted to uppercase when stored in **Class Manager 2023**.
 * Student Number is not case-sensitive, e.g. Student Number `A123V` and `A123v` refer to the same student.
-* Here are some valid examples of Class Numbers:
+* Here are some valid examples of Student Numbers:
     - `A0123456X`
     - `A32g (Stored as A32G)`
 
