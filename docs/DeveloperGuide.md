@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. ManageHR shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 #### Use case: UC03 - Add an employee
 
@@ -431,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. ManageHR detects an error with the entered employee's details.
   * 1a1. ManageHR shows an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 #### Use case: UC04 - Edit an employee details
 
@@ -453,13 +453,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. ManageHR shows an error message.
 
-        Use case resumes at step 2.
+        Use case ends. 
 
 * 2b. ManageHR detects an error with the entered employee's details.
 
     * 2b1. ManageHR shows an error message.
 
-        Use case resumes at step 2.
+        Use case ends. 
 
 #### Use case: UC05 - Get help with ManageHR's features
 
