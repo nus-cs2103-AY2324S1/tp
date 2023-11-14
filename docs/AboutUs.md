@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/heran9)] [[portfolio](team/heran9.md)]
 
 * Role: Developer
-* Responsibilities: NA
+* Responsibilities: Feature development, Documentation, Testing
 
 ### Lim Yih Fei
 <img src="images/yihfei.png" width="200px">
@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/jovkusuma.md)]
 
 * Role: Developer
-* Responsibilities: Not determined yet
+* Responsibilities: Feature Development, Quality Assurance, Testing
 
 ### Winston Leonard Prayonggo
 
