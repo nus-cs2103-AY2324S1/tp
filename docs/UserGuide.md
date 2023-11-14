@@ -51,7 +51,7 @@ First time using **Class Manager 2023**? Fear not! This tutorial will guide you 
 
 * For any terms that you are unsure of, the [Glossary](#glossary) might have an explanation for it.
 
-* If you have any burning questions, the answers may lie in the [FAQ](#faq). If not, find us at our [website](https://ay2324s1-cs2103t-t11-1.github.io/tp/index.html)
+* If you have any burning questions, the answers may lie in the [FAQ](#faq). If not, find us at our [website](https://ay2324s1-cs2103t-t11-1.github.io/tp/index.html).
 
 Before reading our User Guide, here are some quick tips:
 
@@ -192,6 +192,10 @@ Student Number refers to the unique matriculation number of a NUS student. **Cla
 * Here are some valid examples of Student Numbers:
     - `A0123456X`
     - `A32g (Stored as A32G)`
+
+## Name
+
+Names should only contain alphanumeric characters and spaces, and it should not be blank.
 
 ## Data visualisation
 

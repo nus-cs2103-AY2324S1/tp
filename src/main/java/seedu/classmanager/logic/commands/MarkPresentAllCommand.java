@@ -11,6 +11,7 @@ import seedu.classmanager.logic.commands.exceptions.CommandException;
 import seedu.classmanager.model.Model;
 import seedu.classmanager.model.student.Student;
 
+//@@author ChangruHenryQian
 /**
  * Marks all displayed students' attendance as present.
  */
