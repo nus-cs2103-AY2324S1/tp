@@ -29,7 +29,6 @@ Given below are my contributions to the project.
 
 * **Testing**: Created JUnit Test Classes
   * Created Testcases for Doctor and related Classes (e.g AddDoctorCommand, AddDoctorCommandParser)
-  * Created Testcases for BloodTypePredicate
 
 * **Project management**:
   * Managed milestones and issues
