@@ -461,7 +461,6 @@ Example usage:
 * `filter /by spec /with Industry AI`
 * `filter /by grad /with 2022 2023 2024 2025`
 
-
 [Table of Contents](#table-of-contents)
 
 <!-- @@author -->
