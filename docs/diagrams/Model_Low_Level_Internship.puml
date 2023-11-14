@@ -6,6 +6,7 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
 
+Class ModelManager
 Class InternshipRole
 Class InternshipTask
 Class Status
@@ -19,6 +20,9 @@ Class TaskOutcome
 Class Name
 Class Description
 Class Tag
+
+ModelManager --> "filtered ~*" InternshipRole
+ModelManager --> "filtered ~*" InternshipTask
 
 InternshipTask *--> "1" Name
 

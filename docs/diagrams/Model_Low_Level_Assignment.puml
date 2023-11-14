@@ -5,12 +5,15 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
+Class ModelManager
 Class Assignment
 Class Status
 Class IsoDate
 Class Name
 Class Description
 Class Tag
+
+ModelManager --> "filtered ~*" Assignment
 
 Assignment *--> "1" Name
 Assignment *--> "1" IsoDate
