@@ -25,6 +25,10 @@ balance sheet. It is built java, developed for small business accountant looking
 5. Bug fixes from Mock PE: [PR 190](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/190)
    - Handle duplicate persons in Address Book [Issue 151](https://github.com/AY2324S1-CS2103T-W13-3/tp/issues/151)
 
+### **Project Management**
+1. Assigned issues to group members for User Guide [Issue 5](https://github.com/AY2324S1-CS2103T-W13-3/tp/issues/5)
+2. Reviewed UG pull requests before merging into master branch
+
 ### **User Guide**
 1. Move draft UG to github: [PR 17](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/17)
 2. Wrote introductory section and added common FAQs: [PR 106](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/106)
