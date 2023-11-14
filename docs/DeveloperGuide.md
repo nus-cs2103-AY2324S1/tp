@@ -165,6 +165,8 @@ the user's input into key-value pairs, where the keys are specified using `Argum
   leading/trailing whitespace from text, verifying that there are no 
   duplicate entries in the text, and so on.
 
+#### Type Inference Within NetworkBookParser
+
 The activity diagram below describes the workflow of `NetworkBookParser`
 when determining which `Parser` to use:
 
@@ -172,13 +174,18 @@ when determining which `Parser` to use:
   <img src="images/AddressBookParser.png" width="1130" />
 </div>
 
-The sequence diagram below illustrates the interactions within the
-`FilterCommand` class to generate a `FilterCommand` object, using
-`ArgumentMultiMap` and `ArgumentTokeniser`:
+#### Type Inference Within FilterCommandParser
+
+The sequence diagram illustrates the interactions within `FilterCommandParser` to infer
+which type of `FilterCommand` to return, using `ArgumentMultiMap` to extract the field the user
+wishes to filter, based on input.
 
 <div class="diagram">
-  <img src="images/FilterCommandParser.png" width="1250" />
+  <img src="images/FilterCommandFindParseCommand.png" width="1250"/>
 </div>
+
+The full implementation of `FilterCommandParser` can be found in the [Filter Command Implementation.](#filter-contact-list)
+
 
 <!-- @@author -->
 
@@ -397,7 +404,7 @@ and hence any mutation of the `Person` object might introduce bugs.
 The implementation of the filter command follows the convention of a normal command, where `FilterCommandParser` is responsible for parsing the user input string into an executable `FilterCommand`.
 
 <div class="diagram">
-  <img src="images/filter/FilterDiagram.png" width="1110" />
+  <img src="images/filter/FilterCommandParser.png" width="1110" />
 </div>
 
 `FilterCommandParser` first obtains the values corresponding to the prefixes `/by` and `/with`, and ensures that each prefix is indicated once and only once.
@@ -406,6 +413,8 @@ If the value corresponding to `/by` is `course`, the value of the tag `/taken` i
 A new filter command is then created with the `Predicate<Person>` that corresponds to the values of `/by` and `/with`, and `/taken` if any.
 
 Upon execution, `FilterCommand` passes the instance of `Predicate<Person>` to the model through the method `model::updateDisplayedPersonList`. The model then uses the predicate internally to update the displayed list of contacts.
+
+The details of how the parser infers which type of `FilterCommand` is to be returned can be found in [`ref`](#type-inference-within-filtercommandparser)
 
 <!-- @@author -->
 

@@ -51,8 +51,7 @@ deactivate am
 skinparam sequenceReferenceBackgroundColor white
 
 ref over fcp, am
-    Infer the type of filterCommand to return
-    based on the "field" value.
+    Infer the type of filterCommand to return.
 end ref
 fcp --> fcp : filterCommand
 deactivate fcp
@@ -60,10 +59,10 @@ deactivate fcp
 fcp --> nbp : filterCommand
 deactivate fcp
 
-nbp -> m : execute(filterCommand)
+nbp -> m : execute(model)
 activate m
 
-m -> m : updateDisplayedPersonList()
+m -> m : updateDisplayedPersonList(\nfilterCommand.predicates)
 activate m
 
 note left of m : Details of how the command tests\neach person is omitted for simplicity
@@ -71,10 +70,10 @@ note left of m : Details of how the command tests\neach person is omitted for si
 m --> m : displayedPersonList
 deactivate m
 
-m --> nbp : displayedPersonList.details
+m --> nbp : Command success
 deactivate m
 
-<-- nbp : Send details of\ndisplayedPersonList to UI
+<-- nbp : Command success
 deactivate nbp
 
 @enduml

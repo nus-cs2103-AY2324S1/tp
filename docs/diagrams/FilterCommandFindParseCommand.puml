@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+group sd Infer the type of filterCommand to return
+    box Logic LOGIC_COLOR_T1
+        Participant ":FilterCommandParser" as fcp LOGIC_COLOR
+        Participant ":ArgumentMultimap" as am LOGIC_COLOR
+    end box
+    activate fcp
+    fcp -> am : getValue(field)
+    activate am
+    note right of am : Name of field determines which\nfilterCommand we generate
+    am --> fcp : field
+    deactivate am
+    fcp -> fcp : field.equals()
+
+    alt "course"
+        fcp -> fcp : parseCourse(args)
+        activate fcp
+        fcp -> am : getValue(taken)
+        activate am
+        note right of am : "taken" can be true or false.\nIf taken does not exist, return false
+        am --> fcp : taken
+        deactivate am
+        fcp --> fcp : new filterCourseCommand(args, taken)\n as filterCommand
+        deactivate fcp
+    else "tag"
+        fcp -> fcp : parseTag(args)
+        activate fcp
+        fcp --> fcp : new filterTagCommand(args)\nas filterCommand
+        deactivate fcp
+    else "spec"
+        fcp -> fcp : parseSpec(args)
+        activate fcp
+        fcp --> fcp : new filterSpecCommand(args)\nas filterCommand
+        deactivate fcp
+    else "grad"
+        fcp -> fcp : parseGrad(args)
+        activate fcp
+        fcp --> fcp : new filterGradCommand(args)\nas filterCommand
+        deactivate fcp
+    end
+    <-- fcp : filterCommand
+    deactivate fcp
+end
+@enduml
