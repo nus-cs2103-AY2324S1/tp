@@ -188,8 +188,6 @@ the lifeline reaches the end of diagram.
 #### Design rationale
 {:.no_toc}
 
-The `add-t` command was designed this way to ensure consistency with the previous `add` command in AB3.
-
 **Aspect: Optional fields**
 * **Alternative 1:** Allow optional fields when adding tutor (e.g. user can omit phone number or email when adding a 
   tutor).
