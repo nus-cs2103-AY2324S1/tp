@@ -892,7 +892,7 @@ mt
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `The task index provided is invalid` | Ensure that the index provided is within the valid range.
-`This task is already marked as done in the task list.` | Ensure that the task specified for marking is not already done in the task list.
+`This task is already marked as done in the task list.` | Ensure that the specified task is not already marked as done in the task list.
 
 <div style="page-break-after: always;"></div>
 
