@@ -723,7 +723,7 @@ et
 
 #### 2.4. Finding a specific task: `findTask`
 
-You can quickly locate tasks that contains your specified keywords in their title and/or note.
+You can find a task by their title or note, so that you can quickly locate a specific task.
 
 <h4>Format:</h4>
 
