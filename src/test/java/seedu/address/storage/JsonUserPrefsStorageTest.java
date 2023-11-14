@@ -34,6 +34,13 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
+    public void getUserPrefsFilePath_success() {
+        Path path = Paths.get("testPath");
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(path);
+        assertEquals(path, jsonUserPrefsStorage.getUserPrefsFilePath());
+    }
+
+    @Test
     public void readUserPrefs_missingFile_emptyResult() throws DataLoadingException {
         assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
     }
@@ -73,7 +80,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setModulePlanFilePath(Paths.get("moduleplan.json"));
         return userPrefs;
     }
 

@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,51 +11,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Andrew Yapp
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rocketninja7.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/rocketninja7)]
+[[portfolio](team/rocketninja7.md)]
+
+- Role: Project Advisor
+
+### Marques Tye
+
+<img src="images/marquestye.png" width="200px">
+
+[[github](http://github.com/marquestye)]
+[[portfolio](team/marquestye.md)]
+
+- Role: Team Lead
+- Responsibilities: Data
+
+### Wong Ji Kean
+
+<img src="images/ji-just-ji.png" width="200px">
+
+[[github](http://github.com/ji-just-ji)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
 
-### Jane Doe
+- Role: Developer
+- Responsibilities: Data
 
-<img src="images/johndoe.png" width="200px">
+### Kyle Zheng Ching Chan
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/xcolourx.png" width="200px">
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](https://github.com/xCOLOURx)]
+[[portfolio](team/xcolourx.md)]
 
-### Johnny Doe
+- Role: Developer
+- Responsibilities: Model + Ui
 
-<img src="images/johndoe.png" width="200px">
+### Huan Yaohong
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/yyyaohhh.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
+[[github](http://github.com/yyyaohhh)]
+[[portfolio](team/yyyaohhh.md)]
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Commands

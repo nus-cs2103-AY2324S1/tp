@@ -4,53 +4,57 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ModulePlanSemester;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the module plan data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ModulePlan modulePlan;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final ModuleData moduleData;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given modulePlan, userPrefs and moduleData.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ReadOnlyModuleData moduleData) {
+        requireAllNonNull(modulePlan, userPrefs, moduleData);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with module plan: " + modulePlan + " user prefs " + userPrefs
+                + " and module data " + moduleData);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.moduleData = new ModuleData(moduleData);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ModulePlan(), new UserPrefs(), new ModuleData());
     }
 
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -65,68 +69,111 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getModulePlanFilePath() {
+        return userPrefs.getModulePlanFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setModulePlanFilePath(Path modulePlanFilePath) {
+        requireNonNull(modulePlanFilePath);
+        userPrefs.setModulePlanFilePath(modulePlanFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ModulePlan ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyModulePlan getModulePlan() {
+        return modulePlan;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+        this.modulePlan.resetData(modulePlan);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modulePlan.hasModule(module);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteModule(Module module) {
+        requireNonNull(module);
+        modulePlan.removeModule(module);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addModule(Module module) {
+        requireNonNull(module);
+        if (modulePlan.hasModule(module)) {
+            throw new DuplicateModuleException();
+        }
+        modulePlan.addModule(module);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+        modulePlan.setModule(target, editedModule);
+    }
+
+    @Override
+    public Module getModule(ModuleCode code) {
+        requireNonNull(code);
+        return modulePlan.getModule(code);
+    }
+
+    @Override
+    public float totalModularCredits() {
+        return modulePlan.totalModularCredits();
+    }
+
+    @Override
+    public Float getCap() {
+        return modulePlan.getCap();
+    }
+
+    //=========== ModuleData ===============================================================================
+
+    @Override
+    public Module getModuleFromDb(ModuleCode moduleCode) {
+        return moduleData.getModule(moduleCode);
+    }
+
+    @Override
+    public ReadOnlyModuleData getModuleData() {
+        return moduleData;
+    }
+
+    @Override
+    public void setModuleData(ReadOnlyModuleData moduleData) {
+        requireNonNull(moduleData);
+        this.moduleData.resetData(moduleData);
+    }
+
+    @Override
+    public boolean checkDbValidModule(Module module) {
+        requireNonNull(module);
+        return checkDbValidModuleCode(module.getModuleCode());
+    }
+
+    @Override
+    public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return moduleData.checkDbValidModuleCode(moduleCode);
+    }
+
+    //=========== ModulePlanSemesterList Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<ModulePlanSemester> getFilteredModuleList() {
+        return modulePlan.getModulePlanSemesterList();
     }
 
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -140,9 +187,9 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return modulePlan.equals(otherModelManager.modulePlan)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && moduleData.equals(otherModelManager.moduleData);
     }
 
 }

@@ -1,120 +1,122 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlanWithout;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.module.Module;
+import seedu.address.model.moduleplan.ModulePlan;
+
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setup() {
+        model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
+    }
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void constructor_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteCommand(null));
+    }
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+    @Test
+    public void execute_validModule_deleteSuccessful() {
+        // Module is present in both moduleData and modulePlan
+        Module moduleToDelete = MODULE_IN_BOTH;
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        // Expected model's modulePlan excludes the valid module
+        ModulePlan expectedModulePlan = getTypicalModulePlanWithout(moduleToDelete);
+        ModelManager expectedModel = new ModelManager(expectedModulePlan, new UserPrefs(), getTypicalModuleData());
+
+        DeleteCommand deleteCommand = prepareDeleteCommand(moduleToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
+                Messages.format(moduleToDelete));
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_missingModule_throwsCommandException() {
+        // Module present in moduleData but not modulePlan
+        Module missingModule = MODULE_ONLY_DATA;
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        DeleteCommand deleteCommand = prepareDeleteCommand(missingModule);
+
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_MODULE_NOT_FOUND,
+                missingModule.getModuleCode(), DeleteCommand.COMMAND_WORD));
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_invalidModule_throwsCommandException() {
+        // Module not present in moduleData
+        Module invalidModule = MODULE_IN_NEITHER;
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = prepareDeleteCommand(invalidModule);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_MODULE_CODE,
+                invalidModule.getModuleCode()));
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        // use random typical modules for their module codes
+        Module module = MODULE_IN_BOTH;
+        Module otherModule = MODULE_ONLY_DATA;
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        DeleteCommand deleteCommand = prepareDeleteCommand(module);
+        assertEquals(deleteCommand, deleteCommand);
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        DeleteCommand deleteCommandCopy = prepareDeleteCommand(module);
+        assertEquals(deleteCommand, deleteCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertNotEquals(1, deleteCommand);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(deleteCommand, null);
 
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different module -> returns false
+        DeleteCommand differentDeleteCommand = prepareDeleteCommand(otherModule);
+        assertNotEquals(deleteCommand, differentDeleteCommand);
     }
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        // use random typical module for its module code
+        Module module = MODULE_IN_BOTH;
+
+        DeleteCommand deleteCommand = prepareDeleteCommand(module);
+        String expected = DeleteCommand.class.getCanonicalName()
+                + "{toDelete=" + module.getModuleCode() + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
+    // Utility function to create an {@code AddCommand} with the given {@code Module}.
+    private DeleteCommand prepareDeleteCommand(Module m) {
+        return new DeleteCommand(m.getModuleCode());
     }
 }

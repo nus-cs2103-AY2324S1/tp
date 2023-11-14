@@ -2,21 +2,26 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
+import seedu.address.model.moduleplan.ModulePlan;
 
 public class ModelManagerTest {
 
@@ -26,8 +31,10 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ModulePlan(), new ModulePlan(modelManager.getModulePlan()));
     }
+
+    //=========== UserPrefs ==================================================================================
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
@@ -37,14 +44,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setModulePlanFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setModulePlanFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -60,73 +67,142 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
+    //=========== ModulePlan ================================================================================
+
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setModulePlanFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setModulePlanFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setModulePlanFilePath_validPath_setsModulePlanFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setModulePlanFilePath(path);
+        assertEquals(path, modelManager.getModulePlanFilePath());
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasModule(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasModule_moduleNotInModulePlan_returnsFalse() {
+        modelManager.setModulePlan(getTypicalModulePlan());
+        modelManager.setModuleData(getTypicalModuleData());
+
+        // Module is present in moduleData but not in modulePlan
+        Module module = MODULE_ONLY_DATA;
+        assertFalse(modelManager.hasModule(module));
+
+        // Module is not present in moduleData or modulePlan
+        module = MODULE_IN_NEITHER;
+        assertFalse(modelManager.hasModule(module));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasModule_moduleInModulePlan_returnsTrue() {
+        modelManager.setModulePlan(getTypicalModulePlan());
+
+        Module module = MODULE_IN_BOTH;
+        assertTrue(modelManager.hasModule(module));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
+    }
+
+    //=========== ModuleData ===============================================================================
+
+    @Test
+    public void setModuleData_nullModuleData_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setModuleData(null));
+    }
+
+    @Test
+    public void getModuleFromDb_validModule_returnsModule() {
+        modelManager.setModuleData(getTypicalModuleData());
+        Module actualModule = modelManager.getModuleFromDb(MODULE_ONLY_DATA.getModuleCode());
+        Module expectedModule = clearUserInputFields(MODULE_ONLY_DATA);
+        assertEquals(expectedModule, actualModule);
+    }
+
+    @Test
+    public void getModuleFromDb_invalidModule_throwsIllegalArgumentException() {
+        modelManager.setModuleData(getTypicalModuleData());
+        ModuleCode invalidModuleCode = MODULE_IN_NEITHER.getModuleCode();
+        assertThrows(ModuleNotFoundException.class, () -> modelManager.getModuleFromDb(invalidModuleCode));
+    }
+
+    @Test
+    public void checkDbValidModule_validModule_returnsTrue() {
+        modelManager.setModuleData(getTypicalModuleData());
+        assertTrue(modelManager.checkDbValidModule(MODULE_ONLY_DATA));
+    }
+
+    @Test
+    public void checkDbValidModule_invalidModule_returnsFalse() {
+        modelManager.setModuleData(getTypicalModuleData());
+        assertFalse(modelManager.checkDbValidModule(MODULE_IN_NEITHER));
+    }
+
+    @Test
+    public void checkDbValidModule_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.checkDbValidModule(null));
+    }
+
+    @Test
+    public void checkDbValidModuleCode_validModule_returnsTrue() {
+        modelManager.setModuleData(getTypicalModuleData());
+        ModuleCode validModuleCode = MODULE_IN_BOTH.getModuleCode();
+        assertTrue(modelManager.checkDbValidModuleCode(validModuleCode));
+    }
+
+    @Test
+    public void checkDbValidModuleCode_invalidModule_returnsFalse() {
+        modelManager.setModuleData(getTypicalModuleData());
+        ModuleCode invalidModuleCode = MODULE_IN_NEITHER.getModuleCode();
+        assertFalse(modelManager.checkDbValidModuleCode(invalidModuleCode));
+    }
+
+    @Test
+    public void checkDbValidModuleCode_nullModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.checkDbValidModuleCode(null));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        ModulePlan modulePlan = getTypicalModulePlan();
         UserPrefs userPrefs = new UserPrefs();
+        ModuleData moduleData = getTypicalModuleData();
+        modelManager = new ModelManager(modulePlan, userPrefs, moduleData);
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        ModelManager modelManagerCopy = new ModelManager(modulePlan, userPrefs, moduleData);
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(modelManager, null);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
-
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // different modulePlan -> returns false
+        ModulePlan differentModulePlan = new ModulePlan();
+        assertNotEquals(modelManager, new ModelManager(differentModulePlan, userPrefs, moduleData));
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setModulePlanFilePath(Paths.get("differentFilePath"));
+        assertNotEquals(modelManager, new ModelManager(modulePlan, differentUserPrefs, moduleData));
+
+        // different moduleData -> returns false
+        ModuleData differentModuleData = new ModuleData();
+        assertNotEquals(modelManager, new ModelManager(modulePlan, userPrefs, differentModuleData));
     }
+
 }

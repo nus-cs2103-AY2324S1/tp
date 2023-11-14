@@ -13,18 +13,21 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.database.Database;
+import seedu.address.database.DatabaseManager;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModuleData;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonModulePlanStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ModulePlanStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -36,19 +39,20 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
+    protected Database database;
     protected Model model;
     protected Config config;
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ModulePlan ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,10 +61,12 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ModulePlanStorage modulePlanStorage = new JsonModulePlanStorage(userPrefs.getModulePlanFilePath());
+        storage = new StorageManager(modulePlanStorage, userPrefsStorage);
 
-        model = initModelManager(storage, userPrefs);
+        Database database = new DatabaseManager(DatabaseManager.DEFAULT_DATABASE_FILEPATH);
+
+        model = initModelManager(storage, userPrefs, database);
 
         logic = new LogicManager(model, storage);
 
@@ -68,29 +74,39 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s module plan, {@code userPrefs} and
+     * {@code database}'s module list. <br>
+     * The data from the sample module plan will be used instead if {@code storage}'s module plan is not found,
+     * or an empty module plan will be used instead if errors occur when reading {@code storage}'s module plan.
+     * If the {@code database}'s module list is not found, a {@code RuntimeException} will be thrown.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Database database) {
+        logger.info("Using data file : " + storage.getModulePlanFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyModulePlan> modulePlanOptional;
+        ReadOnlyModulePlan initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            modulePlanOptional = storage.readModulePlan();
+            if (!modulePlanOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getModulePlanFilePath()
+                        + " populated with a sample ModulePlan.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = modulePlanOptional.orElseGet(SampleDataUtil::getSampleModulePlan);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getModulePlanFilePath() + " could not be loaded."
+                    + " Will be starting with an empty ModulePlan.");
+            initialData = new ModulePlan();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        ModuleData moduleData;
+        try {
+            moduleData = database.readDatabase();
+        } catch (DataLoadingException dle) {
+            logger.severe("Database file at " + database.getDatabaseFilePath() + " could not be loaded.");
+            throw new RuntimeException("Unable to load database file.");
+        }
+
+        return new ModelManager(initialData, userPrefs, moduleData);
     }
 
     private void initLogging(Config config) {
@@ -170,13 +186,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting ModulePlan " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Module Plan ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
