@@ -66,8 +66,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is adapted from **[AddressBook 3(AB3)](https://github.com/se-edu/addressbook-level3)**
-* Undo and Redo features are adapted from proposed implementations from **[AddressBook 3(AB3)](https://github.com/se-edu/addressbook-level3)**
+* This project is adapted from **[AddressBook 3(AB3)](https://github.com/nus-cs2103-AY2324S1/tp)**
+* Undo and Redo features are adapted from proposed implementations from **[AddressBook 3(AB3)](https://github.com/nus-cs2103-AY2324S1/tp)**
 
 --------------------------------------------------------------------------------------------------------------------
 
