@@ -92,8 +92,9 @@ Given below are my contributions to the project.
       deliver a minimum viable product, I had to ensure that the ability to switch between views was done effectively.
       The main challenge was to identify that `CommandResult` was a good way to implement this.
 
-* **Code contributed
-  **: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lamchenghou&breakdown=false&sort=totalCommits%20dsc&sortWithin=totalCommits%20dsc&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&tabOpen=true&tabType=authorship&tabAuthor=lamchenghou&tabRepo=AY2324S1-CS2103T-W10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lamchenghou&breakdown=false&sort=totalCommits%20dsc&sortWithin=totalCommits%20dsc&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&tabOpen=true&tabType=authorship&tabAuthor=lamchenghou&tabRepo=AY2324S1-CS2103T-W10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+
+<div style="page-break-after: always;"></div>
 
 * **Project management**:
     * Created, managed and closed milestones `v1.1`, `v1.2`, `v1.2b` (3 milestones).
@@ -120,9 +121,14 @@ Given below are my contributions to the project.
         * Added `Command Summary` section [\#35](https://github.com/AY2324S1-CS2103T-W10-2/tp/pull/35)
         * Added documentation for the `mapping` features [\#35](https://github.com/AY2324S1-CS2103T-W10-2/tp/pull/35)
         * Modified site-wide settings: [\#35](https://github.com/AY2324S1-CS2103T-W10-2/tp/pull/35)
+        * Helped design the table of contents
     * Developer Guide:
         * Added implementation details for `SeplendidParser`
         * Added implementation details for the mapping feature
+        * Added implementation details for `Storage` and `SeplendidModel`
+        * Added use cases for mapping search and sort features
+        * Added user stories for mappings
+        * Added 'Morphing of AB3 to SEPlendid' portion of Effort section
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [1](https://github.com/AY2324S1-CS2103T-W10-2/tp/pull/85/files),

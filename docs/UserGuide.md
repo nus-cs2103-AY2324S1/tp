@@ -37,20 +37,20 @@ guide!
 
 <div class= "toc">
 
-1. [How to navigate this User Guide](#1-navigate-this-user-guide)
+1. [How to navigate this User Guide](#1-how-to-navigate-this-user-guide)
 2. [Icons used in this User Guide](#2-icons-used-in-this-user-guide)
 3. [Installation](#3-installation)
 4. [Quick Reference Guide](#4-quick-reference-guide)
     - 4.1 [Graphical User Interface (GUI)](#4-1-graphical-user-interface-gui)
     - 4.2 [Command format](#4-2-command-format)
-    - 4.3 [Try Out Your first command](#4-3-your-first-command)
+    - 4.3 [Try Out Your first command](#4-3-try-out-your-first-command)
 5. [Commands](#5-commands)
     - 5.1 [Commands for local courses](#5-1-commands-for-local-courses)
         - 5.1.1 [List all local courses: `localcourse list`](#5-1-1-list-all-local-courses-localcourse-list)
         - 5.1.2 [Add a local course: `localcourse add`](#5-1-2-add-a-local-course-localcourse-add)
         - 5.1.3 [Delete a local course: `localcourse delete`](#5-1-3-delete-a-local-course-localcourse-delete)
         - 5.1.4 [Update a local course: `localcourse update`](#5-1-4-update-a-local-course-localcourse-update)
-        - 5.1.5 [Search a local course by attributes: `localcourse search`](#5-1-5-search-a-localcourse-by-attributes-localcourse-search)
+        - 5.1.5 [Search a local course by attributes: `localcourse search`](#5-1-5-search-a-local-course-by-attributes-localcourse-search)
         - 5.1.6 [Sort a local course by attributes: `localcourse sort`](#5-1-6-sort-local-courses-by-attributes-localcourse-sort)
     - 5.2 [Commands for partner courses](#5-2-commands-for-partner-courses)
         - 5.2.1 [List all partner courses: `partnercourse list`](#5-2-1-list-all-partner-courses-partnercourse-list)
@@ -692,7 +692,6 @@ Refer to the Figure 5.3.3 to view the outcome of the execution of the command:
 <br>
 <br>
 
-//@@author lamchenghou 
 ### 5.4 Commands for mappings
 <br />
 
@@ -830,7 +829,6 @@ Refer to the figure below to view the outcome of the execution of the command:
 
 <br />
 <br />
-//@@author lamchenghou 
 
 ### 5.5 Commands for notes
 <br />
