@@ -749,14 +749,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. Command is of invalid format
     * 1a1. Flagship shows an error message.
+  
       Use case resumes from step 1.
 
 * 1b. Internship entry has a duplicate already stored in Flagship.
     * 1b1. Flagship shows an error message.
+  
       Use case resumes from step 1.
 
 * 1c. Necessary fields in the command are missing.
     * 1c1. Flagship shows an error message.
+  
       Use case resumes from step 1.
 
 
@@ -816,13 +819,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. Flagship shows an error message.
 
-      Use case resumes at step 3.
+      Use case resumes from step 3.
 
 * 3b. Command is of invalid format.
 
     * 3b1. Flagship shows an error message.
 
-      Use case resumes at step 3.
+      Use case resumes from step 3.
 
 <div style="float: right;">
   <a href="#table-of-contents">
@@ -845,13 +848,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Flagship shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes from step 1.
 
 * 1b. The given index is invalid.
 
     * 1b1. Flagship shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes from step 1.
 
 * 2a. No matching application is found and list is empty.
 
@@ -872,7 +875,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Flagship shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes from step 1.
 
 * 1b. List is empty.
 
