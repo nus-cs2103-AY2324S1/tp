@@ -1,0 +1,31 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User launches LoveBook;
+
+: User enters a command to filter dates in the GUI;
+
+: Input is passed over to the logic component;
+
+if () then ([at least one valid field])
+        if () then ([all valid fields contain valid values])
+            if () then ([keywords match any date in LoveBook])
+                :Display filtered dates;
+                :Display number of dates found message;
+                stop
+            else ([else])
+                : Display 0 dates;
+                :Display 0 dates found message;
+                stop
+            endif
+        else ([else])
+            :Display invalid field value error message;
+            stop
+        endif
+else ([else])
+    :Display invalid command format error message;
+    stop
+endif
+@enduml

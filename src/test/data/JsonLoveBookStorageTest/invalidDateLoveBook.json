@@ -1,0 +1,8 @@
+{
+  "dates": [ {
+    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "age": "94",
+    "gender": "F",
+    "height": "23245"
+  } ]
+}

@@ -1,19 +1,19 @@
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-image: url("../images/pink-gradient.jpg");
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-opacity: 0.8;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: white;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: white;
 }

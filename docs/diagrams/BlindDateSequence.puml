@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LoveBookParser" as LoveBookParser LOGIC_COLOR
+participant "b:BlindDateCommand" as BlindDateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("blindDate")
+activate LogicManager
+
+LogicManager -> LoveBookParser : parseCommand("blindDate")
+activate LoveBookParser
+
+create BlindDateCommand
+LoveBookParser -> BlindDateCommand
+activate BlindDateCommand
+
+BlindDateCommand --> LoveBookParser : b
+deactivate BlindDateCommand
+
+LoveBookParser --> LogicManager : b
+deactivate LoveBookParser
+
+LogicManager -> BlindDateCommand : execute()
+activate BlindDateCommand
+
+BlindDateCommand -> Model : getBlindDate()
+activate Model
+
+Model --> BlindDateCommand
+deactivate Model
+
+create CommandResult
+BlindDateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> BlindDateCommand
+deactivate CommandResult
+
+BlindDateCommand --> LogicManager : result
+deactivate BlindDateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
