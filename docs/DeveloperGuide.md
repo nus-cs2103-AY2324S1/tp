@@ -547,11 +547,12 @@ The `FullTaskList` class is implemented as a list to view all the collective tas
     * Pros: May be easier to increase navigability.
     * Cons: May increase code complexity due to filtering the respective tasks.
 
-### Linking to students
+### Linking Lessons to Students
 
 #### Implementation
 
 The Link feature is facilitated by the `LinkCommand` class, as well as the `BiDirectionalMap` class. As its name suggests, the `BiDirectionalMap` is a class that contains two maps, a "Forward" map and a "Reverse" map. The "Forward" map maps keys to values, and the "Reverse" map maps the values back to the keys.
+
 This allows us to hold both a mapping of `Person` to `Lesson` and `Lesson` to `Person` at the same time.
 The `BiDirectionalMap` class exposes a few useful methods such as `addMapping`, `removeMapping`, `get` and `getReversed` that help to manipulate both maps at once.
 
@@ -560,8 +561,8 @@ The Link Command supports two different commands depending on the current State:
 - When in the ___STUDENTS list___ and a student is selected via `show INDEX`, the `linkTo` command allows linking of the selected student to any specified lesson
 - When in the ___SCHEDULE list___ and a lesson is selected via `show INDEX`, the `linkTo` command allows linking of the selected lesson to any specified student
 
-When a user successfully runs either one of these commands, the app gets the relevant `Person` and the relevant `Lesson` from the `ModelManager`.
-A check to ensure the entered Student and Lesson exists and that they are not already linked is carried out.
+When a user successfully runs either one of these commands, the app gets the relevant `Person` and the relevant `Lesson` from the `ModelManager` through a simple search using the names of each.
+A check to ensure the entered student and lesson exists and that they are not already linked is carried out.
 
 Then, `BiDirectionalMap#addMapping()` is called to create a map between the student and lesson. 
 
