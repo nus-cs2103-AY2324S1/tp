@@ -5,55 +5,64 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `evanyan@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Chen Peiran
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/peiran18.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/peiran18)]
+[[portfolio](team/peiran18.md)]
 
-* Role: Project Advisor
+* Role: Documentation & Deliverables IC
+* Responsibilities:
+    * Review Documentations
+    * Tasks Allocation
+    * Milestone Tracking
 
-### Jane Doe
+### Chen Zhiruo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/czhiruo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/czhiruo)][[portfolio](team/czhiruo.md)]
+
+* Role: Testing IC
+* Responsibilities:
+    * Code Testing
+    * Supervises Continuous Integration
+
+### Jeremy Yong Zheming
+
+<img src="images/jeremyyong128.png" width="200px">
+
+[[github](https://github.com/JeremyYong128)] [[portfolio](team/jeremyyong128.md)]
+
+* Role: Code Implementation & Quality IC
+* Responsibilities:
+    * Logic Implementation
+    * Reviews Code Quality
+
+### Miguel Foo Ming Yew
+
+<img src="images/migfoo02.png" width="200px">
+
+[[github](http://github.com/migfoo02)][[portfolio](team/migfoo02.md)]
+
+* Role: Frontend Development IC
+* Responsibilities:
+    * Frontend Development
+    * UI Design
+
+### Yan Weidong (Evan)
+
+<img src="images/evanyan13.png" width="200px">
+
+[[github](https://github.com/evanyan13)][[portfolio](team/evanyan13.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+    * Overall Coordination
+    * Version & Release Management
+    * Repo Maintenance & Integration

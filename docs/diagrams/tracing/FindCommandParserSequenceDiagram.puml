@@ -1,0 +1,28 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":FindCommandParser" as fcp LOGIC_COLOR
+Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
+Participant "predicateList:List<Predicate<Job>>" as pl LOGIC_COLOR
+Participant "cp:CombinedPredicate" as cp LOGIC_COLOR
+Participant "command:FindCommand" as fc LOGIC_COLOR
+
+[-> fcp ++: parse(args)
+fcp -> at ++: tokenize user input
+at --> fcp --: argMultimap
+create pl
+fcp -> pl ++
+pl --> fcp --
+loop for each entry in argMultimap
+    fcp -> pl ++: add(predicate)
+    pl --> fcp --
+end
+create cp
+fcp -> cp ++: CombinedPredicate(predicateList)
+cp --> fcp --:
+create fc
+fcp -> fc ++: FindCommand(cp)
+fc --> fcp --
+fcp -->[ --: command
+@enduml

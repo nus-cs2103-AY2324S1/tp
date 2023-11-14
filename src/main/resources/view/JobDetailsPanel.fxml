@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:id="jobDetailsPanel" minWidth="100" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" styleClass="jobDetailsPanel">
+    <VBox VBox.vgrow="NEVER" minHeight="150" prefHeight="150">
+        <padding>
+            <Insets bottom="15" left="15" right="15" top="15"/>
+        </padding>
+        <Label fx:id="company" styleClass="cell_big_label" text="\$company" wrapText="true"/>
+        <GridPane minHeight="20">
+            <columnConstraints>
+                <ColumnConstraints minWidth="100.0"/>
+            </columnConstraints>
+            <Label styleClass="cell_small_label" text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                   GridPane.valignment="TOP"/>
+            <Label fx:id="role" styleClass="cell_small_label" text="\$role" wrapText="true" GridPane.columnIndex="1"
+                   GridPane.rowIndex="0"/>
+            <Label styleClass="cell_small_label" text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                   GridPane.valignment="TOP"/>
+            <Label fx:id="status" styleClass="cell_small_label" text="\$status" GridPane.columnIndex="1"
+                   GridPane.rowIndex="1"/>
+            <Label styleClass="cell_small_label" text="Industry:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                   GridPane.valignment="TOP"/>
+            <Label fx:id="industry" styleClass="cell_small_label" text="\$industry" GridPane.columnIndex="1"
+                   GridPane.rowIndex="2"/>
+            <Label styleClass="cell_small_label" text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                   GridPane.valignment="TOP"/>
+            <Label fx:id="deadline" styleClass="cell_small_label" text="\$industry" GridPane.columnIndex="1"
+                   GridPane.rowIndex="3"/>
+            <Label styleClass="cell_small_label" text="Job Type:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                   GridPane.valignment="TOP"/>
+            <Label fx:id="jobType" styleClass="cell_small_label" text="\$jobType" GridPane.columnIndex="1"
+                   GridPane.rowIndex="4"/>
+        </GridPane>
+    </VBox>
+
+    <AnchorPane minWidth="100" prefWidth="400.0" minHeight="200.0" prefHeight="400.0" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="5" right="15" bottom="15" left="15"/>
+        </padding>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="interviewPreamble" styleClass="cell_big_label" text="\$interviewPreamble"/>
+            <StackPane fx:id="interviewListPanelPlaceHolder" minHeight="100" prefHeight="400"
+                       prefWidth="400.0">
+            </StackPane>
+        </VBox>
+    </AnchorPane>
+</VBox>
+

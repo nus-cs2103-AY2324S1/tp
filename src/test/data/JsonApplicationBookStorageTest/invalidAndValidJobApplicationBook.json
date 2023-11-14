@@ -1,0 +1,9 @@
+{
+  "jobs": [ {
+    "role" : "Valid Job",
+    "company" : "Valid Company"
+  }, {
+    "role" : "Person With Invalid Company",
+    "company" : "&&&"
+  } ]
+}

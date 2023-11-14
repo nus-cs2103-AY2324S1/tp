@@ -1,0 +1,22 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic #skyblue
+Participant ":ClearCommand" as ClearCommand LOGIC_COLOR
+Participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model #pink
+Participant "model:Model" as model MODEL_COLOR
+end box
+
+[-> ClearCommand ++: execute()
+ClearCommand -> model ++: setApplicationBook(new ApplicationBook())
+deactivate model
+create CommandResult
+ClearCommand -> CommandResult ++: CommandResult()
+CommandResult --> ClearCommand --: result
+ClearCommand -->[ --: result
+
+@enduml

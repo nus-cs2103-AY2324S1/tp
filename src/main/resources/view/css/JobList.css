@@ -1,0 +1,22 @@
+/* Job List Panel*/
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+    -fx-border-radius: 20px;
+}
+
+.list-view .list-cell {
+    -fx-padding: 0px 10px 15px 5px;
+}
+
+.list-cell:selected {
+    -fx-background-color: #ffffff;
+}
+
+.list-cell:selected #cardPane {
+    -fx-background-color: #FAF0FF;
+}

@@ -1,0 +1,6 @@
+{
+  "jobs": [ {
+    "name" : "Person with invalid name field: Ha!ns Mu@ster",
+    "company" : "Test"
+  } ]
+}

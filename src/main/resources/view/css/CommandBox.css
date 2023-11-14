@@ -1,0 +1,20 @@
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #878787;
+}
+
+#commandTextField {
+    -fx-background-color: transparent #343434 transparent #343434;
+    -fx-background-insets: 0;
+    -fx-background-radius: 15px;
+    -fx-background-color: #E4E1FF;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-border-radius: 15px;
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13pt;
+    -fx-text-fill: #343434;
+    -fx-prompt-text-fill: #6F6F6F;
+    -fx-effect: dropshadow(gaussian, rgba(00, 00, 00, 0.25), 4, 0, 2, 2);
+}

@@ -1,0 +1,61 @@
+{
+  "_comment": "AddressBook save file which contains the same Job values as in TypicalJobs#getTypicalAddressBook()",
+  "jobs": [
+    {
+      "role": "Software Engineer",
+      "company": "Google",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    },
+    {
+      "role": "Teacher",
+      "company": "NUS",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    },
+    {
+      "role": "Waiter",
+      "company": "McDonalds",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    },
+    {
+      "role": "Pilot",
+      "company": "Singapore Airlines",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    },
+    {
+      "role": "Police Officer",
+      "company": "SPF",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    },
+    {
+      "role": "Fruit Seller",
+      "company": "ABC Fruits",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    },
+    {
+      "role": "Grass Cutter",
+      "company": "XYZ Gardening",
+      "status": "TO_ADD_STATUS",
+      "deadline": "TO_ADD_DEADLINE",
+      "jobType": "TO_ADD_JOB_TYPE",
+      "industry": "TO_ADD_INDUSTRY"
+    }
+  ]
+}

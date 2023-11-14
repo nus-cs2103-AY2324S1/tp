@@ -1,0 +1,30 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+Participant ":InterviewDeleteCommand" as idc LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant "model:Model" as m MODEL_COLOR
+Participant "jobToDeleteInterview:Job" as j MODEL_COLOR
+end box
+
+[-> idc ++: execute()
+idc -> m ++: getJob()
+m --> idc--: jobToDeleteInterview
+
+idc -> j ++: getInterview()
+j --> idc--: interviewToDelete
+
+idc -> j ++: deleteInterview()
+deactivate j
+
+create cr
+idc -> cr ++
+cr -->idc --
+idc -->[ --: result
+
+@enduml

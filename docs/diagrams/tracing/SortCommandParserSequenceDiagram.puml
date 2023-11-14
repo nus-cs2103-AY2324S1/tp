@@ -1,0 +1,22 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":SortCommandParser" as scp LOGIC_COLOR
+Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
+Participant "comparator:FieldComparator" as fc LOGIC_COLOR
+Participant "command:SortCommand" as sc LOGIC_COLOR
+
+[-> scp ++: parse(args)
+scp -> at ++: tokenize user input
+at --> scp --: argMultimap
+scp -> scp ++: getPrefix(argMultimap)
+scp --> scp --: p
+create fc
+scp -> fc ++: FieldComparator(p)
+fc --> scp --
+create sc
+scp -> sc ++: SortCommand(comparator)
+sc --> scp --
+scp -->[ --: command
+@enduml
