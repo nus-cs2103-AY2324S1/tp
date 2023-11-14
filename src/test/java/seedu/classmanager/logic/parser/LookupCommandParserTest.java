@@ -82,7 +82,7 @@ public class LookupCommandParserTest {
         assertParseFailure(parser, " #t/test comment n/Alice ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
 
-        // prefix for class information commands 'tut/', 'a/', 'part/' is not accepted for lookup
+        // prefix for Class Information commands 'tut/', 'a/', 'part/' is not accepted for lookup
         assertParseFailure(parser, " n/Alice tut/test comment",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " part/test comment n/Alice ",
