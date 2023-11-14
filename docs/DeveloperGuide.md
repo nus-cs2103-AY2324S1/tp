@@ -81,7 +81,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletePerson 1`.
 
 ![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
