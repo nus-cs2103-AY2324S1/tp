@@ -18,7 +18,7 @@ still having the benefits of a Graphical User Interface (GUI).
   * Remove tags as parameter for both `add` and `edit` command.
   * (Pull Requests [#90](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/90))
 
-* Enhance the `find` command
+* Enhance the `find` command.
   * Allow users to find tutees using partial keywords.
   * Allow users to find by name and/or subject to find for tutees.
   * (Pull Requests [#68](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/68), [#127](https://github.com/AY2324S1-CS2103T-F10-4/tp/pull/127))
