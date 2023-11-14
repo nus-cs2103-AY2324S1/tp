@@ -875,10 +875,6 @@ is for **Shopee**.
 
 ![IntAddCommandEg4](images/user-guide/IntAddCommandEg4.png)
 
-<div style="page-break-after: always;">
-
-</div>
-
 * Invalid/Missing input for any field: `interview add 1 t/NOT SURE a/Office d/Dec 01 2023 1000`
     * If any fields have invalid/missing input, Result Display will show the possible valid inputs for that field.
     * So instead of putting `NOT SURE` for the interview `type`, we can put `OTHER` instead.
@@ -984,10 +980,6 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 
 ![IntEditCommandEg4](images/user-guide/IntEditCommandEg4.png)
 
-<div style="page-break-after: always;">
-
-</div>
-
 * Invalid/Missing input for any field: `interview edit 2 from/1 d/Dec 31 2023`
     * If any fields have invalid/missing input, Result Display will show the possible valid inputs for that field.
     * As `Dec 31 2023` is not a valid `DATETIME` format, please specify the time as well. Eg. `Dec 31 2023 2359`
@@ -1052,7 +1044,8 @@ On **Windows**:
 
 ### 6. Can I have multiple Job types and Interview types for a single application?
 
-1. No, only a single job type can be added for each application and only a single interview type can be added for each interview.
+1. No, only a single [job type](#valid-job-types) can be added for each application and only a single 
+   [interview type](#valid-interview-types) can be added for each interview.
 2. Choose the type that best suits the job or interview.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
