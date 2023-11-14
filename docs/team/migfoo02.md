@@ -5,7 +5,6 @@ title: Miguel's Project Portfolio Page
 
 # Project: JobFindr
 
-This portfolio provides an overview of my contributions to JobFindr.
 ## Overview
 
 JobFindr is a desktop-based job application management application.
@@ -17,8 +16,6 @@ for students like us.
 
 JobFindr was born out of this necessity, offering a one-stop solution for recording and managing your job applications
 effortlessly.
-
-## Summary of Contributions
 
 ### Enhancements
 
@@ -47,8 +44,9 @@ effortlessly.
    * **Justification**: This was a valuable addition to the UI as it allows users to view the interviews associated with a job application. 
    * **Highlights**: Implementing this functionality required creating the `InterviewListPanel` class and its associated FXML file. The challenging aspect was ensuring that the `InterviewListPanel` updates whenever an `interview` command is executed. As such, I modified the `CommandResult` class to track the type of command that was executed to update the `InterviewListPanel` accordingly.
 
-### Contributions
+### Other Contributions
 
+* **Code Contributed**: My code contributions can be found here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=migfoo02&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=migfoo02&tabRepo=AY2324S1-CS2103T-W12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 * **Project management**:
   * Participated actively in meetings and discussions to provide feedback and suggestions on the project.
   * Helped to ensure that the team was on track to meet the deadlines for each milestone.
@@ -63,8 +61,3 @@ effortlessly.
     * Fixed bugs reported during PE dry run.
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [#55](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/55), [#58](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/58), [#103](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/103), [#126](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/126)
-
-### Code Contributed
-
-My code contributions can be found
-here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=migfoo02&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=migfoo02&tabRepo=AY2324S1-CS2103T-W12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
