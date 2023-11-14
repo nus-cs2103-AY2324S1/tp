@@ -27,7 +27,7 @@ Given below are my contributions to the project.
   * Highlights: This feature needed to handle input when there is no group name type and when there is group name type. It also needed to ensure that when the group name is typed, the contact needed to be added inside the `uniquePersonList` and the group inside the `addressbook#grouplist` if the group does not exist. It also needed to ensure that in the group was added into contact and the contact was added into the group because group and contact are dependent with one another.
 *  **Updated the GUI to fit ProjectPRO requirements** (Pull requests [\#70](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/70), [\#100](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/100), [\#136](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/136))
    * Justification: This update allows the user to see a weekly schedule and track when their next group meeting is.
-   * Highlights: The challenges faced was converting the data to GUI friendly and ensuring the GUI gets updated when new group meeting time was added to a group
+   * Highlights: The challenges faced was converting the data to GUI friendly and ensuring the GUI gets updated when new group meeting time was added to a group.
 
 
 * **Documentation**:
@@ -35,11 +35,11 @@ Given below are my contributions to the project.
     * Added documentation for the features `list`, `new`, `delete`, `find`. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
     * Made some updates to the documentation for the final release. [\#290](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/290), [\#277](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/277), [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271)
   * Developer Guide:
-    * Added implementation details of the `add` and `addtime`feature. [\#271] (https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files)
+    * Added implementation details of the `add` and `addtime`feature. [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files).
     * Made diagrams for `add` and `addtime` feature.
-    * Updated old architecture models to projectPROs implementation for `model` and `UI` [\#263](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/263/files)
-    * Added and updated the planned enhancements section. [\#248](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/248/files)
+    * Updated old architecture models to projectPROs implementation for `model` and `UI` [\#263](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/263/files).
+    * Added and updated the planned enhancements section. [\#248](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/248/files).
 
 * **Community**:
-  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/232), [2](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/231), [3](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/234))
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/232), [2](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/231), [3](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/234)).
 
