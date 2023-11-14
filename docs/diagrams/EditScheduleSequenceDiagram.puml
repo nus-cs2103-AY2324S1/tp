@@ -6,10 +6,9 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditSchedule\nCommandParser" as EditScheduleCommandParser LOGIC_COLOR
-participant "e:EditSchedule\nDescriptor" as EditScheduleDescriptor LOGIC_COLOR
 participant "d:EditSchedule\nCommand" as EditScheduleCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
-participant "s:Schedule" as EditedSchedule MODEL_COLOR
+participant "e:Schedule" as EditedSchedule MODEL_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -31,13 +30,6 @@ deactivate EditScheduleCommandParser
 
 AddressBookParser -> EditScheduleCommandParser : parse("1 st/2023-09-15T09:00")
 activate EditScheduleCommandParser
-
-create EditScheduleDescriptor
-EditScheduleCommandParser -> EditScheduleDescriptor
-activate EditScheduleDescriptor
-
-EditScheduleDescriptor --> EditScheduleCommandParser : e
-deactivate EditScheduleDescriptor
 
 create EditScheduleCommand
 EditScheduleCommandParser -> EditScheduleCommand
@@ -63,21 +55,21 @@ return
 
 create EditedSchedule
 EditScheduleCommand -> EditedSchedule ++
-return s
-EditScheduleCommand -> Model ++ : hasSchedule(s)
+return e
+EditScheduleCommand -> Model ++ : hasSchedule(e)
 return
 
 EditScheduleCommand -> Model ++ : getAddressBook()
 return
 
 loop number of schedules in model
-    EditScheduleCommand -> EditedSchedule : isClashing(s)
+    EditScheduleCommand -> EditedSchedule : isClashing(e)
     activate EditedSchedule
     EditedSchedule --> EditScheduleCommand
     deactivate EditedSchedule
 end
 
-EditScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, s)
+EditScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, e)
 return
 EditScheduleCommand -> Model ++ : updateFilteredScheduleList()
 return
