@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Reviewing, approving and merging pull requests on GitHub (Pull requests [#76](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/76), [#144](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/144), [#211](https://github.com/AY2324S1-CS2103T-W12-1/tp/pull/211))
-  * Creating and closing issues using Github's issue tracker
+  * Creating, assigning and closing issues using Github's issue tracker
   * Maintaining Team Project Notes on Google Docs
 
 
@@ -39,14 +39,15 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added Table of Contents, Glossary and FAQ section
-    * Included v1.2 commands into command summary and parameter information
-    * Added guides for list leave feature
+    * Add Table of Contents, Glossary and FAQ section
+    * Include v1.2 commands into command summary and parameter information
+    * Add guides for list leave feature
     * Check through overall formatting and content of UG
   * Developer Guide:
-    * Added implementation and testing guide for add leave and list leave feature
-    * Created UML diagrams to illustrate implementations
-    * Updated the user stories
+    * Add implementation and testing guide for add leave and list leave features
+    * Create UML diagrams for add leave and list leave features
+    * Update UML class diagrams (e.g. ModelClassDiagram, UIClassDiagram) to fit v1.4 implementation
+    * Update user stories
     * Check through overall formatting and content of DG
 
 
