@@ -796,7 +796,7 @@ testers are expected to do more *exploratory* testing.
 
 **Prerequisite:** Musician List should have at least 1 musician. Band List should have at least 1 band with at least 1 musician.
 2. Removing a musician from an invalid band
-    1. Test case: `addm b/0 m/1`  
+    1. Test case: `removem b/0 m/1`  
        **Expected:** An invalid command format error should be shown with the correct command format.
 
 ### Edit a band
