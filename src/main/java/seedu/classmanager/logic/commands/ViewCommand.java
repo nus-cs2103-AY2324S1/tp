@@ -35,7 +35,7 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Executes a view command to display the class information of a specified student in the view panel.
+     * Executes a view command to display the Class Information of a specified student in the view panel.
      * @param model {@code Model} which the command should operate on.
      * @param commandHistory The command history to record this command.
      * @return A {@code CommandResult} with the feedback message of the operation result.
