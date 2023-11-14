@@ -49,5 +49,6 @@ public class FinancialPlanTest {
         assertTrue(fp1.equals(fp1));
         assertTrue(fp1.equals(fp2));
         assertFalse(fp1.equals(fp3));
+        assertFalse(fp2.equals(null));
     }
 }

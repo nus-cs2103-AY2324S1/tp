@@ -34,17 +34,11 @@ public class GatherCommandParser implements Parser<GatherCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_FINANCIAL_PLAN).isPresent()) {
-            String financialPlanArgs = removePrefix(trimmedArgs, PREFIX_FINANCIAL_PLAN);
-            validateFinancialPlan(financialPlanArgs);
-            assert isValidFinancialPlanName(financialPlanArgs) : "Prompt has to meets valid FP requirements";
-            return new GatherCommand(new GatherEmailByFinancialPlan(financialPlanArgs));
+            return createGatherByFinancialPlan(trimmedArgs);
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            String tagArgs = removePrefix(trimmedArgs, PREFIX_TAG);
-            validateTag(tagArgs);
-            assert isValidTagName(tagArgs) : "Prompt has to meets valid Tag requirements";
-            return new GatherCommand(new GatherEmailByTag(tagArgs));
+            return createGatherByTag(trimmedArgs);
         }
 
         throw new ParseException(
@@ -58,5 +52,27 @@ public class GatherCommandParser implements Parser<GatherCommand> {
         String noPrefix = currArg.replace(prefix.getPrefix(), "");
         String trimmedArg = noPrefix.trim();
         return trimmedArg;
+    }
+
+    /**
+     * Creates a GatherCommand object for Financial Plan from {@code argString}
+     */
+    private GatherCommand createGatherByFinancialPlan(String argString) throws ParseException {
+        String financialPlanArg = removePrefix(argString, PREFIX_FINANCIAL_PLAN);
+        validateFinancialPlan(financialPlanArg);
+        assert isValidFinancialPlanName(financialPlanArg) : "Prompt has to meets valid FP requirements";
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan(financialPlanArg);
+        return new GatherCommand(prompt);
+    }
+
+    /**
+     * Creates a GatherCommand object for Tag from {@code argString}
+     */
+    private GatherCommand createGatherByTag(String argString) throws ParseException {
+        String tagArg = removePrefix(argString, PREFIX_TAG);
+        validateTag(tagArg);
+        assert isValidTagName(tagArg) : "Prompt has to meets valid Tag requirements";
+        GatherEmailByTag prompt = new GatherEmailByTag(tagArg);
+        return new GatherCommand(prompt);
     }
 }

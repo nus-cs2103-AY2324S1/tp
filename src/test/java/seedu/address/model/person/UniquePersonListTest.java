@@ -206,4 +206,10 @@ public class UniquePersonListTest {
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+    @Test
+    public void equals() {
+        assertEquals(uniquePersonList, uniquePersonList);
+        assertFalse(uniquePersonList.equals(null));
+    }
 }

@@ -91,7 +91,7 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 that are in the `src/main/resources/view` folder. For example, the layout of the
 [`MainWindow`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified in
-[`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+[`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -161,7 +161,7 @@ chronological order.
 * `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for
 `Person` objects in `filteredPersons`.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-should make sense on their own without depending on other components)
+should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -256,22 +256,22 @@ Alternative 2: Create a hashset of Appointments for each Person.
 
 **Aspect: How to implement override prompt**
 
-Alternative 1(current solution): Create a separate constructor in CommandResult to handle overriding
+Alternative 1(current solution): Create a separate constructor in CommandResult to handle overriding.
 - Pros:
-  * Quick solution to the problem
-  * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command
+  * Easy to implement.
+  * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command.
 - Cons:
-  * This creates multiple different constructors within the CommandResult
+  * This creates multiple different constructors within the CommandResult.
 
-Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a PausedExecutionResult
+Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a PausedExecutionResult.
 - Pros:
-  * Improves code readability and reduces coupling in code
+  * Improves code readability and reduces coupling in code.
 - Cons:
   * Time-consuming to refactor code
-  * Improper implementation could result in breaking of coding principles
+  * Improper implementation could result in breaking of coding principles.
 - Note:
   * With additional time, alternative 2 can be implemented by refactoring the code to create multiple subclasses. Be wary of the
-    liskov substitution principle when doing so. The earlier alternative 2 is implemented, the better to reduce amount of code
+    Liskov Substitution Principle  (LSP) when doing so. The earlier alternative 2 is implemented, the better to reduce amount of code
     that needs to be refactored.
   * The above implementation can be done in conjunction with the clear command prompt to reduce code coupling.
 
@@ -288,7 +288,7 @@ The following sequence diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteSequenceDiagram.png" width="800"/>
 
-<div markdown="span" class="alert alert-primary">:information_source: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+<div markdown="span" class="alert alert-primary">:information_source: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML.
 </div>
 
 The following activity diagram illustrates how the complete operation is executed.
@@ -375,7 +375,7 @@ The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilis
 
 #### Implementation Overview
 
-Here's a sequence diagram that demonstrates how `FindCommand` works.
+Here's a sequence diagram that demonstrates how `FindCommand` works:
 
 ![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
 
@@ -433,7 +433,7 @@ time. This feature is facilitated through the `SortCommand` class.
 
 #### Implementation Overview
 
-The following diagram summarises what happens when the user executes a sort command
+The following diagram summarises what happens when the user executes a sort command:
 
 <img src="images/SortClassActivityDiagram.png" width="700"/>
 
@@ -465,8 +465,8 @@ A `CommandResult` class is created and returned.
 **Alternative 1(current choice):** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
 in the ordering of find to also be sorted.
 - Pros: Improved usability of maintaining order of list throughout without the list having to be reordered after
-each command
-- Cons: Limited sorting options as of now
+each command.
+- Cons: Limited sorting options as of now.
 
 
 ### Appointment List Feature
@@ -493,10 +493,20 @@ The following sequence diagram shows how the appointment list is updated. The `s
     - Cons: Errors with respect to `addressBook` will affect the appointment list rendered.
 
 * **Alternative 2:** Implement it within `addressBook`
-    - Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment
-    list is not dependent on `persons` in `addressBook`
+    - Pros: `persons` and `appointmentList` are handled separately within. `addressBook` and hence the appointment
+    list is not dependent on `persons` in `addressBook`.
     - Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
     dependent on `filteredPersons`.
+
+**Aspect: How to update appointment list**
+* **Alternative 1 (current choice):**
+Empty `appointmentList` and populate the list when there is a command that can potentially update it.
+    - Pros: Easy to implement.
+    - Cons: Time complexity might not be optimal if the application is dealing with large amounts of data.
+* **Alternative 2:**
+Based on specific index that user inputs for commands, update `appointmentList` accordingly.
+    - Pros: Time complexity will be optimal and will not deterioriate with increasing amounts of data.
+    - Cons: More difficult to test.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -515,11 +525,11 @@ The following sequence diagram shows how the appointment list is updated. The `s
 ### Product scope
 
 **Target user profile**: Financial Advisors
-* has a need to manage a significant number of client contacts
+* has a need to manage a significant number of client contacts.
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
 
 **Value proposition**:
 This tool functions as a digital address book suited to the needs of financial advisors.

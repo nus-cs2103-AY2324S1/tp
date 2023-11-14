@@ -21,7 +21,9 @@ deactivate observableAppointments
 loop through filteredPersons
     ModelManager -> ModelManager: addToAppointmentListIfPresent(person)
     activate ModelManager
-
+    ModelManager -> observableAppointments: add(appointment)
+    activate observableAppointments
+    deactivate observableAppointments
     deactivate ModelManager
 end loop
 
