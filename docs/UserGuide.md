@@ -360,7 +360,7 @@ Event type must either be 'cca' or 'module'!
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Notes about the rmschedule and rmevent command:
+:information_source: Notes about the `rmschedule` and `rmevent` command:
 
 If there are multiple time slots with the same names, the command will remove time slots in the chronological order they were added.
 
