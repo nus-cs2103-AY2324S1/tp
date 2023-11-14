@@ -5,13 +5,53 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
 :User uses filter command;
-if () then ([filter by department])
-    :Filter employees with
-    entered department;
-else ([filter by salary])
-    :Filter employees with less
-    than or equal entered salary;
-endif
+fork
+    if () then ([n/NAME present])
+        :Filter with given name;
+    else ([n/NAME absent])
+    endif
+fork again
+    if () then ([p/PHONE_NUMBER present])
+        :Filter with given phone number;
+    else ([p/PHONE_NUMBER absent])
+    endif
+fork again
+    if () then ([e/EMAIL present])
+        :Filter with given email;
+    else ([e/EMAIL absent])
+    endif
+fork again
+    if () then ([a/ADDRESS present])
+        :Filter with given address;
+    else ([a/ADDRESS absent])
+    endif
+fork again
+    if () then ([s/SALARY present])
+        :Filter with given salary;
+    else ([s/SALARY absent])
+    endif
+fork again
+    if () then ([l/LEAVE present])
+        :Filter with given leave;
+    else ([l/LEAVE absent])
+    endif
+fork again
+    if () then ([r/ROLE present])
+        :Filter with given role;
+    else ([r/ROLE absent])
+    endif
+fork again
+    if () then ([m/MANAGER_NAME present])
+        :Filter with given manager name;
+    else ([m/MANAGER_NAME absent])
+    endif
+fork again
+    if () then ([d/DEPARTMENT present])
+        :Filter with given department;
+    else ([d/DEPARTMENT absent])
+    endif
+end fork
+
 :ManageHR UI shows filtered employees;
 stop
 

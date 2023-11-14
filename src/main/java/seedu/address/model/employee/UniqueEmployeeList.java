@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -165,6 +166,32 @@ public class UniqueEmployeeList implements Iterable<Employee> {
 
 
         internalList.setAll(people);
+    }
+
+    /**
+     * Adds an employee to the internal list without applying constraints.
+     * This method is intended for use when adding an employee where constraints related to the
+     * supervisor-subordinate relationship are not enforced.
+     *
+     * @param toAdd The employee to be added. Must not be {@code null}.
+     */
+    public void addWithoutConstraints(Employee toAdd) {
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Enforces constraints on the internal list of employees.
+     * This method filters the internal list to include only employees who meet specific constraints.
+     * The constraints applied ensures the supervisor-subordinate relationship is enforced.
+     *
+     * @return A list of employees who does not violate the constraints.
+     */
+    public List<Employee> enforceConstraints() {
+        List<Employee> filteredList = internalList.stream()
+                .filter(x -> this.hasSubordinates(x) && this.containsManager(x))
+                .collect(Collectors.toList());
+        return filteredList;
+
     }
 
     /**

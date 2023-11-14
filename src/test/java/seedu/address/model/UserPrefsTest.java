@@ -24,6 +24,12 @@ public class UserPrefsTest {
     @Test
     public void equals_sameObj_success() {
         UserPrefs userPrefs = new UserPrefs();
+        assertTrue(userPrefs.equals(userPrefs));
+    }
+
+    @Test
+    public void equals_similarObj_success() {
+        UserPrefs userPrefs = new UserPrefs();
         assertTrue(userPrefs.equals(new UserPrefs()));
     }
 
