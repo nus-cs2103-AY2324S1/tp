@@ -30,8 +30,9 @@
    11. [Toggle Mode Feature](#toggle-mode-feature)
    12. [Change Password Feature](#change-password-feature)
    13. [Proposed Undo/Redo feature](#proposed-undoredo-feature)
-4. [Acknowledgements](#acknowledgements)
-5. [Appendix: Requirements](#appendix-requirements)
+4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+5. [Acknowledgements](#acknowledgements)
+6. [Appendix: Requirements](#appendix-requirements)
    1. [Product Scope](#product-scope)
    2. [User Stories](#user-stories)
    3. [Use Cases](#use-cases)
@@ -45,8 +46,8 @@
       8. [Use Case 8: Filter Policy](#use-case-8---filter-policy)
    4. [Non-Functional Requirements](#non-functional-requirements)
    5. [Glossary](#glossary)
-6. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
-7. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+7. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
+8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
    <page-nav-print />
 
 ---
