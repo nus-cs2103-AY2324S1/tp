@@ -442,15 +442,7 @@ You have just created a band and are ready to experiment with some cool band mak
 
 **:bulb: Tips:**
 
-If you want to view all your musician contact that you can choose from, you may want to use the `list` command _before_ using this command `addm`. This is especially important if you have just executed an irrelevant `find` or `findb` command and are viewing a filtered list.
-
-</div>
-
-<div markdown="block" class="alert alert-success">
-
-**:bulb: Tips:**
-
-You may want to use the `find` command to filter musicians based on instruments or genre _before_ using this command. This allows you to identify musicians who are proficient in the same genre as the band requirement, and optimize your band makeup.
+If you want to view all your musician contact that you can choose from, you can use the `list` command. If you want to filter musicians based on preferred genre, you may refer to `find` command. This allows you to identify musicians who are proficient in the same genre as the band requirement, and optimise your band makeup.
 
 </div>
 
