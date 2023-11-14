@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Connectify` and the **Actor** is the `user`, unless specified otherwise)
 
-For each use case, "User is in list view" means an expectation that user has already executed the `list` command and is viewing the list of clients. However the user could be in the dashboard view, in this case the command will still work, but the user will be redirected to the list view after the command finishes executing. 
+For each use case, "User is in list view" means an expectation that user has already executed the `list` command and is viewing the list of clients. However the user could be in the dashboard view, in this case the command will still work, but as an additional step, the user will be redirected to the list view after the command finishes executing. 
 
 To enter the list view see Use case UC01:
 
@@ -323,93 +323,51 @@ To enter the list view see Use case UC01:
 
 **MSS**
 
-1.  User requests to delete a specific client in the list
-2.  Connectify deletes the client
+1.  User is in list view
+2.  User requests to delete a specific client in the list
+3.  Connectify deletes the client
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 1a. The given index is invalid.
+* 3a. The given index is invalid.
 
     * 1a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
 **Use case: UC02 - Add a client interaction**
 
 **MSS**
 
-1.  User requests create a client interaction
-2.  Connectify adds the interaction to the client profile
+1. User is in list view
+2.  User requests create a client interaction
+3.  Connectify adds the interaction to the client profile
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The user does not exist.
+* 2a. The user does not exist.
 
-    * 1a1. Connectify shows an error message.
+    * 2a1. Connectify shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 1b. The entered client interaction is invalid
+* 2b. The entered client interaction is invalid
    
-    * 1b1. Connectify shows an error message.
+    * 2b1. Connectify shows an error message.
    
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
-**Use case: UC03 - Mark a client as “Cold”, “Warm” or “Hot” Leads**
-
-**MSS**
-
-1.  User requests to list clients
-2.  Connectify shows a list of clients
-3.  User requests to mark a client as “Cold”, “Warm” or “Hot” Lead
-4.  Connectify displays the updated client profile
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The user does not exist.
-
-    * 1a1. Connectify shows an error message.
-
-      Use case resumes at step 2.
-
-* 1b. The lead category is key'ed in wrong or empty
-   
-    * 1b1. Connectify shows an error message.
-   
-      Use case resumes at step 2.
-
-**Use case: UC04 - View a client’s full profile**
-
-**MSS**
-
-1. User requests to list clients
-2. Connectify shows a list of clients
-3. User requests to view a client’s full profile, this can be done with the `view` command or by clicking on the client’s card
-4. Connectify shows the client’s full profile
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The user does not exist. (because the index was invalid)
-
-    * 3a1. Connectify shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC05 - Edit a client’s profile**
+**Use case: UC03 - Edit a client’s profile**
 
 **Guarantees:**
 
@@ -417,7 +375,90 @@ To enter the list view see Use case UC01:
 
 **MSS**
 
-1. 
+1. User is in list view
+2. User requests to edit a client’s profile
+3. Connectify shows the updated client’s profile
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not exist.
+
+    * 2a1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+* 2b. The edited fields are invalid
+
+    * 2b1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC04 - View a client’s full profile**
+
+**MSS**
+
+1. User is in list view
+2. User requests to view a client’s full profile
+3. Connectify shows the client’s full profile
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not exist.
+
+    * 2a1. Connectify shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: UC05 - Mark a client as “Cold”, “Warm” or “Hot” Leads**
+
+**Guarantees:**
+
+* The client’s profile will be updated only if the command is executed successfully.
+
+**MSS**
+
+Very similar to UC03, the difference being that only the `lead` field is updated only if the entered field is a valid lead.
+
+**Use case: UC06 - View dashboard analytics**
+
+**MSS**
+1. User is in list view
+2. User requests to view dashboard analytics
+3. Connectify shows the dashboard analytics
+
+    Use case ends.
+
+**Use case: UC07 - View Help**
+
+**MSS**
+1. User requests to view help
+2. The help window is shown
+
+    Use case ends.
+
+**Use case: UC08 - Find a client**
+
+**MSS**
+1. User is in list view
+2. User requests to find a client
+3. Connectify filters the address book list to show only clients that match the search query
+
+    Use case ends.
+
+**Use case: UC09 - Clear the address book**
+
+**MSS**
+1. User is in list view
+2. User requests to clear the address book
+3. Connectify clears the address book
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
