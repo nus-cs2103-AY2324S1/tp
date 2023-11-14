@@ -607,4 +607,3 @@ it was a time-consuming process.
     1. **Name**: Limit to 1 - 50 characters to ensure the name has appropriate length.
     2. **Tags**: Limit to 1 - 50 characters to ensure the tag meanings are valid but not too long to impact UI presentations. 
     
-    
