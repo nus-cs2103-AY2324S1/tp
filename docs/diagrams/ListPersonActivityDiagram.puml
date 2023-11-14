@@ -1,0 +1,15 @@
+@startuml
+!pragma useVerticalIf on
+start
+:User enters listPerson command;
+if () then ([Some keywords are provided])
+  if () then ([Keywords are valid])
+    :List only persons whose names contain the keywords;
+  else ([else])
+    :Throw exception;
+  endif
+else ([else])
+  :List all persons in the person list;
+endif
+stop
+@enduml
