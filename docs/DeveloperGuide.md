@@ -182,7 +182,7 @@ By leveraging the existing structures and operations in the application, this me
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src=diagrams/UndoActivityDiagram.puml width="850"/>
+<puml src=diagrams/UndoActivityDiagram.puml width="650"/>
 
 
 #### Alternative Implementation
@@ -339,7 +339,7 @@ The `DeleteCommand` is implemented as follows:
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src=diagrams/DeleteActivityDiagram.puml width="850"/>
+<puml src=diagrams/DeleteActivityDiagram.puml width="650"/>
 
 #### Rationale
 
