@@ -6,10 +6,6 @@ pageNav: 2
 
 # Developer Guide
 
-<!-- * Table of Contents -->
-
-<page-nav-print/>
-
 ## Acknowledgements
 
 This project has not used any third-party libraries.
@@ -31,6 +27,10 @@ For initial setup and getting started with the development, please refer to the 
 The **_Architecture Diagram_** above provides a high-level design overview of the application.
 
 Below is a quick overview of the main components and their interactions:
+
+---
+
+<div style="page-break-after: always;"></div>
 
 #### Main Components:
 
@@ -54,7 +54,7 @@ Each of the four main components:
 - Defines its API in an interface named after the component.
 - Implements its functionality using a `{Component Name}Manager` class, following the corresponding API interface.
 
-For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.S
+For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.
 
 ---
 
@@ -83,6 +83,8 @@ Key responsibilities include:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Logic Component
 
 - **API**: [`Logic.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -101,6 +103,8 @@ Key functionalities include:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Model Component
 
 - **API**: [`Model.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -115,6 +119,8 @@ Key responsibilities include:
 - Providing an unmodifiable view of lists of `Person`, `Record` and `Appointment` objects for UI binding.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Storage Component
 
@@ -136,6 +142,8 @@ Key functionalities include:
 Classes used by multiple components are housed in the `seedu.addressbook.commons` package.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Patient Features
 
@@ -159,6 +167,8 @@ A `Person` object encapsulates various attributes:
 
 Uniqueness of person is maintained through the `UniquePersonList`.
 
+---
+
 ### Adding a Patient
 
 #### Overview
@@ -179,6 +189,8 @@ The `addpatient` command integrates a new `Person` object with the patient's det
 3. **Execute Command**: `AddPersonCommand#execute(Model)` adds the new `Person` to the `UniquePersonList` in the `Model`.
 
 <puml src="diagrams/AddPatientSequenceDiagram.puml"/>
+
+---
 
 ### Editing a Patient's Details
 
@@ -223,6 +235,8 @@ The `editpatient` command facilitates the modification of patient information by
 
 By considering these alternatives, the development team has chosen to prioritize a robust foundation for future development and data integrity, despite the trade-offs in complexity and potential impact on performance.
 
+---
+
 ### Deleting a Patient
 
 #### Overview
@@ -243,6 +257,8 @@ The `delete` command deletes an existing `Person` object from MedBook.
 3. **Execute Command**: `DeleteCommand#execute(Model)` deletes the `Person` object from `Model`.
 
 <puml src="diagrams/DeletePatientSequenceDiagram.puml" alt=”DeletePatientSequenceDiagram” />
+
+---
 
 ### Searching a Patient
 
@@ -266,6 +282,8 @@ The `search` command filters the list of patients using one or more keywords.
 
 <puml src="diagrams/SearchSequenceDiagram.puml"/>
 
+---
+
 ### Pinning a Patient
 
 #### Overview
@@ -286,6 +304,8 @@ The `pin` command pins a patient to the **Pinned Patient List**
 3. **Execute Command**: `PinCommand#execute(Model)` replaces the `Person` object in `Model` with a new `Person` object that has `isPinned` set to `true`.
 
 <puml src="diagrams/PinSequenceDiagram.puml"/>
+
+---
 
 ### Unpinning a Patient
 
@@ -308,6 +328,10 @@ The `unpin` command unpins a patient from the **Pinned Patient List**
 
 <puml src="diagrams/UnpinSequenceDiagram.puml"/>
 
+---
+
+<div style="page-break-after: always;"></div>
+
 ## Records Feature
 
 ### General Implementation Details
@@ -321,6 +345,8 @@ A `Record` object encapsulates various attributes:
 - `List<Medication>`: Medications prescribed to the patient
 
 Uniqueness of record is maintained through the `UniqueRecordList`.
+
+---
 
 ### Adding a Record
 
@@ -344,6 +370,8 @@ The `addrecord` command integrates a new `Record` object with the record's detai
 3. **Execute Command**: `AddRecordCommand#execute(Model)` replaces the `Person` object in `Model` with a new `Person` object that has the added `Record`. `Model#updateRecordList(Person)` replaces the `UniqueRecordList` in `Model` with the `UniqueRecordList` of the new `Person` object.
 
 <puml src="diagrams/AddRecordSequenceDiagram.puml"/>
+
+---
 
 ### Editing a Record's Details
 
@@ -395,6 +423,8 @@ Similar to editing patient, a clone is created and modified, and then replaces t
 
 In conclusion, the decision to proceed with Alternative 1 was made to prioritize the application's long-term robustness and maintainability, accepting the trade-offs in performance and immediate simplicity for the sake of a safer and more extensible editing feature.
 
+---
+
 ### Deleting a Record
 
 #### Overview
@@ -418,6 +448,8 @@ The `deleterecord` command deletes an existing `Record` object from MedBook.
 
 <puml src="diagrams/DeleteRecordSequenceDiagram.puml"/>
 
+---
+
 ### Viewing a patient's medical records
 
 The `view` command displays the list of records of the patient being viewed.
@@ -437,6 +469,8 @@ The `view` command displays the list of records of the patient being viewed.
 3. **Update and Display**: `ViewCommand#execute(Model)` invokes the `Model#updateRecordList(Person)` to update the record list of the `Model`. The record list of the specific patient is displayed.
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+
+---
 
 ### Searching a Record
 
@@ -459,6 +493,8 @@ The `searchrecord` command filters the list of records of the patient being view
 3. **Execute Command**: `FindRecordCommand#execute(Model)` finds records containing keywords using `RecordContainsKeywordsPredicate#test(Record)` and updates `FilteredRecordList`.
 
    <puml src="diagrams/FindRecordSequenceDiagram.puml"/>
+
+---
 
 ### Attaching Files to Patient Records
 
@@ -495,6 +531,10 @@ In designing this feature, we considered two primary approaches:
 
 Ultimately, the decision was made to implement the feature with a GUI to ensure accessibility and ease of use for a broader range of users, while still allowing for efficient management of patient records.
 
+---
+
+<div style="page-break-after: always;"></div>
+
 ## Appointments Feature
 
 ### General Implementation Details
@@ -508,6 +548,8 @@ An `Appointment` object encapsulates various attributes:
 - `Nric`: Nric of the patient involved in the Appointment.
 
 Uniqueness is enforced through a `UniqueAppointmentList`.
+
+---
 
 ### Adding an Appointment
 
@@ -532,6 +574,8 @@ The `addappointment` command integrates a new `Appointment` object with the appo
 
 <puml src="diagrams/AddAppointmentSequenceDiagram.puml"/>
 
+---
+
 ### Deleting an Appointment
 
 #### Overview
@@ -554,6 +598,8 @@ The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 3. **Execute Command**: `DeleteAppointmentCommand#execute(Model)` replaces the `Person` object in `Model` with a new `Person` object that has the updated `UniqueAppointmentList`. `Model#resetAppointmentList()` resets the `UniqueAppointmentList` of the `Model`.
 
 <puml src="diagrams/DeleteAppointmentSequenceDiagram.puml"/>
+
+---
 
 ### Viewing the Appointment Window
 
@@ -603,6 +649,10 @@ The `viewappointment` command opens/focuses the `AppointmentsWindow`.
 
 Considering MedBook's primary focus on patient management, **Alternative 1** has been selected. This decision prioritizes the ease and intuitiveness of accessing and managing patient-specific information, despite some level of data redundancy, which is often a trade-off in software design for enhanced usability.
 
+---
+
+<div style="page-break-after: always;"></div>
+
 ## User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -636,6 +686,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user          | _leave_ patient data encrypted                                                                                | prevent unauthorised access to the data                                      |
 | `*`      | user          | _sort_ existing appointments by date                                                                          | quickly view the appointments which are soon upcoming                        |
 
+---
+
 ## Use Cases
 
 ### UC01 - Viewing Help
@@ -646,6 +698,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User requests for help.
   2. MedBook displays help information.<br>
      Use case ends.
+
+---
 
 ### UC02 - Adding a Patient
 
@@ -663,6 +717,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 2a1-2a2 are repeated until the patient details entered is correct.
     - Use case resumes from step 3.
 
+---
+
 ### UC03 - Listing All Patients
 
 - **Actor**: User
@@ -672,6 +728,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User requests to list patients.
   2. MedBook shows a list of patients.<br>
      Use case ends.
+
+---
 
 ### UC04 - Editing a Patient's Details
 
@@ -691,6 +749,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the patient details entered is correct.
     - Use case resumes from step 4.
 
+---
+
 ### UC05 - Searching for a Specific Patient
 
 - **Actor**: User
@@ -706,6 +766,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 4a. No matches found.
     - 4a1. MedBook informs the user that there were no matches.
     - Use case ends.
+
+---
 
 ### UC06 - Delete a Patient
 
@@ -725,6 +787,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the patient ID entered is correct.
     - Use case resumes from step 4.
 
+---
+
 ### UC07 - Pin a Patient
 
 - **Actor**: User
@@ -743,6 +807,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the patient ID entered is correct.
     - Use case resumes from step 4.
 
+---
+
 ### UC08 - Unpin a Patient
 
 - **Actor**: User
@@ -759,6 +825,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a2. User enters new PINNEDID.
     - Steps 2a1-2a2 are repeated until the PINNEDID entered is correct.
     - Use Case resumes from step 3.
+
+---
 
 ### UC09 - Adding a Record to a Patient
 
@@ -778,6 +846,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the record details entered is correct.
     - Use case resumes from step 4.
 
+---
+
 ### UC10 - View Patient's Medical Records
 
 - **Actor**: User
@@ -794,6 +864,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a2. User enters new patient ID.
     - Steps 3a1-3a2 are repeated until the patient ID entered is correct.
     - Use case resumes from step 4.
+
+---
 
 ### UC11 - Editing a Record
 
@@ -813,6 +885,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the record details entered is correct.
     - Use case resumes from step 4.
 
+---
+
 ### UC12 - Deleting a Record under a Patient
 
 - **Actor**: User
@@ -831,6 +905,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the patient ID and record ID entered is correct.
     - Use case resumes from step 4.
 
+---
+
 ### UC13 - Searching for Records
 
 - **Actor**: User
@@ -846,6 +922,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 4a. No matches found.
     - 4a1. MedBook informs the user that there were no matches.
     - Use case ends.
+
+---
 
 ### UC14 - Adding an Appointment to a Patient
 
@@ -864,6 +942,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 2a1-2a2 are repeated until the appointment details entered is correct.
     - Use Case resumes from step 3.
 
+---
+
 ### UC15 - Viewing Appointments
 
 - **Actor**: User
@@ -872,6 +952,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User requests to view appointments.
   2. MedBook shows the user all appointments.<br>
      Use case ends.
+
+---
 
 ### UC16 - Deleting an Appointment
 
@@ -891,6 +973,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1-3a2 are repeated until the appointment ID entered is correct.
     - Use Case resumes from step 4.
 
+---
+
 ### UC17 - Attaching Files
 
 - **Actor**: User
@@ -909,6 +993,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3a1. MedBook displays an error message.
   - Use case ends.
 
+---
+
 ### UC18 - Opening Files
 
 - **Actor**: User
@@ -924,32 +1010,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1a. File does not exist in user’s local storage.
   - 1a1. MedBook displays an error message.
   - Use case ends.
-
----
-
-## Non-Functional Requirements
-
-1. Should work on any mainstream OS with Java 11 or above.
-   - Rationale: Ensures accessibility for users on different platforms.
-   - Metric: Application functions correctly on Windows, macOS, and Linux.
-2. Supports up to 1000 patients without performance issues.
-   - Rationale: Ensures scalability for larger clinics.
-   - Metric: Application performs smoothly with a database of 1000 patients.
-3. Faster operation with commands than mouse for proficient typists.
-   - Rationale: Enhances productivity for users familiar with the command line.
-   - Metric: Common tasks are completed faster using keyboard shortcuts than GUI.
-4. Backward compatible with data from previous versions.
-   - Rationale: Ensures smooth transition for existing users upgrading to a new version.
-   - Metric: Users can open and interact with data files from previous versions without issues.
-5. Usable by novices.
-   - Rationale: Ensures the application is accessible to new users.
-   - Metric: New users can perform basic tasks without having to keep referring to the user manual.
-6. Provides comprehensive error messages and guidance for recovery.
-   - Rationale: Helps users understand what went wrong and how to fix it.
-   - Metric: Error messages include a description of the issue and steps for resolution.
-7. Comprehensive documentation and user guides available.
-   - Rationale: Provides users with resources to understand and use the application effectively.
-   - Metric: Documentation covers all features, includes screenshots, and is easy to navigate.
 
 ---
 
@@ -996,6 +1056,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Efficient Patient Management**: Provides a streamlined and efficient solution for managing patient information, ensuring that healthcare professionals can access and modify patient data quickly.
 - **Speed and Accessibility**: Designed to be significantly faster than conventional GUI applications, allowing users to execute commands and retrieve patient information in a matter of seconds.
 - **Command Line Efficiency**: Leverages the power of CLI to offer advanced users the ability to perform tasks in a more direct and efficient manner, while still maintaining accessibility for those who prefer graphical interfaces.
+
+### Non-Functional Requirements
+
+1. Should work on any mainstream OS with Java 11 or above.
+   - Rationale: Ensures accessibility for users on different platforms.
+   - Metric: Application functions correctly on Windows, macOS, and Linux.
+2. Supports up to 1000 patients without performance issues.
+   - Rationale: Ensures scalability for larger clinics.
+   - Metric: Application performs smoothly with a database of 1000 patients.
+3. Faster operation with commands than mouse for proficient typists.
+   - Rationale: Enhances productivity for users familiar with the command line.
+   - Metric: Common tasks are completed faster using keyboard shortcuts than GUI.
+4. Backward compatible with data from previous versions.
+   - Rationale: Ensures smooth transition for existing users upgrading to a new version.
+   - Metric: Users can open and interact with data files from previous versions without issues.
+5. Usable by novices.
+   - Rationale: Ensures the application is accessible to new users.
+   - Metric: New users can perform basic tasks without having to keep referring to the user manual.
+6. Provides comprehensive error messages and guidance for recovery.
+   - Rationale: Helps users understand what went wrong and how to fix it.
+   - Metric: Error messages include a description of the issue and steps for resolution.
+7. Comprehensive documentation and user guides available.
+   - Rationale: Provides users with resources to understand and use the application effectively.
+   - Metric: Documentation covers all features, includes screenshots, and is easy to navigate.
+
+---
 
 ## Appendix: Instructions for Manual Testing
 
@@ -1291,6 +1377,8 @@ We plan to enhance the calendar navigation by introducing a more efficient way f
 
 **`viewcalender MM YYYY` command**: For users who prefer typing through the CLI, we will implement a command that allows them to view the calendar for a specific month and year. Users will be able to enter a command in the format viewcalendar MM YYYY (e.g., viewcalendar 12 2023 to view December 2023), and the calendar will update to display the selected month and year.
 
+---
+
 ### Enhanced Appointment Calender UI
 
 #### Current Implementation
@@ -1309,6 +1397,8 @@ Implement a dynamic text resizing or wrapping feature within each calendar entry
 
 **Responsive and Adaptive Design**: Enhance the calendar’s responsive design so it adapts effectively to different screen sizes and resolutions. This ensures that the increased information density does not negatively impact users on smaller screens or mobile devices.
 
+---
+
 ### Enhanced NRIC Parameter for Patients
 
 #### Current Implementation
@@ -1323,6 +1413,8 @@ To make the NRIC parameter more inclusive and reflective of real-world use cases
 
 **Optional Passport Number Support**: To accommodate foreign patients who do not have an NRIC, the system will be enhanced to accept passport numbers as an alternative identifier. This feature is particularly important for private clinics that cater to a diverse patient base, including non-residents and tourists.
 
+---
+
 ### Accepting `/` in Name parameter
 
 #### Current Implementation
@@ -1333,6 +1425,8 @@ Due to current constraints in the Parser which causes / to be parsed as tags, th
 
 Modify the parsing logic to differentiate between command tags and legitimate use of special characters in names. This could involve implementing an escape character mechanism or a more advanced parsing algorithm that can contextually understand the use of "/" in different scenarios.
 
+---
+
 ### Patient Index Alignment
 
 #### Current Implementation
@@ -1342,6 +1436,8 @@ The Patient ID in the patients in the **Pinned Patient List** and **Patient Bein
 #### Proposed Enhancement
 
 Modify the way panels create new person card entries. This could involve creating new lists to keep track of the patient index and update commands associated with the Pinned Patients and Patient Being Viewed.
+
+---
 
 ## Appendix: Effort
 
