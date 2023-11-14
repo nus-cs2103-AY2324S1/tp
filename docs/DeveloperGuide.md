@@ -389,7 +389,7 @@ Formats that are usually used when conversing. As there are a lot of possibiliti
 
 These make sense as scheduling meetings with a client may sound like: *"Let's follow-up next week, 4:30pm?"*
 
-Similarly, we can achieve this by parsing these inputs based on the number of words it has. For natural language formats as you can from the [User Guide](https://ay2324s1-cs2103t-w09-2.github.io/tp/UserGuide.html#accepted-date-time-formats),
+Similarly, we can achieve this by parsing these inputs based on the number of words it has. For natural language formats as you can see from the [User Guide](https://ay2324s1-cs2103t-w09-2.github.io/tp/UserGuide.html#accepted-date-time-formats),
 has formats that correspond to the number of words (For example, 3 word date formats are in the formt of "in _ days/months/years"). Hence, we parsed these inputs using switch cases.
 
 To explain, we have described the implementation of one of methods that parse english date time formats, `parseThreeElementsEnglishDateFormat()` in the activity diagram below:
