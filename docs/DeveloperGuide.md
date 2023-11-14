@@ -12,6 +12,7 @@ title: Developer Guide
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Ui components (command bar / command message box) [T09-4 AY2122S2](https://github.com/AY2122S2-CS2103T-T09-4/tp) and reminder list [T17-1 AY2122S2](https://github.com/AY2122S2-CS2103T-T17-1/tp) are adapted from past-year-projects
 
 --------------------------------------------------------------------------------------------------------------------
 
