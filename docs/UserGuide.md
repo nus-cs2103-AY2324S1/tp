@@ -1327,7 +1327,7 @@ dtagp
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
 `The person index provided is invalid` | Ensure that the index specified is in the range of the displayed number of persons.
-`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 
 <div style="page-break-after: always;"></div>
 
@@ -1374,7 +1374,7 @@ dtagt
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
 `The task index provided is invalid` | Ensure that the index specified is in the range of the displayed number of tasks.
-`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric.
 
 ---
 
