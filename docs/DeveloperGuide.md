@@ -304,7 +304,7 @@ Moving on to the implementation details, the following sections describe how and
    which adds the new `Date` object created into the existing `Model` component.
 
 <box type="info">
-    The `delete`, `edit` and `find` features are also implemented in a similiar manner.
+    The delete, edit and find features are also implemented in a similar manner.
 </box>
 
 The sequence diagram notation of the above steps is shown below. <br>
