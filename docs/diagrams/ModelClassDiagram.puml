@@ -17,21 +17,6 @@ Class ReminderScheduler
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-Class Interaction
-Class "{abstract}\nLead" as Lead
-Class Telegram
-Class Profession
-Class Income
-Class Details
-Class HotLead
-Class ColdLead
-Class WarmLead
-Class UnknownLead
 
 Class I #FFFFFF
 }
@@ -53,35 +38,9 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Person *--> "0..1" Lead
-Person *--> "0..1" Telegram
-Person *--> "0..1" Profession
-Person *--> "0..1" Income
-Person *--> "0..1" Details
-Person *--> "*" Interaction
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-Email -[hidden]right-> Tag
-Tag -[hidden]right-> Lead
-Lead -[hidden]right-> Telegram
-Telegram -[hidden]right-> Profession
-Profession -[hidden]right-> Income
-Income -[hidden]right-> Details
-
-HotLead -up-|> Lead
-ColdLead -up-|> Lead
-WarmLead -up-|> Lead
-UnknownLead -up-|> Lead
 
 ModelManager --> "~* filtered" Person
 @enduml

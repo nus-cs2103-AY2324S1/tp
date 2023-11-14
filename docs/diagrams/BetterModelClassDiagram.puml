@@ -12,16 +12,36 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
+Class Person {
+    <color: #FFFFFF>- String: Name
+}
+Class "{abstract}\nLead" as Lead
+
+show Person fields
+
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 
 Person *--> "0..1" Telegram
 Person *--> "0..1" Lead
 Person *--> "0..1" Income
 Person *--> "0..1" Profession
+Person *--> "0..1" Details
 Person *--> "*" Interaction
+
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+Email -[hidden]right-> Lead
+Lead -[hidden]right-> Telegram
+Telegram -[hidden]right-> Profession
+Profession -[hidden]right-> Income
+Income -[hidden]right-> Details
+
+HotLead -up-|> Lead
+ColdLead -up-|> Lead
+WarmLead -up-|> Lead
+UnknownLead -up-|> Lead
 @enduml
