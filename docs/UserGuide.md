@@ -35,7 +35,25 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command. 
+
+1. Look out for additional information in these alert blocks to master the use of InsureIQ!
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+Provides additional information for your understanding.
+</div>
+
+<div markdown="block" class="alert alert-success">
+**:bulb: Tips:**<br>
+Provides tips for advanced users to maximise efficiency.
+</div>
+
+<div markdown="span" class="alert alert-warning">
+**:exclamation: Warnings:**<br>
+Highlights important information you need to be careful about!
+</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,9 +64,9 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: About the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -68,7 +86,7 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Leads you to the help page, which is this user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -77,26 +95,27 @@ Format: `help`
 
 ### Adding a client : `add`
 
-Adds a client to the data file.
+Adds client details to your client list. You can also choose to include policy details attached to a client.
+
+<div markdown="block" class="alert alert-success">
+**:bulb: Importing client information from a data file:** 
+InsureIQ data is stored in a JSON file, which you can add clients directly into. More information can be found in the [Editing the data file](#editing-the-data-file) section.
+</div>
 
 Format: `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS [t/TAG]... l/LICENCE PLATE [c/COMPANY
  pn/POLICY NUMBER pi/POLICY ISSUE DATE pe/POLICY EXPIRY DATE]`
 
-* Add a client's details in the data file.
 * **All** client details **except tag** must be present when using this command.
 * Tag is optional and this command allows multiple tags.
-* If adding a client’s policy, **all** policy details must be present when using this command as follows:
+* If adding a client’s policy, all 4 policy fields must be present when using this command:
   * `c/COMPANY`
   * `pn/POLICY NUMBER`
   * `pi/POLICY ISSUE DATE`
   * `pe/POLICY EXPIRY DATE`
-<div markdown="block" class="alert alert-info">
-**:information_source: Note:** These four fields are referred to as `4 policy fields` in the following section.
-</div>
 
 Examples:
 * `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` adds a client Irfan without a policy.
-* `add n/Bob Anderson i/578A p/54783402 e/bobanderson@gmail.com a/Blk 233 Serangoon Avenue 3, #05-12 t/teacher l/SGP1208J c/DEF Insurance pn/263J pi/20-09-2023 pe/19-09-2024` adds a client Bob with the policy he buys.
+* `add n/Bob Anderson i/578A p/54783402 e/bobanderson@gmail.com a/Blk 233 Serangoon Avenue 3, #05-12 t/teacher l/SGP1208J c/DEF Insurance pn/263J pi/20-09-2023 pe/19-09-2024` adds a client Bob with the policy he bought.
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphanumeric.
@@ -136,21 +155,21 @@ Error: This person already exists in the address book
 ```
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Adding clients with duplicate fields:** The above error will only be raised when **ALL** fields in the client's details (excluding the Tag and the 4 policy fields) 
-are the same.
+**:information_source: Adding clients with duplicate fields:**<br>
+The above error will only be raised when **ALL** fields in the client's details (name, NRIC, contact number, email, address) are the same.
 </div>
 
 
 ### Listing all clients : `list`
 
-Shows a list of all clients in the data file.
+Shows you all clients in your client list.
 
 Format: `list`
 
 
 ### Editing a client : `edit`
 
-Modify and/or updates existing policy information in the data file.
+Modify and/or updates existing policy information in your client list.
 
 Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]... [c/COMPANY] [l/LICENCE PLATE]
  [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
@@ -160,7 +179,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 * Existing values will be updated to the input values.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Important Notes about usage:**
+**:information_source: Important notes about usage:**
 
 * If you are adding a new policy number to a client with no attached policy, you **must** also add the company, policy issue date and policy expiry date.
 * In case of already existing policy, individual updates to the policy number, company, policy issue date and policy expiry date are allowed.
@@ -171,7 +190,6 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
   * `pn/NOPOLICY`, as per the 'Format' mentioned above.
 
 </div>
-
 
 Examples:
 *  `edit 1 l/SNB9876E` updates the policy at the INDEX number 1 with the new licence plate provided.
@@ -206,18 +224,14 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/A
 ```
 At least one field to edit must be provided. 
 ```
-* Editing a client that will result in **ALL** fields matching with another client`:
+* Editing a client such that all fields match with an existing client:
 ```
 Error: This person already exists in the client list.
 ```
-<div markdown="block" class="alert alert-info">
-**:information_source: Editing clients that will result in duplicate fields with another client:** 
-The above error will only be raised when the edited client's details will have **ALL** fields (excluding the Tag and the 4 policy fields) the same as another.
-</div>
 
 ### Locating clients by fields : `find`
 
-Finds client(s) whose fields matches any of the given fields.
+Finds client(s) based on conditions you specify.
 
 Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
 [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
@@ -234,8 +248,9 @@ Examples:
 * `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with only `Hans` or `Bo` in it.
 * `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The `find` command does not check for values of invalid format 
-given in the different prefixes. Since any non-matching results will not be displayed, values of invalid format will also not display anything. </div>
+<div markdown="span" class="alert alert-info">:information_source: **Note: Format of values do not matter** <br>
+Unlike previous commands, the fields do not have to be in a specific format.
+</div>
 
 Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
@@ -259,7 +274,7 @@ Error: No value detected for the following field(s): n/ c/
 
 ### Deleting a client : `delete`
 
-Deletes the specified client from the data file.
+Deletes the specified client from your client list.
 
 Format: `delete INDEX`
 
@@ -290,10 +305,59 @@ Error: Missing Index
 Error: The parameter is not of the type positive integer
 ```
 
+### Batch delete clients: `batchdelete`
+
+Batch delete clients based on a specific condition.
+
+Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
+
+* Batch delete specific clients in the data file.
+* **Only one** of the optional fields must be provided.
+* Clients that partially matches with the field given will be deleted e.g. `batchdelete c/NTUC` will delete all clients
+  who buy policy from companies `NTUC Company` and `NTUC Insurance`.
+
+Examples:
+* `batchdelete dm/07-2020` batch delete clients whose policy expiry date is in July 2020.
+* `batchdelete c/DEF Insurance` batch delete clients who buy policy from the company DEF Insurance.
+
+Acceptable values for each parameter:
+* `c/COMPANY`: Alphanumeric and/or special characters, white spaces allowed.
+* `dm/DELETE MONTH`: Month and year in the format mm-yyyy.
+
+Expected output upon success: <br>
+![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
+
+<div markdown="span" class="alert alert-info">
+**:information_source: Confirmation message**
+Even if no clients are deleted, InsureIQ will still show a confirmation message to let you know that the `batchdelete` 
+command has been successfully processed.
+</div>
+
+Expected output upon failure:
+* No field provided:<br>
+```
+Invalid command format! 
+batchdelete: batch delete people whose policy: 
+(i) expiry date is in the corresponding month and year OR 
+(ii) belongs to a company.
+(i) Parameter: dm/MM-yyyy
+Example: batchdelete dm/11-2022
+(ii) Parameter: c/COMPANY NAME
+Example: batchdelete c/Allianz 
+```
+* Both fields exist:<br>
+```
+Error: Please contain only either one field of dm/ or c/.
+```
+* Incorrect format for delete month:<br>
+```
+Delete month should be in the format MM-yyyy
+```
+
 
 ### Sorting clients by policy expiry date : `sort`
 
-Sorts the data file.
+Sorts the client list.
 
 Format: `sort`
 
@@ -311,7 +375,7 @@ Expected output upon success :
 
 ### Remind user of clients policy expiry date : `remind`
 
-Reminds the user of clients that have approaching policy expiry date within a certain number of days.
+Reminds you of clients that have approaching policy expiry date within a certain number of days.
 
 Format: `remind NUMBER_OF_DAYS`
 
@@ -377,62 +441,17 @@ Example: remark 1 r/Likes to swim.
 
 <div style="page-break-after: always;"></div>
 
-### Batch delete clients: `batchdelete`
-
-Batch delete clients with the specific condition.
-
-Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
-
-* Batch delete specific clients in the data file.
-* **Only one** of the optional fields must be provided.
-* Clients that partially matches with the field given will be deleted e.g. `batchdelete c/NTUC` will delete all clients 
-  who buy policy from companies `NTUC Company` and `NTUC Insurance`. 
-
-Examples:
-* `batchdelete dm/07-2020` batch delete clients whose policy expiry date is in July 2020.
-* `batchdelete c/DEF Insurance` batch delete clients who buy policy from the company DEF Insurance.
-
-Acceptable values for each parameter:
-* `c/COMPANY`: Alphanumeric and/or special characters, white spaces allowed.
-* `dm/DELETE MONTH`: Month and year in the format mm-yyyy.
-
-Expected output upon success: <br>
-![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-Even if no clients are deleted, 
-InsureIQ will still show a confirmation message to let you know that the `batchdelete` command has been successfully processed.
-
-</div>
-
-Expected output upon failure:
-* No field provided:<br>
-```
-Invalid command format! 
-batchdelete: batch delete people whose policy: 
-(i) expiry date is in the corresponding month and year OR 
-(ii) belongs to a company.
-(i) Parameter: dm/MM-yyyy
-Example: batchdelete dm/11-2022
-(ii) Parameter: c/COMPANY NAME
-Example: batchdelete c/Allianz 
-```
-* Both fields exist:<br>
-```
-Error: Please contain only either one field of dm/ or c/.
-```
-* Incorrect format for delete month:<br>
-```
-Delete month should be in the format MM-yyyy
-```
-
-
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the data file.
+Clears all entries from your client list.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-warning">
+**:exclamation: Caution:**
+This action is irreversible.
+</div>
 
 
 ### Exiting the program : `exit`
@@ -451,7 +470,10 @@ InsureIQ data are saved in the hard disk automatically after any command that ch
 
 InsureIQ data are saved automatically as a JSON file `[JAR file location]/data/insureiq.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+_{ TO DO: SPECIFY DATA FORMAT AND HOW TO EDIT, FORMAT CHECKS }_
+
+<div markdown="span" class="alert alert-warning">
+**:exclamation: Caution:**
 If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
@@ -500,6 +522,13 @@ Sure! you can transfer your data to another computer by the following steps belo
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+_{TO DO}_
+
 
 --------------------------------------------------------------------------------------------------------------------
 
