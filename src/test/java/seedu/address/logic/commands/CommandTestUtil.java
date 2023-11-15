@@ -121,6 +121,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_LOW = " " + PREFIX_TAG + "Low";
     public static final String TAG_DESC_MEDIUM = " " + PREFIX_TAG + "Medium";
     public static final String TAG_DESC_HIGH = " " + PREFIX_TAG + "High";
+    public static final String TAG_DESC_SURGEON = " " + PREFIX_TAG + "Surgeon";
+    public static final String INVALID_DOCTOR_TAG_DESC_ = " " + PREFIX_TAG + "Brain Doc";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

@@ -13,10 +13,12 @@ import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEREK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SURGEON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -67,11 +69,11 @@ public class AddDoctorCommandParserTest {
     }
     @Test
     public void parse_allFieldsPresent_success() {
-        Doctor expectedDoctor = new DoctorBuilder(DEREK).build();
+        Doctor expectedDoctor = new DoctorBuilder(DEREK).withTags("Surgeon").build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_DEREK + PHONE_DESC_DEREK + EMAIL_DESC_DEREK
-                        + ADDRESS_DESC_DEREK + GENDER_DESC_MALE + NRIC_DESC_DEREK,
+                        + ADDRESS_DESC_DEREK + GENDER_DESC_MALE + NRIC_DESC_DEREK +,
                 new AddDoctorCommand(expectedDoctor));
     }
 
