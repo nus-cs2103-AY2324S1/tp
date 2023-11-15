@@ -146,6 +146,8 @@ Acceptable values for each parameter:
 Expected output upon success: <br>
 ![AddSuccess](images/AddSuccess.png)
 
+<div style="page-break-after: always;"></div>
+
 Expected output upon failure:
 * Missing any of the compulsory fields:<br>
 ```
@@ -236,6 +238,7 @@ At least one field to edit must be provided.
 Error: This person already exists in the client list.
 ```
 
+<div style="page-break-after: always;"></div>
 
 ### Locating clients by fields : `find`
 
@@ -263,6 +266,8 @@ Unlike previous commands, the fields do not have to be in a specific format.
 
 Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
+
+<div style="page-break-after: always;"></div>
 
 Expected output upon failure:
 
