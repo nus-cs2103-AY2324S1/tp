@@ -113,13 +113,13 @@ to better understand all the technical jargons!
 
 Throughout this User Guide, you might run into the following symbols and syntax.
 
-| Symbol/Syntax                                   | Meaning                                                                                                                                         |
-|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| :information_source: **Notes**                  | Information that you need to pay attention to.                                                                                                  |
-| :bulb: **Tip**                                  | Information that you may find helpful.                                                                                                          |
-| :exclamation: **Caution**                       | Information that you need to know before executing a [command](#command)                                                                        |
-| `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
-| [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
+| Symbol/Syntax                                   | Meaning                                                                                                                                          |
+|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| :information_source: **Notes**                  | Information that you need to pay attention to.                                                                                                   |
+| :bulb: **Tip**                                  | Information that you may find helpful.                                                                                                           |
+| :exclamation: **Caution**                       | Information that you need to know before executing a [command](#command).                                                                        |
+| `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application. |
+| [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                                |
 
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
@@ -402,7 +402,7 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 [Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)
 
-### Mark all tutee as unpaid: `unpaidAll`
+### Mark all tutees in the list as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in your current displayed list as not paid.
 
