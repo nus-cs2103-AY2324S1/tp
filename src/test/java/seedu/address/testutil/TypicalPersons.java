@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,11 +27,30 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
+            .withLinkedin("alice")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withBirthday(MonthDay.of(10, 10))
+            .withLinkedin("bensonmeier")
+            .withSecondaryEmail("ben10@gmail.com")
+            .withTelegram("@benson")
+            .withTags("owesMoney", "friends")
+            .withId(1)
+            .withNotes("Likes to swim", "Likes to run", "Is a chad")
+            .withBalance(2800)
+            .build();
+
+    public static final Person JOHN = new PersonBuilder().withName("Benson Meier")
+        .withAddress("311, Clementi Ave 2, #02-25")
+        .withEmail("johnd@example.com").withPhone("98765432")
+        .withBirthday(MonthDay.of(10, 10))
+        .withLinkedin("bensonmeier")
+        .withTags("owesMoney", "friends")
+        .withId(1)
+        .withNotes("Likes to swim", "Likes to run", "Is a chad")
+        .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

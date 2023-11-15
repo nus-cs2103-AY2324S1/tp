@@ -1,0 +1,85 @@
+@startuml
+!include ./style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAltCommandParser" as AddAltCommandParser LOGIC_COLOR
+participant ":AddAltPersonDescriptor" as AddAltPersonDescriptor LOGIC_COLOR
+participant ":AddAltCommand" as AddAltCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+note left of AddressBookParser
+let {str} be "1 e2/johndoe@hotmail.com"
+end note
+
+
+[-> AddressBookParser : parseCommand("addalt {str}")
+activate AddressBookParser
+
+create AddAltCommandParser
+AddressBookParser -> AddAltCommandParser
+activate AddAltCommandParser
+
+AddAltCommandParser --> AddressBookParser
+deactivate AddAltCommandParser
+
+AddressBookParser -> AddAltCommandParser : parse("{str}")
+activate AddAltCommandParser
+
+create AddAltPersonDescriptor
+AddAltCommandParser -> AddAltPersonDescriptor
+activate AddAltPersonDescriptor
+AddAltPersonDescriptor --> AddAltCommandParser
+deactivate AddAltPersonDescriptor
+
+AddAltCommandParser -> AddAltPersonDescriptor : setAttributes()
+activate AddAltPersonDescriptor
+deactivate AddAltPersonDescriptor
+
+create AddAltCommand
+AddAltCommandParser -> AddAltCommand : new AddAltCommand(index, addAltPersonDescriptor)
+activate AddAltCommand
+AddAltCommand --> AddAltCommandParser : addAltCommand
+deactivate AddAltCommand
+
+AddAltCommandParser --> AddressBookParser : addAltCommand
+deactivate AddAltCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddAltCommandParser -[hidden]->
+destroy AddAltCommandParser
+
+[<-- AddressBookParser : addAltCommand
+deactivate AddressBookParser
+
+[-> AddAltCommand : execute()
+activate AddAltCommand
+
+AddAltCommand -> Model : getPerson(1)
+activate Model
+deactivate Model
+
+AddAltCommand -> AddAltCommand : createAddAltPerson(person, addAltPersonDescriptor)
+activate AddAltCommand
+deactivate AddAltCommand
+
+AddAltCommand -> Model : setPerson(person, addAltPerson)
+activate Model
+deactivate Model
+
+create CommandResult
+AddAltCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAltCommand : result
+deactivate CommandResult
+
+[<-- AddAltCommand : result
+deactivate AddAltCommand
+
+
+@enduml

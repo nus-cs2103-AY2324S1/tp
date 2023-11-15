@@ -1,13 +1,22 @@
 package seedu.address.testutil;
 
+import java.time.MonthDay;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -25,7 +34,14 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Optional<Birthday> birthday;
+    private Optional<Linkedin> linkedin;
+    private Optional<Email> secondaryEmail;
+    private Optional<Telegram> telegram;
+    private Optional<Integer> id;
     private Set<Tag> tags;
+    private Balance balance;
+    private ObservableList<Note> notes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +51,14 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        birthday = Optional.empty(); // No birthday by default
+        linkedin = Optional.empty(); // No linkedin by default
+        secondaryEmail = Optional.empty(); // No secondaryEmail by default
+        telegram = Optional.empty(); // No telegram by default
         tags = new HashSet<>();
+        id = Optional.empty();
+        notes = FXCollections.observableArrayList();
+        balance = new Balance(0);
     }
 
     /**
@@ -46,7 +69,14 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        birthday = personToCopy.getBirthday();
+        linkedin = personToCopy.getLinkedin();
+        secondaryEmail = personToCopy.getSecondaryEmail();
+        telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
+        id = personToCopy.getId();
+        notes = personToCopy.getNotes();
+        balance = personToCopy.getBalance();
     }
 
     /**
@@ -74,6 +104,39 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(MonthDay birthday) {
+        this.birthday = Optional.of(new Birthday(birthday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Linkedin} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLinkedin(String linkedin) {
+        this.linkedin = Optional.of(new Linkedin(linkedin));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Secondary Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = Optional.of(new Email(secondaryEmail));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Secondary Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = Optional.of(new Telegram(telegram));
+        return this;
+    }
+
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -89,8 +152,38 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ID} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(int id) {
+        this.id = Optional.of(id);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Notes} of the {@code Person} that we are building.
+     * @param notes
+     * @return
+     */
+    public PersonBuilder withNotes(String... notes) {
+        this.notes = SampleDataUtil.getNoteList(notes);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Balance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBalance(int balance) {
+        this.balance = new Balance(balance);
+        return this;
+    }
+
+    /**
+     * Builds a {@code Person}.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram,
+                tags, id, notes, balance);
     }
 
 }

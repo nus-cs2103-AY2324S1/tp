@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private NotificationWindow notificationWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -192,5 +194,13 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Shows startup notifications to user.
+     */
+    public void showStartupNotifications() {
+        logic.getLatestNotifications(LocalDateTime.now()).stream()
+                .forEach(notification -> new NotificationWindow(getPrimaryStage(), notification).show());
     }
 }

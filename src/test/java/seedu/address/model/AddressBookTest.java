@@ -12,7 +12,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -84,10 +86,40 @@ public class AddressBookTest {
     }
 
     @Test
+    public void randomOperations_ensureUniqueIds() {
+        addressBook.resetData(new AddressBookStub(Collections.emptyList()));
+        Random random = new Random();
+        HashSet<Integer> ids = new HashSet<>();
+        for (int i = 0; i < 200; i++) {
+            if (addressBook.getPersonList().isEmpty() || random.nextBoolean()) {
+                String name = java.util.UUID.randomUUID().toString().replace("-", "");
+                Person newPerson = new PersonBuilder().withName(name).build();
+                addressBook.addPerson(newPerson);
+                ids.add(newPerson.getId().get());
+            } else {
+                int randomIndex = random.nextInt(addressBook.getPersonList().size());
+                Person personToRemove = addressBook.getPersonList().get(randomIndex);
+                ids.remove(personToRemove.getId().get());
+                addressBook.removePerson(personToRemove);
+            }
+        }
+
+        for (Person person : addressBook.getPersonList()) {
+            assertTrue(ids.contains(person.getId().get()));
+            ids.remove(person.getId().get());
+        }
+        assertTrue(ids.isEmpty());
+    }
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
+
+
+
+
+
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.

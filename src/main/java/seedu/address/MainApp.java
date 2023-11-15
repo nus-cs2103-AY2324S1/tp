@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,6 +22,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventFactory;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -62,6 +65,8 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
+        initEvents(model);
+
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
@@ -91,6 +96,17 @@ public class MainApp extends Application {
         }
 
         return new ModelManager(initialData, userPrefs);
+    }
+
+    /**
+     * Initialises {@code Event} instances.
+     * @param model Model representing initial state.
+     */
+    private void initEvents(Model model) {
+        List<Event> events = EventFactory.createEvents(model);
+        for (Event event: events) {
+            model.addEvent(event);
+        }
     }
 
     private void initLogging(Config config) {

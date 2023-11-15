@@ -1,0 +1,39 @@
+@startuml
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User executes edit command;
+:Parse command string;
+
+if () then ([invalid command format])
+    :ParseException: INVALID_COMMAND_FORMAT;
+    stop
+([else]) elseif () then ([index not an integer])
+    :ParseException: MESSAGE_NOT_A_INDEX;
+    stop
+([else]) elseif () then ([index not a non-zero unsigned integer])
+    :ParseException: MESSAGE_INVALID_INDEX;
+    stop
+([else]) elseif () then ([index larger than last index in contact list])
+    :CommandException: MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+    stop
+([else]) elseif () then ([wrong attribute format])
+    :ParseException: MESSAGE_CONSTRAINTS;
+    stop
+([else]) elseif () then ([edit empty additional attribute])
+    :CommandException: MESSAGE_USE_ADDALT_COMMAND;
+    stop
+([else]) elseif () then ([same primary and secondary email after edit])
+    :CommandException: MESSAGE_DUPLICATE_EMAIL;
+    stop
+([else]) elseif () then ([no change after edit])
+    :CommandException: MESSAGE_NO_CHANGE;
+    stop
+else ([else])
+endif
+:Update person in contact list with edited attributes;
+:Show MESSAGE_EDIT_PERSON_SUCCESS to user;
+
+stop
+@enduml

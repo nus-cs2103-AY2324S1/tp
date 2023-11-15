@@ -1,0 +1,70 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UpdatePhotoCommandParser" as CommandParser LOGIC_COLOR_T3
+participant ":UpdatePhotoCommand" as Command LOGIC_COLOR_T2
+participant ":Model" as Model MODEL_COLOR
+participant ":Avatar" as Avatar MODEL_COLOR_T2
+participant ":Person" as Person MODEL_COLOR_T3
+
+
+[-> AddressBookParser : parseCommand("updatephoto 1 path//SomeImage.png")
+activate AddressBookParser
+create CommandParser
+AddressBookParser -> CommandParser
+activate CommandParser
+CommandParser --> AddressBookParser
+deactivate CommandParser
+
+AddressBookParser -> CommandParser : parse(arguments)
+activate CommandParser
+
+create Command
+CommandParser -> Command : new UpdatePhotoCommand(index, path)
+activate Command
+Command --> CommandParser : command
+deactivate Command
+
+CommandParser --> AddressBookParser : command
+deactivate CommandParser
+CommandParser -[hidden]->
+destroy CommandParser
+
+[<-- AddressBookParser : command
+deactivate AddressBookParser
+
+[-> Command : execute(model)
+activate Command
+
+Command -> Model : getFilteredPersonList()
+activate Model
+Model --> Command : lastShownList
+deactivate Model
+
+create Avatar
+Command -> Avatar : new Avatar(...)
+activate Avatar
+Avatar --> Command : avatar
+deactivate Avatar
+
+Command -> Command : createPersonWithAvatar(personToEdit, avatar)
+activate Command
+create Person
+Command --> Person : new Person(...)
+activate Person
+Person --> Command : editedPerson
+deactivate Person
+
+Command --> Command : editedPerson
+deactivate Command
+
+Command -> Model :  setPerson(personToEdit, editedPerson)
+activate Model
+Model --> Command
+deactivate Model
+
+[<-- Command: commandResult
+
+@enduml

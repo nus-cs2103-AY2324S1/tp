@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Birthday.FORMATTER;
 
+import java.time.MonthDay;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,9 +13,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_NOT_A_INDEX = "Index should be an integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -29,10 +37,15 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+        try {
+            boolean isValidIndex = StringUtil.isNonZeroUnsignedInteger(trimmedIndex);
+            if (!isValidIndex) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_NOT_A_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
@@ -81,6 +94,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String birthday} into an {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthday} is invalid or doesn't follow the specified format.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        try {
+            return new Birthday(MonthDay.parse(trimmedBirthday, FORMATTER));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Birthday.MESSAGE_INVALID);
+        }
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +122,36 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String linkedin} into an {@code Linkedin}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code linkedin} is invalid.
+     */
+    public static Linkedin parseLinkedin(String linkedin) throws ParseException {
+        requireNonNull(linkedin);
+        String trimmedLinkedin = linkedin.trim();
+        if (!Linkedin.isValidLinkedin(trimmedLinkedin)) {
+            throw new ParseException(Linkedin.MESSAGE_CONSTRAINTS);
+        }
+        return new Linkedin(trimmedLinkedin);
+    }
+
+    /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return new Telegram(trimmedTelegram);
     }
 
     /**
@@ -117,8 +176,61 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tagToAdd = parseTag(tagName);
+            if (!tagSet.contains(tagToAdd)) {
+                tagSet.add(tagToAdd);
+            }
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String balance} into a {@code Balance}.
+     * Handles the conversion of a dollar amount into cents.
+     */
+    public static Balance parseBalance(String balance) throws ParseException {
+        requireNonNull(balance);
+        String trimmedBalance = balance.trim();
+
+
+        if (!Balance.isValidDollarString(trimmedBalance)) {
+            throw new ParseException(Balance.MESSAGE_CONSTRAINTS);
+        }
+
+        // Remove the dollar sign if it exists
+        String dollarAmount = trimmedBalance.replace("$", "");
+
+        // Split the string at the decimal point
+        String[] parts = dollarAmount.split("\\.");
+
+        // Strip leading zeros from the dollar part
+        parts[0] = parts[0].replaceFirst("^0+(?!$)", "");
+
+        // Check that the dollar amount does not clearly exceed 5 digits.
+        // This prevents integer overflow when converting to cents and when
+        // performing validation in subsequent pay / owe operations.
+        if (parts[0].length() > 5) {
+            throw new ParseException(Balance.MESSAGE_TRANSACTION_LIMIT_EXCEEDED);
+        }
+
+        // Convert the dollar part to cents
+        int cents = Integer.parseInt(parts[0]) * 100;
+
+        // Add the cents part if it exists
+        if (parts.length > 1) {
+            if (parts[1].length() == 1) {
+                // If there's only one decimal place, multiply by 10 to get correct cents
+                cents += Integer.parseInt(parts[1]) * 10;
+            } else {
+                cents += Integer.parseInt(parts[1]);
+            }
+        }
+
+        if (!Balance.isWithinTransactionLimit(cents)) {
+            throw new ParseException(Balance.MESSAGE_TRANSACTION_LIMIT_EXCEEDED);
+        }
+
+        return new Balance(cents);
+    }
+
 }

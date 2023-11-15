@@ -2,18 +2,16 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -22,8 +20,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OweCommand;
+import seedu.address.logic.commands.PayCommand;
+import seedu.address.logic.commands.RemoveNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -70,10 +71,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(FindCommand.COMMAND_WORD + " n/foo && n/bar || t/baz")
+                instanceof FindCommand);
     }
 
     @Test
@@ -89,6 +88,18 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_note() throws Exception {
+        Note note = new Note("Sample note");
+        assertTrue(parser.parseCommand(AddNoteCommand.COMMAND_WORD + " 1 Sample note") instanceof AddNoteCommand);
+    }
+
+    @Test
+    public void parseCommand_removeNote() throws Exception {
+        assertTrue(parser.parseCommand(RemoveNoteCommand.COMMAND_WORD + " 1 2") instanceof RemoveNoteCommand);
+    }
+
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -97,5 +108,36 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_pay() throws Exception {
+        assertTrue(parser.parseCommand("pay 1 2.50") instanceof PayCommand);
+    }
+
+    @Test
+    public void parseCommand_owe() throws Exception {
+        assertTrue(parser.parseCommand("owe 1 2.50") instanceof OweCommand);
+    }
+
+    @Test
+    public void parseCommand_nonAsciiInput_throwsParseException() {
+        String nonAsciiInput = "add José";
+        assertThrows(ParseException.class,
+            AddressBookParser.MESSAGE_NON_ASCII, () -> parser.parseCommand(nonAsciiInput));
+    }
+
+    @Test
+    public void parseCommand_allAsciiInputAllowed() {
+        AddressBookParser parser = new AddressBookParser();
+        String input = "0123456789abcdefghijklmnopqrstuvwxyz"
+            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\\\'()*+,-./:;<=>?@[\\\\]^_{|} ~";
+        try {
+            parser.parseCommand(input);
+        } catch (Exception e) {
+            if (e.getMessage() == AddressBookParser.MESSAGE_NON_ASCII) {
+                fail("Ascii input should be allowed");
+            }
+        }
     }
 }

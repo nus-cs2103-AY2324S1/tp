@@ -15,6 +15,26 @@ public class Tag {
     public final String tagName;
 
     /**
+     * Enum for emergency tags
+     */
+    public enum EmergencyTags {
+        RA,
+        SOS;
+
+        /**
+         * Returns true if a given string is a valid emergency tag name.
+         */
+        public static boolean isEmergencyTag(String tagName) {
+            for (EmergencyTags tag : EmergencyTags.values()) {
+                if (tag.name().equals(tagName.toUpperCase())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
@@ -44,12 +64,12 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.compareToIgnoreCase(otherTag.tagName) == 0;
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toUpperCase().hashCode();
     }
 
     /**

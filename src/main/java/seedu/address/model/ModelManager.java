@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ArrayList<Event> events;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        events = new ArrayList<>();
     }
 
     public ModelManager() {
@@ -62,6 +67,11 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Path getDataDirectoryPath() {
+        return getAddressBookFilePath().getParent();
     }
 
     @Override
@@ -129,6 +139,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    @Override
+    public List<Event> getEventList() {
+        return events;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -144,5 +164,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

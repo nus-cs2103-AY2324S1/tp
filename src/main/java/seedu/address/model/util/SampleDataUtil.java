@@ -1,14 +1,21 @@
 package seedu.address.model.util;
 
+import java.time.MonthDay;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -18,7 +25,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
-        return new Person[] {
+        Person[] samplePersons = {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends")),
@@ -33,11 +40,23 @@ public class SampleDataUtil {
                 getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
+                Optional.of(new Birthday(MonthDay.of(10, 13))),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                getTagSet("classmates"),
+                Optional.empty(),
+                getNoteList("Irfan has a cool sister."),
+                new Balance(5)),
+
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
         };
+        for (int i = 0; i < samplePersons.length; i++) {
+            samplePersons[i].setId(i + 1);
+        }
+        return samplePersons;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -55,6 +74,17 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a notes set containing the notes of strings given.
+     */
+    public static ObservableList<Note> getNoteList(String... strings) {
+        ObservableList<Note> notes = FXCollections.observableArrayList();
+        for (String string : strings) {
+            notes.add(new Note(string));
+        }
+        return notes;
     }
 
 }
