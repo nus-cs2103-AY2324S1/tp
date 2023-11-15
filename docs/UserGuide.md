@@ -12,10 +12,10 @@
 * [Product Overview](#product-overview)
 * [Key Definitions](#key-definitions)
 * [Features Overview](#overview-of-main-features)
-* [Quick Start Guide](#quick-start)
+* [Quick Start](#quick-start)
+* [Command Failures](#command-failure)
+* [Viewing help](#viewing-help-help)
 * [Features](#features)
-  * [Viewing help](#viewing-help-help)
-  * [Command Failures](#command-failure)
   * [Managing Tags](#1-managing-tags)
     * [Creating tags](#creating-tags-create)
     * [Listing all tags](#listing-all-tags-listt)
@@ -69,7 +69,7 @@ Access our self-curated user guide below to learn more on how you can integrate 
 [Jump back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-## Overview of Main Features
+## Features Overview
 
 While **JABPro** offers a whole range of features, we believe that the following features are likely to be the most useful to you:
 
