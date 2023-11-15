@@ -911,7 +911,7 @@ In the **main page**, your Foster Family data is **saved in the hard disk automa
 
 <div></div>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
