@@ -18,6 +18,9 @@ package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
+Class JsonAdaptedPatient
+Class JsonAdaptedDoctor
+Class JsonAdaptedAppointment
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
@@ -37,7 +40,11 @@ Storage -right-|> AddressBookStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableAddressBook --> "*" JsonAdaptedPatient
+JsonSerializableAddressBook --> "*" JsonAdaptedDoctor
+JsonSerializableAddressBook --> "*" JsonAdaptedAppointment
+JsonAdaptedPatient ..|> JsonAdaptedPerson
+JsonAdaptedDoctor ..|> JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
 @enduml

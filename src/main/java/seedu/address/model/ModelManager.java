@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,10 +26,14 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    private final AddressBook addressBook;
+    private static final int UNDOS_ALLOWED = 5;
+    private AddressBook addressBook;
+    private final ArrayList<AddressBook> undoList;
+    private final ArrayList<AddressBook> redoList;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Doctor> filteredDoctors;
+    private final FilteredList<Patient> filteredPatients;
+    private final FilteredList<Appointment> filteredAppointments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -30,14 +42,45 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.undoList = new ArrayList<>();
+        this.redoList = new ArrayList<>();
+        filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
+        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
+        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    private void updateBackup() {
+        if (undoList.size() == UNDOS_ALLOWED) {
+            undoList.remove(0);
+        }
+        undoList.add(new AddressBook(addressBook));
+        redoList.clear();
+    }
+
+    @Override
+    public void undo() throws CommandException {
+        if (!undoList.isEmpty()) {
+            redoList.add(new AddressBook(addressBook));
+            addressBook.resetData(undoList.remove(undoList.size() - 1));
+        } else {
+            throw new CommandException(UndoCommand.MESSAGE_EMPTY);
+        }
+    }
+
+    @Override
+    public void redo() throws CommandException {
+        if (!redoList.isEmpty()) {
+            undoList.add(new AddressBook(addressBook));
+            addressBook.resetData(redoList.remove(redoList.size() - 1));
+        } else {
+            throw new CommandException(RedoCommand.MESSAGE_EMPTY);
+        }
     }
 
     //=========== UserPrefs ==================================================================================
@@ -90,42 +133,103 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        if (person.isPatient()) {
+            return addressBook.hasPatient((Patient) person);
+        } else {
+            return addressBook.hasDoctor((Doctor) person);
+        }
+    }
+    @Override
+    public boolean hasIc(Ic nric) {
+        return addressBook.hasIc(nric);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        if (target instanceof Patient) {
+            updateBackup();
+            addressBook.removePatient((Patient) target);
+        } else if (target instanceof Doctor) {
+            updateBackup();
+            addressBook.removeDoctor((Doctor) target);
+        }
+
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        if (person.isPatient()) {
+            updateBackup();
+            addressBook.addPatient((Patient) person);
+        } else if (person.isDoctor()) {
+            updateBackup();
+            addressBook.addDoctor((Doctor) person);
+        }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        updateBackup();
+        addressBook.addAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
+    public void deleteAppointment(Appointment appointment) {
+        updateBackup();
+        addressBook.removeAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+        if (target instanceof Patient && editedPerson instanceof Patient) {
+            updateBackup();
+            addressBook.setPatient((Patient) target, (Patient) editedPerson);
+        } else if (target instanceof Doctor && editedPerson instanceof Doctor) {
+            updateBackup();
+            addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
+        }
     }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Patient> getFilteredPatientList() {
+        return filteredPatients;
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered doctor list
+     */
+    @Override
+    public ObservableList<Doctor> getFilteredDoctorList() {
+        return filteredDoctors;
+    }
+
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPatients.setPredicate(predicate);
+        filteredDoctors.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +246,9 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredDoctors.equals(otherModelManager.filteredDoctors)
+                && filteredPatients.equals(otherModelManager.filteredPatients)
+                && filteredAppointments.equals(otherModelManager.filteredAppointments);
     }
 
 }

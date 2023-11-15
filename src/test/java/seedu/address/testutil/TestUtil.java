@@ -33,23 +33,24 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the person in the {@code model}'s person list.
+     * Returns the middle index of the patient in the {@code model}'s patient list.
      */
-    public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+    public static Index getPatientMidIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredPatientList().size() / 2);
+    }
+
+
+    /**
+     * Returns the last index of the patient in the {@code model}'s patient list.
+     */
+    public static Index getPatientLastIndex(Model model) {
+        return Index.fromOneBased(model.getFilteredPatientList().size());
     }
 
     /**
-     * Returns the last index of the person in the {@code model}'s person list.
+     * Returns the patient in the {@code model}'s patient list at {@code index}.
      */
-    public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
-    }
-
-    /**
-     * Returns the person in the {@code model}'s person list at {@code index}.
-     */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Person getPatient(Model model, Index index) {
+        return model.getFilteredPatientList().get(index.getZeroBased());
     }
 }

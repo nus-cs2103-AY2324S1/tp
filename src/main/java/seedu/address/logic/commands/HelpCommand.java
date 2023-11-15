@@ -4,6 +4,7 @@ import seedu.address.model.Model;
 
 /**
  * Format full help instructions for every command for display.
+ * Extends the abstract class {@link Command}.
  */
 public class HelpCommand extends Command {
 

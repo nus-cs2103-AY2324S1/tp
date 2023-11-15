@@ -4,51 +4,61 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+Package Model {
+    Class "<<interface>>\nModel" as Model
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    Class "ModelManager" as ModelManager
+    Class "AddressBook" as AddressBook
+    Class "UserPrefs" as UserPrefs
 
-Class I #FFFFFF
+    Class "UniqueObjectList" as UniqueObjectList
+    Class "UniqueAppointmentList" as UniqueAppointmentList
+
+
+Package Person {
+    Class "Person" as Person
+
+    Package Doctor {
+        Class "UniqueDoctorList" as UniqueDoctorList
+        Class "Doctor" as Doctor
+    }
+    Package Patient {
+        Class "UniquePatientList" as UniquePatientList
+        Class "Patient" as Patient
+    }
+
+    Doctor.Doctor -down-|>Person
+    Patient.Patient -down-|> Person
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+    ModelManager ---> "~* filteredDoctors" Person.Doctor.Doctor
+    ModelManager ---> "~* filteredPatients" Person.Patient.Patient
+    ModelManager ---> "~* filteredAppointments" Appointment
 
-AddressBook .up.|> ReadOnlyAddressBook
+    AddressBook *-down--> UniqueDoctorList
+    AddressBook *-down--> UniquePatientList
+    AddressBook *-down--> UniqueAppointmentList
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+    UniqueDoctorList .up.|> UniqueObjectList
+    UniquePatientList .up.|> UniqueObjectList
+    UniqueAppointmentList .up.|> UniqueObjectList
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+    UniqueDoctorList -down---> "~* all" Person.Doctor.Doctor
+    UniquePatientList -down----> "~* all" Person.Patient.Patient
+    UniqueAppointmentList -down----> "~* all" Appointment
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+    Appointment --> "2" Ic
+    Appointment --> "1" AppointmentTime
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+    AddressBook .up.|> ReadOnlyAddressBook
+    ModelManager .up.|> Model
+    UserPrefs .up.|> ReadOnlyUserPrefs
 
-ModelManager --> "~* filtered" Person
+    ModelManager -down-> "1" AddressBook
+    UserPrefs "1" <- ModelManager
+
+
+}
 @enduml

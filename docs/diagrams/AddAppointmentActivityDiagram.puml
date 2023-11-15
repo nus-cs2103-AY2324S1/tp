@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes AddAppointmentCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([patient and doctor exist in model])
+    if () then ([patient and doctor do not already have
+    other appointments at the stated time])
+        :Add appointment to patient;
+        :Add appointment to doctor;
+        :Add appointment to model;
+    else ()
+        :System throws
+        CommandException;
+    endif
+
+else ()
+    :System throws
+    CommandException;
+endif
+stop
+@enduml

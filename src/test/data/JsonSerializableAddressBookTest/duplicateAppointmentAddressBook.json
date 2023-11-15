@@ -1,0 +1,18 @@
+{
+  "patients": [],
+  "doctors": [],
+  "appointments" :  [
+  {
+    "doctorIc": "S9712346B",
+    "patientIc": "S8192320E",
+    "appointmentTime": "2022-02-14 13:30",
+    "status": "Scheduled"
+  },
+    {
+    "doctorIc": "S9712346B",
+    "patientIc": "S8192320E",
+    "appointmentTime": "2022-02-14 13:30",
+    "status": "Scheduled"
+  }]
+}
+
