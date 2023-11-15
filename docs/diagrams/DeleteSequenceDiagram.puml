@@ -49,11 +49,24 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
+DeleteCommand -> Model : purgeAddressBook()
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
 DeleteCommand -> Model : deletePerson(1)
 activate Model
 
 Model --> DeleteCommand
 deactivate Model
+
+DeleteCommand -> Model : commitAddressBook()
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
 
 create CommandResult
 DeleteCommand -> CommandResult

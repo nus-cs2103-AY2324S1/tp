@@ -2,19 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interval.Duration;
+import seedu.address.model.interval.IntervalBegin;
+import seedu.address.model.interval.IntervalDay;
+import seedu.address.model.interval.IntervalEnd;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Begin;
+import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-
+import seedu.address.model.person.Subject;
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -95,30 +98,149 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String day} into an {@code Day}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code day} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Day parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        Day initialisedDay;
+
+        try {
+            initialisedDay = new Day(trimmedDay);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        return initialisedDay;
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String subject} into an {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code String begin} into an {@code Begin}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code begin} is invalid.
+     */
+    public static Begin parseBegin(String begin) throws ParseException {
+        requireNonNull(begin);
+        String trimmedBegin = begin.trim();
+        if (!Begin.isValidBegin(trimmedBegin)) {
+            throw new ParseException(Begin.MESSAGE_CONSTRAINTS);
+        }
+        return new Begin(trimmedBegin);
+    }
+
+    /**
+     * Parses a {@code String end} into an {@code End}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code end} is invalid.
+     */
+    public static End parseEnd(String end) throws ParseException {
+        requireNonNull(end);
+        String trimmedEnd = end.trim();
+        if (!End.isValidEnd(trimmedEnd)) {
+            throw new ParseException(End.MESSAGE_CONSTRAINTS);
+        }
+        return new End(trimmedEnd);
+    }
+
+    /**
+     * Parses a {@code String payRate} into an {@code PayRate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code end} is invalid.
+     */
+    public static PayRate parsePayRate(String payRate) throws ParseException {
+        requireNonNull(payRate);
+        String trimmedPayRate = payRate.trim();
+        if (!PayRate.isValidPayRate(payRate)) {
+            throw new ParseException(PayRate.MESSAGE_CONSTRAINTS);
+        }
+        return new PayRate(trimmedPayRate);
+    }
+
+    /**
+     * Parses a {@code String day} into an {@code IntervalDay}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static IntervalDay parseIntervalDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        IntervalDay initialisedDay;
+
+        try {
+            initialisedDay = new IntervalDay(trimmedDay);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(IntervalDay.MESSAGE_CONSTRAINTS);
+        }
+
+        return initialisedDay;
+    }
+
+    /**
+     * Parses a {@code String begin} into an {@code IntervalBegin}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code begin} is invalid.
+     */
+    public static IntervalBegin parseIntervalBegin(String begin) throws ParseException {
+        requireNonNull(begin);
+        String trimmedBegin = begin.trim();
+        if (!IntervalBegin.isValidBegin(trimmedBegin)) {
+            throw new ParseException(IntervalBegin.MESSAGE_CONSTRAINTS);
+        }
+        return new IntervalBegin(trimmedBegin);
+    }
+
+    /**
+     * Parses a {@code String end} into an {@code IntervalEnd}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code end} is invalid.
+     */
+    public static IntervalEnd parseIntervalEnd(String end) throws ParseException {
+        requireNonNull(end);
+        String trimmedEnd = end.trim();
+        if (!IntervalEnd.isValidEnd(trimmedEnd)) {
+            throw new ParseException(IntervalEnd.MESSAGE_CONSTRAINTS);
+        }
+        return new IntervalEnd(trimmedEnd);
+    }
+
+    /**
+     * Parses a {@code String duration} into an {@code Duration}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code end} is invalid.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (!Duration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
+        return new Duration(trimmedDuration);
     }
 }

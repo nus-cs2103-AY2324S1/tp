@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +15,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Person> PREDICATE_SHOW_ALL_UNPAID_PERSONS = paid -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -57,11 +61,21 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasDate(Person person);
+    List<String> findInterval(Interval interval);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    void markPersonPaid(Person target);
+
+    void markPersonUnPaid(Person target);
+
+    boolean getPersonPaid(Person target);
+
 
     /**
      * Adds the given person.
@@ -74,14 +88,52 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Person target, Person editedPerson, boolean isEditingSchedule);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the schedule list */
+    ObservableList<Person> getScheduleList();
+
+    /** Returns an unmodifiable view of the unfiltered person list */
+    ObservableList<Person> getUnfilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Saves the current addressbook {@code VersionedAddressBook} state in its history
+     */
+    void commitAddressBook();
+
+    /**
+     * Restore the previous addressbook {@code VersionedAddressBook} state from its history
+     */
+    void undoAddressBook();
+
+    /**
+     * Restore a previously undone addressbook {@code VersionedAddressBook} state from its history
+     */
+    void redoAddressBook();
+
+    /**
+     * Remove states in the {@code VersionedAddressBook} that are no longer valid
+     */
+    void purgeAddressBook();
+
+    /**
+     * Checks whether the addressbook has any saved states that can be restored
+     * @return a boolean to indicate whether an undo operation is possible
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Checks whether the addressbook has any saved undone states that can be restored
+     * @return a boolean to indicate whether an undo operation is possible
+     */
+    boolean canRedoAddressBook();
 }

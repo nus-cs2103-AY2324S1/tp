@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +18,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.interval.Duration;
+import seedu.address.model.interval.Interval;
+import seedu.address.model.interval.IntervalBegin;
+import seedu.address.model.interval.IntervalDay;
+import seedu.address.model.interval.IntervalEnd;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -46,8 +51,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -71,10 +75,26 @@ public class AddressBookTest {
     }
 
     @Test
+    public void findInterval() {
+        addressBook.addPerson(ALICE);
+        Interval interval = new Interval(new IntervalDay("Mon"), new Duration("60"), new IntervalBegin("0600"),
+                new IntervalEnd("2200"));
+        List<String> result = addressBook.findInterval(interval);
+        List<String> expected = new ArrayList<>();
+        expected.add("08:00 - 10:00");
+        assertEquals(expected, result);
+    }
+
+    @Test void setPaidTest() {
+        addressBook.addPerson(ALICE);
+        addressBook.setPaid(ALICE);
+        assertEquals(true, addressBook.getPaid(ALICE));
+    }
+
+    @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 

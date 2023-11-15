@@ -4,13 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.interval.Interval;
+import seedu.address.model.person.LessonComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,10 +22,12 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> scheduleList;
+
+    private final ObservableList<Person> unfilteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -31,13 +37,15 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        unfilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        scheduleList = new SortedList<>(this.addressBook.getPersonList(), new LessonComparator());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new VersionedAddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -94,8 +102,35 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDate(Person person) {
+        requireNonNull(person);
+        return addressBook.hasDate(person);
+    }
+
+    @Override
+    public List<String> findInterval(Interval interval) {
+        requireNonNull(interval);
+        return addressBook.findInterval(interval);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void markPersonPaid(Person target) {
+        addressBook.setPaid(target);
+    }
+
+    @Override
+    public void markPersonUnPaid(Person target) {
+        addressBook.setUnPaid(target);
+    }
+
+    @Override
+    public boolean getPersonPaid(Person target) {
+        return addressBook.getPaid(target);
     }
 
     @Override
@@ -105,11 +140,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Person target, Person editedPerson, boolean isEditingSchedule) {
+        requireAllNonNull(target, editedPerson, isEditingSchedule);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedPerson, isEditingSchedule);
     }
+
+    @Override
+    public void commitAddressBook() {
+        addressBook.commit();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        addressBook.undo();
+    }
+
+    @Override
+    public void redoAddressBook() {
+        addressBook.redo();
+    }
+
+    @Override
+    public boolean canUndoAddressBook() {
+        return addressBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return addressBook.canRedo();
+    }
+
+    @Override
+    public void purgeAddressBook() {
+        addressBook.purge();
+    }
+
+
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -128,6 +196,28 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Schedule List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} sorted by date backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getScheduleList() {
+        return scheduleList;
+    }
+
+    //=========== Full List Accessors ==================================================================
+
+    /**
+     * Returns an unmodifiable unfiltered view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return unfilteredPersons;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -144,5 +234,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

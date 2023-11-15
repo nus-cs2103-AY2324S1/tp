@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -68,6 +69,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same schedule as {@code person} exists in the address book.
+     * @param person
+     * @return boolean for whether a person has a clashing schedule
+     */
+    public boolean hasDate(Person person) {
+        requireNonNull(person);
+        return persons.checkSameDate(person);
+    }
+
+    /**
+     * Finds the list of timings which have the same day as the Interval from the address book
+     * @param interval
+     * @return list of timings
+     */
+    public List<String> findInterval(Interval interval) {
+        requireNonNull(interval);
+        return persons.findInterval(interval);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -80,10 +101,34 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson, boolean isEditingSchedule) {
         requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(target, editedPerson, isEditingSchedule);
+    }
+
+    /**
+     * Set the person as paid in the address book.
+     * The person must exist in the address book.
+     */
+    public void setPaid(Person target) {
+        persons.setPaid(target);
+    }
+
+    /**
+     * Set the person as not paid in the address book.
+     * The person must exist in the address book.
+     */
+    public void setUnPaid(Person target) {
+        persons.setUnPaid(target);
+    }
+
+    /**
+     * Get the person's paid status.
+     * The person must exist in the address book.
+     */
+    public boolean getPaid(Person target) {
+        return persons.getPaid(target);
     }
 
     /**

@@ -1,16 +1,25 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,19 +35,31 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_SUBJECT + "SUBJECT "
+            + PREFIX_DAY + "DAY "
+            + PREFIX_BEGIN + "START "
+            + PREFIX_END + "END "
+            + PREFIX_PAYRATE + "PAYRATE"
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_SUBJECT + "Maths "
+            + PREFIX_DAY + "Mon "
+            + PREFIX_BEGIN + "1200 "
+            + PREFIX_END + "1300 "
+            + PREFIX_PAYRATE + "20.00";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+
+    public static final String MESSAGE_DUPLICATE_PERSON = "This tutee already exists";
+
+    public static final String MESSAGE_DUPLICATE_DATE = "This date and time clashes with an existing schedule";
 
     private final Person toAdd;
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -52,11 +73,25 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!Lesson.isValid(toAdd.getBegin(), toAdd.getEnd())) {
+            logger.info("[AddCommand.execute()]: Begin after End");
+            throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+        }
+
         if (model.hasPerson(toAdd)) {
+            logger.info("[AddCommand.execute()]: Duplicate Person");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (model.hasDate(toAdd)) {
+            logger.info("[AddCommand.execute()]: Clashing Schedules");
+            throw new CommandException(MESSAGE_DUPLICATE_DATE);
+        }
+
+        model.purgeAddressBook();
         model.addPerson(toAdd);
+        model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
