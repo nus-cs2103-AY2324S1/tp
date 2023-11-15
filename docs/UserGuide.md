@@ -1168,24 +1168,26 @@ See [Appendix C](#appendix-c-similar-names) for more details.
 Here is a non-exhaustive list of some warning messages.
 
 ```
-Warning!; [Phone numbers should only contain numbers, and it should be at 
-least 3 digits long. Area codes are allowed, signified by a '+' and up to 
-3 numbers, followed by a space separating this from the main number.]
+Warning!; [Phone numbers should only contain numbers, and it should 
+be at least 3 digits long. Area codes are allowed, signified by a 
+'+' and up to 3 numbers, followed by a space separating this from 
+the main number.]
 Please ignore if this is expected.
 ```
 ```
-Warning!; [Emails should be of the format local-part@domain and adhere to 
-the following constraints:
-1. The local-part should only contain alphanumeric characters and these 
-special characters, excluding the parentheses, (+_.-). The local-part may 
-not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is 
-made up of domain labels separated by periods.
+Warning!; [Emails should be of the format local-part@domain and 
+adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and 
+these special characters, excluding the parentheses, (+_.-). The 
+local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain 
+name is made up of domain labels separated by periods.
 The domain name must:
     - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated 
-      only by hyphens, if any.]
+    - have each domain label start and end with alphanumeric 
+      characters
+    - have each domain label consist of alphanumeric characters, 
+      separated only by hyphens, if any.]
 Please ignore if this is expected.
 ```
 </box>
