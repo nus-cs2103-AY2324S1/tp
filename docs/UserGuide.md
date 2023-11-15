@@ -7,7 +7,7 @@ title: User Guide
 Here are some tasks which Foster Family can help you with: 
 * **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes).
 * **Search** for a fosterer using _any_ detail you can remember of them.
-* **Gain insights** on the overall status of fosterers managed.
+* **Gain insights** on the overall status of managed fosterers.
 
 Foster Family is optimised for use via a **Command Line Interface (CLI)**. This means that you primarily interact with it by typing commands. It also retains the benefits of a Graphical User Interface (GUI), allowing you to interact with the application through graphical components. If you can type fast, Foster Family can get things done faster than traditional GUI apps.
 
