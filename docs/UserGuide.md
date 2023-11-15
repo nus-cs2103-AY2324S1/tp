@@ -34,9 +34,9 @@ Here's how you can get started with CareCentral quickly:
 6. Alternatively, you can also use the [terminal](#7-glossary-) and [go to the folder](https://opensource.com/article/21/8/linux-change-directories#:~:text=To%20open%20a%20directory%20in,and%20places%20you%20in%20it.) where the `carecentral.jar` is located and type `java -jar carecentral.jar` in the command box to start the app.
 7. For Mac users who are unable to open the file or encountering the issue below, follow this [guide](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html).
 ![Error](images/mac_issue.png)
-8. Type the command in the command box and press Enter to execute it.
-   e.g. typing `help` and pressing Enter will open the help window.
-   Some example commands you can try:
+8. Type the command in the [command box](#35-command-box-%EF%B8%8F) and press `Enter` to execute it.
+   e.g. typing `help` and pressing `Enter` will open the help window, which is a link that redirects you back to this guide. So don't worry if you lost the link to this user guide, **CareCentral got you covered**!
+   <br> Some example commands you can try:
     * `add-patient n/John Doe ic/S1234567A p/98765432 e/johnd@example.com a/25 t/Diabetic`
     * `list-patients`
     * `delete-patient 1`
@@ -59,7 +59,7 @@ The sidebar contains the following tabs:
 * Medical History
 * Appointments
 
-Users can switch between tabs by clicking on the respective tabs, using the switch command (see [here](#641-switch-tabs-%EF%B8%8F)) or using the `Ctrl + T` shortcut.
+Users can switch between tabs by clicking on the respective tabs, using the switch command (see [here](#541-switch-tabs-%EF%B8%8F)) or using the `Ctrl + T` shortcut.
 
 ## 3.3. Panel 📋
 There are 3 panels in the main screen depending on which tab is selected:
@@ -67,13 +67,13 @@ There are 3 panels in the main screen depending on which tab is selected:
 * Medical History Panel
 * Appointment Panel
 
-Users can switch between the panels by switching between the respective tabs by using the `Ctrl + T` shortcut.
+You can switch between the panels by switching between the respective tabs using the `Ctrl + T` shortcut or by simply clicking on the tab itself.
 
 ## 3.4. Result Display Box 📬
 The result display box displays the result of the command executed.
 
 ## 3.5. Command Box ⌨️
-The command box is where the user can type in the commands to be executed.
+The command box is where you type in the commands to be executed.
 
 <div style="page-break-after: always;"></div>
 
@@ -105,7 +105,7 @@ Below is a table of parameters you'll commonly use in CareCentral, along with th
 <div style="background-color: #f9f9f9; border-left: 5px solid #009688; padding: 5px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 <p style="color: #009688; font-size: 20px;">:information_source: Notes about the command format:</p>
     <ul>
-        <li><strong>Words in <code>UPPER_CASE</code></strong> are the parameters to be supplied by the user.<br>
+        <li><strong>Words in <code>UPPER_CASE</code></strong> are the parameters to be supplied by you.<br>
             For example, in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</li>
         <li><strong>Optional items</strong> are in square brackets.<br>
             For example, <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</li>
@@ -125,7 +125,7 @@ Below is a table of parameters you'll commonly use in CareCentral, along with th
 ### 5.1.1. Create Patient Record 📝🚑
 
 **What it does**  <br>
-This feature lets you add a new patient record into the CareCentral system, keeping track of all the essential details for each patient.
+This command allows you to add a new patient record into the CareCentral system, keeping track of all the essential details for each patient.
 
 **Command Format**  <br>
 `add-patient n/NAME ic/NRIC a/AGE p/PHONE_NUMBER e/EMAIL [t/TAG]…`
@@ -161,7 +161,7 @@ Just type this simple command to get the **full list of patients**: <br>
 ### 5.1.3. Edit Patient Record ✏️🚑
 
 **What it does** <br>
-Edits existing patient information at the specified `PATIENT_INDEX` in the system.
+This command allows you to edit existing patient information at the specified `PATIENT_INDEX` in the system.
 
 **Command Format** <br>
 `edit-patient PATIENT_INDEX [n/NAME] [ic/NRIC] [a/AGE] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…`
@@ -194,7 +194,7 @@ Let's break down what each part of the command means:
 ### 5.1.4. Delete Patient Record 🗑️🚑
 
 **What it does** <br>
-Removes a patient's record from the system. The specific patient is found by the `PATIENT_INDEX` as shown in the list from `list-patients`.
+This command allows you to remove a patient's record from the system. The specific patient is found by the `PATIENT_INDEX` as shown in the list from `list-patients`.
 **Be aware: This action will permanently erase the patient's record, including all related appointments and medical history.**
 
 **Command Format** <br>
@@ -219,7 +219,7 @@ When using this command, ensure that the patient index corresponds to a valid pa
 ### 5.1.5. Find Patient Record 🔎🚑
 
 **What it does** <br>
-Helps you to locate a patient's record in the system by searching for a keyword. The search functionality is designed to match complete or starting fragments of the name. For instance, searching for `John` will show `John Doe` but not `Johnny`.
+This command helps you to locate a patient's record in the system by searching for a keyword. The search functionality is designed to match complete or starting fragments of the name. For instance, searching for `John` will show `John Doe` but not `Johnny`.
 
 **Command Format** <br>
 `find KEYWORD`
@@ -246,7 +246,7 @@ Let's break down what each part of the command means:
 
 ### 5.2.1. Add Appointment 📝📅
 **What it does** <br>
-Enables the scheduling of new appointments for patients.
+This command allows you to schedule new appointments for patients.
 
 **Command Format** <br>
 `add-appt PATIENT_INDEX d/DATE t/TIME`
@@ -273,7 +273,7 @@ Let's break down what each part of the command means:
 </div>
 
 **What it does** <br>
-Displays a list of all appointments for a specific patient.
+This command allows you to display a list of all appointments for a specific patient.
 
 **Command Format** <br>
 `list-appointments PATIENT_INDEX`
@@ -304,7 +304,7 @@ When using this command, ensure that the patient index corresponds to a valid pa
   </div>
 
 **What it does** <br>
-Edits **existing** appointment details. The appointment to be edited is identified by the index number shown in the displayed list of appointments by `list-appointments`.
+This command allows you to edit **existing** appointment details. The appointment to be edited is identified by the index number shown in the displayed list of appointments by `list-appointments`.
 
 **Command Format** <br>
 `edit-appt APPOINTMENT_INDEX pi/patient-index [d/DATE] [t/TIME]`
@@ -346,7 +346,7 @@ Remember to verify the appointment index and patient index before making changes
 </div>
 
 **What it does** <br>
-Removes an appointment from the system. The appointment to be deleted is identified by the index number shown in the displayed list of appointments by `list-appointments`.
+This command allows you to remove an appointment from the system. The appointment to be deleted is identified by the index number shown in the displayed list of appointments by `list-appointments`.
 
 **Command Format** <br>
 `delete-appt APPOINTMENT_INDEX pi/patient-index`
@@ -378,7 +378,7 @@ Please double-check the appointment and patient indexes before executing this co
 </div>
 
 **What it does** <br>
-Allows you to add one or multiple medications to a patient's appointment record. The appointment to be edited is identified by the index number shown in the displayed list of appointments by `list-appointments`.
+This command allows you to add one or multiple medications to a patient's appointment record. The appointment to be edited is identified by the index number shown in the displayed list of appointments by `list-appointments`.
 
 **Command Format** <br>
 `add-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX mn/MEDICATION_NAME...`
@@ -408,7 +408,7 @@ Let's break down what each part of the command means:
 </div>
 
 **What it does** <br>
-Edits a prescription of a patient. The prescription to be edited is identified by the index number shown in the displayed list of appointments by `list-appointments`.
+This command allows you to edit a prescription of a patient. The prescription to be edited is identified by the index number shown in the displayed list of appointments by `list-appointments`.
 
 **Command Format** <br>
 `edit-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX mn/MEDICATION_NAME...`
@@ -446,7 +446,7 @@ Let's break down what each part of the command means:
 </div>
 
 **What it does** <br>
-Removes an appointment's prescription from the system. The prescription to be deleted is identified by the index number shown in the displayed list of appointments by `list-appointments`.
+This command allows you to remove an appointment's prescription from the system. The prescription to be deleted is identified by the index number shown in the displayed list of appointments by `list-appointments`.
 
 **Command Format** <br>
 `delete-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX`
@@ -482,7 +482,7 @@ Ensure correct usage of appointment and patient indices to avoid accidental dele
 </div>
 
 **What it does** <br>
-Adds a medical history to a patient record.
+This command allows you to add a medical history to a patient.
 
 **Command Format** <br>
 `add-medical-history PATIENT_INDEX d/DATE mc/MEDICAL_CONDITION t/TREATMENT`
@@ -513,7 +513,7 @@ Let's break down what each part of the command means:
 </div>
 
 **What it does** <br>
-Lists the medical history of a patient, including past diagnoses and treatments.
+This command allows you to list the medical history of a patient, including past diagnoses and treatments.
 
 **Command Format** <br>
 `list-medical-history PATIENT_INDEX`
@@ -545,7 +545,7 @@ Ensure the patient index corresponds to a valid entry in your patient registry t
 </div>
 
 **What it does** <br>
-Edits a medical history of a patient. The medical history to be edited is identified by the index number shown in the displayed list of medical history by `list-medical-history`.
+This command allows you to edit a medical history of a patient. The medical history to be edited is identified by the index number shown in the displayed list of medical history by `list-medical-history`.
 
 **Command Format** <br>
 `edit-medical-history MEDICAL_HISTORY_INDEX pi/PATIENT_INDEX [d/DATE] [mc/MEDICAL_CONDITION] [t/TREATMENT]`
@@ -585,7 +585,7 @@ Let's break down what each part of the command means:
 </div>
 
 **What it does** <br>
-Deletes a medical history of a patient. The medical history to be deleted is identified by the index number shown in the displayed list of medical history by `list-medical-history`.
+This command allows you to delete a medical history of a patient. The medical history to be deleted is identified by the index number shown in the displayed list of medical history by `list-medical-history`.
 
 **Command Format** <br>
 `delete-medical-history MEDICAL_HISTORY_INDEX [pi/PATIENT_INDEX]`
@@ -612,7 +612,7 @@ Be cautious and verify the indexes accurately before deleting to avoid unintende
 ### 5.4.1. Switch Tabs ⏩⚙️
 
 **What it does** <br>
-Switches between the different tabs in the sidebar.
+This command allows you to switch between the different tabs in the sidebar.
 
 **Command Format** <br>
 `switch TAB_NUMBER`
@@ -633,7 +633,7 @@ Let's break down what each part of the command means:
 ### 5.3.2. Help❓⚙️
 
 **What it does** <br>
-Displays the help page.
+This command allows you to display the help page link and come back to this user guide whenever you need.
 
 **Command Format** <br>
 `help`
@@ -650,7 +650,7 @@ Displays the help page.
 </div>
 
 **What it does** <br>
-Clears all data from the system. **This action will permanently erase all data, including all patient records, appointments, and medical history.**
+This command allows you to clear all data from the system. **This action will permanently erase all data, including all patient records, appointments, and medical history.**
 
 **Command Format** <br>
 `clear`
@@ -664,7 +664,7 @@ Clears all data from the system. **This action will permanently erase all data, 
 ### 5.3.4. Exit 🚪⚙️
 
 **What it does** <br>
-Exits the program.
+This command allows you to exit the program.
 
 **Command Format** <br>
 `exit`
