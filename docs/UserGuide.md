@@ -173,7 +173,7 @@ The same process can be applied to other fields.
 
 Entering <code>save</code> saves the changes you have made into storage.
 
-Suppose you want to save your changes after changing the name of the fosterer,.
+Suppose you want to save your changes after changing the name of the fosterer.
 
 <div style="text-align: center">
 <img src="images/screenshots/SaveCommandBefore.png" class="center"/>
