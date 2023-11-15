@@ -586,8 +586,6 @@ Parameters: INDEX PRIORITY
 </box>
 
 
-<br>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Setting a seller's priority: `sprio`
@@ -617,10 +615,12 @@ Example: `sprio 3 high`
 
 <div style="page-break-after: always;"></div>
 
-<box type="info">
 
 
 <br>
+
+<box type="info">
+
 
 **Note:**
 * `PRIORITY` only considers the first letter of the input (`h` for high, `m` for medium, `l` for low, or `n` for nil). For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
@@ -1017,6 +1017,8 @@ guide, ensuring that you have all the information you need at your fingertips.
 
 Format: `help`
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program: `exit`
@@ -1033,6 +1035,8 @@ Format: `exit`
 **Note:** Upon exit, the latest data is saved to your computer at data/rtpm.json.
 
 </box>
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1051,14 +1055,6 @@ the entries may not appear in the application until you refresh the list.
 **A**: You can make use of the handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
 commands to fix any errors made.
 
-**Q**: I can't double-click on the application to run it! <br>
-**A**: First, check that you have Java 11 installed. If you do, and you still can't double-click, try this:
-Open a command terminal,use the `cd` command to change into the folder you put the application file in,
-and type in the `java -jar rtpm.jar`command to run the application.
-
-**Q**: How do I install Java 11? <br>
-**A**: Try installing from the official Oracle archive [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
-
 <div style='text-align: right;'>
 
 [Back to top](#contents)
@@ -1067,6 +1063,17 @@ and type in the `java -jar rtpm.jar`command to run the application.
 
 <div style="page-break-after: always;"></div>
 
+
+<br>
+
+**Q**: I can't double-click on the application to run it! <br>
+**A**: First, check that you have Java 11 installed. If you do, and you still can't double-click, try this:
+Open a command terminal,use the `cd` command to change into the folder you put the application file in,
+and type in the `java -jar rtpm.jar`command to run the application.
+
+
+**Q**: How do I install Java 11? <br>
+**A**: Try installing from the official Oracle archive [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
 
 **Q**: I still have issues! <br>
 **A**: Try contacting our developer team by creating an issue on our 
@@ -1077,8 +1084,10 @@ and type in the `java -jar rtpm.jar`command to run the application.
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
-2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.<br>
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+<br>
+2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
+<br>
 3. Long fields can cause the details of a client to not be displayed fully. A workaround is to use the 
 ```slist```/```blist``` commands to display the details of the client in the result box. 
 
