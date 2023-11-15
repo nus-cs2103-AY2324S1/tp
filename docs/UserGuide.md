@@ -2,16 +2,16 @@
 layout: page
 title: User Guide
 ---
-**Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
+**Foster Family** is a desktop application built for **foster managers of cat and dog shelters** to facilitate the **administrative management** of **foster families**. 
 
 Here are some tasks which Foster Family can help you with: 
-* **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes)
-* Search for a fosterer using _**any**_ detail you can remember of them
-* **Gain insights** on the current status of fosterers
+* **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes).
+* **Search** for a fosterer using _any_ detail you can remember of them.
+* **Gain insights** on the overall status of managed fosterers.
 
-Foster Family is **optimised for use** via a Command Line Interface (CLI). This means you interact with it by typing commands in the command box. It also retains the benefits of a Graphical User Interface (GUI), allowing you to interact with the application through graphical components. If you can type fast, Foster Family can get things done faster than traditional GUI apps.
+Foster Family is optimised for use via a **Command Line Interface (CLI)**. This means that you primarily interact with it by typing commands. It also retains the benefits of a Graphical User Interface (GUI), allowing you to interact with the application through graphical components. If you can type fast, Foster Family can get things done faster than traditional GUI apps.
 
-This user guide contains **all** the commands available to you, along with **step-by-step explanations** and **examples** to help you master the use of Foster Family. If you are a _new user_, simply head over to [Quick Start](#quick-start) to begin your journey with us. For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to your command of interest.
+This document is a comprehensive guide to all the commands available to you, along with **step-by-step explanations** and **examples** to help you master the features Foster Family has to offer. If you are a _new user_, we recommend beginning your journey with [Quick Start](#quick-start). For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to a section that interests you.
 
 <div style="page-break-after: always;"></div>
 
@@ -26,9 +26,9 @@ This user guide contains **all** the commands available to you, along with **ste
 
 ## **Quick Start**
 
-Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from the [Oracle website](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-Step 2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
+Step 2. Download the latest `FosterFamily.jar` from [our GitHub Page](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
 
 Step 3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
 
@@ -38,7 +38,7 @@ Step 5. Navigate to the home folder you put the jar file in using the command `c
 
 Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
-   The Foster Family GUI, similar to the image below, should appear on your screen. Note how the app contains some sample data.<br>
+   The Foster Family GUI, similar to the image below, should appear on your screen. Note that the app contains some sample data the first time you launch it.<br>
    ![Ui](images/Ui.png) 
 
 <div style="page-break-after: always;"></div>
@@ -65,26 +65,26 @@ Please refer to the [Features](#features) section for details of each command.
 <div style="page-break-after: always;"></div>
 
 ## **Useful Notations**
-These are the symbols we will be using to highlight certain information to you.
+These symbols highlight information you might find important.
 
-| Symbol               | Meaning                                                                           |
-|----------------------|-----------------------------------------------------------------------------------|
-| :information_source: | General notes about command                                                       |
-| :exclamation:        | Important notes about command                                                     |
-| :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation  |
-| :bulb:               | Tips to optimise the use of Foster Family                                         |
+| Symbol               | Meaning                                                                                |
+|----------------------|----------------------------------------------------------------------------------------|
+| :information_source: | General notes about the command                                                        |
+| :exclamation:        | Important notes about the command                                                      |
+| :warning:            | Warnings about the command, especially when data loss or  misinterpretation is likely  |
+| :bulb:               | Tips to optimise the use of Foster Family                                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Technical Terms**
 These are some technical terms you may come across in this user guide.
 
-| Term                  | Definition                                                                                 |
-|-----------------------|--------------------------------------------------------------------------------------------|
-| Command               | Keywords that Foster Family recognises to invoke specific functions                        |
-| Parameter / Argument  | Information to be passed to commands as inputs                                             |
-| Index                 | The number next to a fosterer's name in the list shown in the main window                  |
-| Field                 | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
+| Term                 | Definition                                                                                            |
+|----------------------|-------------------------------------------------------------------------------------------------------|
+| Command              | Flexibly refers both to features of Foster Family, as well as to keywords that trigger those features |
+| Parameter / Argument | Information to be passed to commands as inputs                                                        |
+| Index                | The number to the left of each fosterer's name in the list shown in the main page                     |
+| Field                | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc             |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -92,9 +92,9 @@ These are some technical terms you may come across in this user guide.
 
 ## **User Interface (UI)**
 
-These are the two different screens you will be interacting with in Foster Family. 
+There are two different screens you will interact with in Foster Family. 
 
-### The Main Window 
+### The Main Page
 
 ![Ui](images/Ui.png)
 
@@ -200,7 +200,7 @@ The effect of a `save` depends on the command you used to enter this view.
 
 #### Exiting the profile page
 
-Entering <code>exit</code> closes the profile page and directs you back to the main window. <br>
+Entering <code>exit</code> closes the profile page and directs you back to the main page. <br>
 Foster Family will warn you if you attempt to exit without saving your changes.
 
 <br>
@@ -231,11 +231,11 @@ Let's say you did not save your changes and entered <code>exit</code>.
 
 <div style="page-break-after: always;"></div>
 
-If you _press the Enter key_ again, your **changes are discarded** and you will be redirected back to the main window.
+If you _press the Enter key_ again, you will **discard your changes** and be redirected back to the main page.
 
 <div></div>
 
-If you _press the Esc key_, the **exit is cancelled** and you can continue working on your changes in the profile page.
+If you _press the Esc key_, the **exit is cancelled**, and you can continue working on your changes in the profile page.
 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 
@@ -288,9 +288,9 @@ Format: `help`
 
 <div style="page-break-after: always;"></div>
 
-### Adding a fosterer through the main window: `add`
+### Adding a fosterer through the main page: `add`
 
-Adds a fosterer to your address book, done through the main window.
+Adds a fosterer to your address book, done through the main page.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`
 
@@ -375,7 +375,7 @@ Format: `add`
 
 **:information_source: Notes about the command:**<br>
 
-*  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
+*  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main page: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
 </div>
 
 Here is the profile page you will see after entering <code>add</code>: 
@@ -496,9 +496,9 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Editing a fosterer's details through the main window: `edit`
+### Editing a fosterer's details through the main page: `edit`
 
-Edits the details of the fosterer at the specified index in your currently displayed list, done through the main window.
+Edits the details of the fosterer at the specified index in your currently displayed list, done through the main page.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
@@ -555,7 +555,7 @@ Examples:
 
 **:warning: Caution:**<br>
 
-**Edit for tags** in the main window **overwrites existing tags**.<br>
+**Edit for tags** in the main page **overwrites existing tags**.<br>
 e.g. If the first fosterer has 2 tags : `experienced`, `reliable`,<br>
 entering `edit 1 t/goodWithCats` will mean fosterer 1 will lose the `experienced` and `reliable` tags. <br>
 
@@ -856,11 +856,6 @@ Format: `reset`, followed by `reset confirm`
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
 
-
-<div style="page-break-after: always;"></div>
-
-   * In the case where the user attempts to reset the address book by entering `reset confirm` without entering the `reset` command, the user will be prompted to enter the `reset` command first.
-     ![Reset](images/screenshots/ResetPrompt.png)
    * In the case where the user wishes to **cancel the reset**, he/she just has to proceed and type any other **valid command** in the command box.
 
 
@@ -889,7 +884,7 @@ Please refer to [User Interface: The Profile Page: Exiting the profile page](#ex
 
 ### Saving data
 
-In the **main window**, your Foster Family data is **saved in the hard disk automatically** after any command that changes the data, so no manual saving is needed. However, **edits made in the profile page have to be saved** via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
+In the **main page**, your Foster Family data is **saved in the hard disk automatically** after any command that changes the data, so no manual saving is needed. However, **edits made in the profile page have to be saved** via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
 
 <div style="page-break-after: always;"></div>
 
@@ -899,7 +894,8 @@ In the **main window**, your Foster Family data is **saved in the hard disk auto
 
 * A JSON file stores fosterer details as key value pairs, making it more readable than a regular text file.<br>
 
-  ![Json](images/screenshots/JsonExample.png)
+  <img src="images/screenshots/JsonExample.png" height="400" class="center"/>
+  
   For example, the "name" key is paired with a value "Alex Yeoh" for the first fosterer in your address book.<br>
 
 * We strongly advise you to update the data file directly **only if you are an advanced user**.<br>
@@ -942,12 +938,12 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 | Action                                   | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                                 | `help`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **Add** from main window                 | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`                        | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
+| **Add** from main page                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`                        | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
 | **Add** from profile page                | `add`                                                                                                                                                                     | -                                                                                                                                                                       |
 | **List**  or **Find**                    | `list`, `find`                                                                                                                                                            | `list`, `find`,  `list available`, `find available`                                                                                                                     |
 | **View Profile**                         | `view INDEX`                                                                                                                                                              | `view 1`                                                                                                                                                                |
 | **Save updated fosterer details**        | `save`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **Edit** from main window                | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                             |
+| **Edit** from main page                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                             |
 | **Edit** from profile page               | `edit INDEX`                                                                                                                                                              | `edit 1`                                                                                                                                                                |
 | **Delete**                               | `delete INDEX [INDEX...]`                                                                                                                                                 | `delete 1 2 3`                                                                                                                                                          |
 | **Sort**                                 | `sort`                                                                                                                                                                    | -                                                                                                                                                                       |
