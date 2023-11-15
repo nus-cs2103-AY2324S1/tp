@@ -60,7 +60,9 @@ Nice! Now you know the basic commands and have launched TimetaBRO, lets get into
 
 ### 2.1. Toolbar
 
-Provides functionality related to accessing the help pop-up or exiting TimetaBRO. Quick and easy!
+Provides functionality related to accessing the help pop-up or exiting TimetaBRO. Currently, we only have two buttons for you! They are:
+* `File`: Clicking on it will open a dropdown menu, where you can click on `Exit` to exit the application!
+* `Help`: Clicking on it will open another dropdown menu, where you can click on `Help F1` to get a help pop-up! See 2.5 for more info about it.
 
 ### 2.2. Command input box
 
@@ -69,59 +71,66 @@ This is where you can input our cool commands to perform actions on TimetaBRO.
 ### 2.3. Command feedback box
 
 This displays information related to your entered input in the command input box. <br>
-Errors and success messages all will be here, and they will guide you to use TimetaBRO more effectively. Keep an eye out here!
+Errors and success messages all will be here, and they will guide you to use TimetaBRO more effectively, so keep an eye out for them over here!
 
 ### 2.4. Friends list
 
-This section displays all your friends in your list by default,
-and may be filtered display certain friends based on the executed command.
-### 2.5. Daily reminder pop-up
+This section displays all your friends in your list by default, and may be filtered display certain friends based on the executed command.
+
+### 2.5 Help pop-up
+
+![Ui-labelled](images/HelpPopUp.png)
+<br><center><ins>Image: Help pop-up</ins></center>
+
+This pop-up provides a link to this user guide should you lose the link! There is also a handy `Copy URL` button for you to copy the URL onto your clipboard!
+
+### 2.6. Daily reminder pop-up
 
 ![Ui-labelled](images/ui-reminder-popup.png)
 <br><center><ins>Image: User interface layout breakdown of TimetaBRO</ins></center>
 
-This reminder pop-up appears when you open the app. Don't forget them!
+This reminder pop-up appears when you open the app.
 
-#### 2.5.1. Birthday reminders
+#### 2.6.1. Birthday reminders
 
 This section displays the names of friends whose birthday falls on the date of the day you open TimetaBRO. Remember to wish them happy birthday!
 
-#### 2.5.2. Event reminders
+#### 2.6.2. Event reminders
 
-This section displays the non-recurring events you have for the day. It can be your Hangouts, meetings, or exams!
+This section displays the non-recurring events you have for the day. They can be hangouts with friends, meetings, exams, and other important events you need reminders for!
 
-### 2.6. Profile display
+### 2.7 Profile display
 
 ![Ui-labelled](images/ui-profile-display.png)
 <br><center><ins>Image: TimetaBRO profile display breakdown</ins></center>
 
-#### 2.6.1. User display
+#### 2.7.1. User display
 
 At all times, this section displays the user profile. This consists of all the user information and the user schedule. Now, you can see your schedule at a glance!
 
-#### 2.6.2. Friend Display
+#### 2.7.2. Friend Display
 
 This section is blank by default.
 It displays the profile of whichever friend is selected from the list by clicking on it.<br>
 Upon selection, the list cell of that friend will turn blue, and you can see your friend's details and schedule for quick comparisons.
 
-#### 2.6.3. Display features
+#### 2.7.3. Display features
 
-##### 2.6.3.1 Timetable layout
+##### 2.7.3.1 Timetable layout
 
 The timetable will be displayed under all the profile information, and each profile section is scrollable.
 
 The days of the week are arranged from Monday to Sunday, and the timeslots are arranged from earliest to latest. Hope you like how it looks!
 
-##### 2.6.3.2 Color coding
+##### 2.7.3.2 Color coding
 
 The event timeslots are color coded according to their type and vibe.
 
 Blue for module (recurring), red for cca (recurring), and green for dated (non-recurring) events. Let TimetaBRO brighten your day up!
 
-##### 2.6.3.3 Event block formation
+##### 2.7.3.3 Event block formation
 
-Each event block consists of the event name on the first line, and the start and end times on the second line. Simple yet elegant! (at least we hope you feel that way)
+Each event block consists of the event name on the first line, and the start and end times on the second line. Simple yet elegant!
 
 ## **3. Features**
 
@@ -149,7 +158,7 @@ Each event block consists of the event name on the first line, and the start and
 * Clicking on your friend's name will display their timetable on the bottom half of the right hand side of TimetaBRO.
 
 * Only times in 30-minute intervals are allowed. <br>
-  e.g. `1430` and `1500` will be excepted, `1445` and `2359` will not be allowed.
+  e.g. `1430` and `1500` will be excepted, `1445` and `2359` will not be valid! If your timings do not fit nicely into 30-minute chunks, try your best to round up/down, and use tags to remind yourself that it's actually at another time.<br> E.g. t/[insert Event Name] 1445
 
 </div>
 
@@ -181,7 +190,7 @@ No changes to user.
 
 #### 3.1.2 Adding recurring event to user: `addschedule user`
 
-This command adds a recurring event to your schedule, such as a class or CCA.
+This command adds a recurring event to your schedule, such as a class or CCA. You might find this command useful if you want to keep track of your weekly commitments!
 
 Format: `addschedule user type/EVENT_TYPE en/EVENT_NAME h/DAY_TIME`
 
@@ -243,7 +252,7 @@ Missing prefix(es) for en/ type/ h/ !
 
 #### 3.1.3 Adding non-recurring event to user: `addevent user`
 
-This command adds a non-recurring event to your schedule. Use it for meetings, hangouts, and exams!
+This command adds a non-recurring event to your schedule. Use it to keep track of meetings, hangouts, and exams!
 
 Format: `addevent user en/EVENT NAME h/DAY_TIME r/REMINDER`
 
@@ -310,7 +319,7 @@ Events added outside the current week are not visible! The application is stream
 
 #### 3.1.4 Deleting recurring event from user: `rmschedule user`
 
-Removes the specified recurring item from your schedule. Use it when your schedule changes!
+Removes the specified recurring item from your schedule. Useful for schedule changes!
 <br>If there are multiple recurring events with the same names, this command will the instance of the event that was added the earliest!</br>
 
 Format: `rmschedule user type/EVENT_TYPE en/EVENT_NAME`
@@ -369,7 +378,7 @@ If there are multiple time slots with the same names, the command will remove ti
 
 #### 3.1.5 Deleting non-recurring event from user: `rmevent user`
 
-Removes the specified event from your schedule. Use it when your plans changes!
+Removes the specified event from your schedule. You can use it when your plans changes!
 <br>If there are multiple non-recurring events with the same names, this command will the instance of the event that was added the earliest!</br>
 
 Format: `rmevent user en/EVENT_NAME`
@@ -404,7 +413,7 @@ Example: rmevent user en/CS2103T Final Exam
 
 #### 3.2.1 Adding a friend: `add`
 
-Adds a person to your TimetaBRO friend list. Watch as your list grows!
+Adds a person to your TimetaBRO friend list. Use it to keep track of the schedules and details of your closest friends or even new acquaintances. Watch as your list grows!
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]...​`
 
@@ -486,7 +495,7 @@ Examples:
 
 #### 3.2.3 Deleting a friend's profile: `delete`
 
-Deletes the specified friend from your TimetaBRO friends list. Goodbye, old friend.
+Deletes the specified friend from your TimetaBRO friends list. You may it when your friends leave for SEP and you don't want your friends' list being so cluttered!
 
 Format: `delete INDEX`
 
@@ -501,7 +510,7 @@ Output:
 [Friend's Name] deleted.
 ```
 
-The friend should be removed from the friend's list. Good riddance! (Or see you later!)
+The friend should be removed from the friend's list. Goodbye!
 
 **Unsuccessful Command:**\
 If index is unspecified or not a positive integer, the following error message will be returned:
@@ -524,13 +533,13 @@ Examples:
 
 #### 3.2.4 Listing all friends: `list`
 
-Shows a list of all your added friends!
+Shows a list of all your added friends! You could use it after you use the `find` or `cft` command, which alters your friends' list. Your list now returns to its original state!
 
 Format: `list`
 
 #### 3.2.5 Viewing friend's profile
 
-View your friend's timetable.
+View your friend's timetable. Now, you can use it compare both your timetables!
 
 ![Ui-labelled](images/ui-view-friend.png)
 <br><center><ins>Image: Friend profile selection on TimetaBRO</ins></center>
@@ -541,7 +550,7 @@ View your friend's timetable.
 
 #### 3.2.6 Adding recurring event to friend: `addschedule`
 
-This command adds a weekly recurring event to a friend's schedule, like their modules and CCAs.
+This command adds a weekly recurring event to a friend's schedule, like their modules and CCAs. Use it to keep track of their lesson timings, and CCAs. You could maybe even join in if you're free!
 
 Format: `addschedule INDEX type/TYPE en/EVENT_NAME h/DAY_TIME`
 
@@ -592,7 +601,7 @@ NOTE: If you want to add a cca/module to yourself, use addschedule user
 Example: addschedule user type/cca en/Basketball h/Monday 1400 1600
 ```
 
-The error message at the top of the command feedback above will specify what needs to be changed. Helpful!\
+The error message at the top of the command feedback above will specify what needs to be changed to help you correct any errors you might have made!\
 e.g.\
 Input:
 ```
@@ -616,7 +625,7 @@ Missing prefix(es) for en/ type/ h/ !
 
 #### 3.2.7 Adding non-recurring event to friend: `addevent`
 
-This command adds a dated, non-recurring event to you or your friend's schedule.
+This command adds a dated, non-recurring event to you or your friend's schedule. You could use it to keep track of your friends' important events!
 
 Format: `addevent INDEX en/EVENT_NAME h/DATE_TIME r/REMINDER`
 
@@ -693,7 +702,7 @@ Missing prefix(es) for en/ h/ r/ !
 
 #### 3.2.8 Deleting recurring event from friend: `rmschedule`
 
-Removes the specified recurring item from the specified Person's schedule. Use it when they have a change in schedule!<br>If there are multiple recurring events with the same names, this command will the instance of the event that was added the earliest!<br>
+Removes the specified recurring item from the specified Person's schedule. You might find it useful when they have a change in schedule!<br>If there are multiple recurring events with the same names, this command will the instance of the event that was added the earliest!<br>
 
 Format: `rmschedule INDEX type/EVENT_TYPE en/EVENT_NAME`
 
@@ -821,7 +830,7 @@ Example: rmevent user en/CS2103T Final Exam
 
 #### 3.2.10 Finding common free times with your friend(s): `cft`
 
-Finds friend(s) with the same free times as you, or returns a message if no friends are free. That's okay though! Just find more friends to add!
+Finds friend(s) with the same free times as you, or returns a message if no friends are free. This command is for you to look for lunch buddies or to see what time you can bug them!
 
 Format:
 
@@ -915,7 +924,7 @@ Examples:
 
 #### 3.3.1 Set reminder for non-recurring events: `setReminder`
 
-Sets a reminder for a **dated, non-recurring event** in your schedule. You'll never forget another!
+Sets a reminder for a **dated, non-recurring event** in your schedule. Use it when you forgot to set reminders when adding it, or decide that an event is important enough for a reminder afterwards. You'll never forget it now!
 
 Format: `setReminder EVENT_NAME`
 - Set reminder for an event titled `EVENT_NAME` in your schedule!
@@ -942,7 +951,7 @@ No such event exists!
 
 #### 3.3.2 Remove reminder for non-recurring events: `rmReminder`
 
-Remove a reminder for a dated event from your schedule. You'll never be reminded about it again!
+Removes a reminder for a dated event from your schedule. You may find this command great when you accidentally set a reminder, or decided that it's not that important!
 
 Format: `rmReminder EVENT_NAME`
 - Remove reminder for an event titled `EVENT_NAME` in your schedule.
@@ -974,9 +983,12 @@ Shows a message explaining how to access the help page. We promise it's helpful.
 
 Format: `help`
 
+The app should provide you with a pop-up as shown below!
+![Ui-Labelled](images/HelpPopUp.png)
+
 #### 3.4.2 Clearing all entries: `clear`
 
-Clears all entries from TimetaBRO. Be careful not to delete everything by accident!
+Clears all entries from TimetaBRO. You can use it to clear the sample data we provided, or if you find it too cluttered. Be careful not to delete everything by accident!
 
 Format: `clear`
 
@@ -986,11 +998,11 @@ Output:
 All friends have been deleted.
 ```
 
-The entire friend list should be emptied. Start afresh!
+The entire friend list should be emptied. Start afresh! 
 
 #### 3.4.3 Exiting the program: `exit`
 
-Exits the program.
+Exits the program. Use it instead of the traditional button if you're already typing!
 
 Format: `exit`
 
@@ -1025,11 +1037,11 @@ Command parameter inputs have constraints to ensure their use is streamlined.
 
 ## **5. Saving the data**
 
-TimetaBRO data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TimetaBRO data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually!
 
 ## **6. Editing the data file**
 
-TimetaBRO data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TimetaBRO data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file!
 
 <div markdown="span" class="alert alert-warning">Caution:
 If your changes to the data file makes its format invalid, TimetaBRO will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -1067,8 +1079,11 @@ Not yet! However, for now, you may set slightly different names for events with 
 **If I have two events that overlap, can I add both of them to the calendar?**<br>
 Nope! As TimetaBRO was designed to be a timetable management app, we would not be allowing overlapping events to be added into the timetable. You don't wanna double book your own time!
 
-**Why do my event names automatically change to all capitalized letters?**<br>
-We want to standardize the format of all event names to prevent users from accidentally adding multiple events wit the same names but in different formats! (i.e. only first letter is capitalized vs only last letter is capitalized)
+**Why do my event names automatically change to all capitalised letters?**<br>
+We want to standardize the format of all event names to prevent users from accidentally adding multiple events wit the same names but in different formats! (i.e. only first letter is capitalised vs only last letter is capitalised)
+
+**Why can't I put 0000 instead of 2400 when my event ends at 12AM?**<br>
+This is because it makes it hard for TimetaBRO to understand that it ends at 12AM the next day! Hence, 2400 is a workaround for this. Stay tuned for enhancements!
 
 --------------------------------------------------------------------------------------------------------------------
 
