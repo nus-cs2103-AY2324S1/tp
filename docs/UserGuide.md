@@ -238,7 +238,6 @@ At least one field to edit must be provided.
 Error: This person already exists in the client list.
 ```
 
-<div style="page-break-after: always;"></div>
 
 ### Locating clients by fields : `find`
 
@@ -266,8 +265,6 @@ Unlike previous commands, the fields do not have to be in a specific format.
 
 Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
-
-<div style="page-break-after: always;"></div>
 
 Expected output upon failure:
 
@@ -308,6 +305,8 @@ Expected output upon failure:
 ```
 Error: Invalid Index
 ```
+<div style="page-break-after: always;"></div>
+
 * Missing `INDEX` parameter:<br>
 ```
 Error: Missing Index
@@ -507,6 +506,8 @@ A sample client entry in the JSON file is as follows. The respective formats are
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q1**: How do I check my Java version?<br>
@@ -548,6 +549,8 @@ Sure! you can transfer your data to another computer by the following steps belo
    ![Computer1Preferences](images/Computer1Preferences.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
