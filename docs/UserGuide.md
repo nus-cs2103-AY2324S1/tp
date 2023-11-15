@@ -5,6 +5,10 @@ title: User Guide
 
 Welcome to the user guide for InsureIQ, the ultimate **contact management system for car insurance agents to keep track of multiple clients' details and policies**. Designed with efficiency in mind, this tool combines the speed of a Command Line Interface (CLI) with the user-friendly benefits of a Graphical User Interface (GUI). Experience a faster and more efficient contact management solution tailored to the unique needs of car insurance agents!
 
+This guide is designed to introduce features in InsureIQ for effectively managing client information and assist you in understanding how to use InsureIQ! 
+
+Go ahead and click on the links below to jump to the respective sections!
+
 * Table of Contents
 {:toc}
 
