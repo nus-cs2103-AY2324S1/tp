@@ -150,7 +150,7 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 
 <div style="page-break-after: always;"></div>
 
-After you are **done editing**, _press the Enter key_ on your keyboard to bring your cursor back to the command box. 
+After you are done editing, _press the Enter key_ on your keyboard to **confirm your changes**, and bring your cursor back to the command box. 
 
 <div></div>
 
