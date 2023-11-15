@@ -39,12 +39,12 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
 1. Look out for additional information in these alert blocks to master the use of InsureIQ!
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 **:information_source: Notes:**<br>
 Provides additional information for your understanding.
 </div>
 
-<div markdown="block" class="alert alert-success">
+<div markdown="span" class="alert alert-success">
 **:bulb: Tips:**<br>
 Provides tips for advanced users to maximise efficiency.
 </div>
@@ -62,7 +62,7 @@ Highlights important information you need to be careful about!
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 
 **:information_source: About the command format:**<br>
 
@@ -97,7 +97,7 @@ Format: `help`
 
 Adds client details to your client list. You can also choose to include policy details attached to a client.
 
-<div markdown="block" class="alert alert-success">
+<div markdown="span" class="alert alert-success">
 **:bulb: Importing client information from a data file:** 
 InsureIQ data is stored in a JSON file, which you can add clients directly into. More information can be found in the [Editing the data file](#editing-the-data-file) section.
 </div>
@@ -154,7 +154,7 @@ Error: The policy number is already in use
 Error: This person already exists in the address book
 ```
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 **:information_source: Adding clients with duplicate fields:**<br>
 The above error will only be raised when **ALL** fields in the client's details (name, NRIC, contact number, email, address) are the same.
 </div>
@@ -178,7 +178,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 **:information_source: Important notes about usage:**
 
 * If you are adding a new policy number to a client with no attached policy, you **must** also add the company, policy issue date and policy expiry date.
