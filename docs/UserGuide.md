@@ -38,7 +38,7 @@ Step 5. Navigate to the home folder you put the jar file in using the command `c
 
 Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
-   The Foster Family GUI should appear on your screen, similar to the image below. Note how the app contains some sample data.<br>
+   The Foster Family GUI, similar to the image below, should appear on your screen. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png) 
 
 <div style="page-break-after: always;"></div>
@@ -193,14 +193,14 @@ Key in <code>save</code> and press Enter to save the changes.
 <br/>
 
 If this was an `edit`, your changes to the fosterer will be saved.<br>
-If this was an `add`,  the new fosterer with the inputted details will be added.
+If this was an `add`,  the new fosterer with the inputted details will be added, and you will be redirected back to the main window.
 
 <br>
 
 #### Exiting the profile page
 
 Entering <code>exit</code> closes the profile page and directs you back to the main window. <br>
-Foster Family will warn you if you attempt to exit without first saving your changes.
+Foster Family will warn you if you attempt to exit without saving your changes.
 
 <br>
 
@@ -529,8 +529,8 @@ Parameters:
 **:exclamation: Important:**<br>
 
 * If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
-* If you run the **same edit command multiple times consecutively** (resulting in no visible change after the first run), the undo command **will not** be able to revert the data back to the original state. <br>
-  This is because undo can only undo the last command, **even if the command made no visible changes**.
+* If you run the **same `edit` command multiple times consecutively** (resulting in no visible change after the first run), the undo command **will not** be able to revert the data back to the original state. <br>
+  This is because `undo` can only undo the last command, **even if the command made no visible changes**.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -641,7 +641,7 @@ Format: `save`
 **:information_source: Notes about the command:**<br>
 
 *  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
-*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details.
+*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, allowing you to edit more details.
 </div>
 
 <br> 
@@ -723,8 +723,8 @@ Format: `sort`
 
 **:exclamation: Important:**<br>
 
-Repeated sort commands will not result in additional changes to the address book, and undo will not be able to revert the data back to its original state. <br>
-This is because undo can only revert the last command, even if the command made no changes to the address book.
+Repeated `sort` commands will not result in additional changes to the address book, and `undo` will not be able to revert the data back to its original state. <br>
+This is because `undo` can only revert the last command, even if the command made no changes to the address book.
 
 </div> 
 
@@ -867,7 +867,7 @@ Format: `reset`, followed by `reset confirm`
 
 <div style="page-break-after: always;"></div>
 
-   * In the case where the user attempts to reset the address book by entering `reset confirm` without first entering the `reset` command, the user will be prompted to enter the `reset` command first.
+   * In the case where the user attempts to reset the address book by entering `reset confirm` without entering the `reset` command, the user will be prompted to enter the `reset` command first.
      ![Reset](images/screenshots/ResetPrompt.png)
    * In the case where the user wishes to **cancel the reset**, he/she just has to proceed and type any other **valid command** in the command box.
 
@@ -939,7 +939,8 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 
 ## **Known issues**
 
-- **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
+- If you are **using multiple screens** and you move the application to a secondary screen, a part of the GUI may appear "off-screen" if you later choose to switch back to your primary screen. <br>
+  To resolve this, you can delete the `preferences.json` file that was created, before running the application again. This file is located in the same folder as the application jar file.
 
 --------------------------------------------------------------------------------------------------------------------
 
