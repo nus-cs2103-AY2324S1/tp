@@ -522,7 +522,7 @@ Parameters:
 
 | Parameter        | About                                                                                                                         | Example                                                     |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer | `1`, `2`, `3`                                               |
+| `INDEX`          | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer | `1`, `2`, `3`                                               |
 | `NAME`           | Updated name of the fosterer                                                                                                  | `Alice Tan`, `Harry Yeo`                                    |
 | `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                          | `93456778`, `89067547`                                      |
 | `EMAIL`          | Updated email of the fosterer                                                                                                 | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
