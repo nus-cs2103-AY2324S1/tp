@@ -74,7 +74,7 @@ You can navigate the user guide by clicking on the links in the table of content
   Things that are good to know but not compulsory, but might come in handy in using the feature will be displayed in this format.
 </div>
 
-#### 2.2.7. Notes from developers
+#### 2.2.4.4. Notes from developers
 
 <div style="background-color: #fff3e0; padding: 5px; border-left: 5px solid #ffa726;">
   📝<strong> Notes from developers<br></strong>
