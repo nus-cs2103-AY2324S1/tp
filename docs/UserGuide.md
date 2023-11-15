@@ -127,8 +127,8 @@ You are an **advanced** user if ...
 **Notes** and **tips** curated for you are labeled by the following box!
 
 
-<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
+<div style="display: flex; justify-content: center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 17px; font-weight: bold;">Advanced</p>
 </div>
 
 <br>
