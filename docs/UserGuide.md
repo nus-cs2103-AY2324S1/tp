@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-**Foster Family** is a desktop application built for **foster managers of cat and dog shelters** to help the **administrative management** of **foster families**. 
+**Foster Family** is a desktop application built for **foster managers of cat and dog shelters** to facilitate the **administrative management** of **foster families**. 
 
 Here are some tasks which Foster Family can help you with: 
 * **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes).
@@ -11,7 +11,7 @@ Here are some tasks which Foster Family can help you with:
 
 Foster Family is optimised for use via a **Command Line Interface (CLI)**. This means that you primarily interact with it by typing commands. It also retains the benefits of a Graphical User Interface (GUI), allowing you to interact with the application through graphical components. If you can type fast, Foster Family can get things done faster than traditional GUI apps.
 
-This document is a comprehensive guide to all the commands available to you, along with **step-by-step explanations** and **examples** to help you master the features Foster Family has to offer. If you are a _new user_, we recommend the [Quick Start](#quick-start) to begin your journey. For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to a section that interests you.
+This document is a comprehensive guide to all the commands available to you, along with **step-by-step explanations** and **examples** to help you master the features Foster Family has to offer. If you are a _new user_, we recommend beginning your journey with [Quick Start](#quick-start). For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to a section that interests you.
 
 <div style="page-break-after: always;"></div>
 
