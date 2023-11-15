@@ -687,6 +687,12 @@ Examples:
 
 </div>
 
+**Here's what you should do when you encounter an error:**
+
+| Error Encountered         | Reason                                                                                                                                   | Solution                                                                                                                                                       |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!` | You may have misspelled or entered the wrong sorting criterion. <br> Otherwise, you may have added extraneous characters in the command. | Verify that the criterion entered is spelt correctly in lowercase. <br> Ensure that you did not leave the hyphen out in `name-ascending` or `name-descending`. |
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Sorting by Course: `sort course`
@@ -716,6 +722,12 @@ Examples:
 
 In both cases, students with the same number of courses taken are arranged by their names similar to the [`sort name`](#sorting-by-name-sort-name) command.
 
+**Here's what you should do when you encounter an error:**
+
+| Error Encountered         | Reason                                                                                                                                   | Solution                                                                                                                                                       |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!` | You may have misspelled or entered the wrong sorting criterion. <br> Otherwise, you may have added extraneous characters in the command. | Verify that the criterion entered is spelt correctly in lowercase. <br> Ensure that you did not leave the hyphen out in `size-ascending` or `size-descending`. |
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Sorting by Tags: `sort tags`
@@ -739,6 +751,14 @@ Examples:
 * Students with multiple tags will be sorted by the tag with the greatest importance.  
 For example, a student with both 'Friend' and 'Emergency' tags will be placed in NUSCoursemates with other students tagged as 'Friend'. 
 </div>
+
+**Here's what you should do when you encounter an error:**
+
+| Error Encountered         | Reason                                                                                                                                     | Solution                                                                                                                                                                         |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Invalid command format!` | You may have misspelled or entered the wrong sorting criterion, `tags`. <br> Otherwise, you may have added extraneous characters after it. | Verify that the command, `sort tags`, is spelt correctly in lowercase. <br> Unlike the other `sort` commands, no additional sorting criterion should be entered for `sort tags`. |
+
+Please be patient with us as we work hard to bring you better sorting features!
 
 [Back to Table of Contents](#table-of-contents)
 
