@@ -650,7 +650,7 @@ Format: `save`
 
 ### Deleting a fosterer : `delete`
 
-Deletes the fosterers at the specified index/ indices in your address book.
+Deletes the fosterer at the specified index in your address book.
 
 Format: `delete INDEX [INDEX...]`
 
@@ -694,6 +694,8 @@ Examples:
 
 * `list` followed by `delete 1 3 7` 
   * deletes the 1st, 3rd and 7th fosterers in your address book.
+  <div></div>
+
     ![Delete](images/screenshots/Delete.png)
 In the example above, Alex, Bernice and Charlotte are the fosterers deleted. 
   
@@ -761,41 +763,11 @@ Examples:
   In the example above, you have 6 fosterers in your address book, and 3 of them are available to foster.
 
   <div></div>
+  <div></div>
+
 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
-
-<div></div>
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command:**<br>
-
-For all statistic commands,<br>
-
-* Extra white spaces are ignored.<br>
-  * `stats (multiple spaces) avail` is a valid `stats avail` command, while `statsavail` is not valid.<br>
-
-* Extra parameters after the valid statistic command will be ignored.<br>
-  * `stats avail current` and `stats avail 123` are valid `stats avail` commands, while `stats 123 avail` is not valid.<br>
-
-</div>
-
-<div style="page-break-after: always;"></div>
-
-<div markdown="block" class="alert alert-warning">
-
-**:warning: Caution:**<br>
-
-For all statistic commands, **percentages may not add up to 100.00%**.<br>
-
-Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
-* The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
-* In this case, you can assume that each group takes up 1/3 of 100.00%.
-
-![Stats](images/screenshots/StatsTotalPercent.png)
-
-</div>
 
 <br> 
 
@@ -809,7 +781,7 @@ Format: `stats current`
 Examples:
 * `list` followed by `stats current` 
   * calculates statistics of current fosterers, based on all fosterers in your address book.
-
+  
   <div></div>
 
   ![Stats](images/screenshots/StatsCurrent.png)
@@ -817,6 +789,8 @@ Examples:
   In the example above, you have 6 fosterers in your address book, and 2 of them are currently fostering.
 
   <div></div>
+  <div></div>
+
 
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
@@ -841,6 +815,8 @@ Examples:
   In the example above, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
 
   <div></div>
+  <div></div>
+
 
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
