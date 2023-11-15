@@ -13,9 +13,6 @@ Foster Family is optimised for use via a **Command Line Interface (CLI)**. This 
 
 This document is a comprehensive guide to all the commands available to you, along with **step-by-step explanations** and **examples** to help you master the features Foster Family has to offer. If you are a _new user_, we recommend beginning your journey with [Quick Start](#quick-start). For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to a section that interests you.
 
-<!--suppress ALL -->
-<!--to suppress IDE warnings-->
-
 <div style="page-break-after: always;"></div>
 
 ## **Table of Contents**
@@ -29,7 +26,7 @@ This document is a comprehensive guide to all the commands available to you, alo
 
 ## **Quick Start**
 
-Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from the [Oracle website](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 Step 2. Download the latest `FosterFamily.jar` from [our GitHub Page](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
 
