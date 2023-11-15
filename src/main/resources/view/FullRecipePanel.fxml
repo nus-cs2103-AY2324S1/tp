@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="4" left="8" right="8" top="4" />
+    </padding>
+    <Label fx:id="name" alignment="CENTER" styleClass="label-header" text="\$first" textAlignment="CENTER" />
+    <Label fx:id="id" alignment="CENTER" styleClass="cell_small_label" textAlignment="CENTER" />
+    <Label></Label>
+    <Label alignment="CENTER" styleClass="label" text="Ingredients:" textAlignment="CENTER" />
+    <Label fx:id="ingredients" alignment="CENTER" styleClass="cell_small_label" text="\$ingredients"
+           textAlignment="CENTER" />
+    <VBox >
+        <padding>
+            <Insets bottom="4" left="32" right="32" top="16" />
+        </padding>
+        <Label styleClass="label" text="Steps:" alignment="CENTER_LEFT" textAlignment="LEFT" />
+        <Label fx:id="steps" alignment="CENTER_LEFT" styleClass="cell_small_label" text="\$steps" />
+    </VBox>
+</VBox>
+

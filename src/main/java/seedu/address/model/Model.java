@@ -5,14 +5,19 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.Quantity;
+import seedu.address.model.recipe.Recipe;
+import seedu.address.model.recipe.UniqueId;
+import seedu.address.model.recipe.exceptions.RecipeNotFoundException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Ingredient> PREDICATE_SHOW_ALL_INGREDIENTS = unused -> true;
+    Predicate<Recipe> PREDICATE_SHOW_ALL_RECIPES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +40,79 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' inventory file path.
      */
-    Path getAddressBookFilePath();
+    Path getInventoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' inventory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setInventoryFilePath(Path inventoryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces inventory data with the data in {@code inventory}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setInventory(ReadOnlyInventory inventory);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Inventory */
+    ReadOnlyInventory getInventory();
+
+    boolean hasIngredient(Name ingredientName);
+
+    Quantity getQuantityOf(Name ingredientName);
+
+    void deleteIngredient(Name ingredientName);
+
+    void deleteIngredients();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Adds the given ingredient.
+     * {@code ingredient} must not already exist in the inventory.
      */
-    boolean hasPerson(Person person);
+    void addIngredient(Ingredient ingredient);
+
+
+    void useIngredient(Name ingredientName, Quantity quantity);
+
+    /** Returns an unmodifiable view of the filtered ingredient list */
+    ObservableList<Ingredient> getFilteredIngredientList();
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deletePerson(Person target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addPerson(Person person);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered ingredient list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredIngredientList(Predicate<Ingredient> predicate);
+
+    /**
+     * Replaces recipe data with the data in {@code recipeBook}.
+     */
+    void setRecipeBook(ReadOnlyRecipeBook recipeBook);
+
+    /** Returns the RecipeBook */
+    ReadOnlyRecipeBook getRecipeBook();
+
+    //boolean hasRecipe(Name recipeName);
+
+    boolean hasRecipe(UniqueId uuid);
+
+    void deleteRecipe(Recipe recipe);
+
+    void addRecipe(Recipe recipe);
+
+    Recipe getRecipe(UniqueId uuid);
+
+    /**
+     * Gets the full Recipe based on the unique {@code recipeId} of the Recipe.
+     * @throws RecipeNotFoundException if {@code recipe} is not found.
+     */
+    String getFullRecipe(int recipeId);
+
+    /** Returns an unmodifiable view of the filtered recipe list */
+    ObservableList<Recipe> getFilteredRecipeList();
+
+    /**
+     * Updates the filter of the filtered recipe list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRecipeList(Predicate<Recipe> predicate);
 }

@@ -1,0 +1,9 @@
+{
+  "ingredients": [ {
+    "name": "Valid Ingredient",
+    "quantity" : "1.0 KILOGRAM"
+  }, {
+    "name": "Ingredient with inv@lid name",
+    "quantity" : "2.5 KILOGRAM"
+  } ]
+}

@@ -1,0 +1,49 @@
+{
+  "recipes": [{
+    "id": 1,
+    "name": "Cookies",
+    "ingredients": [{
+      "name": "Flour",
+      "quantity": "200.0 GRAM"
+    },{
+      "name": "Milk",
+      "quantity": "100.0 GRAM"
+    },{
+      "name": "Chocolate Chips",
+      "quantity": "50.0 GRAM"
+    }],
+    "steps": [
+      "1. Mix flour with milk",
+      "2. Put chocolate chips in mixture",
+      "3. Shape dough into cookie shape",
+      "4. Bake in oven at 180C for 20 minutes"
+    ]
+  },{
+    "id": 2,
+    "name": "Spongecake",
+    "ingredients": [{
+      "name": "Flour",
+      "quantity": "500.0 GRAM"
+    },{
+      "name": "Butter",
+      "quantity": "250.0 GRAM"
+    },{
+      "name": "Eggs",
+      "quantity": "4.0 PIECE"
+    },{
+      "name": "Yeast",
+      "quantity": "5.0 GRAM"
+    },{
+      "name": "Baking Soda",
+      "quantity": "10.0 GRAM"
+    }],
+    "steps": [
+      "1. Mix flour with butter",
+      "2. Mix eggs into dough",
+      "3. Put yeast in warm water and mix it in dough",
+      "4. Put baking soda in dough",
+      "5. Let dough rest for 30 minutes",
+      "6. Bake in oven at 220C for 25 minutes"
+    ]
+  }]
+}

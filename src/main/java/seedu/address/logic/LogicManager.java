@@ -11,11 +11,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.InventoryAppParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.recipe.Recipe;
 import seedu.address.storage.Storage;
 
 /**
@@ -31,7 +32,9 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final InventoryAppParser inventoryAppParser;
+
+    private final RecipeAddInputHandler recipeAddInputHandler;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,19 +42,31 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        inventoryAppParser = new InventoryAppParser();
+        recipeAddInputHandler = new RecipeAddInputHandler();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        Command command;
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        if (!recipeAddInputHandler.check(commandText)) {
+            System.out.println(commandText);
+            command = inventoryAppParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+        } else {
+            commandResult = recipeAddInputHandler.handle(commandText);
+            if (recipeAddInputHandler.isComplete()) {
+                command = recipeAddInputHandler.getCommand();
+                commandResult = command.execute(model);
+            }
+        }
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveInventory(model.getInventory());
+            storage.saveRecipeBook(model.getRecipeBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,18 +77,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyInventory getInventory() {
+        return model.getInventory();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Ingredient> getFilteredIngredientList() {
+        return model.getFilteredIngredientList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getInventoryFilePath() {
+        return model.getInventoryFilePath();
     }
 
     @Override
@@ -84,5 +99,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<Recipe> getRecipeList() {
+        return model.getFilteredRecipeList();
     }
 }

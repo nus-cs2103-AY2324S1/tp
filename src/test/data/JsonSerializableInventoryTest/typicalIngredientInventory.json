@@ -1,0 +1,10 @@
+{
+  "_comment": "Inventory save file which contains the same Inventory as in TypicalInventory#getTypicalInventory()",
+  "ingredients" : [ {
+    "name" : "Flour",
+    "quantity" : "1.0 GRAM"
+  }, {
+    "name" : "Egg",
+    "quantity" : "1.0 PIECE"
+  }]
+}

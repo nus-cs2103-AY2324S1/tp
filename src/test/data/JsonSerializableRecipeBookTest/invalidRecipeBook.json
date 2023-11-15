@@ -1,0 +1,22 @@
+{
+  "recipes": [{
+    "id": 1,
+    "name": "Cookies",
+    "ingredients": [{
+      "name": "Flour",
+      "quantity": "200.0 GRAM"
+    },{
+      "name": "Milk",
+      "quantity": "100.0 GRAM"
+    },{
+      "name": "Chocolate Chips",
+      "quantity": "50.0 GRAM"
+    }],
+    "steps": [
+      "1. Mix flour with milk",
+      "2. Put chocolate chips in mixture",
+      "3. Shape dough into cookie shape",
+      "Not a valid step"
+    ]
+  }]
+}

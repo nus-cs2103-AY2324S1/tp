@@ -1,0 +1,6 @@
+{
+  "ingredients": [ {
+    "name": "Ingredient with invalid name field: B@king Bre@d",
+    "quantity" : "1.0 GRAM"
+  } ]
+}

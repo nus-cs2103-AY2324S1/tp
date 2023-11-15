@@ -1,0 +1,41 @@
+{
+  "recipes": [{
+      "id" : 1,
+      "name" : "Cookies",
+      "ingredients" : [{
+        "name" : "Flour",
+        "quantity" : "200.0 GRAM"
+      },{
+        "name" : "Milk",
+        "quantity" : "100.0 GRAM"
+      },{
+        "name" : "Chocolate Chips",
+        "quantity" : "50.0 GRAM"
+      }],
+      "steps" : [
+        "1. Mix flour with milk",
+        "2. Add chocolate chips",
+        "3. Bake at 180C for 20 minutes"
+      ]
+    },{
+      "id" : 2,
+      "name" : "C@ke",
+      "ingredients" : [{
+        "name" : "Flour",
+        "quantity" : "200.0 GRAM"
+      },{
+        "name" : "Eggs",
+        "quantity" : "2.0 PIECE"
+      },{
+        "name" : "Cream",
+        "quantity" : "50.0 GRAM"
+      }],
+      "steps" : [
+        "1. Mix flour with eggs",
+        "2. Let the batter rest",
+        "3. Bake at 180C for 20 minutes",
+        "4. Squeeze cream on the baked cake"
+      ]
+    }
+  ]
+}

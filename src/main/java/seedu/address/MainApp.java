@@ -15,16 +15,20 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.ReadOnlyRecipeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RecipeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.InventoryStorage;
+import seedu.address.storage.JsonInventoryStorage;
+import seedu.address.storage.JsonRecipeBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RecipeBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -36,7 +40,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +52,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Inventory App ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +61,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        InventoryStorage inventoryStorage = new JsonInventoryStorage(userPrefs.getInventoryFilePath());
+        RecipeBookStorage recipeBookStorage = new JsonRecipeBookStorage(userPrefs.getRecipeBookFilePath());
+        storage = new StorageManager(inventoryStorage, userPrefsStorage, recipeBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,29 +73,44 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s inventory and {@code userPrefs}. <br>
+     * The data from the sample inventory will be used instead if {@code storage}'s inventory is not found,
+     * or an empty inventory will be used instead if errors occur when reading {@code storage}'s inventory.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getInventoryFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyInventory> inventoryOptional;
+        ReadOnlyInventory initialData;
+        Optional<ReadOnlyRecipeBook> recipeBookOptional;
+        ReadOnlyRecipeBook initialRecipeData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            inventoryOptional = storage.readInventory();
+            if (!inventoryOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getInventoryFilePath()
+                        + " populated with a sample Inventory.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = inventoryOptional.orElseGet(SampleDataUtil::getSampleInventory);
+
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getInventoryFilePath() + " could not be loaded."
+                    + " Will be starting with an empty Inventory.");
+            initialData = new Inventory();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            recipeBookOptional = storage.readRecipeBook();
+            if (!recipeBookOptional.isPresent()) {
+                logger.info("Creating an empty recipe data file " + storage.getRecipeBookFilePath());
+            }
+            initialRecipeData = recipeBookOptional.orElseGet(SampleDataUtil::getSampleRecipeBook);
+        } catch (DataLoadingException e) {
+            logger.warning("Recipe data file at " + storage.getRecipeBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty Recipe Book.");
+            initialRecipeData = new RecipeBook();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialRecipeData);
     }
 
     private void initLogging(Config config) {
@@ -170,13 +190,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Inventory App " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Inventory App ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

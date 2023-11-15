@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane fx:id="listHeader" minHeight="39">
+        <HBox alignment="CENTER" spacing="16">
+            <padding>
+                <Insets top="4" right="8" bottom="4" left="8" />
+            </padding>
+            <Label alignment="CENTER" minWidth="366" styleClass="cell_big_label" text="Your Recipe(s)"
+                   textAlignment="CENTER" HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </StackPane>
+    <ListView fx:id="recipeListView" VBox.vgrow="ALWAYS" />
+</VBox>

@@ -11,15 +11,18 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Box?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="[Ba]king [Br]ead" minWidth="740" minHeight="700" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/bread.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@LightTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -33,27 +36,39 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <VBox VBox.vgrow="ALWAYS" styleClass="stack-pane" spacing="10">
+          <VBox.margin>
+            <Insets top="5" right="5" bottom="5" left="5" />
+          </VBox.margin>
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets top="5" right="5" bottom="5" left="5" />
           </padding>
-        </StackPane>
+          <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+            <padding>
+              <Insets top="5" right="10" bottom="5" left="10" />
+            </padding>
+          </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="stack-pane"
+                     minHeight="100" prefHeight="100" maxHeight="100">
+          </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <HBox VBox.vgrow="ALWAYS" spacing="10">
+            <VBox fx:id="ingredientList" styleClass="pane-with-border" minWidth="292" maxWidth="292"
+                  VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+              <StackPane fx:id="ingredientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <VBox fx:id="recipeList" styleClass="pane-with-border" minWidth="402" prefWidth="402" VBox.vgrow="ALWAYS"
+                  HBox.hgrow="ALWAYS">
+              <StackPane fx:id="recipeListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+          </HBox>
+
+          <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
         </VBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+
       </VBox>
     </Scene>
   </scene>
