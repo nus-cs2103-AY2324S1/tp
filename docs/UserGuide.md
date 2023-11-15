@@ -890,21 +890,32 @@ Format: `exit`
 
 On the profile page,<br>
 
-* Entering <code>exit</code> leads you out of the page back to the main window. 
-* Attempting to <code>exit</code> **without first saving changes** with <code>save</code> prompts a warning message (please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information). 
+* Entering <code>exit</code> leads you back to the main window. 
+* Attempting to <code>exit</code> **without first saving changes** with <code>save</code> prompts a warning message.
+* Please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information. 
 </div>
  
 
 ### Saving data
 
-In the **main window**, your Foster Family data is **saved in the hard disk automatically** after any command that changes the data, so no manual saving is needed. However, **edits made in the profile page have to be saved** via the `save` command. Else, changes will be **discarded** once you exit out of that fosterer's profile page.
+In the **main window**, your Foster Family data is **saved in the hard disk automatically** after any command that changes the data, so no manual saving is needed. However, **edits made in the profile page have to be saved** via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing data file
 
-Your Foster Family data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. We strongly
-advise you to update the data file directly **only if you are an advanced user**. 
+* Your Foster Family data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.<br>
 
-Otherwise, we highly recommend you to perform edits using our user-friendly interface instead.
+* A JSON file stores fosterer details as key value pairs, making it more readable than a regular text file.<br>
+
+  ![Json](images/screenshots/JsonExample.png)
+  For example, the "name" key is paired with a value "Alex Yeoh" for the first fosterer in your address book.<br>
+
+* We strongly advise you to update the data file directly **only if you are an advanced user**.<br>
+
+* Otherwise, we highly recommend you to perform edits using our user-friendly interface instead.<br>
+
+<div></div>
 
 <div markdown="span" class="alert alert-warning">
 
@@ -928,7 +939,7 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 
 ## **Known issues**
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
+- **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
