@@ -14,9 +14,9 @@ However, with TimetaBRO, you can now save your friends’ timetables, and ask it
 ## **About the user guide**
 This comprehensive user guide will walk you through all the exciting features TimetaBRO has to offer. New to TimetaBRO? Fret not! This guide will walk you through a quickstart to start using TimetaBRO.
 
-This user guide will also provide information about its amazing functionalities in the features section, optimising your use of TimetaBRO even further. Included is a command summary for your perusal.
+This user guide will also provide information about its amazing functionalities in the features section, optimising your use of TimetaBRO even further. There is also a command summary for your convenience!
 
-Additionally, we included FAQs and a glossary in case you have any additional questions after reading this user guide.
+Additionally, we included FAQs in case you have any additional questions after reading this user guide. There are also hyperlinks around and the table of contents below to guide you to appropriate websites and sections of this user guide. Have fun!
 
 --------------------------------------------------------------------------------------------------------------------
 * Table of Contents
@@ -141,6 +141,8 @@ Each event block consists of the event name on the first line, and the start and
 * Words in `UPPER_CASE` are the parameters to be written by you!<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Commands are all case-sensitive! Please follow the format **exactly** as shown in this User Guide!
+
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -148,12 +150,12 @@ Each event block consists of the event name on the first line, and the start and
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order you like!<br>
-  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, the order `p/PHONE n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines! Space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines! Space characters surrounding line-breaks may disappear when copied over to the application.
 
 * Clicking on your friend's name will display their timetable on the bottom half of the right hand side of TimetaBRO.
 
@@ -350,7 +352,7 @@ NOTE: If you want to remove an event from yourself, use index user
 Example: rmschedule user type/cca en/Basketball
 ```
 
-The error message at the top of the command feedback above will specify what needs to be rectified.\
+The error message at the top of the command feedback above will specify what needs to change!\
 e.g.\
 Input:
 ```
@@ -1093,7 +1095,11 @@ This is because it makes it hard for TimetaBRO to understand that it ends at 12A
 
 2. **The timetable only supports timings in 30-minute gaps** because this is an app made for NUS students! Since NUS timetables are set in 30-minute gaps, we have adapted this to better fit the NUS timetable style.
 
-3.  While you **can't select a specific event to delete**, don't sweat it. We've got you covered. The events are removed in the order they were added, following a first-in-first-out basis. So, the earliest added event will be the first to bid farewell! If you have any more questions, feel free to ask!
+3.  While you **can't select a specific event to delete**, don't sweat it. We've got you covered. The events are removed in the order they were added, following a first-in-first-out basis. So, the earliest added event will be the first to bid farewell! 
+
+4.  You can currently put birthdays in the future. Not to worry if you accidentally mistype your friends birthday! You use the edit command to rectify any future birthdays. 
+
+If you have any more questions, feel free to ask!
 
 --------------------------------------------------------------------------------------------------------------------
 
