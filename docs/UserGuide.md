@@ -73,8 +73,6 @@ Only for web users, you can click on the panel header to collapse the panel if t
     <div>
         <box type="warning">
 This **yellow box** with the **exclamation mark icon** clarify cases which are expected to display **errors** to you, or explain **enhancements** that will be implemented in future releases of CampusConnect.
-
-All planned enhancements will also be listed in the [Planned Enhancements / Known Issues](#planned-enhancements-known-issues) section near the end of the guide.
         </box>
         <br>
     </div>
