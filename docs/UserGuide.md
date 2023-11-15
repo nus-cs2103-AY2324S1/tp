@@ -16,17 +16,18 @@ This guide is meticulously crafted to help you navigate, utilize, and optimize C
 
 ## Our Target Audience 👥
 **CareCentral** is built specifically for medical staffs — including doctors, nurses, and hospital staff aged between 25-60 years.
-We understand the importance of your time and the need for a tool that compliments your expertise and fast typing abilities.
+We understand the importance of your time and the need for a tool that compliments your expertise and fast typing abilities, thus CareCentral is built to be **fast, intuitive, and easy to use**.
 
 <div style="background-color: #DFF0D8; padding: 10px; margin-bottom: 10px; border-left: 5px solid #4CAE4C;">
-  <em>You can download our latest release from <a href="https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.3.1" target="_blank">here</a>.</em>
+  <em>You can download our latest release from <a href="https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.4" target="_blank">here</a>.</em>
 </div>
 
 # 2. Quick Start Guide ⚡️
 Here's how you can get started with CareCentral quickly:
 
-1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) installed in your Computer.
-2. Download the latest `carecentral.jar` from [here](https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.3.1) if you have not downloaded it yet.
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) installed in your computer. If you need a video guide, you can refer to this [video for Windows users](https://youtu.be/VTzzmqNwGzM) and [this video for macOS users](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=video&cd=&cad=rja&uact=8&ved=2ahUKEwibl-3n78SCAxVc3TgGHVdOAcwQtwJ6BAgOEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoiqKK0FOjK0&usg=AOvVaw3xcKQNDdvu0hi9x8ZUVFlp&opi=89978449).
+2. For Linux users, Java 11 is already installed in your computer by default. You can check by typing `java -version` in your terminal.
+2. Download the latest `carecentral.jar` from [here](https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.4) if you have not downloaded it yet.
 3. Copy the file to the folder you want to use as the home folder for CareCentral.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    ![Ui](images/Ui.png)
@@ -703,9 +704,10 @@ Exits the program.
 # 7. Glossary 📚
 The following terms are used throughout the CareCentral user guide:
 
-| Word           | Meaning                                                                                                                                                  |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CLI`          | **Command Line Interface** - A text-based interface used for entering commands. In CareCentral, you'll use the CLI to input your actions quickly.        |
-| `GUI`          | **Graphical User Interface** - A visual interface with graphical elements. CareCentral's GUI is designed for ease of navigation and information display. |
-| `NRIC`         | **National Registration Identity Card** number - A unique identifier for Singaporean residents.                                                          |
-| `Prescription` | **Medicine prescribed by a medical professional** - CareCentral allows you to manage and track prescriptions for each patient.                           |
+| Word           | Meaning                                                                                                                                                                                                                                                                                                                                                |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CLI`          | **Command Line Interface** - A text-based interface used for entering commands. In CareCentral, you'll use the CLI to input your actions quickly.                                                                                                                                                                                                      |
+| `GUI`          | **Graphical User Interface** - A visual interface with graphical elements. CareCentral's GUI is designed for ease of navigation and information display.                                                                                                                                                                                               |
+| `Terminal`     | **A text-based interface to the computer** - In a terminal, you can type commands, manipulate files, execute programs, and open documents. Here's how you can open a terminal in [Windows](https://www.youtube.com/watch?v=uE9WgNr3OjM), [macOS](https://www.youtube.com/watch?v=Lx0_MuvzBDo) and [Linux](https://www.youtube.com/watch?v=HbrDRBtf0S4) |
+| `NRIC`         | **National Registration Identity Card** number - A unique identifier for Singaporean residents.                                                                                                                                                                                                                                                        |
+| `Prescription` | **Medicine prescribed by a medical professional** - CareCentral allows you to manage and track prescriptions for each patient.                                                                                                                                                                                                                         |
