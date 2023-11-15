@@ -187,7 +187,7 @@ Here is an overview of the main elements of the interface you should be familiar
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. In `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact-addalt) and [Edit contact information](#edit-contact-information-edit) under Features)**<br>
+* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact-addalt) and [Edit information of contact](#edit-information-of-contact-edit) under Features)**<br>
   e.g In `n/NAME [t/TAG]`, `[t/TAG]` is an optional parameter which can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters with `…`​ after them can be used multiple times including zero times.<br>
@@ -312,7 +312,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 * You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
 * You should provide at least one of the parameters under [properties of contact](#properties-of-contact) for the command to work.
-* You should not edit any empty alternative information i.e. **telegram, secondary email, linkedin, birthday** of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact) to add these information.
+* You should not edit any empty alternative information i.e. **telegram, secondary email, linkedin, birthday** of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact-addalt) to add these information.
 * You should not input `NAME` with a name ___(case sensitive)___ that already exists in CampusConnect.
 
 </box>
@@ -349,7 +349,7 @@ Below are some examples on how to use the command:
 
 ###  List all contacts: `list`
 
-After using CampusConnect's [find contact](#find-contacts) feature that filters the contacts you are looking for, you may want to have an overview of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
+After using CampusConnect's [contact search](#contact-search) feature that filters the contacts you are looking for, you may want to have an overview of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
 
 This feature involves the command: `list`, which lists all of your saved contacts.
 
@@ -572,7 +572,7 @@ At the end of both commands, **the contact owes you `$20.50`**.
 
 </box>
 
-If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-a-contact-money-owe) command instead!
+If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-money-to-contact-owe) command instead!
 
 ### Owe money to contact: `owe`
 
