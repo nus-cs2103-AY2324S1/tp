@@ -192,8 +192,9 @@ Key in <code>save</code> and press Enter to save the changes.
 
 <br/>
 
-If this was an `edit`, your changes to the fosterer will be saved.<br>
-If this was an `add`,  the new fosterer with the inputted details will be added, and you will be redirected back to the main window.
+The effect of a `save` depends on the command you used to enter this view.
+* If this was an `edit` command, your changes to the fosterer will be saved.<br>
+* If this was an `add` command,  the new fosterer with the inputted details will be added, and you will be redirected back to the main window.
 
 <br>
 
@@ -467,7 +468,7 @@ Examples:
 
 ### Viewing a fosterer's detail: `view`
 
-Redirects you to the profile page of the fosterer at the specified index in your address book.
+Redirects you to the profile page of the fosterer at the specified index of your currently displayed list. 
 
 Format: `view INDEX`
 
@@ -481,7 +482,9 @@ Parameters:
 
 **:exclamation: Important:**<br>
 
-Only the <code>save</code> and <code>exit</code> commands are available to you in the profile page.
+Only the <code>save</code> and <code>exit</code> commands are available to you in the profile page.<br>
+
+To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).
 
 </div> 
 
@@ -489,15 +492,13 @@ Examples:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in your address book.
 
-To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
-
 <br>
 
 <div style="page-break-after: always;"></div>
 
 ### Editing a fosterer's details through the main window: `edit`
 
-Edits the details of the fosterer at the specified index in your address book, done through the main window.
+Edits the details of the fosterer at the specified index in your currently displayed list, done through the main window.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
@@ -529,8 +530,8 @@ Parameters:
 **:exclamation: Important:**<br>
 
 * If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
-* If you run the **same `edit` command multiple times consecutively** (resulting in no visible change after the first run), the undo command **will not** be able to revert the data back to the original state. <br>
-  This is because `undo` can only undo the last command, **even if the command made no visible changes**.
+* If you run the **same `edit` command multiple times consecutively** (resulting in no visible change after the first run), the undo command _will not_ be able to revert the data back to the original state. <br>
+  This is because `undo` can only undo the last command, _even if the command made no visible changes_.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -568,7 +569,7 @@ This is not a problem when editing using the [profile view](#editing-a-fosterers
 
 ### Editing a fosterer's details through the profile page: `edit`
 
-Edits the details of the fosterer at the specified index in your address book, done through the profile page.
+Edits the details of the fosterer at the specified index in your address book, by redirecting you to the profile page.
 
 Format: `edit INDEX`
 
@@ -598,15 +599,6 @@ more flexibility.
 </div>
 
 <div style="page-break-after: always;"></div>
-
-<div markdown="block" class="alert alert-warning">
-
-**:warning: Caution:**<br>
-
-Edit may cause **information loss**. 
-Before you type the save command, please check that the details of the fosterer are correct.
-
-</div>
 
 <br/>
 
@@ -650,7 +642,7 @@ Format: `save`
 
 ### Deleting a fosterer : `delete`
 
-Deletes the fosterer at the specified index in your address book.
+Deletes the fosterer at the specified index of your currently displayed list.
 
 Format: `delete INDEX [INDEX...]`
 
@@ -724,7 +716,7 @@ Format: `sort`
 **:exclamation: Important:**<br>
 
 Repeated `sort` commands will not result in additional changes to the address book, and `undo` will not be able to revert the data back to its original state. <br>
-This is because `undo` can only revert the last command, even if the command made no changes to the address book.
+This is because `undo` can only revert the last command, _even if the command made no changes to the address book_.
 
 </div> 
 
@@ -888,11 +880,10 @@ Format: `exit`
 
 **:information_source: Notes about the command:**<br>
 
-On the profile page,<br>
+On the profile page, entering <code>exit</code> leads you back to the main window, instead of exiting the application.
 
-* Entering <code>exit</code> leads you back to the main window. 
-* Attempting to <code>exit</code> **without first saving changes** with <code>save</code> prompts a warning message.
-* Please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information. 
+Please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information. 
+
 </div>
  
 
