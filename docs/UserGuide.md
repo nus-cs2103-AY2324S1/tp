@@ -10,6 +10,16 @@ Welcome to the user guide for InsureIQ, the ultimate **contact management system
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Command Line Interface (CLI)**: A way of interacting with the software by typing textual commands
+* **Graphical User Interface (GUI)**: A way of interacting with the software using visual elements like buttons and windows
+* **Policy fields**: Refers to the company the policy is under, policy number, policy issue date and policy expiry date
+* **Client**: Buyers / potential buyers that car insurance agent is in contact with, such that it is stored inside InsureIQ
+* **Client list**: List of clients and their personal and policy details in the InsureIQ app
+
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Quick start
@@ -543,16 +553,6 @@ Sure! you can transfer your data to another computer by the following steps belo
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Glossary
-
-* **Command Line Interface (CLI)**: A way of interacting with the software by typing textual commands
-* **Graphical User Interface (GUI)**: A way of interacting with the software using visual elements like buttons and windows
-* **Policy fields**: Refers to the company the policy is under, policy number, policy issue date and policy expiry date
-* **Client**: Buyers / potential buyers that car insurance agent is in contact with, such that it is stored inside InsureIQ
-* **Client list**: List of clients and their personal and policy details in the InsureIQ app
-
----------
 
 ## Command summary
 
