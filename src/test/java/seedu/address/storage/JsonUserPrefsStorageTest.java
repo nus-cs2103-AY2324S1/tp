@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.user.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 
@@ -22,6 +22,13 @@ public class JsonUserPrefsStorageTest {
 
     @TempDir
     public Path testFolder;
+
+    @Test
+    public void constructor_validPath_success() {
+        Path filePath = Paths.get("TypicalUserPrefs.json");
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(filePath);
+        assertEquals(filePath, userPrefsStorage.getUserPrefsFilePath());
+    }
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {

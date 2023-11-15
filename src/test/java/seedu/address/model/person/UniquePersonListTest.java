@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -56,6 +58,17 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void getPersonWithName_nameNotInList_returnNull() {
+        assertNull(uniquePersonList.getPersonWithName(new Name("Edric")));
+    }
+
+    @Test
+    public void getPersonWithName_nameInList_returnNull() {
+        uniquePersonList.add(ALICE);
+        assertEquals(ALICE, uniquePersonList.getPersonWithName(ALICE.getName()));
     }
 
     @Test
@@ -169,7 +182,59 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void iterator() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        Person alice = new PersonBuilder(ALICE).build();
+        Person bob = new PersonBuilder(BOB).build();
+        uniquePersonList.add(alice);
+        uniquePersonList.add(bob);
+
+        int count = 0;
+        for (Person person : uniquePersonList) {
+            if (count == 0) {
+                assertEquals(alice, person);
+            } else if (count == 1) {
+                assertEquals(bob, person);
+            }
+            count++;
+        }
+        assertEquals(2, count);
+    }
+
+    @Test
+    public void testEquals() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        Person alice = new PersonBuilder(ALICE).build();
+        Person bob = new PersonBuilder(BOB).build();
+        uniquePersonList1.add(alice);
+        uniquePersonList1.add(bob);
+        uniquePersonList2.add(alice);
+        uniquePersonList2.add(bob);
+
+        assertEquals(uniquePersonList1, uniquePersonList1);
+        assertNotEquals(uniquePersonList1, null);
+    }
+
+    @Test
+    public void testHashCode() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        Person alice = new PersonBuilder(ALICE).build();
+        Person bob = new PersonBuilder(BOB).build();
+        uniquePersonList1.add(alice);
+        uniquePersonList1.add(bob);
+        uniquePersonList2.add(alice);
+        uniquePersonList2.add(bob);
+
+        // Test hashCode method
+        assertEquals(uniquePersonList1.hashCode(), uniquePersonList2.hashCode());
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+
 }

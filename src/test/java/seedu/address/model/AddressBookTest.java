@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -87,6 +88,40 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equalsMethod() {
+        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook2 = new AddressBook();
+        assertTrue(addressBook.equals(addressBook2));
+        addressBook.addPerson(ALICE);
+        assertFalse(addressBook.equals(addressBook2));
+        assertFalse(addressBook.equals(null));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook2 = new AddressBook();
+        assertEquals(addressBook.hashCode(), addressBook2.hashCode());
+    }
+
+    @Test
+    public void getBirthdayList() {
+        AddressBook addressBook = new AddressBook();
+        assertEquals("", addressBook.getBirthdayList());
+        addressBook.addPerson(new PersonBuilder().withName("Alice Pauline")
+                .withBirthday(LocalDate.now().toString()).build());
+        assertEquals("Alice Pauline\n", addressBook.getBirthdayList());
+    }
+
+    @Test
+    public void getPersonWithName() {
+        addressBook.addPerson(ALICE);
+        Person expectedPerson = ALICE;
+        Person actualPerson = addressBook.getPersonWithName(expectedPerson.getName());
+        assertEquals(expectedPerson, actualPerson);
     }
 
     /**

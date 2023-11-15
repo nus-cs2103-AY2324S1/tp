@@ -86,4 +86,17 @@ public class AppParametersTest {
             return Collections.unmodifiableMap(namedParameters);
         }
     }
+
+    @Test
+    public void testHashCode() {
+        AppParameters appParameters1 = new AppParameters();
+        AppParameters appParameters2 = new AppParameters();
+
+        // Set the same configPath for both objects
+        appParameters1.setConfigPath(Paths.get("test_config_path"));
+        appParameters2.setConfigPath(Paths.get("test_config_path"));
+
+        assertEquals(appParameters1.hashCode(), appParameters2.hashCode(),
+                "Hash codes of equal AppParameters should be the same");
+    }
 }

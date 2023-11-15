@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+Class JsonAdaptedPerson
+Class JsonAdaptedUser
+
+package "Timetable Classes"{
+Class JsonAdaptedSchedule
+Class JsonAdaptedModule
+Class JsonAdaptedCca
+Class JsonAdaptedDatedEvent
+
+JsonAdaptedSchedule *--> "*" JsonAdaptedModule
+JsonAdaptedSchedule *--> "*" JsonAdaptedCca
+JsonAdaptedSchedule *--> "*" JsonAdaptedDatedEvent
+}
+
+JsonAdaptedPerson *--> "1" JsonAdaptedSchedule
+JsonAdaptedUser *--> "1" JsonAdaptedSchedule

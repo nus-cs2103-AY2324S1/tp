@@ -65,6 +65,14 @@ public class LogsCenter {
         requireNonNull(clazz);
         return getLogger(clazz.getSimpleName());
     }
+    /**
+     * Retrieves the current logging level.
+     *
+     * @return The current logging level as a {@link java.util.logging.Level} object.
+     */
+    public static Level getCurrentLogLevel() {
+        return currentLogLevel;
+    }
 
     /**
      * Removes all handlers from the {@code logger}.

@@ -2,13 +2,18 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +21,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +40,10 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private UserCard userProfile;
+    private Person selectedPerson;
+    private int selectedPersonPos;
+    private SelectedFriendCard friendProfile;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +59,17 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane userProfilePlaceholder;
+    @FXML
+    private StackPane selectedFriendPlaceholder;
+    @FXML
+    private ScrollPane userCardScrollPane;
+    @FXML
+    private VBox input1;
+    @FXML
+    private VBox input2;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +87,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -121,6 +143,36 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        userProfile = new UserCard(logic.getUser());
+        userProfilePlaceholder.getChildren().add(userProfile.getRoot());
+
+        Scene scene = primaryStage.getScene();
+
+        input1.setMinHeight(scene.getHeight() / 2);
+        input2.setMinHeight(scene.getHeight() / 2);
+
+        scene.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                Number oldSceneHeight, Number newSceneHeight) {
+                input1.setMinHeight((double) newSceneHeight / 2);
+                input2.setMinHeight((double) newSceneHeight / 2);
+            }
+        });
+
+        if (scene != null) {
+            scene.addEventFilter(ListCellSelectedEvent.LIST_CELL_SELECTED, event -> {
+                selectedPerson = event.getSelectedPerson();
+                if (selectedPerson != null) {
+                    friendProfile = new SelectedFriendCard(selectedPerson);
+                    selectedFriendPlaceholder.getChildren().clear();
+                    selectedFriendPlaceholder.getChildren().add(friendProfile.getRoot());
+                    selectedPersonPos = logic.getFilteredPersonList().indexOf(selectedPerson);
+                }
+            });
+        }
+
     }
 
     /**
@@ -186,11 +238,33 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isCommonFreetime()) {
+
+            }
+
+            if (selectedPerson != null && commandResult.isRefresh()) {
+                friendProfile = new SelectedFriendCard(logic.getFilteredPersonList().get(selectedPersonPos));
+                selectedFriendPlaceholder.getChildren().clear();
+                selectedFriendPlaceholder.getChildren().add(friendProfile.getRoot());
+
+                userProfile = new UserCard(logic.getUser());
+                userProfilePlaceholder.getChildren().clear();
+                userProfilePlaceholder.getChildren().add(userProfile.getRoot());
+
+            } else if (commandResult.isRefresh()) {
+                userProfile = new UserCard(logic.getUser());
+                userProfilePlaceholder.getChildren().clear();
+                userProfilePlaceholder.getChildren().add(userProfile.getRoot());
+            }
+
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+
     }
+
 }

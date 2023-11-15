@@ -25,6 +25,18 @@ public class PersonTest {
     }
 
     @Test
+    public void isSamePhone() {
+        assertTrue(ALICE.isSamePhone(ALICE));
+        assertFalse(ALICE.isSamePerson(new PersonBuilder().withName(VALID_NAME_BOB).build()));
+    }
+
+    @Test
+    public void isSameEmail() {
+        assertTrue(ALICE.isSameEmail(ALICE));
+        assertFalse(ALICE.isSamePerson(new PersonBuilder().withName(VALID_NAME_BOB).build()));
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
@@ -91,9 +103,17 @@ public class PersonTest {
     }
 
     @Test
+    public void testHashCode() {
+        Person alice = new PersonBuilder(ALICE).build();
+        assertEquals(alice.hashCode(), new PersonBuilder(ALICE).build().hashCode());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+                + ", birthday=" + ALICE.getBirthday() + ", free times=" + ALICE.getSchedule()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

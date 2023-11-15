@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe Execute Command
+
+box Logic LOGIC_COLOR_T1
+participant ":EditUserCommand" as EditUserCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+participant "editedUser:User" as User LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate EditUserCommand
+EditUserCommand -> Model : getUser()
+activate Model
+
+Model --> EditUserCommand : user
+deactivate Model
+
+create User
+EditUserCommand -> User : createEditedUser(user, editUserDescriptor)
+activate User
+
+User --> EditUserCommand : editedUser
+deactivate User
+
+EditUserCommand -> Model : setUser(editedUser)
+activate Model
+
+
+
+Model --> EditUserCommand :
+deactivate Model
+
+create CommandResult
+EditUserCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditUserCommand
+deactivate CommandResult
+
+<-- EditUserCommand : result
+
+@enduml

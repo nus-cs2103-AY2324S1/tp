@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -131,5 +132,34 @@ public class VersionTest {
     private void verifyVersionParsedCorrectly(String versionString,
             int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
+    }
+
+    @Test
+    public void testCompareToMethod() {
+        Version version1 = new Version(2, 1, 4, false);
+        Version version2 = new Version(2, 1, 4, false);
+        Version version3 = new Version(2, 1, 3, false);
+        Version version4 = new Version(1, 2, 3, true);
+
+        int result1 = version1.compareTo(version2); // Should return 0 (equal)
+        int result2 = version1.compareTo(version3); // Should return 1 (greater)
+        int result3 = version1.compareTo(version4); // Should return 1 (greater)
+        int result4 = version3.compareTo(version1); // Should return -1 (smaller)
+
+        assertEquals(0, result1, "compareTo should return 0 when versions are equal");
+        assertEquals(1, result2, "compareTo should return 1 when version1 is greater");
+        assertEquals(1, result3, "compareTo should return 1 when version1 is greater");
+        assertEquals(-1, result4, "compareTo should return -1 when version3 is smaller");
+    }
+
+    @Test
+    public void testEqualsMethod() {
+        Version version1 = new Version(2, 1, 4, false);
+        Version version2 = new Version(2, 1, 4, false);
+        Version version3 = null;
+
+        assertTrue(version1.equals(version1), "A version should be equal to itself");
+        assertTrue(version1.equals(version2), "Two versions with the same values should be equal");
+        assertFalse(version1.equals(version3), "Two different versions should not be equal");
     }
 }

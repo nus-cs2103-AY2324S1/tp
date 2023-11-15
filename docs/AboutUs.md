@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Andre Foo En Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/andrefoo.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/andrefoo)]
+[[portfolio](team/andrefoo.md)]
 
-* Role: Project Advisor
+* Role: Model Developer
+* Secondary Role: UG/DG IC
 
-### Jane Doe
+### Khiew Yiquan, Edric
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lululwtv.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lululwtv)]
+[[portfolio](team/lululwtv.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Logic Developer
+* Secondary Role: Milestones Tracker
 
-### Johnny Doe
+### Krista Yeo Su-Anne
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kristayeo.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/kristayeo)]
+[[portfolio](team/kristayeo.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: UI IC
+* Secondary Role: UG/DG IC
 
-### Jean Doe
+### Owen Yeo Le Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/owenyeo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/owenyeo)]
+[[portfolio](team/owenyeo.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Storage Developer
+* Secondary Role: Code Quality IC
 
-### James Doe
+### Teo Zheng Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teozhengyang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/teozhengyang)]
+[[portfolio](team/teozhengyang.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Test Engineer
+* Secondary Role: Reminder Feature

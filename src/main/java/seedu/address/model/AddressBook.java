@@ -2,10 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -49,6 +52,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns the person with the given name
+     *
+     * @param name Name of the person to be retrieved.
+     */
+    public Person getPersonWithName(Name name) {
+        return persons.getPersonWithName(name);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -65,6 +77,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containsPhone(person);
+    }
+
+    /**
+     * Returns true if a person with the same email address as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containsEmail(person);
     }
 
     /**
@@ -92,6 +120,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    public String getBirthdayList() {
+        StringBuilder sb = new StringBuilder();
+        for (Person person: persons) {
+            if (person.getBirthday().getDate().getMonth().equals(LocalDate.now().getMonth())
+                && Objects.equals(person.getBirthday().getDate().getDayOfMonth(), LocalDate.now().getDayOfMonth())) {
+                sb.append(person.getName() + "\n");
+            }
+        }
+        return sb.toString();
     }
 
     //// util methods

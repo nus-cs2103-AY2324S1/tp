@@ -5,7 +5,11 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.user.ReadOnlyUserData;
+import seedu.address.model.user.ReadOnlyUserPrefs;
+import seedu.address.model.user.User;
 
 /**
  * The API of the Model component.
@@ -13,6 +17,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Person> PREDICATE_SHOW_USER = user -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,9 +59,40 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Replaces user data with the data in {@code userData}.
+     */
+    void setUserData(ReadOnlyUserData userData);
+
+    /**
+     * Returns the user data.
+     */
+    ReadOnlyUserData getUserData();
+
+    /**
+     * Returns the user.
+     */
+    User getUser();
+
+    /**
+     * Sets the user.
+     * @param user
+     */
+    void setUser(User user);
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    boolean hasPhone(Person person);
+
+    /**
+     * Returns true if a person with the same email address as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
 
     /**
      * Deletes the given person.
@@ -76,8 +113,22 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    String getBirthdayList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the user */
+    ObservableList<User> getUserView();
+
+    /**
+     * Returns the person in the address book with the given name.
+     * The name must be an exact match (case-insensitive).
+     *
+     * @param name The name of the person to retrieve.
+     * @return The person with the given name, or null if no such person exists.
+     */
+    Person getPersonWithName(Name name);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

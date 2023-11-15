@@ -4,12 +4,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.edit.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.timetable.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,7 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPersonDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private final EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
         descriptor = new EditPersonDescriptor();
@@ -36,6 +38,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setBirthday(person.getBirthday());
+        descriptor.setSchedule(person.getSchedule());
         descriptor.setTags(person.getTags());
     }
 
@@ -56,6 +60,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPhone(Phone phone) {
+        descriptor.setPhone(phone);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
@@ -64,10 +76,42 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmail(Email email) {
+        descriptor.setEmail(email);
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthday} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withBirthday(String birthday) {
+        descriptor.setBirthday(new Birthday(birthday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Schedule} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSchedule(Schedule schedule) {
+        descriptor.setSchedule(schedule);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Schedule} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSchedule() {
+        descriptor.setSchedule(new Schedule());
         return this;
     }
 

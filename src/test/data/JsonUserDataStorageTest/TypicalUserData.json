@@ -1,0 +1,16 @@
+{
+  "user" : {
+    "name" : "Amy Bee",
+    "phone" : "85355255",
+    "email" : "amy@gmail.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "birthday": "2000-01-01",
+    "schedule" : {
+      "datedEvents" : [ ],
+      "modules" : [ ],
+      "ccas" : [ ],
+      "meetUpEvents" : [ ]
+    },
+    "datedEvents" : [ ]
+  }
+}

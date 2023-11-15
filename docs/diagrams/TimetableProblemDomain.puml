@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+' Define classes
+class Person
+class Friend
+class User
+class Schedule
+class FreeTime
+class TimeBlock
+class Interval
+class Day
+class Name
+class DatedEvent
+class Cca
+class Module
+class Reminder
+
+' Define relationships
+Person <|-left- Friend
+Person <|-left- User
+
+Person *--"1" Schedule
+Schedule *-- "*" TimeBlock : contains
+Schedule .left.> FreeTime
+FreeTime -- Interval
+FreeTime -- Day
+TimeBlock -left- "1" Interval
+TimeBlock -left- "1" Day
+TimeBlock -left- "1" Name
+TimeBlock <|-- DatedEvent
+TimeBlock <|-- Cca
+TimeBlock <|-- Module
+DatedEvent -- "0..1" Reminder
+
+@enduml

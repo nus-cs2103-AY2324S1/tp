@@ -37,6 +37,22 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean containsPhone(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePhone);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmail);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,6 +62,21 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Returns the person with the given name.
+     *
+     * @param name Name of the person to be retrieved.
+     */
+    public Person getPersonWithName(Name name) {
+        requireNonNull(name);
+        for (Person person : internalList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     /**

@@ -1,0 +1,27 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "name" : "George Best",
+    "phone" : "94824424",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "birthday": "2000-01-01",
+    "schedule" : {
+      "datedEvents" : [ {
+        "name" : "CS2103 Meeting",
+        "reminder" : true,
+        "timeBlockString" : "Tuesday 1030 1130",
+        "localDateString" : "2023-10-10"
+      } ],
+      "modules" : [ {
+        "name" : "CS2103",
+        "timeBlockString" : "Wednesday 1200 1300"
+      } ],
+      "ccas" : [ {
+        "name" : "Basketball",
+        "timeBlockString" : "Monday 1800 2000"
+      } ]
+    },
+    "tags" : [ ]
+  } ]
+}

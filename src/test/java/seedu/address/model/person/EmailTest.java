@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -15,7 +16,7 @@ public class EmailTest {
 
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
+        String invalidEmail = "@example.com";
         assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
     }
 
@@ -23,10 +24,6 @@ public class EmailTest {
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
-
-        // blank email
-        assertFalse(Email.isValidEmail("")); // empty string
-        assertFalse(Email.isValidEmail(" ")); // spaces only
 
         // missing parts
         assertFalse(Email.isValidEmail("@example.com")); // missing local part
@@ -53,6 +50,7 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
 
         // valid email
+        assertTrue(Email.isValidEmail(""));
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
         assertTrue(Email.isValidEmail("PeterJack.1190@example.com")); // period in local part
         assertTrue(Email.isValidEmail("PeterJack+1190@example.com")); // '+' symbol in local part
@@ -85,4 +83,11 @@ public class EmailTest {
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
     }
+
+    @Test
+    public void testHashCode() {
+        Email email = new Email("valid@email");
+        assertEquals(email.hashCode(), new Email("valid@email").hashCode());
+    }
+
 }

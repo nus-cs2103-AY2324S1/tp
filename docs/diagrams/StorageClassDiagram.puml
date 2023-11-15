@@ -11,6 +11,13 @@ Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
 
+package "UserData Storage" {
+Class "<<interface>>\nUserDataStorage" as UserDataStorage
+Class JsonUserDataStorage
+Class JsonSerializableUserData
+Class JsonAdaptedUser
+}
+
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
@@ -20,8 +27,11 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
-}
 
+
+}
+package "Timetable Classes"{
+}
 }
 
 Class HiddenOutside #FFFFFF
@@ -29,15 +39,22 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
+StorageManager -up-> "1" UserDataStorage
 StorageManager -up-> "1" AddressBookStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
+Storage -right-|> UserDataStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonUserDataStorage .up.|> UserDataStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
+JsonUserDataStorage ..> JsonSerializableUserData
 JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableUserData --> "1" JsonAdaptedUser
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "Timetable Classes"
+JsonAdaptedUser --> "Timetable Classes"
 
 @enduml

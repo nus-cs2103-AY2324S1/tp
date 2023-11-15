@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddScheduleCommandParser" as AddScheduleCommandParser LOGIC_COLOR
+participant "d:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addschedule user...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addschedule user...")
+activate AddressBookParser
+
+create AddScheduleCommandParser
+AddressBookParser -> AddScheduleCommandParser
+activate AddScheduleCommandParser
+
+AddScheduleCommandParser --> AddressBookParser
+deactivate AddScheduleCommandParser
+
+AddressBookParser -> AddScheduleCommandParser : parse("user type/cca...")
+activate AddScheduleCommandParser
+
+create AddScheduleCommand
+AddScheduleCommandParser -> AddScheduleCommand
+activate AddScheduleCommand
+
+AddScheduleCommand --> AddScheduleCommandParser : addCca
+deactivate AddScheduleCommand
+
+AddScheduleCommandParser --> AddressBookParser : addCca
+deactivate AddScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddScheduleCommandParser -[hidden]-> AddressBookParser
+destroy AddScheduleCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddScheduleCommand : execute()
+activate AddScheduleCommand
+
+AddScheduleCommand -> Model : addCca(table tennis monday 1400 1600)
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+create CommandResult
+AddScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddScheduleCommand
+deactivate CommandResult
+
+AddScheduleCommand --> LogicManager : result
+deactivate AddScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

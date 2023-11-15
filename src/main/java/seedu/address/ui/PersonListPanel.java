@@ -15,10 +15,10 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
-
     @FXML
     private ListView<Person> personListView;
+    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -42,6 +42,13 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+
+                setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 1) {
+                        Person selectedPerson = getItem();
+                        fireEvent(new ListCellSelectedEvent(selectedPerson));
+                    }
+                });
             }
         }
     }

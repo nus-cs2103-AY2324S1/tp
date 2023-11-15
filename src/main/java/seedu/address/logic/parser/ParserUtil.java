@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -47,7 +48,21 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+
+        // Split the name into words based on spaces
+        String[] words = trimmedName.split("\\s+");
+        StringBuilder capitalizedBuilder = new StringBuilder();
+
+        for (String word : words) {
+            // Capitalize the first letter of each word and lowercase the rest of the letters
+            String capitalizedWord = word.substring(0, 1).toUpperCase()
+                + word.substring(1).toLowerCase();
+            capitalizedBuilder.append(capitalizedWord).append(" ");
+        }
+
+        // Trim the trailing space
+        String capitalizedTrimmedName = capitalizedBuilder.toString().trim();
+        return new Name(capitalizedTrimmedName);
     }
 
     /**
@@ -59,6 +74,7 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
+
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -74,6 +90,7 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
+
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -89,10 +106,23 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
+
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String birthday} into a {@code Birthday}.
+     */
+    public static Birthday parseBirthday(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Birthday.isValidBirthday(trimmedDate)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(date);
     }
 
     /**
@@ -121,4 +151,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }

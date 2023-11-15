@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+
+Class Person
+Class User
+
+
+package timetable as "Timetable" {
+Class Schedule
+Class TimeBlock
+Class HalfHourBlocks
+Class DatedEvent
+Class FreeTime
+Class Module
+Class Cca
+}
+
+Class I #FFFFFF
+
+
+'Class HiddenOutside #FFFFFF
+'HiddenOutside ..> Model
+
+Person *--> "1" Schedule
+
+FreeTime *--> "1" HalfHourBlocks
+TimeBlock *--> "1" HalfHourBlocks
+
+Schedule *--> "*" DatedEvent
+Schedule *--> "*" Module
+Schedule *--> "*" Cca
+TimeBlock <|-- Cca
+TimeBlock <|-- Module
+TimeBlock <|-- DatedEvent
+Schedule -- FreeTime
+
+User *--> "*" DatedEvent
+
+Person -[hidden]down-> Schedule
+User -[hidden]right-> Person
+
+FreeTime -[hidden]left-> DatedEvent
+Schedule -[hidden]down--> TimeBlock
+
+@enduml

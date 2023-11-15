@@ -9,14 +9,22 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AddScheduleCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommonFreetimeCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveEventCommand;
+import seedu.address.logic.commands.RemoveReminderCommand;
+import seedu.address.logic.commands.RemoveScheduleCommand;
+import seedu.address.logic.commands.SetReminderCommand;
+import seedu.address.logic.commands.edit.EditCommand;
+import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,6 +84,30 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EditUserCommand.COMMAND_WORD:
+            return new EditUserCommandParser().parse(arguments);
+
+        case SetReminderCommand.COMMAND_WORD:
+            return new SetReminderCommandParser().parse(arguments);
+
+        case RemoveReminderCommand.COMMAND_WORD:
+            return new RemoveReminderCommandParser().parse(arguments);
+
+        case CommonFreetimeCommand.COMMAND_WORD:
+            return new CommonFreeTimeCommandParser().parse(arguments);
+
+        case AddEventCommand.COMMAND_WORD:
+            return new AddEventCommandParser().parse(arguments);
+
+        case RemoveEventCommand.COMMAND_WORD:
+            return new RemoveEventCommandParser().parse(arguments);
+
+        case AddScheduleCommand.COMMAND_WORD:
+            return new AddScheduleCommandParser().parse(arguments);
+
+        case RemoveScheduleCommand.COMMAND_WORD:
+            return new RemoveScheduleCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

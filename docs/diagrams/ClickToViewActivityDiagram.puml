@@ -1,0 +1,12 @@
+@startuml
+
+start
+: onMouseClicked event triggered when a cell of the friend list is clicked on;
+: PersonListPanel.PersonListViewCell#updateItem() fires new ListCellSelectedEvent with the selected Person;
+: MainWindow#fillInnerParts() retrieves selected Person object with ListCellSelectedEvent#getSelectedPerson();
+: Create new SelectedFriendCard with the Person;
+: Store the SelectedFriendCard in friendProfile;
+: Replace contents of SelectedFriendPlaceHolder with friendProfile;
+stop
+
+@enduml
