@@ -3,14 +3,14 @@ layout: page
 title: User Guide
 ---
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 ---
 
 # 1. Introduction 🎯
 ## Why This Guide ❓
-The purpose of this guide is to empower you with the **knowledge and skills needed** to effectively utilize CareCentral. 
+The purpose of this guide is to empower you with the **knowledge and skills needed** to effectively utilize CareCentral.
 Our goal is to **streamline your workflow in managing patients' medical journeys**, ensuring that you can leverage the system's features for **efficient and accurate** patient care.
 This guide is meticulously crafted to help you navigate, utilize, and optimize CareCentral, enhancing your ability to provide the best possible care to your patients.
 
@@ -64,8 +64,8 @@ You can navigate the user guide by clicking on the links in the table of content
 #### 2.2.4.2. Things to Note
 
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
-  <strong>:warning: Things To Note <br></strong> 
-   Things that you should take note before using the respective command will be displayed in this format.   
+  <strong>:warning: Things To Note <br></strong>
+   Things that you should take note before using the respective command will be displayed in this format. 
 </div>
 
 #### 2.2.4.3. Additional Info
@@ -726,7 +726,7 @@ This command allows you to exit the program.
 | **List Appointments**      | `list-appointments PATIENT_INDEX`                                                                           | `list-appointments 1`                                                       |
 | **Edit Appointment**       | `edit-appt APPOINTMENT_INDEX pi/patient-index [d/DATE] [t/TIME]`                                            | `edit-appt 2 pi/7 d/2023-10-05 t/16:00`                                     |
 | **Delete Appointment**     | `delete-appt APPOINTMENT_INDEX pi/patient-index`                                                            | `delete-appt 3 pi/2`                                                        |
-| **Add Prescription**       | `add-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX mn/MEDICATION_NAME...`                                 | `add-prescription 1 pi/1 mn/Panadol`                                        | 
+| **Add Prescription**       | `add-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX mn/MEDICATION_NAME...`                                 | `add-prescription 1 pi/1 mn/Panadol`                                        |
 | **Edit Prescription**      | `edit-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX mn/MEDICATION_NAME...`                                | `edit-prescription 1 pi/1 mn/Panadol mn/Paracetamol mn/Albuterol`           |
 | **Delete Prescription**    | `delete-prescription APPOINTMENT_INDEX pi/PATIENT_INDEX`                                                    | `delete-prescription 1 pi/1`                                                |
 | **Add Medical History**    | `add-medical-history PATIENT_INDEX d/DATE [mc/MEDICAL_CONDITION t/TREATMENT`                                | `add-medical-history 1 d/2023-10-01 mc/asthma t/ventolin`                   |
