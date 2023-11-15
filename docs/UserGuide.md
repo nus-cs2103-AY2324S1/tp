@@ -63,6 +63,8 @@ Used to highlight helpful tips
 Used to highlight errors to look out for
 </box>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 * [Getting Started](#quick-start)
@@ -103,6 +105,8 @@ New to [Ba]king [Br]ead? Not to worry, simply follow the instructions below to g
 
 ![Ui](images/Ui.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Navigating the GUI
 The GUI may be confusing if you are a first time user of our application. Here is the breakdown of the GUI for [Ba]king [Br]ead.
 ![Ui](images/Ui-annotated.png)<br>
@@ -110,6 +114,8 @@ The GUI may be confusing if you are a first time user of our application. Here i
 **Command result box:** Where the application will return a message regarding the outcome of command inputted.<br>
 **Ingredients list:** Contain a list view of all your ingredients with their specified quantity and unit.<br>
 **Recipe list:** Contains a list view of all your recipes.<br>
+
+<div style="page-break-after: always;"></div>
 
 ### Tutorials
 #### Adding your first ingredient
@@ -123,6 +129,7 @@ into the application's input box as shown below.<br><br>
 <img src='images/ug-images/quickstart_addingredient2.png' width='700'>
 
 <div style="page-break-after: always;"></div>
+
 #### Adding your first recipe
 Recipe adding is a little more complicated! But don't worry, you will get the hang of it in no time! Refer to the
 infographic below for step-by-step instructions on adding your first recipe.
@@ -177,6 +184,8 @@ Refer to the [Features](#features) below for details of the other commands avail
 | `i/`      |           UUID of recipe            | UUID must be at least 1                          | 1, 2, 3               | 0, -1, 0.1       |
 
 
+<div style="page-break-after: always;"></div>
+
 #### Supported Units:
 
 | Unit     | Alias                                 |
@@ -216,10 +225,13 @@ Examples:
 * `add n/Flour q/1 u/kg` adds 1kg of Flour to the stock.
 * `add n/Milk q/600 u/g` adds 600g of Milk to the stock.
 
+<div style="page-break-after: always;"></div>
+
 Example Used: `add n/Flour q/1 u/kg` **Note**: Sample started with 3kg of Flour in the stock.
 
-<img src='images/ug-images/addIngredient.png' width='650'>
+<img src='images/ug-images/addIngredient.png' width='650'><br>
 
+<div style="page-break-after: always;"></div>
 
 Example Used: `add n/Milk q/600 u/g` **Note**: Sample did not have any Milk in the stock.
 
@@ -276,10 +288,13 @@ Examples:
 * `stock Butter flour` will show both the `Butter` and `Flour` ingredient in the list.
 * `stock` lists all ingredients.<br>
 
+<div style="page-break-after: always;"></div>
+
 Example used: `stock butter`
 
 <img src='images/ug-images/stock.png' width='650'><br>
 
+<div style="page-break-after: always;"></div>
 
 ### Clearing all ingredients from ingredient stock : `clear`
 
@@ -291,6 +306,7 @@ Example used: `clear`
 
 <img src='images/ug-images/clear.png' width='650'><br>
 
+<div style="page-break-after: always;"></div>
 
 ### Listing all Recipes : `list`
 
@@ -402,7 +418,7 @@ Example Used: `modify i/1 n/Flour q/100 u/g`
 Example Used: `modify i/1 n/Cream q/100 u/g` 
 **Note**: Recipe being modified does not have cream in its ingredient list
 
-<img src='images/ug-images/modifyNew.png' width='650'>
+<img src='images/ug-images/modifyNew.png' width='650'><br>
 
 <box type="info">
 
@@ -453,7 +469,7 @@ Examples:
 
 Example used: `search flour` **Note**: Multiple recipes use the ingredient flour
 
-<img src='images/ug-images/searchMultiple.png' width='650'>
+<img src='images/ug-images/searchMultiple.png' width='650'><br>
 
 
 Example used: `search blueberry` **Note**: Only one recipe uses the ingredient blueberry
