@@ -26,7 +26,7 @@ We understand the importance of your time and the need for a tool that complimen
 Here's how you can get started with CareCentral quickly:
 
 1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) installed in your computer. If you need a video guide, you can refer to this [video for Windows users](https://youtu.be/VTzzmqNwGzM) and [this video for macOS users](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=video&cd=&cad=rja&uact=8&ved=2ahUKEwibl-3n78SCAxVc3TgGHVdOAcwQtwJ6BAgOEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoiqKK0FOjK0&usg=AOvVaw3xcKQNDdvu0hi9x8ZUVFlp&opi=89978449).
-2. For Linux users, Java 11 is already installed in your computer by default. You can check by typing `java -version` in your [terminal](#7-glossary-).
+2. If you are using Linux, Java 11 is already installed in your computer by default. You can check by typing `java -version` in your [terminal](#7-glossary-).
 3. Download the latest `carecentral.jar` from [here](https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.4) if you have not downloaded it yet.
 4. Copy the file to the folder you want to use as the home folder for CareCentral.
 5. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
@@ -55,11 +55,11 @@ Here's how you can get started with CareCentral quickly:
 
 ## 3.2. Sidebar 🗂️
 The sidebar contains the following tabs:
-* Patients
-* Medical History
-* Appointments
+1. Patients
+2. Medical History
+3. Appointments
 
-Users can switch between tabs by clicking on the respective tabs, using the switch command (see [here](#541-switch-tabs-%EF%B8%8F)) or using the `Ctrl + T` shortcut.
+You can switch between tabs by clicking on the respective tabs, using the switch command (see [here](#541-switch-tabs-%EF%B8%8F)) or using the `Ctrl + T` shortcut.
 
 ## 3.3. Panel 📋
 There are 3 panels in the main screen depending on which tab is selected:
