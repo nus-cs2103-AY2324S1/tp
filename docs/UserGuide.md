@@ -67,9 +67,6 @@ Important information you need to be careful about!
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
-
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -269,8 +266,6 @@ Expected output upon success:<br>
 
 Expected output upon failure:
 
-<div style="page-break-after: always;"></div>
-
 * No field or invalid arguments given:
 ```
 Invalid command format!  
@@ -388,8 +383,6 @@ Examples:
 Expected output upon success :
 ![SortSuccess](images/SortSuccess.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Remind user of clients policy expiry date : `remind`
 
 Reminds you of clients that have approaching policy expiry date within a certain number of days.
@@ -423,8 +416,6 @@ remind: Finds all persons whose policy expiry dates is within the specified numb
 Parameters: Number of days  
 Example: remind 30
 ```
-
-<div style="page-break-after: always;"></div>
 
 ### Adding or removing remark to a client : `remark`
 
@@ -546,8 +537,6 @@ Sure! you can transfer your data to another computer by the following steps belo
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, sometimes the program's window can't be seen because it opens off the screen. To fix this, go to the InsureIQ home folder, find and delete a file called `preferences.json`. After deleting this file, the program should show up normally when you reopen it.
@@ -573,6 +562,8 @@ Sure! you can transfer your data to another computer by the following steps belo
  | **BatchDelete** | `batchdelete [c/COMPANY] [dm/DELETE MONTH]` <br> e.g. `batchdelete c/DEF Insurance`                                                                                                                                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: UG workload distribution
 
