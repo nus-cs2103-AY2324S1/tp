@@ -634,11 +634,11 @@ You can see the list of medical history for Alex Yeoh. You want to edit the seco
 
 ![EditMedicalHistory](images/EditMedicalHistory.png)
 
-You can now edit the date of the second entry using `edit-medical-history 2 pi/1 d/2021-03-03`, where 2 is the index of the second entry and 1 is the index of Alex Yeoh.
+You can now edit the date of the second entry using `edit-medical-history 2 pi/1 d/2022-03-03`, where 2 is the index of the second entry and 1 is the index of Alex Yeoh.
 
 ![AfterEditMedicalHistory](images/AfterEditMedicalHistory.png)
 
-You can see that the date of the second entry has been changed to 2021-03-03.
+You can see that the date of the second entry has been changed to 2022-03-03.
 
 <div style="background-color: #cce7ff; padding: 10px; margin-bottom: 10px; border-left: 3px solid #3385ff;">
   <strong>:scroll: Additional Information</strong><br>
