@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,6 +21,9 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+
+    public static final String MESSAGE_MAX_EMERGENCY_CONTACTS_EXCEEDED = "Maximum number of emergency contacts "
+            + "exceeded.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -53,6 +57,12 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        long emergencyTagCount = addressBook.getPersonList().stream()
+                .map(x -> x.getTags().stream().filter(Tag::isEmergencyTag).count())
+                .reduce(0L, Long::sum);
+        if (emergencyTagCount > 2) {
+            throw new IllegalValueException(MESSAGE_MAX_EMERGENCY_CONTACTS_EXCEEDED);
         }
         return addressBook;
     }

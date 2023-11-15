@@ -43,8 +43,12 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Telehandle: ")
+                .append(person.getTelehandle())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Courses: ");
+        person.getCourses().forEach(builder::append);
         return builder.toString();
     }
 

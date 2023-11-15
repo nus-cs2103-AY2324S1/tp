@@ -1,0 +1,27 @@
+{
+  "persons" : [ {
+    "name" : "joe",
+    "phone" : "123",
+    "email" : "",
+    "address" : "",
+    "telehandle" : "",
+    "tags" : [ "Emergency" ],
+    "courses" : [ "MA1521" ]
+  }, {
+    "name" : "john",
+    "phone" : "123",
+    "email" : "",
+    "address" : "",
+    "telehandle" : "",
+    "tags" : [ "Emergency" ],
+    "courses" : [ ]
+  }, {
+    "name" : "potato",
+    "phone" : "123",
+    "email" : "",
+    "address" : "",
+    "telehandle" : "",
+    "tags" : [ "Friend", "Close Friend", "Emergency" ],
+    "courses" : []
+  } ]
+}

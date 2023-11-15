@@ -1,0 +1,41 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+scale 1000 width
+scale 1000 height
+
+start
+:User executes Sort command;
+:Input is parsed;
+  if () then ([sort by name])
+    :Sort students \nby names \n(case-insensitive);
+    :Sort students \nby names \n(natural sort order);
+    if () then ([descending order])
+      :Reverse result;
+    else ([ascending order])
+    endif
+  else if () then ([sort by course])
+    if () then ([ascending size])
+      :Sort students in \nincreasing number \nof courses taken;
+    else ([descending size])
+      :Sort students in \ndecreasing number \nof courses taken;
+    endif
+    if () then ([some students have \nsame number of courses])
+      :Sort them by name;
+    else ([else])
+    endif
+  else if () then ([sort by tags])
+    :Get highest priority tag;
+    :Sort students by the \nhighest priority tag;
+     if () then ([some students have \nsame highest priority tag])
+       :Sort them by name;
+     else ([else])
+     endif
+  else ([else])
+    :Display error message;
+  endif
+
+
+stop
+@enduml

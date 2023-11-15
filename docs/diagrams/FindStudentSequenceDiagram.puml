@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "fc:FindCommand" as FindCommand LOGIC_COLOR
+participant ":NameContainsKeywordsPredicate" as NamePredicate MODEL_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("findstudent alice bob")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findstudent alice bob")
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> AddressBookParser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse("alice bob")
+activate FindCommandParser
+
+create NamePredicate
+FindCommandParser -> NamePredicate : NameContainsKeywordsPredicate("alice bob")
+activate NamePredicate
+
+NamePredicate --> FindCommandParser
+deactivate NamePredicate
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand
+
+FindCommand --> FindCommandParser : fc
+deactivate FindCommand
+
+FindCommandParser --> AddressBookParser : fc
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> AddressBookParser
+destroy FindCommandParser
+
+AddressBookParser --> LogicManager : fc
+deactivate AddressBookParser
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> NamePredicate : test(person)
+activate NamePredicate
+
+NamePredicate --> FindCommand
+deactivate NamePredicate
+
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand : result
+deactivate CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

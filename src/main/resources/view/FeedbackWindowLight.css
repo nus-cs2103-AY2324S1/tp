@@ -1,0 +1,23 @@
+#feedbackMessage {
+    -fx-text-fill: black;
+}
+
+#copyButton {
+    -fx-text-fill: white;
+}
+
+#copyButton {
+    -fx-background-color: #23a1d1;
+}
+
+#copyButton:hover {
+    -fx-background-color: #229ac8;
+}
+
+#copyButton:armed {
+    -fx-background-color: darkgray;
+}
+
+#feedbackMessageContainer {
+    -fx-background-color: white;
+}

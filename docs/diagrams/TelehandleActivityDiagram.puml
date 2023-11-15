@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+if () then ([input is valid])
+    :User inputs "add n/... th/@user c/...";
+    :LogicManager processes the input;
+    :AddressBookParser identifies the command type;
+    :Instantiate AddCommandParser;
+    :Parse the Telehandle code "@user";
+    :LogicManager executes AddCommand;
+    :Insert person to PersonList;
+    :Update UI;
+
+else ([else])
+    :Display error message;
+
+endif
+stop
+
+@enduml

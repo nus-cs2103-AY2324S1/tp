@@ -15,7 +15,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t17-4.github.io/tp/";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -98,5 +98,25 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Sets the theme for the HelpWindow based on the specified theme setting.
+     *
+     * @param isLight A boolean indicating whether the light theme should be applied.
+     *                If true, the light theme will be set; if false, the dark theme will be set.
+     */
+    public void setTheme(boolean isLight) {
+        if (isLight) {
+            // Load the light theme CSS
+            String lightThemePath = getClass().getResource("/view/HelpWindowLight.css").toExternalForm();
+            getRoot().getScene().getStylesheets().clear();
+            getRoot().getScene().getStylesheets().add(lightThemePath);
+        } else {
+            // Load the dark theme CSS
+            String darkThemePath = getClass().getResource("/view/HelpWindowDark.css").toExternalForm();
+            getRoot().getScene().getStylesheets().clear();
+            getRoot().getScene().getStylesheets().add(darkThemePath);
+        }
     }
 }

@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCourseCommandParser" as FindCourseCommandParser LOGIC_COLOR
+participant "fc:FindCourseCommand" as FindCourseCommand LOGIC_COLOR
+participant ":CourseContainsKeywordsPredicate" as CoursePredicate MODEL_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("findcourse MA2001")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findcourse MA2001")
+activate AddressBookParser
+
+create FindCourseCommandParser
+AddressBookParser -> FindCourseCommandParser
+activate FindCourseCommandParser
+
+FindCourseCommandParser --> AddressBookParser
+deactivate FindCourseCommandParser
+
+AddressBookParser -> FindCourseCommandParser : parse("MA2001")
+activate FindCourseCommandParser
+
+create CoursePredicate
+FindCourseCommandParser -> CoursePredicate : CourseContainsKeywordsPredicate("MA2001")
+activate CoursePredicate
+
+CoursePredicate --> FindCourseCommandParser
+deactivate CoursePredicate
+
+create FindCourseCommand
+FindCourseCommandParser -> FindCourseCommand
+activate FindCourseCommand
+
+FindCourseCommand --> FindCourseCommandParser : fc
+deactivate FindCourseCommand
+
+FindCourseCommandParser --> AddressBookParser : fc
+deactivate FindCourseCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCourseCommandParser -[hidden]-> AddressBookParser
+destroy FindCourseCommandParser
+
+AddressBookParser --> LogicManager : fc
+deactivate AddressBookParser
+
+LogicManager -> FindCourseCommand : execute()
+activate FindCourseCommand
+
+FindCourseCommand -> CoursePredicate : test(person)
+activate CoursePredicate
+
+CoursePredicate --> FindCourseCommand
+deactivate CoursePredicate
+
+
+create CommandResult
+FindCourseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCourseCommand :result
+deactivate CommandResult
+
+FindCourseCommand --> LogicManager : result
+deactivate FindCourseCommand
+
+[<--LogicManager :result
+deactivate LogicManager
+@enduml

@@ -2,20 +2,24 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,23 +36,44 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private CourseListPanel courseListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FeedbackWindow feedbackWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+    @FXML
+    private MenuItem feedbackMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
+    @FXML
+    private StackPane courseListPanelPlaceholder;
+    @FXML
+    private StackPane tagListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private MenuItem lightModeMenuItem;
+
+    @FXML
+    private MenuItem darkModeMenuItem;
+    @FXML
+    private Label numberStudents;
+    @FXML
+    private Label numberCourses;
+    @FXML
+    private Label numberTags;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +91,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        feedbackWindow = new FeedbackWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +100,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(lightModeMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(darkModeMenuItem, KeyCombination.valueOf("F3"));
     }
 
     /**
@@ -110,8 +138,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        updateTotalStudents();
+
+        courseListPanel = new CourseListPanel(logic.getFilteredCourseList());
+        courseListPanelPlaceholder.getChildren().add(courseListPanel.getRoot());
+        updateTotalCourses();
+
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +158,38 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Updates the total number of tags.
+     */
+    private void updateTags() {
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+    }
+
+    /**
+     * Updates the individual tag numbers.
+     */
+    private void updateCourses() {
+        courseListPanel = new CourseListPanel(logic.getFilteredCourseList());
+        courseListPanelPlaceholder.getChildren().add(courseListPanel.getRoot());
+    }
+
+    /**
+     * Updates the total number of students.
+     */
+    private void updateTotalStudents() {
+        ObservableList<Person> personList = logic.getFilteredPersonList();
+        numberStudents.setText(Integer.toString(personList.size()));
+    }
+
+    /**
+     * Updates the total number of courses.
+     */
+    private void updateTotalCourses() {
+        ObservableList<Pair<String, Integer>> courseList = logic.getFilteredCourseList();
+        numberCourses.setText(Integer.toString(courseList.size()));
     }
 
     /**
@@ -147,6 +216,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the feedback window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleFeedback() {
+        if (!feedbackWindow.isShowing()) {
+            feedbackWindow.show();
+        } else {
+            feedbackWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,11 +241,16 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        feedbackWindow.hide();
         primaryStage.hide();
     }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public CourseListPanel getCourseListPanel() {
+        return courseListPanel;
     }
 
     /**
@@ -182,9 +268,26 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowFeedback()) {
+                handleFeedback();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            if (commandResult.isLight()) {
+                handleTheme("LIGHT");
+            }
+
+            if (commandResult.isDark()) {
+                handleTheme("DARK");
+            }
+
+            updateTotalStudents();
+            updateTotalCourses();
+            updateCourses();
+            updateTags();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -192,5 +295,59 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Handles the application's theme based on the specified theme string.
+     * This method allows switching between "DARK" and "LIGHT" themes by setting the appropriate mode.
+     *
+     * @param theme The theme to apply. It must be either "DARK" or "LIGHT".
+     * @throws AssertionError if the provided theme is neither "DARK" nor "LIGHT".
+     */
+    public void handleTheme(String theme) {
+        assert theme == "DARK" || theme == "LIGHT" : "Invalid theme input";
+        switch (theme) {
+        case "DARK":
+            setDarkMode();
+            break;
+        case "LIGHT":
+            setLightMode();
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Sets the light mode theme for the application's main window and associated windows.
+     * This method updates the visual style of the application to a light theme.
+     * It removes the dark theme stylesheet and adds the light theme stylesheet to the primary stage's scene.
+     * Additionally, it sets the light theme for the FeedbackWindow and HelpWindow.
+     */
+    @FXML
+    private void setLightMode() {
+        String lightThemePath = getClass().getResource("/view/LightTheme.css").toExternalForm();
+        String darkThemePath = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+        primaryStage.getScene().getStylesheets().remove(darkThemePath);
+        primaryStage.getScene().getStylesheets().add(lightThemePath);
+
+        feedbackWindow.setTheme(true);
+        helpWindow.setTheme(true);
+    }
+
+    /**
+     * Sets the dark mode theme for the application's main window and associated windows.
+     * This method updates the visual style of the application to a dark theme.
+     * It removes the light theme stylesheet and adds the dark theme stylesheet to the primary stage's scene.
+     * Additionally, it sets the dark theme for the FeedbackWindow and HelpWindow.
+     */
+    @FXML
+    private void setDarkMode() {
+        String lightThemePath = getClass().getResource("/view/LightTheme.css").toExternalForm();
+        String darkThemePath = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+        primaryStage.getScene().getStylesheets().remove(lightThemePath);
+        primaryStage.getScene().getStylesheets().add(darkThemePath);
+
+        feedbackWindow.setTheme(false);
+        helpWindow.setTheme(false);
     }
 }

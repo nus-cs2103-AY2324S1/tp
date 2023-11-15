@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User inputs feedback command;
+
+if () then ([input is valid])
+
+    :LogicManager processes the input;
+
+    :AddressBookParser identifies the command type;
+
+    :Execute FeedbackCommand;
+
+    :A Feedback popup window appears;
+
+    :User sends a feedback through the link provided;
+else ([else])
+:Display invalid \ninput error message;
+
+endif
+stop
+
+@enduml

@@ -17,6 +17,9 @@ public class NameTest {
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
         assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+
+        String otherInvalidName = "!!!@!EEW";
+        assertThrows(IllegalArgumentException.class, () -> new Name(otherInvalidName));
     }
 
     @Test

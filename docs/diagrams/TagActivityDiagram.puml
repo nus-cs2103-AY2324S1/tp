@@ -1,0 +1,30 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User executes `add` command with tag;
+
+if () then ([valid format])
+    :Parse the tag data;
+    if () then ([tag is `Emergency`])
+        :Check with TagUtil for validity;
+        if () then ([Emergency tag in address book < 2])
+            :Add tag to person in model;
+            :Display success message;
+        else ([Emergency tag in address book = 2])
+            :Show error message;
+        endif
+    else ([tag is not `Emergency`])
+        :Add tag to person in model;
+        :Display success message;
+    endif
+else ([invalid format])
+    :Show error message for invalid tag format;
+endif
+
+stop
+
+@enduml

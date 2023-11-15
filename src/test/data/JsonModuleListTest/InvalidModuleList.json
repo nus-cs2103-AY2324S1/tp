@@ -1,0 +1,25 @@
+[
+  {
+    "moduleCode": "CS2103T",
+    "title": "Software Engineering",
+    "semesters": [
+      1,
+      2
+    ]
+  },
+  {
+    "moduleCode": "CS2040",
+    "title": "Data Structures",
+    "semesters": [
+      1,
+      2
+    ]
+  },
+  {
+    "moduleCode": "CS1101S",
+    "title": "Programming Methodology",
+    "semesters": [
+      1,
+      2
+    ]
+  }

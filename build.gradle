@@ -20,6 +20,10 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
@@ -39,6 +43,7 @@ task coverage(type: JacocoReport) {
         xml.required = true
     }
 }
+
 
 dependencies {
     String jUnitVersion = '5.4.0'
@@ -66,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'NUSCoursemates.jar'
 }
 
 defaultTasks 'clean', 'test'

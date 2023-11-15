@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User inputs findstudent command;
+
+:LogicManager processes the input;
+
+:AddressBookParser identifies the command type;
+
+if () then ([command is valid])
+    :Instantiate FindStudentCommandParser;
+    :Parse the student names "Alice Bob";
+    :Instantiate StudentContainsKeywordsPredicate;
+    :Instantiate FindStudentCommand with predicate;
+    :Execute FindStudentCommand;
+    :Model filters the person list using predicate;
+    :Return filtered list as CommandResult;
+else ([command is invalid])
+    :Show error message for invalid command;
+endif
+
+stop
+
+@enduml
+

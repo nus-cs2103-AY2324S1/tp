@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CLOSE_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -20,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.sorter.PersonNameAscendingSorter;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -46,7 +49,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_CLOSE_FRIEND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -73,7 +76,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_CLOSE_FRIEND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -87,6 +90,32 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void sortPersonList_nullPersonSorter_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.sortPersonList(null));
+    }
+
+    @Test
+    public void sortPersonList_validPersonSorter_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.sortPersonList(null));
+    }
+
+
+    @Test
+    public void sortPersonList_validPersonSorter_sortsAddressBookInModelManager() {
+        addressBook.addPerson(CARL);
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(BOB);
+
+        AddressBook sortedAddressBook = new AddressBook();
+        sortedAddressBook.addPerson(ALICE);
+        sortedAddressBook.addPerson(BOB);
+        sortedAddressBook.addPerson(CARL);
+
+        addressBook.sortPersonList(new PersonNameAscendingSorter());
+        assertEquals(addressBook, sortedAddressBook);
     }
 
     /**

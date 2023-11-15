@@ -1,0 +1,28 @@
+@startuml
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class Tag {
+}
+
+enum TagType {
+    FRIEND
+    CLOSE_FRIEND
+    EMERGENCY
+}
+
+class TagUtil {
+}
+
+class Person {
+}
+
+Person o--> "*" Tag
+Tag --> TagType: uses >
+TagUtil --> Tag: uses >
+TagUtil --> Person: uses >
+
+@enduml

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.sorter.PersonSorter;
 
 /**
  * Wraps all data at the address-book level
@@ -92,6 +93,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Sorts the {@code AddressBook} according to the specified {@code sorter}.
+     * {@code sorter} must not be null.
+     */
+    public void sortPersonList(PersonSorter sorter) {
+        requireNonNull(sorter);
+        persons.sortPersons(sorter);
     }
 
     //// util methods

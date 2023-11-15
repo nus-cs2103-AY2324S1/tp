@@ -1,0 +1,36 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User inputs findcourse command;
+
+:LogicManager processes the input;
+
+:AddressBookParser identifies the command type;
+
+if () then ([command is valid])
+    :Instantiate FindCourseCommandParser;
+
+    :Parse the module code;
+
+
+        :Instantiate CourseContainsKeywordsPredicate;
+
+        :Instantiate FindCourseCommand with predicate;
+
+        :Execute FindCourseCommand;
+
+        :Model filters the person list using predicate;
+
+        :Return filtered list as CommandResult;
+
+else ([command is invalid])
+    :Show error message for invalid command;
+endif
+
+stop
+
+@enduml

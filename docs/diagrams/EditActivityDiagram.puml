@@ -1,0 +1,43 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes edit command with a list of course modifications;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+repeat
+    if () then ([add course])
+        if () then ([user already has the course])
+            :Course is not added again;
+        else ([user does not already have the course])
+            :Course is successfully added;
+        endif
+    elseif () then ([delete course])
+        if () then ([user has the course])
+            :Course is successfully deleted;
+        else ([user does not have the course])
+            :Invalid command;
+            stop
+        endif
+    elseif () then ([edit course])
+        if () then ([user has the first course])
+            :The first course is successfully deleted;
+            if () then ([user already has the second course])
+                :The second course is not added again;
+            else ([user does not have the second course])
+                :The second course is added;
+            endif
+        else ([user does not have the first course])
+            :Invalid command;
+            stop
+        endif
+    else ([else])
+        :Invalid command;
+        stop
+    endif
+repeat while () is ([more courses?])
+->[else];
+stop
+@enduml

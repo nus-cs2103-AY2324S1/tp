@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+package Model <<Rectangle>>{
+    Object "<u>p:Person" as Person {
+
+    }
+
+    Object "<u>:Name" as Name {
+        fullName = "john"
+    }
+    Object "<u>:Phone" as Phone {
+        value = "98765432"
+    }
+    Object "<u>:Telehandle" as Telehandle {
+        value = "@john2"
+    }
+}
+
+Name <-- Person : has <
+Phone <-- Person : has <
+Telehandle <-- Person : has <
+
+@enduml

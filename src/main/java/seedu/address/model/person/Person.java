@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.course.Course;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,19 +24,27 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Telehandle telehandle;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Course> courses = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Telehandle telehandle, Set<Tag> tags,
+                Set<Course> courses) {
+
+        requireAllNonNull(name, phone, tags);
+
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.email = email != null ? email : Email.EMPTY_EMAIL;
+        this.address = address != null ? address : Address.EMPTY_ADDRESS;
+        this.telehandle = telehandle != null ? telehandle : Telehandle.EMPTY_TELEHANDLE;;
         this.tags.addAll(tags);
+        this.courses.addAll(courses != null ? courses : Collections.emptySet());
     }
+
 
     public Name getName() {
         return name;
@@ -52,6 +61,9 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+    public Telehandle getTelehandle() {
+        return telehandle;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -59,6 +71,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable course set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Course> getCourses() {
+        return Collections.unmodifiableSet(courses);
     }
 
     /**
@@ -94,13 +114,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telehandle.equals(otherPerson.telehandle)
+                && tags.equals(otherPerson.tags)
+                && courses.equals(otherPerson.courses);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, courses);
     }
 
     @Override
@@ -110,7 +132,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("telehandle", telehandle)
                 .add("tags", tags)
+                .add("courses", courses)
                 .toString();
     }
 

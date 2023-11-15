@@ -1,14 +1,17 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TELEHANDLE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,6 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -32,6 +37,7 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -166,10 +172,96 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TELEHANDLE_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    /**
+     * Test method for {@link LogicManager#getFilteredCourseList()} when there are no courses.
+     * This method ensures that the observable course list is empty when no courses are associated with persons.
+     */
+    @Test
+    public void getFilteredCourseList_noCourses() {
+        Person person = new PersonBuilder().withCourses().build();
+        model.addPerson(person);
+
+        ObservableList<Pair<String, Integer>> courseList = logic.getFilteredCourseList();
+        assertEquals(0, courseList.size());
+    }
+
+    /**
+     * Test method for {@link LogicManager#getFilteredCourseList()} when there are courses
+     * associated with persons.
+     * This method ensures that the observable course list contains the correct course counts when
+     * there are courses associated with persons.
+     */
+    @Test
+    public void getFilteredCourseList_withCourses() {
+        Person person1 = new PersonBuilder(AMY).withCourses("MA1521", "CS1101S").build();
+        Person person2 = new PersonBuilder(BENSON).withCourses("CS1101S", "IS1128").build();
+        model.addPerson(person1);
+        model.addPerson(person2);
+
+        ObservableList<Pair<String, Integer>> courseList = logic.getFilteredCourseList();
+        assertEquals(3, courseList.size());
+
+        Pair<String, Integer> ma1521Pair = new Pair<>("MA1521", 1);
+        Pair<String, Integer> cs1101sPair = new Pair<>("CS1101S", 2);
+        Pair<String, Integer> is1128Pair = new Pair<>("IS1128", 1);
+
+        assertTrue(courseList.contains(ma1521Pair));
+        assertTrue(courseList.contains(cs1101sPair));
+        assertTrue(courseList.contains(is1128Pair));
+    }
+
+    /**
+     * Test method for {@link LogicManager#getFilteredTagList()} when there are no tags.
+     * This method ensures that the observable tag list contains only "0" counts for each
+     * predefined tag when no tags are associated with persons.
+     */
+    @Test
+    public void getFilteredTagList_noTags() {
+        Person person = new PersonBuilder().withTags().build();
+        model.addPerson(person);
+
+        ObservableList<Pair<String, Integer>> tagList = logic.getFilteredTagList();
+        assertEquals(3, tagList.size());
+
+        Pair<String, Integer> friendPair = new Pair<>("Friend", 0);
+        Pair<String, Integer> closeFriendPair = new Pair<>("Close Friend", 0);
+        Pair<String, Integer> emergencyPair = new Pair<>("Emergency", 0);
+
+        assertTrue(tagList.contains(friendPair));
+        assertTrue(tagList.contains(closeFriendPair));
+        assertTrue(tagList.contains(emergencyPair));
+    }
+
+    /**
+     * Test method for {@link LogicManager#getFilteredTagList()} when there are tags associated
+     * with persons.
+     * This method ensures that the observable tag list contains the correct tag counts when
+     * there are tags associated with persons.
+     */
+    @Test
+    public void getFilteredTagList_withTags() {
+        Person person1 = new PersonBuilder(AMY).withTags("Friend").build();
+        Person person2 = new PersonBuilder(BENSON).withTags("Friend", "Emergency").build();
+        model.addPerson(person1);
+        model.addPerson(person2);
+
+        ObservableList<Pair<String, Integer>> tagList = logic.getFilteredTagList();
+        assertEquals(3, tagList.size());
+
+        Pair<String, Integer> friendPair = new Pair<>("Friend", 2);
+        Pair<String, Integer> closeFriendPair = new Pair<>("Close Friend", 0);
+        Pair<String, Integer> emergencyPair = new Pair<>("Emergency", 1);
+
+        assertTrue(tagList.contains(friendPair));
+        assertTrue(tagList.contains(closeFriendPair));
+        assertTrue(tagList.contains(emergencyPair));
+    }
+
 }

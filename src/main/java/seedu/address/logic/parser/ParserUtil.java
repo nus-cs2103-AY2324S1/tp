@@ -2,17 +2,25 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.changes.CourseAddition;
+import seedu.address.model.course.changes.CourseChange;
+import seedu.address.model.course.changes.CourseDeletion;
+import seedu.address.model.course.changes.CourseEdit;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telehandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -81,6 +89,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String telehandle} into an {@code Telehandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telehandle} is invalid.
+     */
+    public static Telehandle parseTelehandle(String telehandle) throws ParseException {
+        requireNonNull(telehandle);
+        String trimmedTelehandle = telehandle.trim();
+        if (!Telehandle.isValidTelehandle(trimmedTelehandle)) {
+            throw new ParseException(Telehandle.MESSAGE_CONSTRAINTS);
+        }
+        return new Telehandle(trimmedTelehandle);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +116,62 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String course} into a {@code course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim().toUpperCase();
+        if (!Course.isValidCourseName(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        } else if (!Course.isExistingCourseName(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_INVALID_COURSE);
+        }
+        return new Course(trimmedCourse);
+    }
+
+    /**
+     * Parses a {@code String courseChange} into a {@code courseChange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code courseChange} is invalid.
+     */
+    public static CourseChange parseCourseChange(String courseChangeDescription) throws ParseException {
+        requireNonNull(courseChangeDescription);
+        boolean isValidCourseAddition = CourseAddition.isValidCourseAddition(courseChangeDescription);
+        if (isValidCourseAddition) {
+            if (!CourseAddition.checkIfValidCourse(courseChangeDescription)) {
+                String courseName = CourseAddition.getParsedCourseName(courseChangeDescription);
+                throw new ParseException(String.format(Course.MESSAGE_INVALID_COURSE_WITH_NAME, courseName));
+            }
+            return CourseChange.createCourseChange(courseChangeDescription);
+        }
+        boolean isValidCourseDeletion = CourseDeletion.isValidCourseDeletion(courseChangeDescription);
+        if (isValidCourseDeletion) {
+            if (!CourseDeletion.checkIfValidCourse(courseChangeDescription)) {
+                String courseName = CourseDeletion.getParsedCourseName(courseChangeDescription);
+                throw new ParseException(String.format(Course.MESSAGE_INVALID_COURSE_WITH_NAME, courseName));
+            }
+            return CourseChange.createCourseChange(courseChangeDescription);
+        }
+        boolean isValidCourseEdit = CourseEdit.isValidCourseEdit(courseChangeDescription);
+        if (isValidCourseEdit) {
+            if (!CourseEdit.checkIfValidOriginalCourse(courseChangeDescription)) {
+                String originalCourseName = CourseEdit.getParsedOriginalCourseName(courseChangeDescription);
+                throw new ParseException(String.format(Course.MESSAGE_INVALID_COURSE_WITH_NAME, originalCourseName));
+            }
+            if (!CourseEdit.checkIfValidNewCourse(courseChangeDescription)) {
+                String newCourseName = CourseEdit.getParsedNewCourseName(courseChangeDescription);
+                throw new ParseException(String.format(Course.MESSAGE_INVALID_COURSE_WITH_NAME, newCourseName));
+            }
+            return CourseChange.createCourseChange(courseChangeDescription);
+        }
+        throw new ParseException(CourseChange.MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -120,5 +199,29 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> courses} into a {@code Set<Course>}.
+     */
+    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<Course> courseSet = new HashSet<>();
+        for (String courseName : courses) {
+            courseSet.add(parseCourse(courseName));
+        }
+        return courseSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> courseChanges} into a {@code List<CourseChange>}.
+     */
+    public static List<CourseChange> parseCourseChanges(Collection<String> courseChanges) throws ParseException {
+        requireNonNull(courseChanges);
+        final List<CourseChange> courseChangeList = new ArrayList<>();
+        for (String courseChange : courseChanges) {
+            courseChangeList.add(parseCourseChange(courseChange));
+        }
+        return courseChangeList;
     }
 }

@@ -18,7 +18,11 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Telehandle
 Class Tag
+Class Course
+
+Class "<<enumeration>>\nTagType" as TagType
 
 Class I #FFFFFF
 }
@@ -37,11 +41,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *-->"1"Name
+Person *--> "1"Phone
+Person *--> "0..1"Email
+Person *--> "0..1"Address
+Person *--> "0..1"Telehandle
+Person *--> "0..3" Tag
+Person *--> "*" Course
+
+Tag *-down-> "1"TagType
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":Logic" as Logic LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":TagUtil" as TagUtil MODEL_COLOR
+participant ":Tag" as Tag MODEL_COLOR
+participant ":TagType" as TagType MODEL_COLOR
+end box
+
+[-> Logic : execute("add n/John Doe p/12345678 t/Emergency")
+activate Logic
+create Tag
+Logic -> Tag : Tag("Emergency")
+activate Tag
+
+Tag -> TagType : setType("Emergency")
+activate TagType
+TagType --> Tag
+deactivate TagType
+Tag --> Logic
+deactivate Tag
+
+' Logic calls canAddOrEditEmergencyTag in TagUtil
+Logic -> TagUtil : canAddOrEditEmergencyTag(toAdd, currentPersonList)
+activate TagUtil
+TagUtil --> Logic
+deactivate TagUtil
+
+' Logic calls addPerson on Model
+Logic -> Model : addPerson(toAdd)
+activate Model
+Model --> Logic
+deactivate Model
+
+[<-- Logic :result
+deactivate Logic
+
+@enduml

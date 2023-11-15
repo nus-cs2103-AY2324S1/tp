@@ -15,9 +15,11 @@ public class Address {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "([^\\s].*)|()";
+    public static final Address EMPTY_ADDRESS = new Address("");
 
     public final String value;
+
 
     /**
      * Constructs an {@code Address}.

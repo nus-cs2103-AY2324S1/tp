@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+scale 300 width
+scale 300 height
+
+box Logic LOGIC_COLOR_T1
+participant ":Logic" as Logic LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+end box
+
+activate Logic
+
+Logic -> ModelManager : sortPersonList(ps)
+activate ModelManager
+
+ModelManager -> AddressBook : sortPersonList(ps)
+activate AddressBook
+
+AddressBook -> UniquePersonList : sortPersons(ps)
+activate UniquePersonList
+
+UniquePersonList --> AddressBook
+deactivate UniquePersonList
+
+AddressBook --> ModelManager
+deactivate AddressBook
+
+Logic <--ModelManager
+deactivate ModelManager
+@enduml
