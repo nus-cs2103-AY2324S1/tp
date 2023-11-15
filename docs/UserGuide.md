@@ -550,7 +550,8 @@ Sure! you can transfer your data to another computer by the following steps belo
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, sometimes the program's window can't be seen because it opens off the screen. To fix this, go to the InsureIQ home folder, find and delete a file called `preferences.json`. After deleting this file, the program should show up normally when you reopen it.
+   ![Computer1Preferences](images/Computer1Preferences.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -575,10 +576,10 @@ Sure! you can transfer your data to another computer by the following steps belo
 
 ## Appendix: UG workload distribution
 
-| Full Name of Team Member | Agreed allocated sections, duties, roles                                 | Changes if any, record date and reasons for changes | Actual contribution to the UG                                            |
-|--------------------------|--------------------------------------------------------------------------|-----------------------------------------------------|--------------------------------------------------------------------------|
-| Brendan Neo Jia Wei      | Features `find` and `remind`, standardise image size of screenshots      | No change                                           | Features `find` and `remind`, standardise image size of screenshots      |
-| Chua Yao Xuan            | Feature `remark`, rephrase UG to be user friendly                        | No change                                           | Feature `remark`, rephrase UG to be user friendly                        |
-| Kum Chai Yin             | Features `add` and `batchdelete`, update section FAQ, create UG PDF file | No change                                           | Features `add` and `batchdelete`, update section FAQ, create UG PDF file |
-| Rohan Sapra              | Features `delete` and `sort`                                             | No change                                           | Features `delete` and `sort`                                             |
-| Suryansh Kushwaha        | Feature `edit`                                                           | No change                                           | Feature `edit`                                                           |
+| Full Name of Team Member | Agreed allocated sections, duties, roles                                   | Changes if any, record date and reasons for changes | Actual contribution to the UG                                              |
+|--------------------------|----------------------------------------------------------------------------|-----------------------------------------------------|----------------------------------------------------------------------------|
+| Brendan Neo Jia Wei      | Features `find` and `remind`, standardise image size of screenshots        | No change                                           | Features `find` and `remind`, standardise image size of screenshots        |
+| Chua Yao Xuan            | Feature `remark`, rephrase UG to be user friendly, update section glossary | No change                                           | Feature `remark`, rephrase UG to be user friendly, update section glossary |
+| Kum Chai Yin             | Features `add` and `batchdelete`, update section FAQ, create UG PDF file   | No change                                           | Features `add` and `batchdelete`, update section FAQ, create UG PDF file   |
+| Rohan Sapra              | Features `delete` and `sort`                                               | No change                                           | Features `delete` and `sort`                                               |
+| Suryansh Kushwaha        | Feature `edit`                                                             | No change                                           | Feature `edit`                                                             |
