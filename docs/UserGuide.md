@@ -1087,15 +1087,19 @@ and type in the `java -jar rtpm.jar`command to run the application.
 **A**: Try contacting our developer team by creating an issue on our 
 [GitHub](https://github.com/AY2324S1-CS2103T-F11-3/tp/issues), and we will see how we can help.
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-<br>
-2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
-<br>
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only 
+the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the 
+application before running the application again.
+
+2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is 
+recommended to use nicknames or initials if necessary.
+
 3. Long fields can cause the details of a client to not be displayed fully. A workaround is to use the 
 ```slist```/```blist``` commands to display the details of the client in the result box. 
 
