@@ -154,8 +154,8 @@ Examples:
 
 **:information_source: Common Errors:**<br>
 
-Refer to the [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
-behaviour of MediLink Contacts. The relevant exceptions to this section are detailed below. <br> 
+Refer to [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
+behaviour of MediLink Contacts. Below, we have provided specific exceptions that are relevant to the `add-doctor` command. <br> 
 * Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input. 
   * Example:`add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
 </div>
@@ -187,8 +187,8 @@ Examples:
 
 **:information_source: Common Errors:**<br>
 
-Refer to the [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
-behaviour of MediLink Contacts. The relevant exceptions to this section are detailed below. <br>
+Refer to [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
+behaviour of MediLink Contacts. Below, we have provided specific exceptions that are relevant to the `add-patient` command. <br>
 * Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input.
     * Example:`add-patient n/Bruce s/o Wayne ic/S9851586G g/M p/98765433 ec/12345678 e/batsy@example.com a/Wayne Manor, Gotham City St 42 c/AIDS b/O+ t/High`
 </div>
