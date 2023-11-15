@@ -58,6 +58,10 @@ hospital management tasks done faster than current GUI apps in the industry.
     * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+7. Experiencing difficulties? Refer to the following sections for assistance:
+   * Common Pitfalls: These are challenges often encountered by users due to incorrect or unsupported inputs. 
+   * FAQ for Miscellaneous Information: Find answers to frequently asked questions and gather miscellaneous information here. 
+   * Known Issues Due to App Limitations: Discover issues that are known to exist due to the app's limitations in this section.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Parameters
@@ -145,16 +149,6 @@ Examples:
 
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Common Errors:**<br>
-
-Refer to the [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
-behaviour of MediLink Contacts. The exceptions to this section, as well as additional pitfalls are detailed below. <br> 
-* Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input. 
-  * Example:`add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
-</div>
 
 ### Adding a Patient: `add-patient`
 
