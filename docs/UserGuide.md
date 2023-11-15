@@ -209,6 +209,8 @@ Not to worry, here are some steps you can take to fix this:
 | <img src="images/blue.png" width="10px" height="10px">   | Applicant Information Panel | Displays a detailed view of an applicant, providing information of status and remarks, in addition to the basic information about the applicant. |
 | <img src="images/purple.png" width="10px" height="10px"> | Summary Statistics Panel    | Displays summary statistics for a particular applicant pertaining to a specific tag.                                                             |
 
+<div style="page-break-after: always;"></div>
+
 In addition, there are windows such as:
    * Help Window [accessed by the `help` command, or through Menu Bar].
    * Events Window [accessed by the `schedule` command, or through Menu Bar].
@@ -456,7 +458,6 @@ Format: `remark INDEX r/REMARK`
 * You can get the remark previously inputted by using the `**REMARK**` keyword. It will be replaced with the previous remark (see example below). The keyword `**REMARK**` is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
 * You can use multiple prefix for `remark` but only the last prefix will be used. This means that `remark 1 r/remark r/remark2` will just replace the remark with `remark2`.
 
-<div style="page-break-after: always;"></div>
 
 **An example of the `remark` command being successfully executed:**
 1. Enter the command `remark 1 r/Great attitude, hardworking`
@@ -714,7 +715,6 @@ hasn't been created is for the sake of convenience (i.e. if you had forgotten to
 Nonetheless, we **strongly recommend you to use `create` to create categorized tags** if your only intention is to _create tags_. 
 </box>
 
-<div style="page-break-after: always;"></div>
 
 **An example of the `edit` command being successfully executed:**
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**edits name and phone number**)
@@ -723,7 +723,6 @@ Nonetheless, we **strongly recommend you to use `create` to create categorized t
    ![Edit-Success](images/edit-command-success.png)
 <br>
 
-<div style="page-break-after: always;"></div>
 
 **An example of the `edit` command being successfully executed with tags and score:**
 1. Ensure that you have created a tag `Interview` under the `assessment` category using the `create` command. Enter the command `create t/assessment Interview`
@@ -732,8 +731,6 @@ Nonetheless, we **strongly recommend you to use `create` to create categorized t
    
    ![Edit-Success](images/edit-command-with-stats-success.png)
 <br>
-
-<div style="page-break-after: always;"></div>
 
 **An example of the `edit` command being successfully executed to clear a tags and score:**
 1. Enter the command `edit 1 t/` (**Clear all tags**)
@@ -970,8 +967,6 @@ Read more about this in the [Summary Statistics](#summary-statistics) section.
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 Set up for examples when you first start JABPro with default data:
 1. `list`
 2. `create t/assessment interview` to create a tag `interview` under the `assessment` category.
@@ -983,7 +978,6 @@ Set up for examples when you first start JABPro with default data:
    ![Filter-Setup](images/filter-setup.png)
 <br>
 
-<div style="page-break-after: always;"></div>
 
 **An example of the `filter` command being successfully executed:**
 1. Enter the command `list`
@@ -993,7 +987,6 @@ Set up for examples when you first start JABPro with default data:
    ![Filter-Success](images/filter-command-success.png)
 <br>
 
-<div style="page-break-after: always;"></div>
 
 **An example of the `filter` command being successfully executed with `median`:**
 1. Enter the command `list`
