@@ -34,7 +34,8 @@ Step 3. Copy the file to the folder you want to use as the _home folder_ for Fos
 
 Step 4. Open a command terminal.
 
-Step 5. Navigate to the home folder you put the jar file in using the command `cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
+Step 5. Navigate to the home folder you put the jar file in using the command<br>
+`cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
 
 Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
@@ -65,7 +66,7 @@ Please refer to the [Features](#features) section for details of each command.
 <div style="page-break-after: always;"></div>
 
 ## **Useful Notations**
-These symbols highlight information you might find important.
+These symbols highlight information you may find important.
 
 | Symbol               | Meaning                                                                                       |
 |----------------------|-----------------------------------------------------------------------------------------------|
@@ -94,7 +95,7 @@ These are some technical terms you may come across in this user guide.
 
 There are two different screens you will interact with in Foster Family. 
 
-### The Main Page
+### The main page
 
 ![Ui](images/Ui.png)
 
@@ -102,7 +103,7 @@ This is the main view that welcomes you when you first start up Foster Family.
 
 <div style="page-break-after: always;"></div>
 
-### The Profile Page 
+### The profile page 
 ![ProfileExample](images/screenshots/EditExample.png)
 
 This is the profile view that you can use to add a fosterer, or to edit the details of an existing fosterer. 
@@ -114,7 +115,7 @@ There are two ways you can use to navigate to the profile page.
 
 <div style="page-break-after: always;"></div>
 
-Let's say you want to open the profile page of a fosterer named Alex Yeoh who is currently at index 1. 
+Suppose you want to open the profile page of a fosterer named Alex Yeoh who is currently at index 1. 
 
 <div style="text-align: center">
 <img src="images/screenshots/ViewCommandExample.png" height="380" class="center"/>
@@ -142,7 +143,7 @@ Entering the name, fully or partially, of the field you want to edit brings your
 
 <br>
 
-In the example above, entering <code>name</code>, or a substring of name like <code>nam</code>, brings the focus to the name field.
+In the example above, entering <code>name</code>, or a part of `name` like <code>nam</code>, brings the focus to the name field.
 
 <div style="text-align: center">
 <img src="images/screenshots/NavigatingFields.png" class="center"/>
@@ -172,7 +173,7 @@ The same process can be applied to other fields.
 
 Entering <code>save</code> saves the changes you have made into storage.
 
-Let's say after changing the name of the fosterer, you want to save your changes.
+Suppose you want to save your changes after changing the name of the fosterer,.
 
 <div style="text-align: center">
 <img src="images/screenshots/SaveCommandBefore.png" class="center"/>
@@ -206,7 +207,7 @@ Entering <code>exit</code> closes the profile page and directs you back to the m
 
 **1. Changes are saved**
 
-Let's say you have already saved your changes.
+Suppose you have already saved your changes.
 
 ![Exit command saved after](images/screenshots/ExitCommandSavedBefore.png)
 
@@ -222,7 +223,7 @@ Key in <code>exit</code> and press Enter to close the profile page.
 
 **2. Changes are not saved**
 
-Let's say you did not save your changes and entered <code>exit</code>. 
+Suppose you entered <code>exit</code> without saving your latest changes. 
 
 ![Exit command not saved warning](images/screenshots/ExitCommandNotSavedWarning.png)
 
@@ -238,7 +239,7 @@ If you _press the Esc key_, the **exit is cancelled**, and you can continue work
 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 
-The image above is the result of pressing the Esc key after you are warned.
+The image above is the result of pressing the Esc key after the warning.
 
 To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br>
 To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-details-through-the-profile-page-edit).
@@ -275,7 +276,7 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br> 
 
-### Viewing help for Commands : `help`
+### Viewing help for commands : `help`
 
 Opens a pop-up window, providing you with the link to our User Guide for help.
 
@@ -318,7 +319,7 @@ Parameters:
 
 <div style="page-break-after: always;"></div>
 
-Valid cases:
+**Valid cases**:
 
 | No. | Scenario                                                    | `AVAILABILITY` | `TYPE_OF_ANIMAL`     | `ANIMAL_NAME` |
 |-----|-------------------------------------------------------------|-------------|-------------------|---------------|
@@ -328,8 +329,8 @@ Valid cases:
 | 4   | Not fostering (e.g. overseas, currently not able to foster) | `NotAvailable`            | `nil`             | `nil`         |
 | 5   | Fostering: ALL information must be present                  | `NotAvailable`            | `current.Dog/Cat` | NOT `nil`          |
 
-* For invalid cases, error messages will be shown when you enter the invalid commands. For example:
-  ![Add](images/screenshots/AddErrorMessage.png)
+For **invalid cases**, error messages will be shown when you enter the invalid commands. For example:
+![Add](images/screenshots/AddErrorMessage.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -383,7 +384,9 @@ Here is the profile page you will see after entering <code>add</code>:
 <img src="images/screenshots/ProfilePage.png" height="480" class="center"/>
 </div>
 
-To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
+<div></div>
+
+To learn more about the profile page, please refer to the section [User Interface: The profile page](#the-profile-page).  
 
 <br> 
 
@@ -483,7 +486,7 @@ Parameters:
 
 Only the <code>save</code> and <code>exit</code> commands are available to you in the profile page.<br>
 
-To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).
+To learn more about profile page, please refer to the section [User Interface: The profile page](#the-profile-page).
 
 </div> 
 
@@ -606,7 +609,9 @@ If you have at least one fosterer in your address book, here is an example of a 
 <img src="images/screenshots/View1.png" height="480" class="center"/>
 </div>
 
-To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
+<div></div>
+
+To learn more about the profile page, please refer to the section [User Interface: The profile page](#the-profile-page). 
 
 <br> 
 
@@ -874,7 +879,7 @@ Format: `exit`
 
 On the profile page, entering <code>exit</code> leads you back to the main page, instead of exiting the application.
 
-Please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information. 
+Please refer to [User Interface: The profile page: Exiting the profile page](#exiting-the-profile-page) for more information. 
 
 </div>
  
@@ -887,13 +892,14 @@ In the **main page**, your Foster Family data is **saved in the hard disk automa
 
 ### Editing data file
 
-* Your Foster Family data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.<br>
+* Your Foster Family data is saved automatically as a JSON file with the file path <br>
+`[JAR file location]/data/addressbook.json`.<br>
 
 * A JSON file stores fosterer details as key value pairs, making it more readable than a regular text file.<br>
 
   <img src="images/screenshots/JsonExample.png" height="400" class="center"/>
   
-  For example, the "name" key is paired with a value "Alex Yeoh" for the first fosterer in your address book.<br>
+  In the example above, the "name" key is paired with a value "Alex Yeoh" for the first fosterer in your address book.<br>
 
 
 * We strongly advise you to update the data file directly **only if you are an advanced user**.<br>
@@ -925,7 +931,7 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 ## **Known Issues**
 
 - If you are **using multiple screens** and you move the application to a secondary screen, a part of the GUI may appear "off-screen" if you later choose to switch back to your primary screen. <br>
-  To resolve this, you can delete the `preferences.json` file that was created, before running the application again. This file is located in the same folder as the application jar file.
+  To resolve this, you can delete the `preferences.json` file that was created, before running the application again. This file is located in the same home folder as your jar file.
 
 --------------------------------------------------------------------------------------------------------------------
 
