@@ -134,7 +134,7 @@ To do so, enter <code>view 1</code> as shown in the image above.
 
 #### Navigating through fields
 
-Entering the full name or substring of the field you want to edit brings your cursor to the corresponding textbox.
+Entering the name, fully or partially, of the field you want to edit brings your cursor to the corresponding textbox.
 
 <div style="text-align: center">
 <img src="images/screenshots/BeforeEnteringName.png" class="center"/>
