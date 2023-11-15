@@ -5,8 +5,8 @@ title: User Guide
 
 ### Welcome to MediLink Contacts!
 
-MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to manage patients and
-doctors details within clinics.
+MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to manage patient and
+doctor details within clinics.
 
 Hereʼs an overview of how MediLink Contacts can help you streamline your clinic management
 processes:
@@ -15,7 +15,7 @@ processes:
 * Create appointments between patients and doctors upon triaging.
 
 On top of these functionalities, we believe that **efficiency** in patient management is of utmost importance.
-Hence, MediLink Contacts is **optimized** for use via a **Command Line Interface (CLI)** while still having
+Hence, MediLink Contacts is **optimised** for use via a **Command Line Interface (CLI)** while still having
 the benefits of a **Graphical User Interface (GUI)**. If you type fast, MediLink Contacts can get your
 hospital management tasks done faster than current GUI apps in the industry.
 
@@ -30,7 +30,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
+1. Ensure you have Java `11` or above installed on your Computer. If you don't, install it for your relevant operating
     system at this [link](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
@@ -46,16 +46,16 @@ hospital management tasks done faster than current GUI apps in the industry.
    open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list`: Lists all contacts.
 
-    * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
+    * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a
       doctor named `John Doe` to MediLink Contacts.
 
-    * `delete S9851386G` : Deletes the person with NRIC S9851386G.
+    * `delete S9851386G`: Deletes the person with NRIC S9851386G.
 
-    * `clear` : Deletes all contacts.
+    * `clear`: Deletes all contacts.
 
-    * `exit` : Exits the app.
+    * `exit`: Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 7. Experiencing difficulties? Refer to the following sections for assistance:
@@ -66,7 +66,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 --------------------------------------------------------------------------------------------------------------------
 ## Parameters
 
-The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands. Users should follow these constraints for all commands, unless otherwise stated.
+The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands. Users should follow these constraints for all commands unless otherwise stated.
 
 **Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so please do follow them when necessary!
 
@@ -97,7 +97,7 @@ The list below contains the parameters that are used in various commands as well
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -114,7 +114,7 @@ The list below contains the parameters that are used in various commands as well
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -138,7 +138,7 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 - A doctor **MUST** have all fields non-empty except TAG.
   Failure to include these details may result in an error.
-- The order is not important (i.e, NRIC can come before NAME). What matters is that all the mandatory fields are declared,
+- The order is not important (i.e. NRIC can come before NAME). What matters is that all the mandatory fields are declared,
 and the format for each field is adhered to.
 - A person can either be a doctor or a patient, but not both. Hence, if the doctor's NRIC is already in the app
 as a patient, it may result in an error.
@@ -163,7 +163,7 @@ Format: `add-patient n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT
 - A patient cannot have the same NRIC as another person.
 - A person can either be a doctor or a patient, but not both. Hence, if the patient's NRIC is already in the app
     as a doctor, it may result in an error.
-- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same as the person's contact number.
+- EMERGENCY_CONTACT must contain a valid emergency contact number, which needs to be a valid phone number. This number can be the same as the person's contact number.
 - A patient can only have up to one tag at any time.
 
 </div>
@@ -173,7 +173,7 @@ Examples:
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
 * `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/12345678 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
 
-### Creating an Appointment : `new-appt`
+### Creating an Appointment: `new-appt`
 
 Creates a new appointment for patients.
 
@@ -193,7 +193,7 @@ Examples:
 
 * `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`
 
-### Deleting an Appointment : `delete-appt`
+### Deleting an Appointment: `delete-appt`
 
 Deletes an existing appointment.
 
@@ -211,7 +211,7 @@ Examples:
 
 * `delete-appt 1`
 
-### Finding an Appointment : `find-appt`
+### Finding an Appointment: `find-appt`
 
 Finds all appointments that involve a specific patient/doctor.
 
@@ -231,13 +231,13 @@ Examples:
 
 * `find-appt T0001222Q`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons and appointments in the MediLink Contacts.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in MediLink Contacts.
 
@@ -249,12 +249,12 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the person with the specified `NRIC`. The NRIC provided **must be a valid NRIC number** and is not case-sensitive.
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
-* You cannot change a person's IC number. If the provided ic number is the same as the original it will work.
+* You cannot change a person's IC number. If the provided IC number is the same as the original it will work.
 However, if it is different, there will be an error.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition, blood type or
 emergency contact of a doctor).
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 * If extraneous parameters are provided, it may lead to an error.
@@ -295,7 +295,7 @@ Examples:
   ![result for 'find alex david'](images/findpickettpickensresult.png)
 
 
-### Locating a person by NRIC : `find` ###
+### Locating a person by NRIC: `find` ###
 
 Finds person that matches the NRIC query.
 
@@ -314,7 +314,7 @@ Examples:
 * `find T1125726G` returns the person with the matching NRIC.
   ![result for 'find T1125726G'](images/findByNricResult.png)
 
-### Locating people by gender : `find M`, `find F` ###
+### Locating people by gender: `find M`, `find F` ###
 
 Finds all persons with matching gender.
 
@@ -341,7 +341,7 @@ Examples:
 
 </div>
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from MediLink Contacts. Note that appointments related to the person to be deleted will still remain in MediLink Contacts even after the person is deleted.
 
@@ -353,13 +353,13 @@ Examples:
 
 * `delete S1234567J` deletes Jonathan who has the NRIC `S1234567J`.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the MediLink Contacts.
 
 Format: `clear`
 
-### Undo last action : `undo`
+### Undo last action: `undo`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
@@ -375,7 +375,7 @@ Format: `undo`
 
 * Can only do up to 5 undos at any one time.
 
-### Redo last action : `redo`
+### Redo last action: `redo`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
@@ -390,7 +390,7 @@ Format: `redo`
 
 * Can only do up to 5 redos at any one time.
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -407,15 +407,23 @@ MediLink Contacts data are saved automatically as a JSON file `[JAR file locatio
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, MediLink Contacts may discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it. Some changes may also be invalid, but not detected by the system. In that case, there may be many unexpected behaviours due to those undetected errors.
+If your changes to the data file make its format invalid, MediLink Contacts may discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it. Some changes may also be invalid, but not detected by the system. In that case, there may be many unexpected behaviours due to those undetected errors.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Recording the Date of Entry `[Coming in v2.0]`
 
-_Details coming soon ..._
+For cases where patients may not visit the clinic for several years, clinics need to determine the relevance of patient details in their database. In the upcoming version, we'll introduce a new feature that displays the date each patient record is added.
+
+### Sorting Options for Better Organization `[Coming in v2.0]`
+
+To assist clinic staff in finding patient details according to their preferences, we're adding a new feature to sort information based on various criteria such as date, name, and IC. Sorting by date will also help identify the oldest details, making it easier for staff to manage records efficiently.
+
+### Pharmacy Integration `[Coming in v2.0]`
+
+Managing patient medications and calculating prices can be complex. In the next version, we'll introduce a pharmacy feature allowing clinic staff to assign drugs to patients. The system will provide predefined drug data, which can be edited to match the clinic's current drug list. To streamline the process, users can simply type "bill" to calculate the total price of assigned drugs for any patient. This enhancement aims to expedite clinic workflows.
 
 --------------------------------------------------------------------------------------------------------------------
-## Common PitFalls
+## Common Pitfalls
 
 ### Invalid Command Format
 All fields are mandatory except the tag field. Omission of the fields will throw an error stating
