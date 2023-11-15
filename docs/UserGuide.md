@@ -304,7 +304,7 @@ The `Help Window` opens up as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 1.Managing Tags
+### 1. Managing Tags
 <a name="1-managing-tags"></a>
 Tags are meant to help you easily remember applicants details by appending different colour coding to different types of information.
 
@@ -351,7 +351,7 @@ An example of the `create` command being successfully executed:
 
 | Reason for Error                                                                                                        | Error Message                                | Remedy / Suggested course of action                                                                                        |
 |-------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Missing create keyword: `create`                                                                                        | Unknown command                              | Follow the command format of `create t/CATEGORY TAGNAME…​` closely                                                         |
+| Missing create keyword: `create`                                                                                        | Unknown command                              | Follow the command format of `create t/CATEGORY TAGNAME…​` closely.                                                        |
 | Missing mandatory field e.g. `create`                                                                                   | Invalid command format!                      | Ensure that you specify at least one tag category and tag name of the tag you would like to create.                        |
 | Incomplete field e.g. `create t/test`                                                                                   | Invalid command format!                      | Ensure that both parts of the field are included i.e. specify both tag category and tag name.                              |
 | Invalid tag name e.g. `create t/developer@`                                                                             | Tags names should be alphanumeric.           | Ensure that the tag name does not contain any non-alphanumeric characters i.e. no symbols and whitespaces.                 |
@@ -856,7 +856,7 @@ It's best to explain this by breaking down an example `delete` command! <br>
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: `search (n/NAME...  st/STATUS...  t/TAGNAME...)`
+Format: `search (n/NAME... st/STATUS... t/TAGNAME...)`
 
 | Type       | Field       | Constraints                                                                                 |
 |------------|-------------|---------------------------------------------------------------------------------------------|
