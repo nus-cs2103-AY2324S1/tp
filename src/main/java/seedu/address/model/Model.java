@@ -1,11 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.displayable.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * The API of the Model component.
@@ -13,6 +16,12 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that evaluates to true only for sellers */
+    Predicate<Seller> PREDICATE_SHOW_SELLERS = unused -> true;
+
+    /** {@code Predicate} that evaluates to true only for buyers */
+    Predicate<Buyer> PREDICATE_SHOW_BUYERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -37,13 +46,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
-
+    void setAddressBookFilePath(Path filePath);
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
@@ -53,35 +61,96 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
      */
-    boolean hasPerson(Person person);
+    boolean hasBuyer(Buyer buyer);
+    /**
+     * Returns true if a buyer with similar identity as {@code buyer} exists in the address book's buyer list.
+     */
+    boolean hasSimilarBuyer(Buyer buyer);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
-    void deletePerson(Person target);
+    boolean hasSeller(Seller seller);
+    /**
+     * Returns true if a seller with similar identity as {@code seller} exists in the address book's seller list.
+     */
+    boolean hasSimilarSeller(Seller seller);
+
+
+    boolean buyerHasSameSellerName(Buyer buyer);
+
+    boolean sellerHasSameBuyerName(Seller seller);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Deletes the given buyer.
+     * The buyer must exist in the address book's buyer list.
      */
-    void addPerson(Person person);
+    void deleteBuyer(Buyer targetBuyer);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Deletes the given seller.
+     * The seller must exist in the address book's seller list.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void deleteSeller(Seller targetSeller);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Adds the given buyer.
+     * {@code buyer} must not already exist in the address book's buyer list.
+     */
+    void addBuyer(Buyer buyer);
+
+    /**
+     * Adds the given seller.
+     * {@code seller} must not already exist in the address book's seller list.
+     */
+    void addSeller(Seller seller);
+
+    /**
+     * Replaces the given buyer {@code targetBuyer} with {@code editedBuyer}.
+     * {@code targetBuyer} must exist in the address book's buyer list.
+     * The displayable identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
+     */
+    void setBuyer(Buyer targetBuyer, Buyer editedBuyer);
+
+    /**
+     * Replaces the given seller {@code targetSeller} with {@code editedSeller}.
+     * {@code targetSeller} must exist in the address book's seller list.
+     * The displayable identity of {@code editedSeller} must not be the same
+     * as another existing seller in the seller list.
+     */
+    void setSeller(Seller targetSeller, Seller editedSeller);
+
+    /** Returns an unmodifiable view of the filtered buyer list */
+    ObservableList<Buyer> getFilteredBuyerList();
+
+    /** Returns an unmodifiable view of the filtered seller list */
+    ObservableList<Seller> getFilteredSellerList();
+
+    /**
+     * Updates the filter of the filtered buyer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredBuyerList(Predicate<? super Buyer> predicate);
+
+    /**
+     * Updates the filter of the filtered seller list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredSellerList(Predicate<? super Seller> predicate);
+
+    void commitAddressBook();
+
+    void undoAddressBook();
+
+    void redoAddressBook();
+
+    boolean canUndoAddressBook();
+
+    boolean canRedoAddressBook();
+
+    void updateFilteredSortedBuyerList(Comparator<Buyer> comparator);
+
+    void updateFilteredSortedSellerList(Comparator<Seller> comparator);
 }

@@ -9,7 +9,7 @@ public class AppUtilTest {
 
     @Test
     public void getImage_exitingImage() {
-        assertNotNull(AppUtil.getImage("/images/address_book_32.png"));
+        assertNotNull(AppUtil.getImage("/images/RTPM_32.png"));
     }
 
     @Test
@@ -19,18 +19,18 @@ public class AppUtilTest {
 
     @Test
     public void checkArgument_true_nothingHappens() {
-        AppUtil.checkArgument(true);
-        AppUtil.checkArgument(true, "");
+        AppUtil.validateArgument(true);
+        AppUtil.validateArgument(true, "");
     }
 
     @Test
     public void checkArgument_falseWithoutErrorMessage_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> AppUtil.checkArgument(false));
+        assertThrows(IllegalArgumentException.class, () -> AppUtil.validateArgument(false));
     }
 
     @Test
     public void checkArgument_falseWithErrorMessage_throwsIllegalArgumentException() {
         String errorMessage = "error message";
-        assertThrows(IllegalArgumentException.class, errorMessage, () -> AppUtil.checkArgument(false, errorMessage));
+        assertThrows(IllegalArgumentException.class, errorMessage, () -> AppUtil.validateArgument(false, errorMessage));
     }
 }

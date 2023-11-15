@@ -8,7 +8,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * API of the Logic component
@@ -30,14 +31,17 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of buyers */
+    ObservableList<Buyer> getFilteredBuyerList();
+
+
+    /** Returns an unmodifiable view of the filtered list of sellers */
+    ObservableList<Seller> getFilteredSellerList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' file path.
      */
-    Path getAddressBookFilePath();
-
+    Path getFilePath();
     /**
      * Returns the user prefs' GUI settings.
      */

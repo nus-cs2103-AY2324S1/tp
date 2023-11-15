@@ -1,7 +1,6 @@
 package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -28,8 +27,8 @@ public class StringUtil {
         requireNonNull(word);
 
         String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        AppUtil.validateArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        AppUtil.validateArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
@@ -45,7 +44,7 @@ public class StringUtil {
         requireNonNull(t);
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        return t.getMessage() + "\n" + sw;
     }
 
     /**
@@ -64,5 +63,36 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Obtains the Levenshtein distance between two strings. (The Levenshtein distance between two strings is
+     * the minimum amount of deletions/insertions/substitutions that need to be done to make them equal.)
+     * As provided by
+     * <a href="https://rosettacode.org/wiki/Levenshtein_distance#Java">...</a>.
+     * This ignores cases.
+     * @param a The first string to compare.
+     * @param b The second string to compare.
+     * @return the Levenshtein distance between a and b.
+     */
+    //@@author ruiyangzh-reused
+    public static int distanceLeven(String a, String b) {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+        int [] costs = new int [b.length() + 1];
+        for (int j = 0; j < costs.length; j++) {
+            costs[j] = j;
+        }
+        for (int i = 1; i <= a.length(); i++) {
+            costs[0] = i;
+            int nw = i - 1;
+            for (int j = 1; j <= b.length(); j++) {
+                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]),
+                        a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
+                nw = costs[j];
+                costs[j] = cj;
+            }
+        }
+        return costs[b.length()];
     }
 }

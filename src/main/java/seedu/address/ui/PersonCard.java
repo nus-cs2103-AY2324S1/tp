@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -7,14 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.displayable.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An abstract UI component that when implemented, displays information of a {@code Person} according to a provided
+ * FXML scheme.
  */
-public class PersonCard extends UiPart<Region> {
-
-    private static final String FXML = "PersonListCard.fxml";
+abstract class PersonCard extends UiPart<Region> {
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -31,6 +33,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label priority;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -44,14 +48,21 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
-        super(FXML);
+    public PersonCard(Person person, int displayedIndex, String fxml) {
+        super(fxml);
+        requireAllNonNull(displayedIndex, person);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        priority.setText(person.getPriority().toString());
+        priority.setStyle(String.format(
+                "-fx-background-color: %s;" + priority.getStyle(),
+                person.getPriority().getBackgroundColor())
+        );
+        priority.setVisible(!person.getPriority().isPriorityNil());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

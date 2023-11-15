@@ -1,14 +1,18 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2324S1-CS2103T-F11-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-F11-3/tp/actions)
 
+Bonjour fellow realtors and open-source users.
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+* It is named `RealtorTrackerPlusMax` (`RTPM` for short) because it is designed for realtors to track their contacts.
+* For the detailed documentation of this project, please see the [project website](https://ay2324s1-cs2103t-f11-3.github.io/tp/) which contains the user and developer guide.
+* This is a brownfield project, which was based off the initial AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Our project is open-source and in OOP design.
+> “This revolutionary app has changed the way I use the toilet” - James Dareal Ter, realtor, 24 years old
+
+> “This app gave me an A+ for 2040”
+
+> ”If only i could get a job in cs, but this is good too i guess” - Jayden, unemployed CS grad
+
+> “Fork RTPM”
+
+> ”RTPM cured my cancer”

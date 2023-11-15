@@ -3,10 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_BUYERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_SELLERS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalBuyers.ALICE;
+import static seedu.address.testutil.TypicalBuyers.BENSON;
+import static seedu.address.testutil.TypicalSellers.SALICE;
+import static seedu.address.testutil.TypicalSellers.SBENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.displayable.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -69,33 +72,55 @@ public class ModelManagerTest {
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        assertEquals(path, modelManager.getFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasBuyer_nullBuyer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasBuyer(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasBuyer_buyerNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasBuyer(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasBuyer_buyerInAddressBook_returnsTrue() {
+        modelManager.addBuyer(ALICE);
+        assertTrue(modelManager.hasBuyer(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void hasSeller_nullSeller_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasSeller(null));
+    }
+
+    @Test
+    public void hasSeller_sellerNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSeller(SALICE));
+    }
+
+    @Test
+    public void hasSeller_sellerInAddressBook_returnsTrue() {
+        modelManager.addSeller(SALICE);
+        assertTrue(modelManager.hasSeller(SALICE));
+    }
+
+    @Test
+    public void getFilteredBuyerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredBuyerList().remove(0));
+    }
+
+    @Test
+    public void getFilteredSellerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredSellerList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withBuyer(ALICE).withBuyer(BENSON)
+                .withSeller(SALICE).withSeller(SBENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,13 +141,21 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        // different filteredBuyerList -> returns false
+        String[] buyerKeywords = ALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredBuyerList(new NameContainsKeywordsPredicate(Arrays.asList(buyerKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
+
+        // different filteredSellerList -> returns false
+        String[] sellerKeywords = SALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredSellerList(new NameContainsKeywordsPredicate(Arrays.asList(sellerKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

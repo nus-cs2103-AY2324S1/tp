@@ -10,16 +10,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
+import seedu.address.testutil.EditBuyerDescriptorBuilder;
+import seedu.address.testutil.EditSellerDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -34,8 +35,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_HOUSE_INFO_AMY = "Amy's lovely house";
+    public static final String VALID_HOUSE_INFO_BOB = "Bob's lovely house";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_PRIORITY_AMY = "high";
+    public static final String VALID_PRIORITY_BOB = "low";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -57,16 +62,32 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditBuyerCommand.EditBuyerDescriptor DESC_AMY;
+    public static final EditBuyerCommand.EditBuyerDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withHouseInfo(VALID_HOUSE_INFO_AMY)
+                .withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_AMY).build();
+        DESC_BOB = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withHouseInfo(VALID_HOUSE_INFO_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_BOB).build();
+    }
+
+    public static final EditSellerCommand.EditSellerDescriptor DESC_SAMY;
+    public static final EditSellerCommand.EditSellerDescriptor DESC_SBOB;
+
+    static {
+        DESC_SAMY = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withSellingAddress(VALID_ADDRESS_AMY).withHouseInfo(VALID_HOUSE_INFO_AMY)
+                .withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_AMY).build();
+        DESC_SBOB = new EditSellerDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withSellingAddress(VALID_ADDRESS_BOB).withHouseInfo(VALID_HOUSE_INFO_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_BOB).build();
     }
 
     /**
@@ -99,30 +120,61 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered displayable list and selected displayable in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Buyer> expectedFilteredBuyerList = new ArrayList<>(actualModel.getFilteredBuyerList());
+        List<Seller> expectedFilteredSellerList = new ArrayList<>(actualModel.getFilteredSellerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredBuyerList, actualModel.getFilteredBuyerList());
+        assertEquals(expectedFilteredSellerList, actualModel.getFilteredSellerList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the buyer at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showBuyerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredBuyerList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Buyer buyer = model.getFilteredBuyerList().get(targetIndex.getZeroBased());
+        final String[] splitName = buyer.getName().fullName.split("\\s+");
+        model.updateFilteredBuyerList(buyer1 ->
+                StringUtil.containsWordIgnoreCase(buyer1.getName().fullName, splitName[0]));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredBuyerList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the seller at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showSellerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSellerList().size());
+
+        Seller seller = model.getFilteredSellerList().get(targetIndex.getZeroBased());
+        final String[] splitName = seller.getName().fullName.split("\\s+");
+        model.updateFilteredSellerList(seller1 ->
+                StringUtil.containsWordIgnoreCase(seller1.getName().fullName, splitName[0]));
+
+        assertEquals(1, model.getFilteredSellerList().size());
+    }
+
+    //@@author peasantbird-reused
+    //Reused from Address Book (Level4) with minor modifications
+    /**
+     * Deletes the first buyer in {@code model}'s filtered list from {@code model}'s address book.
+     *
+     * @param model The model to delete the buyer from.
+     */
+    public static void deleteFirstBuyer(Model model) {
+        Buyer firstBuyer = model.getFilteredBuyerList().get(0);
+        model.deleteBuyer(firstBuyer);
+        model.commitAddressBook();
+    }
+    //@@author
 }

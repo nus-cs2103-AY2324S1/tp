@@ -11,24 +11,28 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "rtpm-addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE = "list contains duplicate(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedBuyer> buyers = new ArrayList<>();
+    private final List<JsonAdaptedSeller> sellers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given buyers and sellers.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("buyers") List<? extends JsonAdaptedBuyer> buyers,
+                                       @JsonProperty("sellers") List<? extends JsonAdaptedSeller> sellers) {
+        this.buyers.addAll(buyers);
+        this.sellers.addAll(sellers);
     }
 
     /**
@@ -37,7 +41,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        sellers.addAll(source.getSellerList().stream().map(JsonAdaptedSeller::new).collect(Collectors.toList()));
+        buyers.addAll(source.getBuyerList().stream().map(JsonAdaptedBuyer::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +52,19 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {
+            Buyer buyer = jsonAdaptedBuyer.toModelType();
+            if (addressBook.hasBuyer(buyer)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE);
             }
-            addressBook.addPerson(person);
+            addressBook.addBuyer(buyer);
+        }
+        for (JsonAdaptedSeller jsonAdaptedSeller : sellers) {
+            Seller seller = jsonAdaptedSeller.toModelType();
+            if (addressBook.hasSeller(seller)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE);
+            }
+            addressBook.addSeller(seller);
         }
         return addressBook;
     }

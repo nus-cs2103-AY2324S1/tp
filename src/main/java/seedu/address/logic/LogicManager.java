@@ -15,7 +15,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.storage.Storage;
 
 /**
@@ -45,11 +46,13 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
+        CommandWarnings warnings = new CommandWarnings();
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = addressBookParser.parseCommand(commandText, warnings);
         commandResult = command.execute(model);
-
+        if (warnings.containsWarnings()) {
+            logger.warning(warnings.getWarningMessage());
+        }
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
@@ -67,13 +70,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Buyer> getFilteredBuyerList() {
+        return model.getFilteredBuyerList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObservableList<Seller> getFilteredSellerList() {
+        return model.getFilteredSellerList();
+    }
+
+    @Override
+    public Path getFilePath() {
+        return model.getFilePath();
     }
 
     @Override
