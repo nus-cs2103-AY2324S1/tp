@@ -150,7 +150,10 @@ Here are some things regarding RTPM's features to take note of before using them
 </box>
 
 <div style="page-break-after: always;"></div>
-<br><br><br><br>
+
+<br>
+
+
 <box type="definition" seamless>
 
 **Notes about the command format (Continued):**<br>
