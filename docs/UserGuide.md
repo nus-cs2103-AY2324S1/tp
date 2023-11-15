@@ -132,7 +132,6 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application. <br> 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
@@ -295,7 +294,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…�
 </box>
 
 An example of the `add` command being successfully executed:
-1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
+1. Enter the command `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
 2. This is the result of the successful `add` command (Take note that command entered will not be shown in the result):
    
     ![Add-Success](images/add-command-success.png)
@@ -303,15 +302,15 @@ An example of the `add` command being successfully executed:
 
 **Error Handling Table for `add` command:**
 
-| Reason for Error                              | Error Message                                                                     | Remedy / Suggested course of action                                                                                                              |
-|-----------------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Missing add keyword: `add`                    | Unknown command | Follow the command format of `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAGNAME]…​` closely                                                 |
-| Missing mandatory fields                      | Invalid command format!                                                           | Ensure that all mandatory fields are filled up.                                                                                                  | 
-| Duplicate name                                | This person already exists in the address book                                                      | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number |
-| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                           |
-| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints:| Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                          |                                                                                                                                                
-| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                           |
-| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/`      | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                       |
+| Reason for Error                              | Error Message                                                                             | Remedy / Suggested course of action                                                                                                              |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing add keyword: `add`                    | Unknown command                                                                           | Follow the command format of `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAGNAME]…​` closely                                                 |
+| Missing mandatory fields                      | Invalid command format!                                                                   | Ensure that all mandatory fields are filled up.                                                                                                  | 
+| Duplicate name                                | This person already exists in the address book                                            | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number |
+| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long        | Ensure that the phone number only contains number and should be at least 3 digits long                                                           |
+| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                          |                                                                                                                                                
+| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank             | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                           |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/`             | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                      |
 
 <box type="tip" seamless>
 
@@ -409,14 +408,13 @@ Format: `addL USERID u/USERNAME` or `addG USERID u/USERNAME`
 
 **Error Handling Table for `addL` and `addG` command:**
 
-| Reason for Error                          | Error Message                         | Remedy / Suggested course of action                                                                       |
- |-------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| Missing `addL` or `addG` keyword          | Unknown command                       | Follow the command format of `addL USERID u/USERNAME` or `addG USERID u/USERNAME` closely                 |
-| Missing Index                             | Invalid command format!               | Ensure that the index is filled up.                                                                       |
-| Invalid Index                             | The person index provided is invalid  | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
-| Negative or 0 Index                       | Invalid command format! | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
-| Missing username                          | Invalid command format! | Ensure that the username is filled up                                                                     |
-
+| Reason for Error                 | Error Message                        | Remedy / Suggested course of action                                                                       |
+|----------------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Missing `addL` or `addG` keyword | Unknown command                      | Follow the command format of `addL USERID u/USERNAME` or `addG USERID u/USERNAME` closely                 |
+| Missing Index                    | Invalid command format!              | Ensure that the index is filled up.                                                                       |
+| Invalid Index                    | The person index provided is invalid | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
+| Negative or 0 Index              | Invalid command format!              | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
+| Missing username                 | Invalid command format!              | Ensure that the username is filled up                                                                     |
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -714,14 +712,14 @@ Assuming this as the data after executing `list`:
 
 1. `delete t/marketing software`
 
-   ![delete-by-tags-status-pre](images/delete-by-tags-status-1.png)
+   ![delete-by-tags-status-1](images/delete-by-tags-status-1.png)
 
    The above `delete` command deleted all applicants whose tags match ANY of the given keywords. This is because
    `delete` does an `OR` search **within a specific category**. <br>
 
 2. `delete st/interviewed t/software`
 
-   ![delete-by-tags-status-pre](images/delete-by-tags-status-2.png)
+   ![delete-by-tags-status-2](images/delete-by-tags-status-2.png)
 
    The above `delete` command only deleted Bernice because `delete` does an `AND` search **across multiple categories**.<br>
 
@@ -785,7 +783,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 </box>
 
 An example of the `create` command being successfully executed:
-1. Enter the command `create t/dept marketing t/role developer`
+1. Enter the command `create t/dept finance t/role accountant`
 2. This is what you should see upon successful execution of command.
 
    ![create-success](images/create-success.png)
