@@ -10,8 +10,8 @@
 
 ## Table of Contents
 * [Product Overview](#product-overview)
-* [Key Definitions](#key-definitions)
 * [Features Overview](#overview-of-main-features)
+* [Key Definitions](#key-definitions)
 * [Quick Start](#quick-start)
 * [Command Failures](#command-failure)
 * [Viewing help](#viewing-help-help)
@@ -69,6 +69,7 @@ Access our self-curated user guide below to learn more on how you can integrate 
 [Jump back to Table of Contents](#table-of-contents)
 
 ## Features Overview
+<a name="overview-of-main-features"></a>
 
 While **JABPro** offers a whole range of features, we believe that the following features are likely to be the most useful to you:
 
@@ -106,11 +107,11 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Heads up!
+## Key Definitions
+<a name="key-definitions"></a>
 Our user guide takes into consideration your level of expertise in JABPro.
 
 You are a **beginner** user if ...
-
 
 1. You are new to JABPro (used JABPro less than 5 times) *and*,
 2. you wish to fully rely on the JABPro interface.
