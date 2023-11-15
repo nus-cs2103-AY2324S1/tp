@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,51 +11,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Edison Siow
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seraphimstreets.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/seraphimstreets)]
+[[portfolio](team/seraphimstreets.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Models, UI/UX
 
-### Johnny Doe
+### Li Siqi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/siqirua.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/siqirua)]
+[[portfolio](team/siqirua.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Mario Alvaro
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marioalvaro.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/marioalvaro)] [[portfolio](team/marioalvaro.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
+* Responsibilities: Data
+
+### Yufei Sun
+
+<img src="images/feifeiraindrops.png" width="200px">
+
+[[github](http://github.com/feifeiraindrops)]
+[[portfolio](team/feifeiraindrops.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops
+
+### Vedant Sinha
+
+<img src="images/sinhavedant.png" width="200px">
+
+[[github](https://github.com/SinhaVedant)]
+[[portfolio](team/sinhavedant.md)]
+
+* Role: Testing
 * Responsibilities: UI
