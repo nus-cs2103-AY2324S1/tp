@@ -178,6 +178,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isBatchDelete()) {
+                logger.info("Shows all people in the address book");
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

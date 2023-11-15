@@ -1,0 +1,54 @@
+@startuml
+mainframe **sd** execute BatchDeleteCommand
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "b:BatchDeleteCommand" as BatchDeleteCommand LOGIC_COLOR
+participant "p:PolicyExpiryInDeleteMonthPredicate" as PolicyExpiryInDeleteMonthPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+LogicManager -> BatchDeleteCommand : execute()
+activate BatchDeleteCommand
+
+create PolicyExpiryInDeleteMonthPredicate
+BatchDeleteCommand -> PolicyExpiryInDeleteMonthPredicate : PolicyExpiryInDeleteMonthPredicate(month)
+activate PolicyExpiryInDeleteMonthPredicate
+
+PolicyExpiryInDeleteMonthPredicate --> BatchDeleteCommand : p
+deactivate PolicyExpiryInDeleteMonthPredicate
+
+BatchDeleteCommand -> Model : batchDeleteWithPredicate(p)
+activate Model
+
+Model -> Model : updateFilteredPersonList()
+Model -> Model : updateFilteredPersonList(predicate)
+Model -> Model : getFilteredPersonList()
+activate Model
+Model --> Model : listToDelete
+deactivate Model
+
+loop all Person in listToDelete
+    Model -> AddressBook : removePerson(person)
+    activate AddressBook
+    AddressBook --> Model :
+    deactivate AddressBook
+end
+
+Model -> Model : updateFilteredPersonList();
+
+Model --> BatchDeleteCommand
+deactivate Model
+
+BatchDeleteCommand --> LogicManager : result
+deactivate BatchDeleteCommand
+BatchDeleteCommand -[hidden]-> LogicManager : result
+
+
+@enduml

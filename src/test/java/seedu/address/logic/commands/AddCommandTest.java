@@ -54,6 +54,18 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_samePolicyNumber_throwsCommandException() {
+        Person alice = new PersonBuilder().withName("Alice").withPolicy("Allianz",
+                "123A", "25-12-2022", "24-12-2023").build();
+        Person bob = new PersonBuilder().withName("Bob").withPolicy("NTUC",
+                "123A", "21-12-2022", "20-12-2023").build();
+        AddCommand addCommand = new AddCommand(alice);
+        ModelStub modelStub = new ModelStubWithPerson(bob);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_USED_POLICY_NUMBER, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -109,6 +121,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -139,6 +156,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSamePolicyNumber(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,6 +171,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void batchDeleteWithPredicate(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -175,6 +201,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasSamePolicyNumber(Person person) {
+            requireNonNull(person);
+            return this.person.comparePolicyNumber(person);
+        }
     }
 
     /**
@@ -193,6 +225,12 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public boolean hasSamePolicyNumber(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::comparePolicyNumber);
         }
 
         @Override

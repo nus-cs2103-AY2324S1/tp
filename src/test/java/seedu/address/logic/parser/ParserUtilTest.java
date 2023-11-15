@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,6 +12,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -21,14 +21,19 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Rachel!";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_NRIC = "12345";
+    private static final String INVALID_LICENCE_PLATE = "1234567890";
+    private static final String INVALID_POLICY_NUMBER = "2023-09-10";
+    private static final String INVALID_POLICY_DATE = "2023-09-10";
+    private static final String INVALID_COMPANY = "";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
@@ -43,8 +48,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, Messages.MESSAGE_IMPOSSIBLE_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseIndex_missingInput_throwsParseException() {
+        assertThrows(ParseException.class, Messages.MESSAGE_MISSING_INDEX, ()
+                -> ParserUtil.parseIndex(""));
     }
 
     @Test
@@ -192,5 +203,40 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseNric_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNric((String) null));
+    }
+
+    @Test
+    public void parseNric_invalidNric_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNric(INVALID_NRIC));
+    }
+
+    @Test
+    public void parseLicencePlate_invalid_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLicencePlate(INVALID_LICENCE_PLATE));
+    }
+
+    @Test
+    public void parsePolicyNumber_invalidPolicyNumber_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyNumber(INVALID_POLICY_NUMBER));
+    }
+
+    @Test
+    public void parsePolicyIssueDate_invalidPolicyIssueDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyIssueDate(INVALID_POLICY_DATE));
+    }
+
+    @Test
+    public void parsePolicyExpiryDate_invalidPolicyExpiryDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyExpiryDate(INVALID_POLICY_DATE));
+    }
+
+    @Test
+    public void parseCompany_invalidCompany_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCompany(INVALID_COMPANY));
     }
 }

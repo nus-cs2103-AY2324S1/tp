@@ -100,12 +100,18 @@ In `src/test/data/`, data meant for testing purposes are stored. While keeping t
 
 ```json
 {
-  "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+   "persons": [ {
+      "name": "Hans Muster",
+      "phone": "9482424",
+      "email": "invalid@email!3e",
+      "address": "4th street",
+      "nric" : "362D",
+      "licencePlate" : "SLR5E",
+      "company" : "☺",
+      "policyNumber" : "B3425",
+      "policyIssueDate" : "01-01-2020",
+      "policyExpiryDate" : "01-01-2030"
+   } ]
 }
 ```
 

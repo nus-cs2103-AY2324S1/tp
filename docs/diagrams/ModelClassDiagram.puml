@@ -19,6 +19,13 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Nric
+Class LicencePlate
+Class Policy
+Class Remarks
+Class PolicyNumber
+Class PolicyDate
+Class Company
 
 Class I #FFFFFF
 }
@@ -42,6 +49,13 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> Nric
+Person *--> LicencePlate
+Person *--> "0..1" Remarks
+Person *--> Policy
+Policy *--> PolicyNumber
+Policy *--> "2" PolicyDate
+Policy *--> Company
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -49,6 +63,11 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Address -[hidden]right-> Tag
+Tag -[hidden]right-> Nric
+Nric -[hidden]right-> LicencePlate
+LicencePlate -[hidden]right-> Remarks
+Remarks -[hidden]right-> Policy
 
 ModelManager --> "~* filtered" Person
 @enduml

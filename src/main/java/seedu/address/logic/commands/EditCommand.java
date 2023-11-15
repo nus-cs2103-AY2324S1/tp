@@ -1,10 +1,20 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DATES_NOT_COMPATIBLE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_EDIT_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_USED_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -23,9 +33,16 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.policy.Company;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,19 +61,26 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NRIC + "NRIC] "
+            + "[" + PREFIX_LICENCE_PLATE + "LICENCE_PLATE] "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_POLICY_NUMBER + "POLICY_NUMBER] "
+            + "[" + PREFIX_POLICY_ISSUE_DATE + "POLICY_ISSUE_DATE] "
+            + "[" + PREFIX_POLICY_EXPIRY_DATE + "POLICY_EXPIRY_DATE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Error: This person already exists in the client list.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -79,12 +103,50 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        if (personToEdit.hasDefaultPolicy()) {
+            if (!editedPerson.hasDefaultPolicy() && editedPerson.hasAnyDefaultPolicyParameters()) {
+                String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_EDIT_COMMAND;
+                if (editedPerson.hasDefaultCompanyPolicyParameter()) {
+                    errorMessage += "- Company(" + PREFIX_COMPANY + ") ";
+                }
+                if (editedPerson.hasDefaultPolicyNumberParameter()) {
+                    errorMessage += "- Policy Number(" + PREFIX_POLICY_NUMBER + ") ";
+                }
+                if (editedPerson.hasDefaultPolicyIssueDateParameter()) {
+                    errorMessage += "- Policy Issue Date(" + PREFIX_POLICY_ISSUE_DATE + ") ";
+                }
+                if (editedPerson.hasDefaultPolicyExpiryDateParameter()) {
+                    errorMessage += "- Policy Expiry Date(" + PREFIX_POLICY_EXPIRY_DATE + ") ";
+                }
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            }
+        }
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (!editedPerson.comparePolicyNumber(personToEdit) && model.hasSamePolicyNumber(editedPerson)) {
+            throw new CommandException(MESSAGE_USED_POLICY_NUMBER);
+        }
+
+        if (editedPerson.comparePolicyDates() < 0) {
+            throw new CommandException(MESSAGE_DATES_NOT_COMPATIBLE);
+        }
+
+        //If an edit is to a default policy parameter, it should make it a default policy
+        if (editedPerson.hasAnyDefaultPolicyParameters() && !personToEdit.hasAnyDefaultPolicyParameters()) {
+            Person editedPersonWithoutPolicy = editedPerson.cloneWithoutPolicy();
+            model.setPerson(personToEdit, editedPersonWithoutPolicy);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                            Messages.format(editedPersonWithoutPolicy)));
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -100,8 +162,25 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
+        LicencePlate updatedLicencePlate =
+                editPersonDescriptor.getLicencePlate().orElse(personToEdit.getLicencePlate());
+        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
+        Policy updatedPolicy = getUpdatedPolicy(personToEdit, editPersonDescriptor);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNric,
+                updatedLicencePlate, updatedRemark, updatedPolicy);
+    }
+
+    private static Policy getUpdatedPolicy(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getPolicy().getCompany());
+        PolicyNumber updatedPolicyNumber =
+                editPersonDescriptor.getPolicyNumber().orElse(personToEdit.getPolicy().getPolicyNumber());
+        PolicyDate updatedPolicyIssueDate =
+                editPersonDescriptor.getPolicyIssueDate().orElse(personToEdit.getPolicy().getPolicyIssueDate());
+        PolicyDate updatedPolicyExpiryDate =
+                editPersonDescriptor.getPolicyExpiryDate().orElse(personToEdit.getPolicy().getPolicyExpiryDate());
+        return new Policy(updatedCompany, updatedPolicyNumber, updatedPolicyIssueDate, updatedPolicyExpiryDate);
     }
 
     @Override
@@ -138,8 +217,15 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Nric nric;
+        private LicencePlate licencePlate;
+        private Company company;
+        private PolicyNumber policyNumber;
+        private PolicyDate policyIssueDate;
+        private PolicyDate policyExpiryDate;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -151,13 +237,31 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setNric(toCopy.nric);
+            setLicencePlate(toCopy.licencePlate);
+            setCompany(toCopy.company);
+            setPolicyNumber(toCopy.policyNumber);
+            setPolicyIssueDate(toCopy.policyIssueDate);
+            setPolicyExpiryDate(toCopy.policyExpiryDate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(
+                    name,
+                    phone,
+                    email,
+                    address,
+                    tags,
+                    nric,
+                    licencePlate,
+                    company,
+                    policyNumber,
+                    policyIssueDate,
+                    policyExpiryDate
+            );
         }
 
         public void setName(Name name) {
@@ -209,6 +313,56 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
+        }
+
+        public void setLicencePlate(LicencePlate licencePlate) {
+            this.licencePlate = licencePlate;
+        }
+
+        public Optional<LicencePlate> getLicencePlate() {
+            return Optional.ofNullable(licencePlate);
+        }
+
+        public void setCompany(Company company) {
+            this.company = company;
+        }
+
+        public Optional<Company> getCompany() {
+            return Optional.ofNullable(company);
+        }
+
+        public void setPolicyNumber(PolicyNumber policyNumber) {
+            this.policyNumber = policyNumber;
+        }
+
+        public Optional<PolicyNumber> getPolicyNumber() {
+            return Optional.ofNullable(policyNumber);
+        }
+
+        public void setPolicyIssueDate(PolicyDate policyIssueDate) {
+            this.policyIssueDate = policyIssueDate;
+        }
+
+        public Optional<PolicyDate> getPolicyIssueDate() {
+            return Optional.ofNullable(policyIssueDate);
+        }
+
+        public void setPolicyExpiryDate(PolicyDate policyExpiryDate) {
+            this.policyExpiryDate = policyExpiryDate;
+        }
+
+        public Optional<PolicyDate> getPolicyExpiryDate() {
+            return Optional.ofNullable(policyExpiryDate);
+        }
+
+
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -225,7 +379,22 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(nric, otherEditPersonDescriptor.nric)
+                    && Objects.equals(licencePlate, otherEditPersonDescriptor.licencePlate)
+                    && Objects.equals(company, otherEditPersonDescriptor.company)
+                    && Objects.equals(policyNumber, otherEditPersonDescriptor.policyNumber)
+                    && Objects.equals(policyIssueDate, otherEditPersonDescriptor.policyIssueDate)
+                    && Objects.equals(policyExpiryDate, otherEditPersonDescriptor.policyExpiryDate);
+        }
+
+        protected String getPolicy() {
+            return new ToStringBuilder(this)
+                    .add("company", company)
+                    .add("policyNumber", policyNumber)
+                    .add("policyIssueDate", policyIssueDate)
+                    .add("policyExpiryDate", policyExpiryDate)
+                    .toString();
         }
 
         @Override
@@ -236,6 +405,9 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("nric", nric)
+                    .add("licencePlate", licencePlate)
+                    .add("policy", getPolicy())
                     .toString();
         }
     }

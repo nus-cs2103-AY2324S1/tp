@@ -57,6 +57,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    /**
+     * Sorts the existing data of this {@code AddressBook}
+     */
+    public void sortData() {
+        persons.sort();
+    }
+
     //// person-level operations
 
     /**
@@ -65,6 +72,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    public boolean hasSamePolicyNumber(Person person) {
+        requireNonNull(person);
+        return persons.hasSamePolicyNumber(person);
     }
 
     /**

@@ -1,13 +1,22 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.policy.Policy.createNewDefaultPolicy;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.policy.Company;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +29,23 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "";
+    private static final String DEFAULT_NRIC = "567A";
+    private static final String DEFAULT_LICENCE_PLATE = "SBC123D";
+    private static final String DEFAULT_COMPANY = "NTUC";
+    private static final String DEFAULT_POLICY_NUMBER = "AIA1234";
+    private static final String DEFAULT_POLICY_ISSUE_DATE = "01-01-2023";
+    private static final String DEFAULT_POLICY_EXPIRY_DATE = "01-01-2030";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Nric nric;
+    private LicencePlate licencePlate;
+    private Policy policy;
+    private Remark remark;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +56,14 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        nric = new Nric(DEFAULT_NRIC);
+        licencePlate = new LicencePlate(DEFAULT_LICENCE_PLATE);
+        remark = new Remark(DEFAULT_REMARK);
+        Company company = new Company(DEFAULT_COMPANY);
+        PolicyNumber policyNumber = new PolicyNumber(DEFAULT_POLICY_NUMBER);
+        PolicyDate policyIssueDate = new PolicyDate(DEFAULT_POLICY_ISSUE_DATE);
+        PolicyDate policyExpiryDate = new PolicyDate(DEFAULT_POLICY_EXPIRY_DATE);
+        policy = new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
     }
 
     /**
@@ -47,6 +75,18 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        nric = personToCopy.getNric();
+        licencePlate = personToCopy.getLicencePlate();
+        remark = personToCopy.getRemark();
+        policy = personToCopy.getPolicy();
+    }
+
+    /**
+     * Sets the {@code Policy} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDefaultPolicy() {
+        this.policy = createNewDefaultPolicy();
+        return this;
     }
 
     /**
@@ -60,7 +100,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -89,8 +129,45 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code Nric} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNric(String nric) {
+        this.nric = new Nric(nric);
+        return this;
     }
 
+    /**
+     * Sets the {@code LicencePlate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLicencePlate(String licencePlate) {
+        this.licencePlate = new LicencePlate(licencePlate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Policy} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPolicy(
+        String company,
+        String policyNumber,
+        String policyIssueDate,
+        String policyExpiryDate
+    ) {
+        this.policy = new Policy(new Company(company), new PolicyNumber(policyNumber),
+            new PolicyDate(policyIssueDate), new PolicyDate(policyExpiryDate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    public Person build() {
+        return new Person(name, phone, email, address, tags, nric, licencePlate, remark, policy);
+    }
 }

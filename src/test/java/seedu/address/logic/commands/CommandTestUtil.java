@@ -3,22 +3,28 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -36,6 +42,21 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NRIC_AMY = "567A";
+    public static final String VALID_NRIC_BOB = "123Z";
+    public static final String VALID_LICENCE_PLATE_AMY = "SBC123D";
+    public static final String VALID_LICENCE_PLATE_BOB = "SYZ4321Z";
+    public static final String VALID_COMPANY_AMY = "NTUC";
+    public static final String VALID_COMPANY_BOB = "InsureMe";
+    public static final String VALID_POLICY_NO_AMY = "AIA1234";
+    public static final String VALID_POLICY_NO_BOB = "BBBB2";
+    public static final String VALID_POLICY_ISSUE_DATE_AMY = "01-01-2023";
+    public static final String VALID_POLICY_ISSUE_DATE_BOB = "01-01-2013";
+    public static final String VALID_POLICY_EXPIRY_DATE_AMY = "01-01-2030";
+    public static final String VALID_POLICY_EXPIRY_DATE_BOB = "01-01-2025";
+    public static final String VALID_REMARK_AMY = "Like skiing.";
+    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -43,16 +64,38 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
+    public static final String LICENCE_PLATE_DESC_AMY = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_AMY;
+    public static final String LICENCE_PLATE_DESC_BOB = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
+    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_AMY;
+    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
+    public static final String POLICY_NO_DESC_AMY = " " + PREFIX_POLICY_NUMBER + VALID_POLICY_NO_AMY;
+    public static final String POLICY_NO_DESC_BOB = " " + PREFIX_POLICY_NUMBER + VALID_POLICY_NO_BOB;
+    public static final String POLICY_ISSUE_DATE_DESC_AMY = " " + PREFIX_POLICY_ISSUE_DATE
+            + VALID_POLICY_ISSUE_DATE_AMY;
+    public static final String POLICY_ISSUE_DATE_DESC_BOB = " " + PREFIX_POLICY_ISSUE_DATE
+            + VALID_POLICY_ISSUE_DATE_BOB;
+    public static final String POLICY_EXPIRY_DATE_DESC_AMY = " " + PREFIX_POLICY_EXPIRY_DATE
+            + VALID_POLICY_EXPIRY_DATE_AMY;
+    public static final String POLICY_EXPIRY_DATE_DESC_BOB = " " + PREFIX_POLICY_EXPIRY_DATE
+            + VALID_POLICY_EXPIRY_DATE_BOB;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_DELETE_MONTH = "02-2020";
+    public static final String VALID_DELETE_MONTH_2 = "10-2020";
+    public static final String INVALID_DELETE_MONTH = "2020-02";
+    public static final String VALID_DELETE_MONTH_DESC = " " + PREFIX_DELETE_MONTH + VALID_DELETE_MONTH;
+    public static final String INVALID_DELETE_MONTH_DESC = " " + PREFIX_DELETE_MONTH + INVALID_DELETE_MONTH;
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -119,8 +162,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(person.getName().fullName));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

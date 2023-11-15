@@ -58,6 +58,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    boolean hasSamePolicyNumber(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -76,6 +81,11 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Sorts the list by policy expiry date
+     */
+    void sortData();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +94,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Delete all people fulfil the predicate, show all people in address book.
+     * @param predicate Predicate indicate whether a person should be deleted.
+     */
+    void batchDeleteWithPredicate(Predicate<Person> predicate);
 }

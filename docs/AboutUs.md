@@ -5,55 +5,57 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `insuremyiq@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Brendan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brendanneojw.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/brendanneojw)]
+[[portfolio](team/brendanneojw.md)]
+[[linkedin](https://www.linkedin.com/in/brendan-neo-jia-wei-a1a949217/)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Responsible for overall project coordination
 
-### Johnny Doe
+### Chai Yin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kumchaiyin.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/KumChaiYin)]
+[[portfolio](team/kumchaiyin.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents
 
-### Jean Doe
+### Rohan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rsxix.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/RSXIX)]
+[[portfolio](team/rsxix.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
-### James Doe
+### Suryansh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/suryanshkushwaha.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/suryanshkushwaha)]
+[[portfolio](team/suryanshkushwaha.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Code Quality
+* Responsibilities: Responsible for the quality of various project documents
+
+### Yao Xuan
+
+<img src="images/cyaoxuan.png" width="200px">
+
+[[github](http://github.com/cyaoxuan)]
+[[portfolio](team/cyaoxuan.md)]
+
+* Role: Git Expert
+* Responsibilities: Help other team members with matters related to Github

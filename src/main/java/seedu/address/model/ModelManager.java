@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -94,6 +96,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortData() {
+        addressBook.sortData();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -102,6 +109,14 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    public boolean hasSamePolicyNumber(Person person) {
+        requireNonNull(person);
+        return addressBook.hasSamePolicyNumber(person);
     }
 
     @Override
@@ -126,6 +141,22 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void batchDeleteWithPredicate(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        this.updateFilteredPersonList(predicate);
+        ObservableList<Person> listToDelete = this.getFilteredPersonList();
+
+        List<Person> copyList = new ArrayList<>(listToDelete);
+        for (Person person : copyList) {
+            addressBook.removePerson(person);
+        }
+
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
