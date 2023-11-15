@@ -26,15 +26,15 @@ We understand the importance of your time and the need for a tool that complimen
 Here's how you can get started with CareCentral quickly:
 
 1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) installed in your computer. If you need a video guide, you can refer to this [video for Windows users](https://youtu.be/VTzzmqNwGzM) and [this video for macOS users](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=video&cd=&cad=rja&uact=8&ved=2ahUKEwibl-3n78SCAxVc3TgGHVdOAcwQtwJ6BAgOEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoiqKK0FOjK0&usg=AOvVaw3xcKQNDdvu0hi9x8ZUVFlp&opi=89978449).
-2. For Linux users, Java 11 is already installed in your computer by default. You can check by typing `java -version` in your terminal.
-2. Download the latest `carecentral.jar` from [here](https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.4) if you have not downloaded it yet.
-3. Copy the file to the folder you want to use as the home folder for CareCentral.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+2. For Linux users, Java 11 is already installed in your computer by default. You can check by typing `java -version` in your [terminal](#7-glossary-).
+3. Download the latest `carecentral.jar` from [here](https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.4) if you have not downloaded it yet.
+4. Copy the file to the folder you want to use as the home folder for CareCentral.
+5. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    ![Ui](images/Ui.png)
-5. Alternatively, you can also go to the folder where the `carecentral.jar` is located and type `java -jar carecentral.jar` in the command box to start the app.
-6. For Mac users who are unable to open the file or encountering the issue below, follow this [guide](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html).
+6. Alternatively, you can also use the [terminal](#7-glossary-) and [go to the folder](https://opensource.com/article/21/8/linux-change-directories#:~:text=To%20open%20a%20directory%20in,and%20places%20you%20in%20it.) where the `carecentral.jar` is located and type `java -jar carecentral.jar` in the command box to start the app.
+7. For Mac users who are unable to open the file or encountering the issue below, follow this [guide](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html).
 ![Error](images/mac_issue.png)
-7. Type the command in the command box and press Enter to execute it.
+8. Type the command in the command box and press Enter to execute it.
    e.g. typing `help` and pressing Enter will open the help window.
    Some example commands you can try:
     * `add-patient n/John Doe ic/S1234567A p/98765432 e/johnd@example.com a/25 t/Diabetic`
