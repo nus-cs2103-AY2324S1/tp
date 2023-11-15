@@ -48,8 +48,6 @@
 * [Prefix Summary](#prefix-summary)
 * [Glossary](#glossary)
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Product Overview
@@ -128,11 +126,10 @@ You are an **advanced** user if ...
 
 **Notes** and **tips** curated for you are labeled by the following box!
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
+
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
-
-
 
 <br>
 
@@ -274,6 +271,7 @@ The `Help Window` opens up as follows:
 
 [Jump back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -380,6 +378,7 @@ Format: `listT`
 
 [Jump back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ### 2. Managing Applicants
@@ -669,8 +668,9 @@ Format: `edit INDEX ([n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ 
 * If you used a tag that has not been created using `create` in an `edit` command, the tag would still be added to the applicant, but it would be _uncategorized_.
 * If you have **multiple tags in different categories with the same name**, you must **specify the category** when you want to tag the specified applicant with one of these tags e.g. `edit INDEX t/CATEGORY DUPLICATETAGNAME`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
+
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
 
 * If you still would like to tag an applicant that has **not** been created, but you do not want this tag to be _uncategorized_, you can do so by doing 
@@ -692,10 +692,10 @@ This is because, `create` only creates **new** categorized tags. It does **not**
 * You can only edit the score of an applicant i.e. `edit INDEX sc/TAGNAME SCORE` if they have been tagged with the assessment-related `TAGNAME`.
 
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
-</div>
 
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
+</div>
 
 * You can also tag the applicant and edit their score **at the same time** by doing `edit INDEX t/TAGNAME sc/TAGNAME SCORE`. 
 * Note that the tag has to have already been created using `create` with the category `assessment`. You **cannot** do this with a tag that hasn't been created even if you specified its category _assessment_ i.e. `edit INDEX t/assessment interview1 sc/interview1 100` does **NOT**
@@ -791,8 +791,9 @@ Format: `delete (t/TAGNAME... st/STATUS...)`
 * Multiple delete parameters for a specific category are divided by spaces (not commas!) i.e. `delete st/preliminary interviewed`
 * Delete parameters are case-insensitive i.e. doing `delete t/interN` is the same as `delete t/intern`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
+
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
 
 
@@ -851,6 +852,7 @@ It's best to explain this by breaking down an example `delete` command! <br>
 | Using commas as delimiters of different parameters instead of spaces e.g. `delete st/interviewed, t/intern` | Should display the error message for either invalid `status` or `tag` depending on the first prefix because it will consider the comma and anything that comes after it as part of the first prefix. | Remove the comma(s) e.g. `delete n/alex t/intern`                                                                 |
 
 [Jump back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ### 3. Filtering and Listing Applicants
@@ -877,8 +879,9 @@ Format: `search (n/NAME...  st/STATUS...  t/TAGNAME...)`
 * Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 * Search parameters are case-insensitive i.e. doing `search n/aLeX` is the same as `search n/alex`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
+
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
 
 
@@ -1035,6 +1038,7 @@ Format:
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 [Jump back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1119,6 +1123,7 @@ The `Events` window opens up:
 There is no possibility of a "failed" execution of the `schedule` command.
 
 [Jump back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ### 5. Others
@@ -1168,12 +1173,14 @@ Format: `exit`
 
 [Jump back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Additional information
 <a name="additional-information"></a>
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
 
 
@@ -1211,8 +1218,8 @@ You should ensure that you have **sufficient candidates of more than 20** with a
 3. `percentile` as where this applicant stands among all other applicants (treat it like a ranking system, the higher the percentile, the better the applicant is performing)
    </box>
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
 
 
