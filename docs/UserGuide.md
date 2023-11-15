@@ -81,6 +81,7 @@ You can navigate the user guide by clicking on the links in the table of content
    These are notes from the developers to explain the rationale of implementation of certain features.
 </div>
 
+<br><br>
 
 <div style="background-color: #E3F2FD; padding: 10px; margin-top: 10px; border-left: 5px solid #64B5F6;">
   🌟<strong> Congratulations on starting with CareCentral!</strong> The next sections will guide you through more features to fully utilize the app.
