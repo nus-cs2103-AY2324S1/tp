@@ -544,6 +544,16 @@ Sure! you can transfer your data to another computer by the following steps belo
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Command Line Interface (CLI)**: A way of interacting with the software by typing textual commands
+* **Graphical User Interface (GUI)**: A way of interacting with the software using visual elements like buttons and windows
+* **Policy fields**: Refers to the company the policy is under, policy number, policy issue date and policy expiry date
+* **Client**: Buyers / potential buyers that car insurance agent is in contact with, such that it is stored inside InsureIQ
+* **Client list**: List of clients and their personal and policy details in the InsureIQ app
+
+---------
+
 ## Command summary
 
 | Action          | Format, Examples                                                                                                                                                                                                                                                                            |
