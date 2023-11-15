@@ -7,7 +7,7 @@ Welcome to the user guide for InsureIQ, the ultimate **contact management system
 
 This guide is designed to introduce features in InsureIQ for effectively managing client information and assist you in understanding how to use InsureIQ! 
 
-Below is the table of content of this guide:
+Go ahead and click on the links below to jump to the respective sections!
 
 * Table of Contents
 {:toc}
