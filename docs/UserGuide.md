@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-InsureIQ is a **contact management system for car insurance agents to keep track of multiple clients' details and policies** optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InsureIQ can get your contact management tasks done faster than traditional GUI apps.
+Welcome to the user guide for InsureIQ, the ultimate **contact management system for car insurance agents to keep track of multiple clients' details and policies**. Designed with efficiency in mind, this tool combines the speed of a Command Line Interface (CLI) with the user-friendly benefits of a Graphical User Interface (GUI). Experience a faster and more efficient contact management solution tailored to the unique needs of car insurance agents!
 
 * Table of Contents
 {:toc}
@@ -39,19 +39,19 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
 1. Look out for additional information in these alert blocks to master the use of InsureIQ!
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Notes:**<br>
-Provides additional information for your understanding.
+<div markdown="span" class="alert alert-info">
+**:information_source: Notes:**
+Additional information for your understanding.
 </div>
 
 <div markdown="block" class="alert alert-success">
-**:bulb: Tips:**<br>
-Provides tips for advanced users to maximise efficiency.
+**:bulb: Tips:**
+Tips for you to maximise efficiency.
 </div>
 
 <div markdown="block" class="alert alert-warning">
-**:exclamation: Warnings:**<br>
-Highlights important information you need to be careful about!
+**:exclamation: Warnings:**
+Important information you need to be careful about!
 </div>
 
 
@@ -93,13 +93,20 @@ Leads you to the help page, which is this user guide.
 Format: `help`
 
 
+### Listing all clients : `list`
+
+Shows you all clients in your client list.
+
+Format: `list`
+
+
 ### Adding a client : `add`
 
 Adds client details to your client list. You can also choose to include policy details attached to a client.
 
-<div markdown="block" class="alert alert-success">
-**:bulb: Importing client information from a data file:** 
-InsureIQ data is stored in a JSON file, which you can add clients directly into. More information can be found in the [Editing the data file](#editing-the-data-file) section.
+<div markdown="span" class="alert alert-success">
+**:bulb: Importing client information from a data file:**
+InsureIQ data is stored in a JSON file, which you can add clients directly into. More information can be found in the section [Editing the data file](#editing-the-data-file).
 </div>
 
 Format: `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS [t/TAG]... l/LICENCE PLATE [c/COMPANY
@@ -154,17 +161,10 @@ Error: The policy number is already in use
 Error: This person already exists in the address book
 ```
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Adding clients with duplicate fields:**<br>
+<div markdown="span" class="alert alert-info">
+**:information_source: Adding clients with duplicate fields:**
 The above error will only be raised when **ALL** fields in the client's details (name, NRIC, contact number, email, address) are the same.
 </div>
-
-
-### Listing all clients : `list`
-
-Shows you all clients in your client list.
-
-Format: `list`
 
 
 ### Editing a client : `edit`
@@ -229,6 +229,7 @@ At least one field to edit must be provided.
 Error: This person already exists in the client list.
 ```
 
+
 ### Locating clients by fields : `find`
 
 Finds client(s) based on conditions you specify.
@@ -248,7 +249,8 @@ Examples:
 * `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with only `Hans` or `Bo` in it.
 * `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`.
 
-<div markdown="block" class="alert alert-info">:information_source: **Note: Format of values do not matter** <br>
+<div markdown="span" class="alert alert-info">
+**:information_source: Format of values do not matter:**
 Unlike previous commands, the fields do not have to be in a specific format.
 </div>
 
@@ -309,6 +311,11 @@ Error: The parameter is not of the type positive integer
 
 Batch delete clients based on a specific condition.
 
+<div markdown="span" class="alert alert-success">
+**:bulb: Usefulness of `batchdelete`:**
+Use `batchdelete` to quickly delete clients whose policies have expired, or for companies you are no longer working with. 
+</div>
+
 Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
 
 * Batch delete specific clients in the data file.
@@ -327,7 +334,7 @@ Acceptable values for each parameter:
 Expected output upon success: <br>
 ![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 **:information_source: Confirmation message**
 Even if no clients are deleted, InsureIQ will still show a confirmation message to let you know that the `batchdelete` 
 command has been successfully processed.
@@ -448,9 +455,8 @@ Clears all entries from your client list.
 
 Format: `clear`
 
-<div markdown="block" class="alert alert-warning">
-**:exclamation: Caution:**
-This action is irreversible.
+<div markdown="span" class="alert alert-warning">
+**:exclamation: Caution:**This action is irreversible! You can copy the data file before clearing to have a backup.
 </div>
 
 
@@ -470,18 +476,32 @@ InsureIQ data are saved in the hard disk automatically after any command that ch
 
 InsureIQ data are saved automatically as a JSON file `[JAR file location]/data/insureiq.json`. Advanced users are welcome to update data directly by editing that data file.
 
-_{ TO DO: SPECIFY DATA FORMAT AND HOW TO EDIT, FORMAT CHECKS }_
+A sample client entry in the JSON file is as follows. The respective formats are specified in the [`add` feature guide](#adding-a-client--add).
+```
+{
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@gmail.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tags" : [ "friend" ],
+    "nric" : "023A",
+    "licencePlate" : "SNB9538E",
+    "remark" : "Wants cheap policies!",
+    "company" : "NTUC Income",
+    "policyNumber" : "NI11235",
+    "policyIssueDate" : "11-11-2023",
+    "policyExpiryDate" : "11-11-2024"
+}
+```
 
-<div markdown="block" class="alert alert-warning">
-**:exclamation: Caution:**
-If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+<div markdown="span" class="alert alert-warning">
+**:exclamation: Caution:** If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-### Check Java Version
 **Q1**: How do I check my Java version?<br>
 **A1**: <br>
   1. For Window users, open Command Prompt.<br>
@@ -490,7 +510,6 @@ If your changes to the data file makes its format invalid, InsureIQ will discard
   3. If Java is installed, it will display the installed version.
      ![CheckJavaVersion](images/CheckJavaVersion.png)
 
-### Download Java 11
 **Q2**: What should I do if Java 11 is not installed in my device?<br>
 **A2**: <br>
 No worries! You can download Java 11 by the instruction below:
@@ -503,7 +522,6 @@ No worries! You can download Java 11 by the instruction below:
   4. Download the installer for your operating system.
   5. Run the installer and follow the installation instructions.
 
-### Using Another Computer
 **Q3**: Can I transfer my InsureIQ data to another Computer?<br>
 **A3**:<br>
 Sure! you can transfer your data to another computer by the following steps below:
@@ -558,7 +576,7 @@ Appendix
 | Full Name of Team Member | Agreed allocated sections, duties, roles                                 | Changes if any, record date and reasons for changes | Actual contribution to the UG                                            |
 |--------------------------|--------------------------------------------------------------------------|-----------------------------------------------------|--------------------------------------------------------------------------|
 | Brendan Neo Jia Wei      | Features `find` and `remind`, standardise image size of screenshots      | No change                                           | Features `find` and `remind`, standardise image size of screenshots      |
-| Chua Yao Xuan            | Feature `remark`, rephrase UG to be user fiendly                         | No change                                           | Feature `remark`, rephrase UG to be user fiendly                         |
+| Chua Yao Xuan            | Feature `remark`, rephrase UG to be user friendly                        | No change                                           | Feature `remark`, rephrase UG to be user friendly                        |
 | Kum Chai Yin             | Features `add` and `batchdelete`, update section FAQ, create UG PDF file | No change                                           | Features `add` and `batchdelete`, update section FAQ, create UG PDF file |
 | Rohan Sapra              | Features `delete` and `sort`                                             | No change                                           | Features `delete` and `sort`                                             |
 | Suryansh Kushwaha        | Feature `edit`                                                           | No change                                           | Feature `edit`                                                           |
