@@ -56,17 +56,20 @@ BayMeds enables storage of past prescriptions, i.e. prescriptions that you have 
 5. [FAQ](#faq)
 6. [Known issues](#known-issues)
 7. [Command summary](#command-summary)
+8. [Troubleshooting](#troubleshooting)
 
 ## How to use this guide
 
-Navigate to the start of this guide anytime by clicking the button in the bottom right corner of your screen.
-The blue underlined text in this guide are hyperlinks that will bring you to the relevant section when clicked. <br>
-The ```code``` text in this guide are commands that you can type into the application. <br>
-To see all available commands, refer to the [Command Summary](#command-summary) section. <br>
-If you are an experienced user, you can refer to the [Features](#features) section for a quick summary of the commands available. <br>
-If you are new to BayMeds, we recommend you to start with the [Quick Start](#quick-start) section. <br>
+* Navigate to the start of this guide anytime by clicking the button in the bottom right corner of your screen.
+* The [blue](#how-to-use-this-guide) text in this guide are hyperlinks that will bring you to the relevant section when clicked.
+* The ```code``` text in this guide highlight technical information or commands that you can type into the application.
+<br></br>
+* To see all available commands, refer to the [Command Summary](#command-summary) section.
+* If you are an experienced user, you can refer to the [Features](#features) section for a quick summary of the commands available.
+* If you are looking to troubleshoot some errors you encountered, you can refer to the [Troubleshooting](#troubleshooting) section.
+* If you are new to BayMeds, we recommend you to start with the [Quick Start](#quick-start) section.
 
-Also, here are some common icons you may encounter in this guide.
+Additionally, here are some common icons you may encounter in this guide.
 <div style="width: 100%;">
 
 | Icon                                                          | Description            |
@@ -75,7 +78,6 @@ Also, here are some common icons you may encounter in this guide.
 | <box type ="tip" />                                           | Useful tips            |
 | <box type="info" />                                           | Additional information |
 | <box type="warning" icon=":fa-solid-triangle-exclamation:" /> | Warning                |
-| <box type="wrong" />                                          | Errors                 |
 
 </div>
 
@@ -120,6 +122,8 @@ If you are experienced in using JAR applications, simply download the latest ver
 
 ## Graphical User Interface
 
+### Overview
+
 BayMeds allows you to manage your prescriptions using only a single user interface! Hover over the circles to find out more about the different parts!
 
 <annotate src="images/Ui.png" alt="Ui">
@@ -131,23 +135,40 @@ BayMeds allows you to manage your prescriptions using only a single user interfa
 
 <div><br></div>
 
-##### 1: Menu Bar
+| Number | Component      | Description                                            |
+|--------|----------------|--------------------------------------------------------|
+| 1      | Menu Bar       | You can access various menu functions here.            |
+| 2      | Command Box    | This is where you will input your commands.            |
+| 3      | Result Display | BayMeds will show you messages through this box.       |
+| 4      | List Display   | This is where you can view your list of prescriptions. |
 
-You can access various menu functions here.
+### Prescription Card
 
-##### 2: Command Box
+BayMeds organises everything you need to know about each of your prescriptions in cards. Hover over the circles to find out more details for each label!
 
-This is where you will input your commands.
+<annotate src="images/ui/Ui-card.png" alt="Prescription Card" width="1000" style=" padding-bottom: 25px">
+  <a-point x="5%" y="11%" content="This is the name of your medication." label="1" header="Medication Name" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="5%" y="25%" content="This is the number of pills you need to take each day." label="2" header="Dosage" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="5%" y="48.5%" content="This is the interval to consume your medication. It can be `Daily`, `Weekly` or `Monthly`." label="3" header="Frequency" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="5%" y="71.5%" content="This is the total number of pills you have." label="4" header="Total Stock" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="20.5%" y="25%" content="This is the start date of your prescription." label="5" header="Start Date" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="20.5%" y="48.5%" content="This is the end date of your prescription." label="6" header="End Date" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="20.5%" y="71.5%" content="This is the expiry date of your medication." label="7" header="Expiry Date" size="32" opacity="0.8" trigger="hover focus" />
+  <a-point x="36%" y="25%" content="This is where you can see personal notes for your prescription." label="8" header="Note" size="32" opacity="0.8" trigger="hover focus" />
+</annotate>
 
-##### 3: Result Display
+| Number | Component       | Description                                                                                |
+|--------|-----------------|--------------------------------------------------------------------------------------------|
+| 1      | Medication Name | This is the name of your medication.                                                       |
+| 2      | Dosage          | This is the number of pills you need to take each day.                                     |
+| 3      | Frequency       | This is the interval to consume your medication. It can be `Daily`, `Weekly` or `Monthly`. |
+| 4      | Total Stock     | This is the total number of pills you have.                                                |
+| 5      | Start Date      | This is the start date of your prescription.                                               |
+| 6      | End Date        | This is the end date of your prescription.                                                 |
+| 7      | Expiry Date     | This is the expiry date of your medication.                                                |
+| 8      | Note            | This is where you can see personal notes for your prescription.                            |
 
-BayMeds will show you messages through this box.
-
-##### 4: List Display
-
-This is where you can view your list of prescriptions.
 <br></br>
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -954,3 +975,72 @@ You will still be allowed to take the drug, allowing you to keep track of the dr
 | **List all conflicting prescriptions**       | `listAllConflicts`                                                                                                                                                                                                                                                                                              |
 | **Show help**                                | `help`                                                                                                                                                                                                                                                                                                          |
 | **Exit the application**                     | `exit`                                                                                                                                                                                                                                                                                                          |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Troubleshooting
+
+Noticed some error messages? You may refer to this section to find out some possible causes.
+
+<box type="wrong" light header="This prescription already exists in the prescription list." seamless>
+
+You attempted to add a prescription with identical details to one already present in the list.<br>
+You attempted to edit a prescription such that it has identical details to one already present in the list.
+</box>
+
+<box type="wrong" light header="There are conflicting drugs in BayMeds." seamless>
+
+You added a prescription that conflicts with other drugs in the list.
+
+<box type="info">
+
+This is simply a warning and **can be ignored**.
+</box>
+
+</box>
+
+<box type="wrong" light header="Start date cannot be after end date and expiry date cannot be before start or end date." seamless>
+
+You attempted to add a prescription with incorrect dates.<br>
+You attempted to edit a prescription such that it has incorrect dates.
+</box>
+
+<box type="wrong" light header="The prescription index provided is invalid." seamless>
+
+You attempted to execute a command on an index that does not exist in the list.
+</box>
+
+<box type="wrong" light header="At least one field to edit must be provided." seamless>
+
+You attempted to edit a prescription without providing any fields to be edited.
+</box>
+
+<box type="wrong" light header="No prescriptions found." seamless>
+
+You attempted to list some prescriptions, but none matching your query were found.
+</box>
+
+<box type="wrong" light header="No medications to be taken today." seamless>
+
+You attempted to list out medications to be taken today, but none were found.
+</box>
+
+<box type="wrong" light header="No reminders." seamless>
+
+You attempted to list out medications that are about to expire or low in stock, but none were found.
+</box>
+
+<box type="wrong" light header="The specified prescription does not exist." seamless>
+
+You attempted to execute a command on a prescription that does not exist in the list.
+</box>
+
+<box type="wrong" light header="There is insufficient stock for this prescription." seamless>
+
+You attempted to take a medication but there is not enough stock to deduct from for the amount you entered.
+</box>
+
+<box type="wrong" light header="Cannot untake more than what you have consumed." seamless>
+
+You attempted to untake a medication but the consumption count is already 0.
+</box>
