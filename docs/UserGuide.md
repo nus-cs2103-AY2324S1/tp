@@ -23,7 +23,7 @@ We understand the importance of your time and the need for a tool that complimen
 </div>
 
 # 2. Quick Start Guide ⚡️
-Here's how to get started with CareCentral quickly:
+Here's how you can get started with CareCentral quickly:
 
 1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) installed in your Computer.
 2. Download the latest `carecentral.jar` from [here](https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.3.1) if you have not downloaded it yet.
@@ -100,19 +100,7 @@ Below is a table of parameters you'll commonly use in CareCentral, along with th
 
 <div style="page-break-after: always;"></div>
 
-# 5. Glossary 📚
-The following terms are used throughout the CareCentral user guide:
-
-| Word           | Meaning                                                                                                                                                  |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CLI`          | **Command Line Interface** - A text-based interface used for entering commands. In CareCentral, you'll use the CLI to input your actions quickly.        |
-| `GUI`          | **Graphical User Interface** - A visual interface with graphical elements. CareCentral's GUI is designed for ease of navigation and information display. |
-| `NRIC`         | **National Registration Identity Card** number - A unique identifier for Singaporean residents.                                                          |
-| `Prescription` | **Medicine prescribed by a medical professional** - CareCentral allows you to manage and track prescriptions for each patient.                           |
-
-<div style="page-break-after: always;"></div>
-
-# 6. Features ⭐️
+# 5. Features ⭐️
 <div style="background-color: #f9f9f9; border-left: 5px solid #009688; padding: 5px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 <p style="color: #009688; font-size: 20px;">:information_source: Notes about the command format:</p>
     <ul>
@@ -132,8 +120,8 @@ The following terms are used throughout the CareCentral user guide:
 </div>
 
 
-## 6.1. Patients Related Features 🚑
-### 6.1.1. Create Patient Record 📝🚑
+## 5.1. Patients Related Features 🚑
+### 5.1.1. Create Patient Record 📝🚑
 
 **What it does**  <br>
 This feature lets you add a new patient record into the CareCentral system, keeping track of all the essential details for each patient.
@@ -158,7 +146,7 @@ Let's break down what each part of the command means:
 | `[t/TAG]...`     | Information that is related to the patient | **Alphanumeric characters** only and no spaces                                                                                         |
 
 ---
-### 6.1.2. List Patients 📋🚑
+### 5.1.2. List Patients 📋🚑
 
 **What it does** <br>
 This command gives you the big picture, listing out all patients currently saved in the CareCentral system.
@@ -169,7 +157,7 @@ Just type this simple command to get the **full list of patients**: <br>
 
 ---
 
-### 6.1.3. Edit Patient Record ✏️🚑
+### 5.1.3. Edit Patient Record ✏️🚑
 
 **What it does** <br>
 Edits existing patient information at the specified `PATIENT_INDEX` in the system.
@@ -202,7 +190,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.1.4. Delete Patient Record 🗑️🚑
+### 5.1.4. Delete Patient Record 🗑️🚑
 
 **What it does** <br>
 Removes a patient's record from the system. The specific patient is found by the `PATIENT_INDEX` as shown in the list from `list-patients`.
@@ -227,7 +215,7 @@ When using this command, ensure that the patient index corresponds to a valid pa
 
 ---
 
-### 6.1.5. Find Patient Record 🔎🚑
+### 5.1.5. Find Patient Record 🔎🚑
 
 **What it does** <br>
 Helps you to locate a patient's record in the system by searching for a keyword. The search functionality is designed to match complete or starting fragments of the name. For instance, searching for `John` will show `John Doe` but not `Johnny`.
@@ -248,14 +236,14 @@ Let's break down what each part of the command means:
 
 ---
 
-## 6.2. Appointments Related Features 📅
+## 5.2. Appointments Related Features 📅
 
 <div style="background-color: #fff3e0; padding: 5px; border-left: 5px solid #ffa726;">
   📝<strong> Notes from developers<br></strong>
   Our system supports recording of both past and future appointments to facilitate comprehensive schedule management. This functionality is crucial for maintaining accurate records of patient visits and planning ahead for future appointments.
 </div>
 
-### 6.2.1. Add Appointment 📝📅
+### 5.2.1. Add Appointment 📝📅
 **What it does** <br>
 Enables the scheduling of new appointments for patients.
 
@@ -277,7 +265,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.2.2. List All Appointments 📋📅
+### 5.2.2. List All Appointments 📋📅
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
    This feature is dependent on having existing patient records. For example, using <code>list-appointments 1</code> will show all appointments for the patient with index 1. If no patients are recorded, please add a patient to the system first.<br>
@@ -305,7 +293,7 @@ When using this command, ensure that the patient index corresponds to a valid pa
 
 ---
 
-### 6.2.3. Edit Appointment ✏️📅
+### 5.2.3. Edit Appointment ✏️📅
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
    <ol>
@@ -350,7 +338,7 @@ Remember to verify the appointment index and patient index before making changes
 
 ---
 
-### 6.2.4. Delete Appointment 🗑️📅
+### 5.2.4. Delete Appointment 🗑️📅
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
   Make sure to select the correct patient's appointments with <code>list-appointments PATIENT_INDEX</code> before attempting a deletion.
@@ -379,7 +367,7 @@ Please double-check the appointment and patient indexes before executing this co
 
 ---
 
-### 6.2.5. Add Prescription 📝💊
+### 5.2.5. Add Prescription 📝💊
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
    <ol>
@@ -409,7 +397,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.2.6. Edit Prescription ✏️💊
+### 5.2.6. Edit Prescription ✏️💊
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
    <ol>
@@ -447,7 +435,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.2.7. Delete Prescription 🗑️💊
+### 5.2.7. Delete Prescription 🗑️💊
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
    <ol>
@@ -479,9 +467,9 @@ Ensure correct usage of appointment and patient indices to avoid accidental dele
 
 ---
 
-## 6.3. Medical History Related Features 📜
+## 5.3. Medical History Related Features 📜
 
-### 6.3.1. Add Medical History 📝📜
+### 5.3.1. Add Medical History 📝📜
 
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
@@ -514,7 +502,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.3.2. List Medical History 📋📜
+### 5.3.2. List Medical History 📋📜
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
    <ol>
@@ -545,7 +533,7 @@ Ensure the patient index corresponds to a valid entry in your patient registry t
 
 ---
 
-### 6.3.3. Edit Medical History ✏️📜
+### 5.3.3. Edit Medical History ✏️📜
 
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
@@ -589,7 +577,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.3.4. Delete Medical History 🗑️📜
+### 5.3.4. Delete Medical History 🗑️📜
 <div style="background-color: #ffffcc; padding: 10px; border-left: 3px solid #ffeb3b; margin-bottom: 10px;">
   <strong>:warning: Things To Note <br></strong>
   This command should only be used after <code>list-medical-history PATIENT_INDEX</code>
@@ -619,8 +607,8 @@ Be cautious and verify the indexes accurately before deleting to avoid unintende
 
 ---
 
-## 6.4. System Related Features ⚙️
-### 6.4.1. Switch Tabs ⏩⚙️
+## 5.4. System Related Features ⚙️
+### 5.4.1. Switch Tabs ⏩⚙️
 
 **What it does** <br>
 Switches between the different tabs in the sidebar.
@@ -641,7 +629,7 @@ Let's break down what each part of the command means:
 
 ---
 
-### 6.3.2. Help❓⚙️
+### 5.3.2. Help❓⚙️
 
 **What it does** <br>
 Displays the help page.
@@ -654,7 +642,7 @@ Displays the help page.
 
 ---
 
-### 6.3.3. Clear Data 🗑️⚙️
+### 5.3.3. Clear Data 🗑️⚙️
 
 <div style="background-color: #f9f9f9; border-left: 5px solid #d9534f; padding: 5px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
    <p style="color: #d9534f;"><strong>❗Warning:</strong> The <code>clear</code> command will erase all data from the .json file and the action <strong>cannot be undone</strong>. Please use with caution.</p>
@@ -672,7 +660,7 @@ Clears all data from the system. **This action will permanently erase all data, 
 ---
 <div style="page-break-after: always;"></div>
 
-### 6.3.4. Exit 🚪⚙️
+### 5.3.4. Exit 🚪⚙️
 
 **What it does** <br>
 Exits the program.
@@ -685,7 +673,7 @@ Exits the program.
 
 ---
 
-# 7. Command Summary 📚
+# 6. Command Summary 📚
 
 | Action                     | Format                                                                                                      | Examples                                                                    |
 |----------------------------|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
@@ -711,3 +699,13 @@ Exits the program.
 | **Exit**                   | `exit`                                                                                                      | `exit`                                                                      |
 
 ---
+
+# 7. Glossary 📚
+The following terms are used throughout the CareCentral user guide:
+
+| Word           | Meaning                                                                                                                                                  |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CLI`          | **Command Line Interface** - A text-based interface used for entering commands. In CareCentral, you'll use the CLI to input your actions quickly.        |
+| `GUI`          | **Graphical User Interface** - A visual interface with graphical elements. CareCentral's GUI is designed for ease of navigation and information display. |
+| `NRIC`         | **National Registration Identity Card** number - A unique identifier for Singaporean residents.                                                          |
+| `Prescription` | **Medicine prescribed by a medical professional** - CareCentral allows you to manage and track prescriptions for each patient.                           |
