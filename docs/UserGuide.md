@@ -74,7 +74,7 @@ Used to highlight errors to look out for
   * [Add ingredient](#adding-an-ingredient-add)
   * [Use ingredient](#using-up-ingredients-use)
   * [Find quantity of ingredient](#finding-the-quantity-of-an-ingredient-by-name-stock)
-  * [Clear ingredient list](#clearing-all-entries-from-ingredient-stock-clear)
+  * [Clear ingredient list](#clearing-all-ingredients-from-ingredient-stock-clear)
   * [View list of all recipes](#listing-all-recipes-list)
   * [View a recipe](#viewing-specific-recipes-view)
   * [Add a recipe](#adding-recipes-addrecipe)
@@ -127,8 +127,6 @@ into the application's input box as shown below.<br><br>
 2. Press enter to execute the command.
 3. You should see the ingredient added into your ingredient list as seen below. Hooray! You have added your first ingredient!<br><br>
 <img src='images/ug-images/quickstart_addingredient2.png' width='700'>
-
-<div style="page-break-after: always;"></div>
 
 #### Adding your first recipe
 Recipe adding is a little more complicated! But don't worry, you will get the hang of it in no time! Refer to the
@@ -408,12 +406,15 @@ Example:
 * Assuming flour is used in the recipe, `modify i/1 n/Flour q/100 u/g` modifies the `Flour` ingredient in the recipe to 100 grams of flour.
 * Assuming flour is not used in the recipe, `modify i/1 n/Flour q/100 u/g` adds the 100 grams of the `Flour` ingredient to the recipe.
 
+<div style="page-break-after: always;"></div>
+
 Example Used: `modify i/1 n/Flour q/100 u/g` 
 
 **Note**: Recipe being modified has 200g of flour as part of the ingredient list
 
 <img src='images/ug-images/modifyExisting.png' width='650'>
 
+<div style="page-break-after: always;"></div>
 
 Example Used: `modify i/1 n/Cream q/100 u/g` 
 **Note**: Recipe being modified does not have cream in its ingredient list
@@ -467,10 +468,13 @@ Examples:
 * `search flour` searches for all recipes that use `flour`
 * `search butter` searches for all recipes that use `butter`
 
+<div style="page-break-after: always;"></div>
+
 Example used: `search flour` **Note**: Multiple recipes use the ingredient flour
 
 <img src='images/ug-images/searchMultiple.png' width='650'><br>
 
+<div style="page-break-after: always;"></div>
 
 Example used: `search blueberry` **Note**: Only one recipe uses the ingredient blueberry
 
@@ -490,6 +494,7 @@ Inventory and Recipe data are saved in the hard disk automatically after any com
 
 **Note**: When the application loads for the first time and no command is run, no inventory or recipe data will be saved.
 </box><br>
+
 ### Editing the data file
 
 Inventory data are saved automatically as a JSON file `[JAR file location]/data/inventory.json`. Advanced users are welcome to update data directly by editing that data file.
