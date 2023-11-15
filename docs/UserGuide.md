@@ -481,8 +481,39 @@ If your changes to the data file makes its format invalid, InsureIQ will discard
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InsureIQ home folder.
+### Check Java Version
+**Q1**: How do I check my Java version?<br>
+**A1**: <br>
+  1. For Window users, open Command Prompt.<br>
+    * For Mac and Linux (Ubuntu) users, open Terminal.
+  2. Type `java -version` and press Enter.
+  3. If Java is installed, it will display the installed version.
+     ![CheckJavaVersion](images/CheckJavaVersion.png)
+
+### Download Java 11
+**Q2**: What should I do if Java 11 is not installed in my device?<br>
+**A2**: <br>
+No worries! You can download Java 11 by the instruction below:
+  1. If your device has other version of Java, we recommend you to uninstall it by visit the website below: <br>
+    * Windows users: [uninstall Java on Windows](https://www.java.com/en/download/help/uninstall_java.html)<br>
+    * Mac users: [uninstall Java on Mac](https://www.java.com/en/download/help/mac_uninstall_java.html)<br>
+    * Linux users: [uninstall Java on Linux](https://www.java.com/en/download/help/linux_uninstall.html)
+  2. Visit [Oracle's Java SE Downloads Page](https://www.oracle.com/java/technologies/downloads/#java11).
+  3. Select the appropriate version for your operating system, click to accept the license agreement.
+  4. Download the installer for your operating system.
+  5. Run the installer and follow the installation instructions.
+
+### Using Another Computer
+**Q3**: Can I transfer my InsureIQ data to another Computer?<br>
+**A3**:<br>
+Sure! you can transfer your data to another computer by the following steps below:
+1. In the original computer you use InsureIQ, open the InsureIQ home folder, you can see a folder named `data` inside.
+   ![Computer1Folder](images/Computer1Folder.png)
+2. Clicking this folder, you will see a JSON file named `insureiq`.
+   ![Computer1JSONFile](images/Computer1JSONFile.png)
+3. After installing InsureIQ in the other computer, open the InsureIQ home folder.
+4. If you see a `data` folder, open the folder, overwrite the file inside with the JSON file in step 2.
+5. If you don't see a `data` folder, create the folder, copy the JSON file in step 2 into the folder you created.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -517,3 +548,17 @@ _{TO DO}_
 | **Remind**      | `remind NUMBER_OF_DAYS`<br> e.g. `remind 30`                                                                                                                                                                                                                                                | 
 | **Remark**      | `remark INDEX r/[REMARK]`<br> e.g. `remark 1 r/Likes to swim`                                                                                                                                                                                                                               |
  | **BatchDelete** | `batchdelete [c/COMPANY] [dm/DELETE MONTH]` <br> e.g. `batchdelete c/DEF Insurance`                                                                                                                                                                                                         |
+
+--------------------------------------------------------------------------------------------------------------------
+
+Appendix
+
+## UG workload distribution
+
+| Full Name of Team Member | Agreed allocated sections, duties, roles                                 | Changes if any, record date and reasons for changes | Actual contribution to the UG                                            |
+|--------------------------|--------------------------------------------------------------------------|-----------------------------------------------------|--------------------------------------------------------------------------|
+| Brendan Neo Jia Wei      | Features `find` and `remind`, standardise image size of screenshots      | No change                                           | Features `find` and `remind`, standardise image size of screenshots      |
+| Chua Yao Xuan            | Feature `remark`, rephrase UG to be user fiendly                         | No change                                           | Feature `remark`, rephrase UG to be user fiendly                         |
+| Kum Chai Yin             | Features `add` and `batchdelete`, update section FAQ, create UG PDF file | No change                                           | Features `add` and `batchdelete`, update section FAQ, create UG PDF file |
+| Rohan Sapra              | Features `delete` and `sort`                                             | No change                                           | Features `delete` and `sort`                                             |
+| Suryansh Kushwaha        | Feature `edit`                                                           | No change                                           | Feature `edit`                                                           |
