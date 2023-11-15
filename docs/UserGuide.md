@@ -339,7 +339,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 * You can view all of your tags by keying in the `listT` command.
   </box>
 
-An example of the `create` command being successfully executed:
+**An example of the `create` command being successfully executed:**
 1. Enter the command `create t/dept marketing t/role developer`
 2. This is what you should see upon successful execution of command.
 
@@ -418,7 +418,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…�
 * An applicant can have any number of tags (including 0)!
 </box>
 
-An example of the `add` command being successfully executed:
+**An example of the `add` command being successfully executed:**
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
 2. This is the result of the successful `add` command (Take note that command entered will not be shown in the result):
    
@@ -458,7 +458,7 @@ Format: `remark INDEX r/REMARK`
 
 <div style="page-break-after: always;"></div>
 
-An example of the `remark` command being successfully executed:
+**An example of the `remark` command being successfully executed:**
 1. Enter the command `remark 1 r/Great attitude, hardworking`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
    ![Remark-Success](images/remark-command-success.png)
@@ -466,7 +466,7 @@ An example of the `remark` command being successfully executed:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `remark` command being successfully executed with the **REMARK** keyword:
+**An example of the `remark` command being successfully executed with the **REMARK** keyword:**
 1. Enter the command `remark 1 r/**REMARK** furthermore he is great at teamwork`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
   ![Remark-Success](images/remark-command-enhanced-success.png)
@@ -481,7 +481,7 @@ An example of the `remark` command being successfully executed with the **REMARK
 | Invalid Index                    | The person index provided is invalid | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
  | Negative or 0 Index              | Invalid command format!              | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
 
-Additional Examples:
+**Additional Examples:**
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
   
 [Jump back to Table of Contents](#table-of-contents)
@@ -580,7 +580,7 @@ Format: `set INDEX STATUS`
 | Mandatory | `INDEX`  | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicant in JABPro. It must also be a positive integer |
 | Mandatory | `STATUS` | `STATUS` must be one of the following - "Preliminary", "Interviewed", "Rejected", "Accepted". It is case-insensitive.                                                         |
 
-Examples:
+**Examples:**
 * `list` followed by `set 2 Interviewed` sets the 2nd applicant in the address book to "Interviewed".
 
 [Jump back to Table of Contents](#table-of-contents)
@@ -607,14 +607,14 @@ This means that the view will be updated to reflect the latest changes to the da
 
 </box>
 
-An example of the `view` command being successfully executed:
+**An example of the `view` command being successfully executed:**
 1. Enter the command `view 3`
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
    
    ![View-Success](images/view-command-success.png)
 <br>
 
-An example of the `view` command being successfully executed for applicant with tags and score:
+**An example of the `view` command being successfully executed for applicant with tags and score:**
 1. Enter the command `view 2` (**Applicant with tags and score**)
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
    
@@ -716,7 +716,7 @@ Nonetheless, we **strongly recommend you to use `create` to create categorized t
 
 <div style="page-break-after: always;"></div>
 
-An example of the `edit` command being successfully executed:
+**An example of the `edit` command being successfully executed:**
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**edits name and phone number**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
    
@@ -725,7 +725,7 @@ An example of the `edit` command being successfully executed:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `edit` command being successfully executed with tags and score:
+**An example of the `edit` command being successfully executed with tags and score:**
 1. Ensure that you have created a tag `Interview` under the `assessment` category using the `create` command. Enter the command `create t/assessment Interview`
 2. Enter the command `edit 1 t/Interview sc/Interview 80` (**edits tag and score**)
 3. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
@@ -735,7 +735,7 @@ An example of the `edit` command being successfully executed with tags and score
 
 <div style="page-break-after: always;"></div>
 
-An example of the `edit` command being successfully executed to clear a tags and score:
+**An example of the `edit` command being successfully executed to clear a tags and score:**
 1. Enter the command `edit 1 t/` (**Clear all tags**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
    
@@ -799,7 +799,7 @@ Format: `delete (t/TAGNAME... st/STATUS...)`
 **Note:**
 * You can combine multiple delete categories in a single `delete` command e.g. `delete st/interviewed t/intern`
 
-An example of **delete by index** command being successfully executed:
+**An example of **delete by index** command being successfully executed:**
 1. Enter the command `delete Bernice`
 
    ![delete-by-index-pre](images/delete-by-index-pre.png)    
@@ -885,7 +885,7 @@ Format: `search (n/NAME...  st/STATUS...  t/TAGNAME...)`
 **Note:**
 * You can combine multiple search categories in a single `search` command e.g. `search n/alex st/interviewed t/intern`
 
-Here are some examples of **search** command being successfully executed:
+**Here are some examples of **search** command being successfully executed:**
 1. Enter `search n/alex bernice`
 
    ![search-success-1](images/search-success-1.png)
@@ -982,7 +982,7 @@ Set up for examples when you first start JABPro with default data:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `filter` command being successfully executed:
+**An example of the `filter` command being successfully executed:**
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/percentile val/80` (**Filter by percentile**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
@@ -992,7 +992,7 @@ An example of the `filter` command being successfully executed:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `filter` command being successfully executed with `median`:
+**An example of the `filter` command being successfully executed with `median`:**
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/median` (**Filter by median**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
@@ -1136,7 +1136,7 @@ Exports the entries into a .csv file located in the current directory as (/data/
 * JABPro must have write permissions, this means that if the .csv file is open, 
   exporting again will not be possible.
     
-Examples:
+**Examples:**
 * `export` exports the data to /data/export.csv
 
 [Jump back to Table of Contents](#table-of-contents)
