@@ -1,0 +1,24 @@
+{
+  "students" : [ {
+    "name" : "Invalid R@S",
+    "id" : "jsjs",
+    "memo" : "",
+    "currentLessonAttendance" : false,
+    "lessonsAttended" : 0,
+    "classParticipation" : 0
+  } ],
+  "classes" : [ {
+    "className" : "CS2103T",
+    "studentList" : [ {
+      "name" : "B@B",
+      "id" : "jsjs",
+      "memo" : "",
+      "currentLessonAttendance" : false,
+      "lessonsAttended" : 0,
+      "classParticipation" : 0
+    } ],
+    "classNote" : " ",
+    "classSchedule" : " ",
+    "classTotalLessons" : 0
+  } ]
+}

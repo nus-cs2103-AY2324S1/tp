@@ -1,0 +1,18 @@
+{
+  "students" : [ {
+    "name": "Valid Person",
+    "id" : "A0251234Z",
+    "memo" : "",
+    "currentLessonAttendance": true,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+    "name": "Person With Invalid Id Field",
+    "id" : "jsjs",
+    "memo" : "",
+    "currentLessonAttendance": true,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  } ],
+  "classes" : []
+}

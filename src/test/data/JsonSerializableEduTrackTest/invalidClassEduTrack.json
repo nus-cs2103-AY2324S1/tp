@@ -1,0 +1,23 @@
+{
+  "students": [],
+  "classes": [ {
+    "className": "CS2103-T",
+    "studentList" : [ ],
+    "classNote" : " ",
+    "classSchedule" : " ",
+    "classTotalLessons" : 0
+  }, {
+    "className": "cs 2100",
+    "studentList" : [ ],
+    "classNote" : " ",
+    "classSchedule" : " ",
+    "classTotalLessons" : 0
+  }, {
+    "className": "ST2334",
+    "studentList" : [ ],
+    "classNote" : " ",
+    "classSchedule" : " ",
+    "classTotalLessons" : 0
+  }
+  ]
+}

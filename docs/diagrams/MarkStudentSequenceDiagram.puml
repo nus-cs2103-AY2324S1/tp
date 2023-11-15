@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EduTrackParser" as EduTrackParser LOGIC_COLOR
+participant ":MarkStudentPresentCommandParser" as MarkStudentPresentCommandParser LOGIC_COLOR
+participant "d:MarkStudentPresentCommand" as MarkStudentPresentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mark /s 1 /c CS2103T")
+activate LogicManager
+
+LogicManager -> EduTrackParser : parseCommand("mark /s 1 /c CS2103T")
+activate EduTrackParser
+
+create MarkStudentPresentCommandParser
+EduTrackParser -> MarkStudentPresentCommandParser
+activate MarkStudentPresentCommandParser
+
+MarkStudentPresentCommandParser --> EduTrackParser
+deactivate MarkStudentPresentCommandParser
+
+EduTrackParser -> MarkStudentPresentCommandParser : parse("/s 1 /c CS2103T")
+activate MarkStudentPresentCommandParser
+
+create MarkStudentPresentCommand
+MarkStudentPresentCommandParser -> MarkStudentPresentCommand
+activate MarkStudentPresentCommand
+
+MarkStudentPresentCommand --> MarkStudentPresentCommandParser : d
+deactivate MarkStudentPresentCommand
+
+MarkStudentPresentCommandParser --> EduTrackParser : d
+deactivate MarkStudentPresentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkStudentPresentCommandParser -[hidden]-> EduTrackParser
+destroy MarkStudentPresentCommandParser
+
+EduTrackParser --> LogicManager : d
+deactivate EduTrackParser
+
+LogicManager -> MarkStudentPresentCommand : execute()
+activate MarkStudentPresentCommand
+
+MarkStudentPresentCommand -> Model : getClass("CS2103T")
+activate Model
+
+Model --> MarkStudentPresentCommand : sClass
+deactivate Model
+
+MarkStudentPresentCommand -> Model : getStudentInClass(1, CS2103T)
+activate Model
+
+Model --> MarkStudentPresentCommand : s
+deactivate Model
+
+MarkStudentPresentCommand -> Model : duplicateStudent(s)
+activate Model
+
+Model --> MarkStudentPresentCommand : sDuplicate
+deactivate Model
+
+MarkStudentPresentCommand -> Model : markPresent(sClass, s, sDuplicate)
+activate Model
+
+Model --> MarkStudentPresentCommand
+deactivate Model
+
+create CommandResult
+MarkStudentPresentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkStudentPresentCommand
+deactivate CommandResult
+
+MarkStudentPresentCommand --> LogicManager : result
+deactivate MarkStudentPresentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

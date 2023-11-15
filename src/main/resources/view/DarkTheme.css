@@ -10,6 +10,18 @@
     -fx-opacity: 0.9;
 }
 
+.heading-row {
+    -fx-background-color: lightgray;
+    -fx-padding: 5px;
+}
+
+.heading-label {
+    -fx-font-weight: bold;
+    -fx-padding: 0 10px; /* Add some padding to the labels */
+    -fx-min-width: 100px; /* Adjust the width as needed */
+    -fx-alignment: CENTER; /* Align text to center */
+}
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -310,6 +322,22 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+}
+
+#classInfoDisplay {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+#classInfoDisplay .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+}
+
+#classInfoDisplay .label {
+    -fx-text-fill: white;
 }
 
 #commandTypeLabel {

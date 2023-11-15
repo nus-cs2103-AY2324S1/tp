@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command to
+    mark student present;
+
+if () then ([Invalid index provided])
+    : Inform user to put valid Index;
+else ([else])
+    if () then ([Class with that class name exists])
+            : Create a duplicate Student;
+            : Update the attendance of
+                the duplicate student;
+            fork
+                :Replace existing student with
+                   duplicate student in Class;
+            fork again
+                : Replace existing student with
+                duplicate student in EduTrack;
+            end fork
+    else ([else])
+        : Inform user that the class does not exist;
+    endif
+endif
+stop
+@enduml

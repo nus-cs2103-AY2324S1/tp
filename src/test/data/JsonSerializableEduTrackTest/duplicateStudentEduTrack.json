@@ -1,0 +1,18 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "id" : "A1234567Z",
+    "memo" : "",
+    "currentLessonAttendance": true,
+    "lessonsAttended": 4,
+    "classParticipation": ""
+  }, {
+    "name": "Alice Pauline",
+    "id" : "A1234567Z",
+    "memo" : "",
+    "currentLessonAttendance": true,
+    "lessonsAttended": 4,
+    "classParticipation": ""
+  } ],
+  "classes": []
+}

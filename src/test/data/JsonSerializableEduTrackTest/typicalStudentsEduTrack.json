@@ -1,0 +1,109 @@
+{
+  "_comment": "EduTrack save file which contains the same Student values as in TypicalStudents#getTypicalEduTrack()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "id" : "A0251234Z",
+    "memo" : "",
+    "currentLessonAttendance": true,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+    "name" : "Benson Meier",
+    "id" : "A0257893R",
+    "memo" : "Gets distracted easily.",
+    "currentLessonAttendance": false,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+    "name" : "Carl Kurz",
+    "id" : "A0267293K",
+    "memo" : "",
+    "currentLessonAttendance": true,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+    "name" : "Daniel Meier",
+    "id" : "A0129873H",
+    "memo" : "",
+    "currentLessonAttendance": false,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+    "name" : "Elle Meyer",
+    "id" : "A0918239U",
+    "memo" : "",
+    "currentLessonAttendance": false,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+    "name" : "Fiona Kunz",
+    "id" : "A1280382I",
+    "memo" : "",
+    "currentLessonAttendance": false,
+    "lessonsAttended": 5,
+    "classParticipation": ""
+  }, {
+      "name": "George Best",
+      "id": "A0257372P",
+      "memo": "",
+      "currentLessonAttendance": true,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+  } ],
+  "classes": [ {
+    "className" : "1",
+    "studentList" : [ {
+      "name" : "Alice Pauline",
+      "id" : "A0251234Z",
+      "memo" : "",
+      "currentLessonAttendance": true,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    }, {
+      "name" : "Benson Meier",
+      "id" : "A0257893R",
+      "memo" : "Gets distracted easily.",
+      "currentLessonAttendance": false,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    }, {
+      "name" : "Carl Kurz",
+      "id" : "A0267293K",
+      "memo" : "",
+      "currentLessonAttendance": true,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    }, {
+      "name" : "Daniel Meier",
+      "id" : "A0129873H",
+      "memo" : "",
+      "currentLessonAttendance": false,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    }, {
+      "name" : "Elle Meyer",
+      "id" : "A0918239U",
+      "memo" : "",
+      "currentLessonAttendance": false,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    }, {
+      "name" : "Fiona Kunz",
+      "id" : "A1280382I",
+      "memo" : "",
+      "currentLessonAttendance": false,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    }, {
+      "name": "George Best",
+      "id": "A0257372P",
+      "memo": "",
+      "currentLessonAttendance": true,
+      "lessonsAttended": 5,
+      "classParticipation": ""
+    } ],
+    "classNote" : " ",
+    "classSchedule" : " ",
+    "classTotalLessons" : 6
+  } ]
+}
