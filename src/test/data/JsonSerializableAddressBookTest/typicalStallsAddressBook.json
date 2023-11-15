@@ -1,0 +1,25 @@
+{
+  "_comment": "AddressBook save file which contains the same Stall values as in TypicalStalls#getTypicalAddressBook()",
+  "stalls": [ {
+    "name" : "Auntie's Cooking",
+    "location": "Deck"
+  }, {
+    "name" : "Beverages",
+    "location": "Deck"
+  }, {
+    "name" : "Chinese",
+    "location": "wall street"
+  }, {
+    "name" : "Drinks Stall",
+    "location": "10th street"
+  }, {
+    "name" : "Economic Rice",
+    "location": "michegan ave"
+  }, {
+    "name" : "French",
+    "location": "little tokyo"
+  }, {
+    "name" : "GoodFood",
+    "location": "4th street"
+  } ]
+}

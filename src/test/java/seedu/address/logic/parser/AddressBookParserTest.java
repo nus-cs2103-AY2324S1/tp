@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STALL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STALL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,31 +14,30 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddStallCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.DeleteStallCommand;
+import seedu.address.logic.commands.EditStallCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindStallCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.stall.Stall;
+import seedu.address.model.util.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditStallDescriptorBuilder;
+import seedu.address.testutil.StallBuilder;
+import seedu.address.testutil.StallUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+    public void parseCommand_addStall() throws Exception {
+        Stall stall = new StallBuilder().build();
+        AddStallCommand command = (AddStallCommand) parser.parseCommand(StallUtil.getAddCommand(stall));
+        assertEquals(new AddStallCommand(stall), command);
     }
 
     @Test
@@ -47,19 +47,20 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_deleteStall() throws Exception {
+        DeleteStallCommand command = (DeleteStallCommand) parser.parseCommand(
+                DeleteStallCommand.COMMAND_WORD + " " + PREFIX_STALL + INDEX_FIRST_STALL.getOneBased());
+        assertEquals(new DeleteStallCommand(INDEX_FIRST_STALL), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    public void parseCommand_editStall() throws Exception {
+        Stall stall = new StallBuilder().build();
+        EditStallCommand.EditStallDescriptor descriptor = new EditStallDescriptorBuilder(stall).build();
+        EditStallCommand command = (EditStallCommand) parser.parseCommand(EditStallCommand.COMMAND_WORD + " "
+                + PREFIX_STALL + INDEX_FIRST_STALL.getOneBased()
+                + " " + StallUtil.getEditStallDescriptorDetails(descriptor));
+        assertEquals(new EditStallCommand(INDEX_FIRST_STALL, descriptor), command);
     }
 
     @Test
@@ -71,9 +72,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindStallCommand command = (FindStallCommand) parser.parseCommand(
+                FindStallCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindStallCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

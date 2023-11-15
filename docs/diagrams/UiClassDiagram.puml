@@ -5,56 +5,80 @@ skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
-Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
-Class UiManager
-Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+    Class "<<interface>>\nUi" as Ui
+    Class "{abstract}\nUiPart" as UiPart
+    Class UiManager
+    Class MainWindow
+    Class HelpWindow
+    Class ResultDisplay
+    Class "<<interface>>\nListPanel" as ListPanel
+    Class "<<interface>>\nDetailsPanel" as DetailsPanel
+    Class StallListPanel
+    Class ItemListPanel
+    Class StallCard
+    Class ItemCard
+    Class StatusBarFooter
+    Class CommandBox
+    Class StallDetailsPanel
+    Class ItemReviewPanel
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+    Class HiddenModel #FFFFFF
 }
 
 package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+    Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
+UiManager --> "1" MainWindow
+MainWindow *-->  "1" CommandBox
+MainWindow *--> "1" ResultDisplay
+MainWindow *--> "1" ListPanel
+MainWindow *--> "1" StatusBarFooter
+MainWindow *--> "1" DetailsPanel
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+ListPanel <|.. StallListPanel
+ListPanel <|.. ItemListPanel
+DetailsPanel <|.. StallDetailsPanel
+DetailsPanel <|.. ItemReviewPanel
+StallListPanel -down-> "*" StallCard
+ItemListPanel -down-> "*" ItemCard
 
-MainWindow -left-|> UiPart
+MainWindow -------|> UiPart
 
 ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+CommandBox -----|> UiPart
+ListPanel --|> UiPart
+DetailsPanel -right-|> UiPart
+StallDetailsPanel --|> UiPart
+ItemReviewPanel --|> UiPart
+StallCard --|> UiPart
+ItemCard --|> UiPart
+
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
+StallCard ..> Model
+ItemCard ..> Model
+StallDetailsPanel ..> Model
+ItemReviewPanel ..> Model
+UiManager --> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+MainWindow -[hidden]down- CommandBox
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+StatusBarFooter -[hidden]left- ListPanel
+ListPanel -[hidden]left- DetailsPanel
+StallDetailsPanel -[hidden]right- ItemReviewPanel
+StallCard -[hidden]left- ItemCard
 
-MainWindow -[hidden]-|> UiPart
+
 @enduml

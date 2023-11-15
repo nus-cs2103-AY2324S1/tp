@@ -6,16 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.stall.Stall;
+import seedu.address.model.stall.UniqueStallList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameStall comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueStallList stalls;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,13 +25,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        stalls = new UniqueStallList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the stalls in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -41,11 +41,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the stall list with {@code stalls}.
+     * {@code stalls} must not contain duplicate stalls.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setStalls(List<Stall> stalls) {
+        this.stalls.setStalls(stalls);
     }
 
     /**
@@ -54,58 +54,73 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setStalls(newData.getStallList());
     }
 
-    //// person-level operations
+    //// stall-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a stall with the same identity as {@code stall} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasStall(Stall stall) {
+        requireNonNull(stall);
+        return stalls.contains(stall);
     }
 
+
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a stall to the address book.
+     * The stall must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addStall(Stall p) {
+        stalls.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given stall {@code target} in the list with {@code editedStall}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The stall identity of {@code editedStall} must not be the same as another existing stall in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setStall(Stall target, Stall editedStall) {
+        requireNonNull(editedStall);
 
-        persons.setPerson(target, editedPerson);
+        stalls.setStall(target, editedStall);
     }
+
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeStall(Stall key) {
+        stalls.remove(key);
     }
+
+    public void sortStallRating() {
+        stalls.sortByRating();
+    }
+
+    public void sortStallLocation() {
+        stalls.sortByLocation();
+    }
+
+    public void sortStallPrice() {
+        stalls.sortByPrice();
+    }
+
 
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("stalls", stalls)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Stall> getStallList() {
+        return stalls.asUnmodifiableObservableList();
     }
 
     @Override
@@ -120,11 +135,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return stalls.equals(otherAddressBook.stalls);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return stalls.hashCode();
     }
+
+
 }

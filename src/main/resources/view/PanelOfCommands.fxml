@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?stylesheet src="view/MainWindow.css"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <Text fx:id="commandText" styleClass="command-headers" text="Commands:" />
+    <HBox>
+        <VBox HBox.hgrow="ALWAYS">
+
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="General:" />
+                <Text text="help" />
+                <Text text="exit" />
+                <Text text="clear" />
+                <padding>
+                   <Insets bottom="5.0" />
+                </padding>
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Stall Sorting" />
+                <Text text="sort-stalls-location" />
+                <Text text="sort-stalls-rating" />
+                <Text text="sort-stalls-price" />
+                <padding>
+                    <Insets bottom="5.0" />
+                </padding>
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Stall Finding" />
+                <Text text="find-by-name" />
+                <Text text="find-by-location" />
+                <Text text="find-by-item" />
+                <padding>
+                   <Insets bottom="5.0" right="20.0"/>
+                </padding>
+            </VBox>
+
+                <padding>
+                    <Insets bottom="5.0" />
+                </padding>
+
+        </VBox>
+
+        <VBox HBox.hgrow="ALWAYS">
+            <VBox styleClass="panel-of-command">
+                <Label text="Stall Management:" />
+                <Text text="list" />
+                <Text text="view-stall" />
+                <Text text="add-stall" />
+                <Text text="delete-stall" />
+                <Text text="edit-stall" />
+                <Text text="review-stall" />
+                <Text text="delete-stall-review" />
+                <padding>
+                   <Insets bottom="5.0" />
+                </padding>
+            </VBox>
+
+            <VBox styleClass="panel-of-command">
+                <Label text="Item Management:" />
+                <Text text="view-item" />
+                <Text text="add-item" />
+                <Text text="delete-item" />
+                <Text text="edit-item" />
+                <Text text="review-item" />
+                <Text text="delete-item-review" />
+                <padding>
+                   <Insets bottom="5.0" />
+                </padding>
+            </VBox>
+
+        </VBox>
+
+    </HBox>
+
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets left="5.0" />
+   </padding>
+</VBox>

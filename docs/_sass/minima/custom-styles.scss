@@ -24,6 +24,16 @@ h2, h3, h4, h5, h6 {
   font-weight: $alert-link-font-weight;
 }
 
+code {
+    color: #333;  /* Dark gray for code text */
+    background-color: #f5f5f5;  /* Light gray background */
+    border-radius: 8px;
+}
+
+.highlighter-rouge .highlight {
+    background: #f5f5f5;  /* Match the code background color */
+}
+
 // Generate contextual modifier classes for colorizing the alert.
 
 @each $color, $value in $theme-colors {
@@ -31,4 +41,3 @@ h2, h3, h4, h5, h6 {
     @include alert-variant(color-level($value, $alert-bg-level), color-level($value, $alert-border-level), color-level($value, $alert-color-level));
   }
 }
-

@@ -10,15 +10,22 @@ Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
-Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UserPrefs
+Class UniqueStallList
+Class UniqueItemList
+Class Stall
+Class Price
+Class StallReview
+Class StallRating
+Class StallDescription
 Class Name
-Class Phone
-Class Tag
+Class Menu
+Class Item
+Class ItemName
+Class ItemReview
+Class ItemRating
+Class ItemDescription
 
 Class I #FFFFFF
 }
@@ -33,22 +40,28 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -down-> "0..1 filtered" Item
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueStallList
+UniqueStallList --> "~* all" Stall
+Stall *--> "1" Name
+Stall *-down->  "0...1" StallReview
+Item *-down-> "1" Price
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Stall *---> "0...1" Menu
+StallReview *--> "1" StallRating
+StallReview *--> "1" StallDescription
+Menu *--right-> "1" UniqueItemList
+UniqueItemList -right-> "*" Item
+Item *--> "1" ItemName
+Item *--> "0...1" ItemReview
+ItemReview *--> "1" ItemRating
+ItemReview *--> "1" ItemDescription
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Stall -[hidden]up--> I
+UniqueStallList -[hidden]right-> I
 
-ModelManager --> "~* filtered" Person
+
+ModelManager --> " ~* filtered" Stall
 @enduml

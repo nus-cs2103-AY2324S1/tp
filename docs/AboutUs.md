@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Samuel Mui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samuelmui8.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/samuelmui8)]
+[[portfolio](team/samuelmui8.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Backend
 
-### Jean Doe
+### Teo Kai Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teoks0199.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/teoks0199)]
+[[portfolio](team/teoks0199.md)]
+
+* Role: Developer
+* Responsibilities: Backend
+
+### Lim RuiZhi
+
+<img src="images/ruizhi2001.png" width="200px">
+
+[[github](https://github.com/Ruizhi2001)]
+[[portfolio](team/ruizhi2001.md)]
+
+* Role: Developer
+* Responsibilities: UIUX
+
+### Beatrice Chen
+
+<img src="images/beatricecst.png" width="200px">
+
+[[github](http://github.com/beatricecst)]
+[[portfolio](team/beatricecst.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Du Kaixuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jamesebond.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jamesebond)]
+[[portfolio](team/jamesebond.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Best Developer
+* Responsibilities: Best UI

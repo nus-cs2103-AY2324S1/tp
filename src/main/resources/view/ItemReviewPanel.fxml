@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+
+        <HBox GridPane.rowIndex="0">
+            <Text fx:id="itemName" style="-fx-font-size: 20px;" />
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
+            <Label text="Rating: "/>
+            <Label fx:id="itemRating" styleClass="header-label" />
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" GridPane.rowIndex="2">
+            <ImageView fitHeight="30" preserveRatio="true">
+                <image>
+                    <Image url="@/images/money.png" />
+                </image>
+            </ImageView>
+
+            <Label text="Price:">
+               <font>
+                  <Font name="DIN Alternate Bold" size="13.0" />
+               </font>
+            </Label>
+            <Text fx:id="itemPrice" styleClass="cell_big_label" />
+        </HBox>
+
+        <VBox alignment="CENTER_LEFT" GridPane.rowIndex="3">
+            <HBox>
+                <ImageView fitHeight="30" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/review.png" />
+                    </image>
+                </ImageView>
+                <Label styleClass="header-label" text="Review:"/>
+            </HBox>
+            <Text fx:id="itemReview" styleClass="cell_big_label" />
+        </VBox>
+
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
+    </GridPane>
+</HBox>

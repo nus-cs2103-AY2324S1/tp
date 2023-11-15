@@ -45,6 +45,13 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    @Test
+    public void isNonZeroUnsignedDouble() {
+        assertTrue(StringUtil.isNonZeroUnsignedDouble("12.34"));
+        assertFalse(StringUtil.isNonZeroUnsignedDouble("12.345"));
+        assertFalse(StringUtil.isNonZeroUnsignedDouble("invalid"));
+    }
+
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 

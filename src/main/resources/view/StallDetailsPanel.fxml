@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+
+        <HBox GridPane.rowIndex="0">
+            <Label styleClass="-fx-font-size: 20px;" text="Stall Review:" />
+        </HBox>
+
+        <VBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
+            <Label fx:id="stallRating" styleClass="header-label" />
+            <Label text="Stall Description:"/>
+            <Text fx:id="stallDescription" styleClass="header-label">
+                <font>
+                   <Font name="System Bold" size="13.0" />
+                </font>
+            </Text>
+        </VBox>
+
+       <rowConstraints>
+          <RowConstraints />
+       </rowConstraints>
+    </GridPane>
+</HBox>

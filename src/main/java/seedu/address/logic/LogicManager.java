@@ -15,7 +15,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.item.Item;
+import seedu.address.model.stall.Stall;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,9 +27,7 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
@@ -67,8 +66,33 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public Item getFilteredItem() {
+        return model.getFilteredItem();
+    }
+
+    @Override
+    public ObservableList<Item> getFilteredItemList() {
+        return model.getFilteredItemList();
+    }
+
+    @Override
+    public ObservableList<Stall> getFilteredStallList() {
+        return model.getFilteredStallList();
+    }
+
+    @Override
+    public ObservableList<Stall> getTempFilteredStallList() {
+        return model.getTempFilteredStallList();
+    }
+
+    @Override
+    public Stall getFilteredStall() {
+        return model.getFilteredStall();
+    }
+
+    @Override
+    public int getFilteredStallIndex() {
+        return model.getFilteredStallIndex();
     }
 
     @Override

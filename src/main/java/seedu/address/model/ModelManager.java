@@ -11,7 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.review.ItemReview;
+import seedu.address.model.stall.Menu;
+import seedu.address.model.stall.Stall;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +25,11 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Stall> filteredStalls;
+    private final FilteredList<Stall> tempFilteredStalls;
+    private ObservableList<Item> filteredItemList;
+    private Item filteredItem;
+    private Stall filteredStall;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +41,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStalls = new FilteredList<>(this.addressBook.getStallList());
+        tempFilteredStalls = new FilteredList<>(this.addressBook.getStallList());
     }
 
     public ModelManager() {
@@ -88,45 +97,175 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasStall(Stall stall) {
+        requireNonNull(stall);
+        return addressBook.hasStall(stall);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void showStall(Stall stall) {
+        requireNonNull(stall);
+        Predicate<Stall> predicate = stallll -> stallll.equals(stall);
+        tempFilteredStalls.setPredicate(predicate);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteStall(Stall target) {
+        addressBook.removeStall(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addStall(Stall stall) {
+        addressBook.addStall(stall);
+        updateFilteredStallList(PREDICATE_SHOW_ALL_STALLS);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setStall(Stall target, Stall editedStall) {
+        requireAllNonNull(target, editedStall);
+        addressBook.setStall(target, editedStall);
+    }
+
+    //=========== Filtered Stall List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Stall} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Stall> getFilteredStallList() {
+        return filteredStalls;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+    public ObservableList<Stall> getTempFilteredStallList() {
+        return tempFilteredStalls;
     }
+
+    @Override
+    public void updateFilteredStallList(Predicate<Stall> predicate) {
+        requireNonNull(predicate);
+        filteredStalls.setPredicate(predicate);
+    }
+    @Override
+    public Stall getFilteredStall() {
+        return this.filteredStall;
+    }
+
+    @Override
+    public Stall getFilteredStall(Index stallIndex) {
+        return filteredStalls.get(stallIndex.getZeroBased());
+    }
+
+    @Override
+    public void sortStallRating() {
+        addressBook.sortStallRating();
+    }
+
+    @Override
+    public void sortStallLocation() {
+        addressBook.sortStallLocation();
+    }
+
+    @Override
+    public void sortStallPrice() {
+        addressBook.sortStallPrice();
+    }
+
+    @Override
+    public int getFilteredStallIndex() {
+        return filteredStalls.indexOf(filteredStall) + 1;
+    }
+
+
+    //=========== Filtered Item List Accessors =============================================================
+
+    @Override
+    public boolean hasItem(Stall stall, Item item) {
+        requireAllNonNull(stall, item);
+        return stall.hasItem(item);
+    }
+
+    @Override
+    public boolean hasItemReview(Item item) {
+        requireNonNull(item);
+        return item.hasItemReview();
+    }
+
+    @Override
+    public void addItem(Index stallIndex, Item item) {
+        requireNonNull(stallIndex);
+        requireNonNull(item);
+        this.getFilteredStall(stallIndex).addItem(item);
+    }
+
+    @Override
+    public void setItem(Index stallIndex, Index itemIndex, Item editedItem) {
+        requireNonNull(stallIndex);
+        requireNonNull(itemIndex);
+        requireNonNull(editedItem);
+        Stall stallToEdit = this.getFilteredStall(stallIndex);
+        Menu menuToEdit = stallToEdit.getMenu();
+        Item itemToEdit = menuToEdit.getItem(itemIndex);
+        menuToEdit.setItem(itemToEdit, editedItem);
+    }
+
+    @Override
+    public void deleteItem(Index stallIndex, Index itemIndex) {
+        requireNonNull(stallIndex);
+        requireNonNull(itemIndex);
+        this.getFilteredStall(stallIndex).deleteItem(itemIndex);
+    }
+
+    @Override
+    public void setItemReview(Item item, ItemReview itemReview) {
+        requireNonNull(item);
+        requireNonNull(itemReview);
+        item.setItemReview(itemReview);
+    }
+
+    @Override
+    public void deleteItemReview(Item item) {
+        requireNonNull(item);
+        item.deleteItemReview();
+    }
+
+    @Override
+    public Item getFilteredItem() {
+        return filteredItem;
+    }
+
+    @Override
+    public Item getFilteredItem(Index stallIndex, Index itemIndex) {
+        requireAllNonNull(stallIndex, itemIndex);
+        setFilteredStall(stallIndex);
+        return filteredStall.getItem(itemIndex);
+    }
+
+    @Override
+    public void setFilteredItem(Item item) {
+        requireNonNull(item);
+        this.filteredItem = item;
+    }
+
+    @Override
+    public void setFilteredItemList(Index stallIndex) {
+        requireNonNull(stallIndex);
+        setFilteredStall(stallIndex);
+        filteredItemList = filteredStall.getMenuList();
+    }
+
+    @Override
+    public void setFilteredStall(Index stallIndex) {
+        filteredStall = filteredStalls.get(stallIndex.getZeroBased());
+    }
+
+
+    @Override
+    public ObservableList<Item> getFilteredItemList() {
+        return filteredItemList;
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -142,7 +281,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredStalls.equals(otherModelManager.filteredStalls);
     }
 
 }

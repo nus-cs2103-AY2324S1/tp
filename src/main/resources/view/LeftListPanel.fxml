@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?stylesheet src="view/MainWindow.css"?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Text fx:id="name" styleClass="command-headers"/>
+    <Label fx:id="stallIndex" />
+    <Label fx:id="details" />
+    <ListView fx:id="leftListView" />
+</VBox>

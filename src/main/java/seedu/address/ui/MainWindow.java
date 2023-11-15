@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -8,7 +9,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.Item;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StallListPanel stallListPanel;
+    private StallDetailsPanel oneStallPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -40,15 +45,17 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
-
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox leftMainPanel;
+
+    @FXML
+    private VBox rightMainPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +73,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,8 +119,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        stallListPanel = new StallListPanel(logic.getFilteredStallList());
+        VBox.setVgrow(stallListPanel.getRoot(), Priority.ALWAYS);
+        leftMainPanel.getChildren().add(stallListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +131,24 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        PanelOfCommands panelOfCommands = new PanelOfCommands();
+        rightMainPanel.getChildren().add(panelOfCommands.getRoot());
+        logger.log(Level.INFO, "MainWindow is correctly rendered");
+    }
+
+    void backToHomePage() {
+        stallListPanel = new StallListPanel(logic.getFilteredStallList());
+        leftMainPanel.getChildren().clear();
+        leftMainPanel.getChildren().add(stallListPanel.getRoot());
+
+        rightMainPanel.getChildren().clear();
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        PanelOfCommands panelOfCommands = new PanelOfCommands();
+        rightMainPanel.getChildren().add(panelOfCommands.getRoot());
     }
 
     /**
@@ -163,8 +191,32 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Switches to the window with only one stall detail.
+     */
+    @FXML
+    public void handleIsStallDetail() {
+        ItemListPanel itemListPanel = new ItemListPanel(logic.getFilteredItemList(), logic.getFilteredStall(),
+                logic.getFilteredStallIndex());
+        leftMainPanel.getChildren().clear();
+        leftMainPanel.getChildren().add(itemListPanel.getRoot());
+
+        oneStallPanel = new StallDetailsPanel(logic.getFilteredStall());
+        rightMainPanel.getChildren().clear();
+        rightMainPanel.getChildren().add(oneStallPanel.getRoot());
+    }
+
+
+    @FXML
+    private void handleItemSelectionChanged(Item item) {
+        ItemListPanel itemListPanel = new ItemListPanel(logic.getFilteredItemList(), logic.getFilteredStall(),
+                logic.getFilteredStallIndex());
+        leftMainPanel.getChildren().clear();
+        leftMainPanel.getChildren().add(itemListPanel.getRoot());
+
+        ItemReviewPanel itemReviewPanel = new ItemReviewPanel(item);
+        rightMainPanel.getChildren().clear();
+        rightMainPanel.getChildren().add(itemReviewPanel.getRoot());
     }
 
     /**
@@ -180,10 +232,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else if (commandResult.isStallDetail()) {
+                handleIsStallDetail();
+            } else if (commandResult.isViewItem()) {
+                handleItemSelectionChanged(logic.getFilteredItem());
+            } else {
+                this.backToHomePage();
             }
 
             return commandResult;

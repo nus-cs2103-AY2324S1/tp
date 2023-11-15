@@ -1,0 +1,6 @@
+{
+  "stalls": [ {
+    "name": "Stall with invalid location field",
+    "location": " "
+  } ]
+}
