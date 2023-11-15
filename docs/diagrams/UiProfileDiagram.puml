@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+    Class "{abstract}\nUiPart" as UiPart
+    Class MainWindow
+    package Profile <<Rectangle>> {
+        Class PersonProfile
+        Class PersonProfileField
+        Class PersonProfileHeader
+        Class PersonProfileNote
+        Class PersonProfileTags
+    }
+}
+
+MainWindow *-> "1" PersonProfile
+
+
+PersonProfile *--> "*" PersonProfileField
+PersonProfile *--> "1" PersonProfileHeader
+PersonProfile *--> "1" PersonProfileNote
+PersonProfile *--> "1" PersonProfileTags
+
+MainWindow ---|> UiPart
+PersonProfile ---|> UiPart
+PersonProfileField ---|> UiPart
+PersonProfileHeader ---|> UiPart
+PersonProfileNote ---|> UiPart
+PersonProfileTags ---|> UiPart
+@enduml

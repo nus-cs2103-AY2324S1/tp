@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -126,6 +127,16 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Sorts the list of fosterers/persons in the address book by name in alphabetical order.
+     * Uses the natural order of names as the sorting criteria and updates the state of the address book.
+     */
+    @Override
+    public void sortByName() {
+        Comparator<Person> nameComp = Comparator.comparing(person -> person.getName().toString());
+        addressBook.sortNames(nameComp);
     }
 
     @Override

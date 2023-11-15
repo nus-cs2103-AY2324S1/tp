@@ -7,10 +7,11 @@ skinparam classBackgroundColor LOGIC_COLOR
 package Logic as LogicPackage {
 
 Class AddressBookParser
+Class ViewModeParser
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
-
+Class "<<enumeration>>\nCommandType" as CommandType
 
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
@@ -27,11 +28,16 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager -down->"1" AddressBookParser
+LogicManager -down->"1" ViewModeParser
+LogicManager .down.> CommandType
+
+AddressBookParser .down..> XYZCommand : creates >
+ViewModeParser .down..> XYZCommand : creates >
+ViewModeParser .right.> Model
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+LogicManager .down..> Command : executes >
 
 LogicManager --> Model
 LogicManager --> Storage
@@ -41,6 +47,7 @@ Command .right.> Model
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
-LogicManager .down.> CommandResult
+LogicManager .down..> CommandResult
 Command .up.> CommandResult : produces >
+CommandResult .right.>"0..1" CommandType
 @enduml

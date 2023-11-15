@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class StatsCommand
+Class "{abstract}\nCommand" as Command
+
+StatsCommand -up-|> Command
+StatsAvailCommand -up-|> StatsCommand
+StatsCurrentCommand -up-|> StatsCommand
+StatsHousingCommand -up-|> StatsCommand
+
+@enduml

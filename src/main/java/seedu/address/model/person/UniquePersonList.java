@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -107,6 +108,16 @@ public class UniquePersonList implements Iterable<Person> {
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
+    }
+
+    /**
+     * Sorts the list of persons using the provided comparator.
+     * This method allows for sorting of the list of fosterers based on a specified comparator.
+     *
+     * @param comparator The comparator to use for sorting the list of fosterers.
+     */
+    public void sort(Comparator<Person> comparator) {
+        internalList.sort(comparator);
     }
 
     @Override

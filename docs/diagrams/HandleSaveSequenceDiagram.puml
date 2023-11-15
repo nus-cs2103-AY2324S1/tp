@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** Handle Save
+participant "MainWindow" as MainWindow UI_COLOR
+participant "PersonProfile" as PersonProfile UI_COLOR
+
+MainWindow -> MainWindow : handleSave()
+activate MainWindow
+MainWindow -> MainWindow : resetValues()
+activate MainWindow
+MainWindow -> PersonProfile : resetValues()
+deactivate MainWindow
+[<--MainWindow
+deactivate MainWindow
+
+@enduml

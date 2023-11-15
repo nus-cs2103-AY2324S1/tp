@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI  UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":PersonProfile" as PersonProfile UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ViewModeParser" as ViewModeParser LOGIC_COLOR
+participant "s:SaveCommand" as SaveCommand LOGIC_COLOR
+end box
+
+[-> MainWindow : executeCommand("save")
+
+MainWindow -> PersonProfile : getPerson()
+
+PersonProfile --> MainWindow : get personToEdit
+
+MainWindow -> LogicManager : executeInView("name", personToEdit, targetIndex)
+
+LogicManager -> ViewModeParser : parseCommand("name", personToEdit, targetIndex)
+
+create SaveCommand
+ViewModeParser -> SaveCommand
+
+SaveCommand --> ViewModeParser : s
+
+ViewModeParser --> LogicManager : s
+@enduml

@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -13,19 +15,45 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    /**
+     * Help information should be shown to the user.
+     */
 
-    /** The application should exit. */
-    private final boolean exit;
+    private final Person personToView;
+
+    private final Index targetIndex;
+
+    private final boolean isFostererEdited;
+
+    private final CommandType commandType;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(
+            String feedbackToUser,
+            Person personToView,
+            Index targetIndex,
+            CommandType commandType,
+            boolean isFostererEdited
+    ) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.personToView = personToView;
+        this.targetIndex = targetIndex;
+        this.commandType = commandType;
+        this.isFostererEdited = isFostererEdited;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, CommandType commandType) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.personToView = null;
+        this.targetIndex = null;
+        this.commandType = commandType;
+        this.isFostererEdited = false;
     }
 
     /**
@@ -33,19 +61,27 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
+    public Person getPersonToView() {
+        return personToView;
     }
 
-    public boolean isExit() {
-        return exit;
+    public Index getTargetIndex() {
+        return targetIndex;
+    }
+
+    public CommandType getCommandType() {
+        return commandType;
+    }
+
+    public boolean getIsFostererEdited() {
+        return isFostererEdited;
     }
 
     @Override
@@ -61,22 +97,27 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && Objects.equals(personToView, otherCommandResult.personToView)
+                && Objects.equals(targetIndex, otherCommandResult.targetIndex)
+                && commandType == otherCommandResult.commandType
+                && isFostererEdited == otherCommandResult.isFostererEdited;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, personToView, targetIndex, commandType, isFostererEdited);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder t = new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
-                .toString();
+                .add("person", personToView)
+                .add("targetIndex", targetIndex)
+                .add("commandType", commandType)
+                .add("isFostererEdited", isFostererEdited);
+        return t.toString();
     }
 
 }
+

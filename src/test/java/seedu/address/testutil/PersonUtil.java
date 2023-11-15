@@ -1,7 +1,11 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -34,6 +38,10 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        sb.append(PREFIX_ANIMAL_NAME + person.getAnimalName().fullName + " ");
+        sb.append(PREFIX_AVAILABILITY + person.getAvailability().value + " ");
+        sb.append(PREFIX_ANIMAL_TYPE + person.getAnimalType().value + " ");
+        sb.append(PREFIX_HOUSING + person.getHousing().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -49,6 +57,13 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getHousing().ifPresent(housing -> sb.append(PREFIX_HOUSING).append(housing.value).append(" "));
+        descriptor.getAvailability().ifPresent(availability -> sb.append(PREFIX_AVAILABILITY)
+                .append(availability.value).append(" "));
+        descriptor.getAnimalName().ifPresent(animalName -> sb.append(PREFIX_ANIMAL_NAME)
+                .append(animalName.fullName).append(" "));
+        descriptor.getAnimalType().ifPresent(animalType -> sb.append(PREFIX_ANIMAL_TYPE)
+                .append(animalType.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

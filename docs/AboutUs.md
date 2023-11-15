@@ -9,51 +9,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicole Chiong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/butteredyakiimo.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/butteredyakiimo)]
+[[portfolio](team/butteredyakiimo.md)]
 
-* Role: Project Advisor
+* Role: Deliverables and Deadlines, Code Quality
 
-### Jane Doe
+### Nanette Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nananakx-x.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/nananakx-x)]
+[[portfolio](team/nananakx-x.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Testing
 
-### Johnny Doe
+### Sia Zhi Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/h1410101.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/h1410101)]
+[[portfolio](team/h1410101.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Integration
 
-### Jean Doe
+### Nam Dohyun (Brandon)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brandon-nam.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/brandon-nam)]
+[[portfolio](team/brandon-nam.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling and Tracking
 
-### James Doe
+### Tyrus Lye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tyruslye.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/TyrusLye)]
+[[portfolio](team/tyruslye.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation

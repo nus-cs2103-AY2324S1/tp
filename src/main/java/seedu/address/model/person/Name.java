@@ -44,6 +44,10 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Returns true when the two case-insensitive names are the same, ignoring the presence of
+     * multiple spaces between words.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -56,7 +60,11 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        // replaceAll("\\s+", " ") replaces 1 or more spaces with a single space
+        String nameRemovedSpaces = fullName.replaceAll("\\s+", " ");
+        String otherNameRemovedSpaces = otherName.fullName.replaceAll("\\s+", " ");
+        // equalsIgnoreCase() method compares two strings, ignoring lower case and upper case differences
+        return nameRemovedSpaces.equalsIgnoreCase(otherNameRemovedSpaces);
     }
 
     @Override

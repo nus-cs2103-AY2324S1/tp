@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes add command;
+:AddressBookParser parses the command;
+:AddCommandParser parses the arguments provided in the add command;
+
+if () then ([Command is valid])
+  :A new Person object with the specified attributes is created;
+
+  if() then ([There exists invalid input/s or combination of inputs])
+    :Display error message;
+  else ([else])
+      :A new AddCommand object is created;
+      if() then ([Fosterer already exists in the address book])
+      :Display error message;
+      else ([else])
+      :Fosterer is added to the address book;
+      endif
+  endif
+
+else ([else])
+  :Display error message;
+endif
+stop
+@enduml
