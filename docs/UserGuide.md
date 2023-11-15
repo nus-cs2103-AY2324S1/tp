@@ -39,17 +39,17 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
 1. Look out for additional information in these alert blocks to master the use of InsureIQ!
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
 Provides additional information for your understanding.
 </div>
 
-<div markdown="span" class="alert alert-success">
+<div markdown="block" class="alert alert-success">
 **:bulb: Tips:**<br>
 Provides tips for advanced users to maximise efficiency.
 </div>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 **:exclamation: Warnings:**<br>
 Highlights important information you need to be careful about!
 </div>
@@ -62,7 +62,7 @@ Highlights important information you need to be careful about!
 
 ## Features
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: About the command format:**<br>
 
@@ -97,7 +97,7 @@ Format: `help`
 
 Adds client details to your client list. You can also choose to include policy details attached to a client.
 
-<div markdown="span" class="alert alert-success">
+<div markdown="block" class="alert alert-success">
 **:bulb: Importing client information from a data file:** 
 InsureIQ data is stored in a JSON file, which you can add clients directly into. More information can be found in the [Editing the data file](#editing-the-data-file) section.
 </div>
@@ -154,7 +154,7 @@ Error: The policy number is already in use
 Error: This person already exists in the address book
 ```
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 **:information_source: Adding clients with duplicate fields:**<br>
 The above error will only be raised when **ALL** fields in the client's details (name, NRIC, contact number, email, address) are the same.
 </div>
@@ -178,7 +178,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 **:information_source: Important notes about usage:**
 
 * If you are adding a new policy number to a client with no attached policy, you **must** also add the company, policy issue date and policy expiry date.
@@ -248,7 +248,7 @@ Examples:
 * `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with only `Hans` or `Bo` in it.
 * `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note: Format of values do not matter** <br>
+<div markdown="block" class="alert alert-info">:information_source: **Note: Format of values do not matter** <br>
 Unlike previous commands, the fields do not have to be in a specific format.
 </div>
 
@@ -327,7 +327,7 @@ Acceptable values for each parameter:
 Expected output upon success: <br>
 ![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 **:information_source: Confirmation message**
 Even if no clients are deleted, InsureIQ will still show a confirmation message to let you know that the `batchdelete` 
 command has been successfully processed.
@@ -448,7 +448,7 @@ Clears all entries from your client list.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 **:exclamation: Caution:**
 This action is irreversible.
 </div>
@@ -472,7 +472,7 @@ InsureIQ data are saved automatically as a JSON file `[JAR file location]/data/i
 
 _{ TO DO: SPECIFY DATA FORMAT AND HOW TO EDIT, FORMAT CHECKS }_
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 **:exclamation: Caution:**
 If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
