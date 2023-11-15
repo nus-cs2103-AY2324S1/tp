@@ -150,16 +150,6 @@ Examples:
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Common Errors:**<br>
-
-Refer to [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
-behaviour of MediLink Contacts. Below, we have provided specific exceptions that are relevant to the `add-doctor` command. <br> 
-* Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input. 
-  * Example:`add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
-</div>
-
 ### Adding a Patient: `add-patient`
 
 Adds a Patient to MediLink Contacts.
@@ -182,16 +172,6 @@ Examples:
 
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
 * `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/12345678 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Common Errors:**<br>
-
-Refer to [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
-behaviour of MediLink Contacts. Below, we have provided specific exceptions that are relevant to the `add-patient` command. <br>
-* Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input.
-    * Example:`add-patient n/Bruce s/o Wayne ic/S9851586G g/M p/98765433 ec/12345678 e/batsy@example.com a/Wayne Manor, Gotham City St 42 c/AIDS b/O+ t/High`
-</div>
 
 ### Creating an Appointment : `new-appt`
 
