@@ -63,9 +63,9 @@ You can switch between tabs by clicking on the respective tabs, using the switch
 
 ## 3.3. Panel 📋
 There are 3 panels in the main screen depending on which tab is selected:
-* Patient List Panel
-* Medical History Panel
-* Appointment Panel
+1. Patient List Panel
+2. Medical History Panel
+3. Appointment Panel
 
 You can switch between the panels by switching between the respective tabs using the `Ctrl + T` shortcut or by simply clicking on the tab itself.
 
