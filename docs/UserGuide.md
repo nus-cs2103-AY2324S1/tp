@@ -273,7 +273,6 @@ The `Help Window` opens up as follows:
 [Jump back to Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -285,10 +284,10 @@ The `Help Window` opens up as follows:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAGNAME]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * When using parentheses ( ) with items separated by the slash symbol /, at least one item must be included. <br>
-  e.g. in the command `search (n/KEYWORD [MORE KEYWORDS]  st/KEYWORD [MORE KEYWORDS]  t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
+  e.g. in the command `search (n/NAME...  st/STATUS...  t/TAGNAME...)`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
    e.g. `t/TAGNAME…​` can be used as ` ` (i.e. 0 times), `t/swe t/intern` for `add` commands or `t/swe intern` for `search` and `delete` commands.
