@@ -127,11 +127,13 @@ You are an **advanced** user if ...
 
 **Notes** and **tips** curated for you are labeled by the following box!
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
 
 
+
+<br>
 
 **Also, take note of the following icons and their meanings.**
 
@@ -304,7 +306,7 @@ The `Help Window` opens up as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 1.Managing Tags
+### 1. Managing Tags
 <a name="1-managing-tags"></a>
 Tags are meant to help you easily remember applicants details by appending different colour coding to different types of information.
 
@@ -337,7 +339,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 * You can view all of your tags by keying in the `listT` command.
   </box>
 
-An example of the `create` command being successfully executed:
+**An example of the `create` command being successfully executed:**
 1. Enter the command `create t/dept marketing t/role developer`
 2. This is what you should see upon successful execution of command.
 
@@ -416,7 +418,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…�
 * An applicant can have any number of tags (including 0)!
 </box>
 
-An example of the `add` command being successfully executed:
+**An example of the `add` command being successfully executed:**
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
 2. This is the result of the successful `add` command (Take note that command entered will not be shown in the result):
    
@@ -456,7 +458,7 @@ Format: `remark INDEX r/REMARK`
 
 <div style="page-break-after: always;"></div>
 
-An example of the `remark` command being successfully executed:
+**An example of the `remark` command being successfully executed:**
 1. Enter the command `remark 1 r/Great attitude, hardworking`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
    ![Remark-Success](images/remark-command-success.png)
@@ -464,7 +466,7 @@ An example of the `remark` command being successfully executed:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `remark` command being successfully executed with the **REMARK** keyword:
+**An example of the `remark` command being successfully executed with the **REMARK** keyword:**
 1. Enter the command `remark 1 r/**REMARK** furthermore he is great at teamwork`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
   ![Remark-Success](images/remark-command-enhanced-success.png)
@@ -479,7 +481,7 @@ An example of the `remark` command being successfully executed with the **REMARK
 | Invalid Index                    | The person index provided is invalid | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
  | Negative or 0 Index              | Invalid command format!              | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
 
-Additional Examples:
+**Additional Examples:**
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
   
 [Jump back to Table of Contents](#table-of-contents)
@@ -578,7 +580,7 @@ Format: `set INDEX STATUS`
 | Mandatory | `INDEX`  | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicant in JABPro. It must also be a positive integer |
 | Mandatory | `STATUS` | `STATUS` must be one of the following - "Preliminary", "Interviewed", "Rejected", "Accepted". It is case-insensitive.                                                         |
 
-Examples:
+**Examples:**
 * `list` followed by `set 2 Interviewed` sets the 2nd applicant in the address book to "Interviewed".
 
 [Jump back to Table of Contents](#table-of-contents)
@@ -605,14 +607,14 @@ This means that the view will be updated to reflect the latest changes to the da
 
 </box>
 
-An example of the `view` command being successfully executed:
+**An example of the `view` command being successfully executed:**
 1. Enter the command `view 3`
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
    
    ![View-Success](images/view-command-success.png)
 <br>
 
-An example of the `view` command being successfully executed for applicant with tags and score:
+**An example of the `view` command being successfully executed for applicant with tags and score:**
 1. Enter the command `view 2` (**Applicant with tags and score**)
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
    
@@ -666,9 +668,10 @@ Format: `edit INDEX ([n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ 
 * If you used a tag that has not been created using `create` in an `edit` command, the tag would still be added to the applicant, but it would be _uncategorized_.
 * If you have **multiple tags in different categories with the same name**, you must **specify the category** when you want to tag the specified applicant with one of these tags e.g. `edit INDEX t/CATEGORY DUPLICATETAGNAME`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 * If you still would like to tag an applicant that has **not** been created, but you do not want this tag to be _uncategorized_, you can do so by doing 
 `edit INDEX t/CATEGORY TAGNAME`.
@@ -689,9 +692,10 @@ This is because, `create` only creates **new** categorized tags. It does **not**
 * You can only edit the score of an applicant i.e. `edit INDEX sc/TAGNAME SCORE` if they have been tagged with the assessment-related `TAGNAME`.
 
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 * You can also tag the applicant and edit their score **at the same time** by doing `edit INDEX t/TAGNAME sc/TAGNAME SCORE`. 
 * Note that the tag has to have already been created using `create` with the category `assessment`. You **cannot** do this with a tag that hasn't been created even if you specified its category _assessment_ i.e. `edit INDEX t/assessment interview1 sc/interview1 100` does **NOT**
@@ -712,7 +716,7 @@ Nonetheless, we **strongly recommend you to use `create` to create categorized t
 
 <div style="page-break-after: always;"></div>
 
-An example of the `edit` command being successfully executed:
+**An example of the `edit` command being successfully executed:**
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**edits name and phone number**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
    
@@ -721,7 +725,7 @@ An example of the `edit` command being successfully executed:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `edit` command being successfully executed with tags and score:
+**An example of the `edit` command being successfully executed with tags and score:**
 1. Ensure that you have created a tag `Interview` under the `assessment` category using the `create` command. Enter the command `create t/assessment Interview`
 2. Enter the command `edit 1 t/Interview sc/Interview 80` (**edits tag and score**)
 3. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
@@ -731,7 +735,7 @@ An example of the `edit` command being successfully executed with tags and score
 
 <div style="page-break-after: always;"></div>
 
-An example of the `edit` command being successfully executed to clear a tags and score:
+**An example of the `edit` command being successfully executed to clear a tags and score:**
 1. Enter the command `edit 1 t/` (**Clear all tags**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
    
@@ -787,14 +791,15 @@ Format: `delete (t/TAGNAME... st/STATUS...)`
 * Multiple delete parameters for a specific category are divided by spaces (not commas!) i.e. `delete st/preliminary interviewed`
 * Delete parameters are case-insensitive i.e. doing `delete t/interN` is the same as `delete t/intern`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 **Note:**
 * You can combine multiple delete categories in a single `delete` command e.g. `delete st/interviewed t/intern`
 
-An example of **delete by index** command being successfully executed:
+**An example of **delete by index** command being successfully executed:**
 1. Enter the command `delete Bernice`
 
    ![delete-by-index-pre](images/delete-by-index-pre.png)    
@@ -872,14 +877,15 @@ Format: `search (n/NAME...  st/STATUS...  t/TAGNAME...)`
 * Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 * Search parameters are case-insensitive i.e. doing `search n/aLeX` is the same as `search n/alex`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 **Note:**
 * You can combine multiple search categories in a single `search` command e.g. `search n/alex st/interviewed t/intern`
 
-Here are some examples of **search** command being successfully executed:
+**Here are some examples of **search** command being successfully executed:**
 1. Enter `search n/alex bernice`
 
    ![search-success-1](images/search-success-1.png)
@@ -976,7 +982,7 @@ Set up for examples when you first start JABPro with default data:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `filter` command being successfully executed:
+**An example of the `filter` command being successfully executed:**
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/percentile val/80` (**Filter by percentile**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
@@ -986,7 +992,7 @@ An example of the `filter` command being successfully executed:
 
 <div style="page-break-after: always;"></div>
 
-An example of the `filter` command being successfully executed with `median`:
+**An example of the `filter` command being successfully executed with `median`:**
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/median` (**Filter by median**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
@@ -1130,7 +1136,7 @@ Exports the entries into a .csv file located in the current directory as (/data/
 * JABPro must have write permissions, this means that if the .csv file is open, 
   exporting again will not be possible.
     
-Examples:
+**Examples:**
 * `export` exports the data to /data/export.csv
 
 [Jump back to Table of Contents](#table-of-contents)
@@ -1166,9 +1172,10 @@ Format: `exit`
 ## Additional information
 <a name="additional-information"></a>
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 ### Summary Statistics
 
@@ -1204,9 +1211,10 @@ You should ensure that you have **sufficient candidates of more than 20** with a
 3. `percentile` as where this applicant stands among all other applicants (treat it like a ranking system, the higher the percentile, the better the applicant is performing)
    </box>
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 **Note**:
 * Understand that `percentile` has limited functionality in some context. This is because if two applicants have the same score, they are `rank` the same. This means that the percentile of both applicants will be the same.
