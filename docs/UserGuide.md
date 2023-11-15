@@ -127,11 +127,13 @@ You are an **advanced** user if ...
 
 **Notes** and **tips** curated for you are labeled by the following box!
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
 
 
+
+<br>
 
 **Also, take note of the following icons and their meanings.**
 
@@ -304,7 +306,7 @@ The `Help Window` opens up as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 1.Managing Tags
+### 1. Managing Tags
 <a name="1-managing-tags"></a>
 Tags are meant to help you easily remember applicants details by appending different colour coding to different types of information.
 
@@ -666,9 +668,10 @@ Format: `edit INDEX ([n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ 
 * If you used a tag that has not been created using `create` in an `edit` command, the tag would still be added to the applicant, but it would be _uncategorized_.
 * If you have **multiple tags in different categories with the same name**, you must **specify the category** when you want to tag the specified applicant with one of these tags e.g. `edit INDEX t/CATEGORY DUPLICATETAGNAME`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 * If you still would like to tag an applicant that has **not** been created, but you do not want this tag to be _uncategorized_, you can do so by doing 
 `edit INDEX t/CATEGORY TAGNAME`.
@@ -689,9 +692,10 @@ This is because, `create` only creates **new** categorized tags. It does **not**
 * You can only edit the score of an applicant i.e. `edit INDEX sc/TAGNAME SCORE` if they have been tagged with the assessment-related `TAGNAME`.
 
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 * You can also tag the applicant and edit their score **at the same time** by doing `edit INDEX t/TAGNAME sc/TAGNAME SCORE`. 
 * Note that the tag has to have already been created using `create` with the category `assessment`. You **cannot** do this with a tag that hasn't been created even if you specified its category _assessment_ i.e. `edit INDEX t/assessment interview1 sc/interview1 100` does **NOT**
@@ -787,9 +791,10 @@ Format: `delete (t/TAGNAME... st/STATUS...)`
 * Multiple delete parameters for a specific category are divided by spaces (not commas!) i.e. `delete st/preliminary interviewed`
 * Delete parameters are case-insensitive i.e. doing `delete t/interN` is the same as `delete t/intern`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 **Note:**
 * You can combine multiple delete categories in a single `delete` command e.g. `delete st/interviewed t/intern`
@@ -872,9 +877,10 @@ Format: `search (n/NAME...  st/STATUS...  t/TAGNAME...)`
 * Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 * Search parameters are case-insensitive i.e. doing `search n/aLeX` is the same as `search n/alex`
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 **Note:**
 * You can combine multiple search categories in a single `search` command e.g. `search n/alex st/interviewed t/intern`
@@ -1166,9 +1172,10 @@ Format: `exit`
 ## Additional information
 <a name="additional-information"></a>
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 ### Summary Statistics
 
@@ -1204,9 +1211,10 @@ You should ensure that you have **sufficient candidates of more than 20** with a
 3. `percentile` as where this applicant stands among all other applicants (treat it like a ranking system, the higher the percentile, the better the applicant is performing)
    </box>
 
-<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 70px; height: 20px; text-align: center;">
-    <p style="color: #FFFFFF; font-size: 15px; font-weight: bold; font-family: 'Your Font Name', sans-serif;">Advanced</p>
+<div style="display: flex; justify-content: center; align-items: center; background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 35px; text-align: center;">
+    <p style="color: #FFFFFF; font-size: 18px; font-weight: bold;>Advanced</p>
 </div>
+
 
 **Note**:
 * Understand that `percentile` has limited functionality in some context. This is because if two applicants have the same score, they are `rank` the same. This means that the percentile of both applicants will be the same.
