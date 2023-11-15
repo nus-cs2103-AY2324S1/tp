@@ -45,10 +45,10 @@ You can navigate the user guide by clicking on the links in the table of content
 ![UG_tableOfContents](images/UG_tableOfContents.png)
 
 ### 2.2.2. Command Format
-`A command in the User Guide will be displayed in this format`
+`This is the format of a Command in the User Guide`
 
 ### 2.2.3. Links
-[links]() will be displayed in this format. These are clickable links that will bring you to the respective section.
+[Links]() will be displayed in this format. These are clickable links that will bring you to the respective section.
 
 ### 2.2.4. Boxes
 #### 2.2.4.1. Warning
