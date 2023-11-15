@@ -63,11 +63,13 @@ BayMeds enables storage of past prescriptions, i.e. prescriptions that you have 
 * Navigate to the start of this guide anytime by clicking the button in the bottom right corner of your screen.
 * The [blue](#how-to-use-this-guide) text in this guide are hyperlinks that will bring you to the relevant section when clicked.
 * The ```code``` text in this guide highlight technical information or commands that you can type into the application.
-<br></br>
-* To see all available commands, refer to the [Command Summary](#command-summary) section.
-* If you are an experienced user, you can refer to the [Features](#features) section for a quick summary of the commands available.
-* If you are looking to troubleshoot some errors you encountered, you can refer to the [Troubleshooting](#troubleshooting) section.
-* If you are new to BayMeds, we recommend you to start with the [Quick Start](#quick-start) section.
+<br><br>
+
+If you...
+* are **new** to BayMeds, we recommend you to begin at the [Quick Start](#quick-start) section.
+* are an **experienced** user, you may refer to the [Features](#features) section to learn more about each command available in BayMeds.
+* would like to see all available commands, refer to the [Command Summary](#command-summary) section.
+* are looking to troubleshoot some errors you encountered, you can refer to the [Troubleshooting](#troubleshooting) section.
 
 Additionally, here are some common icons you may encounter in this guide.
 <div style="width: 100%;">
@@ -91,6 +93,8 @@ If you are experienced in using JAR applications, simply download the latest ver
 
 </box>
 
+#### Starting BayMeds
+
 1. Ensure you have Java `11` or above installed in your computer.
 
 1. Download the latest `BayMeds.jar` from [here](https://github.com/AY2324S1-CS2103T-T15-2/tp/releases).
@@ -100,21 +104,24 @@ If you are experienced in using JAR applications, simply download the latest ver
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar BayMeds.jar` command to start the application.<br>
 
 
-   A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+1. A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+![Ui](images/Ui.png)
 
-1. Type commands in the command box and press Enter to execute it. <br> e.g. typing the command **`help`** and pressing Enter will open the help window.<br>
+#### Adding your first prescription
 
-   Some example commands you can try:
+1. To add your first prsecription, type `add mn/Doxazosin`. You will see your prescription being added into the prescription list, as shown below.
 
-   * `list` : Shows all your prescriptions.
+![result for 'Example output of add command'](images/ui/Ui-add-2.png)
 
-   * `add mn/Doxazosin f/Daily` : Adds a prescription `Doxazosin` to the list.
+#### Taking your first prescription
 
-   * `delete 2` : Deletes the second prescription in the list.
+1. To mark a prescription that you have just consumed, type `take 5 d/1`. The fifth prescription in the list will then be marked as consumed.
 
+1. To check that it has been marked as consumed, you can type `listToday`. As seen below, this will show that you have consumed 1 pill of Dosazoxin.
 
-1. Refer to the [features](#features) below for details of each command.
+![result for 'Example output of listToday command'](images/ui/Ui-listToday2.png)
+
+1. That is all you have to do to get started! You may wish to refer to the [features](#features) section below for more details of each command.
 
 <br></br>
 
