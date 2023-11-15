@@ -67,12 +67,12 @@ Please refer to the [Features](#features) section for details of each command.
 ## **Useful Notations**
 These symbols highlight information you might find important.
 
-| Symbol               | Meaning                                                                                        |
-|----------------------|------------------------------------------------------------------------------------------------|
-| :information_source: | General notes about the command                                                                |
-| :exclamation:        | Important notes about the command                                                              |
-| :warning:            | Warnings about the command, especially when data loss or  misinterpretation is likely to occur |
-| :bulb:               | Tips to optimise the use of Foster Family                                                      |
+| Symbol               | Meaning                                                                                       |
+|----------------------|-----------------------------------------------------------------------------------------------|
+| :information_source: | General notes about the command                                                               |
+| :exclamation:        | Important notes about the command                                                             |
+| :warning:            | Warnings about the command, especially when data loss or misinterpretation is likely to occur |
+| :bulb:               | Tips to optimise the use of Foster Family                                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ Let's say you want to open the profile page of a fosterer named Alex Yeoh who is
 
 <br>
 
-To do so, enter <code>view 1</code> as shown in the image above. You will be directed to his profile page as result as shown in the image below.
+To do so, enter <code>view 1</code> as shown in the image above. You will be directed to his profile page as shown in the image below.
 
 <div style="text-align: center">
 <img src="images/screenshots/EditExample.png" height="420" class="center"/>
