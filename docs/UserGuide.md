@@ -112,6 +112,7 @@ Our user guide takes into consideration your level of expertise in JABPro.
 
 You are a **beginner** user if ...
 
+
 1. You are new to JABPro (used JABPro less than 5 times) *and*,
 2. you wish to fully rely on the JABPro interface.
 
@@ -124,6 +125,7 @@ You are an **advanced** user if ...
 3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files.
 
 **Notes** and **tips** curated for you are labeled by the following box!
+
 
 <div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
     <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
@@ -666,6 +668,7 @@ Format: `edit INDEX ([n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ 
 * If you used a tag that has not been created using `create` in an `edit` command, the tag would still be added to the applicant, but it would be _uncategorized_.
 * If you have **multiple tags in different categories with the same name**, you must **specify the category** when you want to tag the specified applicant with one of these tags e.g. `edit INDEX t/CATEGORY DUPLICATETAGNAME`
 
+
 <div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
     <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
@@ -687,6 +690,7 @@ This is because, `create` only creates **new** categorized tags. It does **not**
 * The `SCORE` in `sc/TAG SCORE` is non-negative, that is `SCORE` must be more than or equal to 0.
 * To clear a tag's score, just re-tag it with the same tag name, but without using the `sc/TAG SCORE` field e.g. `edit 1 t/SCORETAG`
 * You can only edit the score of an applicant i.e. `edit INDEX sc/TAGNAME SCORE` if they have been tagged with the assessment-related `TAGNAME`.
+
 
 
 <div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
@@ -787,6 +791,7 @@ Format: `delete (t/TAGNAME... st/STATUS...)`
 * Multiple delete parameters for a specific category are divided by spaces (not commas!) i.e. `delete st/preliminary interviewed`
 * Delete parameters are case-insensitive i.e. doing `delete t/interN` is the same as `delete t/intern`
 
+
 <div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
     <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
 </div>
@@ -873,6 +878,7 @@ Format: `search (n/NAME...  st/STATUS...  t/TAGNAME...)`
 * Each prefix can only be used at most once.
 * Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 * Search parameters are case-insensitive i.e. doing `search n/aLeX` is the same as `search n/alex`
+
 
 <div style="display: flex; justify-content: center; align-items:center;  background-color: #FF0000; padding: 10px; border-radius: 30px; width: 100px; height: 50px; text-align: center;">
     <p style="color: #FFFFFF; font-size: 15px; font-weight: bold;">Advanced</p>
