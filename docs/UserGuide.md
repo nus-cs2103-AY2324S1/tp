@@ -790,6 +790,7 @@ Action        | Format, Examples
 }
 
 #content-wrapper h2 {
+  color: rgb(0, 128, 128);
   margin-top: 3rem;
 }
 
