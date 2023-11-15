@@ -31,7 +31,7 @@ This document is a comprehensive guide to all the commands available to you, alo
 
 Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-Step 2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
+Step 2. Download the latest `FosterFamily.jar` from [our GitHub Page](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
 
 Step 3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
 
@@ -86,7 +86,7 @@ These are some technical terms you may come across in this user guide.
 |----------------------|-------------------------------------------------------------------------------------------------------|
 | Command              | Flexibly refers both to features of Foster Family, as well as to keywords that trigger those features |
 | Parameter / Argument | Information to be passed to commands as inputs                                                        |
-| Index                | The number to the left of each fosterer's name in the list shown in the main page                   |
+| Index                | The number to the left of each fosterer's name in the list shown in the main page                     |
 | Field                | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc             |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -867,11 +867,6 @@ Format: `reset`, followed by `reset confirm`
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
 
-
-<div style="page-break-after: always;"></div>
-
-   * In the case where the user attempts to reset the address book by entering `reset confirm` without first entering the `reset` command, the user will be prompted to enter the `reset` command first.
-     ![Reset](images/screenshots/ResetPrompt.png)
    * In the case where the user wishes to **cancel the reset**, he/she just has to proceed and type any other **valid command** in the command box.
 
 
@@ -911,7 +906,8 @@ In the **main page**, your Foster Family data is **saved in the hard disk automa
 
 * A JSON file stores fosterer details as key value pairs, making it more readable than a regular text file.<br>
 
-  ![Json](images/screenshots/JsonExample.png)
+  <img src="images/screenshots/JsonExample.png" height="400" class="center"/>
+  
   For example, the "name" key is paired with a value "Alex Yeoh" for the first fosterer in your address book.<br>
 
 * We strongly advise you to update the data file directly **only if you are an advanced user**.<br>
