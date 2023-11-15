@@ -38,7 +38,7 @@ Step 5. Navigate to the home folder you put the jar file in using the command `c
 
 Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
-   The Foster Family GUI should appear on screen, similar to the screenshot attached below. Note how the app contains some sample data.<br>
+   The Foster Family GUI should appear on your screen, similar to the image below. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png) 
 
 <div style="page-break-after: always;"></div>
@@ -98,14 +98,14 @@ These are the two different screens you will be interacting with in Foster Famil
 
 ![Ui](images/Ui.png)
 
-This is the main view that welcomes you when you start up Foster Family.
+This is the main view that welcomes you when you first start up Foster Family.
 
 <div style="page-break-after: always;"></div>
 
 ### The Profile Page 
 ![ProfileExample](images/screenshots/EditExample.png)
 
-This is the profile view that you can use to add a fosterer or edit the details of an existing fosterer. 
+This is the profile view that you can use to add a fosterer, or to edit the details of an existing fosterer. 
 
 #### Opening the profile page
 There are two ways you can use to navigate to the profile page. 
@@ -122,7 +122,7 @@ Let's say you want to open the profile page of a fosterer named Alex Yeoh who is
 
 <br>
 
-To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
+To do so, enter <code>view 1</code> as shown in the image above. 
 
 <div style="text-align: center">
 <img src="images/screenshots/EditExample.png" height="420" class="center"/>
@@ -133,7 +133,8 @@ To do so, enter <code>view 1</code> as shown in the image above, which opens the
 <div style="page-break-after: always;"></div>
 
 #### Navigating through fields
-Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
+
+Entering the full name or substring of the field you want to edit brings your cursor to the corresponding textbox.
 
 <div style="text-align: center">
 <img src="images/screenshots/BeforeEnteringName.png" class="center"/>
@@ -149,14 +150,16 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 
 <div style="page-break-after: always;"></div>
 
-After you are done editing, pressing the Enter key on your keyboard brings your cursor back to the command box with your new changes intact. 
+After you are **done editing**, _press the Enter key_ on your keyboard to bring your cursor back to the command box. 
 
 <div></div>
 
-If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box.
+If you **wish to discard changes** while editing in the textbox, _press the Esc key_ to undo the changes and direct your cursor back to the command box.
 
 <div style="text-align: center">
+
 <img src="images/screenshots/CursorBackToCommandbox.png" class="center"/>
+
 </div>
 
 In the example above, after changing name from 'Yeoh' to 'Yeo', the Enter key was pressed. 
@@ -189,14 +192,15 @@ Key in <code>save</code> and press Enter to save the changes.
 
 <br/>
 
-This saves the changes you have made and updates the details of a fosterer, or adds a new fosterer with the inputted details (depending on whether the profile page was used for an `edit` or `add`).
+If this was an `edit`, your changes to the fosterer will be saved.<br>
+If this was an `add`,  the new fosterer with the inputted details will be added.
 
 <br>
 
 #### Exiting the profile page
 
-Entering <code>exit</code> closes the profile page and leads you back to the main window.
-Attempting to exit without saving your changes will give you a warning message, prompting you to save your changes. 
+Entering <code>exit</code> closes the profile page and directs you back to the main window. <br>
+Foster Family will warn you if you attempt to exit without first saving your changes.
 
 <br>
 
@@ -226,11 +230,11 @@ Let's say you did not save your changes and entered <code>exit</code>.
 
 <div style="page-break-after: always;"></div>
 
-If you press Enter again, your changes are discarded and you will be redirected back to the main window.
+If you _press the Enter key_ again, your **changes are discarded** and you will be redirected back to the main window.
 
 <div></div>
 
-If you press the Esc key, the exit is cancelled and you can continue working on your changes in the profile page.
+If you _press the Esc key_, the **exit is cancelled** and you can continue working on your changes in the profile page.
 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 
@@ -402,18 +406,13 @@ Alias: `find`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 * All fields are searched (including tags).
-
-* For most fields, keywords can match as parts of words. e.g. `john` will match `Johnny`.
-
-* However, for the `Housing` and `Availability` fields, as well as for tags, keywords must match the entire field. <br>
-  e.g. `available` will not match `NotAvailable`.
-  
-* Keywords can overlap. e.g. `samm my` will match `Sammy`.
+ 
+* Your keywords can overlap. e.g. `samm my` will match `Sammy`.
 
 * Fosterers must match all keywords (i.e. `AND` search).<br>
   e.g. `Hans Bo` will return `Hansbo Grahm`, but not `Hans Duo`.
 
-* Use double quotes `"` for exact, case-sensitive, word-level match.<br>
+* You can use double quotes `"` for exact, case-sensitive, word-level match.<br>
   e.g. `"Tom"` matches "Tom", but not "Tommy".
 
 * Symbols between keywords or sections will combine them according to the function of the symbol.<br>
@@ -429,14 +428,28 @@ e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Important:**<br>
+
+For most fields, your **keywords can match as parts of words**. <br>
+e.g. `john` will match `Johnny`.<br>
+
+However, for the `Housing` and `Availability` fields, as well as for tags, your **keywords must match the entire field**. <br>
+e.g. `available` will not match `NotAvailable`.
+
+</div>
+
 Examples:
 * `list`
-    * lists all fosterers in the address book.
+    * lists all fosterers in your address book.
   
 <div></div>
 
 * `list john doe`
-    * lists entries which match "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street".
+    * lists fosterers that match "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street".
   
 <div></div>
 
@@ -446,7 +459,7 @@ Examples:
 <div></div>
 
 * `list "John" / zam & doe`
-    * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
+    * lists fosterers which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
 <br> 
 
@@ -454,7 +467,7 @@ Examples:
 
 ### Viewing a fosterer's detail: `view`
 
-Redirects you to the profile page of the index-th fosterer in the list currently displayed in your address book.
+Redirects you to the profile page of the fosterer at the specified index.
 
 Format: `view INDEX`
 
@@ -468,8 +481,7 @@ Parameters:
 
 **:exclamation: Important:**<br>
 
-Only specific commands are available to you in the profile page.<br> 
-The available commands are <code>save</code> and <code>exit</code>. 
+Only the <code>save</code> and <code>exit</code> commands are available to you in the profile page.
 
 </div> 
 
@@ -483,38 +495,9 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 <div style="page-break-after: always;"></div>
 
-### Saving changes in a fosterer's details: `save`
-
-Saves changes to details of the fosterer which you have made in the profile page.
-
-<div markdown="block" class="alert alert-danger">
-
-**:exclamation: Important:**<br>
-
-* Just like `add` command, changing name to uppercase or to lowercase or adding spaces in names would not be saved 
-e.g. Since <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>, such edits would not be saved.
-
-* This command only works in the profile page, which you can navigate to by executing the `view` command.
-
-</div>
-
-Format: `save`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command:**<br>
-
-*  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
-*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
-</div>
-
-<br> 
-
-<div style="page-break-after: always;"></div>
-
 ### Editing a fosterer's details through the main window: `edit`
 
-Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the main window.
+Edits the details of the fosterer at the specified index, done through the main window.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
@@ -674,6 +657,35 @@ Step 5. Enter `save` to save your changes.
 <br> 
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
+
+<br> 
+
+<div style="page-break-after: always;"></div>
+
+### Saving changes in a fosterer's details: `save`
+
+Saves changes to details of the fosterer which you have made in the profile page.
+
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Important:**<br>
+
+* Just like `add` command, changing name to uppercase or to lowercase or adding spaces in names would not be saved
+  e.g. Since <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>, such edits would not be saved.
+
+* This command only works in the profile page, which you can navigate to by executing the `view` command.
+
+</div>
+
+Format: `save`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+*  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
+*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details.
+</div>
 
 <br> 
 
