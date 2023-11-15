@@ -78,7 +78,7 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
    A display similar to the below should appear in a few seconds. If you are starting the app for the first time,
  there will be some sample data loaded.<br>
 <div style="text-align:center;">
-   <img src="images/startUi.png" alt="startUi" style="width:450px"/>
+   <img src="images/startUi.png" alt="startUi" style="width:450px; box-shadow: 7px 7px 7px #878787;"/>
 </div>
 <br>
 
@@ -1267,21 +1267,20 @@ An example when the same name is detected:
 ## Appendix D: Definitions
 Provided is a useful definition list of terms that were used in the guide and in the application.
 
-- Area code: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
-- Alphanumeric: Consisting of only English-language letters and the digits from 0-9.
-- CLI: Command-Line Interface. A text-based means of interacting with applications. 
+- **Area code**: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
+- **Alphanumeric**: Consisting of only English-language letters and the digits from 0-9.
+- **CLI**: Command-Line Interface. A text-based means of interacting with applications. 
 In RTPM, you use this to interact with the internal logic.
-- Client: In RTPM, refers to either a buyer or a seller.
-- Hard disk: The storage component of your computer.
-- Computer: Desktops or laptops, but not mobile phones.
-- Index: Any positive (above 0) integer.
-- Integer: A number without a fractional part.
-- JSON: A storage format that RTPM uses to store its data. See [here](https://en.wikipedia.org/wiki/JSON) for more info.
-- Numerical: Consisting only digits from 0-9.
-- Parameters: Specific details, instructions and information about the command you are executing.
-- Priority: The importance of a specific client, as determined by you.
-- RTPM: The acronym for this app, RealtorTrackerPlusMax.
-- Special characters: All non-alphanumeric characters.
+- **Client**: In RTPM, refers to either a buyer or a seller.
+- **Hard disk**: The storage component of your computer.
+- **Index**: Any positive (above 0) integer.
+- **Integer**: A number without a fractional part.
+- **JSON**: A storage format that RTPM uses to store its data. See [here](https://en.wikipedia.org/wiki/JSON) for more info.
+- **Numerical**: Consisting only digits from 0-9.
+- **Parameters**: Specific details, instructions and information about the command you are executing.
+- **Priority**: The importance of a specific client, as determined by you.
+- **RTPM**: The acronym for this app, RealtorTrackerPlusMax.
+- **Special characters**: All non-alphanumeric characters.
 
 
 <div style='text-align: right;'>
