@@ -1,0 +1,25 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+|User|
+start
+:Start JABPro;
+:Enter export command;
+if () then ([Command executes successfully])
+  |JABPro|
+  :Exports existing data to /data/export.csv;
+else ([Command fails to execute])
+  |JABPro|
+  :Display error message and provide remedy;
+  |User|
+
+endif
+
+stop
+
+@enduml

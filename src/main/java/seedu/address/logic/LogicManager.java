@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,7 +16,11 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,6 +31,7 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -50,8 +56,10 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveEventBook(model.getEventBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -67,13 +75,45 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyEventBook getEventBook() {
+        return model.getEventBook();
+    }
+
+    @Override
+    public ReadOnlySummaryStatistic getSummaryStatistic() {
+        return model.getSummaryStatistic();
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 
     @Override
+    public ObservableList<Tag> getFilteredTagsList() {
+        return model.getFilteredTagList();
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return model.getFilteredEventList();
+    }
+
+
+
+    @Override
+    public Index getLastViewedPersonIndex() {
+        return model.getLastViewedPersonIndex();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getEventBookFilePath() {
+        return model.getEventBookFilePath();
     }
 
     @Override
@@ -85,4 +125,6 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+
 }
