@@ -898,6 +898,7 @@ In the **main page**, your Foster Family data is **saved in the hard disk automa
   
   For example, the "name" key is paired with a value "Alex Yeoh" for the first fosterer in your address book.<br>
 
+
 * We strongly advise you to update the data file directly **only if you are an advanced user**.<br>
 
 * Otherwise, we highly recommend you to perform edits using our user-friendly interface instead.<br>
