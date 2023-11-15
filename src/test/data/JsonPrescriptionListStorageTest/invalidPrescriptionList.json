@@ -1,0 +1,12 @@
+{
+  "prescriptions" : [ {
+    "name" : "Prescription with invalid name field: @spr!n",
+    "dosage" : "1",
+    "frequency" : "Daily",
+    "startDate" : "01/08/2023",
+    "endDate" : "25/12/2023",
+    "expiryDate" : "01/12/2024",
+    "totalStock" : "100",
+    "note" : "Test note"
+  } ]
+}

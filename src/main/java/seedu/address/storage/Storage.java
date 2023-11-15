@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPrescriptionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * API of the StoragePrescription component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends PrescriptionListStorage, CompletedPrescriptionListStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -21,12 +21,21 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getPrescriptionListFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyPrescriptionList> readPrescriptionList() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void savePrescriptionList(ReadOnlyPrescriptionList prescriptionList) throws IOException;
+
+    @Override
+    Path getCompletedPrescriptionListFilePath();
+
+    @Override
+    Optional<ReadOnlyPrescriptionList> readCompletedPrescriptionList() throws DataLoadingException;
+
+    @Override
+    void saveCompletedPrescriptionList(ReadOnlyPrescriptionList completedPrescriptionList) throws IOException;
 
 }

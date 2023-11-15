@@ -1,0 +1,21 @@
+{
+  "prescriptions" : [ {
+    "name" : "Valid Prescription",
+    "dosage" : "1",
+    "frequency" : "Daily",
+    "startDate" : "01/08/2023",
+    "endDate" : "25/12/2023",
+    "expiryDate" : "01/12/2024",
+    "totalStock" : "100",
+    "note" : "Test note"
+  }, {
+    "name" : "Prescription With Invalid Dosage",
+    "dosage" : "damith",
+    "frequency" : "Daily",
+    "startDate" : "01/08/2023",
+    "endDate" : "25/12/2023",
+    "expiryDate" : "01/01/2024",
+    "totalStock" : "100",
+    "note" : "Note"
+  } ]
+}

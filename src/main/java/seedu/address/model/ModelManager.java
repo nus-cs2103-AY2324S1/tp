@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,36 +13,46 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.TakeCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.prescription.Name;
+import seedu.address.model.prescription.Prescription;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the prescription list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final PrescriptionList prescriptionList;
+    private final PrescriptionList completedPrescriptionList;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Prescription> filteredPrescriptions;
+    private final FilteredList<Prescription> filteredCompletedPrescriptions;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManagerPrescription with the given prescriptionList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyPrescriptionList prescriptionList, ReadOnlyPrescriptionList completedPrescriptionList,
+        ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(prescriptionList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with prescription list: " + prescriptionList
+                + ", completed prescription list: " + completedPrescriptionList
+                + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.prescriptionList = new PrescriptionList(prescriptionList);
+        this.completedPrescriptionList = new PrescriptionList(completedPrescriptionList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPrescriptions = new FilteredList<>(this.prescriptionList.getPrescriptionList());
+        filteredCompletedPrescriptions = new FilteredList<>(this.completedPrescriptionList.getPrescriptionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new PrescriptionList(), new PrescriptionList(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    //=========== UserPrefsPrescription ===============================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -65,67 +77,191 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getPrescriptionListFilePath() {
+        return userPrefs.getPrescriptionListFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
-
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setPrescriptionListFilePath(Path prescriptionListFilePath) {
+        requireNonNull(prescriptionListFilePath);
+        userPrefs.setPrescriptionListFilePath(prescriptionListFilePath);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public Path getCompletedPrescriptionListFilePath() {
+        return userPrefs.getCompletedPrescriptionListFilePath();
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public void setCompletedPrescriptionListFilePath(Path completedPrescriptionListFilePath) {
+        requireNonNull(completedPrescriptionListFilePath);
+        userPrefs.setCompletedPrescriptionListFilePath(completedPrescriptionListFilePath);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public LocalDate getStoredDate() {
+        return userPrefs.getStoredDate();
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void setStoredDate(LocalDate storedDate) {
+        requireNonNull(storedDate);
+        userPrefs.setStoredDate(storedDate);
+    }
+
+    //=========== PrescriptionList ================================================================================
+
+    @Override
+    public void setPrescriptionList(ReadOnlyPrescriptionList prescriptionList) {
+        this.prescriptionList.resetData(prescriptionList);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public ReadOnlyPrescriptionList getPrescriptionList() {
+        return prescriptionList;
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public boolean hasPrescription(Prescription prescription) {
+        requireNonNull(prescription);
+        return prescriptionList.hasPrescription(prescription);
+    }
+
+    @Override
+    public void deletePrescription(Prescription target) {
+        prescriptionList.removePrescription(target);
+    }
+
+    @Override
+    public void addPrescription(Prescription prescription) {
+        prescriptionList.addPrescription(prescription);
+        updateFilteredPrescriptionList(PREDICATE_SHOW_ALL_PRESCRIPTIONS);
+    }
+
+    @Override
+    public void setPrescription(Prescription target, Prescription editedPrescription) {
+        requireAllNonNull(target, editedPrescription);
+
+        prescriptionList.setPrescription(target, editedPrescription);
+    }
+
+    @Override
+    public Prescription getPrescriptionByName(Name prescriptionName) throws CommandException {
+        requireNonNull(prescriptionName);
+
+        for (Prescription prescription : prescriptionList.getPrescriptionList()) {
+            if (prescription.getName().equals(prescriptionName)) {
+                return prescription;
+            }
+        }
+        throw new CommandException(TakeCommand.MESSAGE_PRESCRIPTION_NOT_FOUND);
+    }
+
+    //=========== Filtered Prescription List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Prescription} backed by the internal list of
+     * {@code versionedPrescriptionList}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Prescription> getFilteredPrescriptionList() {
+        return filteredPrescriptions;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPrescriptions.setPredicate(predicate);
+    }
+
+    //=========== CompletedPrescriptionList =========================================================================
+
+    @Override
+    public void setCompletedPrescriptionList(ReadOnlyPrescriptionList completedPrescriptionList) {
+        this.completedPrescriptionList.resetData(completedPrescriptionList);
+    }
+
+    @Override
+    public ReadOnlyPrescriptionList getCompletedPrescriptionList() {
+        return completedPrescriptionList;
+    }
+
+    @Override
+    public boolean hasCompletedPrescription(Prescription completedPrescription) {
+        requireNonNull(completedPrescription);
+        return completedPrescriptionList.hasPrescription(completedPrescription);
+    }
+
+    @Override
+    public void deleteCompletedPrescription(Prescription target) {
+        completedPrescriptionList.removePrescription(target);
+    }
+
+    @Override
+    public void addCompletedPrescription(Prescription completedPrescription) {
+        completedPrescriptionList.addPrescription(completedPrescription);
+        updateFilteredCompletedPrescriptionList(PREDICATE_SHOW_ALL_PRESCRIPTIONS);
+    }
+
+    @Override
+    public void setCompletedPrescription(Prescription target, Prescription editedPrescription) {
+        requireAllNonNull(target, editedPrescription);
+
+        completedPrescriptionList.setPrescription(target, editedPrescription);
+    }
+
+    @Override
+    public Prescription getCompletedPrescriptionByName(Name completedPrescriptionName) throws CommandException {
+        requireNonNull(completedPrescriptionName);
+
+        for (Prescription completedPrescription : completedPrescriptionList.getPrescriptionList()) {
+            if (completedPrescription.getName().equals(completedPrescriptionName)) {
+                return completedPrescription;
+            }
+        }
+        throw new CommandException(TakeCommand.MESSAGE_PRESCRIPTION_NOT_FOUND);
+    }
+
+    //=========== Filtered Completed Prescription List Accessors ====================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Prescription} backed by the internal list of
+     * {@code versionedPrescriptionList}
+     */
+    @Override
+    public ObservableList<Prescription> getFilteredCompletedPrescriptionList() {
+        return filteredCompletedPrescriptions;
+    }
+
+    @Override
+    public void updateFilteredCompletedPrescriptionList(Predicate<Prescription> predicate) {
+        requireNonNull(predicate);
+        filteredCompletedPrescriptions.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasDrugClash(Prescription toAdd) {
+        requireNonNull(toAdd);
+
+        boolean result = false;
+        for (Prescription prescription : prescriptionList.getPrescriptionList()) {
+            if (prescription.hasDrugClash(toAdd)) {
+                toAdd.addConflictingDrug(prescription.getDrug());
+                result = true;
+            }
+        }
+
+        Set<Name> drugSet = toAdd.getConflictingDrugs();
+        for (Name drug : drugSet) {
+            for (Prescription prescription : prescriptionList.getPrescriptionList()) {
+                if (prescription.getDrug().equals(drug)) {
+                    prescription.addConflictingDrug(toAdd.getDrug());
+                    result = true;
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -140,9 +276,11 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return prescriptionList.equals(otherModelManager.prescriptionList)
+                && completedPrescriptionList.equals(otherModelManager.completedPrescriptionList)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPrescriptions.equals(otherModelManager.filteredPrescriptions)
+                && filteredCompletedPrescriptions.equals(otherModelManager.filteredCompletedPrescriptions);
     }
 
 }

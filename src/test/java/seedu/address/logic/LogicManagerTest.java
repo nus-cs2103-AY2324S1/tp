@@ -1,18 +1,25 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PRESCRIPTION_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DOSAGE_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.END_DATE_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.EXPIRY_DATE_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.FREQUENCY_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.START_DATE_DESC_ASPIRIN;
+import static seedu.address.logic.commands.CommandTestUtil.STOCK_DESC_ASPIRIN;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPrescriptions.ASPIRIN;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +32,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPrescriptionList;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.prescription.Prescription;
+import seedu.address.storage.JsonCompletedPrescriptionListStorage;
+import seedu.address.storage.JsonPrescriptionListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PrescriptionBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -45,10 +53,14 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonPrescriptionListStorage prescriptionListStorage =
+            new JsonPrescriptionListStorage(temporaryFolder.resolve("prescriptionList.json"));
+        JsonCompletedPrescriptionListStorage completedPrescriptionListStorage =
+            new JsonCompletedPrescriptionListStorage(temporaryFolder.resolve("completedPrescriptionList.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
+            temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(prescriptionListStorage,
+                completedPrescriptionListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -58,33 +70,77 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
+
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PRESCRIPTION_DISPLAYED_INDEX);
     }
+
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_EMPTY_LIST, model);
     }
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredPrescriptionList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPrescriptionList().remove(0));
+    }
+
+    @Test
+    public void getFilteredCompletedPrescriptionList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCompletedPrescriptionList()
+                .remove(0));
+    }
+
+    @Test
+    public void checkAndMoveEndedPrescriptions_successful() throws Exception {
+        // Get the current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Create a date formatter to format the dates
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Calculate the end dates based on the current date and days to add
+        LocalDate endDate1 = currentDate.minusDays(10);
+        LocalDate endDate2 = currentDate.plusDays(10);
+        LocalDate endDate3 = currentDate.minusDays(20);
+
+        Prescription prescription1 = new PrescriptionBuilder()
+                .withStartDate("01/02/2021")
+                .withEndDate(dateFormatter.format(endDate1)).build();
+        Prescription prescription2 = new PrescriptionBuilder()
+                .withStartDate("01/03/2021")
+                .withEndDate(dateFormatter.format(endDate2)).build();
+        Prescription prescription3 = new PrescriptionBuilder()
+                .withStartDate("01/04/2020")
+                .withEndDate(dateFormatter.format(endDate3)).build();
+
+        model.addPrescription(prescription1);
+        model.addPrescription(prescription2);
+        model.addPrescription(prescription3);
+        logic.checkAndMoveEndedPrescriptions();
+
+        // Check if prescription1 and prescription3 are in the completed prescription list
+        assertTrue(model.getCompletedPrescriptionList().getPrescriptionList().contains(prescription1));
+        assertTrue(model.getCompletedPrescriptionList().getPrescriptionList().contains(prescription3));
+
+        // prescription2 should still be in the main list
+        assertTrue(model.getPrescriptionList().getPrescriptionList().contains(prescription2));
     }
 
     /**
@@ -95,7 +151,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+        Model expectedModel) throws CommandException, ParseException, IOException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -122,8 +178,9 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage) {
+        Model expectedModel = new ModelManager(
+            model.getPrescriptionList(), model.getCompletedPrescriptionList(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -135,41 +192,51 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+        String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
 
     /**
-     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
+     * Tests the LogicPrescription component's handling of an {@code IOException} thrown by the Storage component.
      *
      * @param e the exception to be thrown by the Storage component
-     * @param expectedMessage the message expected inside exception thrown by the Logic component
+     * @param expectedMessage the message expected inside exception thrown by the LogicPrescription component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        // Inject LogicManagerPrescription with a PrescriptionListStorage that throws the IOException e when saving
+        JsonPrescriptionListStorage prescriptionListStorage = new JsonPrescriptionListStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void savePrescriptionList(ReadOnlyPrescriptionList prescriptionList, Path filePath)
                     throws IOException {
                 throw e;
             }
         };
+        JsonCompletedPrescriptionListStorage completedPrescriptionListStorage =
+            new JsonCompletedPrescriptionListStorage(prefPath);
 
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+            new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(prescriptionListStorage,
+            completedPrescriptionListStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        // Triggers the savePrescriptionList method by executing an add command
+        String addCommand = AddCommand.COMMAND_WORD
+                + NAME_DESC_ASPIRIN
+                + DOSAGE_DESC_ASPIRIN
+                + FREQUENCY_DESC_ASPIRIN
+                + START_DATE_DESC_ASPIRIN
+                + END_DATE_DESC_ASPIRIN
+                + EXPIRY_DATE_DESC_ASPIRIN
+                + STOCK_DESC_ASPIRIN
+                + NOTE_DESC_ASPIRIN;
+        Prescription expectedPrescription = new PrescriptionBuilder(ASPIRIN).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addPrescription(expectedPrescription);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

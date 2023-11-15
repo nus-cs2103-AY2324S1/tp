@@ -4,11 +4,14 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Scale;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -23,7 +26,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindowPrescription.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -31,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private PrescriptionListPanel prescriptionListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane prescriptionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,17 +113,29 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
+        prescriptionListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getPrescriptionListFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        scaleScreen();
+    }
+
+    private void scaleScreen() {
+        Rectangle2D screen = Screen.getPrimary().getBounds();
+        double screenScale = screen.getHeight() / 1080;
+        Scale scale = new Scale(screenScale, screenScale);
+        scale.setPivotX(screen.getWidth() / 2);
+        scale.setPivotY(screen.getHeight() / 2);
+        primaryStage.getScene().getRoot().getTransforms().setAll(scale);
+        primaryStage.centerOnScreen();
     }
 
     /**
@@ -129,6 +144,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -163,8 +179,21 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void resetPrescriptionListView() {
+        prescriptionListPanelPlaceholder.getChildren().clear();
+        prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
+        prescriptionListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
+    }
+
+    @FXML
+    private void handleListCompleted() {
+        prescriptionListPanelPlaceholder.getChildren().clear();
+        prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredCompletedPrescriptionList());
+        prescriptionListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
+    }
+
+    public PrescriptionListPanel getPrescriptionListPanel() {
+        return prescriptionListPanel;
     }
 
     /**
@@ -177,20 +206,39 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
+            handleCommand(commandResult);
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Calls different UI methods based on the type of command.
+     *
+     */
+    private void handleCommand(CommandResult commandResult) {
+        assert commandResult != null;
+
+        PrescriptionListPanel.setShowStatus(false);
+        if (commandResult.isListToday()) {
+            PrescriptionListPanel.setShowStatus(true);
+        }
+
+        if (commandResult.isListCompleted()) {
+            handleListCompleted();
+        } else {
+            resetPrescriptionListView();
+        }
+
+        if (commandResult.isShowHelp()) {
+            handleHelp();
+        }
+
+        if (commandResult.isExit()) {
+            handleExit();
         }
     }
 }

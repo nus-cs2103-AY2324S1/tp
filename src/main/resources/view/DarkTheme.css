@@ -1,6 +1,58 @@
+/* Extra styles for BayMeds */
+#mainWindowBackground {
+     -fx-background-color: #202124;
+     -fx-background-radius: 2em;
+     -fx-effect: dropshadow(three-pass-box, derive(#202124, -20%), 10, 0, 0, 0);
+     -fx-background-insets: 5;
+}
+
+#mainWindowLabel {
+     -fx-font-size: 25pt;
+     -fx-font-family: "Segoe UI Semibold";
+     -fx-text-fill: #F2E8E3;
+     -fx-opacity: 1;
+}
+
+#rightWindowBackground {
+     -fx-background-color: #3C4042;
+     -fx-background-radius: 0em 2em 2em 0em;
+}
+
+.modern-box-pane {
+     -fx-background-color: #424242;
+     -fx-background-radius: 1em;
+     -fx-effect: dropshadow(gaussian, #ADD8E625, 20, 0, 0, 0);
+     -fx-background-insets: 5;
+}
+
+.consumption-status-green {
+     -fx-background-color: #2E7D32;
+     -fx-background-radius: 1em;
+     -fx-font-size: 11pt;
+     -fx-text-fill: #F2E8E3;
+     -fx-padding: 5;
+}
+
+.consumption-status-red {
+     -fx-background-color: #D32F2F;
+     -fx-background-radius: 1em;
+     -fx-font-size: 11pt;
+     -fx-text-fill: #F2E8E3;
+     -fx-padding: 5;
+}
+
+.consumption-status-grey {
+     -fx-background-color: #6c7a89;
+     -fx-background-radius: 1em;
+     -fx-font-size: 11pt;
+     -fx-text-fill: #F2E8E3;
+     -fx-padding: 5;
+}
+
+/* AB3 Styles */
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #474C5F; /* Used in the default.html file */
 }
 
 .label {
@@ -87,24 +139,24 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.list-view {
+#prescriptionListView {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 15;
+    -fx-background-insets: 15;
+    -fx-background-color: #424242;
+    -fx-background-radius: 1em;
+    -fx-effect: dropshadow(gaussian, #ADD8E650, 15, 0, 0, 0);
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+.list-cell:empty {
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:selected {
@@ -113,23 +165,37 @@
 
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-width: 0;
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #F2E8E3;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #F2E8E3;
+}
+
+.cell_small_header {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F2E8E3;
+}
+
+.cell_small_header_red {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D32F2F;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #F2E8E3;
 }
 
 .stack-pane {
@@ -143,14 +209,14 @@
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
 }
 
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #F2E8E3;
 }
 
 .result-display .label {
@@ -159,7 +225,7 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #F2E8E3;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -185,21 +251,23 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #424242;
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #F2E8E3;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 0 0 0 20;
+    -fx-background-color: #202124;
+    -fx-background-radius: 2em 0em 0em 0em;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #F2E8E3;
     -fx-opacity: 0.9;
 }
 
@@ -213,24 +281,16 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
+    -fx-padding: 3 10 3 10;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-color: #3C4042;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 14pt;
+    -fx-text-fill: #F2E8E3;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
-}
-
-.button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: #0096C9;
 }
 
 .button:focused {
@@ -283,6 +343,8 @@
 
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-unit-increment: 0.1;
+    -fx-block-increment: 0.1;
 }
 
 .scroll-bar .thumb {
@@ -318,22 +380,21 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill : #F2E8E3;
+    -fx-prompt-text-fill: #F2E8E3;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #prescriptionListPanel, #prescriptionWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: #424242;
     -fx-background-radius: 0;
 }
 

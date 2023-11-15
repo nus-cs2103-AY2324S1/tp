@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPrescriptions.getTypicalPrescriptionList;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PrescriptionList;
+import seedu.address.model.ReadOnlyPrescriptionList;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,14 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonPrescriptionListStorage prescriptionListStorage = new JsonPrescriptionListStorage(
+            getTempFilePath("pl"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
+            getTempFilePath("prefs"));
+        JsonCompletedPrescriptionListStorage completedPrescriptionListStorage =
+            new JsonCompletedPrescriptionListStorage(getTempFilePath("cpl"));
+        storageManager = new StorageManager(prescriptionListStorage,
+            completedPrescriptionListStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -37,8 +42,9 @@ public class StorageManagerTest {
     public void prefsReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonUserPrefsStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
+         * {@link JsonUserPrefsStoragePrescription} class.
+         * More extensive testing of UserPref saving/reading is done in
+         * {@link JsonUserPrefsStoragePrescriptionTest} class.
          */
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
@@ -48,21 +54,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void prescriptionListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonPrescriptionListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonPrescriptionListStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        PrescriptionList original = getTypicalPrescriptionList();
+        storageManager.savePrescriptionList(original);
+        ReadOnlyPrescriptionList retrieved = storageManager.readPrescriptionList().get();
+        assertEquals(original, new PrescriptionList(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getPrescriptionListFilePath() {
+        assertNotNull(storageManager.getPrescriptionListFilePath());
     }
 
 }

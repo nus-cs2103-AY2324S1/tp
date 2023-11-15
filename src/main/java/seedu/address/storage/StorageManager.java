@@ -7,24 +7,28 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPrescriptionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of PrescriptionList data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private PrescriptionListStorage prescriptionListStorage;
+    private CompletedPrescriptionListStorage completedPrescriptionListStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManagerPrescription} with the given {@code PrescriptionListStorage}
+     * and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(PrescriptionListStorage prescriptionListStorage,
+        CompletedPrescriptionListStorage completedPrescriptionListStorage, UserPrefsStorage userPrefsStorage) {
+        this.prescriptionListStorage = prescriptionListStorage;
+        this.completedPrescriptionListStorage = completedPrescriptionListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,33 +50,64 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ PrescriptionList methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getPrescriptionListFilePath() {
+        return prescriptionListStorage.getPrescriptionListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyPrescriptionList> readPrescriptionList() throws DataLoadingException {
+        return readPrescriptionList(prescriptionListStorage.getPrescriptionListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyPrescriptionList> readPrescriptionList(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return prescriptionListStorage.readPrescriptionList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void savePrescriptionList(ReadOnlyPrescriptionList prescriptionList) throws IOException {
+        savePrescriptionList(prescriptionList, prescriptionListStorage.getPrescriptionListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void savePrescriptionList(ReadOnlyPrescriptionList prescriptionList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        prescriptionListStorage.savePrescriptionList(prescriptionList, filePath);
+    }
+
+    // ================ CompletedPrescriptionList methods ==============================
+
+    @Override
+    public Path getCompletedPrescriptionListFilePath() {
+        return completedPrescriptionListStorage.getCompletedPrescriptionListFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyPrescriptionList> readCompletedPrescriptionList() throws DataLoadingException {
+        return readCompletedPrescriptionList(completedPrescriptionListStorage.getCompletedPrescriptionListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyPrescriptionList> readCompletedPrescriptionList(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return completedPrescriptionListStorage.readCompletedPrescriptionList(filePath);
+    }
+
+    @Override
+    public void saveCompletedPrescriptionList(ReadOnlyPrescriptionList completedPrescriptionList) throws IOException {
+        saveCompletedPrescriptionList(completedPrescriptionList,
+                completedPrescriptionListStorage.getCompletedPrescriptionListFilePath());
+    }
+
+    @Override
+    public void saveCompletedPrescriptionList(ReadOnlyPrescriptionList completedPrescriptionList,
+            Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        completedPrescriptionListStorage.saveCompletedPrescriptionList(completedPrescriptionList, filePath);
     }
 
 }

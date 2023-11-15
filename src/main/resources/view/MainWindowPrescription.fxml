@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+         title="BayMeds v.2103" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+  <icons>
+    <Image url="@/images/address_book_32.png" />
+  </icons>
+  <scene>
+    <Scene fill="transparent">
+      <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+      </stylesheets>
+
+      <BorderPane fx:id="mainWindowBackground">
+        <padding>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </padding>
+
+        <left>
+          <VBox>
+            <MenuBar fx:id="menuBar">
+              <Menu mnemonicParsing="false" text="File">
+                <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+              </Menu>
+              <Menu mnemonicParsing="false" text="Help">
+                <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+              </Menu>
+            </MenuBar>
+            <Pane prefHeight="830.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+              <padding>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </padding>
+
+              <children>
+                <Label text="BayMeds" fx:id="mainWindowLabel" layoutX="50.0" layoutY="60.0" />
+                <StackPane
+                  fx:id="commandBoxPlaceholder"
+                  styleClass="modern-box-pane"
+                  layoutX="45.0"
+                  layoutY="145.0"
+                  prefHeight="34.0"
+                  prefWidth="560.0"
+                />
+                <StackPane
+                  fx:id="resultDisplayPlaceholder"
+                  styleClass="modern-box-pane"
+                  layoutX="45.0"
+                  layoutY="220.0"
+                  minHeight="100"
+                  prefHeight="480.0"
+                  prefWidth="560.0"
+                />
+                <StackPane fx:id="statusbarPlaceholder" layoutX="45.0" layoutY="700.0" />
+              </children>
+            </Pane>
+          </VBox>
+        </left>
+        <center>
+          <VBox fx:id="rightWindowBackground">
+            <BorderPane>
+              <padding>
+                <Insets right="20.0"/>
+              </padding>
+
+              <right>
+                <Button mnemonicParsing="false" text="X" onAction="#handleExit"/>
+              </right>
+            </BorderPane>
+            <Pane prefHeight="830.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+              <padding>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+              </padding>
+
+              <children>
+                <VBox
+                  fx:id="prescriptionList"
+                  style="-fx-background-color: transparent"
+                  layoutX="45.0"
+                  layoutY="60.0"
+                  minWidth="340"
+                  prefWidth="595"
+                  prefHeight="690"
+                  VBox.vgrow="ALWAYS"
+                >
+                  <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                  </padding>
+                  <StackPane fx:id="prescriptionListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                </VBox>
+              </children>
+            </Pane>
+          </VBox>
+        </center>
+      </BorderPane>
+    </Scene>
+  </scene>
+</fx:root>

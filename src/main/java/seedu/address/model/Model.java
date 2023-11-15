@@ -1,18 +1,21 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.prescription.Name;
+import seedu.address.model.prescription.Prescription;
 
 /**
- * The API of the Model component.
+ * The API of the ModelPrescription component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +38,123 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' prescription list file path.
      */
-    Path getAddressBookFilePath();
+    Path getPrescriptionListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' prescription list file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setPrescriptionListFilePath(Path prescriptionListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Returns the user prefs' completed prescription list file path.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    Path getCompletedPrescriptionListFilePath();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Sets the user prefs' completed prescription list file path.
      */
-    boolean hasPerson(Person person);
+    void setCompletedPrescriptionListFilePath(Path completedPrescriptionListFilePath);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Replaces prescription list data with the data in {@code prescriptionList}.
      */
-    void deletePerson(Person target);
+    void setPrescriptionList(ReadOnlyPrescriptionList prescriptionList);
+
+    /** Returns the PrescriptionList */
+    ReadOnlyPrescriptionList getPrescriptionList();
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Returns true if a prescription with the same identity as {@code prescription} exists in the prescription list.
      */
-    void addPerson(Person person);
+    boolean hasPrescription(Prescription prescription);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Deletes the given prescription.
+     * The prescription must exist in the prescription list.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void deletePrescription(Prescription target);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Adds the given prescription.
+     * {@code prescription} must not already exist in the prescription list.
+     */
+    void addPrescription(Prescription prescription);
+
+    /**
+     * Replaces the given prescription {@code target} with {@code editedPrescription}.
+     * {@code target} must exist in the prescription list.
+     * The prescription identity of {@code editedPrescription} must not be the same as another
+     * existing prescription in the prescription list.
+     */
+    void setPrescription(Prescription target, Prescription editedPrescription);
+
+    /** Returns an unmodifiable view of the filtered prescription list */
+    ObservableList<Prescription> getFilteredPrescriptionList();
+
+    /**
+     * Returns a prescription with the same name as {@code prescriptionName}
+     */
+    Prescription getPrescriptionByName(Name prescriptionName) throws CommandException;
+
+    /**
+     * Updates the filter of the filtered prescription list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
+
+    /**
+     * Replaces completed prescription list data with the data in {@code completedPrescriptionList}.
+     */
+    void setCompletedPrescriptionList(ReadOnlyPrescriptionList completedPrescriptionList);
+
+    /** Returns the CompletedPrescriptionList */
+    ReadOnlyPrescriptionList getCompletedPrescriptionList();
+
+    /**
+     * Returns true if a prescription with the same identity as {@code completedPrescription}
+     * exists in the completed prescription list.
+     */
+    boolean hasCompletedPrescription(Prescription completedPrescription);
+
+    /**
+     * Deletes the given prescription.
+     * The prescription must exist in the completed prescription list.
+     */
+    void deleteCompletedPrescription(Prescription target);
+
+    /**
+     * Adds the given completed prescription.
+     * {@codecompletedPprescription} must not already exist in the completed prescription list.
+     */
+    void addCompletedPrescription(Prescription completedPrescription);
+
+    /**
+     * Replaces the given prescription {@code target} with {@code editedPrescription}.
+     * {@code target} must exist in the completed prescription list.
+     * The prescription identity of {@code editedPrescription} must not be the same as another
+     * existing prescription in the completed prescription list.
+     */
+    void setCompletedPrescription(Prescription target, Prescription editedPrescription);
+
+    /** Returns an unmodifiable view of the filtered completed prescription list */
+    ObservableList<Prescription> getFilteredCompletedPrescriptionList();
+
+    /**
+     * Returns a prescription with the same name as {@code completedPrescriptionName}
+     */
+    Prescription getCompletedPrescriptionByName(Name completedPrescriptionName) throws CommandException;
+
+    /**
+     * Updates the filter of the filtered completed prescription list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCompletedPrescriptionList(Predicate<Prescription> predicate);
+
+    LocalDate getStoredDate();
+
+    void setStoredDate(LocalDate storedDate);
+
+    boolean hasDrugClash(Prescription toAdd);
 }

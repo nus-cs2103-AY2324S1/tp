@@ -1,0 +1,12 @@
+{
+  "prescriptions" : [ {
+    "name" : "Aspirin",
+    "dosage" : "1",
+    "frequency" : "DAMITH",
+    "startDate" : "01/08/2023",
+    "endDate" : "25/12/2023",
+    "expiryDate" : "01/12/2024",
+    "totalStock" : "100",
+    "note" : "Test note"
+  } ]
+}

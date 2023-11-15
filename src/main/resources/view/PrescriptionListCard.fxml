@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.BorderPane?>
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+
+      <BorderPane>
+        <left>
+          <HBox spacing="5" alignment="CENTER_LEFT" prefWidth="250">
+            <Label fx:id="id" styleClass="cell_big_label">
+              <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+              </minWidth>
+            </Label>
+            <Label fx:id="name" text="\$first" wrapText="true" styleClass="cell_big_label" />
+          </HBox>
+        </left>
+        <right>
+          <Label fx:id="consumptionCount" text="\$consumptionCount" styleClass="consumption-status-red" />
+        </right>
+      </BorderPane>
+      <GridPane hgap="20" vgap="20">
+        <padding>
+          <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+
+        <children>
+          <VBox>
+            <Label fx:id="dosageHeader" styleClass="cell_small_header" text="Dosage" />
+            <Label fx:id="dosage" styleClass="cell_small_label" text="\$dosage" />
+          </VBox>
+          <VBox GridPane.rowIndex="1">
+            <Label fx:id="frequencyHeader" styleClass="cell_small_header" text="Frequency" />
+            <Label fx:id="frequency" styleClass="cell_small_label" text="\$frequency" />
+          </VBox>
+          <VBox GridPane.rowIndex="2">
+            <Label fx:id="totalStockHeader" styleClass="cell_small_header" text="Total Stock" />
+            <Label fx:id="totalStock" styleClass="cell_small_label" text="\$totalStock" />
+          </VBox>
+          <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label fx:id="startDateHeader" styleClass="cell_small_header" text="Start Date" />
+            <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
+          </VBox>
+          <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="endDateHeader" styleClass="cell_small_header" text="End Date" />
+            <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
+          </VBox>
+          <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="expiryDateHeader" styleClass="cell_small_header" text="Expiry Date" />
+            <Label fx:id="expiryDate" styleClass="cell_small_label" text="\$expiryDate" />
+          </VBox>
+          <VBox GridPane.columnIndex="2" prefWidth="275">
+            <Label fx:id="noteHeader" styleClass="cell_small_header" text="Note" />
+            <Label fx:id="note" styleClass="cell_small_label" text="\$note" wrapText="true" />
+          </VBox>
+        </children>
+      </GridPane>
+    </VBox>
+  </GridPane>
+</HBox>

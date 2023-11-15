@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
+skinparam DefaultFontSize 24
 
 package Storage as StoragePackage {
 
@@ -14,12 +15,21 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "PrescriptionList Storage" #F4F6F6{
+Class "<<interface>>\nPrescriptionListStorage" as PrescriptionListStorage
+Class JsonPrescriptionListStorage
+Class JsonSerializablePrescriptionList
+}
+
+package "Prescription Storage" #F4F6F6 {
+Class JsonAdaptedPrescription
+Class JsonAdaptedDrug
+}
+
+package "CompletedPrescriptionList Storage" #F4F6F6 {
+Class "<<interface>>\nCompletedPrescriptionListStorage" as CompletedPrescriptionListStorage
+Class JsonCompletedPrescriptionListStorage
+Class JsonSerializableCompletedPrescriptionList
 }
 
 }
@@ -29,15 +39,23 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" PrescriptionListStorage
+StorageManager -up-> "1" CompletedPrescriptionListStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> PrescriptionListStorage
+Storage -right-|> CompletedPrescriptionListStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonPrescriptionListStorage .up.|> PrescriptionListStorage
+JsonPrescriptionListStorage ..> JsonSerializablePrescriptionList
+JsonSerializablePrescriptionList --> "*" JsonAdaptedPrescription
+
+JsonCompletedPrescriptionListStorage .up.|> CompletedPrescriptionListStorage
+JsonCompletedPrescriptionListStorage ..> JsonSerializableCompletedPrescriptionList
+JsonSerializableCompletedPrescriptionList --> "*" JsonAdaptedPrescription
+
+JsonAdaptedPrescription --> "*" JsonAdaptedDrug
 
 @enduml

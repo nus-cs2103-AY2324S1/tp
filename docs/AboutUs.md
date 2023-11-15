@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,51 +11,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wei Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/roerere.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/roerere)]
+[[portfolio](team/roerere.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Code Quality
 
-### Jane Doe
+### Ren Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teerenjing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/TeeRenJing)]
+[[portfolio](team/teerenjing.md)]
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Shyan-Yong
+
+<img src="images/shyanyong.png" width="200px">
+
+[[github](http://github.com/shyanyong)]
+[[portfolio](team/shyanyong.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jing Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jingyu987.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jingyu987)]
+[[portfolio](team/jingyu987.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Wei Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chongweijie29.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/chongweijie29)]
+[[portfolio](team/chongweijie29.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration, Developer
+* Responsibilities: Logic

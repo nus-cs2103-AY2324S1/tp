@@ -16,6 +16,11 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, COMMAND_WORD);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof HelpCommand;
     }
 }
