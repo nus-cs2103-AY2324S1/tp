@@ -4,13 +4,13 @@ title: User Guide
 ---
 
 # Welcome to TuitionConnect's User Guide!
-:rocket: Introducing **TuitionConnect**: Revolutionising your Tutoring Business! :rocket:
+:rocket: Introducing **TuitionConnect**: Revolutionising your Private Tutoring Business! :rocket:
 
-Fed up with setting up numerous unorganised spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
+Fed up with setting up numerous unorganised spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of your private tutoring business?
 
 Or feeling overwhelmed with the ugly-looking chaos of your Google Calendar as your number of teaching schedules increase?
 
-Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate desktop app designed to streamline the administrative and financial tasks of your tutoring business!
+Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate desktop app designed to streamline the administrative and financial tasks of your private tutoring business!
 
 This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
@@ -62,12 +62,12 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
 
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
-TuitionConnect is a **desktop app** built for tutors and tutoring businesses to simplify the process of 
+TuitionConnect is a **desktop app** built for private tutors and private tutoring businesses to simplify the process of 
 administration and finance management, optimized for use via a **Command Line Interface** (CLI) while 
 still having the benefits of a Graphical User Interface (GUI). 
 
 If you love to type, then **TuitionConnect** is the app for you! It helps you to track tutee-specific details, teaching-schedule management,
-and other financial and administrative tasks faster than your old and conventional apps like Google Calendar or Microsoft Excel
+and other financial and administrative tasks faster than your old and conventional apps like Google Calendar or Microsoft Excel.
 
 Even if you are not a huge fan of typing, panic not! **TuitionConnect** was designed with you in mind! With this comprehensive User Guide,
 paired up with simple and beginner-friendly features, anyone can learn how to use **TuitionConnect** in no time!
