@@ -9,11 +9,17 @@ title: User Guide
 ---
 
 # 1. Introduction 🎯
+## Why This Guide ❓
+The purpose of this guide is to empower you with the **knowledge and skills needed** to effectively utilize CareCentral. 
+Our goal is to **streamline your workflow in managing patients' medical journeys**, ensuring that you can leverage the system's features for **efficient and accurate** patient care.
+This guide is meticulously crafted to help you navigate, utilize, and optimize CareCentral, enhancing your ability to provide the best possible care to your patients.
 
-**CareCentral** is built specifically for medical staffs — including doctors, nurses, and hospital staff aged between 25-60 years. Optimized for fast typists, it streamlines the management of patients' medical journeys.
+## Our Target Audience 👥
+**CareCentral** is built specifically for medical staffs — including doctors, nurses, and hospital staff aged between 25-60 years.
+We understand the importance of your time and the need for a tool that compliments your expertise and fast typing abilities.
 
 <div style="background-color: #DFF0D8; padding: 10px; margin-bottom: 10px; border-left: 5px solid #4CAE4C;">
-  <em>Note: You can download our latest release from <a href="https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.3.1" target="_blank">here</a>.</em>
+  <em>You can download our latest release from <a href="https://github.com/AY2324S1-CS2103T-F08-1/tp/releases/tag/v1.3.1" target="_blank">here</a>.</em>
 </div>
 
 # 2. Quick Start Guide ⚡️
