@@ -115,7 +115,7 @@ If you are experienced in using JAR applications, simply download the latest ver
 
 #### Taking your first prescription
 
-1. To mark a prescription that you have just consumed, type `take 5 d/1`. The fifth prescription in the list will then be marked as consumed.
+1. To mark a prescription that you have just consumed, type `take 3 d/1`. The third prescription in the list will then be marked as consumed.
 
 1. To check that it has been marked as consumed, you can type `listToday`. As seen below, this will show that you have consumed 1 pill of Dosazoxin.
 
@@ -127,11 +127,11 @@ If you are experienced in using JAR applications, simply download the latest ver
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Graphical User Interface
+## Navigating the Graphical User Interface
 
 ### Overview
 
-BayMeds allows you to manage your prescriptions using only a single user interface! Hover over the circles to find out more about the different parts!
+BayMeds allows you to manage your prescriptions using only a single user interface! Hover over the circles to find out more about the different components on the screen!
 
 <annotate src="images/Ui.png" alt="Ui">
   <a-point x="4%" y="3%" content="You can access various menu functions here." label="1" header="Menu Bar" opacity="0.8" trigger="hover focus" />
@@ -151,7 +151,7 @@ BayMeds allows you to manage your prescriptions using only a single user interfa
 
 ### Prescription Card
 
-BayMeds organises everything you need to know about each of your prescriptions in cards. Hover over the circles to find out more details for each label!
+BayMeds organises everything you need to know about your prescriptions in prescription cards, as shown below. Hover over the circles to find out more about each label!
 
 <annotate src="images/ui/Ui-card.png" alt="Prescription Card" width="1000" style=" padding-bottom: 25px">
   <a-point x="5%" y="11%" content="This is the name of your medication." label="1" header="Medication Name" size="32" opacity="0.8" trigger="hover focus" />
