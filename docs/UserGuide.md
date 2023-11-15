@@ -78,7 +78,7 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
    A display similar to the below should appear in a few seconds. If you are starting the app for the first time,
  there will be some sample data loaded.<br>
 <div style="text-align:center;">
-   <img src="images/startUi.png" alt="startUi" style="width:450px"/>
+   <img src="images/startUi.png" alt="startUi" style="width:450px; box-shadow: 7px 7px 7px #878787;"/>
 </div>
 <br>
 
@@ -150,7 +150,10 @@ Here are some things regarding RTPM's features to take note of before using them
 </box>
 
 <div style="page-break-after: always;"></div>
-<br><br><br><br>
+
+<br>
+
+
 <box type="definition" seamless>
 
 **Notes about the command format (Continued):**<br>
@@ -1165,24 +1168,26 @@ See [Appendix C](#appendix-c-similar-names) for more details.
 Here is a non-exhaustive list of some warning messages.
 
 ```
-Warning!; [Phone numbers should only contain numbers, and it should be at 
-least 3 digits long. Area codes are allowed, signified by a '+' and up to 
-3 numbers, followed by a space separating this from the main number.]
+Warning!; [Phone numbers should only contain numbers, and it should 
+be at least 3 digits long. Area codes are allowed, signified by a 
+'+' and up to 3 numbers, followed by a space separating this from 
+the main number.]
 Please ignore if this is expected.
 ```
 ```
-Warning!; [Emails should be of the format local-part@domain and adhere to 
-the following constraints:
-1. The local-part should only contain alphanumeric characters and these 
-special characters, excluding the parentheses, (+_.-). The local-part may 
-not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is 
-made up of domain labels separated by periods.
+Warning!; [Emails should be of the format local-part@domain and 
+adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and 
+these special characters, excluding the parentheses, (+_.-). The 
+local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain 
+name is made up of domain labels separated by periods.
 The domain name must:
     - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated 
-      only by hyphens, if any.]
+    - have each domain label start and end with alphanumeric 
+      characters
+    - have each domain label consist of alphanumeric characters, 
+      separated only by hyphens, if any.]
 Please ignore if this is expected.
 ```
 </box>
@@ -1262,21 +1267,20 @@ An example when the same name is detected:
 ## Appendix D: Definitions
 Provided is a useful definition list of terms that were used in the guide and in the application.
 
-- Area code: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
-- Alphanumeric: Consisting of only English-language letters and the digits from 0-9.
-- CLI: Command-Line Interface. A text-based means of interacting with applications. 
+- **Area code**: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
+- **Alphanumeric**: Consisting of only English-language letters and the digits from 0-9.
+- **CLI**: Command-Line Interface. A text-based means of interacting with applications. 
 In RTPM, you use this to interact with the internal logic.
-- Client: In RTPM, refers to either a buyer or a seller.
-- Hard disk: The storage component of your computer.
-- Computer: Desktops or laptops, but not mobile phones.
-- Index: Any positive (above 0) integer.
-- Integer: A number without a fractional part.
-- JSON: A storage format that RTPM uses to store its data. See [here](https://en.wikipedia.org/wiki/JSON) for more info.
-- Numerical: Consisting only digits from 0-9.
-- Parameters: Specific details, instructions and information about the command you are executing.
-- Priority: The importance of a specific client, as determined by you.
-- RTPM: The acronym for this app, RealtorTrackerPlusMax.
-- Special characters: All non-alphanumeric characters.
+- **Client**: In RTPM, refers to either a buyer or a seller.
+- **Hard disk**: The storage component of your computer.
+- **Index**: Any positive (above 0) integer.
+- **Integer**: A number without a fractional part.
+- **JSON**: A storage format that RTPM uses to store its data. See [here](https://en.wikipedia.org/wiki/JSON) for more info.
+- **Numerical**: Consisting only digits from 0-9.
+- **Parameters**: Specific details, instructions and information about the command you are executing.
+- **Priority**: The importance of a specific client, as determined by you.
+- **RTPM**: The acronym for this app, RealtorTrackerPlusMax.
+- **Special characters**: All non-alphanumeric characters.
 
 
 <div style='text-align: right;'>
