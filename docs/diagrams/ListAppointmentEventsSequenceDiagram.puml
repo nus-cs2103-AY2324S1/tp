@@ -1,0 +1,89 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+
+box Ui UI_COLOR_T1
+Participant ":MainWindow" as mainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+Participant ":LogicManager" as LogicManager LOGIC_COLOR
+Participant ":ClinicBookParser" as ClinicBookParser LOGIC_COLOR
+Participant ":ListAppointmentEventsCommandParser" as ListAppointmentEventsCommandParser LOGIC_COLOR
+Participant ":ListAppointmentEventsCommand" as ListAppointmentEventsCommand LOGIC_COLOR
+Participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+user -[USER_COLOR]> mainWindow : "list-appointments 1"
+activate mainWindow
+
+mainWindow -[UI_COLOR]> LogicManager
+activate LogicManager
+
+LogicManager -[LOGIC_COLOR]> LogicManager : execute("list-appointments 1")
+activate LogicManager
+
+LogicManager -[LOGIC_COLOR]-> LogicManager
+deactivate LogicManager
+
+LogicManager -[LOGIC_COLOR]> ClinicBookParser : parseCommand("list-appointments 1")
+activate ClinicBookParser
+
+create ListAppointmentEventsCommandParser
+ClinicBookParser -> ListAppointmentEventsCommandParser
+activate ListAppointmentEventsCommandParser
+
+ListAppointmentEventsCommandParser --> ClinicBookParser
+deactivate ListAppointmentEventsCommandParser
+
+ClinicBookParser -> ListAppointmentEventsCommandParser : parse("1")
+activate ListAppointmentEventsCommandParser
+
+create ListAppointmentEventsCommand
+ListAppointmentEventsCommandParser -> ListAppointmentEventsCommand
+activate ListAppointmentEventsCommand
+
+ListAppointmentEventsCommand --> ListAppointmentEventsCommandParser : ListAppointmentEventsCommand
+deactivate ListAppointmentEventsCommand
+
+ListAppointmentEventsCommandParser --> ClinicBookParser : ListAppointmentEventsCommand
+deactivate ListAppointmentEventsCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListAppointmentEventsCommandParser -[hidden]-> ClinicBookParser
+destroy ListAppointmentEventsCommandParser
+
+ClinicBookParser --> LogicManager : ListAppointmentEventsCommand
+deactivate ClinicBookParser
+deactivate LogicManager
+
+LogicManager -> ListAppointmentEventsCommand : execute()
+activate ListAppointmentEventsCommand
+
+ListAppointmentEventsCommand -> model : listAppointmentsEventForPatient(patient)
+activate model
+
+model --> ListAppointmentEventsCommand :
+deactivate model
+
+create CommandResult
+ListAppointmentEventsCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListAppointmentEventsCommand
+deactivate CommandResult
+
+ListAppointmentEventsCommand --> LogicManager : CommandResult
+deactivate ListAppointmentEventsCommand
+
+LogicManager --> mainWindow : CommandResult
+deactivate LogicManager
+
+user <--mainWindow
+deactivate mainWindow
+@enduml

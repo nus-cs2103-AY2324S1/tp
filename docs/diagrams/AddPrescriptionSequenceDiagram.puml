@@ -1,0 +1,100 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+
+box Ui UI_COLOR_T1
+Participant ":MainWindow" as mainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+Participant ":LogicManager" as LogicManager LOGIC_COLOR
+Participant ":ClinicBookParser" as ClinicBookParser LOGIC_COLOR
+Participant ":AddPrescriptionCommandParser" as AddPrescriptionCommandParser LOGIC_COLOR
+Participant ":AddPrescriptionCommand" as AddPrescriptionCommand LOGIC_COLOR
+Participant ":CommandResult" as CommandResult LOGIC_COLOR
+Participant ":AppointmentEvent" as AppointmentEvent LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+user -[USER_COLOR]> mainWindow : "add-prescription 1 pi/1 mn/Panadol"
+activate mainWindow
+
+mainWindow -[UI_COLOR]> LogicManager
+activate LogicManager
+
+LogicManager -[LOGIC_COLOR]> LogicManager : execute("add-prescription ...")
+activate LogicManager
+
+LogicManager -[LOGIC_COLOR]-> LogicManager
+deactivate LogicManager
+
+LogicManager -[LOGIC_COLOR]> ClinicBookParser : parseCommand("add-prescription ...")
+activate ClinicBookParser
+
+create AddPrescriptionCommandParser
+ClinicBookParser -> AddPrescriptionCommandParser
+activate AddPrescriptionCommandParser
+
+AddPrescriptionCommandParser --> ClinicBookParser
+deactivate AddPrescriptionCommandParser
+
+ClinicBookParser -> AddPrescriptionCommandParser : parse("add-prescription 1 pi/1 mn/Panadol")
+activate AddPrescriptionCommandParser
+
+create AddPrescriptionCommand
+AddPrescriptionCommandParser -> AddPrescriptionCommand
+activate AddPrescriptionCommand
+
+AddPrescriptionCommand --> AddPrescriptionCommandParser : AddPrescriptionCommand
+deactivate AddPrescriptionCommand
+
+AddPrescriptionCommandParser --> ClinicBookParser : AddPrescriptionCommand
+deactivate AddPrescriptionCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddPrescriptionCommandParser -[hidden]-> ClinicBookParser
+destroy AddPrescriptionCommandParser
+
+ClinicBookParser --> LogicManager : AddPrescriptionCommand
+deactivate ClinicBookParser
+deactivate LogicManager
+
+LogicManager -> AddPrescriptionCommand : execute()
+activate AddPrescriptionCommand
+
+create AppointmentEvent
+AddPrescriptionCommand -> AppointmentEvent
+activate AppointmentEvent
+AppointmentEvent --> AddPrescriptionCommand : AppointmentEvent
+deactivate AppointmentEvent
+AppointmentEvent -[hidden]-> AddPrescriptionCommand
+destroy AppointmentEvent
+
+deactivate AppointmentEvent
+
+AddPrescriptionCommand -> model : setAppointmentEventForPatient(patient, appointmentEvent, editedEvent)
+activate model
+
+model --> AddPrescriptionCommand :
+deactivate model
+
+create CommandResult
+AddPrescriptionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPrescriptionCommand
+deactivate CommandResult
+
+AddPrescriptionCommand --> LogicManager : CommandResult
+deactivate AddPrescriptionCommand
+
+LogicManager --> mainWindow : CommandResult
+deactivate LogicManager
+
+user <--mainWindow
+deactivate mainWindow
+@enduml

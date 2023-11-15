@@ -1,0 +1,29 @@
+@startuml
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+skinparam classAttributeIconSize 0
+skinparam classAttributeFontColor #FFFFFF
+
+Class Patient {
+ - name : Name
+ - age : Age
+ - nric : Nric
+ - email : Email
+ - phone : Phone
+ - patientMedicalHistory : PatientMedicalHistory
+ - patientAppointmentList : PatientAppointmentList
+}
+
+
+Patient *-left-> "1" Name
+Patient *-right-> "1" Age
+Patient *-down-> "1" Nric
+Patient *-down-> "1" Email
+Patient *-down-> "1" Phone
+Patient *-down-> "1" PatientMedicalHistory
+Patient *-down-> "1" PatientAppointmentList
+
+@enduml

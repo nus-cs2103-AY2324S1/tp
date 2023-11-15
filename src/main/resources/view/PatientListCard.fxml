@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<HBox id="cardPane" fx:id="cardPane" spacing="10" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #F4F4F4; -fx-border-color: #CCCCCC; -fx-border-radius: 10; -fx-background-radius: 10;">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets bottom="15" left="15" right="15" top="15" />
+      </padding>
+      <HBox alignment="CENTER_LEFT" spacing="4">
+        <ImageView fx:id="idIcon" fitHeight="16" fitWidth="16">
+          <Image url="@../images/PatientCardIcons/Person.png"/>
+        </ImageView>
+        <Label fx:id="id" styleClass="cell_big_label" style="-fx-font-weight: bold;">
+          <minWidth>
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" style="-fx-font-size: 18;">
+          <font>
+            <Font name="System Font" size="16.0" />
+          </font>
+        </Label>
+      </HBox>
+      <FlowPane fx:id="tags" hgap="10" vgap="10"/>
+      <HBox spacing="5">
+        <ImageView fx:id="nricIcon" fitHeight="14" fitWidth="14">
+          <Image url="@../images/PatientCardIcons/NRIC.png"/>
+        </ImageView>
+        <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" style="-fx-font-size: 14;"/>
+      </HBox>
+      <HBox spacing="5">
+        <ImageView fx:id="phoneIcon" fitHeight="14" fitWidth="14">
+          <Image url="@../images/PatientCardIcons/Phone.png"/>
+        </ImageView>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" style="-fx-font-size: 14;"/>
+      </HBox>
+      <HBox spacing="5">
+        <ImageView fx:id="addressIcon" fitHeight="15" fitWidth="15">
+            <Image url="@../images/PatientCardIcons/Age.png"/>
+        </ImageView>
+        <Label fx:id="age" styleClass="cell_small_label" text="\$age" style="-fx-font-size: 14;"/>
+      </HBox>
+      <HBox spacing="5">
+        <ImageView fx:id="emailIcon" fitHeight="14" fitWidth="14">
+          <Image url="@../images/PatientCardIcons/Alias.png"/>
+        </ImageView>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" style="-fx-font-size: 14;"/>
+      </HBox>
+    </VBox>
+    <rowConstraints>
+      <RowConstraints />
+    </rowConstraints>
+  </GridPane>
+</HBox>

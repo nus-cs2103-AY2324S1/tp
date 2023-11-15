@@ -1,0 +1,53 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "patients" : [ {
+    "name" : "Alice Pauline",
+    "nric" : "S1234567A",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "age" : "32",
+    "tags" : [ "Hypertension" ]
+  }, {
+    "name" : "Benson Meier",
+    "nric" : "S1234567B",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "age" : "46",
+    "tags" : [ "Asthma", "Hypertension" ]
+  }, {
+    "name" : "Carl Kurz",
+    "nric" : "S1234567C",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "age" : "77",
+    "tags" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "nric" : "S1234567D",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "age" : "50",
+    "tags" : [ "Hypertension" ]
+  }, {
+    "name" : "Elle Meyer",
+    "nric" : "S1234567E",
+    "phone" : "94822240",
+    "email" : "werner@example.com",
+    "age" : "96",
+    "tags" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "nric" : "S1234567F",
+    "phone" : "94824270",
+    "email" : "lydia@example.com",
+    "age" : "69",
+    "tags" : [ ]
+  }, {
+    "name" : "George Best",
+    "nric" : "S1234567G",
+    "phone" : "94824420",
+    "email" : "anna@example.com",
+    "age" : "52",
+    "tags" : [ ]
+  } ]
+}

@@ -1,0 +1,16 @@
+{
+  "patients": [ {
+    "name": "Alice Pauline",
+    "nric": "S1234567A",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "age": "12",
+    "tags": [ "Hypertension" ]
+  }, {
+    "name": "Alice Pauline",
+    "nric": "S1234567A",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "age": "4"
+  } ]
+}

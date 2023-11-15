@@ -1,0 +1,89 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+
+box Ui UI_COLOR_T1
+Participant ":MainWindow" as mainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+Participant ":LogicManager" as LogicManager LOGIC_COLOR
+Participant ":ClinicBookParser" as ClinicBookParser LOGIC_COLOR
+Participant ":ListMedicalHistoryEventCommandParser" as ListMedicalHistoryEventCommandParser LOGIC_COLOR
+Participant ":ListMedicalHistoryEventCommand" as ListMedicalHistoryEventCommand LOGIC_COLOR
+Participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+user -[USER_COLOR]> mainWindow : "list-medical-history 1"
+activate mainWindow
+
+mainWindow -[UI_COLOR]> LogicManager
+activate LogicManager
+
+LogicManager -[LOGIC_COLOR]> LogicManager : execute("list-medical-history 1")
+activate LogicManager
+
+LogicManager -[LOGIC_COLOR]-> LogicManager
+deactivate LogicManager
+
+LogicManager -[LOGIC_COLOR]> ClinicBookParser : parseCommand("list-medical-history 1")
+activate ClinicBookParser
+
+create ListMedicalHistoryEventCommandParser
+ClinicBookParser -> ListMedicalHistoryEventCommandParser
+activate ListMedicalHistoryEventCommandParser
+
+ListMedicalHistoryEventCommandParser --> ClinicBookParser
+deactivate ListMedicalHistoryEventCommandParser
+
+ClinicBookParser -> ListMedicalHistoryEventCommandParser : parse("1")
+activate ListMedicalHistoryEventCommandParser
+
+create ListMedicalHistoryEventCommand
+ListMedicalHistoryEventCommandParser -> ListMedicalHistoryEventCommand
+activate ListMedicalHistoryEventCommand
+
+ListMedicalHistoryEventCommand --> ListMedicalHistoryEventCommandParser : ListMedicalHistoryEventCommand
+deactivate ListMedicalHistoryEventCommand
+
+ListMedicalHistoryEventCommandParser --> ClinicBookParser : ListMedicalHistoryEventCommand
+deactivate ListMedicalHistoryEventCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListMedicalHistoryEventCommandParser -[hidden]-> ClinicBookParser
+destroy ListMedicalHistoryEventCommandParser
+
+ClinicBookParser --> LogicManager : ListMedicalHistoryEventCommand
+deactivate ClinicBookParser
+deactivate LogicManager
+
+LogicManager -> ListMedicalHistoryEventCommand : execute()
+activate ListMedicalHistoryEventCommand
+
+ListMedicalHistoryEventCommand -> model : listMedicalHistoryEvents(patient)
+activate model
+
+model --> ListMedicalHistoryEventCommand :
+deactivate model
+
+create CommandResult
+ListMedicalHistoryEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListMedicalHistoryEventCommand
+deactivate CommandResult
+
+ListMedicalHistoryEventCommand --> LogicManager : CommandResult
+deactivate ListMedicalHistoryEventCommand
+
+LogicManager --> mainWindow : CommandResult
+deactivate LogicManager
+
+user <--mainWindow
+deactivate mainWindow
+@enduml
