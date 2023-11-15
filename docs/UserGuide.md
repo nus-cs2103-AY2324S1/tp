@@ -41,7 +41,7 @@ Step 5. Navigate to the home folder you put the jar file in using the command `c
 
 Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
-   The Foster Family GUI should appear on your screen, similar to the image below. Note that the app contains sample data the first time you launch it.<br>
+   The Foster Family GUI, similar to the image below, should appear on your screen. Note that the app contains some sample data the first time you launch it.<br>
    ![Ui](images/Ui.png) 
 
 <div style="page-break-after: always;"></div>
@@ -137,7 +137,7 @@ To do so, enter <code>view 1</code> as shown in the image above.
 
 #### Navigating through fields
 
-Entering the full name or substring of the field you want to edit brings your cursor to the corresponding textbox.
+Entering the name, fully or partially, of the field you want to edit brings your cursor to the corresponding textbox.
 
 <div style="text-align: center">
 <img src="images/screenshots/BeforeEnteringName.png" class="center"/>
@@ -153,7 +153,7 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 
 <div style="page-break-after: always;"></div>
 
-After you are **done editing**, _press the Enter key_ on your keyboard to bring your cursor back to the command box. 
+After you are done editing, _press the Enter key_ on your keyboard to **confirm your changes**, and bring your cursor back to the command box. 
 
 <div></div>
 
@@ -195,15 +195,16 @@ Key in <code>save</code> and press Enter to save the changes.
 
 <br/>
 
-If this was an `edit`, your changes to the fosterer will be saved.<br>
-If this was an `add`,  the new fosterer with the inputted details will be added.
+The effect of a `save` depends on the command you used to enter this view.
+* If this was an `edit` command, your changes to the fosterer will be saved.<br>
+* If this was an `add` command,  the new fosterer with the inputted details will be added, and you will be redirected back to the main window.
 
 <br>
 
 #### Exiting the profile page
 
 Entering <code>exit</code> closes the profile page and directs you back to the main page. <br>
-Foster Family will warn you if you attempt to exit without first saving your changes.
+Foster Family will warn you if you attempt to exit without saving your changes.
 
 <br>
 
@@ -470,7 +471,7 @@ Examples:
 
 ### Viewing a fosterer's detail: `view`
 
-Redirects you to the profile page of the fosterer at the specified index in your address book.
+Redirects you to the profile page of the fosterer at the specified index of your currently displayed list. 
 
 Format: `view INDEX`
 
@@ -484,7 +485,9 @@ Parameters:
 
 **:exclamation: Important:**<br>
 
-Only the <code>save</code> and <code>exit</code> commands are available to you in the profile page.
+Only the <code>save</code> and <code>exit</code> commands are available to you in the profile page.<br>
+
+To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).
 
 </div> 
 
@@ -492,15 +495,13 @@ Examples:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in your address book.
 
-To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
-
 <br>
 
 <div style="page-break-after: always;"></div>
 
 ### Editing a fosterer's details through the main page: `edit`
 
-Edits the details of the fosterer at the specified index in your address book, done through the main page.
+Edits the details of the fosterer at the specified index in your currently displayed list, done through the main page.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
@@ -532,8 +533,8 @@ Parameters:
 **:exclamation: Important:**<br>
 
 * If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
-* If you run the **same edit command multiple times consecutively** (resulting in no visible change after the first run), the undo command **will not** be able to revert the data back to the original state. <br>
-  This is because undo can only undo the last command, **even if the command made no visible changes**.
+* If you run the **same `edit` command multiple times consecutively** (resulting in no visible change after the first run), the undo command _will not_ be able to revert the data back to the original state. <br>
+  This is because `undo` can only undo the last command, _even if the command made no visible changes_.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -571,7 +572,7 @@ This is not a problem when editing using the [profile view](#editing-a-fosterers
 
 ### Editing a fosterer's details through the profile page: `edit`
 
-Edits the details of the fosterer at the specified index in your address book, done through the profile page.
+Edits the details of the fosterer at the specified index in your address book, by redirecting you to the profile page.
 
 Format: `edit INDEX`
 
@@ -601,15 +602,6 @@ more flexibility.
 </div>
 
 <div style="page-break-after: always;"></div>
-
-<div markdown="block" class="alert alert-warning">
-
-**:warning: Caution:**<br>
-
-Edit may cause **information loss**. 
-Before you type the save command, please check that the details of the fosterer are correct.
-
-</div>
 
 <br/>
 
@@ -644,7 +636,7 @@ Format: `save`
 **:information_source: Notes about the command:**<br>
 
 *  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
-*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details.
+*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, allowing you to edit more details.
 </div>
 
 <br> 
@@ -653,7 +645,7 @@ Format: `save`
 
 ### Deleting a fosterer : `delete`
 
-Deletes the fosterer at the specified index in your address book.
+Deletes the fosterer at the specified index of your currently displayed list.
 
 Format: `delete INDEX [INDEX...]`
 
@@ -726,8 +718,8 @@ Format: `sort`
 
 **:exclamation: Important:**<br>
 
-Repeated sort commands will not result in additional changes to the address book, and undo will not be able to revert the data back to its original state. <br>
-This is because undo can only revert the last command, even if the command made no changes to the address book.
+Repeated `sort` commands will not result in additional changes to the address book, and `undo` will not be able to revert the data back to its original state. <br>
+This is because `undo` can only revert the last command, _even if the command made no changes to the address book_.
 
 </div> 
 
@@ -886,11 +878,10 @@ Format: `exit`
 
 **:information_source: Notes about the command:**<br>
 
-On the profile page,<br>
+On the profile page, entering <code>exit</code> leads you back to the main window, instead of exiting the application.
 
-* Entering <code>exit</code> leads you back to the main page. 
-* Attempting to <code>exit</code> **without first saving changes** with <code>save</code> prompts a warning message.
-* Please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information. 
+Please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information. 
+
 </div>
  
 
@@ -938,7 +929,8 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 
 ## **Known issues**
 
-- **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
+- If you are **using multiple screens** and you move the application to a secondary screen, a part of the GUI may appear "off-screen" if you later choose to switch back to your primary screen. <br>
+  To resolve this, you can delete the `preferences.json` file that was created, before running the application again. This file is located in the same folder as the application jar file.
 
 --------------------------------------------------------------------------------------------------------------------
 
