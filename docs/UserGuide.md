@@ -467,7 +467,7 @@ Examples:
 
 ### Viewing a fosterer's detail: `view`
 
-Redirects you to the profile page of the fosterer at the specified index.
+Redirects you to the profile page of the fosterer at the specified index in your address book.
 
 Format: `view INDEX`
 
@@ -497,7 +497,7 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 ### Editing a fosterer's details through the main window: `edit`
 
-Edits the details of the fosterer at the specified index, done through the main window.
+Edits the details of the fosterer at the specified index in your address book, done through the main window.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
@@ -529,8 +529,8 @@ Parameters:
 **:exclamation: Important:**<br>
 
 * If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
-* If you run the same edit command multiple times consecutively (resulting in no visible change after the first run), the undo command will not be able to revert the data back to the original state. <br>
-  This is because undo can only undo the last command, even if the command made no visible changes.
+* If you run the **same edit command multiple times consecutively** (resulting in no visible change after the first run), the undo command **will not** be able to revert the data back to the original state. <br>
+  This is because undo can only undo the last command, **even if the command made no visible changes**.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -568,7 +568,7 @@ This is not a problem when editing using the [profile view](#editing-a-fosterers
 
 ### Editing a fosterer's details through the profile page: `edit`
 
-Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the profile page.
+Edits the details of the fosterer at the specified index in your address book, done through the profile page.
 
 Format: `edit INDEX`
 
@@ -585,13 +585,15 @@ Parameters:
 
 * Apart from the details added by the add command, we also provide an optional **notes feature** in the profile page for 
 more flexibility.
+
+<div></div>
+
   ![notes example](images/screenshots/Notes.png)
 
 * You can use this to include _additional details_(non-exhaustive) such as: 
   * Health condition of the animal
   * Foster period of the animal
   * Identifiable physical traits of the animal
-*  Just like the other fields, remember to **save** the changes using the `save` command.
  
 </div>
 
@@ -602,59 +604,17 @@ more flexibility.
 **:warning: Caution:**<br>
 
 Edit may cause **information loss**. 
-Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+Before you type the save command, please check that the details of the fosterer are correct.
 
 </div>
 
 <br/>
 
-Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 1:
-
-Step 1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` or `edit 1`.
+If you have at least one fosterer in your address book, here is an example of a profile page you will see after entering `view 1` or `edit 1`:
 
 <div style="text-align: center">
 <img src="images/screenshots/View1.png" height="480" class="center"/>
 </div>
-
-<div style="page-break-after: always;"></div>
-
-Step 2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
-
-<div style="text-align: center">
-<img src="images/screenshots/EnterName.png" height="480" class="center"/>
-</div>
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-Step 3. Edit the original value to a new value. e.g. From 'Alex Yeoh' to 'Bob Yeoh'.
-
-<div style="text-align: center">
-<img src="images/screenshots/ChangeNameToBobYeoh.png" height="480" class="center"/>
-</div>
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-Step 4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear.
-
-<div style="text-align: center">
-<img src="images/screenshots/BobYeoh.png" height="480" class="center"/>
-</div>
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-Step 5. Enter `save` to save your changes.
-
-<div style="text-align: center">
-<img src="images/screenshots/SaveBobYeoh.png" height="480" class="center"/>
-</div>
-
-<br> 
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
@@ -690,7 +650,7 @@ Format: `save`
 
 ### Deleting a fosterer : `delete`
 
-Deletes the index-th fosterer in the list currently displayed in your address book.
+Deletes the fosterers at the specified index/ indices in your address book.
 
 Format: `delete INDEX [INDEX...]`
 
