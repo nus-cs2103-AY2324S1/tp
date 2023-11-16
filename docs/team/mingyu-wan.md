@@ -40,7 +40,7 @@ adding clarity to the role assignment process. A pre-added list of roles for cli
 <br>
 
 * **Enhancements to existing features**:
-    * Modified list feature to work with our new tab and fields (Pull requests [\#113](https://github.com/AY2324S1-CS2103T-T09-2/tp/pull/113))  
+    * Modified list feature to work with our new tab and fields (Pull requests [\#113](https://github.com/AY2324S1-CS2103T-T09-2/tp/pull/113))
     * Fixed parts of the test cases to pass again (Pull requests [\#225](https://github.com/AY2324S1-CS2103T-T09-2/tp/pull/225))
     * Increased code coverage from `32.28%` to `38%` and from `48.9%` to `54.39%`.(Pull requests [\#250](https://github.com/AY2324S1-CS2103T-T09-2/tp/pull/250)
       [\#241](https://github.com/AY2324S1-CS2103T-T09-2/tp/pull/241))

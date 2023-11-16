@@ -201,10 +201,10 @@ from always needing to call the list command.
 
 ## ***Quick start***
 
-1. Ensure you have Java `11` or above installed in your Computer.    
+1. Ensure you have Java `11` or above installed in your Computer.
 
 
-2. Download the latest `CodeContact.jar`.    
+2. Download the latest `CodeContact.jar`.
 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your CodeContact.
@@ -237,7 +237,7 @@ This is a tutorial for **first-time** CodeContact users.
 1. Launch CodeContact. You may refer to the instructions [here](#quick-start).
     * On launch, CodeContact will not contain any developer or client records.
     <br/>
-  
+
 
 2. You will be asked to **enter a password** to unlock CodeContact.
     * Enter the command `unlock pw/Password123!` in the command box.
@@ -377,7 +377,7 @@ Locked all data
 
 **Format:** `unlock pw/CURRENT_PASSWORD`
 
-**Constraints:**    
+**Constraints:**
 1. Only unlocks if password exactly matches the current password (which is the last set password).
    * Note: The default password is `Password123!`. It is highly recommended to change to a different password with the [`change-password` command](#change-password--change-password).
 
@@ -397,10 +397,10 @@ Unlocked all data
 
 **Format:** `change-password pw/CURRENT_PASSWORD npw/NEW_PASSWORD`
 
-**Constraints:**    
+**Constraints:**
 1. `CURRENT_PASSWORD` entered must exactly match the current password.
     * Note: The default password is `Password123!`.
-    
+
 2. `NEW_PASSWORD` must be at least 8 characters long and contain at least one digit, one lowercase letter,
   one uppercase letter, and one special character.
 
@@ -432,13 +432,13 @@ Password changed successfully.
 
 **Constraints:**
 1. `NAME` cannot be the same as another existing developer's name in the address book. Checks are case-insensitive.
-2. `PROJECT_NAME` should be the exact name of an existing project if specified.   
+2. `PROJECT_NAME` should be the exact name of an existing project if specified.
 If project to be assigned does not exist, consider [adding the project](#add-project--add-project) first!
 
 
-**Optional Fields:**    
+**Optional Fields:**
   1. `PROJECT_NAME` - if prefix pr/ is missing in the command, the added developer will not be assigned to any projects.
-     
+
   2. `DATE_JOINED`  - if prefix d/ is missing in the command, the added developer's date joined field will automatically reflect today's date.
 
 
@@ -447,8 +447,8 @@ If project to be assigned does not exist, consider [adding the project](#add-pro
   may not be reflected as clearly in the coloured stars.
 
 
-**Example of usage:**    
-`add-developer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Developer 
+**Example of usage:**
+`add-developer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Developer
 pr/AndroidApp pr/CustomWebsite s/4500 d/11-11-2023 g/johng rt/3`
 
 
@@ -484,8 +484,8 @@ Entered details of a developer incorrectly? You can always undo the action with 
 
 **Constraints:**
 1. `NAME` cannot be the same as another existing client's name in the address book. Checks are case-insensitive.
-  
-2. `PROJECT_NAME` should be the exact name of an existing project if specified.    
+
+2. `PROJECT_NAME` should be the exact name of an existing project if specified.
 If project to be assigned does not exist, consider [adding the project](#add-project--add-project) first!
 
 **Optional Fields:**
@@ -532,7 +532,7 @@ Entered details of a client incorrectly? You can always undo the action with the
 **Optional Fields:**
 1. `DEADLINE` - if prefix dl/ is missing in the command, the added project will not have any deadlines assigned to it.
 
-**Example of usage:**    
+**Example of usage:**
 `add-project n/JuiceApp dr/App to allow for different juices to be ordered dl/19-12-2023,Design backend,HIGH,0 dl/25-12-2023,Design frontend,MEDIUM,0`
 
 
@@ -606,7 +606,7 @@ Deleted a wrong developer? You can always undo the action with the [`undo`](#und
 **Constraints:**
 1. `INDEX` cannot be greater than the number of clients in the list.
 
-**Example of usage:** `delete-client 3`    
+**Example of usage:** `delete-client 3`
 
 When command succeeds, CLI shows:
 ```
@@ -684,7 +684,7 @@ Deleted a wrong project? You can always undo the action with the [`undo`](#undo)
 **Constraints:**
 1. `NAME` cannot be the same as another existing developer's name in the address book. Checks are case-insensitive.
    You can, however, edit the casing of an existing developer's `NAME`.
-2. `PROJECT_NAME` should be the exact name of an existing project. 
+2. `PROJECT_NAME` should be the exact name of an existing project.
 3. At least one of the optional fields must be provided.
 
 **Additional Notes:**
@@ -814,17 +814,17 @@ You can always undo the action with the [`undo`](#undo) command!
 
 **Column Header Format (for CSV file):** `Name`, `Contact Number`, `Email`, `Address`, `Date Joined`, `Role`, `Salary`, `GithubId`, `Rating`, `Projects`
 
-**Constraints:**    
+**Constraints:**
 1. The CSV file has to be in the same folder as the JAR file for the command to function correctly.
 
-2. The CSV file has to strictly follow the column header names and order (given in the example).    
+2. The CSV file has to strictly follow the column header names and order (given in the example).
    The entire command will abort if any of column headers do not follow the given format.
 
-3. `NAME` and `PROJECT_NAME` fields for developers to be added via the import feature have the same constraints as the [`add-developer` command](#add-developer--add-developer) constraints.    
-   The entire command will abort if any of the rows have invalid values that do not comply with given constraints.    
+3. `NAME` and `PROJECT_NAME` fields for developers to be added via the import feature have the same constraints as the [`add-developer` command](#add-developer--add-developer) constraints.
+   The entire command will abort if any of the rows have invalid values that do not comply with given constraints.
 
-**Optional Fields:**     
-While `PROJECT` and `DATE JOINED` column headers are compulsory, they are optional fields, where values (corresponding to the developer to be added) under these columns can be empty.    
+**Optional Fields:**
+While `PROJECT` and `DATE JOINED` column headers are compulsory, they are optional fields, where values (corresponding to the developer to be added) under these columns can be empty.
 
 If values are empty, corresponding developers will be added with `DATE JOINED` automatically set to today and/or with no projects assigned to them, like the [`add-developer` command](#add-developer--add-developer).
 
@@ -870,16 +870,16 @@ Reads a CSV file and populates the addressbook with the clients provided.
 **Column Header Format (for CSV file):** `Name`, `Contact Number`, `Email`, `Address`, `Role`, `Organisation`, `Document`, `Projects`
 
 
-**Constraints:**    
+**Constraints:**
 1. The CSV file has to be in the same folder as the JAR file for the command to function correctly.
-   
-2. The CSV file has to strictly follow the column header names and order (given in the example).    
+
+2. The CSV file has to strictly follow the column header names and order (given in the example).
    The entire command will abort if any of column headers do not follow the given format.
 
-3. `NAME` and `PROJECT_NAME` fields for clients to be added via the import feature have the same constraints as the [`add-client` command](#add-client--add-client) constraints. The entire command will abort if any of the rows have invalid values that do not comply with given constraints.    
+3. `NAME` and `PROJECT_NAME` fields for clients to be added via the import feature have the same constraints as the [`add-client` command](#add-client--add-client) constraints. The entire command will abort if any of the rows have invalid values that do not comply with given constraints.
 
-**Optional Fields:**       
-While the `PROJECT` column header is compulsory, it is an optional fields, where values (corresponding to the client to be added) under this column can be empty.    
+**Optional Fields:**
+While the `PROJECT` column header is compulsory, it is an optional fields, where values (corresponding to the client to be added) under this column can be empty.
 
 If values under the `PROJECT` column are empty, corresponding clients will be added with no projects assigned to them, like the [`add-client` command](#add-client--add-client).
 
@@ -929,7 +929,7 @@ for each client successfully added.
 > Finds the details of an existing developer in the address book.
 
 **Format:**
-`find-developer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE_JOINED] 
+`find-developer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE_JOINED]
 [r/ROLE] [s/SALARY] [pr/PROJECT_NAME] [g/GITHUB_ID] [rt/RATING]`
 
 **Additional notes:**
@@ -970,7 +970,7 @@ This is the one developer with matching information.
 * You can combine multiple attributes for a more specific search.
 * The search is case-insensitive, so you can use any case for the search criteria.
 
-**Example of usage:** 
+**Example of usage:**
 `find-client o/Google r/Senior developer`
 
 * Prints clients from Google with the Senior developer role.
