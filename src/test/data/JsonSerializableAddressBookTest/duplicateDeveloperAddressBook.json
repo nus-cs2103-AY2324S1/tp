@@ -1,0 +1,26 @@
+{
+  "developers" : [ {
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeohz@example.com",
+      "address" : "Blk 15 Geylang Street 29, #06-40",
+      "dateJoined" : "15-12-2019",
+      "role" : "Developer",
+      "salary" : "4000",
+      "projects" : [ "TeamTrekkers", "CodeContact" ],
+      "githubId" : "mahidharah1",
+      "rating" : "4.0"
+    },{
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "address" : "Blk 30 Geylang Street 29, #06-40",
+      "dateJoined" : "15-12-2019",
+      "role" : "Developer",
+      "salary" : "5000",
+      "projects" : [ "TeamTrekker", "CodeContact" ],
+      "githubId" : "mahidharah",
+      "rating" : "5.0"
+    }
+  ]
+}

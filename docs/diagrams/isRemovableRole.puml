@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:get the full developer list;
+
+if (check is any developer using this role) then (there are developers using this role)
+    :throw developer still using error;
+    stop
+    endif
+  if (check is this role one of the pre-defined roles) then (is pre-defined role)
+       :throw cannot be deleted error;
+       stop
+       endif
+    if (check is this role in the list of existing roles) then (role does not exist)
+      :throw role does not exist error;
+      stop
+      endif
+      :delete role from existing list;
+    stop
+
+
+@enduml

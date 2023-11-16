@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ImportDeveloperCommandParser" as ImportDeveloperCommandParser LOGIC_COLOR
+participant "d:ImportDeveloperCommand" as ImportDeveloperCommand LOGIC_COLOR
+participant ":AddDeveloperCommand" as AddDeveloperCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("import-developer\n developers.csv")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand\n("import-developer\n developers.csv")
+activate AddressBookParser
+
+create ImportDeveloperCommandParser
+AddressBookParser -> ImportDeveloperCommandParser
+activate ImportDeveloperCommandParser
+
+ImportDeveloperCommandParser --> AddressBookParser
+deactivate ImportDeveloperCommandParser
+
+AddressBookParser -> ImportDeveloperCommandParser : parse\n("Developers.csv")
+activate ImportDeveloperCommandParser
+
+create ImportDeveloperCommand
+ImportDeveloperCommandParser -> ImportDeveloperCommand
+activate ImportDeveloperCommand
+
+ImportDeveloperCommand --> ImportDeveloperCommandParser : d
+deactivate ImportDeveloperCommand
+
+ImportDeveloperCommandParser --> AddressBookParser : d
+deactivate ImportDeveloperCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ImportDeveloperCommandParser -[hidden]-> AddressBookParser
+destroy ImportDeveloperCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> ImportDeveloperCommand : execute()
+activate ImportDeveloperCommand
+loop              for each row in csv
+    create AddDeveloperCommand
+    ImportDeveloperCommand -> AddDeveloperCommand
+    activate AddDeveloperCommand
+    AddDeveloperCommand --> ImportDeveloperCommand
+    deactivate AddDeveloperCommand
+    ImportDeveloperCommand -> AddDeveloperCommand : execute()
+    activate AddDeveloperCommand
+    AddDeveloperCommand -> Model : addDeveloper()
+    activate Model
+    Model --> AddDeveloperCommand
+    deactivate Model
+    create CommandResult
+    AddDeveloperCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> AddDeveloperCommand
+    deactivate CommandResult
+    AddDeveloperCommand --> ImportDeveloperCommand : result
+    deactivate AddDeveloperCommand
+end
+
+create CommandResult
+    ImportDeveloperCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> ImportDeveloperCommand
+    deactivate CommandResult
+
+ImportDeveloperCommand --> LogicManager : result
+deactivate ImportDeveloperCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

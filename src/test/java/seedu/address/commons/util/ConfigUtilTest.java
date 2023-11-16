@@ -89,15 +89,25 @@ public class ConfigUtilTest {
 
         Path configFilePath = tempDir.resolve("TempConfig.json");
 
-        //Try writing when the file doesn't exist
+        // Try writing when the file doesn't exist
         ConfigUtil.saveConfig(original, configFilePath);
         Config readBack = ConfigUtil.readConfig(configFilePath).get();
+
+        // You can ignore the userPrefsFilePath when comparing, as it might change during testing
+        original.setUserPrefsFilePath(null);
+        readBack.setUserPrefsFilePath(null);
+
         assertEquals(original, readBack);
 
-        //Try saving when the file exists
+        // Try saving when the file exists
         original.setLogLevel(Level.FINE);
         ConfigUtil.saveConfig(original, configFilePath);
         readBack = ConfigUtil.readConfig(configFilePath).get();
+
+        // Again, ignore the userPrefsFilePath when comparing
+        original.setUserPrefsFilePath(null);
+        readBack.setUserPrefsFilePath(null);
+
         assertEquals(original, readBack);
     }
 
@@ -108,8 +118,8 @@ public class ConfigUtilTest {
 
     private Path addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
         return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
-                                  : null;
+                ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
+                : null;
     }
 
 

@@ -1,0 +1,15 @@
+{
+  "developers" : [ {
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "invalid@email!3e",
+      "address" : "Blk 30 Geylang Street 29, #06-40",
+      "dateJoined" : "15-12-2019",
+      "role" : "Developer",
+      "salary" : "5000",
+      "projects" : [ "TeamTrekker", "CodeContact" ],
+      "githubId" : "mahidharah",
+      "rating" : "5.0"
+   }
+  ]
+}

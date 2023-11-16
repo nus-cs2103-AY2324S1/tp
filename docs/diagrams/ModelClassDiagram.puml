@@ -11,17 +11,30 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
-
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Package Person as PersonPackage <<Rectangle>>{
+Package Developer as DeveloperPackage <<Rectangle>>{
+Class UniqueDeveloperList
+Class Developer
+}
+Package Client as ClientPackage <<Rectangle>>{
+Class UniqueClientList
+Class Client
+}
+}
+Package Project as ProjectPackage <<Rectangle>>{
+Class UniqueProjectList
+Class Project
+}
+'Class Address
+''Class Email
+'Class Name
+'Class Phone
+'Class Tag
 
 Class I #FFFFFF
 }
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
@@ -35,20 +48,27 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueDeveloperList
+UniqueDeveloperList --> "~* all" Developer
+AddressBook *--> "1" UniqueClientList
+UniqueClientList --> "~* all" Client
+AddressBook *--> "1" UniqueProjectList
+UniqueProjectList --> "~* all" Project
+'Person *--> Name
+'Person *--> Phone
+'Person *--> Email
+'Person *--> Address
+'Person *--> "*" Tag
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Developer -[hidden]up--> I
+UniqueDeveloperList -[hidden]right-> I
+UniqueProjectList -[hidden]up-> UserPrefs
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+'Name -[hidden]right-> Phone
+'Phone -[hidden]right-> Address
+'Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered Developers" Developer
+ModelManager --> "~* filtered Clients" Client
+ModelManager --> "~* filtered Projects" Project
 @enduml

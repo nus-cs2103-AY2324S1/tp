@@ -2,18 +2,32 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Password;
+import seedu.address.model.client.ClientRoles;
+import seedu.address.model.client.Document;
+import seedu.address.model.commons.Date;
+import seedu.address.model.commons.Name;
+import seedu.address.model.developer.DeveloperRoles;
+import seedu.address.model.developer.GithubId;
+import seedu.address.model.developer.Rating;
+import seedu.address.model.developer.Salary;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.project.Deadline;
+import seedu.address.model.project.Description;
+import seedu.address.model.project.Priority;
+import seedu.address.model.project.Project;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +39,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -96,29 +111,237 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String project} into a {@code Project}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code Project} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Project parseProject(String project) throws ParseException {
+        requireNonNull(project);
+        String trimmedProject = project.trim();
+        if (!Name.isValidName(trimmedProject)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Project(new Name(trimmedProject), new Description(""), new ArrayList<Deadline>());
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> projects} into a {@code Set<project>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Project> parseProjects(Collection<String> projects) throws ParseException {
+        requireNonNull(projects);
+        final Set<Project> projectSet = new HashSet<>();
+        for (String projectName : projects) {
+            projectSet.add(parseProject(projectName));
         }
-        return tagSet;
+        return projectSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> projects} into a {@code Set<String>}.
+     *
+     * @param projects The Collection of projects to parse.
+     * @returns A HashSet of String.
+     */
+    public static Set<String> parseProjectsToSet(Collection<String> projects) {
+        requireNonNull(projects);
+        final Set<String> projectSet = new HashSet<>();
+
+        for (String p : projects) {
+            projectSet.add(p);
+        }
+        return projectSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> deadlines} into a {@code List<Deadline>}.
+     *
+     * @param deadlines The Collection of deadlines to parse.
+     * @throws ParseException if format is invalid.
+     * @returns An ArrayList of Deadlines if parsing is successful.
+     */
+    public static List<Deadline> parseDeadlines(Collection<String> deadlines) throws ParseException {
+        requireNonNull(deadlines);
+        final List<Deadline> deadlineSet = new ArrayList<>();
+        for (String str : deadlines) {
+            if (!Deadline.isValidDeadline(str)) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        Deadline.MESSAGE_CONSTRAINTS));
+            } else {
+                deadlineSet.add(new Deadline(str, deadlineSet.size() + 1));
+            }
+        }
+        return deadlineSet;
+    }
+
+    /**
+     * Parses a {@code String dateJoined} into a {@code DateJoined}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DateJoined} is invalid.
+     */
+    public static Date parseDateJoined(String dateJoined) throws ParseException {
+        requireNonNull(dateJoined);
+        String trimmedDateJoined = dateJoined.trim();
+        if (!Date.isValidDate(trimmedDateJoined, false)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDateJoined, false);
+    }
+
+    /**
+     * Parses a {@code String dateDeadline} into a {@code DateDeadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DateDeadline} is invalid.
+     */
+    public static Date parseDateDeadline(String dateJoined) throws ParseException {
+        requireNonNull(dateJoined);
+        String trimmedDateJoined = dateJoined.trim();
+        if (!Date.isValidDate(trimmedDateJoined, true)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDateJoined, true);
+    }
+
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Role} is invalid.
+     */
+    public static DeveloperRoles parseDeveloperRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!DeveloperRoles.isValidRole(trimmedRole)) {
+            throw new ParseException(DeveloperRoles.NO_SUCH_DEVELOPER_ROLE);
+        }
+        return new DeveloperRoles(trimmedRole);
+    }
+
+    /**
+     * Parses a client role string and returns a `ClientRoles` object.
+     *
+     * @param role The client role string to be parsed.
+     * @return A `ClientRoles` object representing the parsed client role.
+     * @throws ParseException If the input string is not a valid client role.
+     */
+    public static ClientRoles parseClientRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!ClientRoles.isValidRole(trimmedRole)) {
+            throw new ParseException(ClientRoles.NO_SUCH_CLIENT_ROLE);
+        }
+        return new ClientRoles(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code String salary} into a {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
+    }
+
+    /**
+     * Parses a GitHub ID string and returns a `GithubId` object.
+     *
+     * @param githubid The GitHub ID string to be parsed.
+     * @return A `GithubId` object representing the parsed GitHub ID.
+     * @throws ParseException If the input string is not a valid GitHub ID.
+     */
+    public static GithubId parseGithubId(String githubid) throws ParseException {
+        requireNonNull(githubid);
+        String trimmedGithubId = githubid.trim();
+        if (!GithubId.isValidGithubId(trimmedGithubId)) {
+            throw new ParseException(GithubId.MESSAGE_CONSTRAINTS);
+        }
+        return new GithubId(trimmedGithubId);
+    }
+
+    /**
+     * Parses a rating string and returns a `Rating` object.
+     *
+     * @param rating The rating string to be parsed.
+     * @return A `Rating` object representing the parsed rating.
+     * @throws ParseException If the input string is not a valid rating.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        String trimmedRating = rating.trim();
+        if (!Rating.isValidRating(trimmedRating)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Rating(trimmedRating);
+    }
+
+    /**
+     * Parses a document URL string and returns a `Document` object.
+     *
+     * @param doc The document URL string to be parsed.
+     * @return A `Document` object representing the parsed document URL.
+     * @throws ParseException If the input string is not a valid document URL.
+     */
+    public static Document parseDocument(String doc) throws ParseException {
+        requireNonNull(doc);
+        String trimmedDoc = doc.trim();
+        if (!Document.isValidUrl(trimmedDoc)) {
+            throw new ParseException(Document.MESSAGE_CONSTRAINTS);
+        }
+        return new Document(trimmedDoc);
+    }
+
+    /**
+     * Parses a description string and returns a `Description` object.
+     *
+     * @param description The description string to be parsed.
+     * @return A `Description` object representing the parsed description.
+     * @throws ParseException If the input string is not a valid description.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a password string and returns the trimmed password.
+     *
+     * @param pw The password string to be parsed.
+     * @return The trimmed password.
+     * @throws ParseException If the input string is not a valid password.
+     */
+    public static String parsePassword(String pw) throws ParseException {
+        requireNonNull(pw);
+        String trimmedPw = pw.trim();
+        if (!Password.isValidPassword(trimmedPw)) {
+            throw new ParseException(Password.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedPw;
+    }
+
+    /**
+     * Parses a priority string and returns the corresponding Priority enum.
+     *
+     * @param priorityKeywords The priority string to be parsed.
+     * @return The corresponding Priority enum.
+     * @throws ParseException If the input string is not a valid priority.
+     */
+    public static Priority parsePriority(String priorityKeywords) throws ParseException {
+        if (!(priorityKeywords.equals("HIGH") || priorityKeywords.equals("MEDIUM") || priorityKeywords.equals("LOW"))) {
+            throw new ParseException("Priority has to be HIGH, MEDIUM or LOW");
+        }
+        return Priority.valueOf(priorityKeywords);
     }
 }

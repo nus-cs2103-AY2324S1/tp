@@ -19,7 +19,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -74,5 +76,12 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Returns a boolean representing whether there are any prefix mappings in the ArgumentMultimap.
+     */
+    public boolean hasMappings() {
+        return !argMultimap.isEmpty();
     }
 }

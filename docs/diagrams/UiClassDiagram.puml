@@ -11,8 +11,12 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class DeveloperListPanel
+Class DeveloperCard
+Class ClientListPanel
+Class ClientCard
+Class ProjectListPanel
+Class ProjectCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,26 +36,39 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" DeveloperListPanel
+MainWindow *-down-> "1" ClientListPanel
+MainWindow *-down-> "1" ProjectListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+
+DeveloperListPanel -down-> "*" DeveloperCard
+ClientListPanel -down-> "*" ClientCard
+ProjectListPanel -down-> "*" ProjectCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+DeveloperListPanel --|> UiPart
+DeveloperCard --|> UiPart
+ClientListPanel --|> UiPart
+ClientCard --|> UiPart
+ProjectListPanel --|> UiPart
+ProjectCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+DeveloperCard ..> Model
+ClientCard ..> Model
+ProjectCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ProjectListPanel -[hidden]left- ClientListPanel
+ClientListPanel -[hidden]left- DeveloperListPanel
+DeveloperListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

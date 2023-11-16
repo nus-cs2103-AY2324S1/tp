@@ -1,0 +1,105 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkDeadlineCommandParser" as MarkDeadlineCommandParser LOGIC_COLOR
+participant "d:MarkDeadlineCommand" as MarkDeadlineCommand LOGIC_COLOR
+participant ":EditProjectCommandParser" as EditProjectCommandParser LOGIC_COLOR
+participant "d:EditProjectCommand" as EditProjectCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mark-deadline 1 2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mark-deadline 1 2")
+activate AddressBookParser
+
+create MarkDeadlineCommandParser
+AddressBookParser -> MarkDeadlineCommandParser
+activate MarkDeadlineCommandParser
+
+MarkDeadlineCommandParser --> AddressBookParser
+deactivate MarkDeadlineCommandParser
+
+AddressBookParser -> MarkDeadlineCommandParser : parse("1 2")
+activate MarkDeadlineCommandParser
+
+create MarkDeadlineCommand
+MarkDeadlineCommandParser -> MarkDeadlineCommand
+activate MarkDeadlineCommand
+
+MarkDeadlineCommand --> MarkDeadlineCommandParser : d
+deactivate MarkDeadlineCommand
+
+MarkDeadlineCommandParser --> AddressBookParser : d
+deactivate MarkDeadlineCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkDeadlineCommandParser -[hidden]-> AddressBookParser
+destroy MarkDeadlineCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> MarkDeadlineCommand : execute()
+activate MarkDeadlineCommand
+
+create EditProjectCommandParser
+MarkDeadlineCommand -> EditProjectCommandParser
+activate EditProjectCommandParser
+
+EditProjectCommandParser --> MarkDeadlineCommand
+deactivate EditProjectCommandParser
+
+MarkDeadlineCommand -> EditProjectCommandParser : parse("1 dl/19-12-2023,Design backend,HIGH,1")
+activate EditProjectCommandParser
+
+create EditProjectCommand
+EditProjectCommandParser -> EditProjectCommand
+activate EditProjectCommand
+
+EditProjectCommand --> EditProjectCommandParser : c
+deactivate EditProjectCommand
+
+EditProjectCommandParser --> MarkDeadlineCommand : c
+deactivate EditProjectCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditProjectCommandParser -[hidden]-> MarkDeadlineCommand
+destroy EditProjectCommandParser
+
+MarkDeadlineCommand -> EditProjectCommand : execute()
+activate EditProjectCommand
+
+EditProjectCommand -> Model : setProject(projectToEdit, editedProject)
+activate Model
+
+Model --> EditProjectCommand
+deactivate Model
+
+EditProjectCommand --> MarkDeadlineCommand
+deactivate EditProjectCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditProjectCommand -[hidden]-> MarkDeadlineCommand
+destroy EditProjectCommand
+
+create CommandResult
+MarkDeadlineCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkDeadlineCommand
+deactivate CommandResult
+
+MarkDeadlineCommand --> LogicManager : result
+deactivate MarkDeadlineCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

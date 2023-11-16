@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+  !include style.puml
+  skinparam ArrowFontStyle plain
+
+  box Logic LOGIC_COLOR_T1
+  participant ":LogicManager" as LogicManager LOGIC_COLOR
+  participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+  participant "d :AddDeveloperRoleCommandParser" as AddDeveloperRoleCommandParser LOGIC_COLOR
+  participant "d :AddDeveloperRoleCommand" as AddDeveloperRoleCommand LOGIC_COLOR
+  participant ":CommandResult" as CommandResult LOGIC_COLOR
+  end box
+
+  box Model MODEL_COLOR_T1
+  participant ":Model" as Model MODEL_COLOR
+  participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+  participant ":DeveloperRoles" as DeveloperRoles MODEL_COLOR
+  end box
+
+  [-> LogicManager : execute("add-developer-role Tester")
+  activate LogicManager
+
+  LogicManager -> AddressBookParser : parseCommand("add-developer-role Tester")
+  activate AddressBookParser
+
+  create AddDeveloperRoleCommandParser
+  AddressBookParser -> AddDeveloperRoleCommandParser
+  activate AddDeveloperRoleCommandParser
+
+  AddDeveloperRoleCommandParser --> AddressBookParser
+  deactivate AddDeveloperRoleCommandParser
+
+  AddressBookParser -> AddDeveloperRoleCommandParser : parse("Tester")
+  activate AddDeveloperRoleCommandParser
+
+  create AddDeveloperRoleCommand
+  AddDeveloperRoleCommandParser -> AddDeveloperRoleCommand
+  activate AddDeveloperRoleCommand
+
+  AddDeveloperRoleCommand --> AddDeveloperRoleCommandParser
+  deactivate AddDeveloperRoleCommand
+
+  AddDeveloperRoleCommandParser --> AddressBookParser
+  deactivate AddDeveloperRoleCommandParser
+
+  AddressBookParser --> LogicManager
+  deactivate AddressBookParser
+
+  LogicManager -> AddDeveloperRoleCommand : execute()
+  activate AddDeveloperRoleCommand
+
+  AddDeveloperRoleCommand -> DeveloperRoles : isValidRole("Tester")
+  activate DeveloperRoles
+
+  DeveloperRoles --> AddDeveloperRoleCommand : boolean true
+  deactivate DeveloperRoles
+
+  AddDeveloperRoleCommand -> DeveloperRoles : addDeveloperRole(new DeveloperRoles("Tester))
+  activate DeveloperRoles
+
+  DeveloperRoles -> DeveloperRoles : saveDeveloperRoles()
+  DeveloperRoles --> AddDeveloperRoleCommand
+
+  AddDeveloperRoleCommand -> Model : commitAddressBook(model, successMessage, TabIndex)
+  activate Model
+
+  Model -> VersionedAddressBook : commit()
+  activate VersionedAddressBook
+
+  VersionedAddressBook --> Model
+  deactivate VersionedAddressBook
+
+  Model --> AddDeveloperRoleCommand
+  deactivate Model
+
+  create CommandResult
+  AddDeveloperRoleCommand -> CommandResult
+  activate CommandResult
+
+  CommandResult --> AddDeveloperRoleCommand
+  deactivate CommandResult
+
+  AddDeveloperRoleCommand --> LogicManager : result
+  deactivate AddDeveloperRoleCommand
+
+@enduml

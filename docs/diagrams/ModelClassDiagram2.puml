@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Person as PersonPackage <<Rectangle>>{
+Class Person
+
+
+Class Name
+Class Phone
+Class Email
+Class Address
+Class Projects
+
+Package Developer as DeveloperPackage <<Rectangle>>{
+Class Developer
+
+Class Salary
+Class DateJoined
+Class GithubId
+Class Rating
+Class DeveloperRoles
+}
+Package Client as ClientPackage <<Rectangle>>{
+Class Client
+
+Class Organisation
+Class Document
+Class ClientRoles
+}
+}
+
+Package Project as ProjectPackage <<Rectangle>>{
+Class Project
+
+Class ProjectName
+Class ProjectDeadline
+Class ProjectDescription
+}
+
+Person *--> Name
+Person *--> Phone
+Person *--> Email
+Person *--> Address
+Person *-->"*"Projects
+
+Client -up-|> Person
+Developer -up-|> Person
+Developer -[hidden]up->Name
+Client -[hidden]up->Name
+
+Developer *-->Salary
+Developer *-->DateJoined
+Developer *-->GithubId
+Developer *-->Rating
+Developer *-->"*"DeveloperRoles
+
+Client *-->Organisation
+Client *-->Document
+Client *-->"*"ClientRoles
+
+Project -[hidden]up->Rating
+Project -[hidden]up->Document
+Project *-->ProjectName
+Project *-->ProjectDeadline
+Project *-->ProjectDescription
+
+'Name -[hidden]right-> Phone
+'Phone -[hidden]right-> Address
+'Address -[hidden]right-> Email
+
+@enduml

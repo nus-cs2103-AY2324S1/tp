@@ -2,58 +2,53 @@
 layout: page
 title: About Us
 ---
-
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `mahidharah@gmail.com`
 
-## Project team
+## Project team T09-02
 
-### John Doe
+### C Mahidharah Rajendran
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mahidharah.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[portfolio](team/mahidharah.md)]
+[[github](https://github.com/Mahidharah)]
+[[Linkedin](https://www.linkedin.com/in/mahidharah/)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Elizabeth Mao Zhi Min
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/emzm2023.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/emzm2023)]
+[[portfolio](team/emzm2023.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+### Wan Mingyu
 
-### James Doe
+<img src="images/mingyu-wan.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/mingyu-wan)]
+[[portfolio](team/mingyu-wan.md)]
 
 * Role: Developer
-* Responsibilities: UI
+
+### Mathan Chidambaranathan
+
+<img src="images/ncmathan.png" width="200px">
+
+[[github](http://github.com/ncmathan)]
+[[portfolio](team/ncmathan.md)]
+
+* Role: Developer
+
+### Mohammed Waseem Malik
+
+<img src="images/waseemingly.png" width="200px">
+
+[[github](http://github.com/waseemingly)] [[portfolio](team/waseemingly.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
+

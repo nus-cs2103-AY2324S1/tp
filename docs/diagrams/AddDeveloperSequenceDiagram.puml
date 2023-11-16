@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddDeveloperCommandParser" as AddDeveloperCommandParser LOGIC_COLOR
+participant "a:AddDeveloperCommand" as AddDeveloperCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Developer" as Developer USER_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-developer args")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-developer args")
+activate AddressBookParser
+
+create AddDeveloperCommandParser
+AddressBookParser -> AddDeveloperCommandParser
+activate AddDeveloperCommandParser
+
+AddDeveloperCommandParser --> AddressBookParser
+deactivate AddDeveloperCommandParser
+
+AddressBookParser -> AddDeveloperCommandParser : parse("args")
+activate AddDeveloperCommandParser
+
+create AddDeveloperCommand
+AddDeveloperCommandParser -> AddDeveloperCommand
+activate AddDeveloperCommand
+
+AddDeveloperCommand --> AddDeveloperCommandParser : a
+deactivate AddDeveloperCommand
+
+AddDeveloperCommandParser --> AddressBookParser : a
+deactivate AddDeveloperCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddDeveloperCommandParser -[hidden]-> AddressBookParser
+destroy AddDeveloperCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddDeveloperCommand : execute()
+activate AddDeveloperCommand
+
+create Developer
+AddDeveloperCommand -> Developer: new
+activate Developer
+
+Developer --> AddDeveloperCommand : developer
+deactivate Developer
+
+AddDeveloperCommand -> Model : addDeveloper(devleoper)
+activate Model
+
+Model --> AddDeveloperCommand
+deactivate Model
+
+create CommandResult
+AddDeveloperCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddDeveloperCommand
+deactivate CommandResult
+
+AddDeveloperCommand --> LogicManager : result
+deactivate AddDeveloperCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
