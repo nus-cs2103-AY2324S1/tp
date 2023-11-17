@@ -4,6 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'application'
     id 'jacoco'
+    id "com.adarshr.test-logger" version "3.2.0"
 }
 
 mainClassName = 'seedu.address.Main'
@@ -25,6 +26,18 @@ test {
     finalizedBy jacocoTestReport
 }
 
+testlogger {
+    showPassed false
+    showSkipped false
+    showFailed true
+    showOnlySlow false
+}
+
+
+tasks.withType(JavaExec) {
+    enableAssertions = true
+}
+
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
@@ -38,6 +51,11 @@ task coverage(type: JacocoReport) {
         html.required = true
         xml.required = true
     }
+}
+
+task runChecks(type: Exec) {
+    workingDir "${projectDir}/.github"
+    commandLine './run-checks.sh'
 }
 
 dependencies {
@@ -63,10 +81,12 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    testImplementation "org.mockito:mockito-core:3.+"
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'pawfection.jar'
 }
 
 defaultTasks 'clean', 'test'

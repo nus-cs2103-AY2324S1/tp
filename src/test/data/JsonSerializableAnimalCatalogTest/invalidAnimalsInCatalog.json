@@ -1,0 +1,11 @@
+{
+  "animals" : [ {
+    "name" : "Valid Name",
+    "petId" : "1234",
+    "sex" : "MALE",
+    "species" : "Valid Species",
+    "breed" : "Valid Breed",
+    "dateOfBirth" : "2022-09-32",
+    "admissionDate" : "2022-09-09"
+  } ]
+}

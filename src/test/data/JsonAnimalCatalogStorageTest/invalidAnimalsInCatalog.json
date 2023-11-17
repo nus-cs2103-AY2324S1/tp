@@ -1,0 +1,13 @@
+{
+  "animals" : [ {
+    "name" : "Animal with invalid DateOfBirth field",
+    "petId" : "4321",
+    "sex" : "Male",
+    "species" : "Valid Species",
+    "breed" : "Valid Breed",
+    "dateOfBirth" : "2022-09-32",
+    "admissionDate" : "2022-09-10",
+    "taskList" : [{"description":  "Walk Pookie around the Park",
+      "isDone":  false}]
+  } ]
+}

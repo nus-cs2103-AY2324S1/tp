@@ -1,0 +1,23 @@
+{
+  "animals" : [ {
+    "name" : "Tofu",
+    "petId" : "1234",
+    "sex" : "FEMALE",
+    "species" : "Cat",
+    "breed" : "Ragdoll",
+    "dateOfBirth" : "2022-05-07",
+    "admissionDate" : "2023-03-27",
+    "taskList" : [{"description":  "Walk Pookie around the Park",
+      "isDone":  false}]
+  }, {
+    "name" : "Tofu",
+    "petId" : "1234",
+    "sex" : "FEMALE",
+    "species" : "Cat",
+    "breed" : "Ragdoll",
+    "dateOfBirth" : "2022-05-07",
+    "admissionDate" : "2023-03-27",
+    "taskList" : [{"description":  "Walk Pookie around the Park",
+      "isDone":  false}]
+  } ]
+}

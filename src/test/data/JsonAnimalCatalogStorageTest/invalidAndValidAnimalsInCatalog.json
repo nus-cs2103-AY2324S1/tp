@@ -1,0 +1,23 @@
+{
+  "animals" : [ {
+    "name" : "Valid Animal",
+    "petId" : "1234",
+    "sex" : "MALE",
+    "species" : "Valid Species",
+    "breed" : "Valid Breed",
+    "dateOfBirth" : "2022-09-09",
+    "admissionDate" : "2022-09-10",
+    "taskList" : [{"description":  "Walk Pookie around the Park",
+      "isDone":  false}]
+  }, {
+    "name" : "Animal with invalid Sex field",
+    "petId" : "4321",
+    "sex" : "Non-Binary",
+    "species" : "Valid Species",
+    "breed" : "Valid Breed",
+    "dateOfBirth" : "2022-09-09",
+    "admissionDate" : "2022-09-10",
+    "taskList" : [{"description":  "Walk Pookie around the Park",
+      "isDone":  false}]
+  } ]
+}

@@ -21,21 +21,54 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param phrase cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsPhraseIgnoreCase(String sentence, String phrase) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(phrase);
 
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String preppedPhrase = phrase.trim();
+        checkArgument(!preppedPhrase.isEmpty(), "Phrase parameter cannot be empty");
+        String[] wordsInPreppedPhrase = preppedPhrase.split("\\s+");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        // if the word is longer than the sentence, return false
+        if (wordsInPreppedPhrase.length > wordsInPreppedSentence.length) {
+            return false;
+        }
+
+        // if the phrase is one word long, check if the word is in the sentence
+        if (wordsInPreppedPhrase.length == 1) {
+            return Arrays.stream(wordsInPreppedSentence)
+                    .anyMatch(preppedPhrase::equalsIgnoreCase);
+        }
+
+        // iterate through the sentence
+        for (int i = 0; i < wordsInPreppedSentence.length; i++) {
+            if (wordsInPreppedSentence[i].equalsIgnoreCase(wordsInPreppedPhrase[0])) {
+                for (int j = 1; j < wordsInPreppedPhrase.length; j++) {
+
+                    // if the sentence ends before the word does, return false
+                    if (i + j >= wordsInPreppedSentence.length) {
+                        break;
+                    }
+
+                    // check if the subsequent words match
+                    if (!wordsInPreppedSentence[i + j].equalsIgnoreCase(wordsInPreppedPhrase[j])) {
+                        break;
+                    }
+
+                    // if the last word matches, return true
+                    if (j == wordsInPreppedPhrase.length - 1
+                            && wordsInPreppedSentence[i + j].equalsIgnoreCase(wordsInPreppedPhrase[j])) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -64,5 +97,32 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Converts all the words in the given string to title case, meaning the first letter of each word is
+     * capitalized, and the rest are in lowercase. Words are assumed to be separated by spaces.
+     *
+     * @param toTitleCase the string to convert to title case
+     * @return a string with each word converted to title case
+     */
+    public static String toTitleCase(String toTitleCase) {
+        // Check for null or empty string.
+        if (toTitleCase == null || toTitleCase.isEmpty()) {
+            return toTitleCase;
+        }
+
+        // Split the string into words.
+        String[] words = toTitleCase.split("\\s+");
+
+        // Capitalize the first letter of each word and make the rest lowercase.
+        for (int i = 0; i < words.length; i++) {
+            if (!words[i].isEmpty()) {
+                words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
+            }
+        }
+
+        // Join the words back into a single string.
+        return String.join(" ", words);
     }
 }

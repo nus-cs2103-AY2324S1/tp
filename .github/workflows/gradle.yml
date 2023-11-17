@@ -1,6 +1,14 @@
 name: Java CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'config/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'config/**'
 
 jobs:
   build:
@@ -18,13 +26,8 @@ jobs:
         with:
           ref: master
 
-      - name: Merge to master
+      - name: Checkout triggering commit
         run: git checkout --progress --force ${{ github.sha }}
-
-      - name: Run repository-wide tests
-        if: runner.os == 'Linux'
-        working-directory:  ${{ github.workspace }}/.github
-        run: ./run-checks.sh
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1

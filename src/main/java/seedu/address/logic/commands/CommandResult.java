@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.animal.Animal;
 
 /**
  * Represents the result of a command execution.
@@ -19,13 +21,23 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final Optional<Animal> animal;
+
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified fields, and the animal to be updated in detailView.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Animal animal) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.animal = Optional.ofNullable(animal);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields, and animal as null.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, null);
     }
 
     /**
@@ -36,8 +48,16 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    public CommandResult(String feedbackToUser, Animal animal) {
+        this(feedbackToUser, false, false, animal);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Optional<Animal> getAnimalResult() {
+        return animal;
     }
 
     public boolean isShowHelp() {

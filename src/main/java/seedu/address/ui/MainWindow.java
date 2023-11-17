@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
+import seedu.address.logic.AnimalLogic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,12 +28,14 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Logic logic;
+    private AnimalLogic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private AnimalListPanel animalListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private AnimalDetailPanel animalDetailPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +44,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane animalListPanelPlaceholder;
+
+    @FXML
+    private StackPane animalDetailPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -53,7 +58,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, AnimalLogic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -110,13 +115,16 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        animalDetailPanel = new AnimalDetailPanel();
+        animalDetailPanelPlaceholder.getChildren().add(animalDetailPanel.getRoot());
+
+        animalListPanel = new AnimalListPanel(logic.getFilteredAnimalList(), animalDetailPanel);
+        animalListPanelPlaceholder.getChildren().add(animalListPanel.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAnimalCatalogFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -163,14 +171,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see AnimalLogic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -185,9 +189,20 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
+            //@@author bkjwjason-reused
+            //Reused from https://github.com/AY2324S1-CS2103T-W17-2/tp
+            //(src/main/java/seedu/letsgethired/ui/MainWindow.java) Lines 191-194
+            //with minor modifications
+            commandResult.getAnimalResult().ifPresentOrElse(x -> {
+                animalListPanel.selectAnimal(x);
+                animalDetailPanel.updateDetails(x);
+            }, () -> {
+                animalListPanel.clearSelection();
+                animalDetailPanel.clearDetails();
+            });
+            //@@author
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | IllegalArgumentException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

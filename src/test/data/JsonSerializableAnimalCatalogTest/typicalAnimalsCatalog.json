@@ -1,0 +1,54 @@
+{
+  "_comment": "AnimalCatalog save file which contains the same Animal values as in TypicalAnimals#getTypicalCatalog()",
+  "animals" : [ {
+    "name" : "Tofu",
+    "petId" : "1234",
+    "sex" : "FEMALE",
+    "species" : "Cat",
+    "breed" : "British Shorthair",
+    "dateOfBirth" : "2019-10-10",
+    "admissionDate" : "2019-11-11",
+    "taskList" : [{"description":  "Feed Animal",
+      "isDone":  false}, {"description":  "Walk Animal", "isDone":  false}]
+  }, {
+    "name" : "Muffin",
+    "petId" : "3333",
+    "sex" : "MALE",
+    "species" : "Dog",
+    "breed" : "Jack Russell Terrier",
+    "dateOfBirth" : "2020-10-10",
+    "admissionDate" : "2020-12-12",
+    "taskList" : [{"description":  "Feed Muffin",
+      "isDone":  false}, {"description":  "Wash Muffin", "isDone":  false}]
+  }, {
+    "name" : "Jaebee",
+    "petId" : "9999",
+    "sex" : "MALE",
+    "species" : "Pookie",
+    "breed" : "Bear",
+    "dateOfBirth" : "2023-01-01",
+    "admissionDate" : "2023-04-04",
+    "taskList" : [{"description":  "Feed Jaebee",
+      "isDone":  false}, {"description":  "Wash Jaebee", "isDone":  false}]
+  }, {
+    "name" : "Loyboy",
+    "petId" : "2345",
+    "sex" : "MALE",
+    "species" : "Human",
+    "breed" : "Good Boy",
+    "dateOfBirth" : "2001-01-01",
+    "admissionDate" : "2023-02-02",
+    "taskList" : [{"description":  "Feed Loyboy",
+      "isDone":  false}, {"description":  "Wash Loyboy", "isDone":  false}]
+  }, {
+    "name" : "Bear",
+    "petId" : "1111",
+    "sex" : "FEMALE",
+    "species" : "Dog",
+    "breed" : "Poodle",
+    "dateOfBirth" : "2019-01-01",
+    "admissionDate" : "2019-01-02",
+    "taskList" : [{"description":  "Feed Bear",
+      "isDone":  false}, {"description":  "Wash Bear", "isDone":  false}]
+  } ]
+}
