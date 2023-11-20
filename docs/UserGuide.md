@@ -670,15 +670,15 @@ Address book has been cleared!
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JobFestGo home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous D.A.V.E. home folder.
 
-**Q**: What do I do if the clicking of the Dave JAR file does not work?<br>
-**A**: Given below are the steps to launch Dave using CLI:
+**Q**: What do I do if the clicking of the D.A.V.E. JAR file does not work?<br>
+**A**: Given below are the steps to launch D.A.V.E. using CLI:
 
 1. Open the command prompt
 1. Navigate to the directory where the JAR file is located using cd [JAR file location]
 1. Type `java -jar DAVE.jar` and press enter
-1. Dave should launch
+1. D.A.V.E. should launch
 
 **Q**: How can I check my Java version?<br>
 **A**: Open a command prompt and type `java -version` . If you do not have Java installed, you

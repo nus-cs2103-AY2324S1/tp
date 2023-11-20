@@ -15,6 +15,7 @@ pageNav: 3
 
 This project is based on [AB-3](https://github.com/se-edu/addressbook-level3).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
+* Content in the FAQ and Known Issues sections referenced from [JobFestGo](https://ay2324s1-cs2103t-t09-1.github.io/tp/UserGuide.html)'s documentation.
 
 
 --------------------------------------------------------------------------------------------------------------------
