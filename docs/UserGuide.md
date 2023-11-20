@@ -670,7 +670,7 @@ Address book has been cleared!
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JobFestGo home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Dave home folder.
 
 **Q**: What do I do if the clicking of the Dave JAR file does not work?<br>
 **A**: Given below are the steps to launch Dave using CLI:
