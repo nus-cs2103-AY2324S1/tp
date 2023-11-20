@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="TOP_LEFT" minHeight="650" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="5" bottom="30" left="15" />
+            </padding>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <ImageView fx:id="profileImage" fitHeight="50" fitWidth="50">
+                    <image>
+                        <Image url="@/images/profile.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+            </HBox>
+            <Region prefHeight="5" />
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <ImageView fx:id="tagIcon" fitHeight="16" fitWidth="16">
+                    <image>
+                        <Image url="@/images/tag.png" />
+                    </image>
+                </ImageView>
+                <Label styleClass="cell_small_label">
+                    <text>Tags:</text>
+                </Label>
+                <FlowPane fx:id="tags" />
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <ImageView fx:id="phoneIcon" fitHeight="16" fitWidth="16">
+                    <image>
+                        <Image url="@/images/smartphone-call.png" />
+                    </image>
+                </ImageView>
+                <Label styleClass="cell_small_label">
+                    <text>Phone:</text>
+                </Label>
+                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <ImageView fx:id="addressIcon" fitHeight="16" fitWidth="16">
+                    <image>
+                        <Image url="@/images/home-address.png" />
+                    </image>
+                </ImageView>
+                <Label styleClass="cell_small_label">
+                    <text>Address:</text>
+                </Label>
+                <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <ImageView fx:id="emailIcon" fitHeight="16" fitWidth="16">
+                    <image>
+                        <Image url="@/images/email.png" />
+                    </image>
+                </ImageView>
+                <Label styleClass="cell_small_label">
+                    <text>Email:</text>
+                </Label>
+                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+            </HBox>
+            <Region prefHeight="20" />
+            <Separator prefWidth="150" HBox.hgrow="ALWAYS" />
+            <Region prefHeight="20" />
+            <HBox fx:id="additionalInfoBox" alignment="CENTER_LEFT">
+                <Label styleClass="cell_small_label">
+                    <text>Additional Information:</text>
+                </Label>
+            </HBox>
+            <VBox spacing="5" alignment="CENTER_LEFT">
+                    <HBox fx:id="meetingTimeBox" spacing="5" alignment="CENTER_LEFT">
+                        <ImageView fx:id="meetingTimeIcon" fitHeight="16" fitWidth="16" visible="false">
+                            <image>
+                                <Image url="@/images/clock.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="meetingTimeTitle" styleClass="cell_small_label" managed="true">
+                            <text>Meeting Time:</text>
+                        </Label>
+                        <Label fx:id="meetingTime" styleClass="cell_small_label" />
+                    </HBox>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <ImageView fx:id="keyMilestoneIcon" fitHeight="16" fitWidth="16" visible="false">
+                        <image>
+                            <Image url="@/images/milestone.png" />
+                        </image>
+                    </ImageView>
+                    <Label fx:id="keyMilestoneTitle" styleClass="cell_small_label" managed="false">
+                        <text>Key Milestone:</text>
+                    </Label>
+                    <Label fx:id="keyMilestone" styleClass="cell_small_label"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </GridPane>
+    <stylesheets>
+        <URL value="@ViewWindow.css" />
+    </stylesheets>
+</HBox>

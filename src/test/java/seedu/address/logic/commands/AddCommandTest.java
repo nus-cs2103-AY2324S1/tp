@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalLeads.BENSON;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Client;
+import seedu.address.model.person.Lead;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -35,7 +38,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().buildClient();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
@@ -46,7 +49,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().buildClient();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -55,8 +58,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").buildClient();
+        Person bob = new PersonBuilder().withName("Bob").buildClient();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -76,14 +79,48 @@ public class AddCommandTest {
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
-
+    //test the difference between client and lead
     @Test
-    public void toStringMethod() {
+    public void equalsForClientandLeads() {
+        Person aliceClient = new PersonBuilder().withName("Alice").buildClient();
+        Person aliceLead = new PersonBuilder().withName("Alice").buildLead();
+        AddCommand addClientCommand = new AddCommand(aliceClient);
+        AddCommand addLeadCommand = new AddCommand(aliceLead);
+
+        // same object -> returns true
+        assertTrue(addClientCommand.equals(addClientCommand));
+
+        // same values -> returns true
+        AddCommand addAliceCommandCopy = new AddCommand(aliceClient);
+        assertTrue(addClientCommand.equals(addAliceCommandCopy));
+
+        // same values -> returns true
+        AddCommand addAliceLeadCommandCopy = new AddCommand(aliceLead);
+        assertTrue(addLeadCommand.equals(addAliceLeadCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addClientCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addLeadCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(addClientCommand.equals(addLeadCommand));
+    }
+    @Test
+    public void clientToStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
+    //put a lead here
+    @Test
+    public void leadToStringMethod() {
+        AddCommand addCommand = new AddCommand(BENSON);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + BENSON + "}";
+        assertEquals(expected, addCommand.toString());
+    }
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -92,7 +129,6 @@ public class AddCommandTest {
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -120,6 +156,16 @@ public class AddCommandTest {
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addClient(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLead(Lead lead) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,6 +201,15 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void view(Person personToView) {
             throw new AssertionError("This method should not be called.");
         }
     }

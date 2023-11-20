@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -28,12 +30,17 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewWindow viewWindow;
+    @FXML
+    private StackPane viewWindowPlaceholder;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,6 +50,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane clientListPanelPlaceholder;
+
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -60,13 +71,14 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
         helpWindow = new HelpWindow();
     }
+
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -105,7 +117,6 @@ public class MainWindow extends UiPart<Stage> {
             }
         });
     }
-
     /**
      * Fills up all the placeholders of this window.
      */
@@ -163,6 +174,43 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Handles the View Command.
+     */
+    @FXML
+    public void handleView(Person selectedPerson, int displayedIndex) {
+        logger.info("handleView");
+        showViewWindow(selectedPerson, displayedIndex);
+    }
+
+
+    private void showViewWindow(Person selectedPerson, int displayedIndex) {
+        try {
+            if (viewWindow != null && viewWindowPlaceholder != null) {
+                clearViewContent();
+                viewWindowPlaceholder.getChildren().add(viewWindow.getRoot());
+                personListPanelPlaceholder.setVisible(false);
+                personListPanelPlaceholder.setManaged(false);
+                viewWindowPlaceholder.setVisible(true);
+                viewWindowPlaceholder.setManaged(true);
+            } else {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clearViewContent() {
+        viewWindowPlaceholder.getChildren().clear();
+    }
+
+    private void hideViewWindow() {
+        if (viewWindow != null && viewWindowPlaceholder != null) {
+            viewWindowPlaceholder.setVisible(false);
+            personListPanelPlaceholder.setVisible(true);
+        }
+    }
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -173,9 +221,11 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            logger.info("reached here: " + logic.getFilteredPersonList());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
@@ -186,6 +236,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.checkState().equals("view")) {
+                ObservableList<Person> allPersons = logic.getFilteredPersonList();
+                Person selectedPerson = allPersons.get(0);
+                viewWindow = new ViewWindow(selectedPerson, 1);
+
+                handleView(selectedPerson, 0);
+            } else {
+                hideViewWindow();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

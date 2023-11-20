@@ -8,15 +8,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.AddLeadCommand;
+import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConvertClientToLeadCommand;
+import seedu.address.logic.commands.ConvertLeadToClientCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListClientCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListLeadCommand;
+import seedu.address.logic.commands.SortMeetingTimeCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,14 +62,20 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddClientCommand.COMMAND_WORD:
+            return new AddClientCommandParser().parse(arguments);
+
+        case AddLeadCommand.COMMAND_WORD:
+            return new AddLeadCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteMeetingCommand.COMMAND_WORD:
+            return new DeleteMeetingCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -76,6 +91,27 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ListClientCommand.COMMAND_WORD:
+            return new ListClientCommand();
+
+        case ListLeadCommand.COMMAND_WORD:
+            return new ListLeadCommand();
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case ConvertClientToLeadCommand.COMMAND_WORD:
+            return new ConvertClientToLeadCommandParser().parse(arguments);
+
+        case ConvertLeadToClientCommand.COMMAND_WORD:
+            return new ConvertLeadToClientCommandParser().parse(arguments);
+
+        case SortMeetingTimeCommand.COMMAND_WORD:
+            return new SortMeetingTimeCommand();
+
+        case AddMeetingCommand.COMMAND_WORD:
+            return new AddMeetingCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

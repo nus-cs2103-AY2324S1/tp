@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -31,5 +33,14 @@ public class CollectionUtil {
      */
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
+    }
+
+    /**
+     * Adds an item to a set and returns that set.
+     */
+    public static <T> Set<T> addItemToSet(Set<T> set, T item) {
+        Set<T> copy = new HashSet<T>(set);
+        copy.add(item);
+        return copy;
     }
 }

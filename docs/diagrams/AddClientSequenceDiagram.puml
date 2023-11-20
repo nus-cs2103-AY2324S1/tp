@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddClientCommandParser" as AddClientCommandParser LOGIC_COLOR
+participant "a:AddClientCommand" as AddClientCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+[-> LogicManager : execute("addclient n/...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand()
+activate AddressBookParser
+
+create AddClientCommandParser
+AddressBookParser -> AddClientCommandParser
+activate AddClientCommandParser
+
+AddClientCommandParser --> AddressBookParser
+deactivate AddClientCommandParser
+
+AddressBookParser -> AddClientCommandParser : parse()
+activate AddClientCommandParser
+
+create AddClientCommand
+AddClientCommandParser -> AddClientCommand
+activate AddClientCommand
+
+AddClientCommand --> AddClientCommandParser : a
+deactivate AddClientCommand
+
+AddClientCommandParser --> AddressBookParser : a
+deactivate AddClientCommandParser
+AddClientCommandParser -[hidden]-> AddressBookParser : a
+destroy AddClientCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddClientCommand : execute()
+activate AddClientCommand
+
+AddClientCommand -> Model : addClient()
+activate Model
+
+Model -> AddressBook : addClient()
+activate AddressBook
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> AddClientCommand
+deactivate Model
+
+create CommandResult
+AddClientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddClientCommand
+deactivate CommandResult
+
+AddClientCommand --> LogicManager : result
+deactivate AddClientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

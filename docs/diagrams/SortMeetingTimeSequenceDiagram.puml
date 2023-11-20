@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "s:SortMeetingTimeCommand" as SortMeetingTimeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sortmeeting")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sortmeeting")
+activate AddressBookParser
+
+
+create SortMeetingTimeCommand
+AddressBookParser -> SortMeetingTimeCommand
+activate SortMeetingTimeCommand
+
+SortMeetingTimeCommand --> AddressBookParser : s
+deactivate SortMeetingTimeCommand
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SortMeetingTimeCommand : execute()
+activate SortMeetingTimeCommand
+
+SortMeetingTimeCommand -> Model : sortFilteredPersonList()
+activate Model
+
+Model --> SortMeetingTimeCommand
+deactivate Model
+
+create CommandResult
+SortMeetingTimeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortMeetingTimeCommand : result
+deactivate
+
+SortMeetingTimeCommand --> LogicManager : result
+deactivate SortMeetingTimeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

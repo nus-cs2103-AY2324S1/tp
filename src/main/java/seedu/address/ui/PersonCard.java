@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label meetingTime;
+    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
@@ -51,7 +53,20 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        if (person.getMeetingTime().isPresent()) {
+            meetingTime.setManaged(true);
+            meetingTime.setText(person.getMeetingTimeStringForUserInterface());
+        }
         email.setText(person.getEmail().value);
+
+        Label label = new Label(person.getType().value);
+        if (person.isClient()) {
+            label.getStyleClass().add("client-label");
+        } else {
+            label.getStyleClass().add("lead-label");
+        }
+        tags.getChildren().add(label);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

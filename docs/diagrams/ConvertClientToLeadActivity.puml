@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes command;
+:AddressBookParser parses command;
+
+if () then ([valid converttoclient command index])
+    if () then ([indexed person is lead])
+        :Convert to client;
+        stop
+    else ([else])
+        :Display error message;
+        stop
+    endif
+else ([else])
+    :Display error message;
+    stop
+endif
+
+@enduml

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Lead;
 import seedu.address.model.person.Person;
 
 /**
@@ -35,6 +36,11 @@ public class Messages {
      * Formats the {@code person} for display to the user.
      */
     public static String format(Person person) {
+        if (person.isLead()) {
+            //if the person is lead, use another format instead
+            return format((Lead) person);
+        }
+        assert(!person.isLead());
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
@@ -43,8 +49,32 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Meeting Time: ")
+                .append(person.getMeetingTimeString())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code lead} for display to the user.
+     */
+    public static String format(Lead lead) {
+        assert(lead.isLead());
+        final StringBuilder builder = new StringBuilder();
+        builder.append(lead.getName())
+                .append("; Phone: ")
+                .append(lead.getPhone())
+                .append("; Email: ")
+                .append(lead.getEmail())
+                .append("; Address: ")
+                .append(lead.getAddress())
+                .append("; Key Milestone: ")
+                .append(lead.getKeyMilestone())
+                .append("; Meeting Time: ")
+                .append(lead.getMeetingTimeString())
+                .append("; Tags: ");
+        lead.getTags().forEach(builder::append);
         return builder.toString();
     }
 

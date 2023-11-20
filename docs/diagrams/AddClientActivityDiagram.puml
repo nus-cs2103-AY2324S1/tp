@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+:AddressBookParser parses command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid addclient command string])
+    :Create new client;
+    if () then ([client already exists])
+        :Display error message;
+        stop
+    else ([else])
+        :Add client to persons in AddressBook;
+        stop
+    endif
+    else ([invalid addclient command string])
+        :Display error message;
+        stop
+@enduml

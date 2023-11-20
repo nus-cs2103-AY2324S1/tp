@@ -1,10 +1,15 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Client;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.KeyMilestone;
+import seedu.address.model.person.Lead;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -20,12 +25,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_KEY_MILESTONE = "01/12/2023";
+    public static final String DEFAULT_MEETING_TIME = "10/10/2023 14:30";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private KeyMilestone keyMilestone;
+    private Optional<MeetingTime> meetingTime;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,6 +44,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        meetingTime = Optional.empty();
+        keyMilestone = new KeyMilestone(DEFAULT_KEY_MILESTONE);
         tags = new HashSet<>();
     }
 
@@ -46,7 +57,21 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        meetingTime = personToCopy.getMeetingTime();
         tags = new HashSet<>(personToCopy.getTags());
+    }
+
+    /**
+     * Initializes the PersonBuilder with the data of {@code leadToCopy}.
+     */
+    public PersonBuilder(Lead leadToCopy) {
+        name = leadToCopy.getName();
+        phone = leadToCopy.getPhone();
+        email = leadToCopy.getEmail();
+        address = leadToCopy.getAddress();
+        keyMilestone = leadToCopy.getKeyMilestone();
+        meetingTime = leadToCopy.getMeetingTime();
+        tags = new HashSet<>(leadToCopy.getTags());
     }
 
     /**
@@ -60,7 +85,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -89,8 +114,31 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code KeyMilestone} of the {@code Person} that we are building.
+     */
+    //temporary fix: buildLead must call keyMilestone
+    public PersonBuilder withKeyMilestone(String keyMilestone) {
+        this.keyMilestone = new KeyMilestone(keyMilestone);
+        return this;
+    }
+    /**
+     * Sets the {@code MeetingTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMeetingTime(String meetingTime) {
+        if (meetingTime == null) {
+            this.meetingTime = Optional.empty();
+            return this;
+        }
+        this.meetingTime = Optional.of(new MeetingTime(meetingTime));
+        return this;
     }
 
+    public Client buildClient() {
+        return new Client(name, phone, email, address, meetingTime, tags);
+    }
+
+    public Lead buildLead() {
+        return new Lead(name, phone, email, address, keyMilestone, meetingTime, tags);
+    }
 }

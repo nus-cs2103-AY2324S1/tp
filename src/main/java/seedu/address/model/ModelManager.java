@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.SortMeetingTimeCommand.PREDICATE_HAS_MEETING_TIME;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -9,9 +10,13 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Client;
+import seedu.address.model.person.Lead;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonMeetingTimeComparator;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedFilteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +40,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        // default sortedFilteredPersons is identical to filteredPersons due to null comparator
+        sortedFilteredPersons = new SortedList<>(filteredPersons, null);
     }
 
     public ModelManager() {
@@ -105,6 +114,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addClient(Client client) {
+        addressBook.addClient(client);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addLead(Lead lead) {
+        addressBook.addLead(lead);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+    @Override
+    public void view(Person clientToView) {
+        Predicate<Person> leadPredicate = person -> person.equals(clientToView);
+        updateFilteredPersonList(leadPredicate);
+    }
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -119,13 +144,25 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedFilteredPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+
+        // We need to set comparator to null first since PersonMeetingTimeComparator
+        // throws an exception when sorting Persons without a meeting time,
+        // thus passing a null comparator means the list will not be sorted.
+        sortedFilteredPersons.setComparator(null);
+
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredPersonList() {
+        filteredPersons.setPredicate(PREDICATE_HAS_MEETING_TIME);
+        sortedFilteredPersons.setComparator(new PersonMeetingTimeComparator());
     }
 
     @Override
@@ -144,5 +181,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

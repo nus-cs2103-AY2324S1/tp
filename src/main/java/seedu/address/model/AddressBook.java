@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Client;
+import seedu.address.model.person.Lead;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -71,8 +73,24 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addPerson(Person person) {
+        persons.add(person);
+    }
+
+    /**
+     * Adds a client to the address book.
+     * The client must not already exist in the address book.
+     */
+    public void addClient(Client client) {
+        persons.add(client);
+    }
+
+    /**
+     * Adds a lead to the address book.
+     * The lead must not already exist in the address book.
+     */
+    public void addLead(Lead lead) {
+        persons.add(lead);
     }
 
     /**
@@ -82,16 +100,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code personKey} from this {@code AddressBook}.
+     * {@code personKey} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removePerson(Person personKey) {
+        persons.remove(personKey);
     }
 
     //// util methods
@@ -108,6 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -122,7 +140,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons);
     }
-
     @Override
     public int hashCode() {
         return persons.hashCode();

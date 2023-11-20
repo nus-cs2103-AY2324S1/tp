@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.KeyMilestone;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -24,12 +26,16 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_MEETING_TIME = "32/13/2020 2359";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_KEYMILESTONE = "xx/xx/xxxx";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_KEYMILESTONE = "24/12/2023";
+    private static final String VALID_MEETING_TIME = "24/10/2023 12:30";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -103,6 +109,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseMeetingTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMeetingTime((String) null));
+    }
+
+    @Test
+    public void parseMeetingTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime(INVALID_MEETING_TIME));
+    }
+
+    @Test
+    public void parseMeetingTime_validValueWithoutWhitespace_returnsMeetingTime() throws Exception {
+        MeetingTime expectedMeetingTime = new MeetingTime(VALID_MEETING_TIME);
+        assertEquals(expectedMeetingTime, ParserUtil.parseMeetingTime(VALID_MEETING_TIME));
+    }
+
+    @Test
+    public void parseMeetingTime_validValueWithWhitespace_returnsTrimmedMeetingTime() throws Exception {
+        String meetingTimeWithWhiteSpace = WHITESPACE + VALID_MEETING_TIME + WHITESPACE;
+        MeetingTime expectedMeetingTime = new MeetingTime(VALID_MEETING_TIME);
+        assertEquals(expectedMeetingTime, ParserUtil.parseMeetingTime(meetingTimeWithWhiteSpace));
+    }
+
+    @Test
     public void parseAddress_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
@@ -123,6 +152,29 @@ public class ParserUtilTest {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    }
+
+    @Test
+    public void parseKeyMilestone_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseKeyMilestone((String) null));
+    }
+
+    @Test
+    public void parseKeyMilestone_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseKeyMilestone(INVALID_KEYMILESTONE));
+    }
+
+    @Test
+    public void parseKeyMilestone_validValueWithoutWhitespace_returnsKeyMilestone() throws Exception {
+        KeyMilestone expectedKeyMilestone = new KeyMilestone(VALID_KEYMILESTONE);
+        assertEquals(expectedKeyMilestone, ParserUtil.parseKeyMilestone(VALID_KEYMILESTONE));
+    }
+
+    @Test
+    public void parseKeyMilestone_validValueWithWhitespace_returnsTrimmedKeyMilestone() throws Exception {
+        String keyMilestoneWithWhitespace = WHITESPACE + VALID_KEYMILESTONE + WHITESPACE;
+        KeyMilestone expectedKeyMilestone = new KeyMilestone(VALID_KEYMILESTONE);
+        assertEquals(expectedKeyMilestone, ParserUtil.parseKeyMilestone(keyMilestoneWithWhitespace));
     }
 
     @Test
