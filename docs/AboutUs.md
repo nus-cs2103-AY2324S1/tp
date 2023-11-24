@@ -1,59 +1,58 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Keagan Pang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/keaganpzh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/keaganpzh)] [[portfolio](team/keaganpzh.md)]
 
-* Role: Project Advisor
+-   Role: Git expert
+-   Responsibilities: Integration
 
-### Jane Doe
+### Pan Xinping
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/p-xp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/p-xp)]
+[[portfolio](team/p-xp.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+-   Role: Team Lead
+-   Responsibilities: Deliverables & Deadlines
 
-### Johnny Doe
+### Joe Chua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wasjoe1.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/wasjoe1)] [[portfolio](team/wasjoe1.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Documentation
 
-### Jean Doe
+### Samuel Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samuelim01.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/samuelim01)]
+[[portfolio](team/samuelim01.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: IDE/Java expert
+- Responsibilities: Code Quality
 
-### James Doe
+### Shannon Tsou
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tllshan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tllshan)]
+[[portfolio](team/tllshan.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Code Tester
+- Responsibilities: Scheduling & Tracking
