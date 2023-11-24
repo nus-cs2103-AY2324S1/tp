@@ -19,11 +19,13 @@ Here's a quick summary of what WedLog can do for you:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<br />
+
 1. [How to Use This Guide](#1-how-to-use-this-guide)<br>
     1.1 [Notations Used in This Guide](#1-1-notations-used-in-this-guide)<br>
     1.2 [New Users](#1-2-new-users)<br>
-    1.3 [Experienced Users](#1-3-experienced-users)<br>
-2. [Getting Started](#2-getting-started)<br>
+    1.3 [Experienced Users](#1-3-experienced-users)<br><br>
+2. [Getting Started](#2-getting-started)<br><br>
 3. [Understanding the WedLog Interface](#3-understanding-the-wedlog-interface)<br>
     3.1. [User Input and Feedback](#3-1-user-input-and-feedback)<br>
     &emsp; 3.1.1. [Command box](#3-1-1-command-box)<br>
@@ -33,12 +35,18 @@ Here's a quick summary of what WedLog can do for you:
     &emsp; 3.2.2. [Vendor list](#3-2-2-vendor-list)<br>
     3.3. [Quick View Panel](#3-3-quick-view-panel)<br>
     &emsp; 3.3.1. [RSVP Status panel](#3-3-1-rsvp-status-panel)<br>
-    &emsp; 3.3.2. [Dietary Requirements panel](#3-3-2-dietary-requirements-panel)<br>
+    &emsp; 3.3.2. [Dietary Requirements panel](#3-3-2-dietary-requirements-panel)<br><br>
+
+<div style="page-break-after: always;"></div>
+
+<br />
+
 4. [WedLog Tutorial](#4-wedlog-tutorial)<br>
-    4.1. [Adding a guest](#4-1-adding-a-guest)<br>
-    4.2. [Editing a guest](#4-2-editing-a-guest)<br>
-    4.3. [Filtering guests](#4-3-filtering-guests)<br>
-    4.4. [What's next?](#4-4-what-s-next)<br>
+    4.1. [Clearing guests and vendors](#4-1-clearing-guests-and-vendors)<br>
+    4.2. [Adding a guest](#4-2-adding-a-guest)<br>
+    4.3. [Editing a guest](#4-3-editing-a-guest)<br>
+    4.4. [Filtering guests](#4-4-filtering-guests)<br>
+    4.5. [What's next?](#4-5-what-s-next)<br><br>
 5. [Features](#5-features)<br>
     5.1. [Add Command](#5-1-add-command)<br>
     &emsp; 5.1.1. [Adding a guest: `guest add`](#5-1-1-adding-a-guest-guest-add)<br>
@@ -60,11 +68,11 @@ Here's a quick summary of what WedLog can do for you:
     &emsp; 5.6.2. [Undoing last action: `undo`](#5-6-2-undoing-last-action-undo)<br>
     &emsp; 5.6.3. [Redoing last action: `redo`](#5-6-3-redoing-last-action-redo)<br>
     &emsp; 5.6.4. [Clearing guests and vendors: `clear`](#5-6-4-clearing-guests-and-vendors-clear)<br>
-    &emsp; 5.6.5. [Exiting the program: `exit`](#5-6-5-exiting-the-program-exit)<br>
-6. [FAQ](#6-faq)<br>
-7. [Known Issues](#7-known-issues)<br>
-8. [Future Implementations](#8-future-implementations)<br>
-9. [Command Summary](#9-command-summary)<br>
+    &emsp; 5.6.5. [Exiting the program: `exit`](#5-6-5-exiting-the-program-exit)<br><br>
+6. [FAQ](#6-faq)<br><br>
+7. [Known Issues](#7-known-issues)<br><br>
+8. [Future Implementations](#8-future-implementations)<br><br>
+9. [Command Summary](#9-command-summary)<br><br>
 10. [Appendix: Acceptable values for parameters](#10-appendix-acceptable-values-for-parameters)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -103,7 +111,7 @@ If you are new here, welcome to WedLog!
 
 Before you embark on your wedding planning journey, check out our [getting started guide](#2-getting-started) for a step-by-step guide to download WedLog.
 
-Once you have set up WedLog on your computer, proceed to the [Understanding the WedLog Interface](#3-understanding-the-wedlog-interface) section for a quick tour of the WedLog interface.
+Once you have set up WedLog on your computer, proceed to the [understanding the WedLog interface](#3-understanding-the-wedlog-interface) section for a quick tour of the WedLog interface.
 
 Finally, head over to our [WedLog tutorial](#4-wedlog-tutorial) to take your first steps to plan your wedding.
 
@@ -139,11 +147,11 @@ If you would like a detailed look into each of the features WedLog has to offer,
 
 4. Open the WedLog application by double-clicking on the `wedlog.jar` file. If this does not work, [open your computer's terminal](https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955), [navigate to the folder](https://tutorials.codebar.io/command-line/introduction/tutorial.html) containing `wedlog.jar`, and type `java -jar wedlog.jar` to start the application.
    
-5. A window similar to the one below should appear in a few seconds. Note that the app does not come pre-loaded with any data.
+5. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.
 
 <br>
 
-![Ui](images/Ui.png)
+<pic src="images/Ui.png" alt="Screenshot of the user interface"></pic>
 
 Once you have set up WedLog on your computer, take a quick tour of the WedLog interface in the next section.
 
@@ -157,7 +165,7 @@ Once you have set up WedLog on your computer, take a quick tour of the WedLog in
 
 In this section, we give a comprehensive breakdown of the WedLog interface, offering insights into its intuitive design and functionality. Explore the components below to gain a comprehensive understanding of how WedLog simplifies wedding planning.
 
-![ui-overview.png](images%2Funderstanding-interface%2Fui-overview.png)
+<pic src="images/understanding-interface/ui-overview.png" alt="Screenshot of the user interface overview"></pic>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,13 +173,17 @@ In this section, we give a comprehensive breakdown of the WedLog interface, offe
 
 WedLog is optimised for keyboard-based interaction to enhance the efficiency of your wedding planning process. This interaction is facilitated by the command box and result display boxes.
 
-![input-output.png](images%2Funderstanding-interface%2Finput-output.png)
+<pic src="images/understanding-interface/input-output.png" alt="Screenshot of the command box and result display"></pic>
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### 3.1.1. Command box
 
 The command box is the gateway for you to interact with WedLog, allowing you to seamlessly execute various functions. Simply type a command in the command box and press `Enter` to execute it.
+
+<br />
+
+> [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -180,10 +192,6 @@ The command box is the gateway for you to interact with WedLog, allowing you to 
 #### 3.1.2. Result display
 
 Complementing the command box is the result display, where WedLog presents relevant responses based on the executed commands. When a command is successfully executed, a success message will be displayed. When an invalid command is entered, an error message will be displayed.
-
-<br />
-
-> [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,7 +203,13 @@ At the top of each list, you'll find a number indicating the total entries for t
 
 To navigate through your extensive lists, a user-friendly scroll bar is provided.
 
-![lists.png](images%2Funderstanding-interface%2Flists.png)
+<pic src="images/understanding-interface/lists.png" alt="Screenshot of the guest and vendor lists"></pic>
+
+<br />
+
+> [Back to top](#user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -203,7 +217,7 @@ To navigate through your extensive lists, a user-friendly scroll bar is provided
 
 The guest list allows you to meticulously manage and track all information related to your guests. 
 
-![guest-card.png](images%2Funderstanding-interface%2Fguest-card.png)
+<pic src="images/understanding-interface/guest-card.png" alt="Screenshot of a guest card" width="500"></pic>
 
 Individualized guest cards present comprehensive details, including tags, dietary requirements, RSVP status, phone numbers, addresses, emails, and assigned table numbers. This organized representation ensures that each guest's information is easily accessible and manageable.
 
@@ -211,7 +225,7 @@ Individualized guest cards present comprehensive details, including tags, dietar
 
 Similar to the guest list, the vendor list serves as a dedicated space for managing the vendors you are liaising with. 
 
-![vendor-card.png](images%2Funderstanding-interface%2Fvendor-card.png)
+<pic src="images/understanding-interface/vendor-card.png" alt="Screenshot of a vendor card" width="500"></pic>
 
 Vendor cards encapsulate key information such as tags, phone numbers, addresses, and emails, providing you with a comprehensive snapshot of each vendor's essential details.
 
@@ -227,7 +241,7 @@ Vendor cards encapsulate key information such as tags, phone numbers, addresses,
 
 The Quick View panel allows you to see an overview of your guests at a glance. It is located on the left side of the window.
 
-<img src="images/understanding-interface/quick-view-panel.png" alt="WedLog's Quick View panel" height="350"> <br />
+<img src="images/understanding-interface/quick-view-panel.png" alt="WedLog's Quick View panel" height="350"></img>
 
 The Quick View panel consists of 2 sections: the RSVP Status panel and the Dietary Requirements panel.
 
@@ -239,12 +253,14 @@ The RSVP Status panel is designed to help you keep track of the proportion of RS
 represented using a pie chart, with labels indicating the number of guests with each RSVP status. The pie chart is updated automatically
 whenever you add, delete or edit a guest.
 
-<img src="images/understanding-interface/rsvp-status-panel.png" alt="RSVP Status panel" width="300" height="150"> <br />
+<img src="images/understanding-interface/rsvp-status-panel.png" alt="RSVP Status panel" width="300" height="150"></img>
 
 The pie chart slices are colour-coded as follows:
 - `Yes`: Green
 - `No`: Red
 - `Unknown`: Orange
+
+> [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,12 +273,12 @@ of guests with the same requirements.
 This panel consolidates your guests' dietary requirements to be displayed together,
 for you to consider when planning the menu for your wedding. The panel is also updated automatically whenever you add, delete or edit a guest.
 
-<img src="images/understanding-interface/dietary-requirements-panel.png" alt="Dietary Requirements panel"> <br />
+<img src="images/understanding-interface/dietary-requirements-panel.png" alt="Dietary Requirements panel"></img>
 
 <box type="tip">
 
-- **The panel only displays dietary requirements for guests with RSVP status "Yes".** This is because guests with RSVP status "No" or "Unknown" are not expected to attend the wedding, and hence do not need to have their dietary requirements taken into account.
-- If a guest has no specified dietary requirements, we will consider the guest to have "regular" dietary requirements.
+- **The panel only displays dietary requirements for guests with RSVP status `yes`.** This is because guests with RSVP status `no` or `unknown` are not expected to attend the wedding, and hence do not need to have their dietary requirements taken into account.
+- If a guest has no specified dietary requirements, we will consider the guest to have `regular` dietary requirements.
 - Dietary requirements are displayed in descending order of the number of guests with the same requirements.
 
 </box>
@@ -283,7 +299,25 @@ Welcome to the WedLog Tutorial! In this section, we'll guide you through the bas
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 4.1. Adding a guest
+### 4.1. Clearing guests and vendors
+
+When you first open WedLog, the app contains some sample data. Let's reset the app using the `clear` command.
+
+Type `clear` into the command box and press the `Enter` key. This will delete all the data from both the guest and vendor lists, so that you have a clean slate to work with.
+
+Your app should now look like this:
+
+<pic src="images/tutorial/clear.png" alt="Screenshot after clear command"></pic>
+
+<br />
+
+> [Back to top](#user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### 4.2. Adding a guest
 
 Let's add your first guest to WedLog with the `guest add` command. Every guest must have a name, and you have the option to include additional details such as a phone number, address, email, and table number. Furthermore, a guest can be associated with multiple tags.
 
@@ -293,11 +327,11 @@ To add a guest named `John Doe` with the details provided, type the following co
 
 Congratulations! You have successfully added your first guest to your guest list. Your app should now look like this:
 
-![guest-add.png](images%2Ftutorial%2Fguest-add.png)
+<pic src="images/tutorial/guest-add.png" alt="Screenshot after guest add command"></pic>
 
 <box type="tip">
 
-Notice how the default RSVP status for a guest is 'Unknown'. We'll learn how to update this in the next section.
+Notice how the default RSVP status for a guest is `unknown`. We'll learn how to update this in the next section.
 
 </box>
 
@@ -307,9 +341,11 @@ Notice how the default RSVP status for a guest is 'Unknown'. We'll learn how to 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 4.2. Editing a guest
+<div style="page-break-after: always;"></div>
 
-Let's make adjustments to the details of a guest with the `guest edit` command. Suppose John Doe has responded to your invite and confirms that he will be attending your wedding. To reflect this, we'll update the `RSVP status` for John Doe to `Yes`.
+### 4.3. Editing a guest
+
+Let's make adjustments to the details of a guest with the `guest edit` command. Suppose John Doe has responded to your invite and confirms that he will be attending your wedding. To reflect this, we'll update the RSVP status for John Doe to `yes`.
 
 Type the following command and press `Enter`:
 
@@ -317,7 +353,7 @@ Type the following command and press `Enter`:
 
 Your app should now look like this:
 
-![guest-edit.png](images%2Ftutorial%2Fguest-edit.png)
+<pic src="images/tutorial/guest-edit.png" alt="Screenshot after guest edit command"></pic>
 
 <box type="tip">
 
@@ -335,7 +371,7 @@ This ensures that the tallies on the dietary requirements panel reflect only gue
 
 <div style="page-break-after: always;"></div>
 
-### 4.3. Filtering guests
+### 4.4. Filtering guests
 
 Let's narrow down the guest list based on specific criteria using the `guest filter` command.
 
@@ -353,19 +389,23 @@ Notice that parameters can be placed in any order. (e.g. Lily Mae's name is spec
 
 Your app should now look like this:
 
-![guest-filter-0.png](images%2Ftutorial%2Fguest-filter-0.png)
+<pic src="images/tutorial/guest-filter-0.png" alt="Screenshot after adding guests"></pic>
 
-Now that we have a few guests on our list, let's begin filtering. 
+> [Back to top](#user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-First, let's filter for all guests who are friends. The following command will result in a list that contains only guests with the `TAG` `friends`.
+Now that we have a few guests on our list, let's begin filtering.
+
+First, let's filter for all guests who are friends. The following command will result in a list that contains only guests with the tag `friends`.
 
 `guest filter t/friends`
 
 Your guest list should now look like this:
 
-![guest-filter-1.png](images%2Ftutorial%2Fguest-filter-1.png)
+<pic src="images/tutorial/guest-filter-1.png" alt="Screenshot after guest filter t/friends" width="300"></pic>
 
 <box type="tip">
 
@@ -373,21 +413,21 @@ Notice that the number of guests stated at the top of the guest list has changed
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
-Next, let's narrow down our search to filter for all guests who are friends from university. The following command will result in a list that contains only guests with the `TAG` `friends` and `university`.
+Next, let's narrow down our search to filter for all guests who are friends from university. The following command will result in a list that contains only guests with the tags `friends` and `university`.
 
 `guest filter t/friends t/university`
 
 Your guest list should now look like this:
 
-![guest-filter-2.png](images%2Ftutorial%2Fguest-filter-2.png)
+<pic src="images/tutorial/guest-filter-2.png" alt="Screenshot after guest filter t/friends t/university" width="300"></pic>
 
 <box type="tip">
 
 Notice that Mary Fowl is no longer included on this list, since she does not have the `university` tag.
 
 </box>
+
+> [Back to top](#user-guide)
 
 <div style="page-break-after: always;"></div>
 
@@ -397,7 +437,7 @@ Finally, let's filter for all guests who have not been assigned to any table yet
 
 Your guest list should now look like this:
 
-![guest-filter-3.png](images%2Ftutorial%2Fguest-filter-3.png)
+<pic src="images/tutorial/guest-filter-3.png" alt="Screenshot after guest filter tn/" width="300"></pic>
 
 <box type="tip">
 
@@ -407,19 +447,15 @@ Notice that John Doe is not included on this list, since we have previously assi
 
 <br />
 
-> [Back to top](#user-guide)
-
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
-### 4.4. What's next?
+### 4.5. What's next?
 
 Congratulations! You've completed the essential steps of the WedLog Tutorial, setting the stage for seamless and organized wedding planning. Armed with the knowledge of adding guests, editing details, and filtering, you're well-equipped to make the most of WedLog. 
 
 You can manage your vendors with the same set of commands as guests by replacing the `guest` keyword with `vendor`. The only distinction is that vendors require fewer fields for quick and efficient management.
 
-Feel free to explore each command in detail in the [Features](#5-features) section of this guide. For a quick recap on the commands we've just learnt, check out the [command summary](#9-command-summary).
+Feel free to explore each command in detail in the [features](#5-features) section of this guide. For a quick recap on the commands we've just learnt, check out the [command summary](#9-command-summary).
 
 Happy planning, and may your wedding be everything you've dreamed of!
 
@@ -428,6 +464,8 @@ Happy planning, and may your wedding be everything you've dreamed of!
 > [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 5. Features
 
@@ -442,7 +480,11 @@ Let's breakdown an example parameter `x/ABC` below.
 | Labels should be used in the exact format described in this guide.                                         | `n/` must be typed as `n/`. Variations such as `N/` or `name/` are invalid.                         |
 | Placeholder values can be replaced with your own information.                                              | In `guest add n/NAME`, `NAME` is a placeholder which can be replaced, as in `guest add n/Gina Gan`. |
 
-<br>
+<br />
+
+> [Back to top](#user-guide)
+
+----------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -505,7 +547,7 @@ A guest and vendor can share the same name (e.g. Even if there is a vendor named
 
 Examples:
 - `guest add n/Gina p/91234567 a/Blk 123 r/no`: Adds a guest named `Gina` with phone number `91234567`, address `Blk 123`, 
-and RSVP status of `No`.
+and RSVP status of `no`.
 - `guest add n/Gerald d/ r/`: Adds a guest named `Gerald` with no dietary requirements and unknown RSVP status.
 - `guest add n/Georgiana Tan t/family t/bridesmaid`: Adds a guest named `Georgiana` with two tags, `family` and `bridesmaid`.
 
@@ -517,6 +559,10 @@ Expected behaviour upon failure:
 - Not providing the `NAME` parameter: Displays in the error message “Invalid command format!” followed by instruction on `guest add` usage.
 - Adding a new guest with the same `NAME` as an existing guest: Displays the error message "This guest already exists in WedLog." 
 - Providing invalid values for parameters with input restrictions will also trigger error messages.
+
+<br />
+
+> [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -601,7 +647,13 @@ Expected behaviour upon failure:
 - Number out of index range: Displays error message "The guest index provided is invalid."
 - Input for index not a number, or no number: Displays error message "Invalid command format!" followed by instruction on guest delete usage.
 
+<br />
+
+> [Back to top](#user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 #### 5.2.2. Deleting a vendor: `vendor delete`
 
@@ -625,7 +677,7 @@ Expected behaviour upon success:
 
 <box type="tip">
 
-`INDEX` refers to the index number of the guest currently displayed on the guest list.
+`INDEX` refers to the index number of the vendor currently displayed on the vendor list.
 
 </box>
 
@@ -638,6 +690,8 @@ Expected behaviour upon failure:
 > [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### 5.3. Edit Command
 
@@ -659,19 +713,17 @@ Refer to the [Appendix](#10-appendix-acceptable-values-for-parameters) for more 
 
 </box>
 
+<box type="warning">
+
+The edited `NAME` cannot correspond to an existing guest in WedLog.
+
+</box>
+
 <box type="tip">
 
 `INDEX` refers to the index number of the guest currently displayed on the guest list.
 
 </box>
-
-<box type="warning">
-
-If the edited name specified in `n/NAME` corresponds to the name of an existing guest in WedLog, an error message will be displayed.
-
-</box>
-
-<div style="page-break-after: always;"></div>
 
 Examples:
 - `guest list` followed by `guest edit 2 p/914624435` edits the phone number of the 2nd guest to be `91462435`.
@@ -681,18 +733,13 @@ Expected behaviour upon success:
 - Edits the guest at the specified `INDEX`.
 - Displays the guest that has been edited.
 
-<box type="tip">
-
-* If the previous command was `guest filter KEY_WORDS`, the `INDEX` refers to the index number shown in the filtered guest list.
-* Otherwise, the `INDEX` refers to the index number on the unfiltered guest list.
-
-</box>
-
 Expected behaviour upon failure:
 (in order of priority)
 - Index is not a number, or no index provided: Displays error message "Invalid command format!" followed by instruction on guest edit usage.
 - No parameters provided: Displays error message "At least one field to edit must be provided."
 - Index does not correspond to any guest: Displays error message "The guest index provided is invalid."
+
+> [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -714,15 +761,15 @@ Refer to the [Appendix](#10-appendix-acceptable-values-for-parameters) for more 
 
 </box>
 
-<box type="tip">
+<box type="warning">
 
-`INDEX` refers to the index number of the guest currently displayed on the guest list.
+The edited `NAME` cannot correspond to an existing vendor in WedLog.
 
 </box>
 
-<box type="warning">
+<box type="tip">
 
-If the edited name specified in `n/NAME` corresponds to the name of an existing guest in WedLog, an error message will be displayed.
+`INDEX` refers to the index number of the vendor currently displayed on the vendor list.
 
 </box>
 
@@ -733,13 +780,6 @@ Examples:
 Expected behaviour upon success:
 - Edits the vendor at the specified `INDEX`.
 - Displays the vendor that has been edited.
-
-<box type="tip">
-
-* If the previous command was `vendor filter KEY_WORDS`, the `INDEX` refers to the index number shown in the filtered vendor list.
-* Otherwise, the `INDEX` refers to the index number on the unfiltered vendor list.
-
-</box>
 
 Expected behaviour upon failure:
 (in order of priority)
@@ -752,6 +792,8 @@ Expected behaviour upon failure:
 > [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### 5.4. List Command
 
@@ -785,6 +827,8 @@ Expected behaviour upon success:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### 5.5. Filter Command
 
 #### 5.5.1. Filtering guests: `guest filter`
@@ -800,29 +844,15 @@ Format: `guest filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [
 
 * You can use any combination of letters, numbers and special characters as inputs for all parameters.
 * For all parameters aside from `NAME` and `RSVP_STATUS`, providing an empty value (e.g. `p/`) will filter for guests with unfilled values for that parameter. 
-* Providing an empty `RSVP_STATUS` will filter for guests with RSVP status `Unknown`. 
+* Providing an empty `RSVP_STATUS` will filter for guests with RSVP status `unknown`. 
 * Providing an empty `NAME` will filter for guests without a name, thus returning an empty guest list as all guests need a name.
 * At least one parameter must be specified in a filter command.
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 <box type="tip">
 
-**Note:**
-
-* The filter command will only return guests that match all the input values across different parameters.
-* The following parameters are filtered via a case-insensitive partial match (i.e. `guest filter n/john` returns `john` and `johnathan`):
-  * `NAME`
-  * `PHONE`
-  * `EMAIL`
-  * `ADDRESS`
-* The following parameters are filtered via a case-insensitive exact match (i.e. a guest with the tag `friends` would not be a valid result for the input `t/friend`):
-  * `RSVP_STATUS`
-  * `TABLE_NUMBER`
-  * `DIETARY_REQUIREMENT`
-  * `TAG`
+The filter command will only return guests that match all the input values across different parameters.
 
 </box>
 
@@ -839,8 +869,11 @@ Expected behaviour upon success:
 Expected behaviour upon failure:
 - No parameter (e.g. `guest filter`): Displays error message "No prefix was found in the command!" followed by instruction on guest filter usage.
 
+> [Back to top](#user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 #### 5.5.2. Filtering vendors: `vendor filter`
 
@@ -865,16 +898,7 @@ Format: `vendor filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 <box type="tip">
 
-**Note:**
-
-* The filter command will only return vendors that match all the input values across different parameters.
-* The following parameters are filtered via a case-insensitive partial match (i.e. `vendor filter n/john` returns `john` and `johnathan`):
-    * `NAME`
-    * `PHONE`
-    * `EMAIL`
-    * `ADDRESS`
-* The following parameters are filtered via a case-insensitive exact match (i.e. a vendor with the tag `djay` would not be a valid result for the input `t/dj`):
-    * `TAG`
+The filter command will only return vendors that match all the input values across different parameters.
 
 </box>
 
@@ -916,7 +940,7 @@ Format: `undo`
 
 <box type="tip">
 
-The undo command can also be triggered by pressing Control + Z (Windows) or Command + Z (Mac) on the keyboard.
+The undo command can also be triggered by pressing `Control` + `Z` (Windows) or `Command` + `Z` (Mac) on the keyboard.
 
 </box>
 
@@ -939,10 +963,15 @@ Format: `redo`
 
 <box type="tip">
 
-The redo command can be triggered by pressing Control + Y (Windows) or Command + Y (Mac) on the keyboard.
+The redo command can be triggered by pressing `Control` + `Y` (Windows) or `Command` + `Y` (Mac) on the keyboard.
 
 </box>
 
+<br />
+
+> [Back to top](#user-guide)
+
+<!-- This page break is not ideal -->
 <div style="page-break-after: always;"></div>
 
 Examples:
@@ -1023,8 +1052,6 @@ unable to help you recover your lost data.
 **A**: We hope you had a good wedding planning journey with WedLog! If you placed WedLog inside a dedicated folder during the installation process,
 simply delete the entire folder. Otherwise, you will have to find and delete the following files individually: `wedlog.jar`, `addressbook.log.0`, `preferences.json`, `config.json`, alongside the `data` folder.
 
-> [Back to top](#user-guide)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Known Issues
@@ -1045,23 +1072,23 @@ simply delete the entire folder. Otherwise, you will have to find and delete the
 
 ## 9. Command Summary
 
-| Action                   | Format                                                                                                                           | Example                                                                                       |
-|--------------------------|:---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| Add a guest              | `guest add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [tn/TABLE_NUMBER] [d/DIETARY_REQUIREMENT]… [t/TAG]…`           | `guest add n/John Doe p/98765432 e/john@doe.com a/Street 456 r/unknown d/vegetarian t/friend` |
-| Add a vendor             | `vendor add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                                     | `vendor add n/Betsy p/91234567`                                                               |
-| Delete a guest           | `guest delete INDEX`                                                                                                             | `guest delete 1`                                                                              |
-| Delete a vendor          | `vendor delete INDEX`                                                                                                            | `vendor delete 2`                                                                             |
-| Edit a guest             | `guest edit INDEX [n/NAME] [p/PHONE]  [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [tn/TABLE_NUMBER] [d/DIETARY_REQUIREMENT]… [t/TAG]…` | `guest edit 1 p/98765432 r/unknown`                                                           |
-| Edit a vendor            | `vendor edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                            | `vendor edit 2 p/914624435`                                                                   |
-| View all guests          | `guest list`                                                                                                                     |                                                                                               |
-| View all vendors         | `vendor list`                                                                                                                    |                                                                                               |
-| Filter guest list        | `guest filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [d/DIETARY_REQUIREMENTS] [tn/TABLE_NUMBER] [t/TAG]…`      | `guest filter n/Keith p/92354567 r/yes`                                                       |
-| Filter vendor list       | `vendor filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                                | `vendor filter n/John Doe p/91234567 e/johndflowers@email.com a/123 Flower Lane`              |
-| View help                | `help`                                                                                                                           |                                                                                               |
-| Undo last action         | `undo`                                                                                                                           |                                                                                               |
-| Redo last action         | `redo`                                                                                                                           |                                                                                               |
-| Clear guests and vendors | `clear`                                                                                                                          |                                                                                               |
-| Exit program             | `exit`                                                                                                                           |                                                                                               |
+| Action                                                               | Format                                                                                                                           | Example                                                                                       |
+|----------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| [Add a guest](#5-1-1-adding-a-guest-guest-add)                       | `guest add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [tn/TABLE_NUMBER] [d/DIETARY_REQUIREMENT]… [t/TAG]…`           | `guest add n/John Doe p/98765432 e/john@doe.com a/Street 456 r/unknown d/vegetarian t/friend` |
+| [Add a vendor](#5-1-2-adding-a-vendor-vendor-add)                    | `vendor add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                                     | `vendor add n/Betsy p/91234567`                                                               |
+| [Delete a guest](#5-2-1-deleting-a-guest-guest-delete)               | `guest delete INDEX`                                                                                                             | `guest delete 1`                                                                              |
+| [Delete a vendor](#5-2-2-deleting-a-vendor-vendor-delete)            | `vendor delete INDEX`                                                                                                            | `vendor delete 2`                                                                             |
+| [Edit a guest](#5-3-1-editing-a-guest-guest-edit)                    | `guest edit INDEX [n/NAME] [p/PHONE]  [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [tn/TABLE_NUMBER] [d/DIETARY_REQUIREMENT]… [t/TAG]…` | `guest edit 1 p/98765432 r/unknown`                                                           |
+| [Edit a vendor](#5-3-2-editing-a-vendor-vendor-edit)                 | `vendor edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                            | `vendor edit 2 p/914624435`                                                                   |
+| [View all guests](#5-4-1-viewing-all-guests-guest-list)              | `guest list`                                                                                                                     |                                                                                               |
+| [View all vendors](#5-4-2-viewing-all-vendors-vendor-list)           | `vendor list`                                                                                                                    |                                                                                               |
+| [Filter guests](#5-5-1-filtering-guests-guest-filter)                | `guest filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RSVP_STATUS] [d/DIETARY_REQUIREMENTS] [tn/TABLE_NUMBER] [t/TAG]…`      | `guest filter n/Keith p/92354567 r/yes`                                                       |
+| [Filter vendors](#5-5-2-filtering-vendors-vendor-filter)             | `vendor filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                                | `vendor filter n/John Doe p/91234567 e/johndflowers@email.com a/123 Flower Lane`              |
+| [View help](#5-6-1-viewing-help-help)                                | `help`                                                                                                                           |                                                                                               |
+| [Undo last action](#5-6-2-undoing-last-action-undo)                  | `undo`                                                                                                                           |                                                                                               |
+| [Redo last action](#5-6-3-redoing-last-action-redo)                  | `redo`                                                                                                                           |                                                                                               |
+| [Clear guests and vendors](#5-6-4-clearing-guests-and-vendors-clear) | `clear`                                                                                                                          |                                                                                               |
+| [Exit program](#5-6-5-exiting-the-program-exit)                      | `exit`                                                                                                                           |                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1078,42 +1105,17 @@ simply delete the entire folder. Otherwise, you will have to find and delete the
 
 <br />
 
-**Acceptable values for `n/NAME`:**
-- Alphanumeric word with or without spaces and should not be blank.
+| Parameters              | Requirements                                                                      |
+|-------------------------|-----------------------------------------------------------------------------------|
+| `n/NAME`                | Alphanumeric word with or without spaces and should not be blank.                 |
+| `p/PHONE`               | Numbers with no spaces or special characters. It must contain at least 3 numbers. |
+| `e/EMAIL`               | Valid email in the form `local-part@domain` (e.g. `johndoe@example.com`)          |
+| `a/ADDRESS`             | Word with or without spaces and should not be blank.                              |
+| `r/RSVP_STATUS`         | Either `yes`, `no`, or `unknown` only.                                            |
+| `d/DIETARY_REQUIREMENT` | Alphanumeric word with or without spaces and should not be blank.                 |
+| `tn/TABLE_NUMBER`       | Numbers with no spaces or special characters.                                     |
+| `t/TAG`                 | Alphanumeric word with no spaces.                                                 |
 
-**Acceptable values for `p/PHONE`:**
-- Numbers with no spaces or special characters.
-- At least 3 numbers.
-
-**Acceptable values for `e/EMAIL`:**
-- `local-part@domain`
-    - the `local-part` must:
-        - contain alphanumeric characters and these special characters, excluding the parentheses (+_.-)
-        - not start or end with any special characters.
-    - the `domain` must:
-        - consist of domain labels separated by periods.
-        - end with a domain label at least 2 characters long.
-        - have each domain label start and end with alphanumeric characters.
-        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-
-**Acceptable values for `a/ADDRESS`:**
-- Word with or without spaces and should not be blank.
-
-**Acceptable values for `r/RSVP_STATUS`:**
-- `yes`
-- `no`
-- `unknown`
-- Inputs with no values when adding a guest (e.g. `r/`) signify that RSVP status should be stored as `unknown`.
-- Inputs with no values when filtering guests (e.g. `r/`) signify that you wish to filter for guests with `unknown` RSVP status.
-
-**Acceptable values for `d/DIETARY_REQUIREMENT`:**
-- Alphanumeric word with or without spaces and should not be blank.
-
-**Acceptable values for `tn/TABLE_NUMBER`:**
-- Numbers between 1 and 2147483647 inclusive with no spaces or special characters
-- Preceding zeros will be trimmed.
-
-**Acceptable values for `t/TAG`:**
-- Alphanumeric word without spaces.
+<br />
 
 > [Back to top](#user-guide)
