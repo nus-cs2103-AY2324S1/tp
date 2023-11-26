@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Doctor's specialty in the address book.
+ * Represents a Dentist's specialization in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSpecialization(String)}
  */
+
+// Solution of Specialization as a custom class inspired and adapted from
+// https://github.com/AY2223S2-CS2103T-F12-1/tp/tree/master/src/main/java/seedu/address/model/person/doctor
 public class Specialization {
 
     /**
@@ -27,7 +30,7 @@ public class Specialization {
     public static final String MESSAGE_CONSTRAINTS = getMessageConstraints();
 
     /*
-     * The first character of the specialty must not be a whitespace,
+     * The first character of the specialization must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     private static final String VALIDATION_REGEX =
