@@ -1,4 +1,4 @@
-/* Some parts of solution below adapted from https://github.com/AY2122S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/DarkTheme.css*/
+/* Some parts of solution below adapted from https://github.com/AY2122S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/DarkTheme.css */
 
 .background {
     -fx-background-color: derive(#CCCCCC, 20%);
@@ -377,7 +377,7 @@
     -fx-background-color: #c6e2ec;
     -fx-background-radius: 0 0 0 120;
 }
-/* */
+
 .pane-with-border {
     -fx-background-color: white;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 0);
