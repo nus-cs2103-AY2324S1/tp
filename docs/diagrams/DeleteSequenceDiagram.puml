@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":InputParser" as InputParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -14,20 +14,20 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete 1 3 5")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> InputParser : parseCommand("delete 1 3 5")
+activate InputParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+InputParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> InputParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+InputParser -> DeleteCommandParser : parse("1 3 5")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -37,23 +37,26 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> InputParser : d
 deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+InputParser --> LogicManager : d
+deactivate InputParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : getFilteredContactList()
 activate Model
-
-Model --> DeleteCommand
+Model --> DeleteCommand : currentContactList
 deactivate Model
+
+loop for each contact in contactsToDelete
+    DeleteCommand -> Model : removeContact(contact)
+    activate Model
+    Model --> DeleteCommand
+    deactivate Model
+end
 
 create CommandResult
 DeleteCommand -> CommandResult
@@ -67,4 +70,5 @@ deactivate DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
+deactivate CommandResult
 @enduml
