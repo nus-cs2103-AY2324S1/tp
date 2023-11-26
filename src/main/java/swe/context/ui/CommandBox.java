@@ -56,6 +56,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //Solution below inspired by
+    //https://github.com/se-edu/addressbook-level4/blob/master/src/main/java/seedu/address/ui/CommandBox.java
+    //(implemented first, then modified after learning about the approach in AB4, which is slightly different)
     /**
      * Handles the up or down button pressed event.
      */

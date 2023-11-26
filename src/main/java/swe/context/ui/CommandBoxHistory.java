@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+//Solution below inspired by
+//https://github.com/se-edu/addressbook-level4/blob/master/src/main/java/seedu/address/ui/ListElementPointer.java
+//(implemented first, then modified after learning about the approach in AB4, which is slightly different)
 /**
  * Stores the history of entered commands and a pointer indicating the current position in the list.
  * The list always behaves externally as if its last element is the empty string.

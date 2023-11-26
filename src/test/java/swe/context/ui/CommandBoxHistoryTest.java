@@ -11,6 +11,8 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
+//Solution below inspired by
+//https://github.com/se-edu/addressbook-level4/blob/master/src/test/java/seedu/address/ui/ListElementPointerTest.java
 public class CommandBoxHistoryTest {
     private static final String FIRST_COMMAND = "list";
     private static final String SECOND_COMMAND = "clear";
