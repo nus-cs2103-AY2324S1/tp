@@ -1,0 +1,31 @@
+@startuml
+!define MODEL_COLOR_T1 #00FF00
+!define LOGIC_COLOR_T2 #FFD700
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+    participant ":Room" as Room MODEL_COLOR
+    participant ":RoomType" as RoomType MODEL_COLOR
+end box
+
+[-> Room : RoomType.getRoomTypeByNumber(roomNumber)
+activate Room
+Room -> RoomType : getRoomTypeByNumber(roomNumber)
+activate RoomType
+RoomType --> Room : Return RoomType
+deactivate RoomType
+Room --> Room : Get RoomType
+deactivate Room
+
+[-> RoomType : ROOM_MAP.put(roomNumber, RoomType)
+activate RoomType
+RoomType -> RoomType : RoomType mapping
+deactivate RoomType
+
+[-> RoomType : values()
+activate RoomType
+RoomType --> RoomType : Enum values
+deactivate RoomType
+
+@enduml

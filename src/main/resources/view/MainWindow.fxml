@@ -3,56 +3,119 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
+<?import javafx.scene.image.ImageView?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="CheckMate App" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/logo_small.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@pieChartStyle.css" />
       </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+        <HBox fx:id="container" VBox.vgrow="ALWAYS">
+          <VBox VBox.vgrow="NEVER" styleClass="pane-with-border">
+            <children>
+              <ImageView
+                      fx:id="imageView"
+                      fitHeight="150.0"
+                      fitWidth="200.0"
+                      layoutX="61.0"
+                      layoutY="83.0"
+                      pickOnBounds="true"
+                      preserveRatio="true">
+                <image>
+                  <Image url="@/images/logo_large.png"/>
+                </image>
+              </ImageView>
+            </children>
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="20"/>
+            </padding>
+            <HBox>
+              <VBox styleClass="menu">
+                <MenuBar fx:id="fileBar" VBox.vgrow="NEVER">
+                  <Menu mnemonicParsing="false" text="File" styleClass="menu-item">
+                    <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" styleClass="menu-item">
+                      <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0">
+                          <image>
+                            <Image url="@/images/Exit.png"/>
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </MenuItem>
+                  </Menu>
+                </MenuBar>
+              </VBox>
+              <VBox styleClass="menu">
+                <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+                  <Menu mnemonicParsing="false" text="Help">
+                    <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" styleClass="menu-item">
+                      <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0">
+                          <image>
+                            <Image url="@/images/help_icon.png"/>
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </MenuItem>
+                  </Menu>
+                </MenuBar>
+              </VBox>
+            </HBox>
+          </VBox>
+          <VBox fx:id="bookingList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER">
+              <Label styleClass="label-bright" text="Current Bookings" >
+                <padding>
+                  <Insets bottom="20.0" top="10.0"/>
+                </padding>
+              </Label>
+            </VBox>
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+          <StackPane fx:id="roomPieChart" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" >
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10"/>
+            </padding>
+            <StackPane fx:id="roomPieChartPanelPlaceholder" VBox.vgrow="ALWAYS" />
+          </StackPane>
+        </HBox>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+        <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
+        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <padding>
+          <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        <padding>
+          <Insets bottom="5" left="10" right="10" top="5" />
+        </padding>
+        </StackPane>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

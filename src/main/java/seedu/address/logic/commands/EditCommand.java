@@ -1,32 +1,31 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Remark;
+import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -35,75 +34,100 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the booking identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_ROOM + "ROOM] "
+            + "[" + PREFIX_BOOKING_PERIOD + "BOOKING PERIOD] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REMARK + "REMARK]"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
+    public static final List<Prefix> PREFIXES = List.of(PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
+            PREFIX_EMAIL, PREFIX_REMARK);
+    public static final List<String> EXAMPLES = List.of("1", "date", "name",
+            "phone", "email", "remark");
+    public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "No changes made. At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the booking book.";
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditRoomDescriptor editRoomDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * Constructs an EditCommand to edit the booking at the specified index with the given editRoomDescriptor.
+     *
+     * @param index              The index of the booking to be edited.
+     * @param editRoomDescriptor The details to edit the booking with.
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
-
+    public EditCommand(Index index, EditRoomDescriptor editRoomDescriptor) {
+        assert index != null;
+        assert editRoomDescriptor != null;
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        this.editRoomDescriptor = new EditRoomDescriptor(editRoomDescriptor);
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    private static Booking createEditedBooking(Booking bookingToEdit, EditRoomDescriptor editRoomDescriptor)
+            throws CommandException {
+        assert bookingToEdit != null;
+        Room updatedRoom = editRoomDescriptor.getRoom().orElse(bookingToEdit.getRoom());
+        Name updatedName = editRoomDescriptor.getName().orElse(bookingToEdit.getName());
+        Phone updatedPhone = editRoomDescriptor.getPhone().orElse(bookingToEdit.getPhone());
+        Email updatedEmail = editRoomDescriptor.getEmail().orElse(bookingToEdit.getEmail());
+        BookingPeriod updatedBookingPeriod = editRoomDescriptor.getBookingPeriod()
+                .orElse(bookingToEdit.getBookingPeriod());
+        Remark updatedRemark = editRoomDescriptor.getRemark().orElse(bookingToEdit.getRemark());
+        Booking booking = new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail,
+                updatedRemark);
+        return booking;
     }
 
+    /**
+     * Executes the edit command by modifying the details of the booking at the specified index.
+     *
+     * @param model The current model.
+     * @return The result of the command execution.
+     * @throws CommandException If the index is invalid, or if the booking cannot be edited.
+     */
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        assert model != null;
+        List<Booking> lastShownList = model.getFilteredBookingList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX);
+        }
+
+        Booking bookingToEdit = lastShownList.get(index.getZeroBased());
+        Booking editedBooking = createEditedBooking(bookingToEdit, editRoomDescriptor);
+
+        if (!bookingToEdit.isOverlapBooking(editedBooking) && model.hasBooking(editedBooking)) {
+            throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
+        }
+
+        if (editedBooking.equals(bookingToEdit)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
+        model.setBooking(bookingToEdit, editedBooking);
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, Messages.format(editedBooking)));
+    }
+
+    /**
+     * Checks if this edit command is equal to another object.
+     *
+     * @param other The object to compare.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -117,14 +141,19 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editRoomDescriptor.equals(otherEditCommand.editRoomDescriptor);
     }
 
+    /**
+     * Returns a string representation of this edit command.
+     *
+     * @return A string representation of this edit command.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editPersonDescriptor", editRoomDescriptor)
                 .toString();
     }
 
@@ -132,83 +161,160 @@ public class EditCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditRoomDescriptor {
+        private Room room;
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private BookingPeriod bookingPeriod;
+        private Remark remark;
 
-        public EditPersonDescriptor() {}
+        /**
+         * Creates an EditRoomDescriptor object.
+         */
+        public EditRoomDescriptor() {
+        }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditRoomDescriptor(EditRoomDescriptor toCopy) {
+            setRoom(toCopy.room);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setBookingPeriod(toCopy.bookingPeriod);
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return True if at least one field is edited, false otherwise.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(room, bookingPeriod, name, phone, email, remark);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        /**
+         * Returns an optional Room containing the room to edit. If the field is not edited, returns an empty optional.
+         *
+         * @return An optional containing the room to edit, or an empty optional if the field is not edited.
+         */
+        public Optional<Room> getRoom() {
+            return Optional.ofNullable(room);
         }
 
+        /**
+         * Sets the room to edit.
+         *
+         * @param room The new room value.
+         */
+        public void setRoom(Room room) {
+            this.room = room;
+        }
+
+        /**
+         * Returns an optional Name containing the name to edit. If the field is not edited, returns an empty optional.
+         *
+         * @return An optional containing the name to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        /**
+         * Sets the name to edit.
+         *
+         * @param name The new name value.
+         */
+        public void setName(Name name) {
+            this.name = name;
         }
 
+        /**
+         * Returns an optional Phone containing the phone to edit. If the field is not edited, returns an empty
+         * optional.
+         *
+         * @return An optional containing the phone to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        /**
+         * Sets the phone to edit.
+         *
+         * @param phone The new phone value.
+         */
+        public void setPhone(Phone phone) {
+            this.phone = phone;
         }
 
+        /**
+         * Returns an optional Email containing the email to edit. If the field is not edited, returns an empty
+         * optional.
+         *
+         * @return An optional containing the email to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        /**
+         * Sets the email to edit.
+         *
+         * @param email The new email value.
+         */
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Returns an optional BookingPeriod containing the booking period to edit. If the field is not edited, returns
+         * an empty optional.
+         *
+         * @return An optional containing the booking period to edit, or an empty optional if the field is not edited.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public Optional<BookingPeriod> getBookingPeriod() {
+            return Optional.ofNullable(bookingPeriod);
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Sets the booking period to edit.
+         *
+         * @param bookingPeriod The new booking period value.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public void setBookingPeriod(BookingPeriod bookingPeriod) {
+            this.bookingPeriod = bookingPeriod;
         }
 
+        /**
+         * Returns an optional Remark containing the remark to edit. If the field is not edited, returns an empty
+         * optional.
+         *
+         * @return An optional containing the remark to edit, or an empty optional if the field is not edited.
+         */
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        /**
+         * Sets the remark to edit.
+         *
+         * @param remark The new remark value.
+         */
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        /**
+         * Checks if this edit room descriptor is equal to another object.
+         *
+         * @param other The object to compare.
+         * @return True if the objects are equal, false otherwise.
+         */
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -216,26 +322,33 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditRoomDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditRoomDescriptor otherEditRoomDescriptor = (EditRoomDescriptor) other;
+            return Objects.equals(room, otherEditRoomDescriptor.room)
+                    && Objects.equals(bookingPeriod, otherEditRoomDescriptor.bookingPeriod)
+                    && Objects.equals(name, otherEditRoomDescriptor.name)
+                    && Objects.equals(phone, otherEditRoomDescriptor.phone)
+                    && Objects.equals(email, otherEditRoomDescriptor.email)
+                    && Objects.equals(remark, otherEditRoomDescriptor.remark);
         }
 
+        /**
+         * Returns a string representation of this edit room descriptor.
+         *
+         * @return A string representation of this edit room descriptor.
+         */
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("room", room)
+                    .add("booking period", bookingPeriod)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("remark", remark)
                     .toString();
         }
     }

@@ -11,11 +11,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.BookingBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.prefixcompletion.PrefixCompletion;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyBookingsBook;
+import seedu.address.model.booking.Booking;
 import seedu.address.storage.Storage;
 
 /**
@@ -31,15 +32,21 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final BookingBookParser bookingBookParser;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Constructs a LogicManager with the given Model and Storage.
+     *
+     * @param model   The Model component providing the application's data.
+     * @param storage The Storage component handling the saving and loading of data.
      */
     public LogicManager(Model model, Storage storage) {
+        assert model != null;
+        assert storage != null;
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        bookingBookParser = new BookingBookParser();
+        PrefixCompletion.setBookingBook(model.getBookingsBook());
     }
 
     @Override
@@ -47,11 +54,14 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = bookingBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        // Update the bookingBook for prefix completion to use
+        PrefixCompletion.setBookingBook(model.getBookingsBook());
+
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveBookingBook(model.getBookingsBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,18 +72,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyBookingsBook getBookingBook() {
+        return model.getBookingsBook();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Booking> getFilteredPersonList() {
+        return model.getFilteredBookingList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getBookingBookFilePath() {
+        return model.getBookingBookFilePath();
     }
 
     @Override

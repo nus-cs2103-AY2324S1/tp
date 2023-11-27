@@ -15,15 +15,15 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BookingsBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBookingsBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.BookingBookStorage;
+import seedu.address.storage.JsonBookingBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -36,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing CheckMate ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        BookingBookStorage bookingBookStorage = new JsonBookingBookStorage(userPrefs.getBookingBookFilePath());
+        storage = new StorageManager(bookingBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -73,21 +73,21 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getBookingBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyBookingsBook> addressBookOptional;
+        ReadOnlyBookingsBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readBookingBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                logger.info("Creating a new data file " + storage.getBookingBookFilePath()
+                        + " populated with a sample Bookings Book.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getBookingBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty Bookings Book.");
+            initialData = new BookingsBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -176,7 +176,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping CheckMate ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

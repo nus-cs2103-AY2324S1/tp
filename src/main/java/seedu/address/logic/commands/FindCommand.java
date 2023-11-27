@@ -9,31 +9,49 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all bookings whose names or room contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Constructs a FindCommand with the specified keyword predicate.
+     *
+     * @param predicate The keyword predicate to use for filtering bookings.
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the find command to filter and list bookings that match the keyword predicate.
+     *
+     * @param model The current model.
+     * @return A CommandResult indicating the result of the find operation.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredBookingList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW, model.getFilteredBookingList().size()),
+                false, false, false);
     }
 
+    /**
+     * Checks if this FindCommand is equal to another object.
+     *
+     * @param other The object to compare with.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -49,6 +67,11 @@ public class FindCommand extends Command {
         return predicate.equals(otherFindCommand.predicate);
     }
 
+    /**
+     * Returns a string representation of this FindCommand.
+     *
+     * @return A string containing the details of the FindCommand.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

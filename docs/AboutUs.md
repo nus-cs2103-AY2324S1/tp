@@ -9,51 +9,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Aryan Ganju
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aryang01.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/AryanG01)]
+[[portfolio](team/aryang01.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Rohan Bahl
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rb9823.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/RB9823)]
+[[portfolio](team/rb9823.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer and Project Manager
 
-### James Doe
+### Mark Garcera
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/markgcera.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/markgcera)]
+[[portfolio](team/markgcera.md)]
 
 * Role: Developer
-* Responsibilities: UI
+
+### Moon Ji Hoon
+
+<img src="images/iyioon.png" width="200px">
+
+[[github](http://github.com/iyioon)]
+[[portfolio](team/iyioon.md)]
+
+* Role: Developer
+
+### Ting Si Yang Annabel
+
+<img src="images/annabelting.png" width="200px">
+
+[[github](http://github.com/AnnabelTing)]
+[[portfolio](team/annabelting.md)]
+
+* Role: Developer

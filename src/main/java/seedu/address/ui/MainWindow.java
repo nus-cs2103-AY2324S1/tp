@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.BookingCard.closeAllPopups;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -31,10 +33,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private BookingListPanel bookingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    private RoomPieChart roomPieChart;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -49,6 +51,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private StackPane roomPieChartPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -109,16 +113,19 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
+    @FXML
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        bookingListPanel = new BookingListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getBookingBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        roomPieChart = new RoomPieChart(logic.getFilteredPersonList());
+        roomPieChartPanelPlaceholder.getChildren().add(roomPieChart.getRoot());
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -127,6 +134,7 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
+        guiSettings = GuiSettings.fromScreenDimensions();
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
@@ -149,22 +157,44 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
+
+        // Add a setOnCloseRequest to handle the closing of the main stage
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            // Close all associated pop-up stages
+            closeAllPopups();
+            // Close the help window if it's showing
+            if (helpWindow.isShowing()) {
+                helpWindow.hide();
+            }
+        });
     }
+
 
     /**
      * Closes the application.
      */
     @FXML
     private void handleExit() {
+        // Close all associated pop-up stages
+        closeAllPopups();
+
+        if (helpWindow.isShowing()) {
+            helpWindow.hide();
+        }
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Show pie chart
+     */
+    @FXML
+    private void handleViewRoomStatistics() {
+        roomPieChart = new RoomPieChart(logic.getFilteredPersonList());
+        roomPieChartPanelPlaceholder.getChildren().clear();
+        roomPieChartPanelPlaceholder.getChildren().add(roomPieChart.getRoot());
     }
 
     /**
@@ -185,7 +215,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
+            if (commandResult.isShowRoomStatistics()) {
+                handleViewRoomStatistics();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
