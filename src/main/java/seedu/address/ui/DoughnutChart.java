@@ -9,8 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * Ackowledgment to jewelsea from StackOverFlow.
- * Link: https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut.
+ * @@author jewelsea from StackOverFlow.
+ * Reused from  https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut
+ * with minor modifications.
  */
 public class DoughnutChart extends PieChart {
     private final Circle innerCircle;
