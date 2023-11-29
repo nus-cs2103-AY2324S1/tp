@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import seedu.address.MainApp;
 
 /**
@@ -18,6 +19,7 @@ public abstract class UiPart<T> {
     public static final String FXML_FILE_FOLDER = "/view/";
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
+    private T root;
 
     /**
      * Constructs a UiPart with the specified FXML file URL.
@@ -51,11 +53,23 @@ public abstract class UiPart<T> {
         this(getFxmlFileUrl(fxmlFileName), root);
     }
 
+    protected UiPart(Stage root) {
+        // Safe to cast to assign Stage to type T.
+        this.root = (T) root;
+    }
+
     /**
      * Returns the root object of the scene graph of this UiPart.
      */
     public T getRoot() {
         return fxmlLoader.getRoot();
+    }
+
+    /**
+     * Returns the root object of the calendar window.
+     */
+    public T getCalendarRoot() {
+        return this.root;
     }
 
     /**

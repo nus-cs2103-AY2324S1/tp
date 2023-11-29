@@ -1,0 +1,15 @@
+{
+  "persons" : [],
+  "dentists": [],
+  "patients": [],
+  "treatments": [{
+    "name" : "Braces",
+    "cost" : "1080",
+    "time" : "03:00"
+  },
+  {
+    "name" : "Braces",
+    "cost" : "1080",
+    "time" : "03:00"
+  }]
+}

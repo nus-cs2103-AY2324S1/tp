@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" styleClass="card">
+            <GridPane.margin>
+                <Insets top="5" right="10" bottom="5" left="5" />
+            </GridPane.margin>
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5" />
+            </padding>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <FlowPane fx:id="appointmentId" alignment="CENTER_LEFT" prefWrapLength="0.0" />
+                <Label fx:id="date" styleClass="details-title" text="\$date" >
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+            </HBox>
+             <Label fx:id="appointmentTime" styleClass="details-text" text="\$appointmentTime" />
+            <Label fx:id="dentist" styleClass="details-text" text="\$dentist" />
+            <Label fx:id="patient" styleClass="details-text" text="\$patient" />
+            <Label fx:id="treatment" styleClass="details-text" text="\$treatment" />
+            <Label fx:id="cost" styleClass="details-text" text="\$cost" />
+        </VBox>
+    </GridPane>
+</HBox>

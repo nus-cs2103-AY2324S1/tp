@@ -1,18 +1,59 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  {%- include head.html -%}
+{%- include head.html -%}
 
-  <body>
+<body>
 
-    {%- include header.html -%}
+{%- include header.html -%}
 
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </main>
+<main class="page-content" aria-label="Content">
+  {% if page.show-toc %}
+    <aside class="sticky-toc">
+      {% include toc.html html=content %}
+    </aside>
+    <a class="back-to-top" href="#">↑</a>
+  {% endif %}
+    <div id="content-wrapper">
+      {{ content }}
+    </div>
 
-  </body>
+</main>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var backToTopButton = document.querySelector(".back-to-top");
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    };
+
+    backToTopButton.onclick = function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    };
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var headings = document.querySelectorAll(
+      "article.post h2:not(.no_toc), article.post h3:not(.no_toc), article.post h4:not(.no_toc)");
+
+    headings.forEach(function(heading) {
+      heading.innerHTML =
+        '<a class="header-backlink" href="#markdown-toc-' +
+        heading.id +
+        '">' +
+        heading.innerHTML +
+        "</a>";
+    });
+});
+</script>
+
+</body>
 </html>
+

@@ -1,0 +1,13 @@
+{
+  "persons" : [],
+  "patients": [ {
+    "name": "Patient With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "birthdate": "01-01-1990",
+    "gender": "M",
+    "address": "123 Computing Drive",
+    "email": "hans@example.com",
+    "id": "4"
+  } ],
+  "dentists": []
+}

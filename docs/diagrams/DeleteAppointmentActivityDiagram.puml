@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes "delete-appointment" command with APPOINTMENT_ID;
+
+if () then ([valid command])
+  :Parse APPOINTMENT_ID from command arguments;
+
+if () then ([appointment record exists])
+  :Retrieve appointment by ID;
+  :Delete appointment record;
+  :Return success message;
+else ([else])
+  :Throw CommandException for no appointment found;
+endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml

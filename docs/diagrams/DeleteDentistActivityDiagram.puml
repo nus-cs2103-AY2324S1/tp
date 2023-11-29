@@ -1,0 +1,24 @@
+@startuml
+start
+:User executes "delete-dentist" command with DENTIST_ID;
+
+if () then ([valid command])
+  :Parse DENTIST_ID from command arguments;
+
+if () then ([Dentist record exists])
+  :Retrieve dentist by ID;
+  :Delete dentist record;
+  :Return success message;
+else ([else])
+  :Throw CommandException for no dentist found;
+endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml
+
+
+

@@ -1,0 +1,24 @@
+{
+  "_comment": "AddressBook save file which contains the same Treatment values in TypicalTreatments#getTypicalAddressBook()",
+  "persons" : [],
+  "dentists" : [],
+  "patients" : [],
+  "treatments" : [{
+    "name" : "WisdomTooth",
+    "cost" : "1080",
+    "time" : "13:12"
+  },
+  {
+    "name" : "Braces",
+    "cost" : "5000",
+    "time" : "12:31"
+  },
+  {
+    "name" : "RootCanal",
+    "cost" : "10000",
+    "time" : "15:22"
+  }],
+  "patientId" : "6",
+  "dentistId" : "7",
+  "appointmentId" : "5"
+}

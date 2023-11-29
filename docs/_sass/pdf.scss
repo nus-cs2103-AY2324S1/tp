@@ -1,0 +1,47 @@
+@page {
+  size: A4;
+  margin: 0.5in;
+}
+
+// @@author ruth-lim-reused
+// Reused from https://github.com/AY2223S1-CS2103T-W16-2/tp/blob/master/docs/_includes/toc.md
+// with minor modifications
+@media print {
+  article.post {
+    h2:not(:first-of-type) {
+      margin-top: 0;
+      page-break-before: always;
+    }
+  }
+
+  pre {
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
+
+  ul,
+  ol {
+    page-break-before: avoid;
+  }
+
+  post-title {
+    margin-top: 0;
+  }
+
+  tr,
+  code,
+  div,
+  span {
+    page-break-inside: avoid;
+  }
+
+  #toc-heading::after {
+    content: "Click on any item to go to the corresponding section. Click on the heading to go back to the table of contents.";
+    display: block;
+    font-family: $base-font-family;
+    font-size: small;
+    font-style: italic;
+    color: black;
+  }
+
+}

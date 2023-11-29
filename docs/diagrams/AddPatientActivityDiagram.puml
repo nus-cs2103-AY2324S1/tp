@@ -1,0 +1,22 @@
+@startuml
+start
+:User executes "add-patient" command with required details;
+
+if () then ([valid command])
+  :Create Patient object from command arguments;
+
+:Check if Patient already exists in model;
+
+if () then ([Patient already exists])
+  :Throw CommandException "Patient already exists";
+else ([else])
+  :Add new Patient to model;
+  :Return message to show new Patient added;
+endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml

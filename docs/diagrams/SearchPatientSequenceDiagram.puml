@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+'https://plantuml.com/sequence-diagram
+'adapted and inspired from https://github.com/AY2223S1-CS2103T-T14-2/tp/blob/master/docs/diagrams/FindTasksSequenceDiagram.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "SearchPatientCommandParser" as SearchPatientCommandParser LOGIC_COLOR
+participant "p:NameContainsKeywordsPredicate" as Predicate LOGIC_COLOR
+participant "s:SearchPatientCommand" as SearchPatientCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("search-patient Bernice")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("search-patient Bernice")
+activate AddressBookParser
+
+create SearchPatientCommandParser
+AddressBookParser -> SearchPatientCommandParser
+activate SearchPatientCommandParser
+
+SearchPatientCommandParser --> AddressBookParser
+deactivate SearchPatientCommandParser
+
+AddressBookParser -> SearchPatientCommandParser : parse("Bernice")
+activate SearchPatientCommandParser
+
+create Predicate
+SearchPatientCommandParser -> Predicate
+activate Predicate
+Predicate --> SearchPatientCommandParser : p
+deactivate Predicate
+
+create SearchPatientCommand
+SearchPatientCommandParser -> SearchPatientCommand : SearchPatientCommand(p)
+activate SearchPatientCommand
+
+SearchPatientCommand --> SearchPatientCommandParser : s
+deactivate SearchPatientCommand
+
+SearchPatientCommandParser --> AddressBookParser : s
+deactivate SearchPatientCommandParser
+
+SearchPatientCommandParser -[hidden]-> AddressBookParser
+destroy SearchPatientCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SearchPatientCommand : execute()
+activate SearchPatientCommand
+
+SearchPatientCommand -> Model : updateFilteredPatientList(p)
+activate Model
+
+Model --> SearchPatientCommand
+deactivate Model
+
+create CommandResult
+SearchPatientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SearchPatientCommand
+deactivate CommandResult
+
+SearchPatientCommand --> LogicManager : result
+deactivate SearchPatientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

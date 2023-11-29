@@ -1,0 +1,67 @@
+#markdown-toc {
+  //@@author ruth-lim-reused
+  //Reused from https://github.com/AY2223S1-CS2103T-W16-2/tp/blob/master/docs/_sass/toc.scss
+  //with minor modifications
+
+  //Adapted from https://stackoverflow.com/a/51007932/9311854
+  counter-reset: item;
+  ol {
+    counter-reset: item;
+  }
+
+  > li,
+  ol > li {
+    counter-increment: item;
+  }
+
+  ol > li {
+    display: block;
+    position: relative;
+  }
+
+  ol > li:before {
+    content: counters(item, ".") " ";
+    margin-left: -1em;
+  }
+}
+
+
+article.post {
+  counter-reset: section;
+
+  h2:not(.no_toc) {
+    counter-reset: subsection;
+  }
+
+  h3:not(.no_toc) {
+    counter-reset: subsubsection;
+  }
+
+  h4:not(.no_toc) {
+      counter-reset: subsubsubsection;
+  }
+
+  h2:not(.no_toc)::before {
+    counter-increment: section;
+    content: counter(section) ". ";
+  }
+
+  h3:not(.no_toc)::before {
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) " ";
+  }
+
+  h4:not(.no_toc)::before {
+    counter-increment: subsubsection;
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+  }
+}
+
+
+article.post {
+  h2:not(.no_toc)::before,
+  h3:not(.no_toc)::before,
+  h4:not(.no_toc)::before {
+    color: #e46c0a;
+  }
+}

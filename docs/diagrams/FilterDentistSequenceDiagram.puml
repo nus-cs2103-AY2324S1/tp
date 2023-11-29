@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "FilterDentistCommandParser" as FilterDentistCommandParser LOGIC_COLOR
+participant "DentistAttributeContainsKeywordsPredicate" as Predicate LOGIC_COLOR
+participant "s:FilterDentistCommand" as FilterDentistCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter-dentist a/phone k/98667722")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter-dentist a/phone k/98667722")
+activate AddressBookParser
+
+create FilterDentistCommandParser
+AddressBookParser -> FilterDentistCommandParser
+activate FilterDentistCommandParser
+
+FilterDentistCommandParser --> AddressBookParser
+deactivate FilterDentistCommandParser
+
+AddressBookParser -> FilterDentistCommandParser : parse("a/phone k/98667722")
+activate FilterDentistCommandParser
+
+create Predicate
+FilterDentistCommandParser -> Predicate
+activate Predicate
+Predicate --> FilterDentistCommandParser : p
+deactivate Predicate
+
+create FilterDentistCommand
+FilterDentistCommandParser -> FilterDentistCommand : FilterDentistCommand(p)
+activate FilterDentistCommand
+
+FilterDentistCommand --> FilterDentistCommandParser : s
+deactivate FilterDentistCommand
+
+FilterDentistCommandParser --> AddressBookParser : s
+deactivate FilterDentistCommandParser
+
+FilterDentistCommandParser -[hidden]-> AddressBookParser
+destroy FilterDentistCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> FilterDentistCommand : execute()
+activate FilterDentistCommand
+
+FilterDentistCommand -> Model : updateFilteredDentistList(p)
+activate Model
+
+Model --> FilterDentistCommand
+deactivate Model
+
+create CommandResult
+FilterDentistCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterDentistCommand
+deactivate CommandResult
+
+FilterDentistCommand --> LogicManager : result
+deactivate FilterDentistCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

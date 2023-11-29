@@ -1,0 +1,30 @@
+@startuml
+start
+
+:User executes "filter-dentist" command;
+
+if () then ([Valid command])
+    :Parse arguments;
+
+    if () then ([Allowed attribute])
+        :Parse arguments;
+        :Extract attribute and keywords;
+
+        if () then ([Matching records found])
+            :Display matching dentist records;
+
+            else ([else])
+                :Display message that shows no dentists found;
+            endif
+
+    else ([else])
+        :Display error message for invalid attribute;
+    endif
+
+else ([else])
+     :Display error message for invalid command;
+endif
+
+stop
+@enduml
+

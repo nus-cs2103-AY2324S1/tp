@@ -1,0 +1,33 @@
+@startuml
+start
+:User executes "add-appointment" command with required details;
+
+if () then ([valid command])
+  :Check if treatment exists in model;
+
+    if () then ([treatment is valid])
+      :Check if dentist and patient exists in model;
+
+      if () then ([dentist and patient are valid])
+        :Check if appointment clashes with existing appointment in model;
+            if () then ([appointment does not clash])
+                :Add new appointment to model;
+                :Return message to show new appointment added;
+            else ([else])
+                :Throw CommandException for clashing appointments;
+            endif
+
+      else ([else])
+        :Throw CommandException for invalid dentist or patient;
+     endif
+
+    else ([else])
+      :Throw CommandException for invalid treatment;
+    endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml

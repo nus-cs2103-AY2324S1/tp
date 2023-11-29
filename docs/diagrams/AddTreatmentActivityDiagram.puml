@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes "add-treatment" command;
+
+if () then ([valid command])
+  :Check if it is a duplicate treatment;
+  if () then ([duplicate treatment])
+    :Add treatment into ToothTracker;
+  else ([else])
+    :Throw error message;
+  endif
+else ([else])
+  :Display error message for invalid command;
+endif
+stop
+@enduml

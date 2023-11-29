@@ -8,9 +8,14 @@ h2, h3, h4, h5, h6 {
 .alert {
   position: relative;
   padding: $alert-padding-y $alert-padding-x;
+  margin-top: $alert-margin-top;
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
   border-radius : $alert-border-radius;
+}
+
+.alert #text {
+  line-height: 1.75rem;
 }
 
 // Headings for larger alerts

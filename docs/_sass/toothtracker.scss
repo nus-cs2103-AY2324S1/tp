@@ -1,0 +1,220 @@
+html {
+  scroll-behavior: smooth;
+}
+
+// @@author ruth-lim-reused with modifications
+// Sticky TOC adapted from: https://github.com/AY2223S1-CS2103T-W16-2/tp/blob/master/docs/_sass/foodrem.scss
+.page-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  overflow-x: clip;
+
+  .sticky-toc {
+    width: 25%;
+    height: 100vh;
+    align-self: flex-start;
+    border-right: 1px solid #e0e0e0;
+
+    @media screen and (max-width: $on-medium) {
+      display: none;
+    }
+  }
+
+  .wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: $on-large;
+
+    @media screen and (min-width: $on-medium) {
+      width: 75%;
+    }
+  }
+}
+
+.sticky-toc {
+  $margin-block: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: $margin-block;
+  bottom: $margin-block;
+  max-height: calc(100vh - 2 * #{$margin-block});
+  line-height: 200%;
+  padding-inline: 6px;
+  overflow-y: auto;
+  font-size: small;
+
+  @media print {
+    display: none;
+  }
+
+  ul,
+  ol {
+    margin-left: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    li {
+      list-style-type: none;
+      padding-left: 5px;
+      margin-bottom: 1px;
+
+      a {
+        color: gray;
+
+        &:hover {
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+article.post {
+
+  h2, h3, h4 {
+    color: #e46c0a;
+  }
+
+  a {
+    color: #0d6efd;
+
+    &.header-backlink {
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+
+      }
+    }
+  }
+}
+
+pre, code {
+  border-color: #D3D3D3;
+}
+
+.post-content {
+  margin-bottom: 2rem;
+
+  h2 {
+    margin-top: 50px;
+  }
+
+  h3 {
+    margin-top: 50px;
+  }
+
+  h4, h5, h6 {
+    margin-top: 50px;
+  }
+
+  p, li {
+    text-align: left;
+    line-height: 1.75;
+  }
+
+  @media print {
+      h2, h3, h4, h5, h6 {
+        margin-top: 1rem;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+        orphans: 3;
+        widows: 3;
+      }
+
+  }
+}
+
+#content-wrapper {
+  flex: 1;
+  margin: 0 auto;
+  min-width: 0;
+  max-width: 900px;
+  overflow-x: auto;
+  padding: 0.8rem 0.8rem 0 0.8rem;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+}
+
+// Back to Top Button
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(73, 122, 255, .8);
+  width: 40px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  -webkit-border-radius: 30px;
+  border-radius: 40px;
+  display: none;
+  color: white;
+  z-index: 999;
+  cursor: pointer;
+  font-size: 24px;
+  transition: all 0.3s ease;
+  text-align: center;
+  line-height: 40px;
+
+  &:hover {
+    background: rgb(73, 122, 255);
+    text-decoration: none;
+    color: white;
+  }
+
+    @media print {
+      display: none !important;
+    }
+}
+
+.centered-image {
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.centered-image-full-size {
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.centered-image-size-75 {
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+.centered-image-minimal-margin {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+a.site-title {
+    display: flex;
+    align-items: center;
+}
+
+.site-title:hover {
+  text-decoration: none;
+}
+
+.site-logo {
+    height: 30px;
+    vertical-align: auto;
+}

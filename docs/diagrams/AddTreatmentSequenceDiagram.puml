@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTreatmentCommandParser" as AddTreatmentCommandParser LOGIC_COLOR
+participant "a:AddTreatmentCommand" as AddTreatmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-treatment tr/Braces ...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-treatment tr/Braces ...")
+activate AddressBookParser
+
+create AddTreatmentCommandParser
+AddressBookParser -> AddTreatmentCommandParser
+activate AddTreatmentCommandParser
+
+AddTreatmentCommandParser --> AddressBookParser
+deactivate AddTreatmentCommandParser
+
+AddressBookParser -> AddTreatmentCommandParser : parse("add-treatment tr/Braces ...")
+activate AddTreatmentCommandParser
+
+create AddTreatmentCommand
+AddTreatmentCommandParser -> AddTreatmentCommand : createCommand(treatmentDetails)
+activate AddTreatmentCommand
+
+AddTreatmentCommand --> AddTreatmentCommandParser : a
+deactivate AddTreatmentCommand
+
+AddTreatmentCommandParser --> AddressBookParser : a
+deactivate AddTreatmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTreatmentCommandParser -[hidden]-> AddressBookParser
+destroy AddTreatmentCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddTreatmentCommand : execute()
+activate AddTreatmentCommand
+
+AddTreatmentCommand -> Model : addTreatment(toAdd)
+activate Model
+Model --> AddTreatmentCommand
+deactivate Model
+
+create CommandResult
+AddTreatmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTreatmentCommand
+deactivate CommandResult
+
+AddTreatmentCommand --> LogicManager : result
+deactivate Model
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

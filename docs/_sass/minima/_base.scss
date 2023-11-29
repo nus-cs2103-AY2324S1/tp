@@ -286,10 +286,12 @@ table {
   }
   .site-header {
     text-align: center;
+    display: none; // Hide top navigation menu
   }
   .site-header:before {
-    content: "AB-3";
+    content: "ToothTracker";
     font-size: 32px;
+    z-index: 1001;
   }
 }
 

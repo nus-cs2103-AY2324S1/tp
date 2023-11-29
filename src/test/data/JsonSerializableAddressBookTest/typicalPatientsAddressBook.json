@@ -1,0 +1,86 @@
+{
+  "_comment": "AddressBook save file which contains the same Patient values in TypicalPatients#getTypicalAddressBook()",
+  "persons" : [],
+  "patients" : [ {
+    "name" : "Alice Pauline",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "email" : "alice@example.com",
+    "phone" : "99999999",
+    "gender" : "F",
+    "birthdate" : "01-01-1998",
+    "remark" : "Peanut Allergy",
+    "treatment" : "Cleaning",
+    "id" : "0",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "email" : "johnd@example.com",
+    "phone" : "88888888",
+    "gender" : "M",
+    "birthdate" : "10-02-1990",
+    "remark" : "No allergy",
+    "treatment" : "Braces",
+    "id" : "1",
+    "tags" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "address" : "wall street",
+    "email" : "heinz@example.com",
+    "phone" : "11111111",
+    "gender" : "M",
+    "birthdate" : "05-04-1980",
+    "remark" : "Medical Complications",
+    "treatment" : "Cleaning",
+    "id" : "2",
+    "tags" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "address" : "10th street",
+    "email" : "cornelia@example.com",
+    "phone" : "22222222",
+    "gender" : "M",
+    "birthdate" : "09-10-1972",
+    "remark" : "Peanut allergy",
+    "treatment" : "Cleaning",
+    "id" : "3",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "address" : "michegan ave",
+    "email" : "werner@example.com",
+    "phone" : "33333333",
+    "gender" : "F",
+    "birthdate" : "20-10-2000",
+    "remark" : "Drug allergy",
+    "treatment" : "Cleaning",
+    "id" : "4",
+    "tags" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "address" : "little tokyo",
+    "email" : "lydia@example.com",
+    "phone" : "44444444",
+    "gender" : "F",
+    "birthdate" : "01-01-2002",
+    "remark" : "Drug allergy",
+    "treatment" : "Cleaning",
+    "id" : "5",
+    "tags" : [ ]
+  }, {
+    "name" : "George Best",
+    "address" : "4th street",
+    "email" : "anna@example.com",
+    "phone" : "55555555",
+    "gender" : "M",
+    "birthdate" : "10-04-2001",
+    "remark" : "No allergy",
+    "treatment" : "Cleaning",
+    "id" : "6",
+    "tags" : [ ]
+  } ],
+  "dentists": [],
+  "patientId" : "6",
+  "dentistId" : "7",
+  "appointmentId" : "5"
+}

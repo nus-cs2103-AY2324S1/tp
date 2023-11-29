@@ -1,0 +1,30 @@
+{
+  "treatments": [
+    {
+      "name": "Invalid Time Treatment",
+      "cost": "1080",
+      "time": "69:00"
+    },
+    {
+      "name": "Invalid Cost Treatment",
+      "cost": "109000999",
+      "time": "10:30"
+    },
+    {
+      "name": "Invalid Decimal Cost Treatment",
+      "cost": "10.894",
+      "time": "10:30"
+    },
+    {
+      "name": "Valid Treatment",
+      "cost": "1080",
+      "time": "10:30"
+    },
+    {
+      "name": "brace",
+      "cost": "1",
+      "time": "10:30"
+    }
+  ]
+}
+

@@ -1,0 +1,24 @@
+@startuml
+start
+:User executes "delete-treatment" command with TREATMENT_NAME;
+
+if () then ([valid command])
+  :Parse TREATMENT_NAME from command arguments;
+
+if () then ([Treatment record exists])
+  :Retrieve treatment by TREATMENT_NAME;
+  :Delete treatment record;
+  :Return success message;
+else ([else])
+  :Throw CommandException for no treatment found;
+endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml
+
+
+

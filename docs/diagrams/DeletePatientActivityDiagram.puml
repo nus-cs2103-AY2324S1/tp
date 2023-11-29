@@ -1,0 +1,24 @@
+@startuml
+start
+:User executes "delete-patient" command with PATIENT_ID;
+
+if () then ([valid command])
+  :Parse PATIENT_ID from command arguments;
+
+if () then ([Patient record exists])
+  :Retrieve Patient by ID;
+  :Delete Patient record;
+  :Return success message;
+else ([else])
+  :Throw CommandException for no Patient found;
+endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml
+
+
+

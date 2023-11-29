@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -27,23 +29,29 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("91")); // less than 8 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("124293842033123")); // long phone numbers
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("12345678")); // exactly 8 numbers
+    }
+
+    @Test
+    public void toStringMethod() {
+        Phone phone = new Phone("91234567");
+
+        assertEquals("91234567", phone.toString());
     }
 
     @Test
     public void equals() {
-        Phone phone = new Phone("999");
+        Phone phone = new Phone("91234567");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Phone("999")));
+        assertTrue(phone.equals(new Phone("91234567")));
 
         // same object -> returns true
         assertTrue(phone.equals(phone));
@@ -55,6 +63,22 @@ public class PhoneTest {
         assertFalse(phone.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(phone.equals(new Phone("995")));
+        assertFalse(phone.equals(new Phone("12345678")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Phone phone = new Phone("91234567");
+
+        // same object -> returns true
+        assertEquals(phone.hashCode(), phone.hashCode());
+
+        // equal objects -> returns true
+        Phone phoneCopy = new Phone(phone.toString());
+        assertEquals(phone, phoneCopy);
+
+        // non-equal objects -> returns false
+        Phone otherPhone = new Phone("12345678");
+        assertNotEquals(phone, otherPhone);
     }
 }

@@ -1,0 +1,23 @@
+@startuml
+start
+
+:User executes "filter-appointment" command with either DENTIST_ID or PATIENT_ID;
+
+if () then ([valid command])
+    :Parse command arguments;
+    :Check the type of id to filter by;
+
+    if () then ([filter by DENTIST_ID])
+        :Display list of appointments with the specific dentist;
+
+    else ([filter by PATIENT_ID])
+        :Display list of appointments with the specific patient;
+
+    endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml

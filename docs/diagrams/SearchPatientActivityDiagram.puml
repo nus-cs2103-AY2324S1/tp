@@ -1,0 +1,37 @@
+@startuml
+start
+
+:User executes "search-patient" command with either ID or keyword;
+
+' Check the command's validity
+if () then ([valid command])
+    :Parse command arguments;
+
+    ' Decide the search type based on the parsed arguments
+    if () then ([Search by ID])
+        :Extract ID from arguments;
+        :Finds patient record by PATIENT_ID;
+
+        ' Decision point after search attempt
+        if () then ([Patient record exists])
+            :Display patient record;
+        else ([else])
+            :Show message "No patient found with patient ID [ID]";
+        endif
+    else ([Search by keywords])
+        :Extract keywords from arguments;
+        :Search patient records by keywords;
+
+        ' Decision point after search attempt
+        if () then ([Matching records found])
+            :Display all matching patient records;
+        else ([else])
+            :Show message "0 patients listed!";
+        endif
+    endif
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml

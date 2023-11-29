@@ -1,0 +1,51 @@
+{
+  "patients": [ {
+    "name" : "Valid Patient",
+    "phone" : "87438807",
+    "birthdate" : "03-02-1999",
+    "gender" : "F",
+    "treatment" : "Cleaning",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "email" : "alexyeoh@example.com",
+    "id" : "1",
+    "appointment" : "yes"
+  }, {
+    "name" : "Valid Patient without Email",
+    "phone" : "87438807",
+    "birthdate" : "03-02-1999",
+    "gender" : "F",
+    "treatment" : "Cleaning",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "id" : "2",
+    "appointment" : "yes"
+  }, {
+    "name" : "Valid Patient without Address",
+    "phone" : "87438807",
+    "birthdate" : "03-02-1999",
+    "gender" : "F",
+    "treatment" : "Cleaning",
+    "email" : "alexyeoh@example.com",
+    "id" : "3",
+    "appointment" : "yes"
+  }, {
+    "name" : "Dentist with Invalid Phone Field ",
+    "phone" : "874388adse07",
+    "birthdate" : "03-02-1999",
+    "gender" : "F",
+    "treatment" : "Cleaning",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "email" : "alexyeoh@example.com",
+    "id" : "4",
+    "appointment" : "yes"
+  }, {
+    "name" : "Patient with Invalid Patient ID Field",
+    "phone" : "87438807",
+    "birthdate" : "03-02-1999",
+    "gender" : "F",
+    "treatment" : "Cleaning",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "email" : "alexyeoh@example.com",
+    "id" : null,
+    "appointment" : "yes"
+  }]
+}

@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam groupInheritance 3
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
@@ -11,10 +12,15 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class PatientListPanel
+Class PatientCard
+Class DentistListPanel
+Class DentistCard
+Class AppointmentListPanel
+Class AppointmentCard
 Class StatusBarFooter
 Class CommandBox
+Class QuickNotes
 }
 
 package Model <<Rectangle>> {
@@ -26,35 +32,53 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside .up.> Ui
+
+MainWindow *-up-->  "1" CommandBox
+MainWindow *-up--> "1" ResultDisplay
+MainWindow *-up--> "1" PatientListPanel
+MainWindow *-up--> "1" DentistListPanel
+MainWindow *-up--> "1" AppointmentListPanel
+MainWindow *-up--> "1" StatusBarFooter
+MainWindow *-up--> "1" QuickNotes
+MainWindow -up-> "0..1" HelpWindow
+
+PatientListPanel -up--> "*" PatientCard
+DentistListPanel -up--> "*" DentistCard
+AppointmentListPanel -up--> "*" AppointmentCard
+
+MainWindow -up-|> UiPart
+
+ResultDisplay -up--|> UiPart
+CommandBox -up--|> UiPart
+PatientListPanel -up--|> UiPart
+DentistListPanel -up--|> UiPart
+AppointmentListPanel -up--|> UiPart
+PatientCard -up--|> UiPart
+DentistCard -up--|> UiPart
+AppointmentCard -up--|> UiPart
+QuickNotes -up--|> UiPart
+StatusBarFooter -up--|> UiPart
+HelpWindow -up--|> UiPart
+
+PatientCard .up...> Model
+DentistCard .up...> Model
+AppointmentCard .up...> Model
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+UiManager -up-> "1" MainWindow
 
-PersonListPanel -down-> "*" PersonCard
+UiManager -left---> Logic
+MainWindow -left--> Logic
 
-MainWindow -left-|> UiPart
-
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
-
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
-
-PersonListPanel -[hidden]left- HelpWindow
+AppointmentListPanel -[hidden]left- DentistListPanel
+DentistListPanel -[hidden]left- PatientListPanel
+PatientListPanel -[hidden]left- QuickNotes
+QuickNotes -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
+
+'MainWindow -[hidden]-|> UiPart
 @enduml

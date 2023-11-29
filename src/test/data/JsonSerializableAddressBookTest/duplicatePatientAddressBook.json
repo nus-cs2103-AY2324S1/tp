@@ -1,0 +1,26 @@
+{
+  "persons" : [],
+  "patients": [ {
+    "name": "Duplicate Patient",
+    "phone": "99999999",
+    "birthdate": "01-01-1990",
+    "gender": "M",
+    "remark": "Test",
+    "treatment": "Braces",
+    "address": "123 Computing Drive",
+    "email": "hans@example.com",
+    "id": "4"
+  },
+  {
+    "name": "Duplicate Patient",
+    "phone": "99999999",
+    "birthdate": "01-01-1990",
+    "gender": "M",
+    "remark": "Test",
+    "treatment": "Braces",
+    "address": "123 Computing Drive",
+    "email": "hans@example.com",
+    "id": "4"
+  }],
+  "dentists": []
+}

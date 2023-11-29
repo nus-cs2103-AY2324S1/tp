@@ -1,0 +1,21 @@
+{
+  "persons" : [],
+  "dentists": [ {
+    "name": "Duplicate Dentist",
+    "phone": "99999999",
+    "email": "hans@example.com",
+    "address": "The Great Clinic",
+    "specialization": "Orthodontics",
+    "yoe": "1",
+    "id": "2"
+  },
+  {
+    "name": "Duplicate Dentist",
+    "phone": "99999999",
+    "email": "hans@example.com",
+    "address": "The Great Clinic",
+    "specialization": "Orthodontics",
+    "yoe": "1",
+    "id": "2"
+  }]
+}

@@ -4,7 +4,10 @@
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+  "minima/initialize",
+  "toc",
+  "toothtracker",
+  "pdf";
 
 .icon {
     height: 21px;

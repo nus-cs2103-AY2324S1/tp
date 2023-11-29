@@ -1,0 +1,71 @@
+{
+  "_comment": "AddressBook save file which contains the same Dentist values in TypicalDentists#getTypicalAddressBook()",
+  "persons" : [],
+  "dentists" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "99999999",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "specialization" : "Orthodontics",
+    "yoe" : "5",
+    "id" : "0",
+    "tags" : [ "Professional" ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "88888888",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "specialization" : "Endodontics",
+    "yoe" : "6",
+    "id" : "1",
+    "tags" : [ "Professional", "Europe" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "11111111",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "specialization" : "Paediatric Dentistry",
+    "yoe" : "7",
+    "id" : "2",
+    "tags" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "22222222",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "specialization" : "Periodontics",
+    "yoe" : "5",
+    "id" : "3",
+    "tags" : [ "America" ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "33333333",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "specialization" : "Prosthodontics",
+    "yoe" : "5",
+    "id" : "4",
+    "tags" : [ "London", "France" ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "44444444",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "specialization" : "Oral and Maxillofacial Surgery",
+    "yoe" : "5",
+    "id" : "5",
+    "tags" : [ ]
+  }, {
+    "name" : "George Best",
+    "phone" : "55555555",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "specialization" : "Dental Public Health",
+    "yoe" : "5",
+    "id" : "6",
+    "tags" : [ "America" ]
+  } ],
+  "patientId" : "6",
+  "dentistId" : "7",
+  "appointmentId" : "5"
+}

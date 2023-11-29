@@ -1,0 +1,39 @@
+@startuml
+start
+
+:User executes "search-dentist" command with either ID or keyword;
+
+' Check the command's validity
+if () then ([valid command])
+    :Parse command arguments;
+
+    ' Decide the search type based on the parsed arguments
+    if () then ([Search by ID])
+        :Extract ID from arguments;
+        :Finds dentist record by DENTIST_ID;
+
+        ' Decision point after search attempt
+        if () then ([Dentist record exists])
+            :Display dentist record;
+        else ([else])
+            :Show message "No dentist found with dentist ID [ID]";
+        endif
+    else ([Search by keywords])
+        :Extract keywords from arguments;
+        :Search dentist records by keywords;
+
+        ' Decision point after search attempt
+        if () then ([Matching records found])
+            :Display all matching dentist records;
+        else ([else])
+            :Show message "0 dentists listed!";
+        endif
+    endif
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml
+
+

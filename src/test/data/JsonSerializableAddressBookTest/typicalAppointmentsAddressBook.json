@@ -1,0 +1,43 @@
+{
+  "_comment": "AddressBook save file which contains the same Treatment values in TypicalTreatments#getTypicalAddressBook()",
+  "persons" : [],
+  "dentists" : [],
+  "patients" : [],
+  "treatments" : [],
+  "appointments" : [{
+    "dentistId" : "1",
+    "patientId" : "2",
+    "dentistName" : "Tom",
+    "patientName" : "Mary",
+    "start" : "2023-10-19T16:00",
+    "duration" : "PT1H30M",
+    "treatment" : "Braces",
+    "cost" : "100",
+    "id" : "1"
+  },
+  {
+    "dentistId" : "3",
+    "patientId" : "2",
+    "dentistName" : "John",
+    "patientName" : "Mary",
+    "start" : "2023-10-20T12:00",
+    "duration" : "PT2H00M",
+    "treatment" : "Tooth Extraction",
+    "cost" : "150",
+    "id" : "2"
+  },
+  {
+    "dentistId" : "1",
+    "patientId" : "1",
+    "dentistName" : "Tom",
+    "patientName" : "Bob",
+    "start" : "2023-10-21T12:00",
+    "duration" : "PT2H00M",
+    "treatment" : "Tooth Extraction",
+    "cost" : "150",
+    "id" : "3"
+  }],
+  "patientId" : "6",
+  "dentistId" : "7",
+  "appointmentId" : "5"
+}

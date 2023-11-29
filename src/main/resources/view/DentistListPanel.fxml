@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <ListView fx:id="dentistListView" VBox.vgrow="ALWAYS" >
+    <VBox.margin>
+      <Insets top="5.0" bottom="5.0"/>
+    </VBox.margin>
+  </ListView>
+</VBox>

@@ -1,0 +1,23 @@
+@startuml
+start
+:User executes "add-dentist" command with required details;
+
+if () then ([valid command])
+  :Create Dentist object from command arguments;
+
+:Check if dentist already exists in model;
+
+if () then ([Dentist already exists])
+  :Throw CommandException "Dentist already exists";
+else ([else])
+  :Add new dentist to model;
+  :Return message to show new dentist added;
+endif
+
+else ([else])
+    :Display error message for invalid command;
+endif
+
+stop
+@enduml
+
