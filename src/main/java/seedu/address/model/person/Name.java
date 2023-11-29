@@ -19,6 +19,7 @@ public class Name {
      * Allow for alphanumeric characters at the end to differentiate different person with the same name. For example,
      * using the last 4 alphanumeric characters in NRIC for Singapore context.
      */
+    // Solution below inspired and adapted from https://chat.openai.com/c/e97c556d-b7fa-48da-a3f8-5ffb7eef82cf
     public static final String VALIDATION_REGEX = "^[A-Za-z]+(?:\\s[A-Za-z]+)*(?:\\s[0-9A-Za-z]+)?\\s*$";
 
 

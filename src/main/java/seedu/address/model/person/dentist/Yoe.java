@@ -11,6 +11,8 @@ public class Yoe {
     public static final String FULL_CLASS_NAME = "Years of Experience";
     public static final String MESSAGE_CONSTRAINTS =
             "Years of Experience (YOE) should only contain numbers, and it should be at most 2 digits long";
+    // Solution on VALIDATION_REGEX inspired and adapted from
+    // https://github.com/AY2223S2-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/model/person/doctor/Yoe.java
     private static final String VALIDATION_REGEX = "^0*[0-9]{0,2}$";
     private final String value;
 

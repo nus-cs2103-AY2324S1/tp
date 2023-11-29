@@ -21,6 +21,8 @@ public class Dentist extends Person {
     private final Yoe yoe;
     private long id;
 
+    // Solution below inspired and adapted from
+    // github.com/AY2223S2-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/model/person/doctor/Doctor.java
     /**
      * Initializes {@code Dentist} object without {@code id}.
      * Every field must be present and not null.
