@@ -1,4 +1,4 @@
-//@@author {B-enguin}
+//@@author B-enguin
 package seedu.address.logic.parser.customer;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -57,4 +57,4 @@ public class CustomerViewCommandParser implements Parser<CustomerViewCommand> {
     }
 
 }
-//@@author {B-enguin}
+//@@author B-enguin

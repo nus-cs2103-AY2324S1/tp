@@ -1,4 +1,4 @@
-//@@author {juliusgambe}
+//@@author juliusgambe
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -171,4 +171,4 @@ public class DeliveryListCommand extends DeliveryCommand {
         return sortType.equals(otherDeliveryListCommand.sortType);
     }
 }
-//@@author {juliusgambe}
+//@@author juliusgambe

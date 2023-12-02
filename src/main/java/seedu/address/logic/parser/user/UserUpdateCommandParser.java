@@ -1,4 +1,4 @@
-//@@author {zhonghan721}
+//@@author zhonghan721
 package seedu.address.logic.parser.user;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -147,4 +147,4 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         return userUpdateDescriptor;
     }
 }
-//@@author {zhonghan721}
+//@@author zhonghan721

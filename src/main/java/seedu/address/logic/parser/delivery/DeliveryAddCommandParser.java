@@ -1,4 +1,4 @@
-//@@author {Gabriel4357}
+//@@author Gabriel4357
 package seedu.address.logic.parser.delivery;
 
 
@@ -68,4 +68,4 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
         return new DeliveryAddCommand(deliveryAddDescriptor);
     }
 }
-//@@author {Gabriel4357}
+//@@author Gabriel4357

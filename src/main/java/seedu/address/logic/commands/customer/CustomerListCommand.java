@@ -1,3 +1,4 @@
+//@@author B-enguin
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -40,4 +41,4 @@ public class CustomerListCommand extends CustomerCommand {
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
-//@@author {B-enguin}
+//@@author B-enguin

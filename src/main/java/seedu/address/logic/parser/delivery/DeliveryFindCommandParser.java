@@ -1,4 +1,4 @@
-//@@author {B-enguin}
+//@@author B-enguin
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -41,4 +41,4 @@ public class DeliveryFindCommandParser implements Parser<DeliveryFindCommand> {
         return new DeliveryFindCommand(new DeliveryNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 }
-//@@author {B-enguin}
+//@@author B-enguin

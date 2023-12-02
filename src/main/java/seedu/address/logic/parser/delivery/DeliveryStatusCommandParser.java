@@ -1,4 +1,4 @@
-//@@author {B-enguin}
+//@@author B-enguin
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -59,4 +59,4 @@ public class DeliveryStatusCommandParser implements Parser<DeliveryStatusCommand
     }
 
 }
-//@@author {B-enguin}
+//@@author B-enguin

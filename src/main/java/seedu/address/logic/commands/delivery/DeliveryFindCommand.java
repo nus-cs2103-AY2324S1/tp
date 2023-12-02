@@ -1,4 +1,4 @@
-//@@author {B-enguin}
+//@@author B-enguin
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -80,4 +80,4 @@ public class DeliveryFindCommand extends DeliveryCommand {
               .toString();
     }
 }
-//@@author {B-enguin}
+//@@author B-enguin

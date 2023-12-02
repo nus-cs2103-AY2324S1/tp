@@ -1,4 +1,4 @@
-//@@author {Gabriel4357}
+//@@author Gabriel4357
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -181,7 +181,7 @@ public class CustomerEditCommand extends CustomerCommand {
     }
 
 
-    //@@author {zhonghan721}
+    //@@author zhonghan721
 
     /**
      * Creates and returns a {@code Delivery} with the customer details edited.
@@ -210,7 +210,8 @@ public class CustomerEditCommand extends CustomerCommand {
         return new Delivery(deliveryToEdit.getDeliveryId(), deliveryName, editedCustomer, orderDate,
                 deliveryDate, deliveryStatus, note);
     }
-    //@@author {zhonghan721}
+    //@@author zhonghan721
+    //@@author Gabriel4357
 
     @Override
     public boolean equals(Object other) {
@@ -339,4 +340,4 @@ public class CustomerEditCommand extends CustomerCommand {
         }
     }
 }
-//@@author {Gabriel4357}
+//@@author Gabriel4357

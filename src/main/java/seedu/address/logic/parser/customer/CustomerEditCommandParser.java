@@ -1,4 +1,4 @@
-//@@author {Gabriel4357}
+//@@author Gabriel4357
 
 package seedu.address.logic.parser.customer;
 

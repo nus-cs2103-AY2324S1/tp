@@ -1,4 +1,4 @@
-//@@author {Gabriel4357}
+//@@author Gabriel4357
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -319,4 +319,4 @@ public class DeliveryEditCommand extends DeliveryCommand {
     }
 }
 
-//@@author {Gabriel4357}
+//@@author Gabriel4357

@@ -1,4 +1,4 @@
-//@@author {B-enguin}
+//@@author B-enguin
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -69,4 +69,4 @@ public class CustomerViewCommand extends CustomerCommand {
             && customerId == ((CustomerViewCommand) other).customerId); // state check
     }
 }
-//@@author {B-enguin}
+//@@author B-enguin

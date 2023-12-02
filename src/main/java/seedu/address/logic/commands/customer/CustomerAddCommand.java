@@ -1,4 +1,4 @@
-//@@author {zhonghan721}
+//@@author zhonghan721
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -100,4 +100,4 @@ public class CustomerAddCommand extends CustomerCommand {
             .toString();
     }
 }
-//@@author {zhonghan721}
+//@@author zhonghan721

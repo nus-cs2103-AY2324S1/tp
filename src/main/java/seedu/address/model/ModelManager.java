@@ -176,7 +176,7 @@ public class ModelManager implements Model {
     }
 
 
-    //@@author {B-enguin}
+    //@@author B-enguin
     @Override
     public void setAddressBook(ReadOnlyBook<Customer> addressBook) {
         this.addressBook.resetData(addressBook);
@@ -186,7 +186,7 @@ public class ModelManager implements Model {
     public ReadOnlyBook<Customer> getAddressBook() {
         return addressBook;
     }
-    //@@author {B-enguin}
+    //@@author
 
     @Override
     public Optional<Customer> getCustomer(int id) {
@@ -293,7 +293,7 @@ public class ModelManager implements Model {
 
     //=========== User Related Methods =======================================================================
 
-    //@@author {jianyangg}
+    //@@author jianyangg
 
     /**
      * Returns the status of the login as a string.
@@ -313,7 +313,7 @@ public class ModelManager implements Model {
 
         return "Logged out. Please login to continue.";
     }
-    //@@author {jianyangg}
+    //@@author
 
     /**
      * Returns true if the {@code user} is currently logged in.

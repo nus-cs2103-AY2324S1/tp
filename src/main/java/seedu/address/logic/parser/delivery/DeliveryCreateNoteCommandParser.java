@@ -1,4 +1,4 @@
-//@@author {B-enguin}
+//@@author B-enguin
 package seedu.address.logic.parser.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -61,4 +61,4 @@ public class DeliveryCreateNoteCommandParser implements Parser<DeliveryCreateNot
 
     }
 }
-//@@author {B-enguin}
+//@@author B-enguin

@@ -1,4 +1,4 @@
-//@@author {Gabriel4357}
+//@@author Gabriel4357
 package seedu.address.logic.parser.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -39,4 +39,4 @@ public class DeliveryDeleteCommandParser implements Parser<DeliveryDeleteCommand
         }
     }
 }
-//@@author {Gabriel4357}
+//@@author Gabriel4357
