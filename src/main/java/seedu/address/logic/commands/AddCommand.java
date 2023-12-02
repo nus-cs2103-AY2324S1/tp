@@ -1,65 +1,98 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECRUITER_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.company.Company;
 
 /**
- * Adds a person to the address book.
+ * Adds a company to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+    public static final String MESSAGE_USAGE =
+            "Format: " + COMMAND_WORD + " "
+            + PREFIX_COMPANY_NAME + "COMPANY_NAME "
+            + PREFIX_ROLE + "ROLE "
+            + PREFIX_STATUS + "STATUS "
+            + PREFIX_DEADLINE + "DEADLINE "
+            + PREFIX_RECRUITER_NAME + "RECRUITER_NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PRIORITY + "PRIORITY] \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_COMPANY_NAME + "Google "
+            + PREFIX_ROLE + "Software Engineer "
+            + PREFIX_STATUS + "PA "
+            + PREFIX_DEADLINE + "10-10-2023 "
+            + PREFIX_RECRUITER_NAME + "Francis Tan "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_PRIORITY + "HIGH ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New company added: %1$s";
 
-    private final Person toAdd;
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+
+    private final Company toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Company}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Company company) {
+        requireNonNull(company);
+        toAdd = company;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasCompany(toAdd)) {
+            Company duplicateCompany = model.getDuplicateCompany(toAdd);
+            int indexOfDuplicateCompany = model.getDuplicateIndexFromFilteredAddressbook(duplicateCompany);
+            boolean inFilteredList = true;
+
+            if (indexOfDuplicateCompany == -1) {
+                indexOfDuplicateCompany = model.getDuplicateIndexFromOriginalAddressbook(duplicateCompany);
+                inFilteredList = false;
+            }
+
+            String allChangedFields = toAdd.listAllChangedFields(duplicateCompany);
+
+            throw new CommandException.DuplicateException(
+                    Messages.getErrorMessageForDuplicateCompanyAddCommand(
+                    duplicateCompany, indexOfDuplicateCompany, allChangedFields,
+                            inFilteredList));
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        logger.info("Executing add command: " + toAdd.toString());
+        model.addCompany(toAdd);
+        model.setCurrentViewedCompany(toAdd);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.getCompanyName(toAdd)));
     }
 
+    /**
+     * Returns true if both companies have the same identity and data fields.
+     * This defines a stronger notion of equality between two companies.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

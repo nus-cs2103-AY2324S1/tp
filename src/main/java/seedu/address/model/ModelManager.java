@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.company.Company;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +22,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Company> filteredCompanies;
+    private final FilteredList<Company> currentViewedCompany;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +35,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
+        currentViewedCompany = new FilteredList<>(this.addressBook.getCurrentViewedCompany());
     }
 
     public ModelManager() {
@@ -88,46 +91,97 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return addressBook.hasCompany(company);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public Company getDuplicateCompany(Company company) {
+        requireNonNull(company);
+        return addressBook.getDuplicateCompany(company);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteCompany(Company target) {
+        addressBook.removeCompany(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addCompany(Company company) {
+        addressBook.addCompany(company);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setCompany(Company target, Company editedCompany) {
+        requireAllNonNull(target, editedCompany);
+
+        addressBook.setCompany(target, editedCompany);
+    }
+
+    @Override
+    public void setCurrentViewedCompany(Company company) {
+        requireNonNull(company);
+        addressBook.setCurrentViewedCompany(company);
+    }
+
+    @Override
+    public void checkDelete(Company company) {
+        if (currentViewedCompany != null && currentViewedCompany.contains(company)) {
+            addressBook.clearDetailPanel();
+        }
+    }
+
+    @Override
+    public void clearCompanyDetailPanel() {
+        addressBook.clearDetailPanel();
+    }
+
+    @Override
+    public void filterCompaniesByStatus(Predicate<Company> predicate) {
+        addressBook.clearDetailPanel();
+        updateFilteredCompanyList(predicate);
+    }
+
+    @Override
+    public void findCompanies(Predicate<Company> predicate) {
+        addressBook.clearDetailPanel();
+        updateFilteredCompanyList(predicate);
+    }
+
+    @Override
+    public void setAllCompanies(List<Company> companies) {
+        addressBook.setCompanies(companies);
+    }
+
+    //=========== Filtered Company List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Company> getFilteredCompanyList() {
+        return filteredCompanies;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredCompanyList(Predicate<Company> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredCompanies.setPredicate(predicate);
     }
 
+    @Override
+    public void updateCurrentViewedCompany(Predicate<Company> predicate) {
+        requireNonNull(predicate);
+        currentViewedCompany.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Company> getCurrentViewedCompany() {
+        return currentViewedCompany;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +196,16 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredCompanies.equals(otherModelManager.filteredCompanies);
     }
 
+    @Override
+    public int getDuplicateIndexFromOriginalAddressbook(Company company) {
+        return addressBook.getDuplicateIndex(company);
+    }
+
+    @Override
+    public int getDuplicateIndexFromFilteredAddressbook(Company company) {
+        return filteredCompanies.indexOf(company);
+    }
 }

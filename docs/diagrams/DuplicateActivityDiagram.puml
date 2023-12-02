@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+: Get the existing duplicate \n company from the model;
+:Get the index of the duplicate company from the \n                 filtered company list panel;
+if () then ([else])
+    :Get the index of the duplicate company from the \n                    full company list panel;
+else ([Duplicate company is in filtered company list panel])
+    endif
+:         Get all the fields that were different between \nthe duplicate existing company and inputted company;
+:Format the error message with the fields and the index;
+stop
+@enduml

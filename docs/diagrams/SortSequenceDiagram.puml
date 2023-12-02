@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":SortCommand" as SortCommand LOGIC_COLOR
+participant "c:Comparator" as Comparator LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+
+-> SortCommand : execute(sortOrder)
+activate SortCommand
+create Comparator
+SortCommand -> Comparator : createComparator(sortOrder)
+
+activate Comparator
+Comparator --> SortCommand
+deactivate Comparator
+
+SortCommand -> Model : getUnmodifiableObservableList()
+activate Model
+Model --> SortCommand : companyList
+deactivate Model
+
+SortCommand -> SortCommand : sortCompanies(companyList, c)
+activate SortCommand
+SortCommand --> SortCommand : sortedList
+deactivate SortCommand
+
+SortCommand -> Model : setAllCompanies(sortedList)
+activate Model
+Model --> SortCommand
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+<-- SortCommand : result
+deactivate SortCommand
+@enduml

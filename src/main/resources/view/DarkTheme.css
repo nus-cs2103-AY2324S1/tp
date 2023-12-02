@@ -123,13 +123,13 @@
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #ffffff;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #ffffff;
 }
 
 .stack-pane {
@@ -176,14 +176,41 @@
 
 .grid-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #3c3e3f;
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
+    -fx-padding: 0;
     -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-width: 2px;
 }
 
+.card-with-border {
+     -fx-background-color: #515658;
+     -fx-border-color: derive(#1d1d1d, 25%);
+     -fx-padding: 13;
+     -fx-border-insets: 15;
+     -fx-background-insets: 15;
+}
+
+.card_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
+
+.card_medium_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+}
+
+.card_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffffff;
+}
 .context-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
 }
@@ -328,7 +355,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #companyListPanel, #companyWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -337,16 +364,15 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#priority {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#priority .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12;
 }

@@ -1,0 +1,25 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 12
+skinparam ArrowFontSize 12
+start
+:User executes AddCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user input is valid])
+    if () then ([company already exists])
+        :System displays duplicate company error message;
+    else ([else])
+        :System inserts company to list of companies;
+        :System displays added company in CompanyListPanel;
+        :System displays added company in CompanyDetailPanel;
+    endif
+
+else ([else])
+:System displays specific error message;
+
+endif
+stop
+@enduml

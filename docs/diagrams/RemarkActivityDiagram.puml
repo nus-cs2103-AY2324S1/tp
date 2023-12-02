@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:AddressBookParser parses user input;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([remark command word])
+    :Create RemarkCommandParser;
+    :Parse user input;
+    :Create RemarkCommand
+    with user input as remark;
+
+else ([unremark command word])
+    :Create UnremarkCommandParser;
+    :   Create RemarkCommand
+    with "No remarks" as remark;
+
+endif
+
+:   RemarkCommand.execute()
+updates remark of the company;
+stop
+@enduml

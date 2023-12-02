@@ -1,0 +1,23 @@
+{
+  "companies": [ {
+    "name": "Meta",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "role": "Software Engineer",
+    "deadline": "10-10-2023",
+    "status": "PA",
+    "recruiterName": "Alice Pauline",
+    "priority": "HIGH",
+    "remark" : "No remarks"
+  }, {
+    "name": "Meta",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "role": "Software Engineer",
+    "deadline": "10-10-2023",
+    "status": "PA",
+    "recruiterName": "Alice Pauline",
+    "priority": "HIGH",
+    "remark" : "No remarks"
+  } ]
+}

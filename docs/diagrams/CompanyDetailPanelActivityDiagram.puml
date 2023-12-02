@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([view, edit or add command])
+    :Clear UniqueCompanyList;
+    :Add the company to
+    UniqueCompanyList;
+    :Company detail panel displays company;
+else ([delete command])
+    if () then ([viewing the company to be deleted])
+        :Clear company detail panel;
+    else ([else])
+    endif
+
+endif
+stop
+@enduml

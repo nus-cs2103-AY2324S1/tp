@@ -31,4 +31,14 @@ public class Assert {
         Throwable thrownException = Assertions.assertThrows(expectedType, executable);
         Assertions.assertEquals(expectedMessage, thrownException.getMessage());
     }
+
+    /**
+     * Asserts that the message of the {@code actual} equals to the {@code expected} message.
+     * @param expected the expected message
+     * @param actual the object whose message is to be verified
+     */
+    public static void assertEquals(Object expected, Object actual) {
+        Assertions.assertEquals(expected, actual);
+    }
+
 }

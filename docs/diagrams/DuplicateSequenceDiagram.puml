@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box "Logic" LOGIC_COLOR_T1
+participant ":EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniqueCompanyList" as UniqueCompanyList MODEL_COLOR
+participant "c:Company" as CompanyC MODEL_COLOR
+participant "d:Company" as CompanyD MODEL_COLOR
+end box
+
+EditCommand -> ModelManager : getDuplicateCompany(c)
+activate EditCommand
+activate ModelManager
+
+ModelManager -> AddressBook : getDuplicateCompany(c)
+activate AddressBook
+
+AddressBook -> UniqueCompanyList : contains(c)
+activate UniqueCompanyList
+
+loop for each company in UniqueCompanyList
+    UniqueCompanyList -> CompanyC : isSameCompany(d)
+    activate CompanyC
+    ' Self-invocation within Company
+    CompanyC -> CompanyD : getName()
+    activate CompanyD
+    CompanyD --> CompanyC
+    deactivate CompanyD
+
+    CompanyC -> CompanyC : getName()
+    activate CompanyC #DarkSlateGray
+    CompanyC --> CompanyC
+    deactivate CompanyC #DarkSlateGray
+
+    CompanyC -> CompanyD : getRole()
+    activate CompanyD
+    CompanyD --> CompanyC
+    deactivate CompanyD
+
+    CompanyC -> CompanyC : getRole()
+    activate CompanyC #DarkSlateGray
+    CompanyC --> CompanyC
+    deactivate CompanyC #DarkSlateGray
+
+    CompanyC -> CompanyD : getDeadline()
+    activate CompanyD
+    CompanyD --> CompanyC
+    deactivate CompanyD
+
+    CompanyC -> CompanyC : getDeadline()
+    activate CompanyC #DarkSlateGray
+    CompanyC --> CompanyC
+    deactivate CompanyC #DarkSlateGray
+
+    CompanyC --> UniqueCompanyList
+    deactivate CompanyC
+end
+
+UniqueCompanyList --> AddressBook
+deactivate UniqueCompanyList
+
+AddressBook --> ModelManager
+deactivate AddressBook
+
+ModelManager --> EditCommand
+deactivate ModelManager
+
+deactivate EditCommand
+
+@enduml

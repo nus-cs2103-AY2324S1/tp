@@ -65,4 +65,23 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Checks if the provided string represents a valid non-zero integer.
+     *
+     * @param s The string to be checked for integer validity. Must not be null.
+     * @return {@code true} if the string represents an integer (e.g., 1, 2, 3, up to {@code Integer.MAX_VALUE}),
+     *         {@code false} for any other non-null string input (e.g., empty string, "d", "c", "*", " a " (untrimmed),
+     *         "3 0" (contains whitespace), "1 a" (contains letters).
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isInteger(String s) {
+        requireNonNull(s);
+        try {
+            int value = Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false; // Not an integer
+        }
+    }
 }

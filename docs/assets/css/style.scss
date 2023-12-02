@@ -3,10 +3,13 @@
 ---
 
 @import
-  "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+"minima/skins/{{ site.minima.skin | default: 'classic' }}",
+"minima/initialize";
 
-.icon {
-    height: 21px;
-    width: 21px
+blockquote {
+  font-size: 1rem; /* This sets the font size to the base font size, which should match your normal text if that's also set to 1rem */
+  margin-left: 20px; /* Adjust as needed to match your layout */
+  padding-left: 20px; /* Adjust as needed for padding inside the blockquote */
+  border-left: 4px solid #d3d3d3; /* A typical blockquote border, adjust the color as needed */
+  /* Other styles as needed to match your typography */
 }

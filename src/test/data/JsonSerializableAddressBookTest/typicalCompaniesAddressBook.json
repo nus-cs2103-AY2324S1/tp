@@ -1,0 +1,74 @@
+{
+  "_comment": "AddressBook save file which contains the same Company values as in TypicalCompanies#getTypicalAddressBook()",
+  "companies" : [ {
+    "name" : "Meta",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "role" : "Software Engineer",
+    "deadline": "10-10-2023",
+    "status": "PA",
+    "recruiterName": "John Doe",
+    "priority": "LOW",
+    "remark" : "No remarks"
+  }, {
+    "name" : "Amazon",
+    "phone" : "98765432",
+    "email" : "janed@example.com",
+    "role" : "Software Engineer",
+    "deadline": "11-11-2023",
+    "status": "PA",
+    "recruiterName": "Jane Doe",
+    "priority": "MEDIUM",
+    "remark" : "JavaScript&CSS"
+  }, {
+    "name" : "Microsoft",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "deadline": "11-12-2023",
+    "role" : "Data Engineer",
+    "status": "PA",
+    "recruiterName": "Jim Doe",
+    "priority": "HIGH",
+    "remark" : "www.bing.com"
+  }, {
+    "name" : "DSTA",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "role" : "Data Engineer",
+    "deadline": "03-12-2023",
+    "status": "PA",
+    "recruiterName": "Tim Doe",
+    "priority": "LOW",
+    "remark" : "Java"
+  }, {
+    "name" : "Apple",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "role" : "UX Designer",
+    "deadline": "09-11-2023",
+    "status": "PA",
+    "recruiterName": "Tom Doe",
+    "priority": "MEDIUM",
+    "remark" : "Python"
+  }, {
+    "name" : "Accenture",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "role" : "UI Designer",
+    "deadline": "08-11-2023",
+    "status": "PA",
+    "recruiterName": "Mary Doe",
+    "priority": "HIGH",
+    "remark" : "No remarks"
+  }, {
+    "name" : "Netflix",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "role" : "Web Developer",
+    "deadline": "05-12-2023",
+    "status": "PA",
+    "recruiterName": "Timmy Doe",
+    "priority": "HIGH",
+    "remark" : "No remarks"
+  }]
+}

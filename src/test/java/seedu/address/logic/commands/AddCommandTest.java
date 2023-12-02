@@ -1,204 +1,535 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalCompanies.META;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.logic.commands.stubs.ModelStub;
+import seedu.address.logic.commands.stubs.ModelStubAcceptingCompanyAdded;
+import seedu.address.logic.commands.stubs.ModelStubWithCompanyInFilteredCompanyList;
+import seedu.address.logic.commands.stubs.ModelStubWithCompanyNotInFilteredCompanyList;
+import seedu.address.model.company.Company;
+import seedu.address.testutil.CompanyBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullCompany_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_companyAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
+        Company validCompany = new CompanyBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validCompany).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(validCompany)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
+    }
+
+    //Duplicate tests, considered duplicate if same company name, same role and deadline
+    @Test
+    public void execute_fullyDuplicatedCompany_throwsCommandException() {
+        Company validCompany = new CompanyBuilder().build();
+        AddCommand addCommand = new AddCommand(validCompany);
+        ModelStub modelStub = new ModelStubWithCompanyNotInFilteredCompanyList(validCompany);
+
+        assertThrows(CommandException.DuplicateException.class,
+                new CommandException.DuplicateException(
+                        Messages.getErrorMessageForDuplicateCompanyAddCommand(validCompany,
+                        modelStub.getDuplicateIndexFromOriginalAddressbook(validCompany),
+                        validCompany.listAllChangedFields(
+                                modelStub.getDuplicateCompany(validCompany)),
+                                false)).getMessage(), (
+                ) -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_successDifferentCompanyName_doesNotThrowCommandException() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithDifferentNames = companyBuilder.withName("Google").build();
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertFalse(validCompany.isSameCompany(duplicateCompanyWithDifferentNames));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithDifferentNames).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithDifferentNames)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithDifferentNames));
     }
+
+    @Test
+    public void execute_successOnlyDifferentRoles_addsCompany() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithDifferentRole = companyBuilder.withRole("Chief Designer").build();
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany);
+
+        assertFalse(validCompany.isSameCompany(duplicateCompanyWithDifferentRole));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithDifferentRole).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                duplicateCompanyWithDifferentRole)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithDifferentRole));
+    }
+
+    @Test
+    public void execute_onlySameCompanyAndSameRole_throwsCommandException() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompany = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withPriority("HIGH")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .build();
+
+        assert duplicateCompany.isSameCompany(validCompany);
+        AddCommand addCommand = new AddCommand(duplicateCompany);
+        ModelStub modelStub = new ModelStubWithCompanyNotInFilteredCompanyList(validCompany);
+
+        //assumes the caller of listAllChangedFields() is correct
+        assertThrows(CommandException.DuplicateException.class,
+                new CommandException.DuplicateException(
+                        Messages.getErrorMessageForDuplicateCompanyAddCommand(validCompany,
+                                modelStub.getDuplicateIndexFromOriginalAddressbook(validCompany),
+                                duplicateCompany.listAllChangedFields(
+                                        modelStub.getDuplicateCompany(duplicateCompany)),
+                                false)).getMessage(), (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_successOnlySameRole() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithSameRole = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withDeadline("12-10-2015")
+                .withPriority("LOW")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .withName("Google")
+                .build();
+
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany);
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithSameRole).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithSameRole)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithSameRole));
+    }
+
+    @Test
+    public void execute_successOnlySameCompany() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithSameCompany = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withDeadline("12-10-2015")
+                .withPriority("LOW")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .withRole("UI UX Designer")
+                .build();
+
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany);
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithSameCompany).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithSameCompany)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithSameCompany));
+    }
+
+    //More than one company present in the address book
+    @Test
+    public void execute_successOneFullyDuplicatedCompanyInList_throwsCommandException() {
+        Company validCompany = new CompanyBuilder().build();
+        AddCommand addCommand = new AddCommand(validCompany);
+        ModelStub modelStub = new ModelStubWithCompanyNotInFilteredCompanyList(validCompany, 1);
+
+        assertThrows(CommandException.DuplicateException.class,
+                new CommandException.DuplicateException(
+                        Messages.getErrorMessageForDuplicateCompanyAddCommand(validCompany,
+                                modelStub.getDuplicateIndexFromOriginalAddressbook(validCompany),
+                                validCompany.listAllChangedFields(
+                                        modelStub.getDuplicateCompany(validCompany)),
+                                false)).getMessage(), (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_successTwoDifferentCompanyName_doesNotThrowCommandException() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithDifferentNames = companyBuilder.withName("Google").build();
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany, 2);
+
+        assertFalse(validCompany.isSameCompany(duplicateCompanyWithDifferentNames));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithDifferentNames).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithDifferentNames)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithDifferentNames));
+    }
+
+    @Test
+    public void execute_successOnlyDifferentRolesWithThreeCompanies_addsCompany() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithDifferentRole = companyBuilder.withRole("Chief Designer").build();
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany, 3);
+
+        assertFalse(validCompany.isSameCompany(duplicateCompanyWithDifferentRole));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithDifferentRole).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithDifferentRole)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithDifferentRole));
+    }
+
+    @Test
+    public void execute_onlySameCompanyAndSameRoleWithOneCompany_throwsCommandException() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompany = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withPriority("HIGH")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .build();
+
+        assert duplicateCompany.isSameCompany(validCompany);
+        AddCommand addCommand = new AddCommand(duplicateCompany);
+        ModelStub modelStub = new ModelStubWithCompanyNotInFilteredCompanyList(validCompany, 1);
+
+        //assumes the caller of listAllChangedFields() is correct
+        assertThrows(CommandException.DuplicateException.class,
+                new CommandException.DuplicateException(
+                        Messages.getErrorMessageForDuplicateCompanyAddCommand(validCompany,
+                                modelStub.getDuplicateIndexFromOriginalAddressbook(validCompany),
+                                duplicateCompany.listAllChangedFields(
+                                        modelStub.getDuplicateCompany(duplicateCompany)),
+                                false)).getMessage(), (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_successOnlySameRoleWithTwoCompanies() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithSameRole = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withDeadline("12-10-2015")
+                .withPriority("LOW")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .withName("Google")
+                .build();
+
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany, 2);
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithSameRole).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithSameRole)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithSameRole));
+    }
+
+    @Test
+    public void execute_successOnlySameCompanyWithThreeCompanies() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithSameCompany = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withDeadline("12-10-2015")
+                .withPriority("LOW")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .withRole("UI UX Designer")
+                .build();
+
+        ModelStubWithCompanyNotInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyNotInFilteredCompanyList(validCompany, 3);
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithSameCompany).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithSameCompany)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithSameCompany));
+    }
+
+    //Duplicate tests - with duplicate in filtered company view
+    @Test
+    public void execute_fullyDuplicatedCompanyFiltered_throwsCommandException() {
+        Company validCompany = new CompanyBuilder().build();
+        AddCommand addCommand = new AddCommand(validCompany);
+        ModelStub modelStub = new ModelStubWithCompanyInFilteredCompanyList(validCompany);
+
+        assertThrows(CommandException.DuplicateException.class,
+                new CommandException.DuplicateException(
+                        Messages.getErrorMessageForDuplicateCompanyAddCommand(validCompany,
+                                modelStub.getDuplicateIndexFromOriginalAddressbook(validCompany),
+                                validCompany.listAllChangedFields(
+                                        modelStub.getDuplicateCompany(validCompany)),
+                                true)).getMessage(), (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_successDifferentCompanyNameFiltered_doesNotThrowCommandException() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithDifferentNames = companyBuilder.withName("Google").build();
+        ModelStubWithCompanyInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyInFilteredCompanyList(validCompany);
+
+        assertFalse(validCompany.isSameCompany(duplicateCompanyWithDifferentNames));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithDifferentNames).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithDifferentNames)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithDifferentNames));
+    }
+
+    @Test
+    public void execute_successOnlyDifferentRolesFiltered_addsCompany() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithDifferentRole = companyBuilder.withRole("Chief Designer").build();
+        ModelStubWithCompanyInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyInFilteredCompanyList(validCompany);
+
+        assertFalse(validCompany.isSameCompany(duplicateCompanyWithDifferentRole));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithDifferentRole).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithDifferentRole)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithDifferentRole));
+    }
+
+    @Test
+    public void execute_onlySameCompanyAndSameRoleFiltered_throwsCommandException() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompany = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withPriority("HIGH")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .build();
+
+        assert duplicateCompany.isSameCompany(validCompany);
+        AddCommand addCommand = new AddCommand(duplicateCompany);
+        ModelStub modelStub = new ModelStubWithCompanyInFilteredCompanyList(validCompany);
+
+        assertThrows(CommandException.DuplicateException.class,
+                new CommandException.DuplicateException(
+                        Messages.getErrorMessageForDuplicateCompanyAddCommand(validCompany,
+                                modelStub.getDuplicateIndexFromOriginalAddressbook(validCompany),
+                                duplicateCompany.listAllChangedFields(
+                                        modelStub.getDuplicateCompany(duplicateCompany)),
+                                true)).getMessage(), (
+                ) -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_successOnlySameRoleFiltered() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithSameRole = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withDeadline("12-10-2015")
+                .withPriority("LOW")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .withName("Google")
+                .build();
+
+        ModelStubWithCompanyInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyInFilteredCompanyList(validCompany);
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithSameRole).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithSameRole)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithSameRole));
+    }
+
+    @Test
+    public void execute_successOnlySameCompanyFiltered() {
+        CompanyBuilder companyBuilder = new CompanyBuilder();
+        Company validCompany = companyBuilder.build();
+        Company duplicateCompanyWithSameCompany = companyBuilder
+                .withEmail("hello@gmail.com")
+                .withPhone("89004789")
+                .withDeadline("12-10-2015")
+                .withPriority("LOW")
+                .withRecruiterName("Cameron")
+                .withStatus("PA")
+                .withRole("UI UX Designer")
+                .build();
+
+        ModelStubWithCompanyInFilteredCompanyList modelStub =
+                new ModelStubWithCompanyInFilteredCompanyList(validCompany);
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = new AddCommand(duplicateCompanyWithSameCompany).execute(modelStub);
+        } catch (CommandException e) {
+            fail("Execution of command should not throw CommandException.");
+        }
+
+        assertNotNull(commandResult);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.getCompanyName(
+                        duplicateCompanyWithSameCompany)),
+                commandResult.getFeedbackToUser());
+        assertTrue(modelStub.getLastViewedCompany().equals(duplicateCompanyWithSameCompany));
+    }
+
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Company meta = new CompanyBuilder().withName("Meta").build();
+        Company tiktok = new CompanyBuilder().withName("Tiktok").build();
+        AddCommand addMetaCommand = new AddCommand(meta);
+        AddCommand addTiktokCommand = new AddCommand(tiktok);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addMetaCommand.equals(addMetaCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addMetaCommandCopy = new AddCommand(meta);
+        assertTrue(addMetaCommand.equals(addMetaCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addMetaCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addMetaCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different company -> returns false
+        assertFalse(addMetaCommand.equals(addTiktokCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddCommand addCommand = new AddCommand(META);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + META + "}";
         assertEquals(expected, addCommand.toString());
     }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }
