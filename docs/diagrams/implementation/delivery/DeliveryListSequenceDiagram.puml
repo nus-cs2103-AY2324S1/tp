@@ -1,0 +1,101 @@
+@startuml
+!include ../../style.puml
+
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeliveryListCommandParser" as DeliveryListCommandParser LOGIC_COLOR
+participant "deliveryListCommand:DeliveryListCommand" as DeliveryListCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(input)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(input)
+activate AddressBookParser
+
+create DeliveryListCommandParser
+AddressBookParser -> DeliveryListCommandParser
+activate DeliveryListCommandParser
+
+
+
+DeliveryListCommandParser --> AddressBookParser
+deactivate DeliveryListCommandParser
+
+AddressBookParser -> DeliveryListCommandParser : parse(args)
+activate DeliveryListCommandParser
+
+DeliveryListCommandParser -> DeliveryListCommandParser ++ : parseDeliveryListCommand(argMultimap)
+create DeliveryListCommand
+DeliveryListCommandParser -> DeliveryListCommand
+activate DeliveryListCommand
+
+DeliveryListCommand --> DeliveryListCommandParser : deliveryListCommand
+deactivate DeliveryListCommand
+return deliveryListCommand
+
+DeliveryListCommandParser --> AddressBookParser : deliveryListCommand
+deactivate DeliveryListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeliveryListCommandParser -[hidden]-> AddressBookParser
+destroy DeliveryListCommandParser
+
+
+
+AddressBookParser --> LogicManager : deliveryListCommand
+deactivate AddressBookParser
+
+LogicManager -> DeliveryListCommand : execute(model)
+activate DeliveryListCommand
+
+DeliveryListCommand -> Model : getUserLoginStatus()
+activate Model
+
+Model --> DeliveryListCommand : userLoginStatus
+deactivate Model
+
+DeliveryListCommand -> DeliveryListCommand ++ : createDeliveryListFilters()
+return filters
+
+DeliveryListCommand -> Model: updateFilteredDeliveryList(filters)
+activate Model
+
+Model --> DeliveryListCommand: filteredDeliveries
+deactivate Model
+
+DeliveryListCommand -> DeliveryListCommand ++: createDeliveryListSort()
+return sortOrder
+
+DeliveryListCommand -> Model: updateSortedDeliveryList(sortOrder)
+activate Model
+
+deactivate Model
+
+
+
+
+
+create CommandResult
+DeliveryListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeliveryListCommand : result
+deactivate CommandResult
+
+DeliveryListCommand --> LogicManager : result
+deactivate DeliveryListCommand
+
+DeliveryListCommand -[hidden]-> LogicManager
+destroy DeliveryListCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

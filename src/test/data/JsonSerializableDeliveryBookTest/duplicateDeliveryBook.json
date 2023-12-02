@@ -1,0 +1,17 @@
+{
+  "deliveries": [ {
+    "deliveryId": "1",
+    "name": "Valid Name",
+    "customerId": "1",
+    "orderDate": "2021-12-12",
+    "deliveryDate": "2023-12-12",
+    "status": "CREATED"
+  }, {
+    "deliveryId": "1",
+    "name": "Valid Name",
+    "customerId": "1",
+    "orderDate": "2021-12-12",
+    "deliveryDate": "2023-12-12",
+    "status": "CREATED"
+  } ]
+}

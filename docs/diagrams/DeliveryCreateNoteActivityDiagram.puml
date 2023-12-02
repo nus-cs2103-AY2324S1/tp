@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+!pragma useVerticalIf on
+start
+:User executes <i>delivery note</i> command;
+
+partition DeliveryCreateNoteCommand {
+    if () then ([else])
+        :CommandException: User Not Authenticated;
+        stop
+    ( [user logged in]) elseif () then ([else])
+        :CommandException: Invalid Delivery;
+        stop
+    else ( [delivery ID found])
+    endif
+    :Update Delivery with new note;
+}
+
+stop
+
+@enduml

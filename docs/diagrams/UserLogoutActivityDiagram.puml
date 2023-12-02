@@ -1,0 +1,22 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+
+:User executes <i>logout</i> command;
+
+partition UserLogoutCommand
+
+
+if () then ([user is already logged out])
+    :CommandException: Already Logged Out;
+    stop
+else ([else])
+    :User is now logged out.;
+
+endif
+
+stop
+@enduml

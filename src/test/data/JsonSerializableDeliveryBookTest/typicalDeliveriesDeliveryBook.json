@@ -1,0 +1,45 @@
+{
+  "deliveries": [
+    {
+      "deliveryId": "1",
+      "name": "Gabriel Milk",
+      "customerId": "1",
+      "orderDate": "2021-12-12",
+      "deliveryDate": "2023-12-12",
+      "status": "CREATED",
+      "note": "Note"
+    },
+    {
+      "deliveryId": "2",
+      "name": "Gambe Rice",
+      "customerId": "2",
+      "orderDate": "2021-12-12",
+      "deliveryDate": "2023-12-12",
+      "status": "CREATED"
+    },
+    {
+      "deliveryId": "4",
+      "name": "Bryan Rice",
+      "customerId": "2",
+      "orderDate": "2021-12-12",
+      "deliveryDate": "2023-12-12",
+      "status": "CANCELLED"
+    },
+    {
+      "deliveryId": "5",
+      "name": "Reynons Banana",
+      "customerId": "2",
+      "orderDate": "2021-12-12",
+      "deliveryDate": "2023-12-12",
+      "status": "SHIPPED"
+    },
+    {
+      "deliveryId": "6",
+      "name": "Julius Peaches",
+      "customerId": "2",
+      "orderDate": "2021-12-12",
+      "deliveryDate": "2023-12-12",
+      "status": "COMPLETED"
+    }
+  ]
+}

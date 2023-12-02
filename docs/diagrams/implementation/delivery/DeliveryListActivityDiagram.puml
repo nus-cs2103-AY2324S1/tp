@@ -1,0 +1,48 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+!pragma useVerticalIf on
+start
+:User executes <i>delivery list</i> command;
+
+partition DeliveryListCommand {
+    if () then ([else])
+        : CommandException: User Not Authenticated;
+        stop
+    else ([user logged in])
+
+    if () then ( [status \n provided])
+        : Add status filter;
+    else ([else])
+    endif
+
+    if () then ( [customer ID\n provided])
+        : Add Customer ID filter;
+    else ([else])
+    endif
+
+    if () then ( [date provided])
+        : Add expected Delivery date filter;
+    else ([else])
+    endif
+        : Filter Delivery list according to filters;
+    if () then ( [filtered list is empty])
+        : Informs user of empty list;
+        stop
+    else ([else])
+    endif
+    if () then ([sort provided])
+            : Add sort by provided sort;
+        else ([else])
+        : Add sort by the default descending;
+        endif
+        : Sort filtered Delivery list by expected Delivery date;
+    endif
+
+}
+
+stop
+
+@enduml

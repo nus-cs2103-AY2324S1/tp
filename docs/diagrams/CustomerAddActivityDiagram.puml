@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+
+start
+:User executes <i>customer add</i> command;
+partition CustomerAddCommand {
+    if () then ([else])
+        :CommandException: User Not Authenticated;
+        stop
+    ( [user logged in]) elseif () then ([else])
+        :CommandException: Duplicate Customer;
+        stop
+    else ( [customer not already in database])
+    endif
+    :Customer added;
+}
+
+stop
+
+@enduml

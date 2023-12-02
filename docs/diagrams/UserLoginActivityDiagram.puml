@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User executes <i>login</i> command;
+partition UserLoginCommand
+
+
+
+if () then ([user has not registered])
+    :CommandException: No Registered Account Found;
+    stop
+    ( [else]) elseif () then ([user is already logged in])
+    :CommandException: Already Logged In;
+    stop
+( [else]) elseif () then ([user credentials do not match with the registered account])
+    :CommandException: Wrong Credentials;
+    stop
+else ( [else])
+
+endif
+:User is now logged in.;
+
+
+stop
+@enduml

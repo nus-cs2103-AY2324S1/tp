@@ -5,50 +5,74 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class AddressBook<Customer>
+Class DeliveryBook<Delivery>
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class Customer
 
-Class I #FFFFFF
+
+
+Class Delivery
+
+Class User
+
+Class ListItem
+
 }
 
-Class HiddenOutside #FFFFFF
+Class I<<Hidden>> #FFFFFF
+Class H<<Hidden>> #FFFFFF
+Class J<<Hidden>> #FFFFFF
+Class K<<Hidden>> #FFFFFF
+
+
+Class HiddenOutside<<HIDDEN>> #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+
+
+Model -right-> ReadOnlyUserPrefs
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+ModelManager -up-> "1" DeliveryBook
+ModelManager -up-> "1" AddressBook
+'
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModelManager -right-> "~* uiList" ListItem
+ListItem -[hidden]down-> J
+ModelManager -right-> "1" UserPrefs
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+ModelManager -up-> "1" User
+User -[hidden]right-> K
+ModelManager -left-> "~* filteredCustomers" Customer
+Customer-[hidden]left--> H
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ModelManager -down-> "~* filteredDeliveries" Delivery
+Delivery -[hidden]left--> I
 
-ModelManager --> "~* filtered" Person
+ModelManager -down-> "~* sortedDeliveries" Delivery
+
+'
+
+
+'
+'
+'
+
+
+'
+'
+
+'
+
+'
+'
+
+
 @enduml

@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+!pragma useVerticalIf on
+start
+:User executes <i>customer edit</i> command;
+partition CustomerEditCommand {
+    if () then ([else])
+        :CommandException: User Not Authenticated;
+        stop
+    ( [user logged in]) elseif () then ([else])
+        :CommandException: Invalid Customer ID;
+        stop
+    ( [customer ID found]) elseif () then ([else])
+        :CommandException: Duplicate Customer;
+        stop
+    else ( [no changes to phone number\n or unique phone number])
+    endif
+    :Customer edited;
+}
+
+stop
+
+@enduml

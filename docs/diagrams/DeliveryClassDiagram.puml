@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+
+Package Delivery as DeliveryPackage <<Rectangle>>{
+Class Delivery {
+<color: #FFFFFF> - deliveryId: int
+}
+Class DeliveryName
+Class Customer
+Class OrderDate
+Class DeliveryDate
+Class DeliveryStatus
+Class Note
+
+Class DeliveryStatus <<enumeration>>{
+<color: #FFFFFF>CREATED
+<color: #FFFFFF>SHIPPED
+<color: #FFFFFF>CANCELLED
+<color: #FFFFFF>COMPLETED
+}
+show DeliveryStatus fields
+Class I<<HIDDEN>> #FFFFFF
+}
+
+Class HiddenOutside<<HIDDEN>> #FFFFFF
+HiddenOutside .down.> Delivery
+
+Delivery *--> "1" DeliveryName
+Delivery o--> "1" Customer
+Delivery *--> "1" OrderDate
+Delivery *--> "1" DeliveryDate
+Delivery *--> "1" DeliveryStatus
+Delivery *--> "0..1" Note
+
+show Delivery fields
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+!pragma useVerticalIf on
+start
+:User executes <i>delivery view</i> command;
+
+
+partition DeliveryViewCommand {
+    if () then ([else])
+        :CommandException: User Not Authenticated;
+        stop
+        else ([user logged in])
+    endif
+    if () then ([else])
+        :CommandException: Delivery ID is invalid;
+        stop
+    else ([delivery ID found])
+        : The details of the specified Delivery is shown ;
+    endif
+}
+
+stop
+
+@enduml

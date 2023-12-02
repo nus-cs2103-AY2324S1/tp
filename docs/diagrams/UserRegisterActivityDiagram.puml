@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User executes <i>register</i> command;
+
+partition UserRegisterCommand {
+    if () then ( [stored user already exists])
+        :CommandException: Already Have Account;
+        stop
+    else ( [else])
+    endif
+    : Create and store user account;
+}
+
+stop
+@enduml

@@ -1,0 +1,15 @@
+{
+  "deliveries": [ {
+    "name": "Valid Name",
+    "customerId": "1",
+    "orderDate": "2021-12-12",
+    "deliveryDate": "2023-12-12",
+    "status": "CREATED"
+  }, {
+    "name": "Invalid Customer ID",
+    "customerId": "a",
+    "orderDate": "2021-12-12",
+    "deliveryDate": "2023-12-12",
+    "status": "CREATED"
+  } ]
+}
