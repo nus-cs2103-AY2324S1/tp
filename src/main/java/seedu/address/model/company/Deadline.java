@@ -88,6 +88,8 @@ public class Deadline implements Comparable<Deadline> {
         return value.hashCode();
     }
 
+    //@@author papataco14-reused
+    // The compareTo method was adapted from GitHub co-pilot suggestion
     @Override
     public int compareTo(Deadline other) {
         if (other == null) {
