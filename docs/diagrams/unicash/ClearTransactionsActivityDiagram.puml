@@ -1,0 +1,21 @@
+@startuml
+
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+
+: User enters clear_transactions command;
+
+if () then ([command followed with trailing characters])
+  :Parse exception thrown;
+  stop
+
+else ([else])
+  :All transactions cleared successfully;
+
+endif
+
+stop
+
+@enduml

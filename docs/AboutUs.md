@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Woo Jia Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/woojiahao.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://woojiahao.com/)]
+[[github](https://github.com/woojiahao)]
+[[portfolio](team/woojiahao.md)]
 
-* Role: Project Advisor
+* Role: Developer 
+* Responsibilities: Documentation, Testing, PR reviews, Continuous Integration
 
-### Jane Doe
+### Jamie Toh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jamz903.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jamz903)]
+[[portfolio](team/jamz903.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI, Documentation, Testing
 
-### Jean Doe
+### Tan Lip Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lipwei1808.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lipwei1808)] [[portfolio](team/lipwei1808.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Model
+
+### Ernest Liu
+
+<img src="images/elhy1999.png" width="200px">
+
+[[github](http://github.com/elhy1999)]
+[[portfolio](team/elhy1999.md)]
+
+* Role: Developer
+* Responsibilities: Documentation, Testing
+
+### Rubesh Suresh
+
+<img src="images/sp4ce-cowboy.png" width="200px">
+
+[[github](http://github.com/sp4ce-cowboy)]
+[[portfolio](team/sp4ce-cowboy.md)]
+
+* Role: Developer
+* Responsibilities: User Interface, Documentation and Testing
