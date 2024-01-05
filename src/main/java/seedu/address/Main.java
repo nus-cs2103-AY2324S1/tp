@@ -12,7 +12,6 @@ import seedu.address.commons.core.LogsCenter;
  * entry point of the application:
  *
  *     Error: JavaFX runtime components are missing, and are required to run this application
- *
  * The reason is that MainApp extends Application. In that case, the
  * LauncherHelper will check for the javafx.graphics module to be present
  * as a named module. We don't use JavaFX via the module system so it can't
@@ -23,6 +22,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Main {
     private static Logger logger = LogsCenter.getLogger(Main.class);
+
 
     public static void main(String[] args) {
 

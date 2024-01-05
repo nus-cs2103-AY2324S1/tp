@@ -8,6 +8,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.gradedtest.GradedTest;
+import seedu.address.model.person.assignment.Assignment;
+import seedu.address.model.person.assignment.AssignmentMap;
+import seedu.address.model.person.assignment.AssignmentName;
+import seedu.address.model.session.Session;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,19 +27,40 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final TelegramHandle telegramHandle;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<GradedTest> gradedTests = new HashSet<>();
+    private final AssignmentMap assignments;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, TelegramHandle telegramHandle,
+                  Set<Tag> tags, Set<GradedTest> gradedTests) {
+        requireAllNonNull(name, phone, email, telegramHandle, tags, gradedTests);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.telegramHandle = telegramHandle;
         this.tags.addAll(tags);
+        this.gradedTests.addAll(gradedTests);
+        this.assignments = new AssignmentMap();
+    }
+
+    /**
+     * Creates a new Person object with a pre-set map of assignments.
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, TelegramHandle telegramHandle, Set<Tag> tags,
+                  AssignmentMap assignments, Set<GradedTest> gradedTests) {
+        requireAllNonNull(name, phone, email, telegramHandle, tags, assignments);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.telegramHandle = telegramHandle;
+        this.tags.addAll(tags);
+        this.gradedTests.addAll(gradedTests);
+        this.assignments = assignments;
     }
 
     public Name getName() {
@@ -49,8 +75,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     /**
@@ -59,6 +85,40 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable gradedTests set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<GradedTest> getGradedTest() {
+        return Collections.unmodifiableSet(gradedTests);
+    }
+
+    /**
+     * Adds a student to a session and a session to a student.
+     *
+     * @param session The session to attend.
+     */
+    public void attendSession(Session session) {
+        session.addStudent(this);
+    }
+
+    /**
+     * Removes a student from a session and a session from a student.
+     *
+     * @param session The session to miss.
+     */
+    public void missSession(Session session) {
+        session.removeStudent(this);
+    }
+
+    public AssignmentMap getAllAssignments() {
+        return assignments;
+    }
+
+    public Assignment getAssignment(AssignmentName assignmentName) {
+        return assignments.get(assignmentName);
     }
 
     /**
@@ -72,6 +132,18 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameName(Name otherName) {
+        if (otherName == this.getName()) {
+            return true;
+        }
+
+        return otherName.equals(getName());
     }
 
     /**
@@ -93,14 +165,16 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telegramHandle.equals(otherPerson.telegramHandle)
+                && tags.equals(otherPerson.tags)
+                && assignments.equals(otherPerson.assignments)
+                && gradedTests.equals(otherPerson.gradedTests);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, telegramHandle, tags, gradedTests);
     }
 
     @Override
@@ -109,8 +183,9 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("telegramHandle", telegramHandle)
                 .add("tags", tags)
+                .add("gradedTests", gradedTests)
                 .toString();
     }
 

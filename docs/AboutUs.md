@@ -9,53 +9,57 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## Project F.A.K.E.J.A.R.V.I.S.' Team
+<img src="images/fakejarvis.png" width="200px">
 
-### John Doe
+### Yeap Rayson
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/respirayson.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://linkedin.com/in/rayson-yeap)]
+[[github](https://github.com/respirayson)]
+[[portfolio](team/respirayson.md)]
 
-* Role: Project Advisor
+* Role: Git expert, Documentation
 
-### Jane Doe
+### Jian Song
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/raydenlim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/raydenlim)]
+[[portfolio](team/raydenlim.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Morale Booster, Debugger
+* Responsibilities: Documentation, Review PR
 
-### Johnny Doe
+### Ding Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ldinghan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[homepage](http://linkedin.com/in/dinghanlim/)]
+[[github](http://github.com/ldinghan)]
+[[portfolio](team/ldinghan.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ryan Pang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/originalidk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Originalidk)]
+[[portfolio](team/originalidk.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Fullstack
 
-### James Doe
+### Ho Jia Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wesho1107.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://linkedin.com/in/wesleyhojiacheng/)]
+[[github](http://github.com/wesho1107)]
+[[portfolio](team/wesho1107.md)]
 
 * Role: Developer
 * Responsibilities: UI

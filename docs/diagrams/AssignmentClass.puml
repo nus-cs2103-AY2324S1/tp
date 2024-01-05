@@ -1,0 +1,45 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class AssignmentMap {
++setAssignmentMap(): void
++createUpdatedMap(): AssignmentMap
++contains(): boolean
++get(): Assignment
+}
+
+class Assignment {
++getName(): AssignmentName
++getGrade(): Grade
++maxGrade(): String
++gradingStatus(): boolean
++getComment(): Comment
++commentStatus(): boolean
++copyAssignment(): Assignment
+}
+
+class AssignmentName {
+-assignmentName: String
+}
+
+class Grade {
+-actualGrade: String
+-maxGrade: String
+-isGraded: boolean
++getMax(): String
++getIsGraded(): boolean
++ungrade(): Grade
+}
+
+class Comment {
+-commentBody: String
+-isCommented: boolean
++getIsCommented(): boolean
+}
+
+AssignmentMap *-- "*" Assignment: assignment
+Assignment *-- "1" AssignmentName: assignmentName
+Assignment *-- "1" Grade: grade
+Assignment *-- "1" Comment: comment
+@enduml

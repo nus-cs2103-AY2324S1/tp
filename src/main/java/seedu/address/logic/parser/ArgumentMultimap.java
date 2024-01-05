@@ -23,6 +23,16 @@ public class ArgumentMultimap {
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
+     * Returns the count of unique prefixes in the argument multimap.
+     *
+     * @return The number of unique prefixes in the argument multimap.
+     */
+    public int getCountOfPrefixes() {
+        return argMultimap.size();
+    }
+
+
+    /**
      * Associates the specified argument value with {@code prefix} key in this map.
      * If the map previously contained a mapping for the key, the new value is appended to the list of existing values.
      *

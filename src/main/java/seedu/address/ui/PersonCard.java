@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -29,17 +31,25 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private ImageView emailLogo;
+    @FXML
+    private ImageView phoneLogo;
+    @FXML
+    private ImageView telegramLogo;
+    @FXML
     private Label name;
     @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label telegramHandle;
     @FXML
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane gradedTests;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +59,35 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+
+
+        Image phoneImage = new Image(getClass().getResourceAsStream("/images/phonelogo.png"));
+        phoneLogo.setImage(phoneImage);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+
+        Image telegramImage = new Image(getClass().getResourceAsStream("/images/telelogo.png"));
+        telegramLogo.setImage(telegramImage);
+        telegramHandle.setText(String.format("@%s", person.getTelegramHandle().value));
+
+        Image emailImage = new Image(getClass().getResourceAsStream("/images/emaillogo.png"));
+        emailLogo.setImage(emailImage);
         email.setText(person.getEmail().value);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        person.getGradedTest().stream()
+                .sorted(Comparator.comparing(gradedTest -> gradedTest.gradedTestsIndv))
+                .forEach(gradedTest -> {
+                    Label ra1Label = new Label("RA1: " + gradedTest.getRA1());
+                    Label ra2Label = new Label("RA2: " + gradedTest.getRA2());
+                    Label midTermsLabel = new Label("MidTerms: " + gradedTest.getMidTerms());
+                    Label finalsLabel = new Label("Finals: " + gradedTest.getFinals());
+                    Label peLabel = new Label("PE: " + gradedTest.getPracticalExam());
+
+                    gradedTests.getChildren().addAll(ra1Label, ra2Label, midTermsLabel, finalsLabel, peLabel);
+                });
+
     }
 }

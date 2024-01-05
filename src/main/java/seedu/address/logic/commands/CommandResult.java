@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -13,19 +14,27 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    /** The command type producing the result, used for deciding application UI action **/
+    private final CommandType commandType;
 
-    /** The application should exit. */
-    private final boolean exit;
+    /** The tab index to switch to **/
+    private final Index tabIndex;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, CommandType commandType, Index index) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.commandType = commandType;
+        this.tabIndex = index;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and {@code commandType}, and index field set to their default value.
+     */
+    public CommandResult(String feedbackToUser, CommandType commandType) {
+        this(feedbackToUser, commandType, null);
     }
 
     /**
@@ -33,19 +42,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null, null);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
-    }
-
-    public boolean isExit() {
-        return exit;
+    public CommandType getCommandType() {
+        return commandType;
     }
 
     @Override
@@ -61,21 +66,28 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && commandType == otherCommandResult.commandType;
+    }
+
+    /**
+     * A method to return the target tab index.
+     *
+     * @return The zero based index of the target tab.
+     */
+    public int getTabIndex() {
+        return this.tabIndex.getZeroBased();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, commandType);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
+                .add("commandType", commandType)
                 .toString();
     }
 

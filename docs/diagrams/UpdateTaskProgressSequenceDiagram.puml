@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+mainframe **sd** execute UpdateTaskProgressCommand
+
+participant "x:UpdateTaskProgressCommand" as UpdateTaskProgressCommand LOGIC_COLOR
+
+participant ":Model" as Model MODEL_COLOR
+
+participant ":List<Task>" as TaskList MODEL_COLOR_T3
+
+[-> UpdateTaskProgressCommand : execute()
+activate UpdateTaskProgressCommand
+
+UpdateTaskProgressCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model --> UpdateTaskProgressCommand
+deactivate Model
+
+UpdateTaskProgressCommand -> TaskList : get(targetIndex)
+activate TaskList
+
+TaskList --> UpdateTaskProgressCommand
+deactivate TaskList
+
+UpdateTaskProgressCommand -> UpdateTaskProgressCommand : createTask(taskToEdit, descriptor)
+activate UpdateTaskProgressCommand
+
+UpdateTaskProgressCommand ---> UpdateTaskProgressCommand
+deactivate UpdateTaskProgressCommand
+
+UpdateTaskProgressCommand -> Model : setTask(taskToEdit, editedTask)
+activate Model
+
+Model --> UpdateTaskProgressCommand
+deactivate Model
+
+UpdateTaskProgressCommand -> Model : updateFilteredTaskList()
+activate Model
+
+Model ---> UpdateTaskProgressCommand
+deactivate Model
+
+[<-- UpdateTaskProgressCommand
+deactivate UpdateTaskProgressCommand
+
+@enduml

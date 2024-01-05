@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADED_TEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,11 +22,18 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.gradedtest.Finals;
+import seedu.address.model.gradedtest.GradedTest;
+import seedu.address.model.gradedtest.MidTerms;
+import seedu.address.model.gradedtest.PracticalExam;
+import seedu.address.model.gradedtest.ReadingAssessment1;
+import seedu.address.model.gradedtest.ReadingAssessment2;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.assignment.AssignmentMap;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,21 +44,28 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the student index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: STUDENT_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM_HANDLE] "
+            + "[" + PREFIX_TAG + "TAG...] "
+            + "[" + PREFIX_GRADED_TEST + "GRADED_TEST] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@u.nus.edu "
+            + PREFIX_GRADED_TEST + "RA1:0" + " | " + "RA2:0" + " | "
+            + "MidTerms:0" + " | " + "Finals:0" + " | " + "PE:0 \n"
+            + "Tip: you can use " + COMMAND_WORD + " " + PREFIX_GRADED_TEST + "default to reset graded test "
+            + "scores!";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+
+    public static final CommandType COMMAND_TYPE = CommandType.EDIT;
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -85,7 +100,13 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                COMMAND_TYPE);
+    }
+
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
     }
 
     /**
@@ -98,10 +119,14 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        AssignmentMap assignmentMap = editPersonDescriptor.getAssignmentMap().orElse(personToEdit.getAllAssignments());
+        Set<GradedTest> updatedGrades = editPersonDescriptor.getGradedTests().orElse(personToEdit.getGradedTest());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegramHandle, updatedTags,
+            assignmentMap, updatedGrades);
     }
 
     @Override
@@ -136,8 +161,15 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private TelegramHandle telegramHandle;
+        private ReadingAssessment1 ra1;
+        private ReadingAssessment2 ra2;
+        private MidTerms midTerms;
+        private Finals finals;
+        private PracticalExam pe;
         private Set<Tag> tags;
+        private AssignmentMap assignmentMap;
+        private Set<GradedTest> gradedTests;
 
         public EditPersonDescriptor() {}
 
@@ -149,15 +181,17 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setTelegramHandle(toCopy.telegramHandle);
             setTags(toCopy.tags);
+            setGradedTest(toCopy.gradedTests);
+            setAssignmentMap(toCopy.assignmentMap);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegramHandle, tags, gradedTests);
         }
 
         public void setName(Name name) {
@@ -184,12 +218,39 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
+        }
+
+        public void setAssignmentMap(AssignmentMap assignmentMap) {
+            this.assignmentMap = assignmentMap;
+        }
+
+        public Optional<AssignmentMap> getAssignmentMap() {
+            return Optional.ofNullable(assignmentMap);
+        }
+
+        public void setReadingAssessment1(ReadingAssessment1 ra1) {
+            this.ra1 = ra1;
+        }
+
+        public void setReadingAssessment2(ReadingAssessment2 ra2) {
+            this.ra2 = ra2;
+        }
+
+        public void setMidTerms(MidTerms midTerms) {
+            this.midTerms = midTerms;
+        }
+
+        public void setFinals(Finals finals) {
+            this.finals = finals;
+        }
+        public void setPracticalExam(PracticalExam pe) {
+            this.pe = pe;
         }
 
         /**
@@ -209,6 +270,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code gradedTests} to this object's {@code gradedTests}.
+         * A defensive copy of {@code gradedTests} is used internally.
+         */
+        public void setGradedTest(Set<GradedTest> gradedTests) {
+            this.gradedTests = (gradedTests != null) ? new HashSet<>(gradedTests) : null;
+        }
+
+        /**
+         * Returns an unmodifiable gradedTest set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code gradedTest} is null.
+         */
+        public Optional<Set<GradedTest>> getGradedTests() {
+            return (gradedTests != null) ? Optional.of(Collections.unmodifiableSet(gradedTests)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -224,8 +302,9 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(gradedTests, otherEditPersonDescriptor.gradedTests);
         }
 
         @Override
@@ -234,8 +313,9 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
+                    .add("telegramHandle", telegramHandle)
                     .add("tags", tags)
+                    .add("gradedTests", gradedTests)
                     .toString();
         }
     }

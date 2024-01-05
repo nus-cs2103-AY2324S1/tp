@@ -3,44 +3,1193 @@
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "email" : "alice@u.nus.edu",
+    "telegramHandle" : "alicePaulding7",
+    "tags" : [ "friends" ],
+    "gradedTests": [
+      {
+        "RA1": "10",
+        "RA2": "20",
+        "MidTerms": "30",
+        "Finals": "40",
+        "PE": "50"
+      }
+    ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "email" : "johnd@u.nus.edu",
+    "telegramHandle" : "Bensonson",
+    "tags" : [ "owesMoney", "friends" ],
+    "gradedTests": [
+      {
+        "RA1": "1",
+        "RA2": "2",
+        "MidTerms": "3",
+        "Finals": "4",
+        "PE": "5"
+      }
+    ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
+    "email" : "heinz@u.nus.edu",
+    "telegramHandle" : "richcarlton1101",
+    "tags" : [ ],
+    "gradedTests": [
+      {
+        "RA1": "5",
+        "RA2": "4",
+        "MidTerms": "3",
+        "Finals": "2",
+        "PE": "1"
+      }
+    ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
+    "email" : "cornelia@u.nus.edu",
+    "telegramHandle" : "dantheman",
+    "tags" : [ "friends" ],
+    "gradedTests": [
+      {
+        "RA1": "0",
+        "RA2": "0",
+        "MidTerms": "0",
+        "Finals": "0",
+        "PE": "0"
+      }
+    ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
+    "email" : "werner@u.nus.edu",
+    "telegramHandle" : "AllieWithAnEButNoI",
+    "tags" : [ ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
+    "email" : "lydia@u.nus.edu",
+    "telegramHandle" : "phi0na",
+    "tags" : [ ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
+    "email" : "anna@u.nus.edu",
+    "telegramHandle" : "georgeBes17",
+    "tags" : [ ],
+    "assignmentMap" : {
+      "assignments" : {
+        "Beyond the First Dimension" : {
+          "assignmentName" : "Beyond the First Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Premorseal Communications" : {
+          "assignmentName" : "Premorseal Communications",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Beyond the Second Dimension" : {
+          "assignmentName" : "Beyond the Second Dimension",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Musical Diversions" : {
+          "assignmentName" : "Musical Diversions",
+          "grade" : "UNGRADED/1300",
+          "comment" : ""
+        },
+        "Sorting Things Out" : {
+          "assignmentName" : "Sorting Things Out",
+          "grade" : "UNGRADED/950",
+          "comment" : ""
+        },
+        "Grading a Sort" : {
+          "assignmentName" : "Grading a Sort",
+          "grade" : "UNGRADED/750",
+          "comment" : ""
+        },
+        "Stellar Motion Detector" : {
+          "assignmentName" : "Stellar Motion Detector",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "POTS and Pans" : {
+          "assignmentName" : "POTS and Pans",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Reading" : {
+          "assignmentName" : "Rune Reading",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Colorful Carpets" : {
+          "assignmentName" : "Colorful Carpets",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Magical Tone Matrix" : {
+          "assignmentName" : "The Magical Tone Matrix",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Finding ELDRIC" : {
+          "assignmentName" : "Finding ELDRIC",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Rune Trials" : {
+          "assignmentName" : "Rune Trials",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Runic Carpets" : {
+          "assignmentName" : "Runic Carpets",
+          "grade" : "UNGRADED/400",
+          "comment" : ""
+        },
+        "Search and Rescue" : {
+          "assignmentName" : "Search and Rescue",
+          "grade" : "UNGRADED/720",
+          "comment" : ""
+        },
+        "The Anomaly in Focus" : {
+          "assignmentName" : "The Anomaly in Focus",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Functional Expressionism" : {
+          "assignmentName" : "Functional Expressionism",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Know Your Environment" : {
+          "assignmentName" : "Know Your Environment",
+          "grade" : "UNGRADED/1200",
+          "comment" : ""
+        },
+        "Robotic Trials" : {
+          "assignmentName" : "Robotic Trials",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Curve Introduction" : {
+          "assignmentName" : "Curve Introduction",
+          "grade" : "UNGRADED/700",
+          "comment" : ""
+        },
+        "Moving about on Planet Y" : {
+          "assignmentName" : "Moving about on Planet Y",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Curvaceous Wizardry" : {
+          "assignmentName" : "Curvaceous Wizardry",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "Rescue the Space Lizard" : {
+          "assignmentName" : "Rescue the Space Lizard",
+          "grade" : "UNGRADED/800",
+          "comment" : ""
+        },
+        "Streaming the Anomaly" : {
+          "assignmentName" : "Streaming the Anomaly",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Corrective Sky Surgery" : {
+          "assignmentName" : "Corrective Sky Surgery",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "ELDROW - The Riddle" : {
+          "assignmentName" : "ELDROW - The Riddle",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        },
+        "Cardioid Arrest" : {
+          "assignmentName" : "Cardioid Arrest",
+          "grade" : "UNGRADED/500",
+          "comment" : ""
+        },
+        "Curve Manipulation" : {
+          "assignmentName" : "Curve Manipulation",
+          "grade" : "UNGRADED/600",
+          "comment" : ""
+        },
+        "The Essence of the Source" : {
+          "assignmentName" : "The Essence of the Source",
+          "grade" : "UNGRADED/1500",
+          "comment" : ""
+        },
+        "Echoes of the Past" : {
+          "assignmentName" : "Echoes of the Past",
+          "grade" : "UNGRADED/670",
+          "comment" : ""
+        },
+        "Reuse Your Pairs" : {
+          "assignmentName" : "Reuse Your Pairs",
+          "grade" : "UNGRADED/1000",
+          "comment" : ""
+        }
+      }
+    }
   } ]
 }

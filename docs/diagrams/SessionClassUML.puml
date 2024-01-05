@@ -1,0 +1,46 @@
+@startuml Session
+hide circle
+skinparam classAttributeIconSize 0
+
+Class Session {
+  + getSessionNumber(): SessionNumber
+  + getStudents(): StudentSet
+  + getSessionRemark(): SessionRemark
+  + isSameSession(Session): boolean
+  + getSessionInfo(): String
+}
+
+Class SessionNumber {
+  + sessionNumber: String
+  + <u>MESSAGE_CONSTRAINTS: String
+  + <u>VALIDATION_REGEX: String
+  + <u>isValidSessionNumber(String): boolean
+}
+
+Class StudentSet {
+  + students: List<Person>
+  + <u>MESSAGE_CONSTRAINTS: String
+  + <u>VALIDATION_REGEX: String
+  + addStudent(Person)
+  + removeStudent(Person)
+  + getStudents(): StudentSet
+  + toStudentNames(): String
+  + contains(Person): boolean
+}
+
+Class SessionRemark {
+  + sessionRemark: String
+  + <u>MESSAGE_CONSTRAINTS: String
+  + <u>VALIDATION_REGEX: String
+  + <u>isValidSessionRemark(String): boolean
+}
+
+Class Person {
+}
+
+Session *-- "1" SessionNumber: sessionNumber
+Session *-- "1" StudentSet: students
+Session *-- "1" SessionRemark: sessionRemark
+StudentSet o-- "*" Person: contains
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+
+mainframe **sd** execute DeleteTaskCommand
+
+participant "d:DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
+
+participant ":Model" as Model MODEL_COLOR
+
+participant ":List<Task>" as TaskList MODEL_COLOR_T3
+
+[-> DeleteTaskCommand : execute()
+activate DeleteTaskCommand
+
+DeleteTaskCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model --> DeleteTaskCommand
+deactivate Model
+
+DeleteTaskCommand -> TaskList : get(targetIndex)
+activate TaskList
+
+TaskList --> DeleteTaskCommand
+deactivate TaskList
+
+DeleteTaskCommand -> Model : deleteTask(task)
+activate Model
+
+Model --> DeleteTaskCommand
+deactivate Model
+
+[<-- DeleteTaskCommand
+deactivate DeleteTaskCommand
+
+@enduml

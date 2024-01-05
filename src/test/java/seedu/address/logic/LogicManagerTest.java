@@ -3,10 +3,10 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -23,12 +23,22 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ConsultationListBook;
+import seedu.address.model.GradedTestListBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.SessionListBook;
+import seedu.address.model.TaskListBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.assignment.initialise.AssignmentInitialise;
+import seedu.address.model.person.assignment.initialise.AssignmentNameInitialise;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonConsultationListStorage;
+import seedu.address.storage.JsonGradedTestListStorage;
+import seedu.address.storage.JsonSessionListStorage;
+import seedu.address.storage.JsonTaskListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -48,7 +58,15 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTaskListStorage taskListStorage = new JsonTaskListStorage(temporaryFolder.resolve("taskList.json"));
+        JsonGradedTestListStorage gradedTestListStorage = new JsonGradedTestListStorage(
+                temporaryFolder.resolve("gradedTestList.json"));
+        JsonSessionListStorage sessionListStorage = new JsonSessionListStorage(
+                temporaryFolder.resolve("sessionList.json"));
+        JsonConsultationListStorage consultationListStorage = new JsonConsultationListStorage(
+                temporaryFolder.resolve("consultationList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                taskListStorage, sessionListStorage, consultationListStorage, gradedTestListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -87,6 +105,22 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getFilteredConsultationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredConsultationList().remove(0));
+    }
+
+    @Test
+    public void getFilteredSessionList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredSessionList().remove(0));
+    }
+
+    @Test
+    public void getAssignmentNameList_modifyList_throwsUnsupportedOperationException() {
+        AssignmentInitialise.init();
+        assertEquals(logic.getAssignmentNameList(), AssignmentNameInitialise.getAllNames());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -123,7 +157,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskListBook(),
+                new SessionListBook(), new ConsultationListBook(), new GradedTestListBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -160,13 +195,22 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTaskListStorage taskListStorage =
+                new JsonTaskListStorage(temporaryFolder.resolve("ExceptionTaskList.json"));
+        JsonGradedTestListStorage gradedTestListStorage =
+                new JsonGradedTestListStorage(temporaryFolder.resolve("ExceptionGradedTestList.json"));
+        JsonSessionListStorage sessionListStorage =
+                new JsonSessionListStorage(temporaryFolder.resolve("ExceptionSessionList.json"));
+        JsonConsultationListStorage consultationListStorage =
+                new JsonConsultationListStorage(temporaryFolder.resolve("ExceptionConsultationList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                taskListStorage, sessionListStorage, consultationListStorage, gradedTestListStorage);
 
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + EMAIL_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
