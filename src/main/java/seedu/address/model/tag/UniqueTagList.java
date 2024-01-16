@@ -1,8 +1,12 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.CreateTagCommand.MESSAGE_FAILURE;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -87,7 +91,6 @@ public class UniqueTagList {
      * @throws ParseException If the tag is not found in the list.
      */
     public Tag getTag(String tagName, String tagCategory) throws ParseException {
-
         Optional<Tag> foundTag = internalList.stream()
                 .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                 .findFirst();
@@ -99,12 +102,20 @@ public class UniqueTagList {
                     return tag;
                 }
             }
-            throw new ParseException("Tag category does not exist!");
+            if (!containsTagCategory(tagCategory)
+                    && countDistinctCategories(internalList) > 5) {
+                throw new ParseException(MESSAGE_FAILURE);
+            }
+            Tag tag = new Tag(tagName, tagCategory);
+            add(tag);
+            return tag;
         } else if (foundTag.isPresent()) {
             // tag category not specified
             long occurrence = internalList.stream()
                     .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                     .count();
+
+
             // if tag occurs more than once in tag list
             if (occurrence > 1) {
                 throw new ParseException("Multiple tags exists with the same name! "
@@ -116,6 +127,20 @@ public class UniqueTagList {
         Tag uncategorisedTag = new Tag(tagName, "uncategorised");
         this.add(uncategorisedTag); // add uncategorised tag to unique tag list
         return uncategorisedTag;
+    }
+
+    private int countDistinctCategories(List<Tag> tags) {
+        requireNonNull(tags);
+        Set<String> distinctCategories = new HashSet<>();
+
+        for (Tag tag : tags) {
+            String tagCategory = tag.getTagCategory();
+            if (!tagCategory.equals("uncategorised")) {
+                distinctCategories.add(tagCategory);
+            }
+        }
+
+        return distinctCategories.size();
     }
 
     /**
