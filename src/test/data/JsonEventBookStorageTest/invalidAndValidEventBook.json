@@ -1,0 +1,12 @@
+{
+  "events" : [ {
+    "name" : "David Li",
+    "startTime" : "2023-09-21 11:00",
+    "endTime" : "2023-09-22 12:00"
+  }, {
+    "name" : "Bernice Yu",
+    "description" : "T2",
+    "startTime" : "2023-10-11 12:00",
+    "endTime" : "2023-10-11 13:00"
+  } ]
+}

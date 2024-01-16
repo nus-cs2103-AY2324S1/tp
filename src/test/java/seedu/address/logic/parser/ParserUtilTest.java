@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,7 +19,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
+import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -27,14 +31,34 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String INVALID_STATUS = "invalidStatus";
+
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_1 = "intern";
+    private static final String VALID_TAG_2 = "tech";
+
+    private static final String VALID_STATUS_INTERVIEWED = "interviewed";
+    private static final String VALID_STATUS_REJECTED = "rejected";
+    private static final String VALID_STATUS_OFFERED = "offered";
+    private static final String VALID_STATUS_PRELIMINARY = "preliminary";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    private static UniqueTagList uniqueTagList = new UniqueTagList();
+
+    @BeforeEach
+    public void clearTags() {
+        if (uniqueTagList.contains(new Tag(VALID_TAG_1, "employment"))) {
+            uniqueTagList.remove(new Tag(VALID_TAG_1, "employment"));
+        }
+        if (uniqueTagList.contains(new Tag(VALID_TAG_2, "dept"))) {
+            uniqueTagList.remove(new Tag(VALID_TAG_2, "dept"));
+        }
+    }
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -149,26 +173,52 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseStatusType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatusType(null));
+    }
+
+    @Test
+    public void parseStatusType_invalidStatusType_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatusType(INVALID_STATUS));
+    }
+
+    @Test
+    public void parseStatusType_validStatusType_returnsStatusType() throws ParseException {
+        // interviewed
+        assertEquals(StatusTypes.INTERVIEWED, ParserUtil.parseStatusType(VALID_STATUS_INTERVIEWED));
+
+        // offered
+        assertEquals(StatusTypes.OFFERED, ParserUtil.parseStatusType(VALID_STATUS_OFFERED));
+
+        // rejected
+        assertEquals(StatusTypes.REJECTED, ParserUtil.parseStatusType(VALID_STATUS_REJECTED));
+
+        //preliminary
+        assertEquals(StatusTypes.PRELIMINARY, ParserUtil.parseStatusType(VALID_STATUS_PRELIMINARY));
+    }
+
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null, null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG, ""));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        Tag expectedTag = new Tag(VALID_TAG_1, "uncategorised");
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1, ""));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        Tag expectedTag = new Tag(VALID_TAG_1, "uncategorised");
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace, ""));
     }
 
     @Test
@@ -187,10 +237,85 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
+    public void parseTags_collectionWithValidTagsCategoryNotSpecified_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1, "uncategorised"),
+                new Tag(VALID_TAG_2, "uncategorised")));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTags_collectionWithValidTagsCategorySpecified_returnsTagSet() throws Exception {
+        uniqueTagList.add(new Tag(VALID_TAG_1, "employment"));
+        uniqueTagList.add(new Tag(VALID_TAG_2, "dept"));
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList("employment " + VALID_TAG_1, "dept " + VALID_TAG_2));
+        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1, "employment"),
+                new Tag(VALID_TAG_2, "dept")));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSinglePrefixTags_collectionWithNonExistingTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSinglePrefixTags(Arrays.asList(VALID_TAG_1
+                + VALID_TAG_2)));
+    }
+
+    @Test
+    public void parseTagCategories_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagCategories(null));
+    }
+
+    @Test
+    public void parseTagCategories_collectionWithInvalidTagName_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagCategories(Arrays.asList("role " + INVALID_TAG)));
+    }
+
+    @Test
+    public void parseTagCategories_collectionWithIncompleteTag_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagCategories(Arrays.asList(VALID_TAG_2)));
+    }
+
+    @Test
+    public void parseTagCategories_collectionWithIncompleteAndCompleteTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagCategories(Arrays.asList(VALID_TAG_2, "employment"
+                + VALID_TAG_1)));
+    }
+
+
+    @Test
+    public void parseScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseScore(null));
+    }
+
+    @Test
+    public void parseScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore("a"));
+    }
+
+    @Test
+    public void parseScore_validValueWithoutWhitespace_returnsScore() throws Exception {
+        assertEquals(ParserUtil.parseScore("1"), new Score(1));
+    }
+
+    @Test
+    public void parseScore_negativeValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore("-1"));
+    }
+
+    @Test
+    public void parseTagScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagScore(null));
+    }
+
+    @Test
+    public void parseTagScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagScore("a"));
+    }
+
+    @Test
+    public void parseTagScore_invalidValueTwoTabs_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagScore("Interview 100 awadaw"));
     }
 }

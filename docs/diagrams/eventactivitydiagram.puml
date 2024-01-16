@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+|User|
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+
+:Start JABPro;
+:Enter event command;
+if () then ([Command executed successfully])
+  |JABPro|
+  :Add event to EventBook;
+  |User|
+  :Enter schedule command;
+  |JABPro|
+  :Open the Events window;
+  |User|
+else ([Command execution failed])
+  |JABPro|
+  :Display error message and provide remedy;
+  |User|
+
+endif
+
+stop
+
+@enduml
