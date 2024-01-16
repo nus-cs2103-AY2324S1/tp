@@ -126,6 +126,9 @@ public class Person {
         this.currentStatus = newStatus;
     }
 
+    public void setRemark(Remark remark) {
+        this.remark = remark;
+    }
 
 
     /**

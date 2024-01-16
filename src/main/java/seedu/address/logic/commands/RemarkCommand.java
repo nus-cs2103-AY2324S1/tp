@@ -78,15 +78,14 @@ public class RemarkCommand extends Command {
             newRemark = RemarkSyntaxHandler.generateKeepRemarkCommand(remark.value, currentRemark);
         }
 
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), newRemark, personToEdit.getTags());
 
-        model.setPerson(personToEdit, editedPerson);
+
+        personToEdit.setRemark(newRemark);
+
         model.setLastViewedPersonIndex(index);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson), true);
+        return new CommandResult(generateSuccessMessage(personToEdit), true);
     }
 
     /**
